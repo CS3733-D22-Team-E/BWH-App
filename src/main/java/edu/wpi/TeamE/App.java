@@ -1,6 +1,7 @@
 package edu.wpi.TeamE;
 
 import java.io.IOException;
+import java.util.Objects;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +19,8 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    Parent root = FXMLLoader.load(getClass().getResource("view/app.fxml"));
+    Parent root =
+        FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view/defaultPage.fxml")));
 
     Scene scene = new Scene(root);
 
