@@ -47,7 +47,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox minHeight="640.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox minHeight="640.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.TeamE.App">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -94,7 +94,7 @@
                <children>
                   <Pane>
                      <children>
-                        <Button alignment="CENTER" layoutX="38.0" mnemonicParsing="false">
+                        <Button fx:id="medicalEquipmentButton" alignment="CENTER" layoutX="38.0" mnemonicParsing="false" onAction="#medicalEquipmentButton">
                            <graphic>
                               <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
