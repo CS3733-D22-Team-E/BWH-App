@@ -43,7 +43,7 @@ public class App extends Application {
     Node node = (Node) event.getSource();
     Stage thisStage = (Stage) node.getScene().getWindow();
 
-    loader.setLocation(getClass().getResource("view/mealDiliveryPage.fxml"));
+    loader.setLocation(getClass().getResource("view/mealDeliveryPage.fxml"));
     root = loader.load();
 
     thisStage.setScene(new Scene(root));
