@@ -3,44 +3,83 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane fx:controller="edu.wpi.TeamE.App" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.TeamE.App">
    <top>
       <TilePane prefHeight="79.0" prefWidth="600.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0">
+            <VBox prefHeight="107.0" prefWidth="602.0">
                <children>
-                  <ImageView fitHeight="69.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/microscope.png" />
-                     </image>
-                  </ImageView>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="79.0" prefWidth="431.0" text="Medical Equipment Delivery " textFill="#f8f8f8">
-                     <font>
-                        <Font name="Book Antiqua" size="30.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButton" style="-fx-background-color: gray;" text="Back">
-                     <font>
-                        <Font name="Book Antiqua" size="12.0" />
-                     </font>
-                  </Button>
+                  <MenuBar fx:id="menuBar">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="File">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Close" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Edit">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Delete" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Help">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="About" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0">
+                     <children>
+                        <ImageView fitHeight="69.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/microscope.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="79.0" prefWidth="431.0" text="Medical Equipment Delivery " textFill="#f8f8f8">
+                           <font>
+                              <Font name="Book Antiqua" size="24.0" />
+                           </font>
+                        </Label>
+                        <StackPane prefHeight="100.0" prefWidth="254.0">
+                           <children>
+                              <Button fx:id="homeButton" mnemonicParsing="false" onAction="#homeButton" prefHeight="65.0" prefWidth="182.0" style="-fx-background-color: grey;" text="Home">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <ImageView fitHeight="61.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_LEFT">
+                                 <image>
+                                    <Image url="@icons/home.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets left="3.0" />
+                                 </StackPane.margin>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                     </children>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </HBox>
                </children>
-               <padding>
-                  <Insets right="5.0" />
-               </padding>
-            </HBox>
+            </VBox>
          </children>
       </TilePane>
    </top>
@@ -50,6 +89,8 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Label text="Location:" />
+                  <ComboBox prefWidth="150.0" promptText="Select Floor" />
+                  <ComboBox prefWidth="150.0" promptText="Select Room" />
                </children>
                <VBox.margin>
                   <Insets top="5.0" />
@@ -58,6 +99,8 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Label text="Equipment:" />
+                  <ComboBox prefHeight="27.0" prefWidth="184.0" promptText="Select Equipment Type" />
+                  <ComboBox prefWidth="150.0" promptText="Quantity" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
@@ -86,7 +129,7 @@
    <bottom>
       <Pane prefHeight="77.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="serviceRequestButton" alignment="CENTER" contentDisplay="CENTER" layoutX="236.0" layoutY="9.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="129.0" style="-fx-background-color: red;" text="Submit Request" textFill="WHITE" />
+            <Button fx:id="submitRequestButton" alignment="CENTER" contentDisplay="CENTER" layoutX="236.0" layoutY="9.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="57.0" prefWidth="129.0" style="-fx-background-color: red;" text="Submit" textFill="WHITE" />
          </children>
       </Pane>
    </bottom>
