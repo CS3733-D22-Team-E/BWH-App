@@ -62,6 +62,17 @@ public class App extends Application {
   }
 
   @FXML
+  private void medicineDeliveryButton(ActionEvent event) throws IOException {
+    Node node = (Node) event.getSource();
+    Stage thisStage = (Stage) node.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("view/medicineDelivery.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
+
+  @FXML
   private void homeButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
