@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="800.0" maxWidth="1080.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.TeamE.App">
+   <top>
+      <TilePane prefHeight="79.0" prefWidth="600.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="107.0" prefWidth="1081.0">
+               <children>
+                  <MenuBar fx:id="menuBar">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="File">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Close" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Edit">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Delete" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Help">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="About" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0">
+                     <children>
+                        <StackPane alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="134.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" stroke="BLACK" strokeType="INSIDE" width="69.0" />
+                              <ImageView fitHeight="69.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/microscope.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </StackPane>
+                        <Label contentDisplay="CENTER" prefHeight="79.0" prefWidth="630.0" text="Medical Equipment Delivery " textFill="#f8f8f8">
+                           <font>
+                              <Font name="Book Antiqua" size="36.0" />
+                           </font>
+                        </Label>
+                        <StackPane prefHeight="85.0" prefWidth="190.0">
+                           <children>
+                              <Button fx:id="homeButton" mnemonicParsing="false" onAction="#homeButton" prefHeight="65.0" prefWidth="218.0" text="Home">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <ImageView fitHeight="61.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_LEFT">
+                                 <image>
+                                    <Image url="@icons/home.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets />
+                                 </StackPane.margin>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </TilePane>
+   </top>
+   <center>
+      <VBox alignment="CENTER" fillWidth="false" prefHeight="389.0" prefWidth="1040.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="98.0" prefWidth="497.0" spacing="20.0">
+               <children>
+                  <Label text="Location:" />
+                  <ComboBox prefWidth="150.0" promptText="Select Floor" />
+                  <ComboBox prefWidth="150.0" promptText="Select Room" />
+               </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="97.0" prefWidth="513.0" spacing="20.0">
+               <children>
+                  <Label text="Equipment:" />
+                  <ComboBox prefHeight="27.0" prefWidth="184.0" promptText="Select Equipment Type" />
+                  <ComboBox prefWidth="150.0" promptText="Quantity" />
+               </children>
+            </HBox>
+            <HBox prefHeight="98.0" prefWidth="593.0" spacing="20.0">
+               <children>
+                  <Label text="Enter Delivery Time:" />
+                  <TextField prefHeight="26.0" prefWidth="97.0" promptText="MM/DD/YYYY" />
+                  <TextField prefHeight="26.0" prefWidth="104.0" promptText="_ _ : _ _ AM/PM" />
+                  <CheckBox mnemonicParsing="false" text="Urgent" />
+               </children>
+            </HBox>
+            <HBox prefHeight="99.0" prefWidth="518.0" spacing="20.0">
+               <children>
+                  <Label text="Other Notes:" />
+                  <TextField alignment="TOP_LEFT" prefHeight="57.0" prefWidth="417.0" promptText="Type to add text..." />
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets left="20.0" right="20.0" top="50.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="20.0" left="20.0" />
+         </padding>
+      </VBox>
+   </center>
+   <bottom>
+      <Pane prefHeight="129.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="submitRequestButton" alignment="CENTER" contentDisplay="CENTER" layoutX="442.0" layoutY="21.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="87.0" prefWidth="197.0" style="-fx-background-color: red;" text="Submit Request" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+         </children>
+      </Pane>
+   </bottom>
+</BorderPane>

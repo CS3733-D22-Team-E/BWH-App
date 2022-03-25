@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class App extends Application {
   @FXML Button sanitationButton;
   @FXML Button languageButton;
+  @FXML Button medicalEquipmentButton;
   @FXML MenuBar menuBar;
 
   FXMLLoader loader = new FXMLLoader();
@@ -44,6 +45,17 @@ public class App extends Application {
     Stage thisStage = (Stage) node.getScene().getWindow();
 
     loader.setLocation(getClass().getResource("view/languagePage.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
+
+  @FXML
+  private void medicalEquipmentButton(ActionEvent event) throws IOException {
+    Node node = (Node) event.getSource();
+    Stage thisStage = (Stage) node.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("view/medicalEquipmentPage.fxml"));
     root = loader.load();
 
     thisStage.setScene(new Scene(root));

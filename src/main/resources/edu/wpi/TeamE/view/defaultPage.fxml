@@ -100,6 +100,20 @@
                         <Label layoutX="-15.0" layoutY="82.0" text="Language Interpreter" />
                      </children>
                   </Pane>
+                  <Pane>
+                     <children>
+                        <Button fx:id="medicalEquipmentButton" alignment="CENTER" layoutX="2.0" layoutY="6.0" mnemonicParsing="false" onAction="#medicalEquipmentButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/microscope.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="-11.0" layoutY="82.0" text="Equipment Delivery" />
+                     </children>
+                  </Pane>
                </children>
                <opaqueInsets>
                   <Insets />
