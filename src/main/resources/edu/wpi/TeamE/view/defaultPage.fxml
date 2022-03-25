@@ -86,6 +86,20 @@
                         <Insets />
                      </TilePane.margin>
                   </Pane>
+                  <Pane>
+                     <children>
+                        <Button fx:id="languageButton" alignment="CENTER" layoutX="2.0" layoutY="6.0" mnemonicParsing="false" onAction="#languageButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/Language.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="-15.0" layoutY="82.0" text="Language Interpreter" />
+                     </children>
+                  </Pane>
                </children>
                <opaqueInsets>
                   <Insets />
