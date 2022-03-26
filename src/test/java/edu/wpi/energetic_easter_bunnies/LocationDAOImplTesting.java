@@ -7,16 +7,26 @@ import org.junit.jupiter.api.Test;
 
 public class LocationDAOImplTesting {
   @Test
-  public void testLocation() throws SQLException {
+  public void testGetLocation() throws SQLException {
     LocationDAO locationDAO = new LocationDAOImpl();
     System.out.println(locationDAO.getLocation(4));
   }
 
   @Test
-  public void testLocation2() throws SQLException {
+  public void testUpdateLocation() throws SQLException {
     LocationDAO locationDAO = new LocationDAOImpl();
     Location location = new Location();
     locationDAO.updateLocation(location);
     assertTrue(locationDAO.getAllLocations().contains(location));
+  }
+
+  @Test
+  public void testDeleteLocation() throws SQLException {
+    LocationDAO locationDAO = new LocationDAOImpl();
+    Location location = new Location();
+    locationDAO.updateLocation(location);
+    assertTrue(locationDAO.getAllLocations().contains(location));
+    locationDAO.deleteLocation(location);
+    assertTrue(!locationDAO.getAllLocations().contains(location));
   }
 }
