@@ -50,7 +50,8 @@ public class App extends Application {
 
     thisStage.setScene(new Scene(root));
   }
-  
+
+  @FXML
   private void languageButton(ActionEvent event) throws IOException {
     Node node = (Node) event.getSource();
     Stage thisStage = (Stage) node.getScene().getWindow();
