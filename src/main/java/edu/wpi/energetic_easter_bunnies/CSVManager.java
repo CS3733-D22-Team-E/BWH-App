@@ -16,7 +16,7 @@ public class CSVManager {
    * @throws IOException - Writing to the CSV file
    */
   public static void saveLocationCSV(String fileName)
-      throws IOException, SQLException { // TODO Implement adding new information to db
+      throws IOException, SQLException {
     LocationDAO locationDAO = new LocationDAOImpl();
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
     File tempFile = new File(fileName);
