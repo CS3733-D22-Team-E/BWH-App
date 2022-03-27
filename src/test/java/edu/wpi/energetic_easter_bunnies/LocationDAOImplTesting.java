@@ -2,6 +2,7 @@ package edu.wpi.energetic_easter_bunnies;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +29,11 @@ public class LocationDAOImplTesting {
     assertTrue(locationDAO.getAllLocations().contains(location));
     locationDAO.deleteLocation(location);
     assertTrue(!locationDAO.getAllLocations().contains(location));
+  }
+
+  @Test
+  public void testSaveFile() throws SQLException, IOException {
+    LocationDAO locationDAO = new LocationDAOImpl();
+    CSVManager.saveLocationCSV("saveFile.csv");
   }
 }
