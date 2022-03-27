@@ -90,7 +90,7 @@ public class LocationDAOImpl implements LocationDAO {
    * @param fileName - The file name where the CSV will be saved
    * @throws IOException - Writing to the CSV file
    */
-  public void saveFile(String fileName) throws IOException {
+  public void saveFile(String fileName) throws IOException { //TODO Implement adding new information to db
     locations = getAllLocations();
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
     File tempFile = new File(fileName);
