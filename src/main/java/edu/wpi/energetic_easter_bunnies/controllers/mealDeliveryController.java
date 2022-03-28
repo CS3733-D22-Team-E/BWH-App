@@ -1,4 +1,4 @@
-package edu.wpi.TeamE.controllers;
+package edu.wpi.energetic_easter_bunnies.controllers;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
