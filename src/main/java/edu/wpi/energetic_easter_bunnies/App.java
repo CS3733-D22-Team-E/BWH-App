@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies;
 
+import edu.wpi.energetic_easter_bunnies.controllers.*;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,20 +25,11 @@ public class App extends Application {
   FXMLLoader loader = new FXMLLoader();
   Parent root;
 
+  sanitationServiceController sanitationService = new sanitationServiceController();
+
   @Override
   public void init() {
     log.info("Starting Up");
-  }
-
-  @FXML
-  private void sanitationButton(ActionEvent event) throws IOException {
-    Node node = (Node) event.getSource();
-    Stage thisStage = (Stage) node.getScene().getWindow();
-
-    loader.setLocation(getClass().getResource("view/sanitationPage.fxml"));
-    root = loader.load();
-
-    thisStage.setScene(new Scene(root));
   }
 
   @FXML
@@ -85,8 +77,20 @@ public class App extends Application {
   }
 
   @FXML
-  private void homeButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+  private void sanitationButton(ActionEvent event) throws IOException {
+    Node node = (Node) event.getSource();
+    Stage thisStage = (Stage) node.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("view/sanitationPage.fxml"));
+    root = loader.load();
+    loader.setController(sanitationService);
+
+    thisStage.setScene(new Scene(root));
+  }
+
+  @FXML
+  public void homeButton(ActionEvent event) throws IOException {
+    Stage thisStage = ((Stage) ((Node) event.getSource()).getScene().getWindow());
 
     loader.setLocation(getClass().getResource("view/defaultPage.fxml"));
     root = loader.load();
