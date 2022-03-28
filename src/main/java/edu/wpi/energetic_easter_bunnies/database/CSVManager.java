@@ -14,7 +14,7 @@ public class CSVManager {
     Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/BWDB;");
 
     String query =
-        "INSERT INTO TOWERLOCATIONS (NODEID, XCOORD, YCOORD, FLOOR, BUILDING, "
+        "INSERT INTO TOWERLOCATIONS (NODEID, XCOORD, YCOORD, FLOOR, BUILDING, " //TODO Change this query
             + "NODETYPE, LONGNAME, SHORTNAME) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     PreparedStatement statement = connection.prepareStatement(query);
 
