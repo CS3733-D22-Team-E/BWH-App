@@ -7,20 +7,23 @@ public class CSVManager {
 
   /**
    * Loads the location database from the location csv
+   *
    * @param fileName - The file name where the database will be loaded from
    */
   public static void loadLocationCSV(String fileName) throws SQLException, IOException {
     Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/BWDB;");
 
-    String query = "INSERT INTO TOWERLOCATIONS (NODEID, XCOORD, YCOORD, FLOOR, BUILDING, " +
-            "NODETYPE, LONGNAME, SHORTNAME) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    String query =
+        "INSERT INTO TOWERLOCATIONS (NODEID, XCOORD, YCOORD, FLOOR, BUILDING, "
+            + "NODETYPE, LONGNAME, SHORTNAME) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     PreparedStatement statement = connection.prepareStatement(query);
 
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String line;
+    int count = 0;
     in.readLine();
 
-    while((line = in.readLine()) != null) {
+    while ((line = in.readLine()) != null) {
       String[] data = line.split(",");
       String nodeID = data[0];
       int xcoord = Integer.parseInt(data[1]);
@@ -40,17 +43,15 @@ public class CSVManager {
       statement.setString(7, longName);
       statement.setString(8, shortName);
 
-      statement.addBatch();
+      statement.executeUpdate();
     }
     in.close();
-    statement.executeBatch();
     connection.commit();
     connection.close();
   }
   /**
-   * The program first loads all of the contents of the SQL Location table
-   * into Java Location objects. Then the CSV file is created from the
-   * Java objects.
+   * The program first loads all of the contents of the SQL Location table into Java Location
+   * objects. Then the CSV file is created from the Java objects.
    *
    * @param fileName - The file name where the CSV will be saved
    * @throws IOException - Writing to the CSV file
