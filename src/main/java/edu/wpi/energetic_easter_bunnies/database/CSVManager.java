@@ -1,4 +1,4 @@
-package edu.wpi.energetic_easter_bunnies;
+package edu.wpi.energetic_easter_bunnies.database;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,8 +15,7 @@ public class CSVManager {
    * @param fileName - The file name where the CSV will be saved
    * @throws IOException - Writing to the CSV file
    */
-  public static void saveLocationCSV(String fileName)
-      throws IOException, SQLException {
+  public static void saveLocationCSV(String fileName) throws IOException, SQLException {
     LocationDAO locationDAO = new LocationDAOImpl();
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
     File tempFile = new File(fileName);

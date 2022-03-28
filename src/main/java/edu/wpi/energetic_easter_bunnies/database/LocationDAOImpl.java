@@ -1,4 +1,4 @@
-package edu.wpi.energetic_easter_bunnies;
+package edu.wpi.energetic_easter_bunnies.database;
 
 import java.sql.*;
 import java.util.ArrayList;

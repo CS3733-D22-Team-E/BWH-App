@@ -1,4 +1,4 @@
-package edu.wpi.energetic_easter_bunnies;
+package edu.wpi.energetic_easter_bunnies.database;
 
 public class Location {
   private final String nodeID;
