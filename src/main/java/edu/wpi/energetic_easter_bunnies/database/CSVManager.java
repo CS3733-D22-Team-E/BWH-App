@@ -117,7 +117,7 @@ public class CSVManager {
 
       // check if nodeID is already in the database
       // ensures the database is up to date and correct without overwriting
-      String query = "SELECT COUNT(1) FROM MedEquipReqTable WHERE NODEID = " + nodeID;
+      String query = "SELECT COUNT(1) FROM MedEquipReqTable WHERE NODEID = '" + nodeID + "'";
       PreparedStatement statement = connection.prepareStatement(query);
       ResultSet rs = statement.executeQuery(query);
       if (rs.next()) { // true if exists, false if does not exist
@@ -188,7 +188,7 @@ public class CSVManager {
 
       // check if nodeID is already in the database
       // ensures the database is up to date and correct without overwriting
-      String query = "SELECT COUNT(1) FROM EQUIPMENT WHERE NODEID = " + equipID;
+      String query = "SELECT COUNT(1) FROM EQUIPMENT WHERE NODEID = '" + equipID + "'";
       PreparedStatement statement = connection.prepareStatement(query);
       ResultSet rs = statement.executeQuery(query);
       if (rs.next()) { // true if exists, false if does not exist
@@ -274,7 +274,7 @@ public class CSVManager {
 
       // check if nodeID is already in the database
       // ensures the database is up to date and correct without overwriting
-      String query = "SELECT COUNT(1) FROM EmployeeTable WHERE NODEID = " + employeeID;
+      String query = "SELECT COUNT(1) FROM EmployeeTable WHERE NODEID = '" + employeeID + "'";
       PreparedStatement statement = connection.prepareStatement(query);
       ResultSet rs = statement.executeQuery(query);
       if (rs.next()) { // true if exists, false if does not exist

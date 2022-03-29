@@ -1,4 +1,4 @@
-package edu.wpi.energetic_easter_bunnies;
+package edu.wpi.energetic_easter_bunnies.database_testing;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
