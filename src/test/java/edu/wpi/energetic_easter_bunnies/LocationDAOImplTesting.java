@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.wpi.energetic_easter_bunnies.database.Location;
@@ -19,7 +20,8 @@ public class LocationDAOImplTesting {
   public void testUpdateLocation() throws SQLException {
     LocationDAO locationDAO = new LocationDAOImpl();
     Location location = new Location();
-    locationDAO.updateLocation(location);
+    locationDAO.addLocation(location);
+    locationDAO.updateLocation(location,"1","HALL");
     assertTrue(locationDAO.getAllLocations().contains(location));
   }
 
@@ -27,7 +29,7 @@ public class LocationDAOImplTesting {
   public void testDeleteLocation() throws SQLException {
     LocationDAO locationDAO = new LocationDAOImpl();
     Location location = new Location();
-    locationDAO.updateLocation(location);
+    locationDAO.addLocation(location);
     assertTrue(locationDAO.getAllLocations().contains(location));
     locationDAO.deleteLocation(location);
     assertTrue(!locationDAO.getAllLocations().contains(location));
