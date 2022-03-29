@@ -4,23 +4,34 @@ public class Employee {
   private final String employeeID;
   private final String name;
   private String position;
-  private int salary;
+  private double salary;
   private String location;
   private boolean available;
+  private int numID;
+
+  public int getNumID() {
+    return numID;
+  }
+
+  public void setNumID(int numID) {
+    this.numID = numID;
+  }
 
   public Employee(
       String employeeID,
       String name,
       String position,
-      int salary,
+      double salary,
       String location,
-      boolean available) {
+      boolean available,
+      int numID) {
     this.employeeID = employeeID;
     this.name = name;
     this.position = position;
     this.salary = salary;
     this.location = location;
     this.available = available;
+    this.numID = numID;
   }
 
   public String getEmployeeID() {
@@ -35,11 +46,11 @@ public class Employee {
     return position;
   }
 
-  public int getSalary() {
+  public double getSalary() {
     return salary;
   }
 
-  public void setSalary(int salary) {
+  public void setSalary(double salary) {
     this.salary = salary;
   }
 
