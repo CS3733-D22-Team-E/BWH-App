@@ -2,6 +2,9 @@ package edu.wpi.energetic_easter_bunnies;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import edu.wpi.energetic_easter_bunnies.database.Location;
+import edu.wpi.energetic_easter_bunnies.database.LocationDAO;
+import edu.wpi.energetic_easter_bunnies.database.LocationDAOImpl;
 import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 
