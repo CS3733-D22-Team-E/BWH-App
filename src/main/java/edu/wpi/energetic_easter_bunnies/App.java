@@ -4,6 +4,7 @@ import edu.wpi.energetic_easter_bunnies.controllers.*;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
