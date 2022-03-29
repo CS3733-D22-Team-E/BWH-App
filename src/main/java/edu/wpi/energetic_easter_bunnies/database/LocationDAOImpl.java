@@ -39,6 +39,7 @@ public class LocationDAOImpl implements LocationDAO {
     }
     rs.close();
   }
+
   /**
    * Creates an arraylist of all locations from the db
    *
@@ -50,6 +51,8 @@ public class LocationDAOImpl implements LocationDAO {
   }
 
   /**
+   * Gets a location with given numID in the arrayList
+   *
    * @param numID - The numerical id of the location node
    * @return the location requested
    */
@@ -58,23 +61,97 @@ public class LocationDAOImpl implements LocationDAO {
     return locations.get(numID);
   }
 
-  /**
-   * Updates a given location's floor and node type
-   *
-   * @param location - The location to be added
-   */
+  /** Prints all the location information */
   @Override
-  public void updateLocation(Location location) {
-    locations.add(location);
+  public void printLocations() {
+    for (Location location : locations) {
+      System.out.println(location);
+    }
   }
 
   /**
-   * Deletes a location entry
+   * Creates a new location entry in the database
    *
-   * @param location - The location to be deleted
+   * @param location - new location to be added
+   * @throws SQLException - Accesses Database
    */
   @Override
-  public void deleteLocation(Location location) {
+  public void addLocation(Location location) throws SQLException {
+
+    String url = "jdbc:derby://localhost:1527/BWDB";
+    Connection connection = DriverManager.getConnection(url);
+    Statement statement = connection.createStatement();
+    locations.add(location);
+
+    String query =
+        "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
+            + location.getNodeID()
+            + "',"
+            + location.getXcoord()
+            + ","
+            + location.getYcoord()
+            + ",'"
+            + location.getFloor()
+            + "','"
+            + location.getBuilding()
+            + "','"
+            + location.getNodeType()
+            + "','"
+            + location.getLongName()
+            + "','"
+            + location.getShortName()
+            + "')"; // Insert into database; does not check if the nodeID already exists
+    statement.executeUpdate(query);
+  }
+
+  /**
+   * Updates a given location's floor and node type
+   *
+   * @param location - the location node to be updated
+   * @param newFloor - the new floor value
+   * @param newNodeType - the new node type
+   * @throws SQLException - Accesses Database
+   */
+  @Override
+  public void updateLocation(Location location, String newFloor, String newNodeType)
+      throws SQLException {
+
+    // Updating location floor and node type
+    location.setFloor(newFloor);
+    location.setNodeType(newNodeType);
+
+    // Update location floor and node type in the db
+    String url = "jdbc:derby://localhost:1527/BWDB;";
+    Connection connection = DriverManager.getConnection(url);
+    Statement statement = connection.createStatement();
+    String query =
+        "UPDATE TOWERLOCATIONS SET FLOOR = '"
+            + newFloor
+            + "', NODETYPE = '"
+            + newNodeType
+            + "' WHERE NODEID = '"
+            + location.getNodeID()
+            + "'";
+    statement.executeUpdate(query);
+  }
+
+  /**
+   * Deletes a location entry in the database
+   *
+   * @param location - location to be deleted
+   * @throws SQLException - Accesses Database
+   */
+  @Override
+  public void deleteLocation(Location location) throws SQLException {
+
+    // Deleting the location from the array list
     locations.remove(location);
+
+    // Remove location in the db
+    String url = "jdbc:derby://localhost:1527/BWDB";
+    Connection connection = DriverManager.getConnection(url);
+    Statement statement = connection.createStatement();
+    String query = "DELETE FROM TOWERLOCATIONS WHERE nodeID = ('" + location.getNodeID() + "')";
+    statement.executeUpdate(query);
   }
 }
