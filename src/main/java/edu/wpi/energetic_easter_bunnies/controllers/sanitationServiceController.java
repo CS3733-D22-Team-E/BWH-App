@@ -2,28 +2,16 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import entity.sanitationRequest;
-import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
-public class sanitationServiceController {
+public class sanitationServiceController extends ServiceRequestPageController {
 
-  FXMLLoader loader = new FXMLLoader();
-  Parent root;
-
+  @FXML TextField locationField;
   @FXML ToggleGroup biohazardGroup;
   @FXML ToggleGroup urgencyGroup;
   @FXML ToggleGroup sizeGroup;
-  @FXML TextField locationField;
-  @FXML TextField Notes;
-  @FXML MenuBar menuBar;
-  @FXML Button submitButton;
 
   sanitationRequest request = new sanitationRequest();
 
@@ -72,21 +60,10 @@ public class sanitationServiceController {
       if (loc.isEmpty()) throw new NullPointerException();
       request.setLocation(loc);
 
-      request.setAdditionalNotes(Notes.getText());
+      request.setAdditionalNotes(notes.getText());
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
       PopUpWarning.createWarning("Warning : A required value was not filled");
     }
-  }
-
-  @FXML
-  private void homeButton(ActionEvent event) throws IOException {
-    Node node = (Node) event.getSource();
-    Stage thisStage = (Stage) node.getScene().getWindow();
-
-    loader.setLocation(getClass().getResource("../view/defaultPage.fxml"));
-    root = loader.load();
-
-    thisStage.setScene(new Scene(root));
   }
 }

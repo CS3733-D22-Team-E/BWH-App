@@ -26,6 +26,7 @@ public class App extends Application {
   Parent root;
 
   sanitationServiceController sanitationService = new sanitationServiceController();
+  MedicalEquipmentController medicalEquipmentService = new MedicalEquipmentController();
 
   @Override
   public void init() {
@@ -61,6 +62,7 @@ public class App extends Application {
 
     loader.setLocation(getClass().getResource("view/medicalEquipmentPage.fxml"));
     root = loader.load();
+    loader.setController(medicalEquipmentService);
 
     thisStage.setScene(new Scene(root));
   }
