@@ -4,17 +4,6 @@ import java.io.*;
 import java.sql.*;
 
 public class CSVManager {
-
-  // not a lot of overhead, I can always make another implementation,
-  // and we can always refactor code later if we see a better pattern.
-  // can be left alone for now, it should work fine         -jb
-
-  // Blocked before can merge + is functional:
-  // ServiceRequest Class
-  // MedicalEquipmentDAOImpl
-  // MedicalEquipmentServiceRequestDAOImpl
-  // getAllEmployees() method
-
   /**
    * Loads the location database from the location csv
    *
@@ -32,13 +21,10 @@ public class CSVManager {
 
       // check if nodeID is already in the database
       // ensures the database is up to date and correct without overwriting
-      String query = "SELECT COUNT(1) FROM TOWERLOCATIONS WHERE NODEID = " + nodeID;
+      String query = "SELECT * FROM TOWERLOCATIONS WHERE NODEID = '" + nodeID + "'";
       PreparedStatement statement = connection.prepareStatement(query);
-      ResultSet rs = statement.executeQuery(query);
-      if (rs.next()) { // true if exists, false if does not exist
-        continue; // so it does not add a duplicate item into the database - issue from meeting
-        // 3/28/2022
-      }
+      ResultSet rs = statement.executeQuery();
+      if (rs.next()) continue;
 
       String insertQuery =
           "INSERT INTO TOWERLOCATIONS (NODEID, XCOORD, YCOORD, FLOOR, BUILDING, "
