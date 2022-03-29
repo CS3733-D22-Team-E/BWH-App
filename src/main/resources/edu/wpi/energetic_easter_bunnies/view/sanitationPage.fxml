@@ -195,7 +195,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Notes" promptText="Note...">
+                  <TextField fx:id="notes" promptText="Note...">
                      <font>
                         <Font size="14.0" />
                      </font>

@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import edu.wpi.energetic_easter_bunnies.entity.*;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class ServiceRequestPageController {
+public abstract class ServiceRequestPageController {
 
   FXMLLoader loader = new FXMLLoader();
   Parent root;
@@ -18,6 +19,8 @@ public class ServiceRequestPageController {
   @FXML MenuBar menuBar;
   @FXML TextField notes;
   @FXML Button submitButton;
+
+  ServiceRequestPageController() {}
 
   @FXML
   private void homeButton(ActionEvent event) throws IOException {
@@ -28,5 +31,10 @@ public class ServiceRequestPageController {
     root = loader.load();
 
     thisStage.setScene(new Scene(root));
+  }
+
+  public boolean sendToDB(serviceRequest request) {
+    // todo : implement DB communication
+    return true;
   }
 }

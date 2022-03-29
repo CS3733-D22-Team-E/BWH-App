@@ -1,7 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
-import entity.MedicalEquipmentRequest;
+import edu.wpi.energetic_easter_bunnies.entity.MedicalEquipmentRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
