@@ -7,7 +7,9 @@ public abstract class serviceRequest {
   public enum Type {
     sanitationRequest,
     medicalEquipmentRequest,
-    mealDeliveryRequest
+    mealDeliveryRequest,
+    translatorRequest,
+    medicineRequest
   }
 
   private Date requestDate;
@@ -18,6 +20,9 @@ public abstract class serviceRequest {
   private String roomID;
   private boolean isUrgent;
   private Type requestType;
+
+  private String requestStatus;
+  private String staffAssignee;
 
   public Type getRequestType() {
 
@@ -58,5 +63,21 @@ public abstract class serviceRequest {
 
   public void setUrgent(boolean urgent) {
     isUrgent = urgent;
+  }
+
+  public String getRequestStatus() {
+    return requestStatus;
+  }
+
+  public void setRequestStatus(String requestStatus) {
+    this.requestStatus = requestStatus;
+  }
+
+  public String getStaffAssignee() {
+    return staffAssignee;
+  }
+
+  public void setStaffAssignee(String staffAssignee) {
+    this.staffAssignee = staffAssignee;
   }
 }

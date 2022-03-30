@@ -47,6 +47,8 @@ public class MedicalEquipmentController extends ServiceRequestPageController {
     deliveryDate.clear();
     deliveryTime.clear();
     isUrgent.setSelected(false);
+    requestStatus.clear();
+    staffAssignee.clear();
     notes.clear();
   }
 }

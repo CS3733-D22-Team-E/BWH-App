@@ -21,13 +21,21 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.App">
    <children>
-      <MenuBar fx:id="menuBar">
+      <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
          <menus>
             <Menu mnemonicParsing="false" text="Menu">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#homeButton" text="Home" />
-                  <MenuItem mnemonicParsing="false" text="Settings" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
+                  <MenuItem fx:id="homeMenuButton" mnemonicParsing="false" onAction="#homeButton" text="Home" />
+                  <Menu mnemonicParsing="false" text="Pages">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#sanitationButton" text="Sanitation" />
+                        <MenuItem mnemonicParsing="false" onAction="#medicalEquipmentButton" text="Medical Equipment Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Translation" />
+                     </items>
+                  </Menu>
+                  <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitButton" text="Quit" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">

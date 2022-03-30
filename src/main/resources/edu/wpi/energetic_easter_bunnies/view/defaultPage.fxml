@@ -53,13 +53,17 @@
          <menus>
             <Menu mnemonicParsing="false" text="Menu">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#homeButton" text="Home" />
-                  <MenuItem mnemonicParsing="false" onAction="#sanitationButton" text="Sanitation Service" />
-                  <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Interpreter" />
-                  <MenuItem mnemonicParsing="false" onAction="#medicalEquipmentButton" text="Equipment Delivery" />
-                  <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
-                  <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
+                  <MenuItem fx:id="homeMenuButton" mnemonicParsing="false" onAction="#homeButton" text="Home" />
+                  <Menu mnemonicParsing="false" text="Pages">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#sanitationButton" text="Sanitation" />
+                        <MenuItem mnemonicParsing="false" onAction="#medicalEquipmentButton" text="Medical Equipment Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Translation" />
+                     </items>
+                  </Menu>
+                  <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitButton" text="Quit" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
@@ -69,7 +73,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+      <AnchorPane fx:id="mainPane" maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <TilePane hgap="50.0" layoutX="110.0" layoutY="171.0" prefColumns="3" prefHeight="500.0" prefRows="3" prefTileHeight="90.0" prefTileWidth="100.0" prefWidth="860.0" vgap="50.0" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="171.0">
                <children>
