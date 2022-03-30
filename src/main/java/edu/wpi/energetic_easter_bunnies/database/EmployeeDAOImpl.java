@@ -9,7 +9,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
   public EmployeeDAOImpl() throws SQLException {
     employees = new ArrayList<>();
-    String url = "jdbc:derby://localhost:1527/BWDB;";
+    String url = "jdbc:derby:myDB;";
     Connection connection = DriverManager.getConnection(url);
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM EMPLOYEES ORDER BY SALARY DESC";
