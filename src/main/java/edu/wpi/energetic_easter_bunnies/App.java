@@ -22,6 +22,7 @@ public class App extends Application implements menuButtons {
   @FXML Button medicalEquipmentButton;
   @FXML Button medicineDeliveryButton;
   @FXML Button labRequestButton;
+  @FXML Button mapButton;
   @FXML MenuBar menuBar;
   @FXML AnchorPane mainPane;
 
@@ -114,6 +115,16 @@ public class App extends Application implements menuButtons {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
     loader.setLocation(getClass().getResource("view/labRequestPage.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
+
+  @FXML
+  public void mapButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("view/map.fxml"));
     root = loader.load();
 
     thisStage.setScene(new Scene(root));
