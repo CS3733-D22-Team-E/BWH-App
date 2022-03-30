@@ -7,7 +7,9 @@ public abstract class serviceRequest {
   public enum Type {
     sanitationRequest,
     medicalEquipmentRequest,
-    mealDeliveryRequest
+    mealDeliveryRequest,
+    translatorRequest,
+    medicineRequest
   }
 
   private Date requestDate;

@@ -17,6 +17,7 @@ public class sanitationServiceController extends ServiceRequestPageController {
 
   @FXML
   public void submitButton(ActionEvent event) {
+    System.out.println("YOYO");
     sanitationRequest request = new sanitationRequest();
     try {
       RadioButton selectBiohazard = (RadioButton) biohazardGroup.getSelectedToggle();
@@ -55,9 +56,10 @@ public class sanitationServiceController extends ServiceRequestPageController {
           break;
       }
 
+      if (locationField.getText().isEmpty() || locationField.getText().isBlank())
+        throw new NullPointerException();
     } catch (NullPointerException error) {
       System.out.println(error.getMessage());
-      System.out.println(error.getCause());
       PopUpWarning.createWarning("Warning : A required value was not filled");
     }
   }
