@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -9,6 +11,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -20,25 +24,14 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <VBox prefHeight="640.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.MedicalEquipmentController">
    <children>
       <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
          <menus>
             <Menu mnemonicParsing="false" text="Menu">
                <items>
-                  <MenuItem fx:id="homeMenuButton" mnemonicParsing="false" onAction="#homeButton" text="Home" />
-                  <Menu mnemonicParsing="false" text="Pages">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#sanitationButton" text="Sanitation" />
-                        <MenuItem mnemonicParsing="false" onAction="#medicalEquipmentButton" text="Medical Equipment Delivery" />
-                        <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
-                        <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
-                        <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Translation" />
-                     </items>
-                  </Menu>
-                  <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitButton" text="Quit" />
+                  <MenuItem mnemonicParsing="false" onAction="#homeButton" text="Home" />
+                  <MenuItem mnemonicParsing="false" text="Quit" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
@@ -95,7 +88,7 @@
                   </Button>
                </children>
             </AnchorPane>
-            <VBox alignment="CENTER" fillWidth="false" layoutX="263.0" layoutY="90.0" prefHeight="381.0" prefWidth="555.0">
+            <VBox alignment="CENTER_LEFT" fillWidth="false" layoutX="43.0" layoutY="90.0" prefHeight="381.0" prefWidth="555.0">
                <children>
                   <HBox prefHeight="87.0" prefWidth="556.0" spacing="10.0">
                      <children>
@@ -103,7 +96,7 @@
                         <ComboBox fx:id="floor" prefWidth="150.0" promptText="Select Floor">
                            <items>
                               <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="Test 1"/>
+                                 <String fx:value="Test 1" />
                               </FXCollections>
                            </items>
                         </ComboBox>
@@ -123,6 +116,18 @@
                         <TextField fx:id="deliveryDate" promptText="MM/DD/YYYY" />
                         <TextField fx:id="deliveryTime" promptText="_ _ : _ _ AM/PM" />
                         <CheckBox fx:id="isUrgent" mnemonicParsing="false" text="Urgent" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="90.0" prefWidth="329.0" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="Request Status:" />
+                        <TextField fx:id="requestStatus" prefHeight="25.0" prefWidth="192.0" promptText="Done, Processing, or leave blank" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="103.0" prefWidth="315.0" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="Staff Assignee:" />
+                        <TextField fx:id="staffAssignee" prefHeight="25.0" prefWidth="159.0" promptText="Staff to carry out request" />
                      </children>
                   </HBox>
                   <HBox prefHeight="92.0" prefWidth="558.0" spacing="10.0">
@@ -151,6 +156,17 @@
                   <Insets />
                </opaqueInsets>
             </AnchorPane>
+            <TableView layoutX="616.0" layoutY="144.0" prefHeight="315.0" prefWidth="438.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <Label layoutX="616.0" layoutY="115.0" prefHeight="27.0" prefWidth="347.0" style="-fx-font-weight: bold;" text="All Medical Equipment Service Requests">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

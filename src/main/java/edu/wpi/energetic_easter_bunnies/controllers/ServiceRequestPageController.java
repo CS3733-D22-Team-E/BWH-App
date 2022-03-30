@@ -20,6 +20,8 @@ public abstract class ServiceRequestPageController implements menuButtons {
   @FXML Button submitButton;
   @FXML Button resetButton;
   @FXML MenuBar menuBar;
+  @FXML TextField requestStatus;
+  @FXML TextField staffAssignee;
 
   ServiceRequestPageController() {}
 
