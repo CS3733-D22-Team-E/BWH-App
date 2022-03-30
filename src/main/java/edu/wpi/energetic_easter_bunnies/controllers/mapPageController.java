@@ -25,8 +25,7 @@ import javafx.stage.Stage;
 public class mapPageController implements menuButtons, Initializable {
   FXMLLoader loader = new FXMLLoader();
   Parent root;
-  @FXML
-  MenuBar menuBar;
+  @FXML MenuBar menuBar;
   LocationDAOImpl db;
 
   @FXML TableView<locationModel> locationTable;
@@ -148,6 +147,16 @@ public class mapPageController implements menuButtons, Initializable {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
     loader.setLocation(getClass().getResource("../view/map.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
+
+  @Override
+  public void labRequestButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("../view/labRequestPage.fxml"));
     root = loader.load();
 
     thisStage.setScene(new Scene(root));

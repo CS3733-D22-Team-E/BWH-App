@@ -86,6 +86,16 @@ public abstract class serviceRequestPageController implements menuButtons {
   }
 
   @FXML
+  public void labRequestButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("view/labRequestPage.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
+
+  @FXML
   public void homeButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 

@@ -29,4 +29,7 @@ public interface menuButtons {
 
   @FXML
   void locationButton(ActionEvent event) throws IOException;
+
+  @FXML
+  void labRequestButton(ActionEvent event) throws IOException;
 }
