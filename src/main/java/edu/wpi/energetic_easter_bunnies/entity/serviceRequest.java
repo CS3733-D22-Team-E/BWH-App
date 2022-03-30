@@ -21,6 +21,9 @@ public abstract class serviceRequest {
   private boolean isUrgent;
   private Type requestType;
 
+  private String requestStatus;
+  private String staffAssignee;
+
   public Type getRequestType() {
 
     return requestType;
@@ -60,5 +63,21 @@ public abstract class serviceRequest {
 
   public void setUrgent(boolean urgent) {
     isUrgent = urgent;
+  }
+
+  public String getRequestStatus() {
+    return requestStatus;
+  }
+
+  public void setRequestStatus(String requestStatus) {
+    this.requestStatus = requestStatus;
+  }
+
+  public String getStaffAssignee() {
+    return staffAssignee;
+  }
+
+  public void setStaffAssignee(String staffAssignee) {
+    this.staffAssignee = staffAssignee;
   }
 }
