@@ -140,6 +140,11 @@
                   </FXCollections>
                </items>
             </ComboBox>
+            <Button fx:id="resetButton" alignment="CENTER" layoutX="902.0" layoutY="384.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="62.0" prefWidth="164.0" text="Reset Fields">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

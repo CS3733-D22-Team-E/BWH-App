@@ -67,15 +67,15 @@ public class MealDeliveryController extends ServiceRequestPageController impleme
     }
   }
 
-  //  @FXML
-  //  private void resetButton(ActionEvent event) {
-  //    entreeDropDown.clearSelection();
-  //    room.getSelectionModel().clearSelection();
-  //    equipmentType.getSelectionModel().clearSelection();
-  //    equipmentQuantity.getSelectionModel().clearSelection();
-  //    deliveryDate.clear();
-  //    deliveryTime.clear();
-  //    isUrgent.setSelected(false);
-  //    notes.clear();
-  //  }
+  @FXML
+  private void resetButton(ActionEvent event) {
+    entreeDropDown.getSelectionModel().clearSelection();
+    beverageDropDown.getSelectionModel().clearSelection();
+    dessertDropDown.getSelectionModel().clearSelection();
+    roomNumberTxt.clear();
+    dateTime.getEditor().clear();
+    timeTxt.clear();
+    asapCheck.setSelected(false);
+    otherNotesTxt.clear();
+  }
 }
