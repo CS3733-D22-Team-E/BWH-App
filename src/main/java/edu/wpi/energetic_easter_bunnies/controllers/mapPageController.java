@@ -15,13 +15,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class mapPageController implements menuButtons, Initializable {
   FXMLLoader loader = new FXMLLoader();
   Parent root;
+  @FXML
+  MenuBar menuBar;
   LocationDAOImpl db;
 
   @FXML TableView<locationModel> locationTable;
@@ -73,27 +78,78 @@ public class mapPageController implements menuButtons, Initializable {
     return tableList;
   }
 
-  @Override
-  public void homeButton(ActionEvent event) throws IOException {}
+  @FXML
+  public void mealDeliveryButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("../view/mealDeliveryPage.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
+
+  @FXML
+  public void languageButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("../view/languagePage.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
+
+  @FXML
+  public void medicalEquipmentButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("../view/medicalEquipmentPage.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
+
+  @FXML
+  public void medicineDeliveryButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("../view/medicineDelivery.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
 
   @Override
-  public void sanitationButton(ActionEvent event) throws IOException {}
+  public void exitButton(ActionEvent event) throws IOException {
+    System.exit(0);
+  }
 
-  @Override
-  public void mealDeliveryButton(ActionEvent event) throws IOException {}
+  @FXML
+  public void sanitationButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
-  @Override
-  public void languageButton(ActionEvent event) throws IOException {}
+    loader.setLocation(getClass().getResource("../view/sanitationPage.fxml"));
+    root = loader.load();
 
-  @Override
-  public void medicalEquipmentButton(ActionEvent event) throws IOException {}
+    thisStage.setScene(new Scene(root));
+  }
 
-  @Override
-  public void medicineDeliveryButton(ActionEvent event) throws IOException {}
+  @FXML
+  public void homeButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
-  @Override
-  public void exitButton(ActionEvent event) throws IOException {}
+    loader.setLocation(getClass().getResource("../view/defaultPage.fxml"));
+    root = loader.load();
 
-  @Override
-  public void locationButton(ActionEvent event) throws IOException {}
+    thisStage.setScene(new Scene(root));
+  }
+
+  @FXML
+  public void locationButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("../view/map.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
 }

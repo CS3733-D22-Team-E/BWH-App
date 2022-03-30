@@ -39,6 +39,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -114,7 +116,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <AnchorPane layoutX="809.0" layoutY="294.0">
+            <AnchorPane layoutX="62.0" layoutY="504.0">
                <children>
                   <Group layoutX="6.198883056640625E-6" layoutY="6.198883056640625E-6" />
                   <Button fx:id="submitButton" alignment="CENTER" mnemonicParsing="false" onAction="#submitButton" prefHeight="75.0" prefWidth="152.0" text="Submit">
@@ -124,7 +126,7 @@
                   </Button>
                </children>
             </AnchorPane>
-            <VBox layoutX="235.0" layoutY="237.0">
+            <VBox layoutX="235.0" layoutY="265.0">
                <children>
                   <Label prefHeight="39.0" prefWidth="157.0" text="Biohazard On Site">
                      <font>
@@ -144,7 +146,7 @@
                   </VBox>
                </children>
             </VBox>
-            <VBox layoutX="62.0" layoutY="237.0">
+            <VBox layoutX="62.0" layoutY="265.0">
                <children>
                   <Label prefHeight="39.0" prefWidth="157.0" text="Urgency">
                      <font>
@@ -163,21 +165,21 @@
                   </VBox>
                </children>
             </VBox>
-            <VBox layoutX="62.0" layoutY="141.0">
+            <VBox layoutX="62.0" layoutY="106.0">
                <children>
-                  <Label prefHeight="39.0" prefWidth="93.0" text="Location">
+                  <Label prefHeight="39.0" prefWidth="398.0" text="Request Status             Assigned Staff Member">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
                   <HBox spacing="15.0">
                      <children>
-                        <TextField fx:id="locationField" promptText="Location...">
+                        <TextField fx:id="locationField" promptText="Status...">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="locationField1" layoutX="10.0" layoutY="10.0" promptText="Location...">
+                        <TextField fx:id="locationField1" layoutX="10.0" layoutY="10.0" promptText="Assigned Staff...">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -218,6 +220,40 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
+               </children>
+            </VBox>
+            <TableView layoutX="460.0" layoutY="141.0" prefHeight="448.0" prefWidth="604.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Request ID" />
+                <TableColumn prefWidth="67.0" text="Status" />
+                  <TableColumn prefWidth="100.0" text="Assigned Staff" />
+                  <TableColumn prefWidth="72.0" text="Urgency" />
+                  <TableColumn prefWidth="83.0" text="Biohazard" />
+                  <TableColumn prefWidth="72.0" text="Size" />
+                  <TableColumn prefWidth="134.0" text="Location" />
+              </columns>
+            </TableView>
+            <VBox layoutX="62.0" layoutY="187.0">
+               <children>
+                  <Label prefHeight="39.0" prefWidth="398.0" text="Floor Number              Room Number">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox spacing="15.0">
+                     <children>
+                        <TextField fx:id="locationField1" promptText="Floor Number...">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="locationField11" layoutX="10.0" layoutY="10.0" promptText="Room Number...">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
       </children>
