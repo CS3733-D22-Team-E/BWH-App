@@ -1,7 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
-import edu.wpi.energetic_easter_bunnies.entity.SanitationRequest;
+import edu.wpi.energetic_easter_bunnies.entity.sanitationRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -17,31 +17,31 @@ public class sanitationServiceController extends ServiceRequestPageController {
 
   @FXML
   public void submitButton(ActionEvent event) {
-    SanitationRequest request = new SanitationRequest();
+    sanitationRequest request = new sanitationRequest();
     try {
       RadioButton selectBiohazard = (RadioButton) biohazardGroup.getSelectedToggle();
       switch (selectBiohazard.getText()) {
         case "Yes":
-          request.setBiohazardOnSite(SanitationRequest.Biohazard.Yes);
+          request.setBiohazardOnSite(sanitationRequest.Biohazard.Yes);
           break;
         case "No":
-          request.setBiohazardOnSite(SanitationRequest.Biohazard.No);
+          request.setBiohazardOnSite(sanitationRequest.Biohazard.No);
           break;
         case "Unsure":
-          request.setBiohazardOnSite(SanitationRequest.Biohazard.Unsure);
+          request.setBiohazardOnSite(sanitationRequest.Biohazard.Unsure);
           break;
       }
 
       RadioButton selectSize = (RadioButton) sizeGroup.getSelectedToggle();
       switch (selectSize.getText()) {
         case "Light":
-          request.setSizeOfCleaning(SanitationRequest.Size.Light);
+          request.setSizeOfCleaning(sanitationRequest.Size.Light);
           break;
         case "Medium":
-          request.setSizeOfCleaning(SanitationRequest.Size.Medium);
+          request.setSizeOfCleaning(sanitationRequest.Size.Medium);
           break;
         case "Heavy":
-          request.setSizeOfCleaning(SanitationRequest.Size.Heavy);
+          request.setSizeOfCleaning(sanitationRequest.Size.Heavy);
           break;
       }
 

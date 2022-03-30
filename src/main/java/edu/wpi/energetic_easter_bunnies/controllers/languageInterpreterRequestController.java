@@ -33,7 +33,7 @@ public class languageInterpreterRequestController extends ServiceRequestPageCont
             //languageInterpreterRequest.setLang(languageSelection.getValue());
             //languageInterpreterRequest.setStartTime(startSelection.getValue());
             //languageInterpreterRequest.setEndTime(endSelection.getValue());
-            languageInterpreterRequest.setOtherNotes(notes.getText());
+            //languageInterpreterRequest.setOtherNotes(notes.getText());
         } catch (NullPointerException error) {
             System.out.println("Error : Some Value is NULL");
             PopUpWarning.createWarning("Warning : A required value was not filled");

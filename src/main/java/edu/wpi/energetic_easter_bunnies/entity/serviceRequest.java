@@ -2,7 +2,7 @@ package edu.wpi.energetic_easter_bunnies.entity;
 
 import java.util.Date;
 
-public abstract class ServiceRequest {
+public abstract class serviceRequest {
 
   public enum Type {
     sanitationRequest,
