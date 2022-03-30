@@ -8,7 +8,17 @@ public class MedicalEquipmentRequest extends ServiceRequest {
   private String deliveryDate;
   private String deliveryTime;
 
-  public MedicalEquipmentRequest(String otherNotes, String floorID, String roomID, boolean isUrgent, String requestStatus, String staffAssignee, String equipment, int equipQuantity, String deliveryDate, String deliveryTime) {
+  public MedicalEquipmentRequest(
+      String otherNotes,
+      String floorID,
+      String roomID,
+      boolean isUrgent,
+      String requestStatus,
+      String staffAssignee,
+      String equipment,
+      int equipQuantity,
+      String deliveryDate,
+      String deliveryTime) {
     super(otherNotes, floorID, roomID, isUrgent, requestStatus, staffAssignee);
     this.equipment = equipment;
     this.equipmentQuantity = equipQuantity;
