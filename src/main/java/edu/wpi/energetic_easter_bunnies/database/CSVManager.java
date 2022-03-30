@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.database;
 
-import edu.wpi.energetic_easter_bunnies.entity.ServiceRequest;
+import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
 import java.io.*;
 import java.sql.*;
 
@@ -158,7 +158,7 @@ public class CSVManager {
       // write format
       out.write("nodeID,equipID\n");
       // write actual data
-      for (ServiceRequest medEquipServReq : MESR.getAllMedicalEquipmentServiceRequests()) {
+      for (serviceRequest medEquipServReq : MESR.getAllMedicalEquipmentServiceRequests()) {
         String csvLine =
             "" + medEquipServReq.getFloorID() + ',' + medEquipServReq.getRoomID() + "\n";
         out.write(csvLine);

@@ -87,6 +87,16 @@ public class App extends Application implements menuButtons {
     System.exit(0);
   }
 
+  @Override
+  public void locationButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("view/map.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
+
   @FXML
   public void sanitationButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();

@@ -95,6 +95,16 @@ public abstract class ServiceRequestPageController implements menuButtons {
     thisStage.setScene(new Scene(root));
   }
 
+  @FXML
+  public void locationButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("../view/map.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
+
   public void populateRequestTable() {
     // todo : get all service requests as list
     // todo : filter through to match MY type
