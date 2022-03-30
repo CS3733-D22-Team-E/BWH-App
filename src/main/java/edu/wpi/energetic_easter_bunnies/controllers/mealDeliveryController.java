@@ -1,7 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
-import edu.wpi.energetic_easter_bunnies.entity.MealDeliveryRequest;
+import edu.wpi.energetic_easter_bunnies.entity.mealDeliveryRequest;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-public class MealDeliveryController extends ServiceRequestPageController implements Initializable {
+public class mealDeliveryController extends serviceRequestPageController implements Initializable {
   @FXML ComboBox<String> entreeDropDown;
   @FXML ComboBox<String> beverageDropDown;
   @FXML ComboBox<String> dessertDropDown;
@@ -21,7 +21,7 @@ public class MealDeliveryController extends ServiceRequestPageController impleme
   @FXML CheckBox asapCheck;
   @FXML TextArea otherNotesTxt;
 
-  MealDeliveryRequest mealDeliveryRequest = new MealDeliveryRequest();
+  mealDeliveryRequest mealDeliveryRequest = new mealDeliveryRequest();
 
   ObservableList<String> meals =
       FXCollections.observableArrayList(
@@ -38,7 +38,7 @@ public class MealDeliveryController extends ServiceRequestPageController impleme
     dessertDropDown.setItems(desserts);
   }
 
-  public MealDeliveryController() {}
+  public mealDeliveryController() {}
 
   @FXML
   public void submitButton(ActionEvent event) {

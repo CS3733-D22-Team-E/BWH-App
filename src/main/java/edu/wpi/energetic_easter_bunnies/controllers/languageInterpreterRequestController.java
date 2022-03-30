@@ -8,7 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 
-public class languageInterpreterRequestController extends ServiceRequestPageController {
+public class languageInterpreterRequestController extends serviceRequestPageController {
   FXMLLoader loader = new FXMLLoader();
   Parent root;
 

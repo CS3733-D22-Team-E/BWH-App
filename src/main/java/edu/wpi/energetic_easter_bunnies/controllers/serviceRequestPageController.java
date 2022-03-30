@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public abstract class ServiceRequestPageController implements menuButtons {
+public abstract class serviceRequestPageController implements menuButtons {
 
   FXMLLoader loader = new FXMLLoader();
   Parent root;
@@ -23,7 +23,7 @@ public abstract class ServiceRequestPageController implements menuButtons {
   @FXML TextField requestStatus;
   @FXML TextField staffAssignee;
 
-  ServiceRequestPageController() {}
+  serviceRequestPageController() {}
 
   public boolean sendToDB(serviceRequest request) {
     // todo : implement DB communication

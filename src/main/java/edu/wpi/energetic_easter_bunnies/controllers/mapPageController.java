@@ -15,7 +15,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class mapPageController implements menuButtons, Initializable {
   FXMLLoader loader = new FXMLLoader();
@@ -23,6 +25,14 @@ public class mapPageController implements menuButtons, Initializable {
   LocationDAOImpl db;
 
   @FXML TableView<locationModel> locationTable;
+  @FXML TableColumn<locationModel, String> nodeID;
+  @FXML TableColumn<locationModel, Integer> xcoord;
+  @FXML TableColumn<locationModel, Integer> ycoord;
+  @FXML TableColumn<locationModel, String> floor;
+  @FXML TableColumn<locationModel, String> building;
+  @FXML TableColumn<locationModel, String> nodeType;
+  @FXML TableColumn<locationModel, String> longName;
+  @FXML TableColumn<locationModel, String> shortName;
 
   public mapPageController() throws SQLException {}
 
@@ -31,6 +41,14 @@ public class mapPageController implements menuButtons, Initializable {
     try {
       db = new LocationDAOImpl();
       ObservableList<locationModel> locationList = populateList();
+      nodeID.setCellValueFactory(new PropertyValueFactory<locationModel, String>("nodeID"));
+      xcoord.setCellValueFactory(new PropertyValueFactory<locationModel, Integer>("xcoord"));
+      ycoord.setCellValueFactory(new PropertyValueFactory<locationModel, Integer>("ycoord"));
+      floor.setCellValueFactory(new PropertyValueFactory<locationModel, String>("floor"));
+      building.setCellValueFactory(new PropertyValueFactory<locationModel, String>("building"));
+      nodeType.setCellValueFactory(new PropertyValueFactory<locationModel, String>("nodeType"));
+      longName.setCellValueFactory(new PropertyValueFactory<locationModel, String>("longName"));
+      shortName.setCellValueFactory(new PropertyValueFactory<locationModel, String>("shortName"));
       locationTable.setItems(locationList);
     } catch (SQLException e) {
       e.printStackTrace();

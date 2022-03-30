@@ -1,14 +1,14 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
-import edu.wpi.energetic_easter_bunnies.entity.MedicalEquipmentRequest;
+import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-public class MedicalEquipmentController extends ServiceRequestPageController {
+public class medicalEquipmentController extends serviceRequestPageController {
 
   @FXML ComboBox<String> floor;
   @FXML ComboBox<String> room;
@@ -18,9 +18,9 @@ public class MedicalEquipmentController extends ServiceRequestPageController {
   @FXML TextField deliveryTime;
   @FXML CheckBox isUrgent;
 
-  MedicalEquipmentRequest medicalEquipmentRequest = new MedicalEquipmentRequest();
+  medicalEquipmentRequest medicalEquipmentRequest = new medicalEquipmentRequest();
 
-  public MedicalEquipmentController() {}
+  public medicalEquipmentController() {}
 
   @FXML
   public void submitButton(ActionEvent event) {

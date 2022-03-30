@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
-public class MedicalEquipmentRequest extends serviceRequest {
+public class medicalEquipmentRequest extends serviceRequest {
 
   private String equipment;
   private int equipmentQuantity;

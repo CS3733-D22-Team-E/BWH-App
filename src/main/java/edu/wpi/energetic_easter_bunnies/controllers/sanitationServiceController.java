@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class sanitationServiceController extends ServiceRequestPageController {
+public class sanitationServiceController extends serviceRequestPageController {
 
   @FXML TextField locationField;
   @FXML ToggleGroup biohazardGroup;
