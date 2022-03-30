@@ -19,6 +19,7 @@ public abstract class ServiceRequestPageController {
   @FXML MenuBar menuBar;
   @FXML TextField notes;
   @FXML Button submitButton;
+  @FXML Button resetButton;
 
   ServiceRequestPageController() {}
 

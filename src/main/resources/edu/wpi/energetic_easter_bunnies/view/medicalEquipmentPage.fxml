@@ -20,6 +20,8 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <VBox prefHeight="640.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.MedicalEquipmentController">
    <children>
       <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
@@ -90,7 +92,13 @@
                   <HBox prefHeight="87.0" prefWidth="556.0" spacing="10.0">
                      <children>
                         <Label style="-fx-font-weight: bold;" text="Location:" />
-                        <ComboBox fx:id="floor" prefWidth="150.0" promptText="Select Floor" />
+                        <ComboBox fx:id="floor" prefWidth="150.0" promptText="Select Floor">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Test 1"/>
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
                         <ComboBox fx:id="room" prefWidth="150.0" promptText="Select Room" />
                      </children>
                   </HBox>
@@ -125,7 +133,7 @@
             </VBox>
             <AnchorPane layoutX="902.0" layoutY="543.0" prefHeight="58.0" prefWidth="164.0">
                <children>
-                  <Button fx:id="resetButton" alignment="CENTER" layoutY="-3.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="164.0" text="Reset Fields">
+                  <Button fx:id="resetButton" alignment="CENTER" layoutY="-3.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="62.0" prefWidth="164.0" text="Reset Fields">
                      <font>
                         <Font size="18.0" />
                      </font>

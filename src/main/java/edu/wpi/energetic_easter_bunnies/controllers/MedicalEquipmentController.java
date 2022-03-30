@@ -37,4 +37,16 @@ public class MedicalEquipmentController extends ServiceRequestPageController {
       PopUpWarning.createWarning("Warning : A required value was not filled");
     }
   }
+
+  @FXML
+  private void resetButton(ActionEvent event) {
+    floor.getSelectionModel().clearSelection();
+    room.getSelectionModel().clearSelection();
+    equipmentType.getSelectionModel().clearSelection();
+    equipmentQuantity.getSelectionModel().clearSelection();
+    deliveryDate.clear();
+    deliveryTime.clear();
+    isUrgent.setSelected(false);
+    notes.clear();
+  }
 }
