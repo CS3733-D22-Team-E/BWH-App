@@ -26,4 +26,7 @@ public interface menuButtons {
 
   @FXML
   void exitButton(ActionEvent event) throws IOException;
+
+  @FXML
+  void locationButton(ActionEvent event) throws IOException;
 }

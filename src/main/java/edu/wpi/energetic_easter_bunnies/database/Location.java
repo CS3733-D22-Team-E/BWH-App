@@ -1,4 +1,4 @@
-package edu.wpi.energetic_easter_bunnies;
+package edu.wpi.energetic_easter_bunnies.database;
 
 public class Location {
   private final String nodeID;
@@ -11,14 +11,14 @@ public class Location {
 
   public Location() {
     this.nodeID = "";
-    this.xcoord = 0;
-    this.ycoord = 0;
+    this.xcoord = 1;
+    this.ycoord = 1;
     this.floor = "";
     this.building = "";
     this.nodeType = "";
     this.longName = "";
     this.shortName = "";
-    this.numID = 0;
+    this.numID = 1;
   }
 
   public Location(

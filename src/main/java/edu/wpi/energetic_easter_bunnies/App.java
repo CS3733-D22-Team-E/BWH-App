@@ -22,6 +22,7 @@ public class App extends Application implements menuButtons {
   @FXML Button medicalEquipmentButton;
   @FXML Button medicineDeliveryButton;
   @FXML MenuBar menuBar;
+  @FXML AnchorPane mainPane;
 
   public FXMLLoader loader = new FXMLLoader();
   public Parent root;
@@ -85,6 +86,16 @@ public class App extends Application implements menuButtons {
   @Override
   public void exitButton(ActionEvent event) throws IOException {
     System.exit(0);
+  }
+
+  @Override
+  public void locationButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("view/map.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
   }
 
   @FXML

@@ -20,6 +20,8 @@ public abstract class ServiceRequestPageController implements menuButtons {
   @FXML Button submitButton;
   @FXML Button resetButton;
   @FXML MenuBar menuBar;
+  @FXML TextField requestStatus;
+  @FXML TextField staffAssignee;
 
   ServiceRequestPageController() {}
 
@@ -91,5 +93,21 @@ public abstract class ServiceRequestPageController implements menuButtons {
     root = loader.load();
 
     thisStage.setScene(new Scene(root));
+  }
+
+  @FXML
+  public void locationButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    loader.setLocation(getClass().getResource("../view/map.fxml"));
+    root = loader.load();
+
+    thisStage.setScene(new Scene(root));
+  }
+
+  public void populateRequestTable() {
+    // todo : get all service requests as list
+    // todo : filter through to match MY type
+    // todo : populate my table
   }
 }
