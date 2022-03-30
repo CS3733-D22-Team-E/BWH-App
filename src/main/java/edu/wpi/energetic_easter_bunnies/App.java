@@ -28,6 +28,7 @@ public class App extends Application {
 
   sanitationServiceController sanitationService = new sanitationServiceController();
   MedicalEquipmentController medicalEquipmentService = new MedicalEquipmentController();
+  languageInterpreterRequestController languageInterpreterService = new languageInterpreterRequestController();
 
   @Override
   public void init() {
@@ -52,6 +53,8 @@ public class App extends Application {
 
     loader.setLocation(getClass().getResource("view/languagePage.fxml"));
     root = loader.load();
+    loader.setController(languageInterpreterService);
+
 
     thisStage.setScene(new Scene(root));
   }
