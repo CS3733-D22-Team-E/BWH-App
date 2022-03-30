@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class sanitationServiceController extends ServiceRequestPageController {
+public class sanitationServiceController extends serviceRequestPageController {
 
   @FXML TextField locationField;
   @FXML ToggleGroup biohazardGroup;
@@ -55,9 +55,10 @@ public class sanitationServiceController extends ServiceRequestPageController {
           break;
       }
 
+      if (locationField.getText().isEmpty() || locationField.getText().isBlank())
+        throw new NullPointerException();
     } catch (NullPointerException error) {
       System.out.println(error.getMessage());
-      System.out.println(error.getCause());
       PopUpWarning.createWarning("Warning : A required value was not filled");
     }
   }
