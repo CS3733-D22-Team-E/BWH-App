@@ -283,7 +283,8 @@ public class CSVManager {
         // 3/28/2022
       }
       String insertQuery =
-          "INSERT INTO EmployeeTable (ID, NAME, LOCATION, POSITION, AVAILABLE, SALARY)" + " VALUES (?, ?, ?, ?, ?, ?)";
+          "INSERT INTO EmployeeTable (ID, NAME, LOCATION, POSITION, AVAILABLE, SALARY)"
+              + " VALUES (?, ?, ?, ?, ?, ?)";
       statement = connection.prepareStatement(insertQuery);
       statement.setString(1, data[0]); // employeeID
       statement.setString(2, data[1]); // name

@@ -31,6 +31,7 @@
                                 <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
                                 <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
                                 <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Translation" />
+                                <MenuItem mnemonicParsing="false" onAction="#labRequestButton" text="Lab Request" />
                             </items>
                         </Menu>
                         <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitButton" text="Quit" />

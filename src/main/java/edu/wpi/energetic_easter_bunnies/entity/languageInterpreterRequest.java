@@ -1,6 +1,5 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
-
 import java.time.LocalDate;
 
 public class languageInterpreterRequest extends serviceRequest {
@@ -53,7 +52,5 @@ public class languageInterpreterRequest extends serviceRequest {
 
   public LocalDate getEndDate() {
     return this.endDate;
-
-
   }
 }

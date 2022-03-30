@@ -9,8 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-
-public class languageInterpreterRequestController extends ServiceRequestPageController
+public class languageInterpreterRequestController extends serviceRequestPageController
     implements Initializable {
 
   @FXML private ChoiceBox<String> floorSelection;
@@ -26,11 +25,9 @@ public class languageInterpreterRequestController extends ServiceRequestPageCont
   @FXML DatePicker startSelection;
   @FXML DatePicker endSelection;
 
-
   languageInterpreterRequest languageInterpreterRequest = new languageInterpreterRequest();
 
   public languageInterpreterRequestController() {}
-
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -71,7 +68,6 @@ public class languageInterpreterRequestController extends ServiceRequestPageCont
     }
   }
 
-
   @FXML
   private void resetButton(ActionEvent event) {
     floorSelection.getSelectionModel().clearSelection();
@@ -84,5 +80,4 @@ public class languageInterpreterRequestController extends ServiceRequestPageCont
     endSelection.getEditor().clear();
     notes.clear();
   }
-
 }
