@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 public class MedicalEquipmentController extends ServiceRequestPageController {
 
   @FXML ComboBox<String> floor;
-  @FXML ComboBox<String> building;
+  @FXML ComboBox<String> room;
   @FXML ComboBox<String> equipmentType;
   @FXML ComboBox<Integer> equipmentQuantity;
   @FXML TextField deliveryDate;
