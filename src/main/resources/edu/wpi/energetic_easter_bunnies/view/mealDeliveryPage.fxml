@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.App">
+   <children>
+      <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Menu">
+               <items>
+                  <MenuItem fx:id="homeMenuButton" mnemonicParsing="false" onAction="#homeButton" text="Home" />
+                  <Menu mnemonicParsing="false" text="Pages">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#sanitationButton" text="Sanitation" />
+                        <MenuItem mnemonicParsing="false" onAction="#medicalEquipmentButton" text="Medical Equipment Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Translation" />
+                     </items>
+                  </Menu>
+                  <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitButton" text="Quit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About Application" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Pane prefHeight="90.0" prefWidth="1080.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f35959" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
+            <Label alignment="CENTER" layoutX="107.0" layoutY="13.0" text="Brigham Woman's Hospital" textFill="WHITE">
+               <font>
+                  <Font name="Book Antiqua Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="210.0" layoutY="52.0" text="Meal Delivery" textFill="WHITE">
+               <font>
+                  <Font name="Book Antiqua Bold" size="18.0" />
+               </font>
+            </Label>
+            <StackPane layoutX="14.0" layoutY="13.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+                  <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/mealDelivery.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <Button fx:id="homeButton" alignment="CENTER" layoutX="852.0" layoutY="8.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="75.0" prefWidth="222.0" text="     Home" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="76.0" fitWidth="160.0" layoutX="852.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/home.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <AnchorPane fx:id="mealType" prefHeight="402.0" prefWidth="600.0">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="mealTypeLbl" layoutX="164.0" layoutY="79.0" prefHeight="68.0" prefWidth="164.0" text="Meal Type:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="deliveryTimeLbl" layoutX="130.0" layoutY="150.0" text="Delivery Time:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Group layoutX="80.0" layoutY="132.0" />
+            <Group layoutX="58.0" layoutY="166.0" />
+            <Group layoutX="68.0" layoutY="196.0" />
+            <Group layoutX="71.0" layoutY="231.0" />
+            <Button layoutX="407.0" layoutY="396.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="147.0" text="Submit Request" />
+            <ChoiceBox fx:id="dessertDropDown" layoutX="617.0" layoutY="91.0" prefHeight="38.0" prefWidth="147.0" />
+            <ChoiceBox fx:id="beverageDropDown" layoutX="458.0" layoutY="91.0" prefHeight="38.0" prefWidth="147.0" />
+            <ChoiceBox fx:id="entreeDropDown" layoutX="295.0" layoutY="91.0" prefHeight="39.0" prefWidth="147.0" />
+            <Label fx:id="roomNumberLbl" layoutX="118.0" layoutY="203.0" text="Room Number:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="roomNumberTxt" layoutX="295.0" layoutY="144.0" prefHeight="39.0" prefWidth="147.0" promptText="Enter a number" />
+            <TextField fx:id="deliveryTimeTxt" layoutX="295.0" layoutY="200.0" prefHeight="38.0" prefWidth="147.0" promptText="Enter a number" />
+            <CheckBox fx:id="asapCheck" layoutX="455.0" layoutY="210.0" mnemonicParsing="false" text="ASAP" />
+            <TextArea fx:id="otherNotesTxt" layoutX="295.0" layoutY="254.0" prefHeight="101.0" prefWidth="339.0" promptText="Type to add text..." />
+            <Label fx:id="otherNotesLbl" layoutX="143.0" layoutY="254.0" text="Other Notes:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
