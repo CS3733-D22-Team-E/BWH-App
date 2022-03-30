@@ -3,10 +3,11 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -19,7 +20,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.App">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.MealDeliveryController">
    <children>
       <MenuBar fx:id="menuBar">
          <menus>
@@ -81,11 +82,6 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="deliveryTimeLbl" layoutX="130.0" layoutY="150.0" text="Delivery Time:">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
                </children>
             </Pane>
             <Group layoutX="80.0" layoutY="132.0" />
@@ -93,23 +89,50 @@
             <Group layoutX="68.0" layoutY="196.0" />
             <Group layoutX="71.0" layoutY="231.0" />
             <Button layoutX="407.0" layoutY="396.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="147.0" text="Submit Request" />
-            <ChoiceBox fx:id="dessertDropDown" layoutX="617.0" layoutY="91.0" prefHeight="38.0" prefWidth="147.0" />
-            <ChoiceBox fx:id="beverageDropDown" layoutX="458.0" layoutY="91.0" prefHeight="38.0" prefWidth="147.0" />
-            <ChoiceBox fx:id="entreeDropDown" layoutX="295.0" layoutY="91.0" prefHeight="39.0" prefWidth="147.0" />
-            <Label fx:id="roomNumberLbl" layoutX="118.0" layoutY="203.0" text="Room Number:">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
+            <MenuButton fx:id="dessertDropDown" layoutX="617.0" layoutY="91.0" prefHeight="38.0" prefWidth="147.0" text="Select a Dessert">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Cookies" />
+                  <MenuItem mnemonicParsing="false" text="Vanilla Cake" />
+                  <MenuItem mnemonicParsing="false" text="Tiramisu" />
+                  <MenuItem mnemonicParsing="false" text="Muffin" />
+               </items>
+            </MenuButton>
+            <MenuButton fx:id="beverageDropDown" layoutX="458.0" layoutY="91.0" prefHeight="38.0" prefWidth="147.0" text="Select a Beverage">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Water" />
+                  <MenuItem mnemonicParsing="false" text="Coca Cola" />
+                  <MenuItem mnemonicParsing="false" text="Pepsi" />
+                  <MenuItem mnemonicParsing="false" text="Root Beer" />
+               </items>
+            </MenuButton>
+            <MenuButton fx:id="entreeDropDown" layoutX="295.0" layoutY="91.0" prefHeight="39.0" prefWidth="147.0" text="Select an Entree" >
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Chicken Parmesan" />
+                  <MenuItem mnemonicParsing="false" text="Turkey Dinner" />
+                  <MenuItem mnemonicParsing="false" text="Chicken Noodle Soup" />
+                  <MenuItem mnemonicParsing="false" text="Two Cookies" />
+               </items>
+            </MenuButton>
             <TextField fx:id="roomNumberTxt" layoutX="295.0" layoutY="144.0" prefHeight="39.0" prefWidth="147.0" promptText="Enter a number" />
-            <TextField fx:id="deliveryTimeTxt" layoutX="295.0" layoutY="200.0" prefHeight="38.0" prefWidth="147.0" promptText="Enter a number" />
-            <CheckBox fx:id="asapCheck" layoutX="455.0" layoutY="210.0" mnemonicParsing="false" text="ASAP" />
+            <CheckBox fx:id="asapCheck" layoutX="615.0" layoutY="210.0" mnemonicParsing="false" text="ASAP" />
             <TextArea fx:id="otherNotesTxt" layoutX="295.0" layoutY="254.0" prefHeight="101.0" prefWidth="339.0" promptText="Type to add text..." />
             <Label fx:id="otherNotesLbl" layoutX="143.0" layoutY="254.0" text="Other Notes:">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
+            <Label fx:id="deliveryTimeLbl" layoutX="128.0" layoutY="200.0" text="Delivery Time:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="roomNumberLbl" layoutX="119.0" layoutY="145.0" text="Room Number:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="dateTime" layoutX="295.0" layoutY="199.0" prefHeight="39.0" prefWidth="147.0" promptText="Select Date" />
+            <TextField fx:id="timeTxt" layoutX="458.0" layoutY="199.0" prefHeight="39.0" prefWidth="147.0" text="__ __ : __ __ AM/PM" />
          </children>
       </AnchorPane>
    </children>

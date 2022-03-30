@@ -116,4 +116,3 @@ public class App extends Application {
     log.info("Shutting Down");
   }
 }
-

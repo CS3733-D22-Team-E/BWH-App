@@ -1,19 +1,20 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
-public class MealDelivery extends serviceRequest {
+import java.time.LocalDate;
+
+public class MealDeliveryRequest extends serviceRequest {
 
   private String entreeType;
   private String beverageType;
   private String dessertType;
-  private String otherNotes;
 
   private int roomNumber;
-  private int deliveryTimeHour;
-  private int deliveryTimeMin;
+  private LocalDate deliveryDate;
+  private int deliveryTime;
 
   private boolean asap;
 
-  public MealDelivery() {}
+  public MealDeliveryRequest() {}
 
   public void setEntreeType(String entree) {
     this.entreeType = entree;
@@ -47,13 +48,20 @@ public class MealDelivery extends serviceRequest {
     return this.roomNumber;
   }
 
-  public void setDeliveryTime(int hour, int min) {
-    this.deliveryTimeHour = hour;
-    this.deliveryTimeMin = min;
+  public void setDeliveryDate(LocalDate date) {
+    this.deliveryDate = date;
+  }
+
+  public LocalDate getDeliveryDate() {
+    return this.deliveryDate;
+  }
+
+  public void setDeliveryTime(int time) {
+    this.deliveryTime = time;
   }
 
   public int getDeliveryTime() {
-    return this.deliveryTimeHour + this.deliveryTimeMin;
+    return this.deliveryTime;
   }
 
   public void setASAP(boolean status) {
