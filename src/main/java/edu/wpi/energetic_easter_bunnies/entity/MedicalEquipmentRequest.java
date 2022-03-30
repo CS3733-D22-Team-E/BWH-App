@@ -8,6 +8,14 @@ public class MedicalEquipmentRequest extends ServiceRequest {
   private String deliveryDate;
   private String deliveryTime;
 
+  public MedicalEquipmentRequest() {
+    super();
+    this.equipment = "";
+    this.equipmentQuantity = 0;
+    this.deliveryDate = "";
+    this.deliveryTime = "";
+  }
+
   public String getEquipment() {
     return equipment;
   }
