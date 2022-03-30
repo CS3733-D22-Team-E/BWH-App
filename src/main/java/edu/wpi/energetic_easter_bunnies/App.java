@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies;
 
+import edu.wpi.energetic_easter_bunnies.controllers.*;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
