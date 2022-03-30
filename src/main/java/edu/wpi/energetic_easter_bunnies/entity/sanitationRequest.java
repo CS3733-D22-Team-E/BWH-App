@@ -3,17 +3,17 @@ package edu.wpi.energetic_easter_bunnies.entity;
 public class sanitationRequest extends serviceRequest {
 
   public enum Size {
-    Light{
+    Light {
       public String toString() {
         return "Light";
       }
     },
-    Medium{
+    Medium {
       public String toString() {
         return "Medium";
       }
     },
-    Heavy{
+    Heavy {
       public String toString() {
         return "Heavy";
       }
@@ -21,17 +21,17 @@ public class sanitationRequest extends serviceRequest {
   }
 
   public enum Biohazard {
-    Yes{
+    Yes {
       public String toString() {
         return "Yes";
       }
     },
-    No{
+    No {
       public String toString() {
         return "No";
       }
     },
-    Unsure{
+    Unsure {
       public String toString() {
         return "Unsure";
       }
@@ -57,7 +57,7 @@ public class sanitationRequest extends serviceRequest {
     return biohazardOnSite.toString();
   }
 
-  public String getSizeValue(){
+  public String getSizeValue() {
     return sizeOfCleaning.toString();
   }
 

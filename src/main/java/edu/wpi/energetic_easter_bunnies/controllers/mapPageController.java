@@ -25,8 +25,7 @@ import javafx.stage.Stage;
 public class mapPageController implements menuButtons, Initializable {
   FXMLLoader loader = new FXMLLoader();
   Parent root;
-  @FXML
-  MenuBar menuBar;
+  @FXML MenuBar menuBar;
   LocationDAOImpl db;
 
   @FXML TableView<locationModel> locationTable;
