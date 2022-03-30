@@ -9,12 +9,16 @@ public class DBWrapper {
 
     public DBWrapper() {
         try {
-            connection = DriverManager.getConnection("jdbc:derby:myDB;");
+            connection = DriverManager.getConnection("jdbc:derby:myDB;"); //creates connection to DB
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Closes connection to DB
+     * @throws SQLException for closing connection
+     */
     public void quit() throws SQLException {
         connection.close();
     }
