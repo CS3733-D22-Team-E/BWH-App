@@ -5,22 +5,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBWrapper {
-    Connection connection = null;
+  Connection connection = null;
 
-    public DBWrapper() {
-        try {
-            connection = DriverManager.getConnection("jdbc:derby:myDB;"); //creates connection to DB
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+  public DBWrapper() {
+    try {
+      connection = DriverManager.getConnection("jdbc:derby:myDB;"); // creates connection to DB
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
+  }
 
-    /**
-     * Closes connection to DB
-     * @throws SQLException for closing connection
-     */
-    public void quit() throws SQLException {
-        connection.close();
-    }
-
+  /**
+   * Closes connection to DB
+   *
+   * @throws SQLException for closing connection
+   */
+  public void quit() throws SQLException {
+    connection.close();
+  }
 }
