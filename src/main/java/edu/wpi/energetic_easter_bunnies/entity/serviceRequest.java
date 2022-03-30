@@ -1,21 +1,28 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
+import java.util.Date;
+
 public abstract class serviceRequest {
 
   public enum Type {
     sanitationRequest,
     medicalEquipmentRequest,
-    mealDeliveryRequest
+    mealDeliveryRequest,
+    translatorRequest,
+    medicineRequest
   }
 
-  // TODO : add location object proper
+  private Date requestDate;
+  private Date deliveryDate;
 
   private String otherNotes;
-  private String location;
+  private String floorID;
+  private String roomID;
   private boolean isUrgent;
   private Type requestType;
 
   public Type getRequestType() {
+
     return requestType;
   }
 
@@ -23,12 +30,20 @@ public abstract class serviceRequest {
     this.requestType = requestType;
   }
 
-  public String getLocation() {
-    return location;
+  public String getFloorID() {
+    return floorID;
   }
 
-  public void setLocation(String location) {
-    this.location = location;
+  public void setFloorID(String floorID) {
+    this.floorID = floorID;
+  }
+
+  public String getRoomID() {
+    return roomID;
+  }
+
+  public void setRoomID(String roomID) {
+    this.roomID = roomID;
   }
 
   public String getOtherNotes() {

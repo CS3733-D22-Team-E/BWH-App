@@ -44,6 +44,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -56,9 +57,17 @@
       <menus>
         <Menu mnemonicParsing="false" text="Menu">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#homeButton" text="Home" />
-            <MenuItem mnemonicParsing="false" text="Settings" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem fx:id="homeMenuButton" mnemonicParsing="false" onAction="#homeButton" text="Home" />
+                  <Menu mnemonicParsing="false" text="Pages">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#sanitationButton" text="Sanitation" />
+                        <MenuItem mnemonicParsing="false" onAction="#medicalEquipmentButton" text="Medical Equipment Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Translation" />
+                    </items>
+                  </Menu>
+                  <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitButton" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
@@ -129,7 +138,7 @@
                               <ToggleGroup fx:id="biohazardGroup" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="No" toggleGroup="$biohazardGroup" />
+                        <RadioButton mnemonicParsing="false" selected="true" text="No" toggleGroup="$biohazardGroup" />
                         <RadioButton mnemonicParsing="false" text="Unsure" toggleGroup="$biohazardGroup" />
                      </children>
                   </VBox>
@@ -149,7 +158,7 @@
                               <ToggleGroup fx:id="urgencyGroup" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Not Critical" toggleGroup="$urgencyGroup" />
+                        <RadioButton mnemonicParsing="false" selected="true" text="Not Critical" toggleGroup="$urgencyGroup" />
                      </children>
                   </VBox>
                </children>
@@ -161,11 +170,20 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="locationField" promptText="Location...">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
+                  <HBox spacing="15.0">
+                     <children>
+                        <TextField fx:id="locationField" promptText="Location...">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="locationField1" layoutX="10.0" layoutY="10.0" promptText="Location...">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             <VBox layoutX="62.0" layoutY="379.0">
@@ -177,7 +195,7 @@
                   </Label>
                   <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Light">
+                        <RadioButton mnemonicParsing="false" selected="true" text="Light">
                            <toggleGroup>
                               <ToggleGroup fx:id="sizeGroup" />
                            </toggleGroup>

@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 public class MedicalEquipmentController extends ServiceRequestPageController {
 
   @FXML ComboBox<String> floor;
-  @FXML ComboBox<String> building;
+  @FXML ComboBox<String> room;
   @FXML ComboBox<String> equipmentType;
   @FXML ComboBox<Integer> equipmentQuantity;
   @FXML TextField deliveryDate;
@@ -25,7 +25,7 @@ public class MedicalEquipmentController extends ServiceRequestPageController {
   @FXML
   public void submitButton(ActionEvent event) {
     try {
-      medicalEquipmentRequest.setLocation(building.getValue() + floor.getValue());
+      // medicalEquipmentRequest.setLocation(building.getValue() + floor.getValue());
       medicalEquipmentRequest.setEquipment(equipmentType.getValue());
       medicalEquipmentRequest.setEquipmentQuantity(equipmentQuantity.getValue());
       medicalEquipmentRequest.setDeliveryDate(deliveryDate.getText());
@@ -36,5 +36,17 @@ public class MedicalEquipmentController extends ServiceRequestPageController {
       System.out.println("Error : Some Value is NULL");
       PopUpWarning.createWarning("Warning : A required value was not filled");
     }
+  }
+
+  @FXML
+  private void resetButton(ActionEvent event) {
+    floor.getSelectionModel().clearSelection();
+    room.getSelectionModel().clearSelection();
+    equipmentType.getSelectionModel().clearSelection();
+    equipmentQuantity.getSelectionModel().clearSelection();
+    deliveryDate.clear();
+    deliveryTime.clear();
+    isUrgent.setSelected(false);
+    notes.clear();
   }
 }
