@@ -1,19 +1,19 @@
 package edu.wpi.energetic_easter_bunnies.database;
 
-import edu.wpi.energetic_easter_bunnies.entity.ServiceRequest;
+import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
 import java.util.List;
 
 public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentServiceRequestDAO {
 
-  public List<ServiceRequest> getAllMedicalEquipmentServiceRequests() {
+  public List<serviceRequest> getAllMedicalEquipmentServiceRequests() {
     return null;
   }
 
-  public ServiceRequest getMedicalEquipmentServiceRequest(int numID) {
+  public serviceRequest getMedicalEquipmentServiceRequest(int numID) {
     return null;
   }
 
-  public void updateMedicalEquipmentServiceRequest(ServiceRequest serviceRequest) {}
+  public void updateMedicalEquipmentServiceRequest(serviceRequest serviceRequest) {}
 
-  public void deleteMedicalEquipmentServiceRequest(ServiceRequest serviceRequest) {}
+  public void deleteMedicalEquipmentServiceRequest(serviceRequest serviceRequest) {}
 }

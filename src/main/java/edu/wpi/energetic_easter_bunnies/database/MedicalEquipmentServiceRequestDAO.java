@@ -1,14 +1,14 @@
 package edu.wpi.energetic_easter_bunnies.database;
 
-import edu.wpi.energetic_easter_bunnies.entity.ServiceRequest;
+import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
 import java.util.List;
 
 public interface MedicalEquipmentServiceRequestDAO {
-  List<ServiceRequest> getAllMedicalEquipmentServiceRequests();
+  List<serviceRequest> getAllMedicalEquipmentServiceRequests();
 
-  ServiceRequest getMedicalEquipmentServiceRequest(int numID);
+  serviceRequest getMedicalEquipmentServiceRequest(int numID);
 
-  void updateMedicalEquipmentServiceRequest(ServiceRequest serviceRequest);
+  void updateMedicalEquipmentServiceRequest(serviceRequest serviceRequest);
 
-  void deleteMedicalEquipmentServiceRequest(ServiceRequest serviceRequest);
+  void deleteMedicalEquipmentServiceRequest(serviceRequest serviceRequest);
 }

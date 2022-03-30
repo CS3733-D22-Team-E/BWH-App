@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
-public class MealDelivery {
+public class mealDelivery extends serviceRequest {
 
   private String entreeType;
   private String beverageType;
@@ -13,7 +13,7 @@ public class MealDelivery {
 
   private boolean asap;
 
-  public MealDelivery() {}
+  public mealDelivery() {}
 
   public void setEntreeType(String entree) {
     this.entreeType = entree;
