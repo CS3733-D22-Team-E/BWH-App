@@ -22,7 +22,7 @@ public class App extends Application implements menuButtons {
   @FXML Button medicineDeliveryButton;
   @FXML MenuBar menuBar;
   @FXML AnchorPane mainPane;
-  
+
   public FXMLLoader loader = new FXMLLoader();
   public Parent root;
 
@@ -58,8 +58,6 @@ public class App extends Application implements menuButtons {
 
     loader.setLocation(getClass().getResource("view/languagePage.fxml"));
     root = loader.load();
-    loader.setController(languageInterpreterService);
-
 
     thisStage.setScene(new Scene(root));
   }

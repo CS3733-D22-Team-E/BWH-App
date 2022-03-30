@@ -17,7 +17,6 @@ public class sanitationServiceController extends ServiceRequestPageController {
 
   @FXML
   public void submitButton(ActionEvent event) {
-    System.out.println("YOYO");
     sanitationRequest request = new sanitationRequest();
     try {
       RadioButton selectBiohazard = (RadioButton) biohazardGroup.getSelectedToggle();
