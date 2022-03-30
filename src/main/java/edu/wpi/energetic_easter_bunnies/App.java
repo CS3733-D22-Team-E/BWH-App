@@ -1,7 +1,6 @@
 package edu.wpi.energetic_easter_bunnies;
 
-import edu.wpi.energetic_easter_bunnies.controllers.*;
-import java.io.FileInputStream;
+
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -11,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +22,7 @@ public class App extends Application implements menuButtons {
   @FXML Button medicalEquipmentButton;
   @FXML Button medicineDeliveryButton;
   @FXML MenuBar menuBar;
+  @FXML AnchorPane mainPane;
 
   public FXMLLoader loader = new FXMLLoader();
   public Parent root;
