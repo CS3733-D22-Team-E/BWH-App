@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.database;
 
+import edu.wpi.energetic_easter_bunnies.entity.ServiceRequest;
 import java.io.*;
 import java.sql.*;
 
@@ -159,7 +160,7 @@ public class CSVManager {
       // write actual data
       for (ServiceRequest medEquipServReq : MESR.getAllMedicalEquipmentServiceRequests()) {
         String csvLine =
-            "" + medEquipServReq.getNodeID() + ',' + medEquipServReq.getEquipmentID() + "\n";
+            "" + medEquipServReq.getFloorID() + ',' + medEquipServReq.getRoomID() + "\n";
         out.write(csvLine);
       }
     } catch (IOException e) {
@@ -184,11 +185,11 @@ public class CSVManager {
     String[] data;
     while ((line = in.readLine()) != null) {
       data = line.split(",");
-      String equipID = data[0];
+      String roomID = data[0];
 
       // check if nodeID is already in the database
       // ensures the database is up to date and correct without overwriting
-      String query = "SELECT COUNT(1) FROM EQUIPMENT WHERE NODEID = '" + equipID + "'";
+      String query = "SELECT COUNT(1) FROM EQUIPMENT WHERE roomID = '" + roomID + "'";
       PreparedStatement statement = connection.prepareStatement(query);
       ResultSet rs = statement.executeQuery(query);
       if (rs.next()) { // true if exists, false if does not exist
@@ -196,7 +197,7 @@ public class CSVManager {
         // 3/28/2022
       }
       String insertQuery =
-          "INSERT INTO MedEquipTable (EQUIPID, INUSE, ISCLEAN, CLEANLOCATION, STORAGELOCATION)"
+          "INSERT INTO MED_EQUIP_REQ (EQUIPID, INUSE, ISCLEAN, CLEANLOCATION, STORAGELOCATION)"
               + " VALUES (?, ?, ?, ?, ?)";
       statement = connection.prepareStatement(insertQuery);
       statement.setString(1, data[0]); // equipID

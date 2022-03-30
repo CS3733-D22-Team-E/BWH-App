@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
-public class sanitationRequest extends serviceRequest {
+public class SanitationRequest extends ServiceRequest {
 
   public enum Size {
     Light,
