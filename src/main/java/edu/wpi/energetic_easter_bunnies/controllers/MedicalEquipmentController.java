@@ -25,7 +25,7 @@ public class MedicalEquipmentController extends ServiceRequestPageController {
   @FXML
   public void submitButton(ActionEvent event) {
     try {
-      medicalEquipmentRequest.setLocation(building.getValue() + floor.getValue());
+      // medicalEquipmentRequest.setLocation(building.getValue() + floor.getValue());
       medicalEquipmentRequest.setEquipment(equipmentType.getValue());
       medicalEquipmentRequest.setEquipmentQuantity(equipmentQuantity.getValue());
       medicalEquipmentRequest.setDeliveryDate(deliveryDate.getText());

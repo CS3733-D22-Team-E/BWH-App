@@ -54,7 +54,11 @@
             <Menu mnemonicParsing="false" text="Menu">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#homeButton" text="Home" />
-                  <MenuItem mnemonicParsing="false" text="Settings" />
+                  <MenuItem mnemonicParsing="false" onAction="#sanitationButton" text="Sanitation Service" />
+                  <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Interpreter" />
+                  <MenuItem mnemonicParsing="false" onAction="#medicalEquipmentButton" text="Equipment Delivery" />
+                  <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
+                  <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
                   <MenuItem mnemonicParsing="false" text="Quit" />
                </items>
             </Menu>
@@ -116,7 +120,7 @@
                   </Pane>
                   <Pane layoutX="10.0" layoutY="10.0">
                      <children>
-                        <Button id="medicineDeliveryPage" fx:id="sanitationButton1" alignment="CENTER" layoutX="2.0" layoutY="6.0" mnemonicParsing="false" onAction="#medicineDeliveryButton">
+                        <Button id="medicineDeliveryPage" fx:id="medicineDeliveryButton" alignment="CENTER" layoutX="2.0" layoutY="6.0" mnemonicParsing="false" onAction="#medicineDeliveryButton">
                            <graphic>
                               <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -130,7 +134,7 @@
                   </Pane>
                   <Pane layoutX="460.0" layoutY="10.0">
                      <children>
-                        <Button id="mealDeliveryPage" fx:id="sanitationButton11" alignment="CENTER" layoutX="2.0" layoutY="6.0" mnemonicParsing="false" onAction="#mealDeliveryButton">
+                        <Button id="mealDeliveryPage" fx:id="mealDeliveryButton" alignment="CENTER" layoutX="2.0" layoutY="6.0" mnemonicParsing="false" onAction="#mealDeliveryButton">
                            <graphic>
                               <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
