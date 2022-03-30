@@ -32,8 +32,7 @@ public class MealDeliveryController extends ServiceRequestPageController {
       mealDeliveryRequest.setASAP(asapCheck.isSelected());
       mealDeliveryRequest.setOtherNotes(otherNotesTxt.getText());
     } catch (NullPointerException error) {
-      System.out.println(error.getMessage());
-      System.out.println(error.getCause());
+      System.out.println("Error : Some Value is NULL");
       PopUpWarning.createWarning("Warning : A required value was not filled");
     }
   }
