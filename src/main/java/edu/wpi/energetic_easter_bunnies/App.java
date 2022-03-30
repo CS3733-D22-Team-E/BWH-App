@@ -25,6 +25,7 @@ public class App extends Application implements menuButtons {
   @FXML MenuBar menuBar;
   @FXML AnchorPane mainPane;
 
+
   public FXMLLoader loader = new FXMLLoader();
   public Parent root;
 
