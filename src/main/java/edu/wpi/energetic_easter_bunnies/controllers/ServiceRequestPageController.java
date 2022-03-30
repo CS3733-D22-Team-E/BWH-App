@@ -25,7 +25,7 @@ public abstract class ServiceRequestPageController implements menuButtons {
 
   ServiceRequestPageController() {}
 
-  public boolean sendToDB(serviceRequest request) {
+  public boolean sendToDB(ServiceRequest request) {
     // todo : implement DB communication
     return true;
   }
