@@ -118,14 +118,14 @@ public class CSVManager {
 
       // check if nodeID is already in the database
       // ensures the database is up to date and correct without overwriting
-      String query = "SELECT COUNT(1) FROM MedEquipReqTable WHERE NODEID = '" + nodeID + "'";
+      String query = "SELECT * FROM MedEquipReqTable WHERE NODEID = '" + nodeID + "'";
       PreparedStatement statement = connection.prepareStatement(query);
       ResultSet rs = statement.executeQuery(query);
       if (rs.next()) { // true if exists, false if does not exist
         continue; // so it does not add a duplicate item into the database - issue from meeting
         // 3/28/2022
       }
-      String insertQuery = "INSERT INTO MedEquipReqTable (NODEID, EQUIPID) VALUES (?, ?)";
+      String insertQuery = "INSERT INTO MedEquipReqTable (floorID, roomID) VALUES (?, ?)";
       statement = connection.prepareStatement(insertQuery);
       statement.setString(1, data[0]);
       statement.setString(2, data[1]); // floor
@@ -143,7 +143,7 @@ public class CSVManager {
    * @param fileName - The file name where the CSV will be saved
    * @throws IOException - Writing to the CSV file
    */
-  public static void saveMedEquipReqCSV(String fileName) throws IOException, SQLException {
+  public static void saveMedEquipReqCSV(String fileName) throws IOException {
     MedicalEquipmentServiceRequestDAO MESR = new MedicalEquipmentServiceRequestDAOImpl();
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
     File tempFile = new File(fileName);
@@ -156,7 +156,7 @@ public class CSVManager {
       FileWriter fstream = new FileWriter(fileName, true); // appending each line.
       out = new BufferedWriter(fstream); // ready to write
       // write format
-      out.write("nodeID,equipID\n");
+      out.write("floorID,roomID\n");
       // write actual data
       for (serviceRequest medEquipServReq : MESR.getAllMedicalEquipmentServiceRequests()) {
         String csvLine =
@@ -185,11 +185,11 @@ public class CSVManager {
     String[] data;
     while ((line = in.readLine()) != null) {
       data = line.split(",");
-      String roomID = data[0];
+      String equipID = data[0];
 
       // check if nodeID is already in the database
       // ensures the database is up to date and correct without overwriting
-      String query = "SELECT COUNT(1) FROM EQUIPMENT WHERE roomID = '" + roomID + "'";
+      String query = "SELECT * FROM EQUIPMENT WHERE ID = '" + equipID + "'";
       PreparedStatement statement = connection.prepareStatement(query);
       ResultSet rs = statement.executeQuery(query);
       if (rs.next()) { // true if exists, false if does not exist
@@ -275,7 +275,7 @@ public class CSVManager {
 
       // check if nodeID is already in the database
       // ensures the database is up to date and correct without overwriting
-      String query = "SELECT COUNT(1) FROM EmployeeTable WHERE NODEID = '" + employeeID + "'";
+      String query = "SELECT * FROM EmployeeTable WHERE NODEID = '" + employeeID + "'";
       PreparedStatement statement = connection.prepareStatement(query);
       ResultSet rs = statement.executeQuery(query);
       if (rs.next()) { // true if exists, false if does not exist
@@ -283,7 +283,7 @@ public class CSVManager {
         // 3/28/2022
       }
       String insertQuery =
-          "INSERT INTO EmployeeTable (ID, NAME, POSITION, ISAVAILABLE)" + " VALUES (?, ?, ?, ?)";
+          "INSERT INTO EmployeeTable (ID, NAME, LOCATION, POSITION, AVAILABLE, SALARY)" + " VALUES (?, ?, ?, ?, ?, ?)";
       statement = connection.prepareStatement(insertQuery);
       statement.setString(1, data[0]); // employeeID
       statement.setString(2, data[1]); // name
