@@ -1,36 +1,53 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
-import java.util.Date;
-
-public abstract class serviceRequest {
-
-  public enum Type {
-    sanitationRequest,
-    medicalEquipmentRequest,
-    mealDeliveryRequest,
-    translatorRequest,
-    medicineRequest
-  }
-
-  private Date requestDate;
-  private Date deliveryDate;
+public abstract class ServiceRequest {
+  /*
+    public enum Type {
+      sanitationRequest,
+      medicalEquipmentRequest,
+      mealDeliveryRequest,
+      translatorRequest,
+      medicineRequest
+    }
+  */
+  // private Date requestDate; //TODO: Implement later
+  // private Date deliveryDate; //TODO: Implement later
 
   private String otherNotes;
   private String floorID;
   private String roomID;
   private boolean isUrgent;
-  private Type requestType;
+  // private Type requestType;
 
   private String requestStatus;
   private String staffAssignee;
 
-  public Type getRequestType() {
+  // public Type getRequestType() { return requestType; }
 
-    return requestType;
+  // public void setRequestType(Type requestType) { this.requestType = requestType; }
+
+  public ServiceRequest(
+      String otherNotes,
+      String floorID,
+      String roomID,
+      boolean isUrgent,
+      String requestStatus,
+      String staffAssignee) {
+    this.otherNotes = otherNotes;
+    this.floorID = floorID;
+    this.roomID = roomID;
+    this.isUrgent = isUrgent;
+    this.requestStatus = requestStatus;
+    this.staffAssignee = staffAssignee;
   }
 
-  public void setRequestType(Type requestType) {
-    this.requestType = requestType;
+  public ServiceRequest() {
+    this.otherNotes = "";
+    this.floorID = "";
+    this.roomID = "";
+    this.isUrgent = false;
+    this.requestStatus = "";
+    this.staffAssignee = "";
   }
 
   public String getFloorID() {
