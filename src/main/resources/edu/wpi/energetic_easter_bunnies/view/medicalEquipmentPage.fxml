@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<VBox prefHeight="640.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.MedicalEquipmentController">
+   <children>
+      <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Menu">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#homeButton" text="Home" />
+                  <MenuItem mnemonicParsing="false" text="Settings" />
+                  <MenuItem mnemonicParsing="false" text="Quit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About Application" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Pane prefHeight="90.0" prefWidth="1080.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f35959" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
+                  <Label alignment="CENTER" layoutX="107.0" layoutY="13.0" text="Brigham &amp; Women's Hospital" textFill="WHITE">
+                     <font>
+                        <Font name="Book Antiqua Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="192.0" layoutY="52.0" text="Medical Equipment Delivery" textFill="WHITE">
+                     <font>
+                        <Font name="Book Antiqua Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <StackPane layoutX="14.0" layoutY="13.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+                        <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/microscope.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <Button fx:id="homeButton" alignment="CENTER" layoutX="852.0" layoutY="8.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="75.0" prefWidth="222.0" text="     Home" textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="76.0" fitWidth="160.0" layoutX="852.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/home.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <AnchorPane layoutX="464.0" layoutY="493.0">
+               <children>
+                  <Group layoutX="6.198883056640625E-6" layoutY="6.198883056640625E-6" />
+                  <Button fx:id="submitButton" alignment="CENTER" mnemonicParsing="false" onAction="#submitButton" prefHeight="75.0" prefWidth="152.0" style="-fx-background-color: #f35959;" text="Submit Request" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <VBox alignment="CENTER" fillWidth="false" layoutX="263.0" layoutY="90.0" prefHeight="381.0" prefWidth="555.0">
+               <children>
+                  <HBox prefHeight="87.0" prefWidth="556.0" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="Location:" />
+                        <ComboBox fx:id="floor" prefWidth="150.0" promptText="Select Floor">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Test 1"/>
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                        <ComboBox fx:id="room" prefWidth="150.0" promptText="Select Room" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="87.0" prefWidth="560.0" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="Equipment:" />
+                        <ComboBox fx:id="equipmentType" prefWidth="150.0" promptText="Select Equipment Type" />
+                        <ComboBox fx:id="equipmentQuantity" prefWidth="150.0" promptText="Select Quantity" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="92.0" prefWidth="557.0" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="Delivery Time:" />
+                        <TextField fx:id="deliveryDate" promptText="MM/DD/YYYY" />
+                        <TextField fx:id="deliveryTime" promptText="_ _ : _ _ AM/PM" />
+                        <CheckBox fx:id="isUrgent" mnemonicParsing="false" text="Urgent" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="92.0" prefWidth="558.0" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="Other Notes:" />
+                        <TextField fx:id="notes" alignment="TOP_LEFT" prefHeight="58.0" prefWidth="176.0" promptText="Type to add text..." />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets top="25.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+            <AnchorPane layoutX="902.0" layoutY="543.0" prefHeight="58.0" prefWidth="164.0">
+               <children>
+                  <Button fx:id="resetButton" alignment="CENTER" layoutY="-3.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="62.0" prefWidth="164.0" text="Reset Fields">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
