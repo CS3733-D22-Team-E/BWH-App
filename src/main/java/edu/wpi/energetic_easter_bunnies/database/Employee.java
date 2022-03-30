@@ -9,12 +9,14 @@ public class Employee {
   private boolean available;
   private int numID;
 
-  public int getNumID() {
-    return numID;
-  }
-
-  public void setNumID(int numID) {
-    this.numID = numID;
+  public Employee() {
+    this.employeeID = "";
+    this.name = "";
+    this.position = "";
+    this.salary = 0.0;
+    this.location = "";
+    this.available = false;
+    this.numID = 0;
   }
 
   public Employee(
@@ -72,5 +74,13 @@ public class Employee {
 
   public void setAvailable(boolean available) {
     this.available = available;
+  }
+
+  public int getNumID() {
+    return numID;
+  }
+
+  public void setNumID(int numID) {
+    this.numID = numID;
   }
 }
