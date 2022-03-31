@@ -8,47 +8,46 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
-public class MedicineDeliveryController extends ServiceRequestPageController {
+public class MedicineDeliveryController extends serviceRequestPageController {
 
-    @FXML MenuButton floor;
-    @FXML MenuButton room;
-    @FXML MenuButton medicine;
-    @FXML TextField amount;
-    @FXML TextField date;
-    @FXML TextField time;
-    @FXML CheckBox mon;
-    @FXML CheckBox tues;
-    @FXML CheckBox wed;
-    @FXML CheckBox thurs;
-    @FXML CheckBox fri;
-    @FXML CheckBox sat;
-    @FXML CheckBox sun;
+  @FXML MenuButton floor;
+  @FXML MenuButton room;
+  @FXML MenuButton medicine;
+  @FXML TextField amount;
+  @FXML TextField date;
+  @FXML TextField time;
+  @FXML CheckBox mon;
+  @FXML CheckBox tues;
+  @FXML CheckBox wed;
+  @FXML CheckBox thurs;
+  @FXML CheckBox fri;
+  @FXML CheckBox sat;
+  @FXML CheckBox sun;
 
-    medicineDelivery medicineDeliveryRequest = new medicineDelivery();
+  medicineDelivery medicineDeliveryRequest = new medicineDelivery();
 
-    public MedicineDeliveryController() {}
+  public MedicineDeliveryController() {}
 
-    @FXML
-    public void submitButton(ActionEvent event) {
-        try {
-            // medicalEquipmentRequest.setLocation(building.getValue() + floor.getValue());
-            medicineDelivery.setFloorID(String.valueOf(floor.getItems()));
-            medicineDelivery.setAmount(amount.getText());
-            medicineDelivery.setMedicine(String.valueOf(medicine.getItems()));
-            medicineDelivery.setDeliveryDate(date.getText());
-            medicineDelivery.setDeliveryTime(time.getText());
-            medicineDelivery.setMon(mon.isSelected());
-            medicineDelivery.setTues(tues.isSelected());
-            medicineDelivery.setWed(wed.isSelected());
-            medicineDelivery.setThurs(thurs.isSelected());
-            medicineDelivery.setFri(fri.isSelected());
-            medicineDelivery.setSat(sat.isSelected());
-            medicineDelivery.setSun(sun.isSelected());
+  @FXML
+  public void submitButton(ActionEvent event) {
+    try {
+      // medicalEquipmentRequest.setLocation(building.getValue() + floor.getValue());
+      medicineDeliveryRequest.setFloorID(String.valueOf(floor.getItems()));
+      medicineDeliveryRequest.setAmount(amount.getText());
+      medicineDeliveryRequest.setMedicine(String.valueOf(medicine.getItems()));
+      medicineDeliveryRequest.setDeliveryDate(date.getText());
+      medicineDeliveryRequest.setDeliveryTime(time.getText());
+      medicineDeliveryRequest.setMon(mon.isSelected());
+      medicineDeliveryRequest.setTues(tues.isSelected());
+      medicineDeliveryRequest.setWed(wed.isSelected());
+      medicineDeliveryRequest.setThurs(thurs.isSelected());
+      medicineDeliveryRequest.setFri(fri.isSelected());
+      medicineDeliveryRequest.setSat(sat.isSelected());
+      medicineDeliveryRequest.setSun(sun.isSelected());
 
-        } catch (NullPointerException error) {
-            System.out.println("Error : Some Value is NULL");
-            PopUpWarning.createWarning("Warning : A required value was not filled");
-        }
+    } catch (NullPointerException error) {
+      System.out.println("Error : Some Value is NULL");
+      PopUpWarning.createWarning("Warning : A required value was not filled");
     }
-
+  }
 }
