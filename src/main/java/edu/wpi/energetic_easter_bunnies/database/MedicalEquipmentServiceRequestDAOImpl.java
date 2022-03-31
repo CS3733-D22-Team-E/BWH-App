@@ -13,7 +13,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
     String url = "jdbc:derby:myDB;";
     Connection connection = DriverManager.getConnection(url);
     Statement statement = connection.createStatement();
-    String query = "SELECT * FROM MEDEQUIPREQ ORDER BY REQUESTDATE DESC";
+    String query = "SELECT * FROM MED_EQUIP_REQ ORDER BY REQUESTDATE DESC";
     ResultSet rs = statement.executeQuery(query);
     // int numID = 0; //TODO: Assign Medical Requests an ID value
     while (rs.next()) {
@@ -24,7 +24,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
       String equipment = rs.getString("EQUIP");
       int equipQuantity = rs.getInt("EQUIPQUANTITY");
       String staffAssignee = rs.getString("STAFFASSIGNEE");
-      String locNodeID = rs.getString("LOCNODEID");
+      String locNodeID = rs.getString("LOCATIONID");
       String floor = rs.getString("FLOOR");
       String requestStatus = rs.getString("REQUESTSTATUS");
       String otherNotes = rs.getString("OTHERNOTES");

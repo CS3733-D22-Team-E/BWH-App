@@ -85,7 +85,7 @@ public abstract class serviceRequest {
     this.otherNotes = otherNotes;
   }
 
-  public boolean isUrgent() {
+  public boolean getIsUrgent() {
     return isUrgent;
   }
 
