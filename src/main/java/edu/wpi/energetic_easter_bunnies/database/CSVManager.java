@@ -143,7 +143,7 @@ public class CSVManager {
    * @param fileName - The file name where the CSV will be saved
    * @throws IOException - Writing to the CSV file
    */
-  public static void saveMedEquipReqCSV(String fileName) throws IOException {
+  public static void saveMedEquipReqCSV(String fileName) throws IOException, SQLException {
     MedicalEquipmentServiceRequestDAO MESR = new MedicalEquipmentServiceRequestDAOImpl();
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
     File tempFile = new File(fileName);

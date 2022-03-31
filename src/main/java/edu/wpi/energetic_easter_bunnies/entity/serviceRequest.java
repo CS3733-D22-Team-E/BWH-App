@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
-public abstract class ServiceRequest {
+public abstract class serviceRequest {
   /*
     public enum Type {
       sanitationRequest,
@@ -12,7 +12,7 @@ public abstract class ServiceRequest {
   */
   // private Date requestDate; //TODO: Implement later
   // private Date deliveryDate; //TODO: Implement later
-
+  private String serviceRequestID;
   private String otherNotes;
   private String floorID;
   private String roomID;
@@ -26,13 +26,23 @@ public abstract class ServiceRequest {
 
   // public void setRequestType(Type requestType) { this.requestType = requestType; }
 
-  public ServiceRequest(
+  public String getServiceRequestID() {
+    return serviceRequestID;
+  }
+
+  public void setServiceRequestID(String serviceRequestID) {
+    this.serviceRequestID = serviceRequestID;
+  }
+
+  public serviceRequest(
+      String serviceRequestID,
       String otherNotes,
       String floorID,
       String roomID,
       boolean isUrgent,
       String requestStatus,
       String staffAssignee) {
+    this.serviceRequestID = serviceRequestID;
     this.otherNotes = otherNotes;
     this.floorID = floorID;
     this.roomID = roomID;
@@ -41,7 +51,8 @@ public abstract class ServiceRequest {
     this.staffAssignee = staffAssignee;
   }
 
-  public ServiceRequest() {
+  public serviceRequest() {
+    this.serviceRequestID = "";
     this.otherNotes = "";
     this.floorID = "";
     this.roomID = "";

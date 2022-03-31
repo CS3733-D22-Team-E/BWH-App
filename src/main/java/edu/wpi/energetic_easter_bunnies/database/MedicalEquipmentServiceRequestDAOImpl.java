@@ -1,12 +1,12 @@
 package edu.wpi.energetic_easter_bunnies.database;
 
-import edu.wpi.energetic_easter_bunnies.entity.MedicalEquipmentRequest;
+import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentServiceRequestDAO {
-  List<MedicalEquipmentRequest> medicalRequests;
+  List<medicalEquipmentRequest> medicalRequests;
 
   public MedicalEquipmentServiceRequestDAOImpl() throws SQLException {
     medicalRequests = new ArrayList<>();
@@ -17,6 +17,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
     ResultSet rs = statement.executeQuery(query);
     // int numID = 0; //TODO: Assign Medical Requests an ID value
     while (rs.next()) {
+      String medEquipReqID = rs.getString("ID");
       String reqDate = rs.getString("REQUESTDATE");
       String deliveryDate = rs.getString("DELIVERYDATE");
       boolean isUrgent = rs.getBoolean("ISURGENT");
@@ -28,8 +29,9 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
       String requestStatus = rs.getString("REQUESTSTATUS");
       String otherNotes = rs.getString("OTHERNOTES");
 
-      MedicalEquipmentRequest equipRequest =
-          new MedicalEquipmentRequest(
+      medicalEquipmentRequest equipRequest =
+          new medicalEquipmentRequest(
+              medEquipReqID,
               otherNotes,
               floor,
               locNodeID,
@@ -46,17 +48,17 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
     rs.close();
   }
 
-  public List<MedicalEquipmentRequest> getAllMedicalEquipmentServiceRequests() {
+  public List<medicalEquipmentRequest> getAllMedicalEquipmentServiceRequests() {
     return medicalRequests;
   }
 
-  public MedicalEquipmentRequest getMedicalEquipmentServiceRequest(int numID) {
+  public medicalEquipmentRequest getMedicalEquipmentServiceRequest(int numID) {
     return medicalRequests.get(numID);
   } // TODO: Add ID Value as extra parameter
 
   public void updateMedicalEquipmentServiceRequest(
-      MedicalEquipmentRequest medicalEquipmentRequest) {}
+      medicalEquipmentRequest medicalEquipmentRequest) {}
 
   public void deleteMedicalEquipmentServiceRequest(
-      MedicalEquipmentRequest medicalEquipmentRequest) {}
+      medicalEquipmentRequest medicalEquipmentRequest) {}
 }

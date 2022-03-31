@@ -1,7 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
-public class languageInterpreterRequest extends ServiceRequest {
-
+public class languageInterpreterRequest extends serviceRequest {
+  private String lanInterpID;
   private String startDate;
   private String endDate;
   private int roomNumber;
@@ -31,6 +31,7 @@ public class languageInterpreterRequest extends ServiceRequest {
   Floor floorforLangInterpreter;
 
   public languageInterpreterRequest(
+      String lanInterpID,
       String otherNotes,
       String floorID,
       String roomID,
@@ -42,7 +43,7 @@ public class languageInterpreterRequest extends ServiceRequest {
       int roomNumber,
       Language langforInterpreter,
       Floor floorforLangInterpreter) {
-    super(otherNotes, floorID, roomID, isUrgent, requestStatus, staffAssignee);
+    super(lanInterpID, otherNotes, floorID, roomID, isUrgent, requestStatus, staffAssignee);
     this.startDate = startDate;
     this.endDate = endDate;
     this.roomNumber = roomNumber;
@@ -53,6 +54,14 @@ public class languageInterpreterRequest extends ServiceRequest {
   // Location
   public Floor getFloor() {
     return floorforLangInterpreter;
+  }
+
+  public String getLanInterpID() {
+    return lanInterpID;
+  }
+
+  public void setLanInterpID(String lanInterpID) {
+    this.lanInterpID = lanInterpID;
   }
 
   public void setFloor(Floor floorforLangInterpreter) {

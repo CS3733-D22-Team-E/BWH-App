@@ -2,13 +2,15 @@ package edu.wpi.energetic_easter_bunnies.entity;
 
 public class medicalEquipmentRequest extends serviceRequest {
 
+  private String medEquipRequestID;
   private String equipment;
   private int equipmentQuantity;
   // TODO: make method that takes in date and time as string and returns a date object
   private String deliveryDate;
   private String deliveryTime;
 
-  public MedicalEquipmentRequest(
+  public medicalEquipmentRequest(
+      String medEquipRequestID,
       String otherNotes,
       String floorID,
       String roomID,
@@ -19,14 +21,14 @@ public class medicalEquipmentRequest extends serviceRequest {
       int equipQuantity,
       String deliveryDate,
       String deliveryTime) {
-    super(otherNotes, floorID, roomID, isUrgent, requestStatus, staffAssignee);
+    super(medEquipRequestID, otherNotes, floorID, roomID, isUrgent, requestStatus, staffAssignee);
     this.equipment = equipment;
     this.equipmentQuantity = equipQuantity;
     this.deliveryDate = deliveryDate;
     this.deliveryTime = deliveryTime;
   }
 
-  public MedicalEquipmentRequest() {
+  public medicalEquipmentRequest() {
     super();
     this.equipment = "";
     this.equipmentQuantity = 0;
