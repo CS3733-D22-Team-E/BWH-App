@@ -32,7 +32,7 @@ public abstract class serviceRequest {
     return floorID;
   }
 
-  public void setFloorID(String floorID) {
+  public static void setFloorID(String floorID) {
     this.floorID = floorID;
   }
 

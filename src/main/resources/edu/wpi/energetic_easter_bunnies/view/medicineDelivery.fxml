@@ -118,20 +118,20 @@
                           <Font name="System Bold" size="18.0" />
                       </font>
                   </Label>
-            <TextField layoutX="207.0" layoutY="237.0" promptText="Quantity" />
-            <MenuButton layoutX="207.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Floor">
+            <TextField id="amount" fx:id="amount" layoutX="207.0" layoutY="237.0" promptText="Quantity" />
+            <MenuButton id="floor" fx:id="floor" layoutX="207.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Floor">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
               </items>
             </MenuButton>
-            <MenuButton layoutX="381.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Room">
+            <MenuButton id="room" fx:id="room" layoutX="381.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Room">
                <items>
                   <MenuItem mnemonicParsing="false" text="Action 1" />
                   <MenuItem mnemonicParsing="false" text="Action 2" />
                </items>
             </MenuButton>
-            <MenuButton layoutX="373.0" layoutY="237.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Unit">
+            <MenuButton id="unit" fx:id="unit" layoutX="373.0" layoutY="237.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Unit">
                <items>
                   <MenuItem mnemonicParsing="false" text="Action 1" />
                   <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -142,7 +142,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <MenuButton layoutX="207.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Medicine">
+            <MenuButton id="medicine" fx:id="medicine" layoutX="207.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Medicine">
                <items>
                   <MenuItem mnemonicParsing="false" text="Action 1" />
                   <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -153,9 +153,9 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <DatePicker layoutX="237.0" layoutY="276.0" promptText="Select Date" />
-            <TextField layoutX="427.0" layoutY="276.0" prefHeight="25.0" prefWidth="120.0" text="__ __ : __ __ AM/PM" />
-            <CheckBox layoutX="557.0" layoutY="280.0" mnemonicParsing="false" text="Urgent" />
+            <DatePicker fx:id="date" layoutX="237.0" layoutY="276.0" promptText="Select Date" />
+            <TextField fx:id="time" layoutX="427.0" layoutY="276.0" prefHeight="25.0" prefWidth="120.0" text="__ __ : __ __ AM/PM" />
+            <CheckBox id="urgent" fx:id="urgent" layoutX="557.0" layoutY="280.0" mnemonicParsing="false" text="Urgent" />
             <Label layoutX="107.0" layoutY="318.0" prefHeight="39.0" prefWidth="93.0" text="Recurring?" textAlignment="RIGHT">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -166,14 +166,14 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextArea layoutX="536.0" layoutY="311.0" prefHeight="90.0" prefWidth="231.0" promptText="Type here..." />
-            <CheckBox layoutX="215.0" layoutY="318.0" mnemonicParsing="false" text="Mon" />
-            <CheckBox layoutX="215.0" layoutY="338.0" mnemonicParsing="false" text="Tues" />
-            <CheckBox layoutX="215.0" layoutY="357.0" mnemonicParsing="false" text="Wed" />
-            <CheckBox layoutX="282.0" layoutY="318.0" mnemonicParsing="false" text="Thurs" />
-            <CheckBox layoutX="282.0" layoutY="338.0" mnemonicParsing="false" text="Fri" />
-            <CheckBox layoutX="280.0" layoutY="357.0" mnemonicParsing="false" text="Sat" />
-            <CheckBox layoutX="280.0" layoutY="374.0" mnemonicParsing="false" text="Sun" />
+            <TextArea id="notes" fx:id="notes" layoutX="536.0" layoutY="311.0" prefHeight="90.0" prefWidth="231.0" promptText="Type here..." />
+            <CheckBox id="mon" fx:id="mon" layoutX="215.0" layoutY="318.0" mnemonicParsing="false" text="Mon" />
+            <CheckBox id="tues" fx:id="tues" layoutX="215.0" layoutY="338.0" mnemonicParsing="false" text="Tues" />
+            <CheckBox id="wed" fx:id="Wed" layoutX="215.0" layoutY="357.0" mnemonicParsing="false" text="Wed" />
+            <CheckBox id="thurs" fx:id="thurs" layoutX="282.0" layoutY="318.0" mnemonicParsing="false" text="Thurs" />
+            <CheckBox id="fri" fx:id="fri" layoutX="282.0" layoutY="338.0" mnemonicParsing="false" text="Fri" />
+            <CheckBox id="sat" fx:id="sat" layoutX="280.0" layoutY="357.0" mnemonicParsing="false" text="Sat" />
+            <CheckBox id="sun" fx:id="sun" layoutX="280.0" layoutY="374.0" mnemonicParsing="false" text="Sun" />
             </children>
         </AnchorPane>
     </children>
