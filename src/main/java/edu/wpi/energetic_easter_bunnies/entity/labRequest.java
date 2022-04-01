@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
-public class LabRequest extends serviceRequest {
+public class labRequest extends serviceRequest {
 
   private enum timeFrame {
     ASAP,
