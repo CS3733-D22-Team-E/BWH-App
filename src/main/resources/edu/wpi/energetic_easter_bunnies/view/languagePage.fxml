@@ -187,7 +187,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="resetButton" alignment="CENTER" layoutX="797.0" layoutY="526.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="62.0" prefWidth="164.0" text="Reset Fields">
+            <Button fx:id="resetButton" alignment="CENTER" layoutX="797.0" layoutY="526.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="164.0" text="Reset Fields">
                <font>
                   <Font size="18.0" />
                </font>

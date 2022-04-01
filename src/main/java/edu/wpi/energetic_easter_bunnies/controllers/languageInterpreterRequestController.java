@@ -16,8 +16,8 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   @FXML ChoiceBox roomSelection;
   @FXML ChoiceBox languageSelection;
   @FXML TextField noteField;
-  @FXML ChoiceBox startSelection;
-  @FXML ChoiceBox endSelection;
+  @FXML DatePicker startSelection;
+  @FXML DatePicker endSelection;
 
   languageInterpreterRequest languageInterpreterRequest = new languageInterpreterRequest();
 

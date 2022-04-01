@@ -141,7 +141,7 @@
                       </font>
                   </Label>
             <TextField layoutX="207.0" layoutY="237.0" promptText="Quantity" />
-            <MenuButton fx:id="floorSelection" layoutX="207.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Floor">
+            <MenuButton fx:id="floorSelection" layoutX="207.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Floor"/>
             <TextField id="amount" fx:id="amount" layoutX="207.0" layoutY="237.0" promptText="Quantity" />
             <MenuButton id="floor" fx:id="floor" layoutX="207.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Floor">
               <items>
