@@ -16,7 +16,7 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
     ResultSet rs = statement.executeQuery(query);
     int numID = 0;
     while (rs.next()) {
-      String equipmentID = rs.getString("ID");
+      String equipmentID = rs.getString("EQUIPMENTID");
       boolean isInUse = rs.getBoolean("isInUse");
       boolean isClean = rs.getBoolean("isClean");
       String cleanLocation = rs.getString("cleanLocation");

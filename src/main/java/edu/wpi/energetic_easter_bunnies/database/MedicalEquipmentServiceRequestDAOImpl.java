@@ -17,7 +17,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
     ResultSet rs = statement.executeQuery(query);
     // int numID = 0; //TODO: Assign Medical Requests an ID value
     while (rs.next()) {
-      String medEquipReqID = rs.getString("ID");
+      String medEquipReqID = rs.getString("MED_EQUIPMENTID");
       String reqDate = rs.getString("REQUESTDATE");
       String deliveryDate = rs.getString("DELIVERYDATE");
       boolean isUrgent = rs.getBoolean("ISURGENT");
