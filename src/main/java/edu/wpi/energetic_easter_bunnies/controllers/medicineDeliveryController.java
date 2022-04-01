@@ -8,7 +8,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
-public class MedicineDeliveryController extends serviceRequestPageController {
+public class medicineDeliveryController extends serviceRequestPageController {
 
   @FXML MenuButton floor;
   @FXML MenuButton room;
@@ -26,7 +26,7 @@ public class MedicineDeliveryController extends serviceRequestPageController {
 
   medicineDelivery medicineDeliveryRequest = new medicineDelivery();
 
-  public MedicineDeliveryController() {}
+  public medicineDeliveryController() {}
 
   @FXML
   public void submitButton(ActionEvent event) {
