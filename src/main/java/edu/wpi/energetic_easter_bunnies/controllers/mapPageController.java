@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import edu.wpi.energetic_easter_bunnies.Main;
 import edu.wpi.energetic_easter_bunnies.database.*;
 import edu.wpi.energetic_easter_bunnies.entity.locationModel;
 import edu.wpi.energetic_easter_bunnies.menuButtons;
@@ -81,40 +82,60 @@ public class mapPageController implements menuButtons, Initializable {
   public void mealDeliveryButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
-    loader.setLocation(getClass().getResource("../view/mealDeliveryPage.fxml"));
-    root = loader.load();
+    URL url = Main.class.getResource("view/mealDeliveryPage.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      root = loader.load();
 
-    thisStage.setScene(new Scene(root));
+      thisStage.setScene(new Scene(root));
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
   }
 
   @FXML
   public void languageButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
-    loader.setLocation(getClass().getResource("../view/languagePage.fxml"));
-    root = loader.load();
+    URL url = Main.class.getResource("view/languagePage.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      root = loader.load();
 
-    thisStage.setScene(new Scene(root));
+      thisStage.setScene(new Scene(root));
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
   }
 
   @FXML
   public void medicalEquipmentButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
-    loader.setLocation(getClass().getResource("../view/medicalEquipmentPage.fxml"));
-    root = loader.load();
+    URL url = Main.class.getResource("view/medicalEquipmentPage.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      root = loader.load();
 
-    thisStage.setScene(new Scene(root));
+      thisStage.setScene(new Scene(root));
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
   }
 
   @FXML
   public void medicineDeliveryButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
-    loader.setLocation(getClass().getResource("../view/medicineDelivery.fxml"));
-    root = loader.load();
+    URL url = Main.class.getResource("view/medicineDelivery.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      root = loader.load();
 
-    thisStage.setScene(new Scene(root));
+      thisStage.setScene(new Scene(root));
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
   }
 
   @Override
@@ -126,39 +147,59 @@ public class mapPageController implements menuButtons, Initializable {
   public void sanitationButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
-    loader.setLocation(getClass().getResource("../view/sanitationPage.fxml"));
-    root = loader.load();
+    URL url = Main.class.getResource("view/sanitationPage.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      root = loader.load();
 
-    thisStage.setScene(new Scene(root));
+      thisStage.setScene(new Scene(root));
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
+  }
+
+  @FXML
+  public void labRequestButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    URL url = Main.class.getResource("view/labRequestPage.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      root = loader.load();
+
+      thisStage.setScene(new Scene(root));
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
   }
 
   @FXML
   public void homeButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
-    loader.setLocation(getClass().getResource("../view/defaultPage.fxml"));
-    root = loader.load();
+    URL url = Main.class.getResource("view/defaultPage.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      root = loader.load();
 
-    thisStage.setScene(new Scene(root));
+      thisStage.setScene(new Scene(root));
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
   }
 
   @FXML
   public void locationButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
-    loader.setLocation(getClass().getResource("../view/map.fxml"));
-    root = loader.load();
+    URL url = Main.class.getResource("view/map.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      root = loader.load();
 
-    thisStage.setScene(new Scene(root));
-  }
-
-  @Override
-  public void labRequestButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) menuBar.getScene().getWindow();
-
-    loader.setLocation(getClass().getResource("../view/labRequestPage.fxml"));
-    root = loader.load();
-
-    thisStage.setScene(new Scene(root));
+      thisStage.setScene(new Scene(root));
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
   }
 }
