@@ -16,7 +16,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     ResultSet rs = statement.executeQuery(query);
     int numID = 0;
     while (rs.next()) {
-      String employeeID = rs.getString("ID");
+      String employeeID = rs.getString("EMPLOYEEID");
       String name = rs.getString("NAME");
       double salary = rs.getDouble("SALARY");
       String location = rs.getString("LOCATION");
