@@ -5,13 +5,13 @@ import java.io.*;
 import java.sql.*;
 
 public class CSVManager {
+  static Connection connection = DBConnection.getConnection();
   /**
    * Loads the location database from the location csv
    *
    * @param fileName - The file name where the database will be loaded from
    */
   public static void loadLocationCSV(String fileName) throws SQLException, IOException {
-    Connection connection = DriverManager.getConnection("jdbc:derby:myDB;");
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String line;
     in.readLine();
@@ -45,7 +45,6 @@ public class CSVManager {
     }
     in.close();
     connection.commit();
-    connection.close();
   }
 
   /**
@@ -107,7 +106,6 @@ public class CSVManager {
    * @param fileName - The file name where the database will be loaded from
    */
   public static void loadMedEquipReqCSV(String fileName) throws SQLException, IOException {
-    Connection connection = DriverManager.getConnection("jdbc:derby:myDB;");
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String line;
     in.readLine();
@@ -133,7 +131,6 @@ public class CSVManager {
     }
     in.close();
     connection.commit();
-    connection.close();
   }
 
   /**
@@ -178,7 +175,6 @@ public class CSVManager {
    * @param fileName - The file name where the database will be loaded from
    */
   public static void loadMedEquipCSV(String fileName) throws SQLException, IOException {
-    Connection connection = DriverManager.getConnection("jdbc:derby:myDB;");
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String line;
     in.readLine();
@@ -209,7 +205,6 @@ public class CSVManager {
     }
     in.close();
     connection.commit();
-    connection.close();
   }
 
   /**
@@ -264,7 +259,6 @@ public class CSVManager {
    * @param fileName - The file name where the database will be loaded from
    */
   public static void loadEmployeeCSV(String fileName) throws SQLException, IOException {
-    Connection connection = DriverManager.getConnection("jdbc:derby:myDB;");
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String line;
     in.readLine();
@@ -294,7 +288,6 @@ public class CSVManager {
     }
     in.close();
     connection.commit();
-    connection.close();
   }
 
   /**
