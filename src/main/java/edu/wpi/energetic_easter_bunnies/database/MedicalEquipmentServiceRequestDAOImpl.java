@@ -66,8 +66,6 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
   public void addMedEquipReq(medicalEquipmentRequest request) throws SQLException {
     medicalRequests.add(request);
 
-    String url = "jdbc:derby:myDB";
-    Connection connection = DriverManager.getConnection(url);
     Statement statement = connection.createStatement();
     String query =
         "INSERT INTO MED_EQUIP_REQ VALUES ('"
@@ -96,12 +94,12 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
     System.out.println(query);
     statement.executeUpdate(query);
   }
-/*
-  public static void main(String[] args) throws SQLException {
-    MedicalEquipmentServiceRequestDAOImpl db = new MedicalEquipmentServiceRequestDAOImpl();
-    db.addMedEquipReq(
-        new medicalEquipmentRequest(
-            "1234", "note", "floor", "45", false, "inprogress", "me", "bed", 5, "1/12", "1/13"));
-  }
-*/
+  /*
+    public static void main(String[] args) throws SQLException {
+      MedicalEquipmentServiceRequestDAOImpl db = new MedicalEquipmentServiceRequestDAOImpl();
+      db.addMedEquipReq(
+          new medicalEquipmentRequest(
+              "1234", "note", "floor", "45", false, "inprogress", "me", "bed", 5, "1/12", "1/13"));
+    }
+  */
 }
