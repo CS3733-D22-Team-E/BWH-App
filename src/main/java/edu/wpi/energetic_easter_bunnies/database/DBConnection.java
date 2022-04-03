@@ -8,7 +8,7 @@ public class DBConnection {
   private static Connection connection = null;
 
   static {
-    String url = "jdbc:derby:myDB";
+    String url = "jdbc:derby:myDB;create=true";
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
       connection = DriverManager.getConnection(url);
