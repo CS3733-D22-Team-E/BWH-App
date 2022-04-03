@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentServiceRequestDAO {
+  static Connection connection = DBConnection.getConnection();
   List<medicalEquipmentRequest> medicalRequests;
 
   public MedicalEquipmentServiceRequestDAOImpl() throws SQLException {
     medicalRequests = new ArrayList<>();
     String url = "jdbc:derby:myDB;";
-    Connection connection = DriverManager.getConnection(url);
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM MED_EQUIP_REQ ORDER BY REQUESTDATE DESC";
     ResultSet rs = statement.executeQuery(query);
