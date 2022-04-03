@@ -37,7 +37,7 @@ public class DBCreation {
     statement.executeUpdate(query);
   }
 
-  public static void createLabRequestTable() throws SQLException {
+  public static void createLabRequestTable() throws SQLException, IOException {
     String query =
         "create table LAB_REQUEST\n"
             + "(\n"
@@ -53,7 +53,7 @@ public class DBCreation {
     statement.executeUpdate(query);
   }
 
-  public static void createMedEquipTable() throws SQLException {
+  public static void createMedEquipReqTable() throws SQLException, IOException {
     String query =
         "create table MED_EQUIP_REQ\n"
             + "(\n"
@@ -71,6 +71,7 @@ public class DBCreation {
             + ")";
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
+    CSVManager.loadMedEquipReqCSV("MedEquipRequest.csv");
   }
 
   public static void createTowerLocationTable() throws SQLException, IOException {
@@ -96,7 +97,7 @@ public class DBCreation {
       createEmployeesTable();
       createEquipmentTable();
       createLabRequestTable();
-      createMedEquipTable();
+      createMedEquipReqTable();
       createTowerLocationTable();
     } catch (SQLException | IOException e) {
       e.printStackTrace();
