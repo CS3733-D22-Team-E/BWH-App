@@ -52,13 +52,54 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
     return medicalRequests;
   }
 
-  public medicalEquipmentRequest getMedicalEquipmentServiceRequest(int numID) {
-    return medicalRequests.get(numID);
-  } // TODO: Add ID Value as extra parameter
+  public medicalEquipmentRequest getMedicalEquipmentServiceRequest(String MedEquipReqID) {
+    for (medicalEquipmentRequest request : medicalRequests) {
+      if (request.getServiceRequestID().equalsIgnoreCase(MedEquipReqID)) return request;
+    }
+    return null; // TODO: Make a better return if ID is not found
+  }
 
-  public void updateMedicalEquipmentServiceRequest(
-      medicalEquipmentRequest medicalEquipmentRequest) {}
+  public void updateMedicalEquipmentServiceRequest(medicalEquipmentRequest request) {}
 
-  public void deleteMedicalEquipmentServiceRequest(
-      medicalEquipmentRequest medicalEquipmentRequest) {}
+  public void deleteMedicalEquipmentServiceRequest(medicalEquipmentRequest request) {}
+
+  public void addMedEquipReq(medicalEquipmentRequest request) throws SQLException {
+    medicalRequests.add(request);
+
+    Statement statement = connection.createStatement();
+    String query =
+        "INSERT INTO MED_EQUIP_REQ VALUES ('"
+            + request.getServiceRequestID()
+            + "','"
+            + request.getDeliveryDate()
+            + "','"
+            + request.getDeliveryTime()
+            + "',"
+            + request.getIsUrgent()
+            + ",'"
+            + request.getEquipment()
+            + "',"
+            + request.getEquipmentQuantity()
+            + ",'"
+            + request.getStaffAssignee()
+            + "','"
+            + request.getRoomID()
+            + "','"
+            + request.getFloorID()
+            + "','"
+            + request.getRequestStatus()
+            + "','"
+            + request.getOtherNotes()
+            + "')";
+    System.out.println(query);
+    statement.executeUpdate(query);
+  }
+  /*
+    public static void main(String[] args) throws SQLException {
+      MedicalEquipmentServiceRequestDAOImpl db = new MedicalEquipmentServiceRequestDAOImpl();
+      db.addMedEquipReq(
+          new medicalEquipmentRequest(
+              "1234", "note", "floor", "45", false, "inprogress", "me", "bed", 5, "1/12", "1/13"));
+    }
+  */
 }

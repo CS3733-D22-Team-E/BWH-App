@@ -7,7 +7,7 @@ import java.util.List;
 public interface MedicalEquipmentServiceRequestDAO {
   List<medicalEquipmentRequest> getAllMedicalEquipmentServiceRequests();
 
-  serviceRequest getMedicalEquipmentServiceRequest(int numID);
+  serviceRequest getMedicalEquipmentServiceRequest(String MedEquipReqID);
 
   void updateMedicalEquipmentServiceRequest(medicalEquipmentRequest medicalEquipmentRequest);
 
