@@ -117,5 +117,7 @@ public class medicalEquipmentController extends serviceRequestPageController
     notes.clear();
   }
 
-  private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) {}
+  private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) throws SQLException {
+    medEquipmentDB.addMedEquipReq(medEquipmentRequest);
+  }
 }
