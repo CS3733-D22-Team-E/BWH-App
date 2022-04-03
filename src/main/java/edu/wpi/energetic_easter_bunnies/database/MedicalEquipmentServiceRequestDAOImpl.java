@@ -61,4 +61,37 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
 
   public void deleteMedicalEquipmentServiceRequest(
       medicalEquipmentRequest medicalEquipmentRequest) {}
+
+  public void addMedEquipReq(medicalEquipmentRequest request) throws SQLException {
+    medicalRequests.add(request);
+
+    String url = "jdbc:derby:myDB";
+    Connection connection = DriverManager.getConnection(url);
+    Statement statement = connection.createStatement();
+    String query =
+        "INSERT INTO MED_EQUIP_REQ VALUES ('"
+            + request.getMedEquipRequestID()
+            + "',"
+            + request.getOtherNotes()
+            + ","
+            + request.getFloorID()
+            + ",'"
+            + request.getRoomID()
+            + "','"
+            + request.getIsUrgent()
+            + "','"
+            + request.getRequestStatus()
+            + "','"
+            + request.getStaffAssignee()
+            + "','"
+            + request.getEquipment()
+            + "','"
+            + request.getEquipmentQuantity()
+            + "','"
+            + request.getDeliveryDate()
+            + "','"
+            + request.getDeliveryTime()
+            + "')";
+    statement.executeUpdate(query);
+  }
 }
