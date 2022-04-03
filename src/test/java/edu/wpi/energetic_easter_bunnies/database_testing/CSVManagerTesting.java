@@ -19,7 +19,7 @@ public class CSVManagerTesting {
     CSVManager.saveLocationCSV("saveLocationFile.csv");
   }
 
-  @Test
+  /*@Test
   public void testLoadMedEquipReqFile() throws SQLException, IOException {
     DBCreation.createTables();
     CSVManager.loadMedEquipReqCSV("MedEquipRequest.csv");
@@ -29,5 +29,5 @@ public class CSVManagerTesting {
   public void testSaveMedEquipReqFile() throws SQLException, IOException {
     DBCreation.createTables();
     CSVManager.saveLocationCSV("saveMedEquipRequestFile.csv");
-  }
+  }*/
 }
