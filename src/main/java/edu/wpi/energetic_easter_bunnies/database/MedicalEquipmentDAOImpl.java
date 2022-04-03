@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
+  static Connection connection = DBConnection.getConnection();
   List<Equipment> equipmentList;
 
   public MedicalEquipmentDAOImpl() throws SQLException {
     equipmentList = new ArrayList<>();
     String url = "jdbc:derby:myDB;";
-    Connection connection = DriverManager.getConnection(url);
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM EQUIPMENT ORDER BY ID DESC";
     ResultSet rs = statement.executeQuery(query);

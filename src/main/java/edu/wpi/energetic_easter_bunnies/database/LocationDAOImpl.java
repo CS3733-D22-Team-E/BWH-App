@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LocationDAOImpl implements LocationDAO {
+  static Connection connection = DBConnection.getConnection();
   List<Location> locations;
 
   /**
@@ -15,7 +16,6 @@ public class LocationDAOImpl implements LocationDAO {
   public LocationDAOImpl() throws SQLException {
     locations = new ArrayList<>();
     String url = "jdbc:derby:myDB;";
-    Connection connection = DriverManager.getConnection(url);
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM TOWERLOCATIONS ORDER BY FLOOR DESC";
     ResultSet rs = statement.executeQuery(query);
@@ -79,7 +79,6 @@ public class LocationDAOImpl implements LocationDAO {
   public void addLocation(Location location) throws SQLException {
 
     String url = "jdbc:derby:myDB";
-    Connection connection = DriverManager.getConnection(url);
     Statement statement = connection.createStatement();
     locations.add(location);
 
@@ -122,7 +121,6 @@ public class LocationDAOImpl implements LocationDAO {
 
     // Update location floor and node type in the db
     String url = "jdbc:derby:myDB;";
-    Connection connection = DriverManager.getConnection(url);
     Statement statement = connection.createStatement();
     String query =
         "UPDATE TOWERLOCATIONS SET FLOOR = '"
@@ -149,7 +147,6 @@ public class LocationDAOImpl implements LocationDAO {
 
     // Remove location in the db
     String url = "jdbc:derby:myDB";
-    Connection connection = DriverManager.getConnection(url);
     Statement statement = connection.createStatement();
     String query = "DELETE FROM TOWERLOCATIONS WHERE nodeID = ('" + location.getNodeID() + "')";
     statement.executeUpdate(query);
