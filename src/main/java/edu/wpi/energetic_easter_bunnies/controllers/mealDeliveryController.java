@@ -106,8 +106,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
           || dateTime.getValue().equals(0)
           || dateTime.getValue().equals(0)
           || staffAssignee.getText().isEmpty()
-          || requestStatus.getText().isEmpty())
-    {
+          || requestStatus.getText().isEmpty()) {
         throw new NullPointerException();
       }
     } catch (NullPointerException error) {
