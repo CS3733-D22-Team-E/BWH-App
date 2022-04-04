@@ -111,15 +111,15 @@ public abstract class serviceRequest {
     this.staffAssignee = staffAssignee;
   }
 
-  public String generateRandomID(int length) {
+  public static String generateRandomID(int length) {
     String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    String result = "";
+    StringBuilder result = new StringBuilder();
     Random random = new Random();
 
     for (int i = 0; i < length; i++) {
       char randChar = alphabet.charAt(random.nextInt(alphabet.length()));
-      result += randChar;
+      result.append(randChar);
     }
-    return result;
+    return result.toString();
   }
 }

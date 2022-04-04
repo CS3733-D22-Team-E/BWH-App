@@ -21,10 +21,34 @@ public class MedicalEquipment extends Equipment {
 
   @Override
   public void use() {
+    setisInUse(true);
     setClean(false);
+  }
+
+  public void cleanEquipment() {
+    setisInUse(false);
+    setClean(true);
+    setCurrentLocation(getStorageLocation());
+    setMed_equipmentID(null); // Hopefully won't break when entered into DB Table
   }
 
   public boolean checkIsClean() {
     return super.isClean();
+  }
+
+  public String getMed_equipmentID() {
+    return med_equipmentID;
+  }
+
+  public void setMed_equipmentID(String med_equipmentID) {
+    this.med_equipmentID = med_equipmentID;
+  }
+
+  public String getEquipmentType() {
+    return equipmentType;
+  }
+
+  public void setEquipmentType(String equipmentType) {
+    this.equipmentType = equipmentType;
   }
 }

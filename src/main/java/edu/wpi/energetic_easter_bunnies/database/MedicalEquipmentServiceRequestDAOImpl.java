@@ -91,7 +91,6 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
             + "','"
             + request.getOtherNotes()
             + "')";
-    System.out.println(query);
     statement.executeUpdate(query);
   }
   /*

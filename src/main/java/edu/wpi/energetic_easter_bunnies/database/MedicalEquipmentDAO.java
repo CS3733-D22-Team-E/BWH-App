@@ -4,9 +4,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface MedicalEquipmentDAO {
-  List<Equipment> getAllMedicalEquipment();
+  List<MedicalEquipment> getAllMedicalEquipment();
 
-  Equipment getEquipment(int numID);
+  List<MedicalEquipment> getMedicalEquipments(
+      String equipmentType, int equipmentQuantity, String roomID, String MED_EQUIPMENTID)
+      throws SQLException;
 
-  void updateEquipment(Equipment equipment) throws SQLException;
+  void sendToCleaning(List<MedicalEquipment> equipments) throws SQLException;
 }

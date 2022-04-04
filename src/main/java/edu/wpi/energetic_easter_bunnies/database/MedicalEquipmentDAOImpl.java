@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
   static Connection connection = DBConnection.getConnection();
-  List<Equipment> equipmentList;
+  List<MedicalEquipment> equipmentList;
 
   public MedicalEquipmentDAOImpl() throws SQLException {
     equipmentList = new ArrayList<>();
@@ -25,7 +25,7 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
       String currentLocation = rs.getString("currentLocationID");
       String equipmentType = rs.getString("equipmentType");
 
-      Equipment equipment =
+      MedicalEquipment equipment =
           new MedicalEquipment(
               equipmentID,
               med_EquipmentID,
@@ -43,20 +43,69 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
   }
 
   @Override
-  public List<Equipment> getAllMedicalEquipment() {
+  public List<MedicalEquipment> getAllMedicalEquipment() {
     return equipmentList;
   }
 
   @Override
-  public Equipment getEquipment(int numID) {
-    return null;
+  public List<MedicalEquipment> getMedicalEquipments(
+      String equipmentType, int equipmentQuantity, String roomID, String MED_EQUIPMENTID)
+      throws SQLException { // TODO: Maybe figure out better way than a double for-loop
+    List<MedicalEquipment> equipments = new ArrayList<>();
+
+    for (int i = 0; i < equipmentQuantity; i++) {
+      for (MedicalEquipment equipment : equipmentList) {
+        if (equipment.getEquipmentType().equalsIgnoreCase(equipmentType)
+            && equipment.checkIsClean()) {
+          equipment.use(); // Sets it to be in use and be not clean anymore
+          equipment.setMed_equipmentID(MED_EQUIPMENTID); // Binds equipment to the MedEquip Request
+          equipment.setCurrentLocation(roomID); // TODO: Add Patient Rooms to TowerLocations.CSV
+          equipments.add(equipment);
+
+          // DB Query to update said values
+          Statement statement = connection.createStatement();
+          String query =
+              "UPDATE EQUIPMENT SET "
+                  + "\""
+                  + "isInUse"
+                  + "\""
+                  + " = "
+                  + true
+                  + ","
+                  + "\""
+                  + "isClean"
+                  + "\""
+                  + " = "
+                  + false
+                  + ", CURRENTLOCATIONID = '"
+                  + roomID
+                  + "', MED_EQUPIMENTID = '"
+                  + MED_EQUIPMENTID
+                  + "' WHERE EQUIPMENTID = '"
+                  + equipment.getEquipmentID()
+                  + "'"; // Make sure this is actually formatted right
+          statement.executeUpdate(query);
+        }
+      }
+    }
+    return equipments;
   }
 
   @Override
-  public void updateEquipment(Equipment equipment) throws SQLException {
-    equipmentList.add(equipment);
+  public void sendToCleaning(List<MedicalEquipment> equipments) throws SQLException {
+    for (MedicalEquipment equipment : equipments) {
+      equipment.setCurrentLocation(
+          equipment.getCleanLocation()); // Sets current location to where the cleaning location is
 
-    Statement statement = connection.createStatement();
-    String query = "";
+      // TODO: Add MedicalEquipment.cleanEquipment() here?
+
+      // DB Query to set currentLocation to cleaningLocation
+      Statement statement = connection.createStatement();
+      String query =
+          "UPDATE EQUIPMENT SET CURRENTLOCATIONID = '"
+              + equipment.getCleanLocation()
+              + "'"; // Make sure this is formatted properly
+      statement.executeUpdate(query);
+    }
   }
 }

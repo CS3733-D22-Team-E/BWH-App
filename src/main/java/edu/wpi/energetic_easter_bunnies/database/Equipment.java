@@ -42,7 +42,7 @@ public abstract class Equipment {
     this.numID = numID;
   }
 
-  public void setInUse(boolean inUse) {
+  public void setisInUse(boolean inUse) {
     isInUse = inUse;
   }
 
