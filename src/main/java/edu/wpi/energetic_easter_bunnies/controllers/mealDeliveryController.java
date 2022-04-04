@@ -33,6 +33,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     entreeDropDown.setItems(meals);
     beverageDropDown.setItems(beverages);
     dessertDropDown.setItems(desserts);

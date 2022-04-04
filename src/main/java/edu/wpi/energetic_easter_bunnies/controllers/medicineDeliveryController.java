@@ -4,13 +4,10 @@ import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.entity.medicineDelivery;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
 
 public class medicineDeliveryController extends serviceRequestPageController {
 
-  @FXML MenuButton floor;
+  /*@FXML MenuButton floor;
   @FXML MenuButton room;
   @FXML MenuButton medicine;
   @FXML TextField amount;
@@ -22,7 +19,7 @@ public class medicineDeliveryController extends serviceRequestPageController {
   @FXML CheckBox thurs;
   @FXML CheckBox fri;
   @FXML CheckBox sat;
-  @FXML CheckBox sun;
+  @FXML CheckBox sun;*/
 
   medicineDelivery medicineDeliveryRequest = new medicineDelivery();
 
@@ -32,7 +29,7 @@ public class medicineDeliveryController extends serviceRequestPageController {
   public void submitButton(ActionEvent event) {
     try {
       // medicalEquipmentRequest.setLocation(building.getValue() + floor.getValue());
-      medicineDeliveryRequest.setFloorID(String.valueOf(floor.getItems()));
+      /*medicineDeliveryRequest.setFloorID(String.valueOf(floor.getItems()));
       medicineDeliveryRequest.setAmount(amount.getText());
       medicineDeliveryRequest.setMedicine(String.valueOf(medicine.getItems()));
       medicineDeliveryRequest.setDeliveryDate(date.getText());
@@ -43,7 +40,7 @@ public class medicineDeliveryController extends serviceRequestPageController {
       medicineDeliveryRequest.setThurs(thurs.isSelected());
       medicineDeliveryRequest.setFri(fri.isSelected());
       medicineDeliveryRequest.setSat(sat.isSelected());
-      medicineDeliveryRequest.setSun(sun.isSelected());
+      medicineDeliveryRequest.setSun(sun.isSelected());*/
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");

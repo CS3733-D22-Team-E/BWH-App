@@ -32,13 +32,14 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
@@ -46,159 +47,148 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="640.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.App">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.medicineDeliveryController">
     <children>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-            <menus>
-                <Menu mnemonicParsing="false" text="Menu">
-                    <items>
-                        <MenuItem fx:id="homeMenuButton" mnemonicParsing="false" onAction="#homeButton" text="Home" />
-                        <Menu mnemonicParsing="false" text="Pages">
-                            <items>
-                                <MenuItem mnemonicParsing="false" onAction="#sanitationButton" text="Sanitation" />
-                                <MenuItem mnemonicParsing="false" onAction="#medicalEquipmentButton" text="Medical Equipment Delivery" />
-                                <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
-                                <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
-                                <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Translation" />
-                                <MenuItem mnemonicParsing="false" onAction="#labRequestButton" text="Lab Request" />
-                            </items>
-                        </Menu>
-                        <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitButton" text="Quit" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About Application" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-            <children>
-                <Pane prefHeight="90.0" prefWidth="1080.0">
-                    <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f35959" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
-                        <Label alignment="CENTER" layoutX="107.0" layoutY="13.0" text="Brigham Woman's Hospital" textFill="WHITE">
-                            <font>
-                                <Font name="Book Antiqua Bold" size="30.0" />
-                            </font>
-                        </Label>
-                        <Label alignment="CENTER" layoutX="210.0" layoutY="52.0" text="Medicine Delivery" textFill="WHITE">
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;">
+         <children>
+                  <StackPane minHeight="-Infinity" minWidth="-Infinity">
+                      <children>
+                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+                          <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                  <Image url="@icons/pill.png" />
+                              </image>
+                          </ImageView>
+                      </children>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+                  </StackPane>
+            <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
+               <children>
+                  <Label alignment="CENTER" text="Brigham Woman's Hospital" textFill="WHITE">
+                     <font>
+                        <Font name="Book Antiqua Bold" size="30.0" />
+                     </font>
+                  </Label>
+                        <Label alignment="CENTER" text="Medicine Delivery" textFill="WHITE">
                             <font>
                                 <Font name="Book Antiqua Bold" size="18.0" />
                             </font>
                         </Label>
-                        <StackPane layoutX="14.0" layoutY="13.0">
-                            <children>
-                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
-                                <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@icons/pill.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                        </StackPane>
-                        <Button fx:id="homeButton" alignment="CENTER" layoutX="852.0" layoutY="8.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="75.0" prefWidth="222.0" text="     Home" textAlignment="CENTER">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Button>
-                        <ImageView fitHeight="76.0" fitWidth="160.0" layoutX="852.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@icons/home.png" />
-                            </image>
-                        </ImageView>
-                    </children>
-                </Pane>
-                <Group layoutX="63.0" layoutY="237.0" />
-                <Group layoutX="64.0" layoutY="357.0" />
-                <Group layoutX="381.0" layoutY="237.0" />
-                <Group layoutX="62.0" layoutY="151.0" />
-                <AnchorPane layoutX="455.8999938964844" layoutY="435.8999938964844">
-                    <children>
-                        <Group layoutX="6.198883056640625E-6" layoutY="6.198883056640625E-6" />
-                        <Button fx:id="submitButton" alignment="CENTER" mnemonicParsing="false" onAction="#homeButton" prefHeight="75.0" prefWidth="152.0" text="Submit">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Button>
-                    </children>
-                </AnchorPane>
-                  <Label layoutX="107.0" layoutY="146.0" prefHeight="39.0" prefWidth="93.0" text="Location:">
-                      <font>
-                          <Font name="System Bold" size="18.0" />
-                      </font>
-                  </Label>
-                  <Label layoutX="107.0" layoutY="191.0" prefHeight="39.0" prefWidth="93.0" text="Medicine:" textAlignment="RIGHT">
-                      <font>
-                          <Font name="System Bold" size="18.0" />
-                      </font>
-                  </Label>
-            <TextField layoutX="207.0" layoutY="237.0" promptText="Quantity" />
-            <MenuButton fx:id="floorSelection" layoutX="207.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Floor"/>
-            <TextField id="amount" fx:id="amount" layoutX="207.0" layoutY="237.0" promptText="Quantity" />
-            <MenuButton id="floor" fx:id="floor" layoutX="207.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Floor">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-            </MenuButton>
-            <MenuButton id="room" fx:id="room" layoutX="381.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Room">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Action 1" />
-                  <MenuItem mnemonicParsing="false" text="Action 2" />
-               </items>
-            </MenuButton>
-            <MenuButton id="unit" fx:id="unit" layoutX="373.0" layoutY="237.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Unit">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Action 1" />
-                  <MenuItem mnemonicParsing="false" text="Action 2" />
-               </items>
-            </MenuButton>
-            <Label layoutX="107.0" layoutY="230.0" prefHeight="39.0" prefWidth="93.0" text="Amount:" textAlignment="RIGHT">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <MenuButton id="medicine" fx:id="medicine" layoutX="207.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Medicine">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Action 1" />
-                  <MenuItem mnemonicParsing="false" text="Action 2" />
-               </items>
-            </MenuButton>
-            <Label layoutX="107.0" layoutY="269.0" prefHeight="39.0" prefWidth="128.0" text="Delivery Time: " textAlignment="RIGHT">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <DatePicker fx:id="date" layoutX="237.0" layoutY="276.0" promptText="Select Date" />
-            <TextField fx:id="time" layoutX="427.0" layoutY="276.0" prefHeight="25.0" prefWidth="120.0" text="__ __ : __ __ AM/PM" />
-            <CheckBox id="urgent" fx:id="urgent" layoutX="557.0" layoutY="280.0" mnemonicParsing="false" text="Urgent" />
-            <Label layoutX="107.0" layoutY="318.0" prefHeight="39.0" prefWidth="93.0" text="Recurring?" textAlignment="RIGHT">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="381.0" layoutY="318.0" prefHeight="39.0" prefWidth="154.0" text="Addtional Notes:" textAlignment="RIGHT">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextArea id="notes" fx:id="notes" layoutX="536.0" layoutY="311.0" prefHeight="90.0" prefWidth="231.0" promptText="Type here..." />
-            <CheckBox id="mon" fx:id="mon" layoutX="215.0" layoutY="318.0" mnemonicParsing="false" text="Mon" />
-            <CheckBox id="tues" fx:id="tues" layoutX="215.0" layoutY="338.0" mnemonicParsing="false" text="Tues" />
-            <CheckBox id="wed" fx:id="Wed" layoutX="215.0" layoutY="357.0" mnemonicParsing="false" text="Wed" />
-            <CheckBox id="thurs" fx:id="thurs" layoutX="282.0" layoutY="318.0" mnemonicParsing="false" text="Thurs" />
-            <CheckBox id="fri" fx:id="fri" layoutX="282.0" layoutY="338.0" mnemonicParsing="false" text="Fri" />
-            <CheckBox id="sat" fx:id="sat" layoutX="280.0" layoutY="357.0" mnemonicParsing="false" text="Sat" />
-            <CheckBox id="sun" fx:id="sun" layoutX="280.0" layoutY="374.0" mnemonicParsing="false" text="Sun" />
-            </children>
-        </AnchorPane>
+               </children>
+            </VBox>
+            <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="90.0" prefWidth="120.0" style="-fx-border-color: black;">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <children>
+                  <JFXHamburger fx:id="burger" layoutX="45.0" layoutY="35.0" />
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <StackPane>
+         <children>
+              <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0">
+                  <children>
+                  <Pane>
+                     <children>
+                            <Group layoutX="15.0" layoutY="138.0" />
+                            <Group layoutX="16.0" layoutY="258.0" />
+                            <Group layoutX="333.0" layoutY="138.0" />
+                            <Group layoutX="14.0" layoutY="52.0" />
+                            <AnchorPane layoutX="408.0" layoutY="337.0">
+                                <children>
+                                    <Group layoutX="6.198883056640625E-6" layoutY="6.198883056640625E-6" />
+                                    <Button fx:id="submitButton" alignment="CENTER" mnemonicParsing="false" onAction="#submitButton" prefHeight="75.0" prefWidth="152.0" text="Submit">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                            </AnchorPane>
+                              <Label layoutX="59.0" layoutY="47.0" prefHeight="39.0" prefWidth="93.0" text="Location:">
+                                  <font>
+                                      <Font name="System Bold" size="18.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="59.0" layoutY="92.0" prefHeight="39.0" prefWidth="93.0" text="Medicine:" textAlignment="RIGHT">
+                                  <font>
+                                      <Font name="System Bold" size="18.0" />
+                                  </font>
+                              </Label>
+                        <TextField layoutX="159.0" layoutY="138.0" promptText="Quantity" />
+                        <MenuButton fx:id="floorSelection" layoutX="159.0" layoutY="54.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Floor" />
+                        <TextField id="amount" fx:id="amount" layoutX="159.0" layoutY="138.0" promptText="Quantity" />
+                        <MenuButton id="floor" fx:id="floor" layoutX="159.0" layoutY="54.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Floor">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                            <MenuItem mnemonicParsing="false" text="Action 2" />
+                          </items>
+                        </MenuButton>
+                        <MenuButton id="room" fx:id="room" layoutX="333.0" layoutY="54.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Room">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                        </MenuButton>
+                        <MenuButton id="unit" fx:id="unit" layoutX="325.0" layoutY="138.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Unit">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                        </MenuButton>
+                        <Label layoutX="59.0" layoutY="131.0" prefHeight="39.0" prefWidth="93.0" text="Amount:" textAlignment="RIGHT">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <MenuButton id="medicine" fx:id="medicine" layoutX="159.0" layoutY="99.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select Medicine">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                        </MenuButton>
+                        <Label layoutX="59.0" layoutY="170.0" prefHeight="39.0" prefWidth="128.0" text="Delivery Time: " textAlignment="RIGHT">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="date" layoutX="189.0" layoutY="177.0" promptText="Select Date" />
+                        <TextField fx:id="time" layoutX="379.0" layoutY="177.0" prefHeight="25.0" prefWidth="120.0" text="__ __ : __ __ AM/PM" />
+                        <CheckBox id="urgent" fx:id="urgent" layoutX="509.0" layoutY="181.0" mnemonicParsing="false" text="Urgent" />
+                        <Label layoutX="59.0" layoutY="219.0" prefHeight="39.0" prefWidth="93.0" text="Recurring?" textAlignment="RIGHT">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="333.0" layoutY="219.0" prefHeight="39.0" prefWidth="154.0" text="Addtional Notes:" textAlignment="RIGHT">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextArea id="notes" layoutX="488.0" layoutY="212.0" prefHeight="90.0" prefWidth="231.0" promptText="Type here..." />
+                        <CheckBox id="mon" fx:id="mon" layoutX="167.0" layoutY="219.0" mnemonicParsing="false" text="Mon" />
+                        <CheckBox id="tues" fx:id="tues" layoutX="167.0" layoutY="239.0" mnemonicParsing="false" text="Tues" />
+                        <CheckBox id="wed" fx:id="Wed" layoutX="167.0" layoutY="258.0" mnemonicParsing="false" text="Wed" />
+                        <CheckBox id="thurs" fx:id="thurs" layoutX="234.0" layoutY="219.0" mnemonicParsing="false" text="Thurs" />
+                        <CheckBox id="fri" fx:id="fri" layoutX="234.0" layoutY="239.0" mnemonicParsing="false" text="Fri" />
+                        <CheckBox id="sat" fx:id="sat" layoutX="232.0" layoutY="258.0" mnemonicParsing="false" text="Sat" />
+                        <CheckBox id="sun" fx:id="sun" layoutX="232.0" layoutY="275.0" mnemonicParsing="false" text="Sun" />
+                     </children>
+                  </Pane>
+                  </children>
+              </AnchorPane>
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
+         </children>
+      </StackPane>
     </children>
 </VBox>
