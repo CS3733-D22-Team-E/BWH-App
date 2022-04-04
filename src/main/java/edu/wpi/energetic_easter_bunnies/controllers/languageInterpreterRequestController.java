@@ -2,6 +2,8 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.entity.languageInterpreterRequest;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,9 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   languageInterpreterRequest languageInterpreterRequest = new languageInterpreterRequest();
 
   public languageInterpreterRequestController() {}
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {}
 
   @FXML
   public void submitButton(ActionEvent event) {

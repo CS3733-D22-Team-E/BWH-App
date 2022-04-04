@@ -10,7 +10,6 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
 
   public MedicalEquipmentDAOImpl() throws SQLException {
     equipmentList = new ArrayList<>();
-    String url = "jdbc:derby:myDB;";
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM EQUIPMENT ORDER BY ID DESC";
     ResultSet rs = statement.executeQuery(query);
