@@ -21,6 +21,9 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML CheckBox asapCheck;
   @FXML TextArea otherNotesTxt;
 
+
+  // todo: implement the DAO stuff to make table functional
+
   mealDeliveryRequest mealDeliveryRequest = new mealDeliveryRequest();
 
   ObservableList<String> meals =
