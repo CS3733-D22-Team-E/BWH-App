@@ -1,70 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mealDeliveryController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mealDeliveryController">
    <children>
-      <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-         <menus>
-            <Menu mnemonicParsing="false" text="Menu">
-               <items>
-                  <MenuItem fx:id="homeMenuButton" mnemonicParsing="false" onAction="#homeButton" text="Home" />
-                  <Menu mnemonicParsing="false" text="Pages">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#sanitationButton" text="Sanitation" />
-                        <MenuItem mnemonicParsing="false" onAction="#medicalEquipmentButton" text="Medical Equipment Delivery" />
-                        <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
-                        <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
-                        <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Translation" />
-                        <MenuItem mnemonicParsing="false" onAction="#labRequestButton" text="Lab Request" />
-                     </items>
-                  </Menu>
-                  <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitButton" text="Quit" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="About Application" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
-      <Pane prefHeight="90.0" prefWidth="1080.0">
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f35959" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
-            <Label alignment="CENTER" layoutX="107.0" layoutY="13.0" text="Brigham Woman's Hospital" textFill="WHITE">
-               <font>
-                  <Font name="Book Antiqua Bold" size="30.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="210.0" layoutY="52.0" text="Meal Delivery" textFill="WHITE">
-               <font>
-                  <Font name="Book Antiqua Bold" size="18.0" />
-               </font>
-            </Label>
-            <StackPane layoutX="14.0" layoutY="13.0">
+            <StackPane minHeight="-Infinity" minWidth="-Infinity">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
                   <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
@@ -73,79 +36,102 @@
                      </image>
                   </ImageView>
                </children>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
             </StackPane>
-            <Button fx:id="homeButton" alignment="CENTER" layoutX="852.0" layoutY="8.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="75.0" prefWidth="222.0" text="     Home" textAlignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="76.0" fitWidth="160.0" layoutX="852.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@icons/home.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <AnchorPane fx:id="mealType" prefHeight="402.0" prefWidth="600.0">
-         <children>
-            <Pane prefHeight="200.0" prefWidth="200.0">
+            <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
                <children>
-                  <Label fx:id="mealTypeLbl" layoutX="42.0" layoutY="37.0" prefHeight="35.0" prefWidth="62.0" text="Meal Type:" />
-                  <Label fx:id="roomNumberLbl" layoutX="18.0" layoutY="77.0" text="Room Number:" />
-                  <DatePicker fx:id="dateTime" layoutX="113.0" layoutY="107.0" prefHeight="26.0" prefWidth="130.0" promptText="Select Date" />
-                  <Label fx:id="deliveryTimeLbl" layoutX="24.0" layoutY="112.0" text="Delivery Time:" />
-                  <ComboBox fx:id="entreeDropDown" layoutX="112.0" layoutY="42.0" prefHeight="26.0" prefWidth="130.0" promptText="Select an Entree">
+                  <Label alignment="CENTER" text="Brigham Woman's Hospital" textFill="WHITE">
+                     <font>
+                        <Font name="Book Antiqua Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" text="Meal Delivery" textFill="WHITE">
+                     <font>
+                        <Font name="Book Antiqua Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="120.0" style="-fx-border-color: black;">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <children>
+                  <JFXHamburger fx:id="burger" layoutX="45.0" layoutY="35.0" />
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <StackPane prefHeight="561.0" prefWidth="1080.0">
+         <children>
+            <AnchorPane fx:id="mealType" prefHeight="402.0" prefWidth="600.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="mealTypeLbl" layoutX="164.0" layoutY="79.0" prefHeight="68.0" prefWidth="164.0" text="Meal Type:">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Group layoutX="80.0" layoutY="132.0" />
+                  <Group layoutX="58.0" layoutY="166.0" />
+                  <Group layoutX="68.0" layoutY="196.0" />
+                  <Group layoutX="71.0" layoutY="231.0" />
+                  <Button fx:id="submitButton" layoutX="407.0" layoutY="396.0" mnemonicParsing="false" onAction="#submitButton" prefHeight="38.0" prefWidth="147.0" text="Submit Request" />
+                  <TextField fx:id="roomNumberTxt" layoutX="295.0" layoutY="144.0" prefHeight="39.0" prefWidth="147.0" promptText="Enter a number" />
+                  <CheckBox fx:id="asapCheck" layoutX="615.0" layoutY="210.0" mnemonicParsing="false" text="ASAP" />
+                  <TextArea fx:id="otherNotesTxt" layoutX="295.0" layoutY="254.0" prefHeight="101.0" prefWidth="339.0" promptText="Type to add text..." />
+                  <Label fx:id="otherNotesLbl" layoutX="143.0" layoutY="254.0" text="Other Notes:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="deliveryTimeLbl" layoutX="128.0" layoutY="200.0" text="Delivery Time:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="roomNumberLbl" layoutX="119.0" layoutY="145.0" text="Room Number:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dateTime" layoutX="295.0" layoutY="199.0" prefHeight="39.0" prefWidth="147.0" promptText="Select Date" />
+                  <TextField fx:id="timeTxt" layoutX="458.0" layoutY="199.0" prefHeight="39.0" prefWidth="147.0" promptText="__ __ : __ __ AM/PM" />
+                  <ComboBox fx:id="beverageDropDown" layoutX="458.0" layoutY="90.0" prefHeight="39.0" prefWidth="147.0" promptText="Select a Beverage">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Test 1" />
                         </FXCollections>
                      </items>
                   </ComboBox>
-                  <Label fx:id="deliveryTimeLbl1" layoutX="34.0" layoutY="145.0" text="Assign Staff:" />
+                  <ComboBox fx:id="entreeDropDown" layoutX="295.0" layoutY="90.0" prefHeight="39.0" prefWidth="147.0" promptText="Select an Entree">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Test 1" />
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
+                  <ComboBox fx:id="dessertDropDown" layoutX="619.0" layoutY="90.0" prefHeight="39.0" prefWidth="147.0" promptText="Select a Dessert">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Test 1" />
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
+                  <Button fx:id="resetButton" alignment="CENTER" layoutX="400.0" layoutY="450.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="62.0" prefWidth="164.0" text="Reset Fields">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
-            </Pane>
-            <Group layoutX="80.0" layoutY="132.0" />
-            <Group layoutX="58.0" layoutY="166.0" />
-            <Group layoutX="68.0" layoutY="196.0" />
-            <Group layoutX="71.0" layoutY="231.0" />
-            <Button fx:id="submitButton" layoutX="407.0" layoutY="409.0" mnemonicParsing="false" onAction="#submitButton" prefHeight="38.0" prefWidth="147.0" text="Submit Request" />
-            <CheckBox fx:id="asapCheck" layoutX="396.0" layoutY="111.0" mnemonicParsing="false" text="ASAP" />
-            <TextArea fx:id="otherNotesTxt" layoutX="605.0" layoutY="64.0" prefHeight="101.0" prefWidth="339.0" promptText="Type to add text..." />
-            <TextField fx:id="timeTxt" layoutX="250.0" layoutY="107.0" prefHeight="26.0" prefWidth="138.0" promptText="__ __ : __ __ AM/PM" />
-            <ComboBox fx:id="dessertDropDown" layoutX="396.0" layoutY="42.0" prefHeight="26.0" prefWidth="130.0" promptText="Select a Dessert">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Test 1" />
-                  </FXCollections>
-               </items>
-            </ComboBox>
-            <Button fx:id="resetButton" alignment="CENTER" layoutX="565.0" layoutY="409.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="38.0" prefWidth="147.0" text="Reset Fields" />
-            <TableView layoutX="107.0" layoutY="199.0" prefHeight="200.0" prefWidth="748.0">
-              <columns>
-                <TableColumn fx:id="tableEntree" prefWidth="75.0" text="Date" />
-                 <TableColumn fx:id="tableBeverage" prefWidth="75.0" text="Time" />
-                 <TableColumn fx:id="tableDessert" prefWidth="75.0" text="Urgent" />
-                 <TableColumn fx:id="tableRoomNumber" prefWidth="75.0" text="Type" />
-                 <TableColumn fx:id="tableDateTime" prefWidth="75.0" text="Date" />
-                 <TableColumn fx:id="tableTime" prefWidth="75.0" text="Time" />
-                 <TableColumn fx:id="tableStaffAssignee" prefWidth="75.0" text="Staff" />
-                 <TableColumn fx:id="tableASAP" prefWidth="75.0" text="ASAP" />
-                 <TableColumn fx:id="tableRequestStatus" prefWidth="75.0" text="Status" />
-                 <TableColumn fx:id="tableOtherNotes" prefWidth="75.0" text="Notes" />
-              </columns>
-            </TableView>
-            <TextField fx:id="roomNumberTxt" layoutX="111.0" layoutY="75.0" prefHeight="26.0" prefWidth="130.0" promptText="Enter a number" />
-            <Label fx:id="otherNotesLbl" layoutX="605.0" layoutY="41.0" text="Other Notes:" />
-            <ComboBox fx:id="beverageDropDown" layoutX="250.0" layoutY="42.0" prefHeight="26.0" prefWidth="137.0" promptText="Select a Beverage">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Test 1" />
-                  </FXCollections>
-               </items>
-            </ComboBox>
-            <TextField fx:id="staffAssignee" layoutX="111.0" layoutY="139.0" prefHeight="26.0" prefWidth="130.0" promptText="Employee" />
-            <TextField fx:id="requestStatus" layoutX="250.0" layoutY="139.0" prefHeight="26.0" prefWidth="138.0" promptText="Status" />
+            </AnchorPane>
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
          </children>
-      </AnchorPane>
+      </StackPane>
    </children>
 </VBox>
