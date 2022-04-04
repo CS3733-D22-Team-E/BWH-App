@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
+  static Connection connection = DBConnection.getConnection();
   List<Employee> employees;
 
   public EmployeeDAOImpl() throws SQLException {
     employees = new ArrayList<>();
-    String url = "jdbc:derby:myDB;";
-    Connection connection = DriverManager.getConnection(url);
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM EMPLOYEES ORDER BY SALARY DESC";
     ResultSet rs = statement.executeQuery(query);

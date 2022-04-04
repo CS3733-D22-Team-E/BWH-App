@@ -85,17 +85,19 @@ public class medicalEquipmentController extends serviceRequestPageController
   }
 
   @FXML
-  public void submitButton(ActionEvent event) {
+  public void submitButton(ActionEvent event) throws SQLException {
     try {
       medicalEquipmentRequest.setFloorID(floor.getValue());
       medicalEquipmentRequest.setRoomID(room.getValue());
       medicalEquipmentRequest.setEquipment(equipmentType.getValue());
       medicalEquipmentRequest.setEquipmentQuantity(equipmentQuantity.getValue());
+      medicalEquipmentRequest.setRequestStatus(requestStatus.getText());
+      medicalEquipmentRequest.setStaffAssignee(staffAssignee.getText());
       medicalEquipmentRequest.setDeliveryDate(deliveryDate.getText());
       medicalEquipmentRequest.setDeliveryTime(deliveryTime.getText());
       medicalEquipmentRequest.setUrgent(isUrgent.isSelected());
       medicalEquipmentRequest.setOtherNotes(notes.getText());
-      sendToDB(medicalEquipmentRequest);
+      medSendToDB(medicalEquipmentRequest);
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
@@ -117,5 +119,7 @@ public class medicalEquipmentController extends serviceRequestPageController
     notes.clear();
   }
 
-  private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) {}
+  private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) throws SQLException {
+    medEquipmentDB.addMedEquipReq(medEquipmentRequest);
+  }
 }

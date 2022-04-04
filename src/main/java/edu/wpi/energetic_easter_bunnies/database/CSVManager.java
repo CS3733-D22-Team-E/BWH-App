@@ -5,13 +5,13 @@ import java.io.*;
 import java.sql.*;
 
 public class CSVManager {
+  static Connection connection = DBConnection.getConnection();
   /**
    * Loads the location database from the location csv
    *
    * @param fileName - The file name where the database will be loaded from
    */
   public static void loadLocationCSV(String fileName) throws SQLException, IOException {
-    Connection connection = DriverManager.getConnection("jdbc:derby:myDB;");
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String line;
     in.readLine();
@@ -45,7 +45,6 @@ public class CSVManager {
     }
     in.close();
     connection.commit();
-    connection.close();
   }
 
   /**
@@ -107,25 +106,24 @@ public class CSVManager {
    * @param fileName - The file name where the database will be loaded from
    */
   public static void loadMedEquipReqCSV(String fileName) throws SQLException, IOException {
-    Connection connection = DriverManager.getConnection("jdbc:derby:myDB;");
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String line;
     in.readLine();
     String[] data;
     while ((line = in.readLine()) != null) {
       data = line.split(",");
-      String nodeID = data[0];
+      String equipID = data[0];
 
       // check if nodeID is already in the database
       // ensures the database is up to date and correct without overwriting
-      String query = "SELECT * FROM MedEquipReqTable WHERE NODEID = '" + nodeID + "'";
+      String query = "SELECT * FROM MED_EQUIP_REQ WHERE MED_EQUIPMENTID = '" + equipID + "'";
       PreparedStatement statement = connection.prepareStatement(query);
-      ResultSet rs = statement.executeQuery(query);
+      ResultSet rs = statement.executeQuery();
       if (rs.next()) { // true if exists, false if does not exist
         continue; // so it does not add a duplicate item into the database - issue from meeting
         // 3/28/2022
       }
-      String insertQuery = "INSERT INTO MedEquipReqTable (floorID, roomID) VALUES (?, ?)";
+      String insertQuery = "INSERT INTO MED_EQUIP_REQ (floor, locationID) VALUES (?, ?)";
       statement = connection.prepareStatement(insertQuery);
       statement.setString(1, data[0]);
       statement.setString(2, data[1]); // floor
@@ -133,7 +131,6 @@ public class CSVManager {
     }
     in.close();
     connection.commit();
-    connection.close();
   }
 
   /**
@@ -178,7 +175,6 @@ public class CSVManager {
    * @param fileName - The file name where the database will be loaded from
    */
   public static void loadMedEquipCSV(String fileName) throws SQLException, IOException {
-    Connection connection = DriverManager.getConnection("jdbc:derby:myDB;");
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String line;
     in.readLine();
@@ -209,7 +205,6 @@ public class CSVManager {
     }
     in.close();
     connection.commit();
-    connection.close();
   }
 
   /**
@@ -264,7 +259,6 @@ public class CSVManager {
    * @param fileName - The file name where the database will be loaded from
    */
   public static void loadEmployeeCSV(String fileName) throws SQLException, IOException {
-    Connection connection = DriverManager.getConnection("jdbc:derby:myDB;");
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String line;
     in.readLine();
@@ -294,7 +288,6 @@ public class CSVManager {
     }
     in.close();
     connection.commit();
-    connection.close();
   }
 
   /**

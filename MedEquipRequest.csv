@@ -1,0 +1,11 @@
+MED_EQUIPMENTID,REQUESTDATE,DELIVERYDATE,ISURGENT,EQUIP,EQUIPQUANTITY,STAFFASSIGNEE,LOCATIONID,FLOOR,REQUESTSTATUS,OTHERNOTES
+1,4/3/22,8:00 AM,1,bed,4,Bob,FDEPT00101,1,Processing,leave outside door
+2,4/6/22,11:00 AM,1,X-Ray,2,Susie,FHALL02301,1,Done,need ASAP
+3,4/7/22,1:30 PM,1,pump,1,Bob,HHALL01303,3,,
+4,4/3/22,8:00 AM,0,recliner,5,Susie,WELEV00ML1,L1,,no rush
+1,4/3/22,8:00 AM,1,bed,4,Bob,FDEPT00101,1,Processing,leave outside door
+2,4/6/22,11:00 AM,1,X-Ray,2,Susie,FHALL02301,1,Done,need ASAP
+3,4/7/22,1:30 PM,0,pump,1,Ron,HHALL01303,3,,
+4,4/3/22,8:00 AM,0,recliner,5,Vickie,WELEV00ML1,L1,,no rush
+1,4/3/22,8:00 AM,1,bed,4,Steve,FDEPT00101,1,Processing,leave outside door
+1,4/3/22,8:00 AM,1,bed,4,Beverly,HSERV00103,3,Processing,leave outside door
