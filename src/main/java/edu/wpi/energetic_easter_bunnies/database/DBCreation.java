@@ -71,7 +71,7 @@ public class DBCreation {
             + ")";
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
-    CSVManager.loadMedEquipReqCSV("MedEquipRequest.csv");
+    // CSVManager.loadMedEquipReqCSV("MedEquipRequest.csv");
   }
 
   public static void createTowerLocationTable() throws SQLException, IOException {
