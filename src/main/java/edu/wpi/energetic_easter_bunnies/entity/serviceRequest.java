@@ -1,5 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
+import java.util.Random;
+
 public abstract class serviceRequest {
   /*
     public enum Type {
@@ -26,14 +28,6 @@ public abstract class serviceRequest {
 
   // public void setRequestType(Type requestType) { this.requestType = requestType; }
 
-  public String getServiceRequestID() {
-    return serviceRequestID;
-  }
-
-  public void setServiceRequestID(String serviceRequestID) {
-    this.serviceRequestID = serviceRequestID;
-  }
-
   public serviceRequest(
       String serviceRequestID,
       String otherNotes,
@@ -52,13 +46,21 @@ public abstract class serviceRequest {
   }
 
   public serviceRequest() {
-    this.serviceRequestID = "";
+    this.serviceRequestID = generateRandomID(6);
     this.otherNotes = "";
     this.floorID = "";
     this.roomID = "";
     this.isUrgent = false;
     this.requestStatus = "";
     this.staffAssignee = "";
+  }
+
+  public String getServiceRequestID() {
+    return serviceRequestID;
+  }
+
+  public void setServiceRequestID(String serviceRequestID) {
+    this.serviceRequestID = serviceRequestID;
   }
 
   public String getFloorID() {
@@ -107,5 +109,17 @@ public abstract class serviceRequest {
 
   public void setStaffAssignee(String staffAssignee) {
     this.staffAssignee = staffAssignee;
+  }
+
+  public String generateRandomID(int length) {
+    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    String result = "";
+    Random random = new Random();
+
+    for (int i = 0; i < length; i++) {
+      char randChar = alphabet.charAt(random.nextInt(alphabet.length()));
+      result += randChar;
+    }
+    return result;
   }
 }
