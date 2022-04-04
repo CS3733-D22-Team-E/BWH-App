@@ -26,6 +26,15 @@ public class LocationDAOImplTesting {
   }
 
   @Test
+  public void testUpdateCoord() throws SQLException {
+    LocationDAO locationDAO = new LocationDAOImpl();
+    Location location = new Location();
+    locationDAO.addLocation(location);
+    locationDAO.updateCoord(location, 2, 1);
+    assertTrue(locationDAO.getAllLocations().contains(location));
+  }
+
+  @Test
   public void testDeleteLocation() throws SQLException {
     LocationDAO locationDAO = new LocationDAOImpl();
     Location location = new Location();
