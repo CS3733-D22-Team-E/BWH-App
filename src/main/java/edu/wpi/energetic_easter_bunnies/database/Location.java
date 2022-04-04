@@ -2,7 +2,8 @@ package edu.wpi.energetic_easter_bunnies.database;
 
 public class Location {
   private final String nodeID;
-  private final Integer xcoord, ycoord;
+  private Integer xcoord;
+  private Integer ycoord;
   private String floor;
   private final String building;
   private String nodeType;
@@ -48,6 +49,14 @@ public class Location {
 
   public Integer getXcoord() {
     return xcoord;
+  }
+
+  public void setXCoord(Integer newXCoord) {
+    xcoord = newXCoord;
+  }
+
+  public void setYCoord(Integer newYCoord) {
+    ycoord = newYCoord;
   }
 
   public Integer getYcoord() {

@@ -14,5 +14,7 @@ public interface LocationDAO {
 
   void updateLocation(Location location, String newFloor, String newNodeType) throws SQLException;
 
+  void updateCoord(Location location, int newXCoord, int newYCoord) throws SQLException;
+
   void deleteLocation(Location location) throws SQLException;
 }
