@@ -38,6 +38,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML TableColumn<mealDeliveryRequest, String> tableOtherNotes;
 
   // todo:  add DAOImpl
+  // work with Jeremy
 
   mealDeliveryRequest mealDeliveryRequest = new mealDeliveryRequest();
 
