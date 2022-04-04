@@ -254,38 +254,60 @@ public class CSVManager {
   }
 
   /**
-   * loads CSV information of medical equipment into the database
+   * loads CSV file of Lab Requests into the database
    *
    * @param fileName - The file name where the database will be loaded from
    */
   public static void loadLabRequestCSV(String fileName) throws SQLException, IOException {
+    loadCSVGeneral(fileName,"LAB_REQUEST",0,"LAB_REQUESTID, LAB_REQUEST_TYPE, STAFFASSIGNEE, LOCATIONID, TIMEFRAME, REQUESTSTATUS, OTHERNOTES");
+  }
+
+
+  /**
+   *  PUT PARAMETERS IN CAPITALS WHERE POSSIBLE
+   *
+   * @param fileName - with or without .csv, will be included
+   * @param tableName
+   * @param IDindex0 - which column uniquely identifies each row (0,count
+   * @param ColumnsCSV
+   * @throws SQLException
+   * @throws IOException
+   */
+  public static void loadCSVGeneral(String fileName, String tableName, int IDindex0, String ColumnsCSV) throws SQLException, IOException {
+
+    int count = 0;
+    for( int i= 0; i < ColumnsCSV.length(); i++) {if(ColumnsCSV.charAt(i) == ',') count++;} //counts # of commas
+    count = count + 1; //commas is number of results minus one
+    String[] csvData = ColumnsCSV.split(",");//for query later
+
     BufferedReader in = new BufferedReader(new FileReader(fileName));
     String line;
     in.readLine();
     String[] data;
     while ((line = in.readLine()) != null) {
       data = line.split(",");
-      String labRequestID = data[0];
+      String Identification = data[IDindex0];
 
       // check if nodeID is already in the database
       // ensures the database is up to date and correct without overwriting
-      String query = "SELECT * FROM LAB_REQUEST WHERE ID = '" + equipID + "'";
+      String query = "SELECT * FROM "+tableName+" WHERE "+csvData[IDindex0]+" = '" + Identification + "'";
       PreparedStatement statement = connection.prepareStatement(query);
       ResultSet rs = statement.executeQuery(query);
       if (rs.next()) { // true if exists, false if does not exist
-        continue; // so it does not add a duplicate item into the database - issue from meeting
-        // 3/28/2022
+        continue;
       }
+      String questionMarks="";
+      for (int i = 0; i<count-1;i++) questionMarks += "?, ";
+      questionMarks += "?";
       String insertQuery =
-              "INSERT INTO LAB_REQUEST (LAB_REQUESTID, LAB_REQUEST_TYPE, STAFFASSIGNEE)"
-                      + " VALUES (?, ?, ?, ?, ?)";
+              "INSERT INTO "+tableName+" ("+ColumnsCSV+")"
+                      + " VALUES ("+questionMarks+")";
       statement = connection.prepareStatement(insertQuery);
-      statement.setString(1, data[0]); // equipID
-      statement.setString(2, String.valueOf(data[1])); // inuse
-      statement.setString(3, String.valueOf(data[2])); // isclean
-      statement.setString(4, data[3]); // cleanlocation
-      statement.setString(5, data[4]); // storagelocation
-      statement.executeUpdate();
+
+      for (int i=0; i<count-1; i++) { // sets the question marks in the query
+        statement.setString(i+1, String.valueOf(data[i]));
+      }
+      statement.executeUpdate(); //runs the query
     }
     in.close();
     connection.commit();
@@ -308,17 +330,17 @@ public class CSVManager {
       // write actual data
       for (Equipment medEquip : equipment.getAllMedicalEquipment()) {
         String csvLine =
-                ""
-                        + medEquip.getEquipmentID()
-                        + ','
-                        + String.valueOf(medEquip.isInUse())
-                        + ','
-                        + String.valueOf(medEquip.isClean())
-                        + ','
-                        + medEquip.getCleanLocation()
-                        + ','
-                        + medEquip.getStorageLocation()
-                        + "\n";
+            ""
+                + medEquip.getEquipmentID()
+                + ','
+                + String.valueOf(medEquip.isInUse())
+                + ','
+                + String.valueOf(medEquip.isClean())
+                + ','
+                + medEquip.getCleanLocation()
+                + ','
+                + medEquip.getStorageLocation()
+                + "\n";
         out.write(csvLine);
       }
     } catch (IOException e) {
@@ -330,15 +352,7 @@ public class CSVManager {
     }
   }
 
-
-
-
-
-
-
-
-
-  //Iteration 2 / not iteration 1
+  // Iteration 2 / not iteration 1
 
   /**
    * loads CSV information of employees into the database
