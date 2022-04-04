@@ -34,7 +34,7 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
 
   @Override
   public List<Equipment> getAllMedicalEquipment() {
-    return null;
+    return equipmentList;
   }
 
   @Override

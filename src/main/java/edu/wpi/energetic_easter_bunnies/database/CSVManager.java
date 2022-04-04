@@ -254,6 +254,93 @@ public class CSVManager {
   }
 
   /**
+   * loads CSV information of medical equipment into the database
+   *
+   * @param fileName - The file name where the database will be loaded from
+   */
+  public static void loadLabRequestCSV(String fileName) throws SQLException, IOException {
+    BufferedReader in = new BufferedReader(new FileReader(fileName));
+    String line;
+    in.readLine();
+    String[] data;
+    while ((line = in.readLine()) != null) {
+      data = line.split(",");
+      String labRequestID = data[0];
+
+      // check if nodeID is already in the database
+      // ensures the database is up to date and correct without overwriting
+      String query = "SELECT * FROM LAB_REQUEST WHERE ID = '" + equipID + "'";
+      PreparedStatement statement = connection.prepareStatement(query);
+      ResultSet rs = statement.executeQuery(query);
+      if (rs.next()) { // true if exists, false if does not exist
+        continue; // so it does not add a duplicate item into the database - issue from meeting
+        // 3/28/2022
+      }
+      String insertQuery =
+              "INSERT INTO LAB_REQUEST (LAB_REQUESTID, LAB_REQUEST_TYPE, STAFFASSIGNEE)"
+                      + " VALUES (?, ?, ?, ?, ?)";
+      statement = connection.prepareStatement(insertQuery);
+      statement.setString(1, data[0]); // equipID
+      statement.setString(2, String.valueOf(data[1])); // inuse
+      statement.setString(3, String.valueOf(data[2])); // isclean
+      statement.setString(4, data[3]); // cleanlocation
+      statement.setString(5, data[4]); // storagelocation
+      statement.executeUpdate();
+    }
+    in.close();
+    connection.commit();
+  }
+
+  public static void saveLabRequestCSV(String fileName) throws IOException, SQLException {
+    MedicalEquipmentDAO equipment = new MedicalEquipmentDAOImpl();
+    if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
+    File tempFile = new File(fileName);
+    boolean exists = tempFile.exists();
+    if (exists) tempFile.delete();
+
+    BufferedWriter out = null;
+
+    try {
+      FileWriter fstream = new FileWriter(fileName, true); // appending each line.
+      out = new BufferedWriter(fstream); // ready to write
+      // write format
+      out.write("ID,isInUse,isClean,cleanLocation,storageLocation\n");
+      // write actual data
+      for (Equipment medEquip : equipment.getAllMedicalEquipment()) {
+        String csvLine =
+                ""
+                        + medEquip.getEquipmentID()
+                        + ','
+                        + String.valueOf(medEquip.isInUse())
+                        + ','
+                        + String.valueOf(medEquip.isClean())
+                        + ','
+                        + medEquip.getCleanLocation()
+                        + ','
+                        + medEquip.getStorageLocation()
+                        + "\n";
+        out.write(csvLine);
+      }
+    } catch (IOException e) {
+      System.err.println("Error: " + e.getMessage());
+    } finally {
+      if (out != null) {
+        out.close();
+      }
+    }
+  }
+
+
+
+
+
+
+
+
+
+  //Iteration 2 / not iteration 1
+
+  /**
    * loads CSV information of employees into the database
    *
    * @param fileName - The file name where the database will be loaded from
