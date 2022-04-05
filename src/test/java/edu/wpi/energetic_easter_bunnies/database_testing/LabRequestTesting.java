@@ -3,8 +3,8 @@ package edu.wpi.energetic_easter_bunnies.database_testing;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import edu.wpi.energetic_easter_bunnies.database.LabRequestDAO;
-import edu.wpi.energetic_easter_bunnies.database.LabRequestDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.LabRequestDAO;
+import edu.wpi.energetic_easter_bunnies.database.daos.LabRequestDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.labRequest;
 import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
