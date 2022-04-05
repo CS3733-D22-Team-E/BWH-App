@@ -125,7 +125,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
   }
 
   @FXML
-  public void submitButton(ActionEvent event) throws SQLException {
+  public void submitButton(ActionEvent event) {
     try {
       medicalEquipmentRequest.setFloorID(floor.getValue());
       medicalEquipmentRequest.setRoomID(room.getValue());
@@ -139,7 +139,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
       medicalEquipmentRequest.setOtherNotes(notes.getText());
       medSendToDB(medicalEquipmentRequest);
 
-    } catch (NullPointerException error) {
+    } catch (NullPointerException | SQLException error) {
       System.out.println("Error : Some Value is NULL");
       PopUpWarning.createWarning("Warning : A required value was not filled");
     }

@@ -22,7 +22,9 @@ public class sanitationServiceController extends serviceRequestPageController {
   public sanitationServiceController() {}
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {}
+  public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
+  }
 
   @FXML
   public void submitButton(ActionEvent event) {

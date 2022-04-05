@@ -43,6 +43,7 @@ public class medicineDeliveryController extends serviceRequestPageController
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     floor.setItems(floors);
     room.setItems(rooms);
     medicine.setItems(medicines);
@@ -64,7 +65,7 @@ public class medicineDeliveryController extends serviceRequestPageController
       medicineDeliveryRequest.setThurs(thurs.isSelected());
       medicineDeliveryRequest.setFri(fri.isSelected());
       medicineDeliveryRequest.setSat(sat.isSelected());
-      medicineDeliveryRequest.setSun(sun.isSelected());*/
+      medicineDeliveryRequest.setSun(sun.isSelected());
       medicineDeliveryRequest.setOtherNotes(notes.getText());
 
     } catch (NullPointerException error) {
