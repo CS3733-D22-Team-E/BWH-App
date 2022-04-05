@@ -6,8 +6,6 @@ import java.util.List;
 public interface LocationDAO {
   List<Location> getAllLocations();
 
-  Location getLocation(int numID);
-
   void printLocations();
 
   void addLocation(Location location) throws SQLException;

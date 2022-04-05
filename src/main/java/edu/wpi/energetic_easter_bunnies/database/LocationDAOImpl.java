@@ -50,13 +50,29 @@ public class LocationDAOImpl implements LocationDAO {
   }
 
   /**
+   * Gets location with given NodeID
+   *
+   * @param NodeID the NodeID of the location
+   * @return location requested
+   * @throws NullPointerException Location not found with NodeID
+   */
+  public Location getLocation(String NodeID) throws NullPointerException {
+    for (Location location : locations) {
+      if (location.getNodeID() == NodeID) {
+        return location;
+      }
+    }
+    System.out.println("Location with NodeID " + NodeID + " not found");
+    throw new NullPointerException();
+  }
+
+  /**
    * Gets a location with given numID in the arrayList
    *
    * @param numID - The numerical id of the location node
    * @return the location requested
    */
-  @Override
-  public Location getLocation(int numID) {
+  public Location getLocationWithNumID(int numID) {
     return locations.get(numID);
   }
 
