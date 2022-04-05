@@ -1,104 +1,61 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
+import java.time.LocalDate;
+
 public class languageInterpreterRequest extends serviceRequest {
   private String lanInterpID;
-  private String startDate;
-  private String endDate;
+  private String floorSelected;
+  private String roomSelected;
+  private String languageSelected;
+
+  private LocalDate startDate;
+  private LocalDate endDate;
   private int roomNumber;
 
   public languageInterpreterRequest() {
     super();
-    this.startDate = "";
-    this.endDate = "";
+    // this.startDate = LocalDate.parse("");
+    // this.endDate = LocalDate.parse("");
     this.roomNumber = 0;
   }
 
-  public enum Floor {
-    Ground,
-    First,
-    Second,
-    Third
+  public void setFloorSelected(String floorSelected) {
+    this.floorSelected = floorSelected;
   }
 
-  public enum Language {
-    En,
-    Es,
-    FR,
-    CN
+  public String getFloorSelected(String floorSelected) {
+    return this.floorSelected;
   }
 
-  Language langforInterpreter;
-  Floor floorforLangInterpreter;
-
-  public languageInterpreterRequest(
-      String lanInterpID,
-      String otherNotes,
-      String floorID,
-      String roomID,
-      boolean isUrgent,
-      String requestStatus,
-      String staffAssignee,
-      String startDate,
-      String endDate,
-      int roomNumber,
-      Language langforInterpreter,
-      Floor floorforLangInterpreter) {
-    super(lanInterpID, otherNotes, floorID, roomID, isUrgent, requestStatus, staffAssignee);
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.roomNumber = roomNumber;
-    this.langforInterpreter = langforInterpreter;
-    this.floorforLangInterpreter = floorforLangInterpreter;
+  public void setRoomSelected(String roomSelected) {
+    this.roomSelected = roomSelected;
   }
 
-  // Location
-  public Floor getFloor() {
-    return floorforLangInterpreter;
+  public String getRoomSelected() {
+    return this.roomSelected;
   }
 
-  public String getLanInterpID() {
-    return lanInterpID;
+  public void setLanguageSelected(String languageSelected) {
+    this.languageSelected = languageSelected;
   }
 
-  public void setLanInterpID(String lanInterpID) {
-    this.lanInterpID = lanInterpID;
+  public String getLanguageSelected() {
+    return this.languageSelected;
   }
 
-  public void setFloor(Floor floorforLangInterpreter) {
-    this.floorforLangInterpreter = floorforLangInterpreter;
-  }
-
-  public java.lang.Integer getRoomNumber() {
-    return roomNumber;
-  }
-
-  public void setRoomNumber(int roomNumber) {
-    this.roomNumber = roomNumber;
-  }
-
-  // Time Period
-  public void setStartDate(String startDate) {
+  public void setStartDate(LocalDate startDate) {
     this.startDate = startDate;
   }
 
-  public String getStartDate() {
-    return startDate;
+  public LocalDate getStartDate() {
+    return this.startDate;
   }
 
-  public void setEndDate(String endDate) {
+  public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
   }
 
-  public String getEndDate() {
-    return endDate;
-  }
-
-  // Language
-  public Language getLang() {
-    return langforInterpreter;
-  }
-
-  public void setLang(Language langforInterpreter) {
-    this.langforInterpreter = langforInterpreter;
+  public LocalDate getEndDate() {
+    return this.endDate;
   }
 }
