@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.database_testing;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -12,8 +13,16 @@ import org.junit.jupiter.api.Test;
 public class LocationDAOImplTesting {
   @Test
   public void testGetLocation() throws SQLException {
-    LocationDAO locationDAO = new LocationDAOImpl();
-    System.out.println(locationDAO.getLocation(4));
+    LocationDAOImpl locationDAO = new LocationDAOImpl();
+    Location location = new Location();
+    locationDAO.addLocation(location);
+    assertEquals(locationDAO.getLocation("1"), location);
+  }
+
+  @Test
+  public void testGetLocation2() throws SQLException {
+    LocationDAOImpl locationDAO = new LocationDAOImpl();
+    System.out.println(locationDAO.getLocationWithNumID(2));
   }
 
   @Test
@@ -22,6 +31,15 @@ public class LocationDAOImplTesting {
     Location location = new Location();
     locationDAO.addLocation(location);
     locationDAO.updateLocation(location, "2", "HALL");
+    assertTrue(locationDAO.getAllLocations().contains(location));
+  }
+
+  @Test
+  public void testUpdateCoord() throws SQLException {
+    LocationDAO locationDAO = new LocationDAOImpl();
+    Location location = new Location();
+    locationDAO.addLocation(location);
+    locationDAO.updateCoord(location, 2, 1);
     assertTrue(locationDAO.getAllLocations().contains(location));
   }
 
