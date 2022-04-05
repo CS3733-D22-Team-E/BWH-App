@@ -1,5 +1,7 @@
-package edu.wpi.energetic_easter_bunnies.database;
+package edu.wpi.energetic_easter_bunnies.database.daos;
 
+import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.Employee;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
   public EmployeeDAOImpl() throws SQLException {
     employees = new ArrayList<>();
-    String url = "jdbc:derby:myDB;";
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM EMPLOYEES ORDER BY SALARY DESC";
     ResultSet rs = statement.executeQuery(query);
