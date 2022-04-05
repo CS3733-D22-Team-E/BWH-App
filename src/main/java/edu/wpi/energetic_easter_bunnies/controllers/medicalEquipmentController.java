@@ -93,13 +93,38 @@ public class medicalEquipmentController extends serviceRequestPageController
       ArrayList<MedicalEquipment> allEquipment =
           (ArrayList<MedicalEquipment>) medEquipmentDB.getAllMedicalEquipment();
       ArrayList<String> equipmentNames = new ArrayList<String>();
-      ArrayList<Integer> equipmentNum = new ArrayList<Integer>();
-      equipmentNum.add(1);
+      HashMap<String, Integer> equipNameToQuantity = new HashMap<>();
       for (MedicalEquipment e : allEquipment) {
-        equipmentNames.add(e.getEquipmentType());
+        if (e.checkIsClean() && !e.isInUse()) {
+          String curEquipName = e.getEquipmentType();
+          if (!equipmentNames.contains(curEquipName)) {
+            equipmentNames.add(e.getEquipmentType());
+            equipNameToQuantity.put(curEquipName, 1);
+          } else {
+            equipNameToQuantity.put(curEquipName, equipNameToQuantity.get(curEquipName) + 1);
+          }
+        }
       }
       equipmentType.setItems(FXCollections.observableArrayList(equipmentNames));
-      equipmentQuantity.setItems(FXCollections.observableArrayList(equipmentNum));
+      equipmentType
+          .getSelectionModel()
+          .selectedItemProperty()
+          .addListener(
+              new ChangeListener<String>() {
+                @Override
+                public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue,
+                    String newValue) {
+                  ArrayList<Integer> quantityNums = new ArrayList<Integer>();
+                  for (int i = 1; i <= equipNameToQuantity.get(newValue); i++) {
+                    quantityNums.add(i);
+                  }
+                  ObservableList<Integer> quantitySelections =
+                      FXCollections.observableArrayList(quantityNums);
+                  equipmentQuantity.setItems(quantitySelections);
+                }
+              });
 
       medEquipmentServiceRequestDB = new MedicalEquipmentServiceRequestDAOImpl();
       ObservableList<medicalEquipmentRequest> medicalEquipmentRequests = populateMedEquipList();
@@ -178,5 +203,16 @@ public class medicalEquipmentController extends serviceRequestPageController
   private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) throws SQLException {
     medEquipmentServiceRequestDB.addMedEquipReq(medEquipmentRequest);
     tableList.add(medEquipmentRequest);
+    System.out.println("Equipment Quantity: " + medEquipmentRequest.getEquipmentQuantity());
+    List<MedicalEquipment> equipmentUsed =
+        medEquipmentDB.getMedicalEquipments(
+            medEquipmentRequest.getEquipment(),
+            medEquipmentRequest.getEquipmentQuantity(),
+            medEquipmentRequest.getRoomID(),
+            medEquipmentRequest.getServiceRequestID());
+
+    if (medEquipmentRequest.getRequestStatus().equals("Done")) {
+      medEquipmentDB.sendToCleaning(equipmentUsed);
+    }
   }
 }

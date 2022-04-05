@@ -79,7 +79,7 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
                   + false
                   + ", CURRENTLOCATIONID = '"
                   + roomID
-                  + "', MED_EQUPIMENTID = '"
+                  + "', MED_EQUIPMENTID = '"
                   + MED_EQUIPMENTID
                   + "' WHERE EQUIPMENTID = '"
                   + equipment.getEquipmentID()
