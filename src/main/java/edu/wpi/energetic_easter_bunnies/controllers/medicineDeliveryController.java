@@ -57,7 +57,7 @@ public class medicineDeliveryController extends serviceRequestPageController
       medicineDeliveryRequest.setRoomID(room.getValue());
       medicineDeliveryRequest.setAmount(amount.getText());
       medicineDeliveryRequest.setMedicine(String.valueOf(medicine.getItems()));
-      medicineDeliveryRequest.setDeliveryDate(String.valueOf(date.getValue()));
+      // medicineDeliveryRequest.setDeliveryDate(String.valueOf(date.getValue()));
       medicineDeliveryRequest.setDeliveryTime(time.getText());
       medicineDeliveryRequest.setMon(mon.isSelected());
       medicineDeliveryRequest.setTues(tues.isSelected());

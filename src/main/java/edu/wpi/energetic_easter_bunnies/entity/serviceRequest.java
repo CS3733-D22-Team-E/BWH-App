@@ -1,6 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 public class serviceRequest {
   public enum Type {
@@ -82,23 +83,6 @@ public class serviceRequest {
 
   public serviceRequest(
       String serviceRequestID,
-      String otherNotes,
-      String floorID,
-      String roomID,
-      boolean isUrgent,
-      String requestStatus,
-      String staffAssignee) {
-    this.serviceRequestID = serviceRequestID;
-    this.otherNotes = otherNotes;
-    this.floorID = floorID;
-    this.roomID = roomID;
-    this.isUrgent = isUrgent;
-    this.requestStatus = requestStatus;
-    this.staffAssignee = staffAssignee;
-  }
-
-  public serviceRequest(
-      String serviceRequestID,
       String serviceRequestType,
       String otherNotes,
       String floorID,
@@ -176,6 +160,18 @@ public class serviceRequest {
 
   public void setStaffAssignee(String staffAssignee) {
     this.staffAssignee = staffAssignee;
+  }
+
+  public static String generateRandomID(int length) {
+    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    StringBuilder result = new StringBuilder();
+    Random random = new Random();
+
+    for (int i = 0; i < length; i++) {
+      char randChar = alphabet.charAt(random.nextInt(alphabet.length()));
+      result.append(randChar);
+    }
+    return result.toString();
   }
 
   public LocalDate getRequestDate() {

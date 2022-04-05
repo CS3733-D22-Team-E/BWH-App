@@ -136,7 +136,7 @@
                      </font>
                   </Label>
                   <Button fx:id="uploadFileButton" layoutX="57.0" layoutY="421.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="129.0" text="Upload File" />
-                        <Button fx:id="submitButton" alignment="CENTER" layoutX="459.0" layoutY="410.0" mnemonicParsing="false" onAction="#submitButton" prefHeight="75.0" prefWidth="152.0" text="Submit">
+                        <Button fx:id="submitButton" alignment="CENTER" layoutX="301.0" layoutY="351.0" mnemonicParsing="false" onAction="#submitButton" prefHeight="75.0" prefWidth="152.0" text="Submit">
                             <font>
                                 <Font size="18.0" />
                             </font>
