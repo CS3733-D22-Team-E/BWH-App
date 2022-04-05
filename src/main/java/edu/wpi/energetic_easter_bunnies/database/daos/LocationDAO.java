@@ -1,5 +1,6 @@
-package edu.wpi.energetic_easter_bunnies.database;
+package edu.wpi.energetic_easter_bunnies.database.daos;
 
+import edu.wpi.energetic_easter_bunnies.database.Location;
 import java.sql.SQLException;
 import java.util.List;
 

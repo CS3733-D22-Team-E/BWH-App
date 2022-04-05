@@ -2,8 +2,8 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.database.Location;
-import edu.wpi.energetic_easter_bunnies.database.LocationDAOImpl;
-import edu.wpi.energetic_easter_bunnies.database.MedicalEquipmentServiceRequestDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentServiceRequestDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import java.net.URL;
 import java.sql.SQLException;

@@ -2,7 +2,7 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.Main;
 import edu.wpi.energetic_easter_bunnies.database.Location;
-import edu.wpi.energetic_easter_bunnies.database.LocationDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.locationModel;
 import edu.wpi.energetic_easter_bunnies.menuButtons;
 import java.io.IOException;
