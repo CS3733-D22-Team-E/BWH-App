@@ -27,7 +27,7 @@ public abstract class Equipment {
     return equipmentID;
   }
 
-  public boolean isInUse() {
+  public boolean getIsInUse() {
     return isInUse;
   }
 
@@ -39,15 +39,15 @@ public abstract class Equipment {
     this.numID = numID;
   }
 
-  public void setInUse(boolean inUse) {
+  public void setIsInUse(boolean inUse) {
     isInUse = inUse;
   }
 
-  public boolean isClean() {
+  public boolean getIsClean() {
     return isClean;
   }
 
-  public void setClean(boolean clean) {
+  public void setIsClean(boolean clean) {
     isClean = clean;
   }
 

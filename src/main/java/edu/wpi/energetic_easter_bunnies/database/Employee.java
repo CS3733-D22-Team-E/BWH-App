@@ -68,7 +68,7 @@ public class Employee {
     this.position = position;
   }
 
-  public boolean isAvailable() {
+  public boolean getAvailable() {
     return available;
   }
 

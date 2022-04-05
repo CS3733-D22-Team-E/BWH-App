@@ -14,6 +14,6 @@ public class MedicalEquipment extends Equipment {
 
   @Override
   public void use() {
-    setClean(false);
+    setIsClean(false);
   }
 }

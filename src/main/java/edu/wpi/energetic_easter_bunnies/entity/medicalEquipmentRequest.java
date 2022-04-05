@@ -35,6 +35,7 @@ public class medicalEquipmentRequest extends serviceRequest {
     this.deliveryDate = "";
     this.deliveryTime = "";
   }
+  public String getID() {return medEquipRequestID; }
 
   public String getEquipment() {
     return equipment;
