@@ -8,16 +8,16 @@ import java.sql.Statement;
 public class MedicalEquipment extends Equipment {
   private String med_equipmentID;
   private String equipmentType;
-/*
-  public static void main(String[] args) throws SQLException {
-    MedicalEquipment equip =
-        new MedicalEquipment(
-            "BED01", "Balls", false, true, "OR BED Park", "OR BED Park", "ABBPRK03", "BED", 5);
-    System.out.println(equip.getXCoord());
-    System.out.println(equip.getYCoord());
-    System.out.println(equip.getFloor());
-  }
-*/
+  /*
+    public static void main(String[] args) throws SQLException {
+      MedicalEquipment equip =
+          new MedicalEquipment(
+              "BED01", "Balls", false, true, "OR BED Park", "OR BED Park", "ABBPRK03", "BED", 5);
+      System.out.println(equip.getXCoord());
+      System.out.println(equip.getYCoord());
+      System.out.println(equip.getFloor());
+    }
+  */
   public MedicalEquipment(
       String equipmentID,
       String med_equipmendID,

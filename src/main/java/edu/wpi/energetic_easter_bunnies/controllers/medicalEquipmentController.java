@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class medicalEquipmentController extends serviceRequestPageController
     implements Initializable {
@@ -51,110 +52,141 @@ public class medicalEquipmentController extends serviceRequestPageController
 
   public medicalEquipmentController() {}
 
+  /**
+   * Initializes the page by populating the location combo boxes, equipment combo boxes, and the
+   * medical equipment request service table
+   */
   public void initialize(URL url, ResourceBundle rb) {
     try {
       locationDB = new LocationDAOImpl();
-      List<Location> locations = locationDB.getAllLocations();
-      List<String> floors = new ArrayList<>();
-      HashMap<String, ArrayList<String>> floorToRooms = new HashMap<>();
-
-      for (Location l : locations) {
-        String floor = l.getFloor();
-        if (!floors.contains(floor)) {
-          floors.add(floor);
-        }
-        ArrayList<String> roomsOnFloor;
-        if (!floorToRooms.containsKey(floor)) {
-          roomsOnFloor = new ArrayList<>();
-        } else {
-          roomsOnFloor = floorToRooms.get(floor);
-        }
-        roomsOnFloor.add(l.getNodeID());
-        floorToRooms.put(floor, roomsOnFloor);
-      }
-      floor.setItems(FXCollections.observableArrayList(floors));
-      floor
-          .getSelectionModel()
-          .selectedItemProperty()
-          .addListener(
-              new ChangeListener<String>() {
-                @Override
-                public void changed(
-                    ObservableValue<? extends String> observable,
-                    String oldValue,
-                    String newValue) {
-                  ObservableList<String> roomsToDisplay =
-                      FXCollections.observableArrayList((floorToRooms.get(newValue)));
-                  room.setItems(roomsToDisplay);
-                }
-              });
+      populateLocationComboBoxes();
 
       medEquipmentDB = new MedicalEquipmentDAOImpl();
-      ArrayList<MedicalEquipment> allEquipment =
-          (ArrayList<MedicalEquipment>) medEquipmentDB.getAllMedicalEquipment();
-      ArrayList<String> equipmentNames = new ArrayList<String>();
-      HashMap<String, Integer> equipNameToQuantity = new HashMap<>();
-      for (MedicalEquipment e : allEquipment) {
-        if (e.checkIsClean() && !e.isInUse()) {
-          String curEquipName = e.getEquipmentType();
-          if (!equipmentNames.contains(curEquipName)) {
-            equipmentNames.add(e.getEquipmentType());
-            equipNameToQuantity.put(curEquipName, 1);
-          } else {
-            equipNameToQuantity.put(curEquipName, equipNameToQuantity.get(curEquipName) + 1);
-          }
-        }
-      }
-      equipmentType.setItems(FXCollections.observableArrayList(equipmentNames));
-      equipmentType
-          .getSelectionModel()
-          .selectedItemProperty()
-          .addListener(
-              new ChangeListener<String>() {
-                @Override
-                public void changed(
-                    ObservableValue<? extends String> observable,
-                    String oldValue,
-                    String newValue) {
-                  ArrayList<Integer> quantityNums = new ArrayList<Integer>();
-                  for (int i = 1; i <= equipNameToQuantity.get(newValue); i++) {
-                    quantityNums.add(i);
-                  }
-                  ObservableList<Integer> quantitySelections =
-                      FXCollections.observableArrayList(quantityNums);
-                  equipmentQuantity.setItems(quantitySelections);
-                }
-              });
+      populateEquipComboBoxes();
 
       medEquipmentServiceRequestDB = new MedicalEquipmentServiceRequestDAOImpl();
-      ObservableList<medicalEquipmentRequest> medicalEquipmentRequests = populateMedEquipList();
-      tableDeliveryDate.setCellValueFactory(
-          new PropertyValueFactory<medicalEquipmentRequest, String>("deliveryDate"));
-      tableDeliveryTime.setCellValueFactory(
-          new PropertyValueFactory<medicalEquipmentRequest, String>("deliveryTime"));
-      tableIsUrgent.setCellValueFactory(
-          new PropertyValueFactory<medicalEquipmentRequest, Boolean>("isUrgent"));
-      tableEquipmentType.setCellValueFactory(
-          new PropertyValueFactory<medicalEquipmentRequest, String>("equipment"));
-      tableEquipmentQuantity.setCellValueFactory(
-          new PropertyValueFactory<medicalEquipmentRequest, Integer>("equipmentQuantity"));
-      tableStaffAssignee.setCellValueFactory(
-          new PropertyValueFactory<medicalEquipmentRequest, String>("staffAssignee"));
-      tableRoomID.setCellValueFactory(
-          new PropertyValueFactory<medicalEquipmentRequest, String>("roomID"));
-      tableFloorID.setCellValueFactory(
-          new PropertyValueFactory<medicalEquipmentRequest, String>("floorID"));
-      tableRequestStatus.setCellValueFactory(
-          new PropertyValueFactory<medicalEquipmentRequest, String>("requestStatus"));
-      tableOtherNotes.setCellValueFactory(
-          new PropertyValueFactory<medicalEquipmentRequest, String>("otherNotes"));
-
-      medRequestTable.setItems(medicalEquipmentRequests);
+      populateMedEquipRequestTable();
     } catch (SQLException e) {
       e.printStackTrace();
     }
   }
 
+  /**
+   * Populates the location combo boxes by first grabbing all the floors of the hospital and then mapping
+   * them to an ArrayList of all the rooms on that floor. The room combo box selections are determined
+   * based on the selection from the floor combo box.
+   */
+  private void populateLocationComboBoxes() {
+    List<Location> locations = locationDB.getAllLocations();
+    List<String> floors = new ArrayList<>();
+    HashMap<String, ArrayList<String>> floorToRooms = new HashMap<>();
+
+    for (Location l : locations) {
+      String floor = l.getFloor();
+      if (!floors.contains(floor)) {
+        floors.add(floor);
+      }
+      ArrayList<String> roomsOnFloor;
+      if (!floorToRooms.containsKey(floor)) {
+        roomsOnFloor = new ArrayList<>();
+      } else {
+        roomsOnFloor = floorToRooms.get(floor);
+      }
+      roomsOnFloor.add(l.getNodeID());
+      floorToRooms.put(floor, roomsOnFloor);
+    }
+    floor.setItems(FXCollections.observableArrayList(floors));
+    floor
+        .getSelectionModel()
+        .selectedItemProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                ObservableList<String> roomsToDisplay =
+                    FXCollections.observableArrayList((floorToRooms.get(newValue)));
+                room.setItems(roomsToDisplay);
+              }
+            });
+  }
+
+  /**
+   * Populates the equipment combo boxes, which are equipmentType and equipmentQuantity.
+   * Similarly to populateLocationComboBoxes(), equipmentQuantity's selections are determined based
+   * on the selection for equipmentType. equipmentQuantity's selections will be Integers from 1 to however many
+   * Equipment objects of that type are available, or it will have no selections if none are available.
+   */
+  private void populateEquipComboBoxes() {
+    ArrayList<MedicalEquipment> allEquipment =
+        (ArrayList<MedicalEquipment>) medEquipmentDB.getAllMedicalEquipment();
+    ArrayList<String> equipmentNames = new ArrayList<String>();
+    HashMap<String, Integer> equipNameToQuantity = new HashMap<>();
+    for (MedicalEquipment e : allEquipment) {
+      if (e.checkIsClean() && !e.isInUse()) {
+        String curEquipName = e.getEquipmentType();
+        if (!equipmentNames.contains(curEquipName)) {
+          equipmentNames.add(e.getEquipmentType());
+          equipNameToQuantity.put(curEquipName, 1);
+        } else {
+          equipNameToQuantity.put(curEquipName, equipNameToQuantity.get(curEquipName) + 1);
+        }
+      }
+    }
+    equipmentType.setItems(FXCollections.observableArrayList(equipmentNames));
+    equipmentType
+        .getSelectionModel()
+        .selectedItemProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                ArrayList<Integer> quantityNums = new ArrayList<Integer>();
+                for (int i = 1; i <= equipNameToQuantity.get(newValue); i++) {
+                  quantityNums.add(i);
+                }
+                ObservableList<Integer> quantitySelections =
+                    FXCollections.observableArrayList(quantityNums);
+                equipmentQuantity.setItems(quantitySelections);
+              }
+            });
+  }
+
+  /**
+   * Populates the medicalEquipmentRequest table from the database. Sets the cell values for each column
+   * to be the corresponding variable in medicalEquipmentRequest.
+   */
+  private void populateMedEquipRequestTable() {
+    ObservableList<medicalEquipmentRequest> medicalEquipmentRequests = populateMedEquipList();
+    tableDeliveryDate.setCellValueFactory(
+        new PropertyValueFactory<medicalEquipmentRequest, String>("deliveryDate"));
+    tableDeliveryTime.setCellValueFactory(
+        new PropertyValueFactory<medicalEquipmentRequest, String>("deliveryTime"));
+    tableIsUrgent.setCellValueFactory(
+        new PropertyValueFactory<medicalEquipmentRequest, Boolean>("isUrgent"));
+    tableEquipmentType.setCellValueFactory(
+        new PropertyValueFactory<medicalEquipmentRequest, String>("equipment"));
+    tableEquipmentQuantity.setCellValueFactory(
+        new PropertyValueFactory<medicalEquipmentRequest, Integer>("equipmentQuantity"));
+    tableStaffAssignee.setCellValueFactory(
+        new PropertyValueFactory<medicalEquipmentRequest, String>("staffAssignee"));
+    tableRoomID.setCellValueFactory(
+        new PropertyValueFactory<medicalEquipmentRequest, String>("roomID"));
+    tableFloorID.setCellValueFactory(
+        new PropertyValueFactory<medicalEquipmentRequest, String>("floorID"));
+    tableRequestStatus.setCellValueFactory(
+        new PropertyValueFactory<medicalEquipmentRequest, String>("requestStatus"));
+    tableOtherNotes.setCellValueFactory(
+        new PropertyValueFactory<medicalEquipmentRequest, String>("otherNotes"));
+
+    medRequestTable.setItems(medicalEquipmentRequests);
+  }
+
+  /**
+   * Gets the full list of medical equipment requests currently in the database.
+   * @return list of medicalEquipmentRequest objects in the database
+   */
   protected ObservableList<medicalEquipmentRequest> populateMedEquipList() {
     List<medicalEquipmentRequest> list =
         medEquipmentServiceRequestDB.getAllMedicalEquipmentServiceRequests();
