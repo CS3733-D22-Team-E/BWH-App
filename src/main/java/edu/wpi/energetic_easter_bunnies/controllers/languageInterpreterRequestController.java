@@ -16,7 +16,7 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    super(location, resources);
+
     floorSelection.setValue("Select Floor");
     roomSelection.setValue("Select Room");
     languageSelection.setValue("Select Language");
