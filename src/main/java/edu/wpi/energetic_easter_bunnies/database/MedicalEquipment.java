@@ -1,5 +1,10 @@
 package edu.wpi.energetic_easter_bunnies.database;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class MedicalEquipment extends Equipment {
   private String med_equipmentID;
   private String equipmentType;
@@ -50,5 +55,31 @@ public class MedicalEquipment extends Equipment {
 
   public void setEquipmentType(String equipmentType) {
     this.equipmentType = equipmentType;
+  }
+
+  public int getXCoord() throws SQLException {
+    Connection connection = DBConnection.getConnection();
+    String locationID = getCurrentLocation();
+    int result = -1;
+
+    Statement statement = connection.createStatement();
+    String query = "SELECT XCOORD FROM TOWERLOCATIONS WHERE NODEID = '" + locationID + "'";
+    ResultSet rs = statement.executeQuery(query);
+
+    result = rs.getInt("XCOORD");
+    return result;
+  }
+
+  public int getYCoord() throws SQLException {
+    Connection connection = DBConnection.getConnection();
+    String locationID = getCurrentLocation();
+    int result = -1;
+
+    Statement statement = connection.createStatement();
+    String query = "SELECT YCOORD FROM TOWERLOCATIONS WHERE NODEID = '" + locationID + "'";
+    ResultSet rs = statement.executeQuery(query);
+
+    result = rs.getInt("YCOORD");
+    return result;
   }
 }
