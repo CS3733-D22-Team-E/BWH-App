@@ -1,30 +1,85 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
+import java.util.Date;
+
 public abstract class serviceRequest {
-  /*
-    public enum Type {
-      sanitationRequest,
-      medicalEquipmentRequest,
-      mealDeliveryRequest,
-      translatorRequest,
-      medicineRequest
+  public enum Type {
+    sanitationRequest {
+      @Override
+      public String toString() {
+        return "Sanitation";
+      }
+    },
+    medicalEquipmentRequest {
+      @Override
+      public String toString() {
+        return "Medical Equipment";
+      }
+    },
+    mealDeliveryRequest {
+      @Override
+      public String toString() {
+        return "Meal Delivery";
+      }
+    },
+    translatorRequest {
+      @Override
+      public String toString() {
+        return "Translation";
+      }
+    },
+    medicineRequest {
+      @Override
+      public String toString() {
+        return "Medicine";
+      }
     }
-  */
-  // private Date requestDate; //TODO: Implement later
-  // private Date deliveryDate; //TODO: Implement later
+  }
+
+  enum Status {
+    Todo {
+      @Override
+      public String toString() {
+        return "To Do";
+      }
+    },
+    InProgress {
+      @Override
+      public String toString() {
+        return "In Progress";
+      }
+    },
+    Complete {
+      @Override
+      public String toString() {
+        return "Complete";
+      }
+    }
+  }
+
+  private Date requestDate; // TODO: Implement later
+  private Date deliveryDate; // TODO: Implement later
   private String serviceRequestID;
   private String otherNotes;
   private String floorID;
   private String roomID;
   private boolean isUrgent;
-  // private Type requestType;
+  private Type requestType;
 
   private String requestStatus;
   private String staffAssignee;
 
-  // public Type getRequestType() { return requestType; }
+  public Type getRequestType() {
+    return requestType;
+  }
 
-  // public void setRequestType(Type requestType) { this.requestType = requestType; }
+  public String getRequestString() {
+    return requestType.toString();
+  }
+
+  public void setRequestType(Type requestType) {
+    this.requestType = requestType;
+  }
 
   public String getServiceRequestID() {
     return serviceRequestID;

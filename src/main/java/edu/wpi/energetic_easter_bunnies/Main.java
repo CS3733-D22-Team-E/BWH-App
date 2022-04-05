@@ -1,17 +1,23 @@
 package edu.wpi.energetic_easter_bunnies;
 
+import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.DBCreation;
+import java.sql.SQLException;
+
 public class Main {
 
-  public static void main(String[] args) {
+  public static void closeConnection() {
     try {
-      Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-    } catch (ClassNotFoundException e) {
-      System.out.println("Apache Derby Driver not found.");
+      DBConnection.closeConnection();
+    } catch (SQLException e) {
       e.printStackTrace();
-      return;
     }
+    System.out.println("Apache Derby driver closed!");
+  }
 
-    System.out.println("Apache Derby driver registered!");
+  public static void main(String[] args) {
+    DBCreation.createTables();
     App.launch(App.class, args);
+    closeConnection();
   }
 }
