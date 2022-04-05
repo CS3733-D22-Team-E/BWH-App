@@ -40,7 +40,6 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   // todo:  add DAOImpl
   // work with Jeremy
 
-
   // todo: implement the DAO stuff to make table functional
 
   mealDeliveryRequest mealDeliveryRequest = new mealDeliveryRequest();
