@@ -5,6 +5,8 @@ public class medicineDelivery extends serviceRequest {
   String medicine;
   String amount;
   String unit;
+  String otherNotes;
+  String deliveryDate;
   String deliveryTime;
   boolean mon;
   boolean tues;
@@ -36,6 +38,22 @@ public class medicineDelivery extends serviceRequest {
 
   public void setUnit(String unit) {
     this.unit = unit;
+  }
+
+  public String getOtherNotes() {
+    return otherNotes;
+  }
+
+  public void setOtherNotes(String setOtherNotes) {
+    this.otherNotes = otherNotes;
+  }
+
+  public String getDeliveryDate() {
+    return deliveryDate;
+  }
+
+  public void setDeliveryDate(String deliveryDate) {
+    this.deliveryDate = deliveryDate;
   }
 
   public String getDeliveryTime() {

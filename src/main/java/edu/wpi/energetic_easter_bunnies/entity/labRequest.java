@@ -1,7 +1,5 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
-import java.time.LocalDate;
-
 public class labRequest extends serviceRequest {
 
   private enum timeFrame {
@@ -11,39 +9,34 @@ public class labRequest extends serviceRequest {
   }
 
   private String labRequestType;
+  private String building;
+  private String floor;
   private String timeFrame;
+  private String locNodeID;
 
   public labRequest(
       String labRequestID,
       String labRequestType,
       String timeFrame,
-      String floorID,
-      String roomID,
-      boolean isUrgent,
       String staffAssignee,
+      String locNodeID,
       String requestStatus,
-      String otherNotes,
-      LocalDate requestDate,
-      LocalDate deliveryDate) {
-    super(
-        labRequestID,
-        String.valueOf(Type.LAB_REQUEST),
-        otherNotes,
-        floorID,
-        roomID,
-        isUrgent,
-        requestStatus,
-        staffAssignee,
-        requestDate,
-        deliveryDate);
+      String otherNotes) {
+    setServiceRequestID(labRequestID);
     setLabRequestType(labRequestType);
     setTimeFrame(timeFrame);
+    setStaffAssignee(staffAssignee);
+    setLocNodeID(locNodeID);
+    setRequestStatus(requestStatus);
+    setOtherNotes(otherNotes);
   }
 
   public labRequest() {
-    super();
     this.labRequestType = "";
+    this.building = "";
+    this.floor = "";
     this.timeFrame = "";
+    this.locNodeID = "";
   }
 
   public String getLabRequestType() {
@@ -54,11 +47,35 @@ public class labRequest extends serviceRequest {
     this.labRequestType = labRequestType;
   }
 
+  public String getBuilding() {
+    return building;
+  }
+
+  public void setBuilding(String building) {
+    this.building = building;
+  }
+
+  public String getFloor() {
+    return floor;
+  }
+
+  public void setFloor(String floor) {
+    this.floor = floor;
+  }
+
   public void setTimeFrame(String timeFrame) {
     this.timeFrame = timeFrame;
   }
 
   public String getTimeFrame() {
     return timeFrame;
+  }
+
+  public void setLocNodeID(String locNodeID) {
+    this.locNodeID = locNodeID;
+  }
+
+  public String getLocNodeID() {
+    return locNodeID;
   }
 }

@@ -31,8 +31,6 @@ public class containsSideMenu implements Initializable {
       e.printStackTrace();
     }
     drawer.setSidePane(box);
-    box.setDisable(true);
-    drawer.setDisable(true);
 
     transition.setRate(-1);
     burger.addEventHandler(
@@ -43,12 +41,9 @@ public class containsSideMenu implements Initializable {
           if (drawer.isOpened()) {
             drawer.close();
             box.setDisable(true);
-            drawer.setDisable(true);
           } else {
             drawer.open();
             box.setDisable(false);
-            drawer.setVisible(true);
-            drawer.setDisable(false);
           }
         });
   }

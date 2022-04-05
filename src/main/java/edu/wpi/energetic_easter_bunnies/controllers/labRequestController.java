@@ -2,7 +2,6 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -15,9 +14,5 @@ public class labRequestController extends serviceRequestPageController {
   public labRequestController() {}
 
   @Override
-  public void submitButton(ActionEvent event) {}
-
-  public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
-  }
+  public void initialize(URL location, ResourceBundle resources) {}
 }
