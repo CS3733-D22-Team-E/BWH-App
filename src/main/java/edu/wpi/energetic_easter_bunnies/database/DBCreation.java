@@ -92,6 +92,22 @@ public class DBCreation {
     CSVManager.loadLocationCSV("TowerLocations.csv");
   }
 
+  public static void createServiceRequestTable() throws SQLException {
+    String query =
+            "create table SERVICEREQUEST\n" +
+                    "(\n" +
+                    "    REQUESTID     VARCHAR(35) not null,\n" +
+                    "    STATUS        VARCHAR(35) not null,\n" +
+                    "    TYPE          VARCHAR(35) not null,\n" +
+                    "    ASSIGNEE      VARCHAR(35),\n" +
+                    "    REQUEST_STATE DATE        not null,\n" +
+                    "    DELIVERY_DATE DATE,\n" +
+                    "    ISURGENT      BOOLEAN     not null\n" +
+                    ")";
+    Statement statement = connection.createStatement();
+    statement.executeUpdate(query);
+  }
+
   public static void createTables() {
     try {
       createEmployeesTable();
@@ -99,6 +115,7 @@ public class DBCreation {
       createLabRequestTable();
       createMedEquipReqTable();
       createTowerLocationTable();
+      createServiceRequestTable();
     } catch (SQLException | IOException e) {
       e.printStackTrace();
     }
