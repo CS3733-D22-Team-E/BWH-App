@@ -12,7 +12,7 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
     equipmentList = new ArrayList<>();
     // String url = "jdbc:derby:myDB;";
     Statement statement = connection.createStatement();
-    String query = "SELECT * FROM EQUIPMENT ORDER BY ID DESC";
+    String query = "SELECT * FROM EQUIPMENT ORDER BY EQUIPMENTID DESC";
     ResultSet rs = statement.executeQuery(query);
     int numID = 0;
     while (rs.next()) {

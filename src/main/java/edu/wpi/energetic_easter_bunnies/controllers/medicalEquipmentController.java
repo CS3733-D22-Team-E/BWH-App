@@ -1,12 +1,16 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
-import edu.wpi.energetic_easter_bunnies.database.MedicalEquipmentServiceRequestDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.*;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,15 +42,66 @@ public class medicalEquipmentController extends serviceRequestPageController
   @FXML TableColumn<medicalEquipmentRequest, String> tableRequestStatus;
   @FXML TableColumn<medicalEquipmentRequest, String> tableOtherNotes;
 
-  MedicalEquipmentServiceRequestDAOImpl medEquipmentDB;
-
+  MedicalEquipmentServiceRequestDAOImpl medEquipmentServiceRequestDB;
+  MedicalEquipmentDAOImpl medEquipmentDB;
   medicalEquipmentRequest medicalEquipmentRequest = new medicalEquipmentRequest();
+  LocationDAOImpl locationDB;
+
+  ObservableList<medicalEquipmentRequest> tableList;
 
   public medicalEquipmentController() {}
 
   public void initialize(URL url, ResourceBundle rb) {
     try {
-      medEquipmentDB = new MedicalEquipmentServiceRequestDAOImpl();
+      locationDB = new LocationDAOImpl();
+      List<Location> locations = locationDB.getAllLocations();
+      List<String> floors = new ArrayList<>();
+      HashMap<String, ArrayList<String>> floorToRooms = new HashMap<>();
+
+      for (Location l : locations) {
+        String floor = l.getFloor();
+        if (!floors.contains(floor)) {
+          floors.add(floor);
+        }
+        ArrayList<String> roomsOnFloor;
+        if (!floorToRooms.containsKey(floor)) {
+          roomsOnFloor = new ArrayList<>();
+        } else {
+          roomsOnFloor = floorToRooms.get(floor);
+        }
+        roomsOnFloor.add(l.getNodeID());
+        floorToRooms.put(floor, roomsOnFloor);
+      }
+      floor.setItems(FXCollections.observableArrayList(floors));
+      floor
+          .getSelectionModel()
+          .selectedItemProperty()
+          .addListener(
+              new ChangeListener<String>() {
+                @Override
+                public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue,
+                    String newValue) {
+                  ObservableList<String> roomsToDisplay =
+                      FXCollections.observableArrayList((floorToRooms.get(newValue)));
+                  room.setItems(roomsToDisplay);
+                }
+              });
+
+      medEquipmentDB = new MedicalEquipmentDAOImpl();
+      ArrayList<MedicalEquipment> allEquipment =
+          (ArrayList<MedicalEquipment>) medEquipmentDB.getAllMedicalEquipment();
+      ArrayList<String> equipmentNames = new ArrayList<String>();
+      ArrayList<Integer> equipmentNum = new ArrayList<Integer>();
+      equipmentNum.add(1);
+      for (MedicalEquipment e : allEquipment) {
+        equipmentNames.add(e.getEquipmentType());
+      }
+      equipmentType.setItems(FXCollections.observableArrayList(equipmentNames));
+      equipmentQuantity.setItems(FXCollections.observableArrayList(equipmentNum));
+
+      medEquipmentServiceRequestDB = new MedicalEquipmentServiceRequestDAOImpl();
       ObservableList<medicalEquipmentRequest> medicalEquipmentRequests = populateMedEquipList();
       tableDeliveryDate.setCellValueFactory(
           new PropertyValueFactory<medicalEquipmentRequest, String>("deliveryDate"));
@@ -76,8 +131,9 @@ public class medicalEquipmentController extends serviceRequestPageController
   }
 
   protected ObservableList<medicalEquipmentRequest> populateMedEquipList() {
-    List<medicalEquipmentRequest> list = medEquipmentDB.getAllMedicalEquipmentServiceRequests();
-    ObservableList<medicalEquipmentRequest> tableList = FXCollections.observableArrayList();
+    List<medicalEquipmentRequest> list =
+        medEquipmentServiceRequestDB.getAllMedicalEquipmentServiceRequests();
+    tableList = FXCollections.observableArrayList();
     for (medicalEquipmentRequest m : list) {
       tableList.add(m);
     }
@@ -120,6 +176,7 @@ public class medicalEquipmentController extends serviceRequestPageController
   }
 
   private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) throws SQLException {
-    medEquipmentDB.addMedEquipReq(medEquipmentRequest);
+    medEquipmentServiceRequestDB.addMedEquipReq(medEquipmentRequest);
+    tableList.add(medEquipmentRequest);
   }
 }
