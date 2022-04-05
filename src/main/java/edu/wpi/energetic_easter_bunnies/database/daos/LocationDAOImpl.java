@@ -1,5 +1,7 @@
-package edu.wpi.energetic_easter_bunnies.database;
+package edu.wpi.energetic_easter_bunnies.database.daos;
 
+import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.Location;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,13 +52,29 @@ public class LocationDAOImpl implements LocationDAO {
   }
 
   /**
+   * Gets location with given NodeID
+   *
+   * @param NodeID the NodeID of the location
+   * @return location requested
+   * @throws NullPointerException Location not found with NodeID
+   */
+  public Location getLocation(String NodeID) throws NullPointerException {
+    for (Location location : locations) {
+      if (location.getNodeID() == NodeID) {
+        return location;
+      }
+    }
+    System.out.println("Location with NodeID " + NodeID + " not found");
+    throw new NullPointerException();
+  }
+
+  /**
    * Gets a location with given numID in the arrayList
    *
    * @param numID - The numerical id of the location node
    * @return the location requested
    */
-  @Override
-  public Location getLocation(int numID) {
+  public Location getLocationWithNumID(int numID) {
     return locations.get(numID);
   }
 
@@ -125,6 +143,34 @@ public class LocationDAOImpl implements LocationDAO {
             + "', NODETYPE = '"
             + newNodeType
             + "' WHERE NODEID = '"
+            + location.getNodeID()
+            + "'";
+    statement.executeUpdate(query);
+  }
+
+  /**
+   * Updates a given location's x and y coordinates
+   *
+   * @param location - the location node to be updated
+   * @param newXCoord - the new X coordinate
+   * @param newYCoord - the new Y coordinate
+   * @throws SQLException - Accesses Database
+   */
+  @Override
+  public void updateCoord(Location location, int newXCoord, int newYCoord) throws SQLException {
+
+    // Updating location XCoord and YCoord
+    location.setXCoord(newXCoord);
+    location.setYCoord(newYCoord);
+
+    // Update location XCoord and YCoord in the db
+    Statement statement = connection.createStatement();
+    String query =
+        "UPDATE TOWERLOCATIONS SET XCOORD = "
+            + newXCoord
+            + ", YCOORD = "
+            + newYCoord
+            + " WHERE NODEID = '"
             + location.getNodeID()
             + "'";
     statement.executeUpdate(query);

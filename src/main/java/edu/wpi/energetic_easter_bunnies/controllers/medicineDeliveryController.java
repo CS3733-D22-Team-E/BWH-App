@@ -43,6 +43,7 @@ public class medicineDeliveryController extends serviceRequestPageController
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     floor.setItems(floors);
     room.setItems(rooms);
     medicine.setItems(medicines);
@@ -52,7 +53,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   public void submitButton(ActionEvent event) {
     try {
       // medicalEquipmentRequest.setLocation(building.getValue() + floor.getValue());
-      medicineDeliveryRequest.setFloorID(floor.getValue());
+      medicineDeliveryRequest.setFloorID(String.valueOf(floor.getItems()));
       medicineDeliveryRequest.setRoomID(room.getValue());
       medicineDeliveryRequest.setAmount(amount.getText());
       medicineDeliveryRequest.setMedicine(String.valueOf(medicine.getItems()));

@@ -1,9 +1,9 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.Main;
-import edu.wpi.energetic_easter_bunnies.database.*;
+import edu.wpi.energetic_easter_bunnies.database.Location;
+import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.locationModel;
-import edu.wpi.energetic_easter_bunnies.menuButtons;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -23,7 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class mapPageController implements menuButtons, Initializable {
+public class mapPageController implements Initializable {
   FXMLLoader loader = new FXMLLoader();
   Parent root;
   @FXML MenuBar menuBar;
@@ -138,7 +138,6 @@ public class mapPageController implements menuButtons, Initializable {
     }
   }
 
-  @Override
   public void exitButton(ActionEvent event) throws IOException {
     System.exit(0);
   }

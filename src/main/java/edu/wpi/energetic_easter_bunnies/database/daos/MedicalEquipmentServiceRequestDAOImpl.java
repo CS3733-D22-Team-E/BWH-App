@@ -1,5 +1,6 @@
-package edu.wpi.energetic_easter_bunnies.database;
+package edu.wpi.energetic_easter_bunnies.database.daos;
 
+import edu.wpi.energetic_easter_bunnies.database.DBConnection;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
 
   public MedicalEquipmentServiceRequestDAOImpl() throws SQLException {
     medicalRequests = new ArrayList<>();
+    // String url = "jdbc:derby:myDB;";
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM MED_EQUIP_REQ ORDER BY REQUESTDATE DESC";
     ResultSet rs = statement.executeQuery(query);
@@ -90,15 +92,6 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
             + "','"
             + request.getOtherNotes()
             + "')";
-    System.out.println(query);
     statement.executeUpdate(query);
   }
-  /*
-    public static void main(String[] args) throws SQLException {
-      MedicalEquipmentServiceRequestDAOImpl db = new MedicalEquipmentServiceRequestDAOImpl();
-      db.addMedEquipReq(
-          new medicalEquipmentRequest(
-              "1234", "note", "floor", "45", false, "inprogress", "me", "bed", 5, "1/12", "1/13"));
-    }
-  */
 }

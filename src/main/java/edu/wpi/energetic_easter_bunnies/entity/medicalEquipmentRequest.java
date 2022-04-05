@@ -2,7 +2,6 @@ package edu.wpi.energetic_easter_bunnies.entity;
 
 public class medicalEquipmentRequest extends serviceRequest {
 
-  private String medEquipRequestID;
   private String equipment;
   private int equipmentQuantity;
   // TODO: make method that takes in date and time as string and returns a date object

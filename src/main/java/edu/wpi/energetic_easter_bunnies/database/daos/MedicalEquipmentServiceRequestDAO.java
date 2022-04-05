@@ -1,4 +1,4 @@
-package edu.wpi.energetic_easter_bunnies.database;
+package edu.wpi.energetic_easter_bunnies.database.daos;
 
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;

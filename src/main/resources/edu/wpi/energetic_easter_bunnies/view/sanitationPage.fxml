@@ -32,12 +32,12 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -53,211 +53,197 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="640.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.sanitationServiceController">
-  <children>
-    <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="Menu">
-          <items>
-            <MenuItem fx:id="homeMenuButton" mnemonicParsing="false" onAction="#homeButton" text="Home" />
-                  <Menu mnemonicParsing="false" text="Pages">
-                    <items>
-                      <MenuItem mnemonicParsing="false" onAction="#sanitationButton" text="Sanitation" />
-                        <MenuItem mnemonicParsing="false" onAction="#medicalEquipmentButton" text="Medical Equipment Delivery" />
-                        <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
-                        <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
-                        <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Translation" />
-                        <MenuItem mnemonicParsing="false" onAction="#labRequestButton" text="Lab Request" />
-                    </items>
-                  </Menu>
-                  <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitButton" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About Application" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
-            <Pane prefHeight="90.0" prefWidth="1080.0">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.sanitationServiceController">
+    <children>
+        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;" VBox.vgrow="NEVER">
+            <children>
+            <StackPane minHeight="-Infinity" minWidth="-Infinity">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f35959" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
-                  <Label alignment="CENTER" layoutX="107.0" layoutY="13.0" text="Brigham Woman's Hospital" textFill="WHITE">
-                     <font>
-                        <Font name="Book Antiqua Bold" size="30.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="210.0" layoutY="52.0" text="Sanitation Services" textFill="WHITE">
-                     <font>
-                        <Font name="Book Antiqua Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <StackPane layoutX="14.0" layoutY="13.0">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
-                        <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/sanitizer.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <Button fx:id="homeButton" alignment="CENTER" layoutX="852.0" layoutY="8.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="75.0" prefWidth="222.0" text="     Home" textAlignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <ImageView fitHeight="76.0" fitWidth="160.0" layoutX="852.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+                  <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/home.png" />
+                        <Image url="@icons/sanitizer.png" />
                      </image>
                   </ImageView>
                </children>
-            </Pane>
-            <AnchorPane layoutX="62.0" layoutY="504.0">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </StackPane>
+                <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
+                    <children>
+                        <Label alignment="CENTER" text="Brigham &amp; Woman's Hospital" textFill="WHITE">
+                            <font>
+                                <Font name="Book Antiqua Bold" size="30.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" text="Sanitation Services" textFill="WHITE">
+                            <font>
+                                <Font name="Book Antiqua Bold" size="18.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                </VBox>
+                <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="120.0" style="-fx-border-color: black;">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                    <children>
+                        <JFXHamburger fx:id="burger" layoutX="45.0" layoutY="35.0" />
+                    </children>
+                </Pane>
+            </children>
+        </HBox>
+        <StackPane>
+            <children>
+            <AnchorPane>
+               <StackPane.margin>
+                  <Insets bottom="20.0" left="40.0" right="20.0" top="60.0" />
+               </StackPane.margin>
                <children>
-                  <Group layoutX="6.198883056640625E-6" layoutY="6.198883056640625E-6" />
-                  <Button fx:id="submitButton" alignment="CENTER" mnemonicParsing="false" onAction="#submitButton" prefHeight="75.0" prefWidth="152.0" text="Submit">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
+                  <Pane layoutY="-35.0">
+                     <children>
+                              <VBox layoutX="173.0" layoutY="159.0">
+                                  <children>
+                                      <Label prefHeight="39.0" prefWidth="157.0" text="Biohazard On Site">
+                                          <font>
+                                              <Font name="System Bold" size="18.0" />
+                                          </font>
+                                      </Label>
+                                      <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
+                                          <children>
+                                              <RadioButton mnemonicParsing="false" text="Yes">
+                                                  <toggleGroup>
+                                                      <ToggleGroup fx:id="biohazardGroup" />
+                                                  </toggleGroup>
+                                              </RadioButton>
+                                              <RadioButton mnemonicParsing="false" selected="true" text="No" toggleGroup="$biohazardGroup" />
+                                              <RadioButton mnemonicParsing="false" text="Unsure" toggleGroup="$biohazardGroup" />
+                                          </children>
+                                      </VBox>
+                                  </children>
+                              </VBox>
+                              <VBox layoutY="159.0">
+                                  <children>
+                                      <Label prefHeight="39.0" prefWidth="157.0" text="Urgency">
+                                          <font>
+                                              <Font name="System Bold" size="18.0" />
+                                          </font>
+                                      </Label>
+                                      <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
+                                          <children>
+                                              <RadioButton mnemonicParsing="false" text="Critical">
+                                                  <toggleGroup>
+                                                      <ToggleGroup fx:id="urgencyGroup" />
+                                                  </toggleGroup>
+                                              </RadioButton>
+                                              <RadioButton mnemonicParsing="false" selected="true" text="Not Critical" toggleGroup="$urgencyGroup" />
+                                          </children>
+                                      </VBox>
+                                  </children>
+                              </VBox>
+                              <VBox>
+                                  <children>
+                                      <Label prefHeight="39.0" prefWidth="398.0" text="Request Status             Assigned Staff Member">
+                                          <font>
+                                              <Font name="System Bold" size="18.0" />
+                                          </font>
+                                      </Label>
+                                      <HBox spacing="15.0">
+                                          <children>
+                                    <JFXComboBox prefWidth="105.0">
+                                       <HBox.margin>
+                                          <Insets right="70.0" />
+                                       </HBox.margin>
+                                    </JFXComboBox>
+                                              <TextField fx:id="locationField1" layoutX="10.0" layoutY="10.0" promptText="Assigned Staff...">
+                                                  <font>
+                                                      <Font size="14.0" />
+                                                  </font>
+                                              </TextField>
+                                          </children>
+                                      </HBox>
+                                  </children>
+                              </VBox>
+                              <VBox layoutY="259.0" prefHeight="114.0" prefWidth="157.0">
+                                  <children>
+                                      <Label prefHeight="39.0" prefWidth="157.0" text="Size">
+                                          <font>
+                                              <Font name="System Bold" size="18.0" />
+                                          </font>
+                                      </Label>
+                                      <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
+                                          <children>
+                                              <RadioButton mnemonicParsing="false" selected="true" text="Light">
+                                                  <toggleGroup>
+                                                      <ToggleGroup fx:id="sizeGroup" />
+                                                  </toggleGroup>
+                                              </RadioButton>
+                                              <RadioButton mnemonicParsing="false" text="Medium" toggleGroup="$sizeGroup" />
+                                              <RadioButton mnemonicParsing="false" text="Heavy" toggleGroup="$sizeGroup" />
+                                          </children>
+                                      </VBox>
+                                  </children>
+                              </VBox>
+                              <VBox layoutX="173.0" layoutY="296.0">
+                                  <children>
+                                      <Label prefHeight="39.0" prefWidth="152.0" text="Additional Notes">
+                                          <font>
+                                              <Font name="System Bold" size="18.0" />
+                                          </font>
+                                      </Label>
+                                      <TextField fx:id="notes" promptText="Note...">
+                                          <font>
+                                              <Font size="14.0" />
+                                          </font>
+                                      </TextField>
+                                  </children>
+                              </VBox>
+                              <TableView layoutX="398.0" layoutY="35.0">
+                                  <columns>
+                                      <TableColumn prefWidth="75.0" text="Request ID" />
+                                      <TableColumn prefWidth="67.0" text="Status" />
+                                      <TableColumn prefWidth="100.0" text="Assigned Staff" />
+                                      <TableColumn prefWidth="72.0" text="Urgency" />
+                                      <TableColumn prefWidth="83.0" text="Biohazard" />
+                                      <TableColumn prefWidth="72.0" text="Size" />
+                                      <TableColumn prefWidth="134.0" text="Location" />
+                                  </columns>
+                              </TableView>
+                              <VBox layoutY="81.0">
+                                  <children>
+                                      <Label prefHeight="39.0" prefWidth="398.0" text="Floor Number              Room Number">
+                                          <font>
+                                              <Font name="System Bold" size="18.0" />
+                                          </font>
+                                      </Label>
+                                      <HBox spacing="15.0">
+                                 <children>
+                                    <JFXComboBox prefWidth="105.0">
+                                       <HBox.margin>
+                                          <Insets right="50.0" />
+                                       </HBox.margin>
+                                    </JFXComboBox>
+                                    <JFXComboBox layoutX="60.0" layoutY="10.0" prefWidth="105.0">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </JFXComboBox>
+                                 </children>
+                                      </HBox>
+                                  </children>
+                              </VBox>
+                        <JFXButton buttonType="RAISED" layoutY="382.0" onAction="#submitButton" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" style="-fx-background-color: #f1f1f1;" text="Submit" />
+                        <JFXButton buttonType="RAISED" layoutX="173.0" layoutY="382.0" onAction="#resetFields" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" style="-fx-background-color: #f1f1f1;" text="Reset Fields" />
+                     </children>
+                  </Pane>
                </children>
             </AnchorPane>
-            <VBox layoutX="235.0" layoutY="265.0">
-               <children>
-                  <Label prefHeight="39.0" prefWidth="157.0" text="Biohazard On Site">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
-                     <children>
-                        <RadioButton mnemonicParsing="false" text="Yes">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="biohazardGroup" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton mnemonicParsing="false" selected="true" text="No" toggleGroup="$biohazardGroup" />
-                        <RadioButton mnemonicParsing="false" text="Unsure" toggleGroup="$biohazardGroup" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-            <VBox layoutX="62.0" layoutY="265.0">
-               <children>
-                  <Label prefHeight="39.0" prefWidth="157.0" text="Urgency">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
-                     <children>
-                        <RadioButton mnemonicParsing="false" text="Critical">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="urgencyGroup" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton mnemonicParsing="false" selected="true" text="Not Critical" toggleGroup="$urgencyGroup" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-            <VBox layoutX="62.0" layoutY="106.0">
-               <children>
-                  <Label prefHeight="39.0" prefWidth="398.0" text="Request Status             Assigned Staff Member">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <HBox spacing="15.0">
-                     <children>
-                        <TextField fx:id="locationField" promptText="Status...">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="locationField1" layoutX="10.0" layoutY="10.0" promptText="Assigned Staff...">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox layoutX="62.0" layoutY="379.0">
-               <children>
-                  <Label prefHeight="39.0" prefWidth="157.0" text="Size">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
-                     <children>
-                        <RadioButton mnemonicParsing="false" selected="true" text="Light">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="sizeGroup" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Medium" toggleGroup="$sizeGroup" />
-                        <RadioButton mnemonicParsing="false" text="Heavy" toggleGroup="$sizeGroup" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-            <VBox layoutX="235.0" layoutY="402.0">
-               <children>
-                  <Label prefHeight="39.0" prefWidth="152.0" text="Additional Notes">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="notes" promptText="Note...">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </VBox>
-            <TableView layoutX="460.0" layoutY="141.0" prefHeight="448.0" prefWidth="604.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="Request ID" />
-                <TableColumn prefWidth="67.0" text="Status" />
-                  <TableColumn prefWidth="100.0" text="Assigned Staff" />
-                  <TableColumn prefWidth="72.0" text="Urgency" />
-                  <TableColumn prefWidth="83.0" text="Biohazard" />
-                  <TableColumn prefWidth="72.0" text="Size" />
-                  <TableColumn prefWidth="134.0" text="Location" />
-              </columns>
-            </TableView>
-            <VBox layoutX="62.0" layoutY="187.0">
-               <children>
-                  <Label prefHeight="39.0" prefWidth="398.0" text="Floor Number              Room Number">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <HBox spacing="15.0">
-                     <children>
-                        <TextField fx:id="locationField111" promptText="Floor Number...">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="locationField11" layoutX="10.0" layoutY="10.0" promptText="Room Number...">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-      </children>
-    </AnchorPane>
-  </children>
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
+            </children>
+        </StackPane>
+    </children>
 </VBox>
