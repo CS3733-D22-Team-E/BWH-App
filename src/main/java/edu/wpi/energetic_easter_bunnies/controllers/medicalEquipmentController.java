@@ -2,6 +2,9 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.database.*;
+import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentServiceRequestDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -18,7 +21,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 public class medicalEquipmentController extends serviceRequestPageController
     implements Initializable {
@@ -72,9 +74,9 @@ public class medicalEquipmentController extends serviceRequestPageController
   }
 
   /**
-   * Populates the location combo boxes by first grabbing all the floors of the hospital and then mapping
-   * them to an ArrayList of all the rooms on that floor. The room combo box selections are determined
-   * based on the selection from the floor combo box.
+   * Populates the location combo boxes by first grabbing all the floors of the hospital and then
+   * mapping them to an ArrayList of all the rooms on that floor. The room combo box selections are
+   * determined based on the selection from the floor combo box.
    */
   private void populateLocationComboBoxes() {
     List<Location> locations = locationDB.getAllLocations();
@@ -112,10 +114,11 @@ public class medicalEquipmentController extends serviceRequestPageController
   }
 
   /**
-   * Populates the equipment combo boxes, which are equipmentType and equipmentQuantity.
-   * Similarly to populateLocationComboBoxes(), equipmentQuantity's selections are determined based
-   * on the selection for equipmentType. equipmentQuantity's selections will be Integers from 1 to however many
-   * Equipment objects of that type are available, or it will have no selections if none are available.
+   * Populates the equipment combo boxes, which are equipmentType and equipmentQuantity. Similarly
+   * to populateLocationComboBoxes(), equipmentQuantity's selections are determined based on the
+   * selection for equipmentType. equipmentQuantity's selections will be Integers from 1 to however
+   * many Equipment objects of that type are available, or it will have no selections if none are
+   * available.
    */
   private void populateEquipComboBoxes() {
     ArrayList<MedicalEquipment> allEquipment =
@@ -154,8 +157,8 @@ public class medicalEquipmentController extends serviceRequestPageController
   }
 
   /**
-   * Populates the medicalEquipmentRequest table from the database. Sets the cell values for each column
-   * to be the corresponding variable in medicalEquipmentRequest.
+   * Populates the medicalEquipmentRequest table from the database. Sets the cell values for each
+   * column to be the corresponding variable in medicalEquipmentRequest.
    */
   private void populateMedEquipRequestTable() {
     ObservableList<medicalEquipmentRequest> medicalEquipmentRequests = populateMedEquipList();
@@ -185,6 +188,7 @@ public class medicalEquipmentController extends serviceRequestPageController
 
   /**
    * Gets the full list of medical equipment requests currently in the database.
+   *
    * @return list of medicalEquipmentRequest objects in the database
    */
   protected ObservableList<medicalEquipmentRequest> populateMedEquipList() {

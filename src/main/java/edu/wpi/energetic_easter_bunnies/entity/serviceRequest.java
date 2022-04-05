@@ -2,7 +2,7 @@ package edu.wpi.energetic_easter_bunnies.entity;
 
 import java.util.Random;
 
-public abstract class serviceRequest {
+public class serviceRequest {
   /*
     public enum Type {
       sanitationRequest,
