@@ -43,12 +43,12 @@ public class languageInterpreterRequest extends serviceRequest {
     this.langforInterpreter = langforInterpreter;
   }
 
-  public String getLanInterpID() {
-    return lanInterpID;
+  public String getRoomSelected() {
+    return this.roomSelected;
   }
 
-  public void setLanInterpID(String lanInterpID) {
-    this.lanInterpID = lanInterpID;
+  public void setLanguageSelected(String languageSelected) {
+    this.languageSelected = languageSelected;
   }
 
   // Language
