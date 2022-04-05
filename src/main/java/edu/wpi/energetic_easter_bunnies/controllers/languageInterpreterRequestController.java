@@ -9,14 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-
-
 public class languageInterpreterRequestController extends serviceRequestPageController
         implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    super(location, resources);
+
     floorSelection.setValue("Select Floor");
     roomSelection.setValue("Select Room");
     languageSelection.setValue("Select Language");

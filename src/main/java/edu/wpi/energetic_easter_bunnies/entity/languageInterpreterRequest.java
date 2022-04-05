@@ -3,12 +3,11 @@ package edu.wpi.energetic_easter_bunnies.entity;
 import java.time.LocalDate;
 
 public class languageInterpreterRequest extends serviceRequest {
-  private String languageSelected;
+  private String lanInterpID;
 
-  private LocalDate startDate;
-  private LocalDate endDate;
-
-  Language langforInterpreter;
+  public languageInterpreterRequest() {
+    super();
+  }
 
   public enum Language {
     En,
@@ -17,9 +16,7 @@ public class languageInterpreterRequest extends serviceRequest {
     CN
   }
 
-  public languageInterpreterRequest() {
-    super();
-  }
+  Language langforInterpreter;
 
   public languageInterpreterRequest(
       String lanInterpID,
@@ -46,12 +43,8 @@ public class languageInterpreterRequest extends serviceRequest {
     this.langforInterpreter = langforInterpreter;
   }
 
-  public void setLanguageSelected(String languageSelected) {
-    this.languageSelected = languageSelected;
-  }
-
-  public String getLanguageSelected() {
-    return this.languageSelected;
+  public String getRoomSelected() {
+    return this.roomSelected;
   }
 
   public void setLanguageSelected(String languageSelected) {
