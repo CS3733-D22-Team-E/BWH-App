@@ -43,6 +43,17 @@ public class languageInterpreterRequest extends serviceRequest {
     this.langforInterpreter = langforInterpreter;
   }
 
+  /*<<<<<<< HEAD
+  =======
+    public String getRoomSelected() {
+      return this.roomSelected;
+    }
+
+    public void setLanguageSelected(String languageSelected) {
+      this.languageSelected = languageSelected;
+    }
+
+  >>>>>>> parent of 1f427d6 (Merge pull request #17 from CS3733-D22-Team-E/language_request)*/
   // Language
   public Language getLang() {
     return langforInterpreter;

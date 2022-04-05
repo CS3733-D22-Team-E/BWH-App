@@ -243,7 +243,7 @@
                   </Pane>
                </children>
             </AnchorPane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" disable="true" style="-fx-background-color: transparent;" />
             </children>
         </StackPane>
     </children>

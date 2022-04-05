@@ -1,4 +1,5 @@
 package edu.wpi.energetic_easter_bunnies.entity;
+
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -60,9 +61,13 @@ public class serviceRequest {
   private String requestStatus;
   private String staffAssignee;
 
-  public Type getRequestType() { return requestType; }
+  public Type getRequestType() {
+    return requestType;
+  }
 
-  public void setRequestType(Type requestType) { this.requestType = requestType; }
+  public void setRequestType(Type requestType) {
+    this.requestType = requestType;
+  }
 
   public serviceRequest(
       String serviceRequestID,

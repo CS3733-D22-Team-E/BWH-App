@@ -30,6 +30,7 @@ public class statusPageController extends containsSideMenu {
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+    super.initialize(url, rb);
     try {
       db = new ServiceRequestDAOImpl();
       ObservableList<serviceRequestModel> requestList = populateList();
