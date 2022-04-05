@@ -2,8 +2,6 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
-import edu.wpi.energetic_easter_bunnies.Main;
 import edu.wpi.energetic_easter_bunnies.entity.*;
 import java.io.IOException;
 import java.net.URL;
@@ -11,12 +9,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 
-public abstract class serviceRequestPageController extends sideMenuController {
+public abstract class serviceRequestPageController extends containsSideMenu {
 
   @FXML TextField notes;
   @FXML Button submitButton;
@@ -25,7 +20,6 @@ public abstract class serviceRequestPageController extends sideMenuController {
   @FXML TextField staffAssignee;
   @FXML JFXHamburger burger;
   @FXML JFXDrawer drawer;
-  VBox box;
 
   serviceRequestPageController() {
     super();

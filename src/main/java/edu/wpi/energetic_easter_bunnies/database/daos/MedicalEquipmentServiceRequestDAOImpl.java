@@ -19,8 +19,8 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
     // int numID = 0; //TODO: Assign Medical Requests an ID value
     while (rs.next()) {
       String medEquipReqID = rs.getString("MED_EQUIPMENTID");
-      String reqDate = rs.getString("REQUESTDATE");
-      String deliveryDate = rs.getString("DELIVERYDATE");
+      java.sql.Date reqDate = rs.getDate("REQUESTDATE");
+      java.sql.Date deliveryDate = rs.getDate("DELIVERYDATE");
       boolean isUrgent = rs.getBoolean("ISURGENT");
       String equipment = rs.getString("EQUIP");
       int equipQuantity = rs.getInt("EQUIPQUANTITY");
@@ -41,8 +41,9 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
               staffAssignee,
               equipment,
               equipQuantity,
-              reqDate,
-              deliveryDate);
+              reqDate.toLocalDate(),
+              deliveryDate.toLocalDate(),
+              "");
       medicalRequests.add(equipRequest);
       // numID++;
     }

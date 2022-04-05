@@ -72,7 +72,7 @@
             </StackPane>
                 <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
                     <children>
-                        <Label alignment="CENTER" text="Brigham &amp; Woman's Hospital" textFill="WHITE">
+                        <Label alignment="CENTER" text="Brigham and Women's Hospital" textFill="WHITE">
                             <font>
                                 <Font name="Book Antiqua Bold" size="30.0" />
                             </font>
@@ -202,15 +202,16 @@
                                       </TextField>
                                   </children>
                               </VBox>
-                              <TableView layoutX="398.0" layoutY="35.0">
+                              <TableView layoutX="398.0" layoutY="35.0" prefHeight="400.0" prefWidth="631.0">
                                   <columns>
                                       <TableColumn prefWidth="75.0" text="Request ID" />
-                                      <TableColumn prefWidth="67.0" text="Status" />
-                                      <TableColumn prefWidth="100.0" text="Assigned Staff" />
-                                      <TableColumn prefWidth="72.0" text="Urgency" />
-                                      <TableColumn prefWidth="83.0" text="Biohazard" />
-                                      <TableColumn prefWidth="72.0" text="Size" />
-                                      <TableColumn prefWidth="134.0" text="Location" />
+                                      <TableColumn prefWidth="65.0" text="Status" />
+                                      <TableColumn prefWidth="101.0" text="Assigned Staff" />
+                                      <TableColumn prefWidth="63.0" text="Urgency" />
+                                      <TableColumn prefWidth="76.0" text="Biohazard" />
+                                      <TableColumn prefWidth="63.0" text="Size" />
+                                      <TableColumn prefWidth="97.0" text="Floor ID" />
+                              <TableColumn prefWidth="90.0" text="Room ID" />
                                   </columns>
                               </TableView>
                               <VBox layoutY="81.0">

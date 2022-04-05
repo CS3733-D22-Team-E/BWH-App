@@ -2,10 +2,8 @@ package edu.wpi.energetic_easter_bunnies.database.daos;
 
 import edu.wpi.energetic_easter_bunnies.database.DBConnection;
 import edu.wpi.energetic_easter_bunnies.entity.labRequest;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +26,24 @@ public class LabRequestDAOImpl implements LabRequestDAO {
       String locNodeID = rs.getString("LOCATIONID");
       String requestStatus = rs.getString("REQUESTSTATUS");
       String otherNotes = rs.getString("OTHERNOTES");
+      String floorID = "";
+      java.sql.Date deliveryDate = Date.valueOf(LocalDate.now());
+      java.sql.Date requestDate = Date.valueOf(LocalDate.now());
+      boolean isUrgent = false;
 
       labRequest LabRequest =
           new labRequest(
-              labReqID, labRedType, timeFrame, staffAssignee, locNodeID, requestStatus, otherNotes);
+              labReqID,
+              labRedType,
+              timeFrame,
+              floorID,
+              locNodeID,
+              isUrgent,
+              staffAssignee,
+              requestStatus,
+              otherNotes,
+              requestDate.toLocalDate(),
+              deliveryDate.toLocalDate());
       labRequests.add(LabRequest);
       // numID++;
     }
@@ -67,7 +79,7 @@ public class LabRequestDAOImpl implements LabRequestDAO {
             + "','"
             + labRequest.getStaffAssignee()
             + "','"
-            + labRequest.getLocNodeID()
+            + labRequest.getRoomID()
             + "','"
             + labRequest.getTimeFrame()
             + "','"

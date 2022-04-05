@@ -100,7 +100,7 @@ public class DBCreation {
             + "    STATUS        VARCHAR(35) not null,\n"
             + "    TYPE          VARCHAR(35) not null,\n"
             + "    ASSIGNEE      VARCHAR(35),\n"
-            + "    REQUEST_DATE DATE        not null,\n"
+            + "    REQUEST_DATE  DATE        not null,\n"
             + "    DELIVERY_DATE DATE,\n"
             + "    ISURGENT      BOOLEAN     not null\n"
             + ")";

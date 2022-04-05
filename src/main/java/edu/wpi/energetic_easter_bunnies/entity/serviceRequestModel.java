@@ -1,24 +1,22 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class serviceRequestModel {
 
-  SimpleIntegerProperty ID;
   SimpleBooleanProperty isUrgent;
-  SimpleStringProperty Status, Type, Assignee, requestDate, deliveryDate;
+  SimpleStringProperty ID, Status, Type, Assignee, requestDate, deliveryDate;
 
   public serviceRequestModel(
-      Integer ID,
+      String ID,
       String Status,
       String Type,
       String Assignee,
       String requestDate,
       String deliveryDate,
       boolean isUrgent) {
-    this.ID = new SimpleIntegerProperty(ID);
+    this.ID = new SimpleStringProperty(ID);
     this.Status = new SimpleStringProperty(Status);
     this.Type = new SimpleStringProperty(Type);
     this.Assignee = new SimpleStringProperty(Assignee);
@@ -27,15 +25,15 @@ public class serviceRequestModel {
     this.isUrgent = new SimpleBooleanProperty(isUrgent);
   }
 
-  public int getID() {
+  public String getID() {
     return ID.get();
   }
 
-  public SimpleIntegerProperty IDProperty() {
+  public SimpleStringProperty IDProperty() {
     return ID;
   }
 
-  public void setID(int ID) {
+  public void setID(String ID) {
     this.ID.set(ID);
   }
 
