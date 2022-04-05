@@ -1,64 +1,55 @@
 package edu.wpi.energetic_easter_bunnies.entity;
+import java.time.LocalDate;
+import java.util.Random;
 
-import java.util.Date;
-
-public abstract class serviceRequest {
+public class serviceRequest {
   public enum Type {
-    sanitationRequest {
+    SANITATION_REQ {
       @Override
       public String toString() {
-        return "Sanitation";
+        return "SANITATION_REQ";
       }
     },
-    medicalEquipmentRequest {
+    MED_EQUIP_REQ {
       @Override
       public String toString() {
-        return "Medical Equipment";
+        return "MED_EQUIP_REQ";
       }
     },
-    mealDeliveryRequest {
+    LAB_REQUEST {
       @Override
       public String toString() {
-        return "Meal Delivery";
+        return "LAB_REQUEST";
       }
     },
-    translatorRequest {
+    MEAL_DELIV_REQ {
       @Override
       public String toString() {
-        return "Translation";
+        return "MEAL_DELIV_REQ";
       }
     },
-    medicineRequest {
+    LANG_INTERP_REQ {
       @Override
       public String toString() {
-        return "Medicine";
+        return "LANG_INTERP_REQ";
+      }
+    },
+    MED_DELIV_REQ {
+      @Override
+      public String toString() {
+        return "MED_DELIV_REQ";
+      }
+    },
+    SERVICEREQUEST {
+      @Override
+      public String toString() {
+        return "SERVICEREQUEST";
       }
     }
   }
 
-  enum Status {
-    Todo {
-      @Override
-      public String toString() {
-        return "To Do";
-      }
-    },
-    InProgress {
-      @Override
-      public String toString() {
-        return "In Progress";
-      }
-    },
-    Complete {
-      @Override
-      public String toString() {
-        return "Complete";
-      }
-    }
-  }
-
-  private Date requestDate; // TODO: Implement later
-  private Date deliveryDate; // TODO: Implement later
+  private LocalDate requestDate; // TODO: Implement later
+  private LocalDate deliveryDate; // TODO: Implement later
   private String serviceRequestID;
   private String otherNotes;
   private String floorID;
@@ -69,16 +60,41 @@ public abstract class serviceRequest {
   private String requestStatus;
   private String staffAssignee;
 
-  public Type getRequestType() {
-    return requestType;
+  public Type getRequestType() { return requestType; }
+
+  public void setRequestType(Type requestType) { this.requestType = requestType; }
+
+  public serviceRequest(
+      String serviceRequestID,
+      String serviceRequestType,
+      String otherNotes,
+      String floorID,
+      String roomID,
+      boolean isUrgent,
+      String requestStatus,
+      String staffAssignee,
+      LocalDate requestDate,
+      LocalDate deliveryDate) {
+    this.serviceRequestID = serviceRequestID;
+    this.requestType = Type.valueOf(serviceRequestType);
+    this.otherNotes = otherNotes;
+    this.floorID = floorID;
+    this.roomID = roomID;
+    this.isUrgent = isUrgent;
+    this.requestStatus = requestStatus;
+    this.staffAssignee = staffAssignee;
+    this.requestDate = requestDate;
+    this.deliveryDate = deliveryDate;
   }
 
-  public String getRequestString() {
-    return requestType.toString();
-  }
-
-  public void setRequestType(Type requestType) {
-    this.requestType = requestType;
+  public serviceRequest() {
+    this.serviceRequestID = generateRandomID(6);
+    this.otherNotes = "";
+    this.floorID = "";
+    this.roomID = "";
+    this.isUrgent = false;
+    this.requestStatus = "";
+    this.staffAssignee = "";
   }
 
   public String getServiceRequestID() {
@@ -87,33 +103,6 @@ public abstract class serviceRequest {
 
   public void setServiceRequestID(String serviceRequestID) {
     this.serviceRequestID = serviceRequestID;
-  }
-
-  public serviceRequest(
-      String serviceRequestID,
-      String otherNotes,
-      String floorID,
-      String roomID,
-      boolean isUrgent,
-      String requestStatus,
-      String staffAssignee) {
-    this.serviceRequestID = serviceRequestID;
-    this.otherNotes = otherNotes;
-    this.floorID = floorID;
-    this.roomID = roomID;
-    this.isUrgent = isUrgent;
-    this.requestStatus = requestStatus;
-    this.staffAssignee = staffAssignee;
-  }
-
-  public serviceRequest() {
-    this.serviceRequestID = "";
-    this.otherNotes = "";
-    this.floorID = "";
-    this.roomID = "";
-    this.isUrgent = false;
-    this.requestStatus = "";
-    this.staffAssignee = "";
   }
 
   public String getFloorID() {
@@ -162,5 +151,37 @@ public abstract class serviceRequest {
 
   public void setStaffAssignee(String staffAssignee) {
     this.staffAssignee = staffAssignee;
+  }
+
+  public static String generateRandomID(int length) {
+    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    StringBuilder result = new StringBuilder();
+    Random random = new Random();
+
+    for (int i = 0; i < length; i++) {
+      char randChar = alphabet.charAt(random.nextInt(alphabet.length()));
+      result.append(randChar);
+    }
+    return result.toString();
+  }
+
+  public LocalDate getRequestDate() {
+    return requestDate;
+  }
+
+  public void setRequestDate(LocalDate requestDate) {
+    this.requestDate = requestDate;
+  }
+
+  public LocalDate getDeliveryDate() {
+    return deliveryDate;
+  }
+
+  public void setDeliveryDate(LocalDate deliveryDate) {
+    this.deliveryDate = deliveryDate;
+  }
+
+  public boolean isUrgent() {
+    return isUrgent;
   }
 }

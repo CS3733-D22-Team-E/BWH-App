@@ -60,7 +60,7 @@
             <Pane prefHeight="90.0" prefWidth="1080.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5c59f3" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
-                  <Label alignment="CENTER" layoutX="14.0" layoutY="26.0" text="Brigham Woman's Hospital" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="14.0" layoutY="26.0" text="Brigham and Women's Hospital" textFill="WHITE">
                      <font>
                         <Font name="Book Antiqua Bold" size="30.0" />
                      </font>

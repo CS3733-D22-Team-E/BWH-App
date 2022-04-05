@@ -68,12 +68,12 @@
             </StackPane>
             <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
                <children>
-                  <Label alignment="CENTER" text="Brigham Woman's Hospital" textFill="WHITE">
+                  <Label alignment="CENTER" text="Brigham and Women's Hospital" textFill="WHITE">
                      <font>
                         <Font name="Book Antiqua Bold" size="30.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="Sanitation Services" textFill="WHITE">
+                  <Label alignment="CENTER" text="Service Request Status Page" textFill="WHITE">
                      <font>
                         <Font name="Book Antiqua Bold" size="18.0" />
                      </font>
@@ -93,7 +93,7 @@
             </Pane>
          </children>
       </HBox>
-      <StackPane prefHeight="561.0" prefWidth="1080.0">
+      <StackPane minHeight="-Infinity" minWidth="-Infinity">
          <children>
             <AnchorPane>
                <StackPane.margin>
