@@ -7,6 +7,7 @@ import edu.wpi.energetic_easter_bunnies.Main;
 import edu.wpi.energetic_easter_bunnies.entity.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,7 +43,7 @@ public abstract class serviceRequestPageController extends sideMenuController {
   }
 
   @FXML
-  public abstract void submitButton(ActionEvent event);
+  public abstract void submitButton(ActionEvent event) throws SQLException;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {

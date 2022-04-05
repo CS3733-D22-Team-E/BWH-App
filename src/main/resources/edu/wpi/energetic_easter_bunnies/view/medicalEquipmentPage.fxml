@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXHamburger?>
-<?import java.lang.Integer?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
@@ -11,6 +8,9 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -24,173 +24,190 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.medicalEquipmentController">
+<?import java.lang.Integer?>
+<VBox prefHeight="640.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.medicalEquipmentController">
    <children>
-      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;">
+      <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Menu">
+               <items>
+                  <MenuItem fx:id="homeMenuButton" mnemonicParsing="false" onAction="#homeButton" text="Home" />
+                  <Menu mnemonicParsing="false" text="Pages">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#sanitationButton" text="Sanitation" />
+                        <MenuItem mnemonicParsing="false" onAction="#medicalEquipmentButton" text="Medical Equipment Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
+                        <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Translation" />
+                        <MenuItem mnemonicParsing="false" onAction="#labRequestButton" text="Lab Request" />
+                     </items>
+                  </Menu>
+                  <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitButton" text="Quit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About Application" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <StackPane minHeight="-Infinity" minWidth="-Infinity">
+            <Pane prefHeight="90.0" prefWidth="1080.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
-                  <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/microscope.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </StackPane>
-            <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
-               <children>
-                  <Label alignment="CENTER" text="Brigham Woman's Hospital" textFill="WHITE">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f35959" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
+                  <Label alignment="CENTER" layoutX="107.0" layoutY="13.0" text="Brigham &amp; Women's Hospital" textFill="WHITE">
                      <font>
                         <Font name="Book Antiqua Bold" size="30.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="Medical Equipment Delivery" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="192.0" layoutY="52.0" text="Medical Equipment Delivery" textFill="WHITE">
                      <font>
                         <Font name="Book Antiqua Bold" size="18.0" />
                      </font>
                   </Label>
-               </children>
-            </VBox>
-            <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="120.0" style="-fx-border-color: black;">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-               <children>
-                  <JFXHamburger fx:id="burger" layoutX="45.0" layoutY="35.0" />
-               </children>
-            </Pane>
-         </children>
-      </HBox>
-      <StackPane>
-         <children>
-            <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0">
-               <children>
-                  <AnchorPane layoutX="320.0" layoutY="410.0">
+                  <StackPane layoutX="14.0" layoutY="13.0">
                      <children>
-                        <Group layoutX="6.198883056640625E-6" layoutY="6.198883056640625E-6" />
-                        <Button fx:id="submitButton" alignment="CENTER" mnemonicParsing="false" onAction="#submitButton" prefHeight="75.0" prefWidth="152.0" style="-fx-background-color: #f35959;" text="Submit Request" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+                        <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/microscope.png" />
+                           </image>
+                        </ImageView>
                      </children>
-                  </AnchorPane>
-                  <VBox alignment="CENTER_LEFT" fillWidth="false" layoutX="42.0" layoutY="15.0" prefHeight="381.0" prefWidth="555.0">
-                     <children>
-                        <HBox prefHeight="87.0" prefWidth="556.0" spacing="10.0">
-                           <children>
-                              <Label style="-fx-font-weight: bold;" text="Location:" />
-                              <ComboBox fx:id="floor" prefWidth="150.0" promptText="Select Floor">
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Test 1" />
-                                    </FXCollections>
-                                 </items>
-                              </ComboBox>
-                              <ComboBox fx:id="room" prefWidth="150.0" promptText="Select Room">
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Test 1" />
-                                    </FXCollections>
-                                 </items>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="87.0" prefWidth="560.0" spacing="10.0">
-                           <children>
-                              <Label style="-fx-font-weight: bold;" text="Equipment:" />
-                              <ComboBox fx:id="equipmentType" prefWidth="150.0" promptText="Select Equipment Type">
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Test 1" />
-                                    </FXCollections>
-                                 </items>
-                              </ComboBox>
-                              <ComboBox fx:id="equipmentQuantity" prefWidth="150.0" promptText="Select Quantity">
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <Integer fx:value="1" />
-                                    </FXCollections>
-                                 </items>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="92.0" prefWidth="557.0" spacing="10.0">
-                           <children>
-                              <Label style="-fx-font-weight: bold;" text="Delivery Time:" />
-                              <TextField fx:id="deliveryDate" promptText="MM/DD/YYYY" />
-                              <TextField fx:id="deliveryTime" promptText="_ _ : _ _ AM/PM" />
-                              <CheckBox fx:id="isUrgent" mnemonicParsing="false" text="Urgent" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="90.0" prefWidth="329.0" spacing="10.0">
-                           <children>
-                              <Label style="-fx-font-weight: bold;" text="Request Status:" />
-                              <TextField fx:id="requestStatus" prefHeight="25.0" prefWidth="192.0" promptText="Done, Processing, or leave blank" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="103.0" prefWidth="315.0" spacing="10.0">
-                           <children>
-                              <Label style="-fx-font-weight: bold;" text="Staff Assignee:" />
-                              <TextField fx:id="staffAssignee" prefHeight="25.0" prefWidth="159.0" promptText="Staff to carry out request" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="92.0" prefWidth="558.0" spacing="10.0">
-                           <children>
-                              <Label style="-fx-font-weight: bold;" text="Other Notes:" />
-                              <TextField fx:id="notes" alignment="TOP_LEFT" prefHeight="58.0" prefWidth="176.0" promptText="Type to add text..." />
-                           </children>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets top="25.0" />
-                     </padding>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </VBox>
-                  <AnchorPane layoutX="42.0" layoutY="410.0" prefHeight="58.0" prefWidth="164.0">
-                     <children>
-                        <Button fx:id="resetButton" alignment="CENTER" layoutY="-3.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="62.0" prefWidth="164.0" text="Reset Fields">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </AnchorPane>
-                  <Label layoutX="615.0" layoutY="40.0" prefHeight="27.0" prefWidth="347.0" style="-fx-font-weight: bold;" text="All Medical Equipment Service Requests">
+                  </StackPane>
+                  <Button fx:id="homeButton" alignment="CENTER" layoutX="852.0" layoutY="8.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="75.0" prefWidth="222.0" text="     Home" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
-                  </Label>
-                  <TableView fx:id="medRequestTable" layoutX="521.0" layoutY="75.0" prefHeight="315.0" prefWidth="535.0">
-                     <columns>
-                        <TableColumn fx:id="tableDeliveryDate" prefWidth="75.0" text="Date" />
-                        <TableColumn fx:id="tableDeliveryTime" prefWidth="75.0" text="Time" />
-                        <TableColumn fx:id="tableIsUrgent" prefWidth="75.0" text="Urgent" />
-                        <TableColumn fx:id="tableEquipmentType" prefWidth="75.0" text="Type" />
-                        <TableColumn fx:id="tableEquipmentQuantity" prefWidth="75.0" text="Quantity" />
-                        <TableColumn fx:id="tableStaffAssignee" prefWidth="75.0" text="Staff" />
-                        <TableColumn fx:id="tableRoomID" prefWidth="75.0" text="Room" />
-                        <TableColumn fx:id="tableFloorID" prefWidth="75.0" text="Floor" />
-                        <TableColumn fx:id="tableRequestStatus" prefWidth="75.0" text="Status" />
-                        <TableColumn fx:id="tableOtherNotes" prefWidth="75.0" text="Notes" />
-                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
+                  </Button>
+                  <ImageView fitHeight="76.0" fitWidth="160.0" layoutX="852.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/home.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <AnchorPane layoutX="464.0" layoutY="493.0">
+               <children>
+                  <Group layoutX="6.198883056640625E-6" layoutY="6.198883056640625E-6" />
+                  <Button fx:id="submitButton" alignment="CENTER" mnemonicParsing="false" onAction="#submitButton" prefHeight="75.0" prefWidth="152.0" style="-fx-background-color: #f35959;" text="Submit Request" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
+            <VBox alignment="CENTER_LEFT" fillWidth="false" layoutX="43.0" layoutY="90.0" prefHeight="381.0" prefWidth="555.0">
+               <children>
+                  <HBox prefHeight="87.0" prefWidth="556.0" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="Location:" />
+                        <ComboBox fx:id="floor" prefWidth="150.0" promptText="Select Floor">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Test 1" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                        <ComboBox fx:id="room" prefWidth="150.0" promptText="Select Room">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Test 1" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="87.0" prefWidth="560.0" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="Equipment:" />
+                        <ComboBox fx:id="equipmentType" prefWidth="150.0" promptText="Select Equipment Type">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Test 1" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                        <ComboBox fx:id="equipmentQuantity" prefWidth="150.0" promptText="Select Quantity">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <Integer fx:value="1" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="92.0" prefWidth="557.0" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="Delivery Time:" />
+                        <TextField fx:id="deliveryDate" promptText="MM/DD/YYYY" />
+                        <TextField fx:id="deliveryTime" promptText="_ _ : _ _ AM/PM" />
+                        <CheckBox fx:id="isUrgent" mnemonicParsing="false" text="Urgent" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="90.0" prefWidth="329.0" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="Request Status:" />
+                        <TextField fx:id="requestStatus" prefHeight="25.0" prefWidth="192.0" promptText="Done, Processing, or leave blank" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="103.0" prefWidth="315.0" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="Staff Assignee:" />
+                        <TextField fx:id="staffAssignee" prefHeight="25.0" prefWidth="159.0" promptText="Staff to carry out request" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="92.0" prefWidth="558.0" spacing="10.0">
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="Other Notes:" />
+                        <TextField fx:id="notes" alignment="TOP_LEFT" prefHeight="58.0" prefWidth="176.0" promptText="Type to add text..." />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets top="25.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+            <AnchorPane layoutX="902.0" layoutY="543.0" prefHeight="58.0" prefWidth="164.0">
+               <children>
+                  <Button fx:id="resetButton" alignment="CENTER" layoutY="-3.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="62.0" prefWidth="164.0" text="Reset Fields">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </AnchorPane>
+            <Label layoutX="616.0" layoutY="115.0" prefHeight="27.0" prefWidth="347.0" style="-fx-font-weight: bold;" text="All Medical Equipment Service Requests">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="medRequestTable" layoutX="522.0" layoutY="150.0" prefHeight="315.0" prefWidth="535.0">
+               <columns>
+                  <TableColumn fx:id="tableDeliveryDate" prefWidth="75.0" text="Date" />
+                  <TableColumn fx:id="tableDeliveryTime" prefWidth="75.0" text="Time" />
+                  <TableColumn fx:id="tableIsUrgent" prefWidth="75.0" text="Urgent" />
+                  <TableColumn fx:id="tableEquipmentType" prefWidth="75.0" text="Type" />
+                  <TableColumn fx:id="tableEquipmentQuantity" prefWidth="75.0" text="Quantity" />
+                  <TableColumn fx:id="tableStaffAssignee" prefWidth="75.0" text="Staff" />
+                  <TableColumn fx:id="tableRoomID" prefWidth="75.0" text="Room" />
+                  <TableColumn fx:id="tableFloorID" prefWidth="75.0" text="Floor" />
+                  <TableColumn fx:id="tableRequestStatus" prefWidth="75.0" text="Status" />
+                  <TableColumn fx:id="tableOtherNotes" prefWidth="75.0" text="Notes" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
          </children>
-      </StackPane>
+      </AnchorPane>
    </children>
 </VBox>

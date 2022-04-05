@@ -12,6 +12,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
 
   public MedicalEquipmentServiceRequestDAOImpl() throws SQLException {
     medicalRequests = new ArrayList<>();
+    // String url = "jdbc:derby:myDB;";
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM MED_EQUIP_REQ ORDER BY REQUESTDATE DESC";
     ResultSet rs = statement.executeQuery(query);
@@ -91,7 +92,6 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
             + "','"
             + request.getOtherNotes()
             + "')";
-    System.out.println(query);
     statement.executeUpdate(query);
   }
   /*

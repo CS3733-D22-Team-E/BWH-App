@@ -1,93 +1,32 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
-import java.util.Date;
+import java.util.Random;
 
 public class serviceRequest {
-  public enum Type {
-    sanitationRequest {
-      @Override
-      public String toString() {
-        return "Sanitation";
-      }
-    },
-    medicalEquipmentRequest {
-      @Override
-      public String toString() {
-        return "Medical Equipment";
-      }
-    },
-    mealDeliveryRequest {
-      @Override
-      public String toString() {
-        return "Meal Delivery";
-      }
-    },
-    translatorRequest {
-      @Override
-      public String toString() {
-        return "Translation";
-      }
-    },
-    medicineRequest {
-      @Override
-      public String toString() {
-        return "Medicine";
-      }
+  /*
+    public enum Type {
+      sanitationRequest,
+      medicalEquipmentRequest,
+      mealDeliveryRequest,
+      translatorRequest,
+      medicineRequest
     }
-  }
-
-  enum Status {
-    Todo {
-      @Override
-      public String toString() {
-        return "To Do";
-      }
-    },
-    InProgress {
-      @Override
-      public String toString() {
-        return "In Progress";
-      }
-    },
-    Complete {
-      @Override
-      public String toString() {
-        return "Complete";
-      }
-    }
-  }
-
-  private Date requestDate; // TODO: Implement later
-  private Date deliveryDate; // TODO: Implement later
+  */
+  // private Date requestDate; //TODO: Implement later
+  // private Date deliveryDate; //TODO: Implement later
   private String serviceRequestID;
   private String otherNotes;
   private String floorID;
   private String roomID;
   private boolean isUrgent;
-  private Type requestType;
+  // private Type requestType;
 
   private String requestStatus;
   private String staffAssignee;
 
-  public Type getRequestType() {
-    return requestType;
-  }
+  // public Type getRequestType() { return requestType; }
 
-  public String getRequestString() {
-    return requestType.toString();
-  }
-
-  public void setRequestType(Type requestType) {
-    this.requestType = requestType;
-  }
-
-  public String getServiceRequestID() {
-    return serviceRequestID;
-  }
-
-  public void setServiceRequestID(String serviceRequestID) {
-    this.serviceRequestID = serviceRequestID;
-  }
+  // public void setRequestType(Type requestType) { this.requestType = requestType; }
 
   public serviceRequest(
       String serviceRequestID,
@@ -107,13 +46,21 @@ public class serviceRequest {
   }
 
   public serviceRequest() {
-    this.serviceRequestID = "";
+    this.serviceRequestID = generateRandomID(6);
     this.otherNotes = "";
     this.floorID = "";
     this.roomID = "";
     this.isUrgent = false;
     this.requestStatus = "";
     this.staffAssignee = "";
+  }
+
+  public String getServiceRequestID() {
+    return serviceRequestID;
+  }
+
+  public void setServiceRequestID(String serviceRequestID) {
+    this.serviceRequestID = serviceRequestID;
   }
 
   public String getFloorID() {
@@ -162,5 +109,17 @@ public class serviceRequest {
 
   public void setStaffAssignee(String staffAssignee) {
     this.staffAssignee = staffAssignee;
+  }
+
+  public static String generateRandomID(int length) {
+    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    StringBuilder result = new StringBuilder();
+    Random random = new Random();
+
+    for (int i = 0; i < length; i++) {
+      char randChar = alphabet.charAt(random.nextInt(alphabet.length()));
+      result.append(randChar);
+    }
+    return result.toString();
   }
 }
