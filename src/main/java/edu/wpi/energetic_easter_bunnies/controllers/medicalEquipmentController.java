@@ -1,12 +1,15 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
-import edu.wpi.energetic_easter_bunnies.database.MedicalEquipmentServiceRequestDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.Location;
+import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentServiceRequestDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,8 +40,9 @@ public class medicalEquipmentController extends serviceRequestPageController {
   @FXML TableColumn<medicalEquipmentRequest, String> tableOtherNotes;
 
   MedicalEquipmentServiceRequestDAOImpl medEquipmentDB;
-
   medicalEquipmentRequest medicalEquipmentRequest = new medicalEquipmentRequest();
+
+  LocationDAOImpl locationDB;
 
   public medicalEquipmentController() {}
 
@@ -46,6 +50,42 @@ public class medicalEquipmentController extends serviceRequestPageController {
   public void initialize(URL url, ResourceBundle rb) {
     super.initialize(url, rb);
     try {
+      locationDB = new LocationDAOImpl();
+      List<Location> locations = locationDB.getAllLocations();
+      List<String> floors = new ArrayList<>();
+      HashMap<String, ArrayList<String>> floorToRooms = new HashMap<>();
+
+      for (Location l : locations) {
+        String floor = l.getFloor();
+        if (!floors.contains(floor)) {
+          floors.add(floor);
+        }
+        ArrayList<String> roomsOnFloor;
+        if (!floorToRooms.containsKey(floor)) {
+          roomsOnFloor = new ArrayList<>();
+        } else {
+          roomsOnFloor = floorToRooms.get(floor);
+        }
+        roomsOnFloor.add(l.getNodeID());
+        floorToRooms.put(floor, roomsOnFloor);
+      }
+      floor.setItems(FXCollections.observableArrayList(floors));
+      floor
+          .getSelectionModel()
+          .selectedItemProperty()
+          .addListener(
+              new ChangeListener<String>() {
+                @Override
+                public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue,
+                    String newValue) {
+                  ObservableList<String> roomsToDisplay =
+                      FXCollections.observableArrayList((floorToRooms.get(newValue)));
+                  room.setItems(roomsToDisplay);
+                }
+              });
+
       medEquipmentDB = new MedicalEquipmentServiceRequestDAOImpl();
       ObservableList<medicalEquipmentRequest> medicalEquipmentRequests = populateMedEquipList();
       tableDeliveryDate.setCellValueFactory(
@@ -85,17 +125,19 @@ public class medicalEquipmentController extends serviceRequestPageController {
   }
 
   @FXML
-  public void submitButton(ActionEvent event) {
+  public void submitButton(ActionEvent event) throws SQLException {
     try {
       medicalEquipmentRequest.setFloorID(floor.getValue());
       medicalEquipmentRequest.setRoomID(room.getValue());
       medicalEquipmentRequest.setEquipment(equipmentType.getValue());
       medicalEquipmentRequest.setEquipmentQuantity(equipmentQuantity.getValue());
+      medicalEquipmentRequest.setRequestStatus(requestStatus.getText());
+      medicalEquipmentRequest.setStaffAssignee(staffAssignee.getText());
       medicalEquipmentRequest.setDeliveryDate(deliveryDate.getText());
       medicalEquipmentRequest.setDeliveryTime(deliveryTime.getText());
       medicalEquipmentRequest.setUrgent(isUrgent.isSelected());
       medicalEquipmentRequest.setOtherNotes(notes.getText());
-      sendToDB(medicalEquipmentRequest);
+      medSendToDB(medicalEquipmentRequest);
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
@@ -117,5 +159,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
     notes.clear();
   }
 
-  private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) {}
+  private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) throws SQLException {
+    medEquipmentDB.addMedEquipReq(medEquipmentRequest);
+  }
 }

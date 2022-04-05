@@ -161,8 +161,3 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/java,macos,gradle,intellij+all
 
 /myDB/
-myDB/seg0/c4c0.dat
-myDB/log/logmirror.ctrl
-myDB/log/log1.dat
-myDB/log/log.ctrl
-myDB/db.lck

@@ -73,4 +73,6 @@ public abstract class serviceRequestPageController extends sideMenuController {
           }
         });
   }
+
+  public abstract void initialize(URL location, ResourceBundle resources);
 }

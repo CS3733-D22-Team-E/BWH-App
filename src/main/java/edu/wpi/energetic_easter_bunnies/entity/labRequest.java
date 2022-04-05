@@ -11,6 +11,33 @@ public class labRequest extends serviceRequest {
   private String labRequestType;
   private String building;
   private String floor;
+  private String timeFrame;
+  private String locNodeID;
+
+  public labRequest(
+      String labRequestID,
+      String labRequestType,
+      String timeFrame,
+      String staffAssignee,
+      String locNodeID,
+      String requestStatus,
+      String otherNotes) {
+    setServiceRequestID(labRequestID);
+    setLabRequestType(labRequestType);
+    setTimeFrame(timeFrame);
+    setStaffAssignee(staffAssignee);
+    setLocNodeID(locNodeID);
+    setRequestStatus(requestStatus);
+    setOtherNotes(otherNotes);
+  }
+
+  public labRequest() {
+    this.labRequestType = "";
+    this.building = "";
+    this.floor = "";
+    this.timeFrame = "";
+    this.locNodeID = "";
+  }
 
   public String getLabRequestType() {
     return labRequestType;
@@ -34,5 +61,21 @@ public class labRequest extends serviceRequest {
 
   public void setFloor(String floor) {
     this.floor = floor;
+  }
+
+  public void setTimeFrame(String timeFrame) {
+    this.timeFrame = timeFrame;
+  }
+
+  public String getTimeFrame() {
+    return timeFrame;
+  }
+
+  public void setLocNodeID(String locNodeID) {
+    this.locNodeID = locNodeID;
+  }
+
+  public String getLocNodeID() {
+    return locNodeID;
   }
 }
