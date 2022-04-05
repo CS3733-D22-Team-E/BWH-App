@@ -94,12 +94,4 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
             + "')";
     statement.executeUpdate(query);
   }
-  /*
-    public static void main(String[] args) throws SQLException {
-      MedicalEquipmentServiceRequestDAOImpl db = new MedicalEquipmentServiceRequestDAOImpl();
-      db.addMedEquipReq(
-          new medicalEquipmentRequest(
-              "1234", "note", "floor", "45", false, "inprogress", "me", "bed", 5, "1/12", "1/13"));
-    }
-  */
 }
