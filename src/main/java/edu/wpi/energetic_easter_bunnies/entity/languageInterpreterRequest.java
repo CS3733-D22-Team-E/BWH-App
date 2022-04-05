@@ -3,36 +3,47 @@ package edu.wpi.energetic_easter_bunnies.entity;
 import java.time.LocalDate;
 
 public class languageInterpreterRequest extends serviceRequest {
-  private String lanInterpID;
-  private String floorSelected;
-  private String roomSelected;
   private String languageSelected;
 
   private LocalDate startDate;
   private LocalDate endDate;
-  private int roomNumber;
+
+  Language langforInterpreter;
+
+  public enum Language {
+    En,
+    Es,
+    FR,
+    CN
+  }
 
   public languageInterpreterRequest() {
     super();
-    // this.startDate = LocalDate.parse("");
-    // this.endDate = LocalDate.parse("");
-    this.roomNumber = 0;
   }
 
-  public void setFloorSelected(String floorSelected) {
-    this.floorSelected = floorSelected;
-  }
-
-  public String getFloorSelected(String floorSelected) {
-    return this.floorSelected;
-  }
-
-  public void setRoomSelected(String roomSelected) {
-    this.roomSelected = roomSelected;
-  }
-
-  public String getRoomSelected() {
-    return this.roomSelected;
+  public languageInterpreterRequest(
+      String lanInterpID,
+      String otherNotes,
+      String floorID,
+      String roomID,
+      boolean isUrgent,
+      String requestStatus,
+      String staffAssignee,
+      Language langforInterpreter,
+      LocalDate deliveryDate,
+      LocalDate requestDate) {
+    super(
+        lanInterpID,
+        String.valueOf(Type.LANG_INTERP_REQ),
+        otherNotes,
+        floorID,
+        roomID,
+        isUrgent,
+        requestStatus,
+        staffAssignee,
+        requestDate,
+        deliveryDate);
+    this.langforInterpreter = langforInterpreter;
   }
 
   public void setLanguageSelected(String languageSelected) {
@@ -43,19 +54,16 @@ public class languageInterpreterRequest extends serviceRequest {
     return this.languageSelected;
   }
 
-  public void setStartDate(LocalDate startDate) {
-    this.startDate = startDate;
+  public void setLanguageSelected(String languageSelected) {
+    this.languageSelected = languageSelected;
   }
 
-  public LocalDate getStartDate() {
-    return this.startDate;
+  // Language
+  public Language getLang() {
+    return langforInterpreter;
   }
 
-  public void setEndDate(LocalDate endDate) {
-    this.endDate = endDate;
-  }
-
-  public LocalDate getEndDate() {
-    return this.endDate;
+  public void setLang(Language langforInterpreter) {
+    this.langforInterpreter = langforInterpreter;
   }
 }
