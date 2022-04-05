@@ -1,5 +1,4 @@
 package edu.wpi.energetic_easter_bunnies.entity;
-
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -61,25 +60,9 @@ public class serviceRequest {
   private String requestStatus;
   private String staffAssignee;
 
-  public Type getRequestType() {
-    return requestType;
-  }
+  public Type getRequestType() { return requestType; }
 
-  public String getRequestString() {
-    return requestType.toString();
-  }
-
-  public void setRequestType(Type requestType) {
-    this.requestType = requestType;
-  }
-
-  public String getServiceRequestID() {
-    return serviceRequestID;
-  }
-
-  public void setServiceRequestID(String serviceRequestID) {
-    this.serviceRequestID = serviceRequestID;
-  }
+  public void setRequestType(Type requestType) { this.requestType = requestType; }
 
   public serviceRequest(
       String serviceRequestID,
@@ -105,13 +88,21 @@ public class serviceRequest {
   }
 
   public serviceRequest() {
-    this.serviceRequestID = "";
+    this.serviceRequestID = generateRandomID(6);
     this.otherNotes = "";
     this.floorID = "";
     this.roomID = "";
     this.isUrgent = false;
     this.requestStatus = "";
     this.staffAssignee = "";
+  }
+
+  public String getServiceRequestID() {
+    return serviceRequestID;
+  }
+
+  public void setServiceRequestID(String serviceRequestID) {
+    this.serviceRequestID = serviceRequestID;
   }
 
   public String getFloorID() {

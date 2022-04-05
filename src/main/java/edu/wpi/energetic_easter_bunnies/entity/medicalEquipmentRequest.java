@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class medicalEquipmentRequest extends serviceRequest {
 
-  private String medEquipRequestID;
   private String equipment;
   private int equipmentQuantity;
   private String deliveryTime;

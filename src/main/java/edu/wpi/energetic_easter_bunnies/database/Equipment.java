@@ -6,6 +6,7 @@ public abstract class Equipment {
   private boolean isClean;
   private String cleanLocation;
   private String storageLocation;
+  private String currentLocation;
   private int numID;
 
   public Equipment(
@@ -14,12 +15,14 @@ public abstract class Equipment {
       boolean isClean,
       String cleanLocation,
       String storageLocation,
+      String currentLocation,
       int numID) {
     this.equipmentID = equipmentID;
     this.isInUse = isInUse;
     this.isClean = isClean;
     this.cleanLocation = cleanLocation;
     this.storageLocation = storageLocation;
+    this.currentLocation = currentLocation;
     this.numID = numID;
   }
 
@@ -39,7 +42,7 @@ public abstract class Equipment {
     this.numID = numID;
   }
 
-  public void setInUse(boolean inUse) {
+  public void setisInUse(boolean inUse) {
     isInUse = inUse;
   }
 
@@ -65,6 +68,14 @@ public abstract class Equipment {
 
   public void setStorageLocation(String storageLocation) {
     this.storageLocation = storageLocation;
+  }
+
+  public String getCurrentLocation() {
+    return currentLocation;
+  }
+
+  public void setCurrentLocation(String currentLocation) {
+    this.currentLocation = currentLocation;
   }
 
   public abstract void use();
