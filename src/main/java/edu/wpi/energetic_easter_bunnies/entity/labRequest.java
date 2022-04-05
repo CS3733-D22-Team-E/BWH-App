@@ -31,6 +31,14 @@ public class labRequest extends serviceRequest {
     setOtherNotes(otherNotes);
   }
 
+  public labRequest() {
+    this.labRequestType = "";
+    this.building = "";
+    this.floor = "";
+    this.timeFrame = "";
+    this.locNodeID = "";
+  }
+
   public String getLabRequestType() {
     return labRequestType;
   }
