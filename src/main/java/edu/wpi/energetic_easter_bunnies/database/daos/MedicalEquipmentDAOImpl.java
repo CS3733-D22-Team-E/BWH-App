@@ -1,6 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
 import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.Equipment;
 import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
 import java.sql.*;
 import java.util.ArrayList;
