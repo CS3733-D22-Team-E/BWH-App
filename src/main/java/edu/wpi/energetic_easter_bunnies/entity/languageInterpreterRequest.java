@@ -43,14 +43,6 @@ public class languageInterpreterRequest extends serviceRequest {
     this.langforInterpreter = langforInterpreter;
   }
 
-  public String getRoomSelected() {
-    return this.roomSelected;
-  }
-
-  public void setLanguageSelected(String languageSelected) {
-    this.languageSelected = languageSelected;
-  }
-
   // Language
   public Language getLang() {
     return langforInterpreter;

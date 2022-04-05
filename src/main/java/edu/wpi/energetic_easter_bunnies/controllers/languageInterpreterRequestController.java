@@ -14,7 +14,7 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
+    super.initialize(location,resources);
     floorSelection.setValue("Select Floor");
     roomSelection.setValue("Select Room");
     languageSelection.setValue("Select Language");
@@ -43,12 +43,12 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   @FXML
   public void submitButton(ActionEvent event) {
     try {
-      languageInterpreterRequest.setFloorSelected(floorSelection.getValue());
+     /* languageInterpreterRequest.setFloorSelected(floorSelection.getValue());
       languageInterpreterRequest.setLanguageSelected(languageSelection.getValue());
       languageInterpreterRequest.setRoomSelected(roomSelection.getValue());
       languageInterpreterRequest.setEndDate(endSelection.getValue());
       languageInterpreterRequest.setStartDate(startSelection.getValue());
-      languageInterpreterRequest.setOtherNotes(notes.getText());
+      languageInterpreterRequest.setOtherNotes(notes.getText());*/
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
