@@ -53,39 +53,42 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
       throws SQLException { // TODO: Maybe figure out better way than a double for-loop
     List<MedicalEquipment> equipments = new ArrayList<>();
 
-    for (int i = 0; i < equipmentQuantity; i++) {
-      for (MedicalEquipment equipment : equipmentList) {
-        if (equipment.getEquipmentType().equalsIgnoreCase(equipmentType)
-            && equipment.checkIsClean()) {
-          equipment.use(); // Sets it to be in use and be not clean anymore
-          equipment.setMed_equipmentID(MED_EQUIPMENTID); // Binds equipment to the MedEquip Request
-          equipment.setCurrentLocation(roomID); // TODO: Add Patient Rooms to TowerLocations.CSV
-          equipments.add(equipment);
+    int i = 0;
+    for (MedicalEquipment equipment : equipmentList) {
+      if (equipment.getEquipmentType().equalsIgnoreCase(equipmentType)
+          && equipment.checkIsClean()) {
+        equipment.use(); // Sets it to be in use and be not clean anymore
+        equipment.setMed_equipmentID(MED_EQUIPMENTID); // Binds equipment to the MedEquip Request
+        equipment.setCurrentLocation(roomID); // TODO: Add Patient Rooms to TowerLocations.CSV
+        equipments.add(equipment);
 
-          // DB Query to update said values
-          Statement statement = connection.createStatement();
-          String query =
-              "UPDATE EQUIPMENT SET "
-                  + "\""
-                  + "isInUse"
-                  + "\""
-                  + " = "
-                  + true
-                  + ","
-                  + "\""
-                  + "isClean"
-                  + "\""
-                  + " = "
-                  + false
-                  + ", CURRENTLOCATIONID = '"
-                  + roomID
-                  + "', MED_EQUIPMENTID = '"
-                  + MED_EQUIPMENTID
-                  + "' WHERE EQUIPMENTID = '"
-                  + equipment.getEquipmentID()
-                  + "'"; // Make sure this is actually formatted right
-          statement.executeUpdate(query);
-        }
+        // DB Query to update said values
+        Statement statement = connection.createStatement();
+        String query =
+            "UPDATE EQUIPMENT SET "
+                + "\""
+                + "isInUse"
+                + "\""
+                + " = "
+                + true
+                + ","
+                + "\""
+                + "isClean"
+                + "\""
+                + " = "
+                + false
+                + ", CURRENTLOCATIONID = '"
+                + roomID
+                + "', MED_EQUIPMENTID = '"
+                + MED_EQUIPMENTID
+                + "' WHERE EQUIPMENTID = '"
+                + equipment.getEquipmentID()
+                + "'"; // Make sure this is actually formatted right
+        statement.executeUpdate(query);
+        i++;
+      }
+      if (i == equipmentQuantity) {
+        break;
       }
     }
     return equipments;
@@ -104,7 +107,9 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
       String query =
           "UPDATE EQUIPMENT SET CURRENTLOCATIONID = '"
               + equipment.getCleanLocation()
-              + "'"; // Make sure this is formatted properly
+              + "' WHERE EQUIPMENTID = '"
+              + equipment.getEquipmentID()
+              + "'";
       statement.executeUpdate(query);
     }
   }
