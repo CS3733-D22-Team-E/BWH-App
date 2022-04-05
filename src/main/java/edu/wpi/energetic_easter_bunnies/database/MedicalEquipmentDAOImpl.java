@@ -53,6 +53,8 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
       throws SQLException { // TODO: Maybe figure out better way than a double for-loop
     List<MedicalEquipment> equipments = new ArrayList<>();
 
+    // TODO: make this loop and break logic bit more elegant if you get the chance
+    // I made it and it's a little wonky - Tim
     int i = 0;
     for (MedicalEquipment equipment : equipmentList) {
       if (equipment.getEquipmentType().equalsIgnoreCase(equipmentType)
