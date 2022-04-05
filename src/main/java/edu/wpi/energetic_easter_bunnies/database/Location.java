@@ -11,7 +11,7 @@ public class Location {
   private final int numID;
 
   public Location() {
-    this.nodeID = "";
+    this.nodeID = "1";
     this.xcoord = 1;
     this.ycoord = 1;
     this.floor = "";
