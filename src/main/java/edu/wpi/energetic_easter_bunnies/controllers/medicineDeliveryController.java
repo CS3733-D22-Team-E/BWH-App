@@ -52,7 +52,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   public void submitButton(ActionEvent event) {
     try {
       // medicalEquipmentRequest.setLocation(building.getValue() + floor.getValue());
-      medicineDeliveryRequest.setFloorID(floor.getValue());
+      medicineDeliveryRequest.setFloorID(String.valueOf(floor.getItems()));
       medicineDeliveryRequest.setRoomID(room.getValue());
       medicineDeliveryRequest.setAmount(amount.getText());
       medicineDeliveryRequest.setMedicine(String.valueOf(medicine.getItems()));
@@ -64,7 +64,7 @@ public class medicineDeliveryController extends serviceRequestPageController
       medicineDeliveryRequest.setThurs(thurs.isSelected());
       medicineDeliveryRequest.setFri(fri.isSelected());
       medicineDeliveryRequest.setSat(sat.isSelected());
-      medicineDeliveryRequest.setSun(sun.isSelected());
+      medicineDeliveryRequest.setSun(sun.isSelected());*/
       medicineDeliveryRequest.setOtherNotes(notes.getText());
 
     } catch (NullPointerException error) {

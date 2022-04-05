@@ -14,12 +14,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class medicalEquipmentController extends serviceRequestPageController
-    implements Initializable {
+public class medicalEquipmentController extends serviceRequestPageController {
 
   @FXML ComboBox<String> floor;
   @FXML ComboBox<String> room;
@@ -48,7 +46,9 @@ public class medicalEquipmentController extends serviceRequestPageController
 
   public medicalEquipmentController() {}
 
+  @Override
   public void initialize(URL url, ResourceBundle rb) {
+    super.initialize(url, rb);
     try {
       locationDB = new LocationDAOImpl();
       List<Location> locations = locationDB.getAllLocations();

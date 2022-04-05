@@ -1,5 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.entity.sanitationRequest;
 import java.net.URL;
@@ -10,6 +12,8 @@ import javafx.scene.control.*;
 
 public class sanitationServiceController extends serviceRequestPageController {
 
+  @FXML JFXHamburger burger;
+  @FXML JFXDrawer drawer;
   @FXML TextField locationField;
   @FXML ToggleGroup biohazardGroup;
   @FXML ToggleGroup urgencyGroup;
@@ -67,4 +71,7 @@ public class sanitationServiceController extends serviceRequestPageController {
       PopUpWarning.createWarning("Warning : A required value was not filled");
     }
   }
+
+  @FXML
+  public void resetFields(ActionEvent event) {}
 }

@@ -19,31 +19,6 @@
 
 <VBox prefHeight="640.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mapPageController">
     <children>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-            <menus>
-                <Menu mnemonicParsing="false" text="Menu">
-                    <items>
-                        <MenuItem fx:id="homeMenuButton" mnemonicParsing="false" onAction="#homeButton" text="Home" />
-                        <Menu mnemonicParsing="false" text="Pages">
-                            <items>
-                                <MenuItem mnemonicParsing="false" onAction="#sanitationButton" text="Sanitation" />
-                                <MenuItem mnemonicParsing="false" onAction="#medicalEquipmentButton" text="Medical Equipment Delivery" />
-                                <MenuItem mnemonicParsing="false" onAction="#mealDeliveryButton" text="Meal Delivery" />
-                                <MenuItem mnemonicParsing="false" onAction="#medicineDeliveryButton" text="Medicine Delivery" />
-                                <MenuItem mnemonicParsing="false" onAction="#languageButton" text="Language Translation" />
-                                <MenuItem mnemonicParsing="false" onAction="#labRequestButton" text="Lab Request" />
-                            </items>
-                        </Menu>
-                        <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitButton" text="Quit" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About Application" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
                 <Pane prefHeight="90.0" prefWidth="1080.0">
