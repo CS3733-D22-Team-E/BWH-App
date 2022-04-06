@@ -2,9 +2,6 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
-<?import java.lang.Integer?>
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -86,18 +83,8 @@
                            <children>
                               <Label style="-fx-font-weight: bold;" text="Location:" />
                               <ComboBox fx:id="floor" prefWidth="150.0" promptText="Select Floor">
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Test 1" />
-                                    </FXCollections>
-                                 </items>
                               </ComboBox>
                               <ComboBox fx:id="room" prefWidth="150.0" promptText="Select Room">
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Test 1" />
-                                    </FXCollections>
-                                 </items>
                               </ComboBox>
                            </children>
                         </HBox>
@@ -105,18 +92,8 @@
                            <children>
                               <Label style="-fx-font-weight: bold;" text="Equipment:" />
                               <ComboBox fx:id="equipmentType" prefWidth="150.0" promptText="Select Equipment Type">
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Test 1" />
-                                    </FXCollections>
-                                 </items>
                               </ComboBox>
                               <ComboBox fx:id="equipmentQuantity" prefWidth="150.0" promptText="Select Quantity">
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <Integer fx:value="1" />
-                                    </FXCollections>
-                                 </items>
                               </ComboBox>
                            </children>
                         </HBox>
@@ -124,7 +101,6 @@
                            <children>
                               <Label style="-fx-font-weight: bold;" text="Delivery Time:" />
                               <DatePicker fx:id="deliveryDate" prefHeight="25.0" prefWidth="150.0" />
-                              <TextField fx:id="deliveryTime" promptText="_ _ : _ _ AM/PM" />
                               <CheckBox fx:id="isUrgent" mnemonicParsing="false" text="Urgent" />
                            </children>
                         </HBox>
@@ -166,15 +142,15 @@
                         <Insets />
                      </opaqueInsets>
                   </AnchorPane>
-                  <Label layoutX="618.0" layoutY="39.0" prefHeight="27.0" prefWidth="347.0" style="-fx-font-weight: bold;" text="All Medical Equipment Service Requests">
+                  <Label alignment="CENTER" layoutX="447.0" layoutY="39.0" prefHeight="27.0" prefWidth="624.0" style="-fx-font-weight: bold;" text="All Medical Equipment Service Requests">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="medRequestTable" layoutX="524.0" layoutY="74.0" prefHeight="315.0" prefWidth="535.0">
+                  <TableView fx:id="medRequestTable" layoutX="444.0" layoutY="74.0" prefHeight="315.0" prefWidth="624.0">
                      <columns>
-                        <TableColumn fx:id="tableDeliveryDate" prefWidth="75.0" text="Date" />
-                        <TableColumn fx:id="tableDeliveryTime" prefWidth="75.0" text="Time" />
+                        <TableColumn fx:id="tableDeliveryDate" prefWidth="75.0" text="Delivery Date" />
+                        <TableColumn fx:id="tableRequestDate" prefWidth="75.0" text="Request Date" />
                         <TableColumn fx:id="tableIsUrgent" prefWidth="75.0" text="Urgent" />
                         <TableColumn fx:id="tableEquipmentType" prefWidth="75.0" text="Type" />
                         <TableColumn fx:id="tableEquipmentQuantity" prefWidth="75.0" text="Quantity" />
