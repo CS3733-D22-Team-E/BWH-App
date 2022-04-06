@@ -2,11 +2,16 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.Main;
 import edu.wpi.energetic_easter_bunnies.database.Location;
+import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.locationModel;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -19,11 +24,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -34,6 +38,8 @@ public class mapPageController implements Initializable {
   Parent root;
   @FXML MenuBar menuBar;
   LocationDAOImpl db;
+  MedicalEquipmentDAOImpl medEq;
+  ArrayList<MedicalEquipment> medEqList;
 
   @FXML TableView<locationModel> locationTable;
   @FXML TableColumn<locationModel, String> nodeID;
@@ -47,6 +53,8 @@ public class mapPageController implements Initializable {
   @FXML AnchorPane mapBox;
   @FXML ComboBox floorDropdown;
   @FXML ComboBox nodeTypeDropdown;
+  @FXML Button mapEditorButton;
+  @FXML Button showMedicalEquipment;
 
   ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
   ObservableList<String> nodeTypes =
@@ -64,7 +72,9 @@ public class mapPageController implements Initializable {
 
     try {
       db = new LocationDAOImpl();
+      medEq = new MedicalEquipmentDAOImpl();
       ObservableList<locationModel> locationList = populateList();
+      ObservableList<locationModel> medEquipList = populateList();
       nodeID.setCellValueFactory(new PropertyValueFactory<locationModel, String>("nodeID"));
       xcoord.setCellValueFactory(new PropertyValueFactory<locationModel, Integer>("xcoord"));
       ycoord.setCellValueFactory(new PropertyValueFactory<locationModel, Integer>("ycoord"));
@@ -74,6 +84,8 @@ public class mapPageController implements Initializable {
       longName.setCellValueFactory(new PropertyValueFactory<locationModel, String>("longName"));
       shortName.setCellValueFactory(new PropertyValueFactory<locationModel, String>("shortName"));
       locationTable.setItems(locationList);
+      List<MedicalEquipment> medEqList = medEq.getAllMedicalEquipment();
+
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -113,6 +125,26 @@ public class mapPageController implements Initializable {
       c.setCenterX(l.getXcoord() * scaleFactor);
       c.setCenterY(l.getYcoord() * scaleFactor);
       c.getStyleClass().add("locationDot");
+      mapBox.getChildren().add(c);
+    }
+  }
+
+  private void displayMedEquipLocations(ArrayList<MedicalEquipment> medEquipList)
+      throws FileNotFoundException, SQLException {
+
+    double imageX = 535;
+    double coordinateX = 935;
+    double scaleFactor = imageX / coordinateX;
+
+    mapBox.getChildren().clear();
+    for (MedicalEquipment e : medEquipList) {
+      Image image =
+          new Image(
+              new FileInputStream(
+                  "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/microscope.png"));
+      ImageView c = new ImageView(image);
+      c.setX(e.getXCoord() * scaleFactor);
+      c.setY(e.getYCoord() * scaleFactor);
       mapBox.getChildren().add(c);
     }
   }
@@ -188,6 +220,21 @@ public class mapPageController implements Initializable {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
     URL url = Main.class.getResource("view/mealDeliveryPage.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      root = loader.load();
+
+      thisStage.setScene(new Scene(root));
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
+  }
+
+  @FXML
+  public void mapEditorButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    URL url = Main.class.getResource("view/mapEditor.fxml");
     if (url != null) {
       loader.setLocation(url);
       root = loader.load();
@@ -305,5 +352,10 @@ public class mapPageController implements Initializable {
     } else {
       System.out.println("Path Doesn't Exist");
     }
+  }
+
+  @FXML
+  public void showMedicalEquipment(ActionEvent event) throws IOException, SQLException {
+    displayMedEquipLocations(medEqList);
   }
 }
