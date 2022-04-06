@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAOImpl<T> implements DAO<T> {
-  //TODO For iteration 2
+  // TODO For iteration 2
   static Connection connection = DBConnection.getConnection();
   List<T> items;
 
