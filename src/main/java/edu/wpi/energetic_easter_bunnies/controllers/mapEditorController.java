@@ -60,11 +60,7 @@ public class mapEditorController implements Initializable {
   Location selectedLoc;
 
   ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
-  ObservableList<String> nodes =
-      FXCollections.observableArrayList(
-          "PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF",
-          "EXIT", "RETL", "SERV");
-
+  ObservableList<String> nodes = FXCollections.observableArrayList("PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF", "EXIT", "RETL", "SERV");
   public mapEditorController() {}
 
   @Override
@@ -72,7 +68,6 @@ public class mapEditorController implements Initializable {
 
     floor.setItems(floors);
     addNodeType.setItems(nodes);
-    updateNodeType.setItems(nodes);
 
     try {
       db = new LocationDAOImpl();
@@ -103,8 +98,8 @@ public class mapEditorController implements Initializable {
     String nodeID =
         "e"
             + addNodeType.getValue()
-            + "numonfloorWRONG"
-            + floor.getValue(); // not correct need to check which num on floor
+            + "numonfloorWRONG" // not correct need to check which num on floor
+            + floor.getValue();
     int numID = 0;
     Location location =
         new Location(
@@ -121,10 +116,14 @@ public class mapEditorController implements Initializable {
   }
 
   @FXML
-  public void smallUpdateLocationButton(ActionEvent event) throws SQLException {}
+  public void smallUpdateLocationButton(ActionEvent event) throws SQLException {
+    db.updateCoord(selectedLoc, mouseX, mouseY);
+  }
 
   @FXML
-  public void smallDeleteLocationButton(ActionEvent event) throws SQLException {}
+  public void smallDeleteLocationButton(ActionEvent event) throws SQLException {
+    db.deleteLocation(selectedLoc);
+  }
 
   // Display location on the map
   private void displayFloorLocations(List<Location> locationList) {
@@ -314,10 +313,7 @@ public class mapEditorController implements Initializable {
       // Enable the smallDeleteButton
       smallDeleteLocation.setDisable(false);
     } else if (Objects.equals(editMode, "update")) {
-      // Update text fields with location data
-      updateShortName.setText(selectedLoc.getShortName());
-      updateLongName.setText(selectedLoc.getLongName());
-      updateNodeType.setValue(selectedLoc.getNodeType());
+
       // Enable the smallUpdateButton and changePositionButton
       changePosition.setDisable(false);
       smallUpdateLocation.setDisable(false);
