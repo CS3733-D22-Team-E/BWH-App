@@ -141,4 +141,15 @@ public class labRequestController extends serviceRequestPageController {
     labRequestDB.addLabRequest(labReq);
     tableList.add(labReq);
   }
+
+  @FXML
+  private void resetButton(ActionEvent event) {
+    floor.getSelectionModel().clearSelection();
+    room.getSelectionModel().clearSelection();
+    labRequestType.getSelectionModel().clearSelection();
+    timeFrameComboBox.getSelectionModel().clearSelection();
+    requestStatus.clear();
+    staffAssignee.clear();
+    notes.clear();
+  }
 }
