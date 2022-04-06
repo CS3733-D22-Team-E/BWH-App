@@ -10,20 +10,16 @@ import javafx.scene.control.*;
 public class languageInterpreterRequestController extends serviceRequestPageController
     implements Initializable {
 
-  /*@Override
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
-  <<<<<<< HEAD
       super.initialize(location,resources);
-  =======
-
-  >>>>>>> parent of 1f427d6 (Merge pull request #17 from CS3733-D22-Team-E/language_request)
-      floorSelection.setValue("Select Floor");
+       /*floorSelection.setValue("Select Floor");
       roomSelection.setValue("Select Room");
       languageSelection.setValue("Select Language");
       floorSelection.getItems().addAll(floorList);
       roomSelection.getItems().addAll(roomList);
-      languageSelection.getItems().addAll(langList);
-    }*/
+      languageSelection.getItems().addAll(langList);*/
+    }
 
   @FXML private ChoiceBox<String> floorSelection;
 
