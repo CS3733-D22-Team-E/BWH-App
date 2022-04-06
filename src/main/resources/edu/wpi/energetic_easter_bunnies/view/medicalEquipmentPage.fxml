@@ -149,20 +149,17 @@
                   </Label>
                   <TableView fx:id="medRequestTable" layoutX="444.0" layoutY="74.0" prefHeight="315.0" prefWidth="624.0">
                      <columns>
-                        <TableColumn fx:id="tableDeliveryDate" prefWidth="75.0" text="Delivery Date" />
-                        <TableColumn fx:id="tableRequestDate" prefWidth="75.0" text="Request Date" />
-                        <TableColumn fx:id="tableIsUrgent" prefWidth="75.0" text="Urgent" />
-                        <TableColumn fx:id="tableEquipmentType" prefWidth="75.0" text="Type" />
-                        <TableColumn fx:id="tableEquipmentQuantity" prefWidth="75.0" text="Quantity" />
-                        <TableColumn fx:id="tableStaffAssignee" prefWidth="75.0" text="Staff" />
-                        <TableColumn fx:id="tableRoomID" prefWidth="75.0" text="Room" />
-                        <TableColumn fx:id="tableFloorID" prefWidth="75.0" text="Floor" />
-                        <TableColumn fx:id="tableRequestStatus" prefWidth="75.0" text="Status" />
-                        <TableColumn fx:id="tableOtherNotes" prefWidth="75.0" text="Notes" />
+                        <TableColumn fx:id="tableDeliveryDate" prefWidth="81.0" text="Delivery Date" />
+                        <TableColumn fx:id="tableRequestDate" prefWidth="84.0" text="Request Date" />
+                        <TableColumn fx:id="tableIsUrgent" prefWidth="48.0" text="Urgent" />
+                        <TableColumn fx:id="tableEquipmentType" prefWidth="58.0" text="Type" />
+                        <TableColumn fx:id="tableEquipmentQuantity" prefWidth="55.0" text="Quantity" />
+                        <TableColumn fx:id="tableStaffAssignee" prefWidth="51.0" text="Staff" />
+                        <TableColumn fx:id="tableRoomID" prefWidth="73.0" text="Room" />
+                        <TableColumn fx:id="tableFloorID" prefWidth="57.0" text="Floor" />
+                        <TableColumn fx:id="tableRequestStatus" prefWidth="62.0" text="Status" />
+                        <TableColumn fx:id="tableOtherNotes" prefWidth="54.0" text="Notes" />
                      </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
                   </TableView>
                </children>
             </AnchorPane>
