@@ -21,42 +21,30 @@ public class languageInterpreterRequest extends serviceRequest {
     super();
   }
 
-  public languageInterpreterRequest(
-      String lanInterpID,
-      String otherNotes,
-      String floorID,
-      String roomID,
-      boolean isUrgent,
-      String requestStatus,
-      String staffAssignee,
-      Language langforInterpreter,
-      LocalDate deliveryDate,
-      LocalDate requestDate) {
+  /*public languageInterpreterRequest(
+          String lanInterpID,
+          String otherNotes,
+          String floorID,
+          String roomID,
+          boolean isUrgent,
+          String requestStatus,
+          String staffAssignee,
+          Language langforInterpreter,
+          LocalDate deliveryDate,
+          LocalDate requestDate) {
     super(
-        lanInterpID,
-        String.valueOf(Type.LANG_INTERP_REQ),
-        otherNotes,
-        floorID,
-        roomID,
-        isUrgent,
-        requestStatus,
-        staffAssignee,
-        requestDate,
-        deliveryDate);
+            lanInterpID,
+            String.valueOf(Type.LANG_INTERP_REQ),
+            otherNotes,
+            floorID,
+            roomID,
+            isUrgent,
+            requestStatus,
+            staffAssignee,
+            requestDate,
+            deliveryDate);
     this.langforInterpreter = langforInterpreter;
-  }
-
-  public void setLanguageSelected(String languageSelected) {
-    this.languageSelected = languageSelected;
-  }
-
-  public String getLanguageSelected() {
-    return this.languageSelected;
-  }
-
-  public void setLanguageSelected(String languageSelected) {
-    this.languageSelected = languageSelected;
-  }
+  }*/
 
   // Language
   public Language getLang() {
