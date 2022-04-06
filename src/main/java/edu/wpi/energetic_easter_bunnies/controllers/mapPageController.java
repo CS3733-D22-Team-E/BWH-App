@@ -28,7 +28,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -174,16 +173,6 @@ public class mapPageController implements Initializable {
       default:
         mapBox.getStyleClass().add("floorDefaultMap");
     }
-  }
-
-  @FXML
-  public void mapClick(MouseEvent event) throws IOException {
-    Circle c = new Circle();
-    c.setRadius(8);
-    c.setCenterX(event.getX());
-    c.setCenterY(event.getY());
-    c.getStyleClass().add("locationDot");
-    mapBox.getChildren().add(c);
   }
 
   @FXML

@@ -54,7 +54,11 @@ public class mapEditorController implements Initializable {
   LocationDAOImpl db;
 
   ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
-  ObservableList<String> nodes = FXCollections.observableArrayList("PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF", "EXIT", "RETL", "SERV");
+  ObservableList<String> nodes =
+      FXCollections.observableArrayList(
+          "PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF",
+          "EXIT", "RETL", "SERV");
+
   public mapEditorController() {}
 
   @Override
@@ -62,6 +66,7 @@ public class mapEditorController implements Initializable {
 
     floor.setItems(floors);
     addNodeType.setItems(nodes);
+    updateNodeType.setItems(nodes);
   }
 
   // Switching Panes
@@ -83,19 +88,33 @@ public class mapEditorController implements Initializable {
   // New Locations, Update Location, Delete Location
   @FXML
   public void smallAddLocationButton(ActionEvent event) throws SQLException {
-    String nodeID = "e" + addNodeType.getValue() + "numonfloorWRONG" + floor.getValue() ; // not correct need to check which num on floor
+    String nodeID =
+        "e"
+            + addNodeType.getValue()
+            + "numonfloorWRONG"
+            + floor.getValue(); // not correct need to check which num on floor
     int numID = 0;
-    Location location = new Location(nodeID, mouseX, mouseY, floor.getValue().toString(), "Tower", addNodeType.getValue(), addLongName.getText().toString(), addShortName.getText().toString(), numID);
+    Location location =
+        new Location(
+            nodeID,
+            mouseX,
+            mouseY,
+            floor.getValue().toString(),
+            "Tower",
+            addNodeType.getValue(),
+            addLongName.getText().toString(),
+            addShortName.getText().toString(),
+            numID);
     db.addLocation(location);
   }
 
   @FXML
   public void smallUpdateLocationButton(ActionEvent event) throws SQLException {
-    List<Location> locations =  db.getAllLocations();
+    List<Location> locations = db.getAllLocations();
     for (Location location : locations) {
       if (location.getXcoord() == mouseX && location.getYcoord() == mouseY) {
 
-        //this is problematic
+        // this is problematic
 
         db.updateCoord(location, mouseX, mouseY);
       }
@@ -104,7 +123,7 @@ public class mapEditorController implements Initializable {
 
   @FXML
   public void smallDeleteLocationButton(ActionEvent event) throws SQLException {
-    List<Location> locations =  db.getAllLocations();
+    List<Location> locations = db.getAllLocations();
     for (Location location : locations) {
       if (location.getXcoord() == mouseX && location.getYcoord() == mouseY) {
         db.deleteLocation(location);
@@ -168,8 +187,8 @@ public class mapEditorController implements Initializable {
 
   @FXML
   public void mapClick(MouseEvent event) throws IOException {
-      mouseX = (int)event.getX();
-      mouseY = (int) event.getY();
+    mouseX = (int) event.getX();
+    mouseY = (int) event.getY();
 
     Circle c = new Circle();
     c.setRadius(8);

@@ -29,7 +29,7 @@
 }
 
 .locationDot {
-    -fx-fill: rgb(255, 0, 255);
-    -fx-stroke: rgb(0, 255, 0);
+    -fx-fill: #1e88e5;
+    -fx-stroke: #005cb2;
     -fx-stroke-width: 3px;
 }
