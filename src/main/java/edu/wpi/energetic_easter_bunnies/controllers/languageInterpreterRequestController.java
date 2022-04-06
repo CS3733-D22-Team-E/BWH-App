@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 
 
 public class languageInterpreterRequestController extends serviceRequestPageController
-        implements Initializable {
+    implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -71,9 +71,3 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
     notes.clear();
   }
 }
-
-
-
-
-
-
