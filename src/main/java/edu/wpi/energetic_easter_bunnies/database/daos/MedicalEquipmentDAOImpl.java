@@ -12,14 +12,13 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
 
   public MedicalEquipmentDAOImpl() throws SQLException {
     equipmentList = new ArrayList<>();
-    // String url = "jdbc:derby:myDB;";
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM EQUIPMENT ORDER BY EQUIPMENTID DESC";
     ResultSet rs = statement.executeQuery(query);
     int numID = 0;
     while (rs.next()) {
       String equipmentID = rs.getString("EQUIPMENTID");
-      String med_EquipmentID = rs.getString("MED_EQUIPMENTID");
+      String med_EquipmentID = rs.getString("MED_EQUIP_REQ_ID");
       boolean isInUse = rs.getBoolean("isInUse");
       boolean isClean = rs.getBoolean("isClean");
       String cleanLocation = rs.getString("cleanLocationID");

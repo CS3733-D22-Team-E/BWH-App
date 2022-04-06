@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="640.0" prefWidth="400.0" stylesheets="@styles/map.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mapPageController">
+<VBox prefHeight="640.0" prefWidth="400.0" stylesheets="@styles/map.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mapPageController">
     <children>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
             <menus>
@@ -104,7 +104,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <AnchorPane fx:id="mapBox" layoutX="538.0" layoutY="96.0" maxHeight="509.0" maxWidth="535.0" onMouseClicked="#mapClick" prefHeight="509.0" prefWidth="535.0">
+            <AnchorPane fx:id="mapBox" layoutX="538.0" layoutY="96.0" maxHeight="509.0" maxWidth="535.0" prefHeight="509.0" prefWidth="535.0">
                <styleClass>
                   <String fx:value="mapBox" />
                   <String fx:value="floorDefaultMap" />
@@ -112,8 +112,8 @@
             </AnchorPane>
             <JFXComboBox fx:id="nodeTypeDropdown" layoutX="165.0" layoutY="110.0" onAction="#nodeTypeDropdown" promptText="Select Type" />
             <JFXComboBox fx:id="floorDropdown" layoutX="28.0" layoutY="110.0" onAction="#floorDropdown" promptText="Select Floor" />
-            <JFXButton fx:id="mapEditorButton" layoutX="29.0" layoutY="180.0" onAction="#mapEditorButton" prefHeight="25.0" prefWidth="103.0" text="Editor" />
-            <JFXButton fx:id="showMedicalEquipment" layoutX="81.0" layoutY="270.0" onAction="#showMedicalEquipment" text="Show Med Equip" />
+            <JFXButton fx:id="mapEditorButton" layoutX="292.0" layoutY="110.0" onAction="#mapEditorButton" prefHeight="25.0" prefWidth="76.0" text="Editor" />
+            <JFXButton fx:id="showMedicalEquipment" layoutX="389.0" layoutY="110.0" onAction="#showMedicalEquipment" text="Show Med Equip" />
             </children>
         </AnchorPane>
     </children>
