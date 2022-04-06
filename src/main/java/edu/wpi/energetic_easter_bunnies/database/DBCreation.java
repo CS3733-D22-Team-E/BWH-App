@@ -23,7 +23,7 @@ public class DBCreation {
     statement.executeUpdate(query);
   }
 
-  public static void createEquipmentTable() throws SQLException {
+  public static void createEquipmentTable() throws SQLException, IOException {
     String query =
         "create table EQUIPMENT\n"
             + "(\n"
@@ -32,8 +32,8 @@ public class DBCreation {
             + "    \"isInUse\"           BOOLEAN,\n"
             + "    \"isClean\"           BOOLEAN,\n"
             + "    \"cleanLocationID\"   VARCHAR(35),\n"
-            + "    \"storageLocationID\" VARCHAR(35)\n"
-            + "    \"currentLocationID\" VARCHAR(35)\n"
+            + "    \"storageLocationID\" VARCHAR(35),\n"
+            + "    \"currentLocationID\" VARCHAR(35),\n"
             + "    \"equipmentType\"     VARCHAR(35)\n"
             + ")";
     Statement statement = connection.createStatement();
