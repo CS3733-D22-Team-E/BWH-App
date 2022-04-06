@@ -1,11 +1,11 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
+import java.time.LocalDate;
+
 public class medicalEquipmentRequest extends serviceRequest {
 
   private String equipment;
   private int equipmentQuantity;
-  // TODO: make method that takes in date and time as string and returns a date object
-  private String deliveryDate;
   private String deliveryTime;
 
   public medicalEquipmentRequest(
@@ -18,12 +18,22 @@ public class medicalEquipmentRequest extends serviceRequest {
       String staffAssignee,
       String equipment,
       int equipQuantity,
-      String deliveryDate,
+      LocalDate requestDate,
+      LocalDate deliveryDate,
       String deliveryTime) {
-    super(medEquipRequestID, otherNotes, floorID, roomID, isUrgent, requestStatus, staffAssignee);
+    super(
+        medEquipRequestID,
+        String.valueOf(Type.MED_EQUIP_REQ),
+        otherNotes,
+        floorID,
+        roomID,
+        isUrgent,
+        requestStatus,
+        staffAssignee,
+        requestDate,
+        deliveryDate);
     this.equipment = equipment;
     this.equipmentQuantity = equipQuantity;
-    this.deliveryDate = deliveryDate;
     this.deliveryTime = deliveryTime;
   }
 
@@ -31,7 +41,6 @@ public class medicalEquipmentRequest extends serviceRequest {
     super();
     this.equipment = "";
     this.equipmentQuantity = 0;
-    this.deliveryDate = "";
     this.deliveryTime = "";
   }
 
@@ -49,14 +58,6 @@ public class medicalEquipmentRequest extends serviceRequest {
 
   public void setEquipmentQuantity(int equipmentQuantity) {
     this.equipmentQuantity = equipmentQuantity;
-  }
-
-  public String getDeliveryDate() {
-    return deliveryDate;
-  }
-
-  public void setDeliveryDate(String deliveryDate) {
-    this.deliveryDate = deliveryDate;
   }
 
   public String getDeliveryTime() {

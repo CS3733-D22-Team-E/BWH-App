@@ -1,48 +1,95 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 public class serviceRequest {
-  /*
-    public enum Type {
-      sanitationRequest,
-      medicalEquipmentRequest,
-      mealDeliveryRequest,
-      translatorRequest,
-      medicineRequest
+  public enum Type {
+    SANITATION_REQ {
+      @Override
+      public String toString() {
+        return "SANITATION_REQ";
+      }
+    },
+    MED_EQUIP_REQ {
+      @Override
+      public String toString() {
+        return "MED_EQUIP_REQ";
+      }
+    },
+    LAB_REQUEST {
+      @Override
+      public String toString() {
+        return "LAB_REQUEST";
+      }
+    },
+    MEAL_DELIV_REQ {
+      @Override
+      public String toString() {
+        return "MEAL_DELIV_REQ";
+      }
+    },
+    LANG_INTERP_REQ {
+      @Override
+      public String toString() {
+        return "LANG_INTERP_REQ";
+      }
+    },
+    MED_DELIV_REQ {
+      @Override
+      public String toString() {
+        return "MED_DELIV_REQ";
+      }
+    },
+    SERVICEREQUEST {
+      @Override
+      public String toString() {
+        return "SERVICEREQUEST";
+      }
     }
-  */
-  // private Date requestDate; //TODO: Implement later
-  // private Date deliveryDate; //TODO: Implement later
+  }
+
+  private LocalDate requestDate; // TODO: Implement later
+  private LocalDate deliveryDate; // TODO: Implement later
   private String serviceRequestID;
   private String otherNotes;
   private String floorID;
   private String roomID;
   private boolean isUrgent;
-  // private Type requestType;
+  private Type requestType;
 
   private String requestStatus;
   private String staffAssignee;
 
-  // public Type getRequestType() { return requestType; }
+  public Type getRequestType() {
+    return requestType;
+  }
 
-  // public void setRequestType(Type requestType) { this.requestType = requestType; }
+  public void setRequestType(Type requestType) {
+    this.requestType = requestType;
+  }
 
   public serviceRequest(
       String serviceRequestID,
+      String serviceRequestType,
       String otherNotes,
       String floorID,
       String roomID,
       boolean isUrgent,
       String requestStatus,
-      String staffAssignee) {
+      String staffAssignee,
+      LocalDate requestDate,
+      LocalDate deliveryDate) {
     this.serviceRequestID = serviceRequestID;
+    this.requestType = Type.valueOf(serviceRequestType);
     this.otherNotes = otherNotes;
     this.floorID = floorID;
     this.roomID = roomID;
     this.isUrgent = isUrgent;
     this.requestStatus = requestStatus;
     this.staffAssignee = staffAssignee;
+    this.requestDate = requestDate;
+    this.deliveryDate = deliveryDate;
   }
 
   public serviceRequest() {
@@ -121,5 +168,25 @@ public class serviceRequest {
       result.append(randChar);
     }
     return result.toString();
+  }
+
+  public LocalDate getRequestDate() {
+    return requestDate;
+  }
+
+  public void setRequestDate(LocalDate requestDate) {
+    this.requestDate = requestDate;
+  }
+
+  public LocalDate getDeliveryDate() {
+    return deliveryDate;
+  }
+
+  public void setDeliveryDate(LocalDate deliveryDate) {
+    this.deliveryDate = deliveryDate;
+  }
+
+  public boolean isUrgent() {
+    return isUrgent;
   }
 }

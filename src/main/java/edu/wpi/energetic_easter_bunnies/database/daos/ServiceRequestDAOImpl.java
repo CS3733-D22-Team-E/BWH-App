@@ -26,7 +26,17 @@ public class ServiceRequestDAOImpl implements ServiceRequestDAO {
       boolean isUrgent = rs.getBoolean("ISURGENT");
 
       serviceRequest request =
-          new serviceRequest(requestID, "", "", "", isUrgent, status, assignee);
+          new serviceRequest(
+              requestID,
+              type,
+              "",
+              "",
+              "",
+              isUrgent,
+              status,
+              assignee,
+              requestDate.toLocalDate(),
+              deliveryDate.toLocalDate());
 
       serviceRequests.add(request);
       numID++;

@@ -2,12 +2,14 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.database.*;
+import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentServiceRequestDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,18 +20,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class medicalEquipmentController extends serviceRequestPageController
-    implements Initializable {
+public class medicalEquipmentController extends serviceRequestPageController {
 
   @FXML ComboBox<String> floor;
   @FXML ComboBox<String> room;
   @FXML ComboBox<String> equipmentType;
   @FXML ComboBox<Integer> equipmentQuantity;
-  @FXML TextField deliveryDate;
+  @FXML DatePicker deliveryDate;
   @FXML TextField deliveryTime;
   @FXML CheckBox isUrgent;
   @FXML TableView<medicalEquipmentRequest> medRequestTable;
@@ -59,6 +59,7 @@ public class medicalEquipmentController extends serviceRequestPageController
    * medical equipment request service table
    */
   public void initialize(URL url, ResourceBundle rb) {
+    super.initialize(url, rb);
     try {
       locationDB = new LocationDAOImpl();
       populateLocationComboBoxes();
@@ -210,7 +211,7 @@ public class medicalEquipmentController extends serviceRequestPageController
       medicalEquipmentRequest.setEquipmentQuantity(equipmentQuantity.getValue());
       medicalEquipmentRequest.setRequestStatus(requestStatus.getText());
       medicalEquipmentRequest.setStaffAssignee(staffAssignee.getText());
-      medicalEquipmentRequest.setDeliveryDate(deliveryDate.getText());
+      medicalEquipmentRequest.setDeliveryDate(deliveryDate.getValue());
       medicalEquipmentRequest.setDeliveryTime(deliveryTime.getText());
       medicalEquipmentRequest.setUrgent(isUrgent.isSelected());
       medicalEquipmentRequest.setOtherNotes(notes.getText());
@@ -228,7 +229,7 @@ public class medicalEquipmentController extends serviceRequestPageController
     room.getSelectionModel().clearSelection();
     equipmentType.getSelectionModel().clearSelection();
     equipmentQuantity.getSelectionModel().clearSelection();
-    deliveryDate.clear();
+    deliveryDate.getEditor().clear();
     deliveryTime.clear();
     isUrgent.setSelected(false);
     requestStatus.clear();
