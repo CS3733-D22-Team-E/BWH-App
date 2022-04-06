@@ -145,7 +145,7 @@
                       </Label>
                       <CheckBox id="mon" fx:id="mon" layoutX="212.0" layoutY="210.0" mnemonicParsing="false" text="Mon" />
                       <CheckBox id="tues" fx:id="tues" layoutX="264.0" layoutY="210.0" mnemonicParsing="false" text="Tues" />
-                      <CheckBox id="wed" fx:id="Wed" layoutX="317.0" layoutY="210.0" mnemonicParsing="false" text="Wed" />
+                      <CheckBox id="wed" fx:id="wed" layoutX="317.0" layoutY="210.0" mnemonicParsing="false" text="Wed" />
                       <CheckBox id="thurs" fx:id="thurs" layoutX="374.0" layoutY="210.0" mnemonicParsing="false" text="Thurs" />
                       <CheckBox id="fri" fx:id="fri" layoutX="434.0" layoutY="210.0" mnemonicParsing="false" text="Fri" />
                       <CheckBox id="sat" fx:id="sat" layoutX="475.0" layoutY="210.0" mnemonicParsing="false" text="Sat" />
