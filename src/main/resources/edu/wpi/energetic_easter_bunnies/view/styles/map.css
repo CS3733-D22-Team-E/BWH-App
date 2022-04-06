@@ -1,0 +1,41 @@
+.mapBox {
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 535px 509px;
+    -fx-border-radius: 8px;
+}
+
+.floorDefaultMap {
+    -fx-background-image: url('../images/maps/00_thegroundfloor.png');
+}
+
+.floor1Map {
+    -fx-background-image: url('../images/maps/01_thefirstfloor.png');
+}
+
+.floor2Map {
+    -fx-background-image: url('../images/maps/02_thesecondfloor.png');
+}
+
+.floor3Map {
+    -fx-background-image: url('../images/maps/03_thethirdfloor.png');
+}
+
+.floorL1Map {
+    -fx-background-image: url('../images/maps/00_thelowerlevel1.png');
+}
+
+.floorL2Map {
+    -fx-background-image: url('../images/maps/00_thelowerlevel2.png');
+}
+
+.locationDot {
+    -fx-fill: #1e88e5;
+    -fx-stroke: #005cb2;
+    -fx-stroke-width: 3px;
+}
+
+.selectedLocationDot {
+    -fx-fill: #e53935;
+    -fx-stroke: #ab000d;
+    -fx-stroke-width: 3px;
+}

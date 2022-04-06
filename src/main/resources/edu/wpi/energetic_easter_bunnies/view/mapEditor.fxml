@@ -9,8 +9,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,8 +18,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox prefHeight="640.0" prefWidth="400.0" stylesheets="@styles/map.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mapPageController">
+<VBox prefHeight="640.0" prefWidth="400.0" stylesheets="@styles/map.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mapEditorController">
     <children>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
             <menus>
@@ -49,6 +49,44 @@
         </MenuBar>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
+            <Pane fx:id="AddLocationPane" layoutX="231.0" layoutY="115.0" prefHeight="259.0" prefWidth="287.0" visible="false">
+               <children>
+                  <Text layoutX="73.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Location">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="addShortName" layoutX="68.0" layoutY="75.0" promptText="Enter Short Name" />
+                  <TextField fx:id="addLongName" layoutX="67.0" layoutY="117.0" promptText="Enter Long Name" />
+                  <JFXComboBox fx:id="addNodeType" layoutX="68.0" layoutY="161.0" prefHeight="27.0" prefWidth="152.0" promptText="Select Node Type" />
+                  <Button fx:id="smallAddLocation" layoutX="89.0" layoutY="214.0" mnemonicParsing="false" onAction="#smallAddLocationButton" prefHeight="31.0" prefWidth="108.0" text="Add Location" />
+               </children>
+            </Pane>
+            <Pane fx:id="UpdateLocationPane" layoutX="231.0" layoutY="115.0" prefHeight="294.0" prefWidth="287.0">
+               <children>
+                  <Text layoutX="55.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Location">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="updateShortName" layoutX="68.0" layoutY="75.0" promptText="Enter Short Name" />
+                  <TextField fx:id="updateLongName" layoutX="67.0" layoutY="117.0" promptText="Enter Long Name" />
+                  <JFXComboBox fx:id="updateNodeType" layoutX="68.0" layoutY="161.0" prefHeight="27.0" prefWidth="152.0" promptText="Select Node Type" />
+                  <Button fx:id="smallUpdateLocation" disable="true" layoutX="71.0" layoutY="243.0" mnemonicParsing="false" onAction="#smallUpdateLocationButton" prefHeight="31.0" prefWidth="141.0" text="Update Location" />
+                  <Button fx:id="changePosition" layoutX="88.0" layoutY="206.0" mnemonicParsing="false" onAction="#changePositionButton" text="Change Position" textAlignment="CENTER" />
+               </children>
+            </Pane>
+            <Pane fx:id="deleteLocationPane" layoutX="241.0" layoutY="125.0" prefHeight="167.0" prefWidth="287.0" visible="false">
+               <children>
+                  <Text layoutX="60.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Location">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="smallDeleteLocation" disable="true" layoutX="90.0" layoutY="122.0" mnemonicParsing="false" onAction="#smallDeleteLocationButton" prefHeight="31.0" prefWidth="108.0" text="Delete Location" />
+                  <Text fx:id="deleteText" layoutX="20.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click on the location you would like to delete" textAlignment="CENTER" wrappingWidth="247.1875" />
+               </children>
+            </Pane>
                 <Pane prefHeight="90.0" prefWidth="1080.0">
                     <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f35959" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
@@ -57,7 +95,7 @@
                                 <Font name="Book Antiqua Bold" size="30.0" />
                             </font>
                         </Label>
-                        <Label alignment="CENTER" layoutX="210.0" layoutY="52.0" text="Location Data" textFill="WHITE">
+                        <Label alignment="CENTER" layoutX="210.0" layoutY="52.0" text="Map Editor" textFill="WHITE">
                             <font>
                                 <Font name="Book Antiqua Bold" size="18.0" />
                             </font>
@@ -89,31 +127,16 @@
                         <Group layoutX="6.198883056640625E-6" layoutY="6.198883056640625E-6" />
                     </children>
                 </AnchorPane>
-            <TableView fx:id="locationTable" layoutX="98.0" layoutY="122.0" prefHeight="435.0" prefWidth="885.0" visible="false">
-              <columns>
-                <TableColumn fx:id="nodeID" prefWidth="75.0" text="Node ID" />
-                <TableColumn prefWidth="91.0" text="X Coordinate" fx:id="xcoord" />
-                  <TableColumn fx:id="ycoord" prefWidth="75.0" text="Y Coordinate" />
-                  <TableColumn fx:id="floor" prefWidth="75.0" text="Floor" />
-                  <TableColumn fx:id="building" prefWidth="75.0" text="Building" />
-                  <TableColumn fx:id="nodeType" prefWidth="75.0" text="Node Type" />
-                  <TableColumn fx:id="longName" prefWidth="75.0" text="Long Name" />
-                  <TableColumn fx:id="shortName" prefWidth="75.0" text="Short Name" />
-              </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-            <AnchorPane fx:id="mapBox" layoutX="538.0" layoutY="96.0" maxHeight="509.0" maxWidth="535.0" prefHeight="509.0" prefWidth="535.0">
-               <styleClass>
-                  <String fx:value="mapBox" />
-                  <String fx:value="floorDefaultMap" />
-               </styleClass>
-            </AnchorPane>
-            <JFXComboBox fx:id="nodeTypeDropdown" layoutX="165.0" layoutY="110.0" onAction="#nodeTypeDropdown" promptText="Select Type" />
-            <JFXComboBox fx:id="floorDropdown" layoutX="28.0" layoutY="110.0" onAction="#floorDropdown" promptText="Select Floor" />
-            <JFXButton fx:id="mapEditorButton" layoutX="292.0" layoutY="110.0" onAction="#mapEditorButton" prefHeight="25.0" prefWidth="76.0" text="Editor" />
-            <JFXButton fx:id="showMedicalEquipment" layoutX="389.0" layoutY="110.0" onAction="#showMedicalEquipment" text="Show Med Equip" />
+                <AnchorPane fx:id="mapBox" layoutX="538.0" layoutY="96.0" maxHeight="509.0" maxWidth="535.0" onMouseClicked="#mapClick" prefHeight="509.0" prefWidth="535.0">
+                    <styleClass>
+                        <String fx:value="mapBox" />
+                        <String fx:value="floorDefaultMap" />
+                    </styleClass>
+                </AnchorPane>
+            <JFXButton fx:id="BigAddLocation" layoutX="31.0" layoutY="171.0" onAction="#BigAddLocationButton" prefHeight="55.0" prefWidth="171.0" text="Add Location" />
+            <JFXComboBox fx:id="floor" layoutX="31.0" layoutY="123.0" onAction="#floor" prefHeight="28.0" prefWidth="171.0" promptText="Select Floor" />
+            <JFXButton fx:id="BigUpdateLocation" layoutX="31.0" layoutY="239.0" onAction="#BigUpdateLocationButton" prefHeight="55.0" prefWidth="171.0" text="Update Location" />
+            <JFXButton fx:id="BigDeleteLocation" layoutX="31.0" layoutY="305.0" onAction="#BigDeleteLocationButton" prefHeight="55.0" prefWidth="171.0" text="Delete Location" />
             </children>
         </AnchorPane>
     </children>

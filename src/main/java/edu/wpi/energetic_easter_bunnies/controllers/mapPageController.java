@@ -2,13 +2,20 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.Main;
 import edu.wpi.energetic_easter_bunnies.database.Location;
+import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.locationModel;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,10 +24,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class mapPageController implements Initializable {
@@ -28,6 +37,8 @@ public class mapPageController implements Initializable {
   Parent root;
   @FXML MenuBar menuBar;
   LocationDAOImpl db;
+  MedicalEquipmentDAOImpl medEq;
+  ArrayList<MedicalEquipment> medEqList;
 
   @FXML TableView<locationModel> locationTable;
   @FXML TableColumn<locationModel, String> nodeID;
@@ -38,14 +49,31 @@ public class mapPageController implements Initializable {
   @FXML TableColumn<locationModel, String> nodeType;
   @FXML TableColumn<locationModel, String> longName;
   @FXML TableColumn<locationModel, String> shortName;
+  @FXML AnchorPane mapBox;
+  @FXML ComboBox floorDropdown;
+  @FXML ComboBox nodeTypeDropdown;
+  @FXML Button mapEditorButton;
+  @FXML Button showMedicalEquipment;
+
+  ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
+  ObservableList<String> nodeTypes =
+      FXCollections.observableArrayList(
+          "DEPT", "EXIT", "HALL", "INFO", "LABS", "REST", "RETL", "SERV", "STAI", "ELEV", "BATH");
 
   public mapPageController() throws SQLException {}
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+
+    // Add items to dropdown
+    floorDropdown.setItems(floors);
+    nodeTypeDropdown.setItems(nodeTypes);
+
     try {
       db = new LocationDAOImpl();
+      medEq = new MedicalEquipmentDAOImpl();
       ObservableList<locationModel> locationList = populateList();
+      ObservableList<locationModel> medEquipList = populateList();
       nodeID.setCellValueFactory(new PropertyValueFactory<locationModel, String>("nodeID"));
       xcoord.setCellValueFactory(new PropertyValueFactory<locationModel, Integer>("xcoord"));
       ycoord.setCellValueFactory(new PropertyValueFactory<locationModel, Integer>("ycoord"));
@@ -55,11 +83,14 @@ public class mapPageController implements Initializable {
       longName.setCellValueFactory(new PropertyValueFactory<locationModel, String>("longName"));
       shortName.setCellValueFactory(new PropertyValueFactory<locationModel, String>("shortName"));
       locationTable.setItems(locationList);
+      List<MedicalEquipment> medEqList = medEq.getAllMedicalEquipment();
+
     } catch (SQLException e) {
       e.printStackTrace();
     }
   }
 
+  // Populate locations table
   protected ObservableList<locationModel> populateList() {
     List<Location> list = db.getAllLocations();
     ObservableList<locationModel> tableList = FXCollections.observableArrayList();
@@ -78,11 +109,121 @@ public class mapPageController implements Initializable {
     return tableList;
   }
 
+  // Display location on the map
+  private void displayFloorLocations(List<Location> locationList) {
+
+    double imageX = 535;
+    double coordinateX = 935;
+    double scaleFactor = imageX / coordinateX;
+
+    mapBox.getChildren().clear();
+
+    for (Location l : locationList) {
+      Circle c = new Circle();
+      c.setRadius(8);
+      c.setCenterX(l.getXcoord() * scaleFactor);
+      c.setCenterY(l.getYcoord() * scaleFactor);
+      c.getStyleClass().add("locationDot");
+      mapBox.getChildren().add(c);
+    }
+  }
+
+  private void displayMedEquipLocations(ArrayList<MedicalEquipment> medEquipList)
+      throws FileNotFoundException, SQLException {
+
+    double imageX = 535;
+    double coordinateX = 935;
+    double scaleFactor = imageX / coordinateX;
+
+    mapBox.getChildren().clear();
+    for (MedicalEquipment e : medEquipList) {
+      Image image =
+          new Image(
+              new FileInputStream(
+                  "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/microscope.png"));
+      ImageView c = new ImageView(image);
+      c.setX(e.getXCoord() * scaleFactor);
+      c.setY(e.getYCoord() * scaleFactor);
+      mapBox.getChildren().add(c);
+    }
+  }
+
+  private void switchMap(String floor) {
+
+    // Clear and add back mapBox CSS class
+    mapBox.getStyleClass().clear();
+    mapBox.getStyleClass().add("mapBox");
+
+    switch (floor) {
+      case "1":
+        mapBox.getStyleClass().add("floor1Map");
+        break;
+      case "2":
+        mapBox.getStyleClass().add("floor2Map");
+        break;
+      case "3":
+        mapBox.getStyleClass().add("floor3Map");
+        break;
+      case "L1":
+        mapBox.getStyleClass().add("floorL1Map");
+        break;
+      case "L2":
+        mapBox.getStyleClass().add("floorL2Map");
+        break;
+      default:
+        mapBox.getStyleClass().add("floorDefaultMap");
+    }
+  }
+
+  @FXML
+  public void floorDropdown(ActionEvent event) throws IOException {
+
+    switchMap(floorDropdown.getValue().toString());
+  }
+
+  @FXML
+  public void nodeTypeDropdown(ActionEvent event) throws IOException {
+
+    String floor = floorDropdown.getValue().toString();
+    String nodeType = nodeTypeDropdown.getValue().toString();
+
+    List<Location> locationList = db.getAllLocations();
+
+    List<Location> filteredLocations =
+        locationList.stream()
+            .filter(
+                location -> {
+                  if (Objects.equals(location.getFloor(), floor)
+                      && Objects.equals(location.getNodeType(), nodeType)) {
+                    return true;
+                  }
+                  return false;
+                })
+            .collect(Collectors.toList());
+
+    displayFloorLocations(filteredLocations);
+  }
+
   @FXML
   public void mealDeliveryButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) menuBar.getScene().getWindow();
 
     URL url = Main.class.getResource("view/mealDeliveryPage.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      root = loader.load();
+
+      thisStage.setScene(new Scene(root));
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
+  }
+
+  @FXML
+  public void mapEditorButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+
+    URL url = Main.class.getResource("view/mapEditor.fxml");
     if (url != null) {
       loader.setLocation(url);
       root = loader.load();
@@ -200,5 +341,10 @@ public class mapPageController implements Initializable {
     } else {
       System.out.println("Path Doesn't Exist");
     }
+  }
+
+  @FXML
+  public void showMedicalEquipment(ActionEvent event) throws IOException, SQLException {
+    displayMedEquipLocations(medEqList);
   }
 }
