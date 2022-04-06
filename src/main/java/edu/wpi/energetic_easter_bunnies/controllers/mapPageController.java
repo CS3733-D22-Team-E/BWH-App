@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,10 +19,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class mapPageController implements Initializable {
@@ -38,11 +44,24 @@ public class mapPageController implements Initializable {
   @FXML TableColumn<locationModel, String> nodeType;
   @FXML TableColumn<locationModel, String> longName;
   @FXML TableColumn<locationModel, String> shortName;
+  @FXML AnchorPane mapBox;
+  @FXML ComboBox floorDropdown;
+  @FXML ComboBox nodeTypeDropdown;
+
+  ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
+  ObservableList<String> nodeTypes =
+      FXCollections.observableArrayList(
+          "DEPT", "EXIT", "HALL", "INFO", "LABS", "REST", "RETL", "SERV", "STAI", "ELEV", "BATH");
 
   public mapPageController() throws SQLException {}
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+
+    // Add items to dropdown
+    floorDropdown.setItems(floors);
+    nodeTypeDropdown.setItems(nodeTypes);
+
     try {
       db = new LocationDAOImpl();
       ObservableList<locationModel> locationList = populateList();
@@ -60,6 +79,7 @@ public class mapPageController implements Initializable {
     }
   }
 
+  // Populate locations table
   protected ObservableList<locationModel> populateList() {
     List<Location> list = db.getAllLocations();
     ObservableList<locationModel> tableList = FXCollections.observableArrayList();
@@ -76,6 +96,91 @@ public class mapPageController implements Initializable {
               l.getShortName()));
     }
     return tableList;
+  }
+
+  // Display location on the map
+  private void displayFloorLocations(List<Location> locationList) {
+
+    double imageX = 535;
+    double coordinateX = 935;
+    double scaleFactor = imageX / coordinateX;
+
+    mapBox.getChildren().clear();
+
+    for (Location l : locationList) {
+      Circle c = new Circle();
+      c.setRadius(8);
+      c.setCenterX(l.getXcoord() * scaleFactor);
+      c.setCenterY(l.getYcoord() * scaleFactor);
+      c.getStyleClass().add("locationDot");
+      mapBox.getChildren().add(c);
+    }
+  }
+
+  private void switchMap(String floor) {
+
+    // Clear and add back mapBox CSS class
+    mapBox.getStyleClass().clear();
+    mapBox.getStyleClass().add("mapBox");
+
+    switch (floor) {
+      case "1":
+        mapBox.getStyleClass().add("floor1Map");
+        break;
+      case "2":
+        mapBox.getStyleClass().add("floor2Map");
+        break;
+      case "3":
+        mapBox.getStyleClass().add("floor3Map");
+        break;
+      case "L1":
+        mapBox.getStyleClass().add("floorL1Map");
+        break;
+      case "L2":
+        mapBox.getStyleClass().add("floorL2Map");
+        break;
+      default:
+        mapBox.getStyleClass().add("floorDefaultMap");
+    }
+  }
+
+  @FXML
+  public void mapClick(MouseEvent event) throws IOException {
+    Circle c = new Circle();
+    c.setRadius(8);
+    c.setCenterX(event.getX());
+    c.setCenterY(event.getY());
+    c.getStyleClass().add("locationDot");
+    mapBox.getChildren().add(c);
+  }
+
+  @FXML
+  public void floorDropdown(ActionEvent event) throws IOException {
+
+    switchMap(floorDropdown.getValue().toString());
+  }
+
+  @FXML
+  public void nodeTypeDropdown(ActionEvent event) throws IOException {
+
+    String floor = floorDropdown.getValue().toString();
+    String nodeType = nodeTypeDropdown.getValue().toString();
+
+    List<Location> locationList = db.getAllLocations();
+
+    List<Location> filteredLocations =
+        locationList.stream()
+            .filter(
+                location -> {
+                  if (Objects.equals(location.getFloor(), floor)
+                      && Objects.equals(location.getNodeType(), nodeType)) {
+                    return true;
+                  }
+                  return false;
+                })
+            .collect(Collectors.toList());
+
+    displayFloorLocations(filteredLocations);
   }
 
   @FXML
