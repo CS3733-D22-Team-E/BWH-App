@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class mapEditorController implements Initializable {
@@ -29,6 +32,7 @@ public class mapEditorController implements Initializable {
   FXMLLoader loader = new FXMLLoader();
   Parent root;
   @FXML MenuBar menuBar;
+  LocationDAOImpl db;
 
   @FXML ComboBox<String> floor;
   @FXML JFXButton BigAddLocation;
@@ -47,11 +51,13 @@ public class mapEditorController implements Initializable {
   @FXML Pane deleteLocationPane;
   @FXML Button smallDeleteLocation;
   @FXML AnchorPane mapBox;
+  @FXML Text deleteText;
+  @FXML Button changePosition;
 
   int mouseX;
   int mouseY;
-
-  LocationDAOImpl db;
+  String editMode;
+  Location selectedLoc;
 
   ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
   ObservableList<String> nodes =
@@ -67,6 +73,12 @@ public class mapEditorController implements Initializable {
     floor.setItems(floors);
     addNodeType.setItems(nodes);
     updateNodeType.setItems(nodes);
+
+    try {
+      db = new LocationDAOImpl();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   // Switching Panes
@@ -109,25 +121,45 @@ public class mapEditorController implements Initializable {
   }
 
   @FXML
-  public void smallUpdateLocationButton(ActionEvent event) throws SQLException {
-    List<Location> locations = db.getAllLocations();
-    for (Location location : locations) {
-      if (location.getXcoord() == mouseX && location.getYcoord() == mouseY) {
-
-        // this is problematic
-
-        db.updateCoord(location, mouseX, mouseY);
-      }
-    }
-  }
+  public void smallUpdateLocationButton(ActionEvent event) throws SQLException {}
 
   @FXML
-  public void smallDeleteLocationButton(ActionEvent event) throws SQLException {
-    List<Location> locations = db.getAllLocations();
-    for (Location location : locations) {
-      if (location.getXcoord() == mouseX && location.getYcoord() == mouseY) {
-        db.deleteLocation(location);
+  public void smallDeleteLocationButton(ActionEvent event) throws SQLException {}
+
+  // Display location on the map
+  private void displayFloorLocations(List<Location> locationList) {
+
+    double imageX = 535;
+    double coordinateX = 935;
+    double scaleFactor = imageX / coordinateX;
+
+    mapBox.getChildren().clear();
+
+    List<Location> filteredLocations =
+        locationList.stream()
+            .filter(
+                location -> {
+                  if (Objects.equals(location.getFloor(), floor.getValue())) {
+                    return true;
+                  }
+                  return false;
+                })
+            .collect(Collectors.toList());
+
+    for (Location l : filteredLocations) {
+      Circle c = new Circle();
+      c.setRadius(8);
+      c.setCenterX(l.getXcoord() * scaleFactor);
+      c.setCenterY(l.getYcoord() * scaleFactor);
+
+      // Conditional styling
+      if (selectedLoc == l) {
+        c.getStyleClass().add("selectedLocationDot");
+      } else {
+        c.getStyleClass().add("locationDot");
       }
+
+      mapBox.getChildren().add(c);
     }
   }
 
@@ -163,21 +195,49 @@ public class mapEditorController implements Initializable {
   @FXML
   public void floor(ActionEvent event) throws IOException {
 
-    switchMap(floor.getValue().toString());
+    // Reset values to default
+    selectedLoc = null;
+    smallUpdateLocation.setDisable(true);
+    changePosition.setDisable(false);
+    smallDeleteLocation.setDisable(true);
+    smallAddLocation.setDisable(true);
+
+    // Clear all locations dots when the floor is switched
+    mapBox.getChildren().clear();
+    switchMap(floor.getValue());
   }
 
   public void paneSwitch(String pane) {
+
+    // Reset values to default
+    selectedLoc = null;
+    smallUpdateLocation.setDisable(true);
+    changePosition.setDisable(false);
+    smallDeleteLocation.setDisable(true);
+    smallAddLocation.setDisable(true);
+
+    // Only render existing dots if the delete or update functions are selected
+    if (Objects.equals(pane, "delete") || Objects.equals(pane, "update")) {
+      List<Location> locationList = db.getAllLocations();
+
+      displayFloorLocations(locationList);
+    }
+
     AddLocationPane.setVisible(false);
     UpdateLocationPane.setVisible(false);
     deleteLocationPane.setVisible(false);
     switch (pane) {
       case "add":
+        editMode = "add";
+        mapBox.getChildren().clear();
         AddLocationPane.setVisible(true);
         break;
       case "update":
+        editMode = "update";
         UpdateLocationPane.setVisible(true);
         break;
       case "delete":
+        editMode = "delete";
         deleteLocationPane.setVisible(true);
         break;
       default:
@@ -187,15 +247,101 @@ public class mapEditorController implements Initializable {
 
   @FXML
   public void mapClick(MouseEvent event) throws IOException {
+
+    double imageX = 535;
+    double coordinateX = 935;
+    double scaleFactor = imageX / coordinateX;
+
     mouseX = (int) event.getX();
     mouseY = (int) event.getY();
 
-    Circle c = new Circle();
-    c.setRadius(8);
-    c.setCenterX(event.getX());
-    c.setCenterY(event.getY());
-    c.getStyleClass().add("locationDot");
-    mapBox.getChildren().add(c);
+    List<Location> locations = db.getAllLocations();
+
+    // Handle moving the location dot on the map
+    if (Objects.equals(editMode, "changePosition")) {
+
+      // Filter out the old location dot
+      List<Location> filteredLocations =
+          locations.stream()
+              .filter(
+                  location -> {
+                    if (selectedLoc == location) {
+                      return false;
+                    }
+                    return true;
+                  })
+              .collect(Collectors.toList());
+      // Re-render location dots
+      displayFloorLocations(filteredLocations);
+
+      // Add circle to map
+      Circle c = new Circle();
+      c.setRadius(8);
+      c.setCenterX(mouseX);
+      c.setCenterY(mouseY);
+      c.getStyleClass().add("selectedLocationDot");
+      mapBox.getChildren().add(c);
+
+      // Update change position button text
+      changePosition.setText("Change Position");
+
+      // Change edit mode back to update
+      editMode = "update";
+    }
+
+    // Get a selected location based on where the user clicked
+    if (Objects.equals(editMode, "delete") || Objects.equals(editMode, "update")) {
+      for (Location location : locations) {
+        // If the user has selected a dot on the map
+        int locationPadding = 7;
+        if ((location.getXcoord() * scaleFactor >= mouseX - locationPadding
+                && location.getXcoord() * scaleFactor <= mouseX + locationPadding)
+            && (location.getYcoord() * scaleFactor >= mouseY - locationPadding
+                && location.getYcoord() * scaleFactor <= mouseY + locationPadding)
+            && Objects.equals(location.getFloor(), floor.getValue())) {
+
+          // Update the current selected location variable
+          selectedLoc = location;
+          // Re-render dots to change the selected dot to red
+          displayFloorLocations(locations);
+        }
+      }
+    }
+
+    if (Objects.equals(editMode, "delete")) {
+      // Update text with location name
+      deleteText.setText(selectedLoc.getShortName());
+      // Enable the smallDeleteButton
+      smallDeleteLocation.setDisable(false);
+    } else if (Objects.equals(editMode, "update")) {
+      // Update text fields with location data
+      updateShortName.setText(selectedLoc.getShortName());
+      updateLongName.setText(selectedLoc.getLongName());
+      updateNodeType.setValue(selectedLoc.getNodeType());
+      // Enable the smallUpdateButton and changePositionButton
+      changePosition.setDisable(false);
+      smallUpdateLocation.setDisable(false);
+    } else if (Objects.equals(editMode, "add")) {
+      // Clear past dots the user placed
+      mapBox.getChildren().clear();
+
+      // Place new dot
+      Circle c = new Circle();
+      c.setRadius(8);
+      c.setCenterX(event.getX());
+      c.setCenterY(event.getY());
+      c.getStyleClass().add("selectedLocationDot");
+      mapBox.getChildren().add(c);
+
+      // Enable smallAddButton
+      smallAddLocation.setDisable(false);
+    }
+  }
+
+  @FXML
+  public void changePositionButton(ActionEvent event) throws IOException {
+    changePosition.setText("Cancel");
+    editMode = "changePosition";
   }
 
   @FXML

@@ -33,3 +33,9 @@
     -fx-stroke: #005cb2;
     -fx-stroke-width: 3px;
 }
+
+.selectedLocationDot {
+    -fx-fill: #e53935;
+    -fx-stroke: #ab000d;
+    -fx-stroke-width: 3px;
+}
