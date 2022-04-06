@@ -12,15 +12,15 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
 
   public MedicalEquipmentServiceRequestDAOImpl() throws SQLException {
     medicalRequests = new ArrayList<>();
-    String url = "jdbc:derby:myDB;";
+    // String url = "jdbc:derby:myDB;";
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM MED_EQUIP_REQ ORDER BY REQUESTDATE DESC";
     ResultSet rs = statement.executeQuery(query);
     // int numID = 0; //TODO: Assign Medical Requests an ID value
     while (rs.next()) {
       String medEquipReqID = rs.getString("MED_EQUIPMENTID");
-      String reqDate = rs.getString("REQUESTDATE");
-      String deliveryDate = rs.getString("DELIVERYDATE");
+      java.sql.Date reqDate = rs.getDate("REQUESTDATE");
+      java.sql.Date deliveryDate = rs.getDate("DELIVERYDATE");
       boolean isUrgent = rs.getBoolean("ISURGENT");
       String equipment = rs.getString("EQUIP");
       int equipQuantity = rs.getInt("EQUIPQUANTITY");
@@ -41,8 +41,9 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
               staffAssignee,
               equipment,
               equipQuantity,
-              reqDate,
-              deliveryDate);
+              reqDate.toLocalDate(),
+              deliveryDate.toLocalDate(),
+              "");
       medicalRequests.add(equipRequest);
       // numID++;
     }
@@ -92,15 +93,6 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
             + "','"
             + request.getOtherNotes()
             + "')";
-    System.out.println(query);
     statement.executeUpdate(query);
   }
-  /*
-    public static void main(String[] args) throws SQLException {
-      MedicalEquipmentServiceRequestDAOImpl db = new MedicalEquipmentServiceRequestDAOImpl();
-      db.addMedEquipReq(
-          new medicalEquipmentRequest(
-              "1234", "note", "floor", "45", false, "inprogress", "me", "bed", 5, "1/12", "1/13"));
-    }
-  */
 }

@@ -12,7 +12,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
   public EmployeeDAOImpl() throws SQLException {
     employees = new ArrayList<>();
-    String url = "jdbc:derby:myDB;";
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM EMPLOYEES ORDER BY SALARY DESC";
     ResultSet rs = statement.executeQuery(query);
