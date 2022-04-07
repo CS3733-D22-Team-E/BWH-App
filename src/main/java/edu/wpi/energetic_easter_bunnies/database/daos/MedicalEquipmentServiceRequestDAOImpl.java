@@ -75,7 +75,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
             + "','"
             + request.getDeliveryDate()
             + "','"
-            + request.getDeliveryTime()
+            + request.getRequestDate()
             + "',"
             + request.getIsUrgent()
             + ",'"

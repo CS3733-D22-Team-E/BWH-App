@@ -44,6 +44,9 @@ public class mapEditorController implements Initializable {
   @FXML ComboBox<String> addNodeType;
   @FXML Button smallAddLocation;
   @FXML Pane UpdateLocationPane;
+  @FXML TextField updateShortName;
+  @FXML TextField updateLongName;
+  @FXML ComboBox<String> updateNodeType;
   @FXML Button smallUpdateLocation;
   @FXML Pane deleteLocationPane;
   @FXML Button smallDeleteLocation;
@@ -61,11 +64,7 @@ public class mapEditorController implements Initializable {
   Location selectedLoc;
 
   ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
-  ObservableList<String> nodes =
-      FXCollections.observableArrayList(
-          "PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF",
-          "EXIT", "RETL", "SERV");
-
+  ObservableList<String> nodes = FXCollections.observableArrayList("PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF", "EXIT", "RETL", "SERV");
   public mapEditorController() {}
 
   @Override
