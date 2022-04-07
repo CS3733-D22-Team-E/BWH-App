@@ -54,7 +54,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.medicineDeliveryController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.medicineDeliveryController">
     <children>
       <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;">
          <children>
@@ -145,7 +145,7 @@
                       </Label>
                       <CheckBox id="mon" fx:id="mon" layoutX="212.0" layoutY="210.0" mnemonicParsing="false" text="Mon" />
                       <CheckBox id="tues" fx:id="tues" layoutX="264.0" layoutY="210.0" mnemonicParsing="false" text="Tues" />
-                      <CheckBox id="wed" fx:id="Wed" layoutX="317.0" layoutY="210.0" mnemonicParsing="false" text="Wed" />
+                      <CheckBox id="wed" fx:id="wed" layoutX="317.0" layoutY="210.0" mnemonicParsing="false" text="Wed" />
                       <CheckBox id="thurs" fx:id="thurs" layoutX="374.0" layoutY="210.0" mnemonicParsing="false" text="Thurs" />
                       <CheckBox id="fri" fx:id="fri" layoutX="434.0" layoutY="210.0" mnemonicParsing="false" text="Fri" />
                       <CheckBox id="sat" fx:id="sat" layoutX="475.0" layoutY="210.0" mnemonicParsing="false" text="Sat" />

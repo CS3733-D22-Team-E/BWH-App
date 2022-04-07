@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -38,7 +37,7 @@ public class mapPageController implements Initializable {
   @FXML MenuBar menuBar;
   LocationDAOImpl db;
   MedicalEquipmentDAOImpl medEq;
-  ArrayList<MedicalEquipment> medEqList;
+  List<MedicalEquipment> medEqList;
 
   @FXML TableView<locationModel> locationTable;
   @FXML TableColumn<locationModel, String> nodeID;
@@ -73,7 +72,6 @@ public class mapPageController implements Initializable {
       db = new LocationDAOImpl();
       medEq = new MedicalEquipmentDAOImpl();
       ObservableList<locationModel> locationList = populateList();
-      ObservableList<locationModel> medEquipList = populateList();
       nodeID.setCellValueFactory(new PropertyValueFactory<locationModel, String>("nodeID"));
       xcoord.setCellValueFactory(new PropertyValueFactory<locationModel, Integer>("xcoord"));
       ycoord.setCellValueFactory(new PropertyValueFactory<locationModel, Integer>("ycoord"));
@@ -83,7 +81,7 @@ public class mapPageController implements Initializable {
       longName.setCellValueFactory(new PropertyValueFactory<locationModel, String>("longName"));
       shortName.setCellValueFactory(new PropertyValueFactory<locationModel, String>("shortName"));
       locationTable.setItems(locationList);
-      List<MedicalEquipment> medEqList = medEq.getAllMedicalEquipment();
+      medEqList = medEq.getAllMedicalEquipment();
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -128,7 +126,7 @@ public class mapPageController implements Initializable {
     }
   }
 
-  private void displayMedEquipLocations(ArrayList<MedicalEquipment> medEquipList)
+  private void displayMedEquipLocations(List<MedicalEquipment> medEquipList)
       throws FileNotFoundException, SQLException {
 
     double imageX = 535;

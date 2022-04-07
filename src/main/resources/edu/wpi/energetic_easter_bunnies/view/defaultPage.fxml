@@ -44,7 +44,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="default-background" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mainController">
+<VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mainController">
    <children>
       <AnchorPane fx:id="mainPane" maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>

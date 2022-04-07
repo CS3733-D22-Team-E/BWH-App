@@ -25,7 +25,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mealDeliveryController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mealDeliveryController">
    <children>
       <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;">
          <children>
@@ -66,7 +66,7 @@
             </Pane>
          </children>
       </HBox>
-      <StackPane prefHeight="561.0" prefWidth="1080.0">
+      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
          <children>
             <AnchorPane fx:id="mealType">
                <children>
@@ -129,7 +129,7 @@
                   <TextField fx:id="requestStatus" layoutX="256.0" layoutY="153.0" prefHeight="26.0" prefWidth="138.0" promptText="Status" />
                </children>
             </AnchorPane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" maxHeight="-Infinity" prefHeight="560.0" style="-fx-background-color: transparent;" />
          </children>
       </StackPane>
    </children>

@@ -52,7 +52,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.languageInterpreterRequestController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.languageInterpreterRequestController">
     <children>
       <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;">
          <children>
@@ -93,10 +93,10 @@
             </Pane>
          </children>
          <VBox.margin>
-            <Insets bottom="10.0" />
+            <Insets />
          </VBox.margin>
       </HBox>
-      <StackPane>
+      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
          <children>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" prefWidth="887.0" />
               <AnchorPane maxHeight="-1.0" maxWidth="-1.0">
