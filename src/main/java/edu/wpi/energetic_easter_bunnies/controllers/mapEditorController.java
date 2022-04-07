@@ -64,7 +64,11 @@ public class mapEditorController implements Initializable {
   Location selectedLoc;
 
   ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
-  ObservableList<String> nodes = FXCollections.observableArrayList("PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF", "EXIT", "RETL", "SERV");
+  ObservableList<String> nodes =
+      FXCollections.observableArrayList(
+          "PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF",
+          "EXIT", "RETL", "SERV");
+
   public mapEditorController() {}
 
   @Override

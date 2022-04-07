@@ -4,7 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" prefHeight="650.0" prefWidth="120.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.sideMenuController">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="120.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.sideMenuController">
    <children>
       <JFXButton fx:id="b1" buttonType="RAISED" onAction="#medicalEquipmentButton" prefHeight="65.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Medical Equipment">
          <VBox.margin>
