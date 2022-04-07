@@ -73,11 +73,4 @@ public class RSAEncryption {
       throws IllegalBlockSizeException, BadPaddingException {
     return enteredPassword.equals(decryptHASH(userPassword));
   }
-
-  public static void main(String[] args)
-      throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException,
-          IOException, InvalidKeySpecException, BadPaddingException, InvalidKeyException {
-    String e = generatePasswordHASH("password");
-    System.out.println(validatePassword("password", e));
-  }
 }
