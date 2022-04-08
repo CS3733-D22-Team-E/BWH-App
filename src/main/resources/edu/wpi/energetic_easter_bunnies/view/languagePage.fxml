@@ -33,6 +33,7 @@
 -->
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
@@ -164,8 +165,8 @@
                         <DatePicker fx:id="startSelection" layoutX="214.0" layoutY="3.0" />
                      </children>
                   </Group>
-                  <ChoiceBox fx:id="floorSelection" layoutX="166.0" layoutY="86.0" prefHeight="30.0" prefWidth="113.0" />
-                  <ChoiceBox fx:id="roomSelection" layoutX="297.0" layoutY="86.0" prefHeight="30.0" prefWidth="113.0" />
+                  <JFXComboBox fx:id="room" layoutX="297.0" layoutY="91.0" promptText="Select Room" />
+                  <JFXComboBox fx:id="floor" layoutX="166.0" layoutY="91.0" promptText="Select Floor" />
                   <DatePicker fx:id="endSelection" layoutX="458.0" layoutY="182.0" />
                   <JFXButton fx:id="submitButton" layoutX="405.0" layoutY="391.0" onAction="#submitButton" prefHeight="75.0" prefWidth="152.0" ripplerFill="RED" style="-fx-background-color: #c0c0c0;" text="Submit Request" AnchorPane.bottomAnchor="32.199999999999974" AnchorPane.rightAnchor="525.4000000000001" AnchorPane.topAnchor="391.0">
                      <font>

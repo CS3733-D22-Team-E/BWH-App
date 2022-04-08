@@ -3,6 +3,7 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.entity.languageInterpreterRequest;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,19 +16,15 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    floorSelection.setValue("Select Floor");
-    roomSelection.setValue("Select Room");
+    try {
+      populateLocationComboBoxes();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
     languageSelection.setValue("Select Language");
-    floorSelection.getItems().addAll(floorList);
-    roomSelection.getItems().addAll(roomList);
     languageSelection.getItems().addAll(langList);
   }
-
-  @FXML private ChoiceBox<String> floorSelection;
-
-  private String[] floorList = {"Ground", "First Floor", "Second Floor", "Third Floor"};
-  @FXML private ChoiceBox<String> roomSelection;
-  private String[] roomList = {"101", "102", "103", "104"};
 
   @FXML private ChoiceBox<String> languageSelection;
   private String[] langList = {"English", "Spanish", "Russian", "Mandarin Chinese"};
@@ -58,11 +55,11 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
 
   @FXML
   private void resetButton(ActionEvent event) {
-    floorSelection.getSelectionModel().clearSelection();
+    floor.getSelectionModel().clearSelection();
     languageSelection.getSelectionModel().clearSelection();
-    roomSelection.getSelectionModel().clearSelection();
-    floorSelection.setValue("Select Floor");
-    roomSelection.setValue("Select Room");
+    room.getSelectionModel().clearSelection();
+    floor.setValue("Select Floor");
+    room.setValue("Select Room");
     languageSelection.setValue("Select Language");
     startSelection.getEditor().clear();
     endSelection.getEditor().clear();
