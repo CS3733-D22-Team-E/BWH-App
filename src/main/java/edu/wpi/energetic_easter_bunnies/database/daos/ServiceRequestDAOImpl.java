@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceRequestDAOImpl implements ServiceRequestDAO {
+public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
   static Connection connection = DBConnection.getConnection();
   List<serviceRequest> serviceRequests;
 
@@ -45,19 +45,27 @@ public class ServiceRequestDAOImpl implements ServiceRequestDAO {
   }
 
   @Override
-  public List<serviceRequest> getAllServiceRequests() {
+  public List<serviceRequest> getAll() {
     return serviceRequests;
   }
 
-  // TODO Implement this dao
   @Override
-  public serviceRequest getServiceRequest(int numID) {
-    return null;
+  public serviceRequest get(String id) {
+    for(serviceRequest request : serviceRequests) {
+      if(request.getServiceRequestID().equals(id))
+        return request;
+    }
+    System.out.println("Service Request with service request id " + id + " not found");
+    throw new NullPointerException();
   }
 
   @Override
-  public void updateServiceRequest(serviceRequest request) {}
+  public void update(serviceRequest request) {
+    serviceRequests.add(request);
+  }
 
   @Override
-  public void deleteServiceRequest(serviceRequest request) {}
+  public void delete(serviceRequest request) {
+    serviceRequests.remove(request);
+  }
 }

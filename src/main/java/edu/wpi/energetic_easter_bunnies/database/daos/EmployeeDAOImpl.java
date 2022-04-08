@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDAOImpl implements EmployeeDAO {
+public class EmployeeDAOImpl implements DAO<Employee> {
   static Connection connection = DBConnection.getConnection();
   List<Employee> employees;
 
@@ -34,22 +34,27 @@ public class EmployeeDAOImpl implements EmployeeDAO {
   }
 
   @Override
-  public List<Employee> getAllEmployees() {
+  public List<Employee> getAll() {
     return employees;
   }
 
   @Override
-  public Employee getEmployee(int numID) {
-    return employees.get(numID);
+  public Employee get(String id) {
+    for(Employee employee : employees) {
+      if(employee.getEmployeeID().equals(id))
+        return employee;
+    }
+    System.out.println("Employee with EmployeeID " + id + " not found");
+    throw new NullPointerException();
   }
 
   @Override
-  public void updateEmployee(Employee employee) {
+  public void update(Employee employee) {
     employees.add(employee);
   }
 
   @Override
-  public void deleteEmployee(Employee employee) {
+  public void delete(Employee employee) {
     employees.remove(employee);
   }
 }

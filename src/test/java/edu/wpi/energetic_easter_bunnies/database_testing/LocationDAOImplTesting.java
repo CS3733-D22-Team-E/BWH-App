@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.wpi.energetic_easter_bunnies.database.Location;
-import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAO;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import java.sql.SQLException;
 import org.junit.jupiter.api.Test;

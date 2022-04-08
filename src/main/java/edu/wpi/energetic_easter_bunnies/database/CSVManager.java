@@ -216,7 +216,7 @@ public class CSVManager {
    * @throws IOException - Writing to the CSV file
    */
   public static void saveMedEquipCSV(String fileName) throws IOException, SQLException {
-    MedicalEquipmentDAO equipment = new MedicalEquipmentDAOImpl();
+    DAO<MedicalEquipment> equipment = new MedicalEquipmentDAOImpl();
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
     File tempFile = new File(fileName);
     boolean exists = tempFile.exists();
@@ -299,7 +299,7 @@ public class CSVManager {
    * @throws IOException - Writing to the CSV file
    */
   public static void saveEmployeeCSV(String fileName) throws IOException, SQLException {
-    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    DAO<Employee> employeeDAO = new EmployeeDAOImpl();
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
     File tempFile = new File(fileName);
     boolean exists = tempFile.exists();
