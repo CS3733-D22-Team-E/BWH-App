@@ -10,11 +10,11 @@ public class AccountsManager {
   static Connection connection = DBConnection.getConnection();
 
   //TODO create DB table in DBCreation.java
-
+  //TODO Decision on where to store passwords - this could also be just another attribute of the
+  //    employees DB 'password'
   /**
    * for use in storing passwords in an 'accounts' database -> "never store plaintext
-   * passwords"-Gandhi, probably ^^^^^^^^ > this could also be just another attribute of the
-   * employees DB
+   * passwords"-Gandhi, probably
    *
    * @param input
    * @return

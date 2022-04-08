@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -60,7 +59,9 @@ public class mapPageController implements Initializable {
       FXCollections.observableArrayList(
           "DEPT", "EXIT", "HALL", "INFO", "LABS", "REST", "RETL", "SERV", "STAI", "ELEV", "BATH");
 
-  public mapPageController() throws SQLException {}
+  public mapPageController() throws SQLException {
+    int i = 3;
+  }
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
