@@ -133,16 +133,23 @@ public class mapPageController implements Initializable {
     double coordinateX = 935;
     double scaleFactor = imageX / coordinateX;
 
+    System.out.println(medEquipList);
+
     mapBox.getChildren().clear();
     for (MedicalEquipment e : medEquipList) {
       Image image =
           new Image(
               new FileInputStream(
                   "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/microscope.png"));
-      ImageView c = new ImageView(image);
-      c.setX(e.getXCoord() * scaleFactor);
-      c.setY(e.getYCoord() * scaleFactor);
-      mapBox.getChildren().add(c);
+      double prefWidth = (int) image.getWidth() / 2.5;
+      double prefHeight = (int) image.getHeight() / 2.5;
+
+      ImageView i = new ImageView(image);
+      i.setFitWidth(prefWidth);
+      i.setFitHeight(prefHeight);
+      i.setX(e.getXCoord() * scaleFactor - (prefWidth / 2));
+      i.setY(e.getYCoord() * scaleFactor - (prefHeight / 2));
+      mapBox.getChildren().add(i);
     }
   }
 
@@ -151,6 +158,9 @@ public class mapPageController implements Initializable {
     // Clear and add back mapBox CSS class
     mapBox.getStyleClass().clear();
     mapBox.getStyleClass().add("mapBox");
+
+    // Clears the medical Equipment Icons
+    mapBox.getChildren().clear();
 
     switch (floor) {
       case "1":
@@ -198,8 +208,30 @@ public class mapPageController implements Initializable {
                   return false;
                 })
             .collect(Collectors.toList());
-
     displayFloorLocations(filteredLocations);
+  }
+
+  @FXML
+  public void filterMedEquip(ActionEvent event) throws SQLException, FileNotFoundException {
+
+    String floor = floorDropdown.getValue().toString();
+    List<MedicalEquipment> medEqList = medEq.getAllMedicalEquipment();
+
+    List<MedicalEquipment> filteredEquipment =
+        medEqList.stream()
+            .filter(
+                medicalEqupment -> {
+                  try {
+                    if (Objects.equals(medicalEqupment.getFloor(), floor)) {
+                      return true;
+                    }
+                  } catch (SQLException e) {
+                    e.printStackTrace();
+                  }
+                  return false;
+                })
+            .collect(Collectors.toList());
+    displayMedEquipLocations(filteredEquipment);
   }
 
   @FXML
