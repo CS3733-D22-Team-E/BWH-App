@@ -1,10 +1,10 @@
 package edu.wpi.energetic_easter_bunnies.entity.accounts;
 
-import java.util.Random;
+import edu.wpi.energetic_easter_bunnies.database.AccountsManager;
+import edu.wpi.energetic_easter_bunnies.database.AccountsManager.*;
 
 public class account {
-  private int
-      authorityLevel; // thinking 0 - 3 of getting more access in the program the greater you go
+  private int authorityLevel; // thinking 0 - 5 of getting more access the higher it is
   private String accountID; // staff assignee
   private String passwordHash;
   private String firstName;
@@ -12,6 +12,17 @@ public class account {
   private String position;
   private String location; // if not "live tracked", this could be their office etc
 
+  /**
+   * realistically used to load in from a CSV of accounts
+   *
+   * @param accountID
+   * @param authorityLevel
+   * @param passwordHash
+   * @param firstName
+   * @param lastName
+   * @param position
+   * @param location
+   */
   public account(
       String accountID,
       Integer authorityLevel,
@@ -30,26 +41,22 @@ public class account {
   }
 
   public account() {
-    this.accountID = generateRandom8DigitID(); //8 digits, 0-99,999,999
-    this.authorityLevel=0;
-    this.passwordHash="0"; // ?? (formatted to 8 digits)
-    this.firstName="First";
-    this.lastName="Last";
-    this.position="basicUser";
-    this.location="yourMom";
-  }
-
-  private String generateRandom8DigitID() {
-    return String.format("07d",String.valueOf(new Random().nextInt((int) Math.pow(10,9))));
+    this.accountID = AccountsManager.generateRandom8DigitID(); // 8 digits, 0-99,999,999
+    this.authorityLevel = 0;
+    this.passwordHash = "0"; // ?? (formatted to 8 digits)
+    this.firstName = "First";
+    this.lastName = "Last";
+    this.position = "basicUser";
+    this.location = "yourMom";
   }
 
   /**
    * set all attributes of an account (note not static)
    *
-   * FUNCTIONALITY: to leave a field unchanged, put an empty String ("") in the parameter
-   *                            -> this also prevents empty or null strings from being manually set
+   * <p>FUNCTIONALITY: to leave a field unchanged, put an empty String ("") in the parameter -> this
+   * also prevents empty or null strings from being manually set
    *
-   * for ease of setting attributes from fields in a UI
+   * <p>for ease of setting attributes from fields in a UI
    *
    * @param accountID
    * @param authorityLevel
@@ -60,13 +67,14 @@ public class account {
    * @param location
    * @return
    */
-  public boolean setAttributes(String accountID,
-                               Integer authorityLevel,
-                               String passwordHash,
-                               String firstName,
-                               String lastName,
-                               String position,
-                               String location) { //"" for unchanged attributes
+  public boolean setAttributes(
+      String accountID,
+      Integer authorityLevel,
+      String passwordHash,
+      String firstName,
+      String lastName,
+      String position,
+      String location) { // "" for unchanged attributes
     if (!accountID.equals("")) this.accountID = accountID;
     if (!passwordHash.equals("")) this.passwordHash = passwordHash;
     if (!firstName.equals("")) this.firstName = firstName;
