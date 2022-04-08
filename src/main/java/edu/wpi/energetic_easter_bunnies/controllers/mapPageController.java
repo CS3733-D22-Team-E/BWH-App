@@ -67,6 +67,7 @@ public class mapPageController implements Initializable {
     // Add items to dropdown
     floorDropdown.setItems(floors);
     nodeTypeDropdown.setItems(nodeTypes);
+    floorDropdown.setValue("1");
 
     try {
       db = new LocationDAOImpl();
@@ -179,7 +180,7 @@ public class mapPageController implements Initializable {
         mapBox.getStyleClass().add("floorL2Map");
         break;
       default:
-        mapBox.getStyleClass().add("floorDefaultMap");
+        mapBox.getStyleClass().add("floor1Map");
     }
   }
 
@@ -220,9 +221,9 @@ public class mapPageController implements Initializable {
     List<MedicalEquipment> filteredEquipment =
         medEqList.stream()
             .filter(
-                medicalEqupment -> {
+                medicalEquipment -> {
                   try {
-                    if (Objects.equals(medicalEqupment.getFloor(), floor)) {
+                    if (Objects.equals(medicalEquipment.getFloor(), floor)) {
                       return true;
                     }
                   } catch (SQLException e) {

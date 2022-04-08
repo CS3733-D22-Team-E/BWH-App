@@ -76,6 +76,7 @@ public class mapEditorController implements Initializable {
 
     floor.setItems(floors);
     addNodeType.setItems(nodes);
+    floor.setValue("1");
 
     try {
       db = new LocationDAOImpl();
@@ -244,7 +245,7 @@ public class mapEditorController implements Initializable {
         mapBox.getStyleClass().add("floorL2Map");
         break;
       default:
-        mapBox.getStyleClass().add("floorDefaultMap");
+        mapBox.getStyleClass().add("floor1Map");
         break;
     }
   }
@@ -262,6 +263,12 @@ public class mapEditorController implements Initializable {
     // Clear all locations dots when the floor is switched
     mapBox.getChildren().clear();
     switchMap(floor.getValue());
+
+    // Only render existing dots if the delete or update functions are selected
+    if (Objects.equals(editMode, "delete") || Objects.equals(editMode, "update")) {
+      List<Location> locationList = db.getAllLocations();
+      displayFloorLocations(locationList);
+    }
   }
 
   public void paneSwitch(String pane) {

@@ -129,7 +129,7 @@
                 <AnchorPane fx:id="mapBox" layoutX="538.0" layoutY="96.0" maxHeight="509.0" maxWidth="535.0" onMouseClicked="#mapClick" prefHeight="509.0" prefWidth="535.0">
                     <styleClass>
                         <String fx:value="mapBox" />
-                        <String fx:value="floorDefaultMap" />
+                        <String fx:value="floor1Map" />
                     </styleClass>
                 </AnchorPane>
             <JFXButton fx:id="BigAddLocation" layoutX="31.0" layoutY="171.0" onAction="#BigAddLocationButton" prefHeight="55.0" prefWidth="171.0" text="Add Location" />
