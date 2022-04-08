@@ -40,9 +40,8 @@ public class EmployeeDAOImpl implements DAO<Employee> {
 
   @Override
   public Employee get(String id) {
-    for(Employee employee : employees) {
-      if(employee.getEmployeeID().equals(id))
-        return employee;
+    for (Employee employee : employees) {
+      if (employee.getEmployeeID().equals(id)) return employee;
     }
     System.out.println("Employee with EmployeeID " + id + " not found");
     throw new NullPointerException();

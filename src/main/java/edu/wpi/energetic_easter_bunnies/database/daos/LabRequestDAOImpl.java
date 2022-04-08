@@ -61,14 +61,14 @@ public class LabRequestDAOImpl implements DAO<labRequest> {
 
   /**
    * Method to get a specific lab request
+   *
    * @param id The id of the specific lab request wanted
    * @return
    */
   @Override
   public labRequest get(String id) {
-    for(labRequest labRequest : labRequests) {
-      if(labRequest.getServiceRequestID().equals(id))
-        return labRequest;
+    for (labRequest labRequest : labRequests) {
+      if (labRequest.getServiceRequestID().equals(id)) return labRequest;
     }
     System.out.println("Lab Request with lab request id " + id + " not found");
     throw new NullPointerException();
@@ -86,31 +86,31 @@ public class LabRequestDAOImpl implements DAO<labRequest> {
     try {
       Statement statement = connection.createStatement();
       String query =
-              "INSERT INTO LAB_REQUEST VALUES ('"
-                      + labRequest.getServiceRequestID()
-                      + "','"
-                      + labRequest.getLabRequestType()
-                      + "','"
-                      + labRequest.getStaffAssignee()
-                      + "','"
-                      + labRequest.getRoomID()
-                      + "','"
-                      + labRequest.getTimeFrame()
-                      + "','"
-                      + labRequest.getRequestStatus()
-                      + "','"
-                      + labRequest.getOtherNotes()
-                      + "')";
+          "INSERT INTO LAB_REQUEST VALUES ('"
+              + labRequest.getServiceRequestID()
+              + "','"
+              + labRequest.getLabRequestType()
+              + "','"
+              + labRequest.getStaffAssignee()
+              + "','"
+              + labRequest.getRoomID()
+              + "','"
+              + labRequest.getTimeFrame()
+              + "','"
+              + labRequest.getRequestStatus()
+              + "','"
+              + labRequest.getOtherNotes()
+              + "')";
       System.out.println(query);
       statement.executeUpdate(query);
-    } catch(SQLException e) {
+    } catch (SQLException e) {
       e.printStackTrace();
     }
   }
 
   /**
-   * Update request status for a lab request
-   * TODO find what to do with this function
+   * Update request status for a lab request TODO find what to do with this function
+   *
    * @param labRequest lab request to update
    * @param newRequestStatus new request status for the lab request
    * @throws SQLException
@@ -147,11 +147,11 @@ public class LabRequestDAOImpl implements DAO<labRequest> {
     try {
       Statement statement = connection.createStatement();
       String query =
-              "DELETE FROM LAB_REQUEST WHERE LAB_REQUESTID = ('"
-                      + labRequest.getServiceRequestID()
-                      + "')";
+          "DELETE FROM LAB_REQUEST WHERE LAB_REQUESTID = ('"
+              + labRequest.getServiceRequestID()
+              + "')";
       statement.executeUpdate(query);
-    } catch(SQLException e) {
+    } catch (SQLException e) {
       e.printStackTrace();
     }
   }

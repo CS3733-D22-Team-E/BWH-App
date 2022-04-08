@@ -97,25 +97,25 @@ public class LocationDAOImpl implements DAO<Location> {
       locations.add(location);
 
       String query =
-              "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
-                      + location.getNodeID()
-                      + "',"
-                      + location.getXcoord()
-                      + ","
-                      + location.getYcoord()
-                      + ",'"
-                      + location.getFloor()
-                      + "','"
-                      + location.getBuilding()
-                      + "','"
-                      + location.getNodeType()
-                      + "','"
-                      + location.getLongName()
-                      + "','"
-                      + location.getShortName()
-                      + "')"; // Insert into database; does not check if the nodeID already exists
+          "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
+              + location.getNodeID()
+              + "',"
+              + location.getXcoord()
+              + ","
+              + location.getYcoord()
+              + ",'"
+              + location.getFloor()
+              + "','"
+              + location.getBuilding()
+              + "','"
+              + location.getNodeType()
+              + "','"
+              + location.getLongName()
+              + "','"
+              + location.getShortName()
+              + "')"; // Insert into database; does not check if the nodeID already exists
       statement.executeUpdate(query);
-    } catch(SQLException e) {
+    } catch (SQLException e) {
       e.printStackTrace();
     }
   }
@@ -192,7 +192,7 @@ public class LocationDAOImpl implements DAO<Location> {
       Statement statement = connection.createStatement();
       String query = "DELETE FROM TOWERLOCATIONS WHERE nodeID = ('" + location.getNodeID() + "')";
       statement.executeUpdate(query);
-    } catch(SQLException e) {
+    } catch (SQLException e) {
       e.printStackTrace();
     }
   }

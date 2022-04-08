@@ -1,6 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.database;
 
 import edu.wpi.energetic_easter_bunnies.database.daos.*;
+import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
 import java.io.*;
 import java.sql.*;
@@ -56,7 +57,7 @@ public class CSVManager {
    * @throws IOException - Writing to the CSV file
    */
   public static void saveLocationCSV(String fileName) throws IOException, SQLException {
-    LocationDAO locationDAO = new LocationDAOImpl();
+    DAO<Location> locationDAO = new LocationDAOImpl();
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
     File tempFile = new File(fileName);
     boolean exists = tempFile.exists();
@@ -70,7 +71,7 @@ public class CSVManager {
       // write format
       out.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName\n");
       // write actual data
-      for (Location location : locationDAO.getAllLocations()) {
+      for (Location location : locationDAO.getAll()) {
         String csvLine =
             ""
                 + // might be extraneous, shouldn't affect anything
@@ -142,7 +143,7 @@ public class CSVManager {
    * @throws IOException - Writing to the CSV file
    */
   public static void saveMedEquipReqCSV(String fileName) throws IOException, SQLException {
-    MedicalEquipmentServiceRequestDAO MESR = new MedicalEquipmentServiceRequestDAOImpl();
+    DAO<medicalEquipmentRequest> MESR = new MedicalEquipmentServiceRequestDAOImpl();
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
     File tempFile = new File(fileName);
     boolean exists = tempFile.exists();
@@ -156,7 +157,7 @@ public class CSVManager {
       // write format
       out.write("floorID,roomID\n");
       // write actual data
-      for (serviceRequest medEquipServReq : MESR.getAllMedicalEquipmentServiceRequests()) {
+      for (serviceRequest medEquipServReq : MESR.getAll()) {
         String csvLine =
             "" + medEquipServReq.getFloorID() + ',' + medEquipServReq.getRoomID() + "\n";
         out.write(csvLine);
@@ -230,7 +231,7 @@ public class CSVManager {
       // write format
       out.write("ID,isInUse,isClean,cleanLocation,storageLocation\n");
       // write actual data
-      for (Equipment medEquip : equipment.getAllMedicalEquipment()) {
+      for (Equipment medEquip : equipment.getAll()) {
         String csvLine =
             ""
                 + medEquip.getEquipmentID()
@@ -313,7 +314,7 @@ public class CSVManager {
       // write format
       out.write("ID,name,position,isFree\n");
       // write actual data
-      for (Employee employee : employeeDAO.getAllEmployees()) {
+      for (Employee employee : employeeDAO.getAll()) {
         String csvLine =
             ""
                 + employee.getEmployeeID()

@@ -56,11 +56,11 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
 
   public medicalEquipmentRequest get(String id) {
     for (medicalEquipmentRequest request : medicalRequests) {
-      if (request.getServiceRequestID().equals(id))
-        return request;
+      if (request.getServiceRequestID().equals(id)) return request;
     }
 
-    System.out.println("Medical Equipment Request with medical equipment request id " + id + " not found");
+    System.out.println(
+        "Medical Equipment Request with medical equipment request id " + id + " not found");
     throw new NullPointerException();
   }
 

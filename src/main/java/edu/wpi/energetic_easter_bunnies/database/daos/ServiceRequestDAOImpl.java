@@ -51,9 +51,8 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
 
   @Override
   public serviceRequest get(String id) {
-    for(serviceRequest request : serviceRequests) {
-      if(request.getServiceRequestID().equals(id))
-        return request;
+    for (serviceRequest request : serviceRequests) {
+      if (request.getServiceRequestID().equals(id)) return request;
     }
     System.out.println("Service Request with service request id " + id + " not found");
     throw new NullPointerException();

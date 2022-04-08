@@ -50,9 +50,8 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
 
   @Override
   public MedicalEquipment get(String id) {
-    for(MedicalEquipment equipment : equipmentList) {
-      if(equipment.getEquipmentID().equals(id))
-        return equipment;
+    for (MedicalEquipment equipment : equipmentList) {
+      if (equipment.getEquipmentID().equals(id)) return equipment;
     }
     System.out.println("Location with equipment id " + id + " not found");
     throw new NullPointerException();
