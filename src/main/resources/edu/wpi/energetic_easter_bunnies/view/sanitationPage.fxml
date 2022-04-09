@@ -223,12 +223,12 @@
                                       </Label>
                                       <HBox spacing="15.0">
                                  <children>
-                                    <JFXComboBox prefWidth="105.0">
+                                    <JFXComboBox fx:id="floor" prefWidth="105.0">
                                        <HBox.margin>
                                           <Insets right="50.0" />
                                        </HBox.margin>
                                     </JFXComboBox>
-                                    <JFXComboBox layoutX="60.0" layoutY="10.0" prefWidth="105.0">
+                                    <JFXComboBox fx:id="room" layoutX="60.0" layoutY="10.0" prefWidth="105.0">
                                        <HBox.margin>
                                           <Insets left="20.0" />
                                        </HBox.margin>

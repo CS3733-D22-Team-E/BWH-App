@@ -36,14 +36,12 @@ public class labRequestController extends serviceRequestPageController {
 
   public labRequestController() {}
 
+  @Override
   public void initialize(URL location, ResourceBundle resources) {
     try {
       super.initialize(location, resources);
       labRequestType.getItems().addAll("Blood Sample", "Urine Sample", "X-Ray", "CAT Scan", "MRI");
       timeFrameComboBox.getItems().addAll("ASAP", "<1 day", "<1 week");
-
-      locationDB = new LocationDAOImpl();
-      populateLocationComboBoxes();
 
       labRequestDB = new LabRequestDAOImpl();
       populateLabRequestTable();

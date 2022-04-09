@@ -56,12 +56,10 @@ public class medicalEquipmentController extends serviceRequestPageController {
    * Initializes the page by populating the location combo boxes, equipment combo boxes, and the
    * medical equipment request service table
    */
+  @Override
   public void initialize(URL url, ResourceBundle rb) {
     super.initialize(url, rb);
     try {
-      locationDB = new LocationDAOImpl();
-      populateLocationComboBoxes();
-
       medEquipmentDB = new MedicalEquipmentDAOImpl();
       populateEquipComboBoxes();
 

@@ -6,10 +6,12 @@ import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.*;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -34,6 +36,16 @@ public abstract class serviceRequestPageController extends containsSideMenu {
 
   serviceRequestPageController() {
     super();
+  }
+
+  @Override
+  public void initialize(URL url, ResourceBundle rb) {
+    super.initialize(url, rb);
+    try {
+      populateLocationComboBoxes();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   private LocationDAOImpl initalizeLocationDAO() throws SQLException {

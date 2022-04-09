@@ -14,8 +14,6 @@ import javafx.scene.control.*;
 public class medicineDeliveryController extends serviceRequestPageController
     implements Initializable {
 
-  @FXML ComboBox<String> floor;
-  @FXML ComboBox<String> room;
   @FXML ComboBox<String> medicine;
   @FXML TextField amount;
   @FXML DatePicker date;
@@ -31,10 +29,6 @@ public class medicineDeliveryController extends serviceRequestPageController
 
   medicineDelivery medicineDeliveryRequest = new medicineDelivery();
 
-  ObservableList<String> floors =
-      FXCollections.observableArrayList(
-          "Ground Floor", "First Floor", "Second Floor", "Third Floor");
-  ObservableList<String> rooms = FXCollections.observableArrayList("101", "102", "104", "105");
   ObservableList<String> medicines =
       FXCollections.observableArrayList(
           "Halothane", "Isoflurane", "Propofol", "midazolam", "ibuprofen");
@@ -44,8 +38,6 @@ public class medicineDeliveryController extends serviceRequestPageController
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    floor.setItems(floors);
-    room.setItems(rooms);
     medicine.setItems(medicines);
   }
 

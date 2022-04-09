@@ -3,7 +3,6 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.entity.languageInterpreterRequest;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,11 +15,6 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    try {
-      populateLocationComboBoxes();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
 
     languageSelection.setValue("Select Language");
     languageSelection.getItems().addAll(langList);

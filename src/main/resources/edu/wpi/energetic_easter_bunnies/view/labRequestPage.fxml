@@ -81,10 +81,10 @@
                                         </font>
                                     </Label>
                                     <HBox spacing="15.0">
-                                 <children>
-                                    <JFXComboBox fx:id="floor" promptText="Select Room" />
-                                    <JFXComboBox fx:id="room" promptText="Select Floor" />
-                                 </children>
+                                        <children>
+                                    <JFXComboBox fx:id="floor" promptText="Select Floor" />
+                                    <JFXComboBox fx:id="room" promptText="Select Room" />
+                                        </children>
                                     </HBox>
                                 </children>
                             </VBox>
