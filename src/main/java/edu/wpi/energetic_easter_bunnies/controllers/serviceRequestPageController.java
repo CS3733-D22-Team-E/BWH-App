@@ -38,6 +38,9 @@ public abstract class serviceRequestPageController extends containsSideMenu {
     super();
   }
 
+  /**
+   * Calls the initialize function for containsSideMenu and then populates the location combo boxes.
+   */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     super.initialize(url, rb);
@@ -48,6 +51,11 @@ public abstract class serviceRequestPageController extends containsSideMenu {
     }
   }
 
+  /**
+   * Initializes and returns a LocationDAOImpl object to be used for populating location combo boxes
+   * @return an initialized LocationDAOImpl object
+   * @throws SQLException if there is an error accessing the database
+   */
   private LocationDAOImpl initalizeLocationDAO() throws SQLException {
     locationDB = new LocationDAOImpl();
     return locationDB;
@@ -59,13 +67,21 @@ public abstract class serviceRequestPageController extends containsSideMenu {
    * determined based on the selection from the floor combo box.
    */
   protected void populateLocationComboBoxes() throws SQLException {
+    //Initializes the locationDB object
     initalizeLocationDAO();
 
+    /*
+      Sets up data structures for storing floor and room values.
+      A hashmap with floor name keys and lists of room names as values is used to
+      associate rooms with their corresponding floor
+    */
     List<Location> locations = locationDB.getAllLocations();
     List<String> floors = new ArrayList<>();
     HashMap<String, ArrayList<String>> floorToRooms = new HashMap<>();
+    //Makes the room combo box hidden until a floor value is selected
     room.setVisible(false);
 
+    //Populates location list and hashmap
     for (Location l : locations) {
       String floor = l.getFloor();
       if (!floors.contains(floor)) {
@@ -80,7 +96,12 @@ public abstract class serviceRequestPageController extends containsSideMenu {
       roomsOnFloor.add(l.getShortName());
       floorToRooms.put(floor, roomsOnFloor);
     }
+
+    //Sets value of floor combo box to list of floor names
     floor.setItems(FXCollections.observableArrayList(floors));
+
+    //Adds a listener to the floor combo box so that once a selection is made, the corresponding room values
+    //for that floor populate the room combo box
     floor
         .getSelectionModel()
         .selectedItemProperty()
