@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
+  // TODO Add enum to switch between client and embedded db to this class
   private static Connection connection = null;
 
   static {

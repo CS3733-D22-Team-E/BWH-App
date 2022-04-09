@@ -82,7 +82,7 @@ public class mapPageController implements Initializable {
       longName.setCellValueFactory(new PropertyValueFactory<locationModel, String>("longName"));
       shortName.setCellValueFactory(new PropertyValueFactory<locationModel, String>("shortName"));
       locationTable.setItems(locationList);
-      medEqList = medEq.getAllMedicalEquipment();
+      medEqList = medEq.getAll();
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -91,7 +91,7 @@ public class mapPageController implements Initializable {
 
   // Populate locations table
   protected ObservableList<locationModel> populateList() {
-    List<Location> list = db.getAllLocations();
+    List<Location> list = db.getAll();
     ObservableList<locationModel> tableList = FXCollections.observableArrayList();
     for (Location l : list) {
       tableList.add(
@@ -196,7 +196,7 @@ public class mapPageController implements Initializable {
     String floor = floorDropdown.getValue().toString();
     String nodeType = nodeTypeDropdown.getValue().toString();
 
-    List<Location> locationList = db.getAllLocations();
+    List<Location> locationList = db.getAll();
 
     List<Location> filteredLocations =
         locationList.stream()

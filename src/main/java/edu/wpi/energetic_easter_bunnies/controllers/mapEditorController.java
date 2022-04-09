@@ -87,7 +87,7 @@ public class mapEditorController implements Initializable {
 
   private void fetchDB() throws SQLException {
     db = new LocationDAOImpl();
-    List<Location> locationList = db.getAllLocations();
+    List<Location> locationList = db.getAll();
     displayFloorLocations(locationList);
   }
 
@@ -111,7 +111,7 @@ public class mapEditorController implements Initializable {
   @FXML
   public void smallAddLocationButton(ActionEvent event) throws SQLException {
 
-    List<Location> locationList = db.getAllLocations();
+    List<Location> locationList = db.getAll();
 
     // Get node type count
     List<Location> filteredLocations =
@@ -145,7 +145,7 @@ public class mapEditorController implements Initializable {
             addLongName.getText().toString(),
             addShortName.getText().toString(),
             numID);
-    db.addLocation(location);
+    db.update(location);
 
     // Fetch and switch and to update pane
     fetchDB();
@@ -182,7 +182,7 @@ public class mapEditorController implements Initializable {
     // Reset delete text
     deleteText.setText("Click on the location you would like to delete");
     // Remove the currently selected location from the db
-    db.deleteLocation(selectedLoc);
+    db.delete(selectedLoc);
     fetchDB();
   }
 
@@ -284,7 +284,7 @@ public class mapEditorController implements Initializable {
 
     // Only render existing dots if the delete or update functions are selected
     if (Objects.equals(pane, "delete") || Objects.equals(pane, "update")) {
-      List<Location> locationList = db.getAllLocations();
+      List<Location> locationList = db.getAll();
 
       displayFloorLocations(locationList);
     }
@@ -321,7 +321,7 @@ public class mapEditorController implements Initializable {
     mouseX = (int) event.getX();
     mouseY = (int) event.getY();
 
-    List<Location> locations = db.getAllLocations();
+    List<Location> locations = db.getAll();
 
     // Handle moving the location dot on the map
     if (Objects.equals(editMode, "changePosition")) {

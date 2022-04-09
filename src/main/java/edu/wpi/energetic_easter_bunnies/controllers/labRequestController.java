@@ -61,7 +61,7 @@ public class labRequestController extends serviceRequestPageController {
   }
 
   private void populateLocationComboBoxes() {
-    List<Location> locations = locationDB.getAllLocations();
+    List<Location> locations = locationDB.getAll();
     List<String> floors = new ArrayList<>();
     HashMap<String, ArrayList<String>> floorToRooms = new HashMap<>();
 
@@ -111,7 +111,7 @@ public class labRequestController extends serviceRequestPageController {
   }
 
   protected ObservableList<labRequest> populateLabRequestList() {
-    List<labRequest> list = labRequestDB.getAllLabRequests();
+    List<labRequest> list = labRequestDB.getAll();
     tableList = FXCollections.observableArrayList();
     for (labRequest l : list) {
       tableList.add(l);
@@ -138,7 +138,7 @@ public class labRequestController extends serviceRequestPageController {
   }
 
   private void labSendToDB(labRequest labReq) throws SQLException {
-    labRequestDB.addLabRequest(labReq);
+    labRequestDB.update(labReq);
     tableList.add(labReq);
   }
 
