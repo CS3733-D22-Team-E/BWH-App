@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
+public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
   static Connection connection = DBConnection.getConnection();
   List<MedicalEquipment> equipmentList;
 
@@ -44,11 +44,29 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
   }
 
   @Override
-  public List<MedicalEquipment> getAllMedicalEquipment() {
+  public List<MedicalEquipment> getAll() {
     return equipmentList;
   }
 
   @Override
+  public MedicalEquipment get(String id) {
+    for (MedicalEquipment equipment : equipmentList) {
+      if (equipment.getEquipmentID().equals(id)) return equipment;
+    }
+    System.out.println("Location with equipment id " + id + " not found");
+    throw new NullPointerException();
+  }
+
+  @Override
+  public void update(MedicalEquipment equipment) {
+    equipmentList.add(equipment);
+  }
+
+  @Override
+  public void delete(MedicalEquipment equipment) {
+    equipmentList.remove(equipment);
+  }
+
   public List<MedicalEquipment> getMedicalEquipments(
       String equipmentType, int equipmentQuantity, String roomID, String MED_EQUIPMENTID)
       throws SQLException { // TODO: Maybe figure out better way than a double for-loop
@@ -97,7 +115,6 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
     return equipments;
   }
 
-  @Override
   public void sendToCleaning(List<MedicalEquipment> equipments) throws SQLException {
     for (MedicalEquipment equipment : equipments) {
       equipment.setCurrentLocation(

@@ -157,7 +157,7 @@ public class statusPageController extends containsSideMenu {
   }
 
   protected ObservableList<serviceRequestModel> populateList() {
-    List<serviceRequest> list = db.getAllServiceRequests();
+    List<serviceRequest> list = db.getAll();
     ObservableList<serviceRequestModel> tableList = FXCollections.observableArrayList();
     /*for (serviceRequest r : list) {
       tableList.add(

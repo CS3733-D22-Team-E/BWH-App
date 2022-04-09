@@ -80,7 +80,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
    * determined based on the selection from the floor combo box.
    */
   private void populateLocationComboBoxes() {
-    List<Location> locations = locationDB.getAllLocations();
+    List<Location> locations = locationDB.getAll();
     List<String> floors = new ArrayList<>();
     HashMap<String, ArrayList<String>> floorToRooms = new HashMap<>();
 
@@ -123,7 +123,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
    */
   private void populateEquipComboBoxes() {
     ArrayList<MedicalEquipment> allEquipment =
-        (ArrayList<MedicalEquipment>) medEquipmentDB.getAllMedicalEquipment();
+        (ArrayList<MedicalEquipment>) medEquipmentDB.getAll();
     ArrayList<String> equipmentNames = new ArrayList<String>();
     HashMap<String, Integer> equipNameToQuantity = new HashMap<>();
     for (MedicalEquipment e : allEquipment) {
@@ -193,8 +193,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
    * @return list of medicalEquipmentRequest objects in the database
    */
   protected ObservableList<medicalEquipmentRequest> populateMedEquipList() {
-    List<medicalEquipmentRequest> list =
-        medEquipmentServiceRequestDB.getAllMedicalEquipmentServiceRequests();
+    List<medicalEquipmentRequest> list = medEquipmentServiceRequestDB.getAll();
     tableList = FXCollections.observableArrayList();
     for (medicalEquipmentRequest m : list) {
       tableList.add(m);
