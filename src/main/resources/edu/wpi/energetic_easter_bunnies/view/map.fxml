@@ -9,6 +9,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -87,15 +89,31 @@
                         <Group layoutX="6.198883056640625E-6" layoutY="6.198883056640625E-6" />
                     </children>
                 </AnchorPane>
+            <TableView fx:id="locationTable" layoutX="98.0" layoutY="122.0" prefHeight="435.0" prefWidth="885.0" visible="false">
+              <columns>
+                <TableColumn fx:id="nodeID" prefWidth="75.0" text="Node ID" />
+                <TableColumn prefWidth="91.0" text="X Coordinate" fx:id="xcoord" />
+                  <TableColumn fx:id="ycoord" prefWidth="75.0" text="Y Coordinate" />
+                  <TableColumn fx:id="floor" prefWidth="75.0" text="Floor" />
+                  <TableColumn fx:id="building" prefWidth="75.0" text="Building" />
+                  <TableColumn fx:id="nodeType" prefWidth="75.0" text="Node Type" />
+                  <TableColumn fx:id="longName" prefWidth="75.0" text="Long Name" />
+                  <TableColumn fx:id="shortName" prefWidth="75.0" text="Short Name" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
             <AnchorPane fx:id="mapBox" layoutX="538.0" layoutY="96.0" maxHeight="509.0" maxWidth="535.0" prefHeight="509.0" prefWidth="535.0">
                <styleClass>
                   <String fx:value="mapBox" />
                   <String fx:value="floor1Map" />
                </styleClass>
             </AnchorPane>
+            <JFXComboBox fx:id="nodeTypeDropdown" layoutX="165.0" layoutY="110.0" onAction="#nodeTypeDropdown" promptText="Select Type" />
             <JFXComboBox fx:id="floorDropdown" layoutX="28.0" layoutY="110.0" onAction="#floorDropdown" promptText="Select Floor" />
-            <JFXButton fx:id="mapEditorButton" layoutX="444.0" layoutY="568.0" onAction="#mapEditorButton" prefHeight="25.0" prefWidth="76.0" text="Editor" />
-            <JFXButton fx:id="showMedicalEquipment" layoutX="160.0" layoutY="110.0" onAction="#filterMedEquip" text="Show Med Equip" />
+            <JFXButton fx:id="mapEditorButton" layoutX="292.0" layoutY="110.0" onAction="#mapEditorButton" prefHeight="25.0" prefWidth="76.0" text="Editor" />
+            <JFXButton fx:id="showMedicalEquipment" layoutX="389.0" layoutY="110.0" onAction="#showMedicalEquipment" text="Show Med Equip" />
             </children>
         </AnchorPane>
     </children>
