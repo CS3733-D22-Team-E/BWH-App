@@ -3,18 +3,21 @@ package edu.wpi.energetic_easter_bunnies.database_testing;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.wpi.energetic_easter_bunnies.database.AccountsManager;
-import java.security.NoSuchAlgorithmException;
+import edu.wpi.energetic_easter_bunnies.database.DBCreation;
+import edu.wpi.energetic_easter_bunnies.entity.accounts.account;
+import edu.wpi.energetic_easter_bunnies.entity.accounts.adminAccount;
 import org.junit.jupiter.api.Test;
 
-public class AccountsManagerTesting {
-  AccountsManager AM;
+public class AccountsManagerTesting extends DBCreation {
 
   @Test
-  public void testSHA256Func() throws NoSuchAlgorithmException {
-    AM = new AccountsManager();
-    String plainText = "password";
-    String SHA256hash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8";
-    String testHash = AccountsManager.getSHA256(plainText);
-    assertTrue(SHA256hash.equals(testHash));
+  public void testAccountCreation() {
+    account a;
+    for (int i = 0; i < 20; i++) {
+      a = new adminAccount();
+      assertTrue(a.getAuthorityLevel() == 5);
+      assertTrue(a.getAccountID().length() == 8);
+      assertTrue(a.getFirstName() == "First"); // by default
+    }
   }
 }
