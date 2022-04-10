@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies;
 
-import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.database.DBCreation;
 import java.sql.SQLException;
 
@@ -8,7 +8,7 @@ public class Main {
 
   public static void closeConnection() {
     try {
-      DBConnection.closeConnection();
+      DBConnect.INSTANCE.closeConnection();
     } catch (SQLException e) {
       e.printStackTrace();
     }

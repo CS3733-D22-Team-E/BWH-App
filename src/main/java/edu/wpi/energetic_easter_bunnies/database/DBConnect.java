@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConnection {
-  // TODO Add enum to switch between client and embedded db to this class
-  private static Connection connection = null;
+public enum DBConnect {
+  INSTANCE;
+  private Connection connection;
 
-  static {
+  DBConnect() {
     String url = "jdbc:derby:myDB;create=true";
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
@@ -20,11 +20,15 @@ public class DBConnection {
     System.out.println("Apache Derby driver registered!");
   }
 
-  public static Connection getConnection() {
+  public static DBConnect getInstance() {
+    return INSTANCE;
+  }
+
+  public Connection getConnection() {
     return connection;
   }
 
-  public static void closeConnection() throws SQLException {
+  public void closeConnection() throws SQLException {
     connection.close();
   }
 }

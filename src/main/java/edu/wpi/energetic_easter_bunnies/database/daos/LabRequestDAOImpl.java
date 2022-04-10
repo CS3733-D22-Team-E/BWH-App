@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
-import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.entity.labRequest;
 import java.sql.*;
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LabRequestDAOImpl implements DAO<labRequest> {
 
-  static Connection connection = DBConnection.getConnection();
+  static Connection connection = DBConnect.INSTANCE.getConnection();
   List<labRequest> labRequests;
 
   public LabRequestDAOImpl() throws SQLException {

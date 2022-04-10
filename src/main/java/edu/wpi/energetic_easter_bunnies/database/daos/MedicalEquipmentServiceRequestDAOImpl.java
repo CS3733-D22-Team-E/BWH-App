@@ -1,13 +1,13 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
-import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipmentRequest> {
-  static Connection connection = DBConnection.getConnection();
+  static Connection connection = DBConnect.INSTANCE.getConnection();
   List<medicalEquipmentRequest> medicalRequests;
 
   public MedicalEquipmentServiceRequestDAOImpl() throws SQLException {

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBCreation {
-  static Connection connection = DBConnection.getConnection();
+  static Connection connection = DBConnect.INSTANCE.getConnection();
 
   public static void createEmployeesTable() throws SQLException {
     String query =
