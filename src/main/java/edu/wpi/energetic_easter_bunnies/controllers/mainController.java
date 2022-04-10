@@ -46,6 +46,9 @@ public class mainController implements menuButtons {
     thisStage.getScene().setRoot(root);
   }
 
+  @Override
+  public void profileButton(ActionEvent event) throws IOException {}
+
   @FXML
   public void languageButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
