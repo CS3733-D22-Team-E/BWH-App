@@ -1,30 +1,42 @@
-package edu.wpi.energetic_easter_bunnies.entity;
+package edu.wpi.energetic_easter_bunnies.entity.accounts;
 
-public class account {
-  private int
-      authorityLevel; // thinking 0 - 3 of getting more access in the program the greater you go
+/**
+ * - create new user Type by creating a new class that extends this class
+ */
+public abstract class Account {
+  int authorityLevel; // 0 is basic (default) user,
+                              // 1 is a staff account,
+                              // 2 and above is admin privileges
   private String accountID; // staff assignee
   private String firstName;
   private String lastName;
   private String position;
   private String location; // if not "live tracked", this could be their office etc
 
-  public account(
+  private String passwordHash;
+
+  public Account(
       String accountID,
-      Integer authorityLevel,
+      String passwordHash,
+      int authorityLevel,
       String firstName,
       String lastName,
       String position,
       String location) {
     this.accountID = accountID;
-    this.authorityLevel = authorityLevel;
+    this.passwordHash = passwordHash;
     this.firstName = firstName;
     this.lastName = lastName;
     this.position = position;
     this.location = location;
+    this.authorityLevel = authorityLevel; //0 is basic user account
   }
 
-  public int getAuthorityLevel() {
+  //thinking for setters it will require a object of [this]
+  // that will check the current user has admin privileges, to change
+  // a users attributes. maybe a separate page
+
+  public int getAuthLevel() {
     return this.authorityLevel;
   }
 
