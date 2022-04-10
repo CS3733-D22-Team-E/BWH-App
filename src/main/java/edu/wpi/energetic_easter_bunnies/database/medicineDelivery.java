@@ -1,7 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.database;
 
 import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
-
 import java.time.LocalDate;
 
 public class medicineDelivery extends serviceRequest {
@@ -18,8 +17,38 @@ public class medicineDelivery extends serviceRequest {
   boolean sat;
   boolean sun;
 
-  public medicineDelivery(String serviceRequestID, String serviceRequestType, String otherNotes, String floorID, String roomID, boolean isUrgent, String requestStatus, String staffAssignee, LocalDate requestDate, LocalDate deliveryDate, String medicine, String amount, String unit, String deliveryTime, boolean mon, boolean tues, boolean wed, boolean thurs, boolean fri, boolean sat, boolean sun) {
-    super(serviceRequestID, serviceRequestType, otherNotes, floorID, roomID, isUrgent, requestStatus, staffAssignee, requestDate, deliveryDate);
+  public medicineDelivery(
+      String serviceRequestID,
+      String otherNotes,
+      String floorID,
+      String roomID,
+      boolean isUrgent,
+      String requestStatus,
+      String staffAssignee,
+      LocalDate requestDate,
+      LocalDate deliveryDate,
+      String medicine,
+      String amount,
+      String unit,
+      String deliveryTime,
+      boolean mon,
+      boolean tues,
+      boolean wed,
+      boolean thurs,
+      boolean fri,
+      boolean sat,
+      boolean sun) {
+    super(
+        serviceRequestID,
+        String.valueOf(Type.MED_DELIV_REQ),
+        otherNotes,
+        floorID,
+        roomID,
+        isUrgent,
+        requestStatus,
+        staffAssignee,
+        requestDate,
+        deliveryDate);
     this.medicine = medicine;
     this.amount = amount;
     this.unit = unit;
