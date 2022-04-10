@@ -10,18 +10,22 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 
 public class containsSideMenu implements Initializable {
   @FXML public JFXHamburger burger;
   @FXML JFXDrawer drawer;
-  VBox box;
+  StackPane box;
+  ScrollPane scrollPane;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     assert (burger != null);
     assert (drawer != null);
+    // scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    // scrollPane.setFitToWidth(true);
     HamburgerSlideCloseTransition transition = new HamburgerSlideCloseTransition(burger);
     FXMLLoader l = new FXMLLoader();
     l.setLocation(Main.class.getResource("view/sidePanel.fxml"));
