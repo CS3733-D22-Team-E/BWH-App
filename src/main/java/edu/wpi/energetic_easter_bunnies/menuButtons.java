@@ -35,4 +35,7 @@ public interface menuButtons {
 
   @FXML
   void statusButton(ActionEvent event) throws IOException;
+
+  @FXML
+  void profileButton(ActionEvent event) throws IOException;
 }

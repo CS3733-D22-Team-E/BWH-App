@@ -49,7 +49,9 @@ public class mapPageController implements Initializable {
 
   ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
 
-  public mapPageController() throws SQLException {}
+  public mapPageController() throws SQLException {
+    int i = 3;
+  }
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
