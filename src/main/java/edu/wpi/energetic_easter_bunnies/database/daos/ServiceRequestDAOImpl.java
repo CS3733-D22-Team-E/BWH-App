@@ -3,13 +3,14 @@ package edu.wpi.energetic_easter_bunnies.database.daos;
 import edu.wpi.energetic_easter_bunnies.database.DBConnection;
 import edu.wpi.energetic_easter_bunnies.entity.labRequest;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
+import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
-  static Connection connection = DBConnection.getConnection();
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<serviceRequest> serviceRequests;
 
   public ServiceRequestDAOImpl() throws SQLException {

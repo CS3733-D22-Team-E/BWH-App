@@ -1,13 +1,13 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
-import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.database.Location;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LocationDAOImpl implements DAO<Location> {
-  static Connection connection = DBConnection.getConnection();
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<Location> locations;
 
   /**

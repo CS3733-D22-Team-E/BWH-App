@@ -59,7 +59,7 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
                   <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/beaker.png" />
+                        <Image url="@icons/status.png" />
                      </image>
                   </ImageView>
                </children>
@@ -170,8 +170,8 @@
                   </AnchorPane>
                </children>
             </Pane>
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
          </children>
       </StackPane>
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
    </children>
 </VBox>
