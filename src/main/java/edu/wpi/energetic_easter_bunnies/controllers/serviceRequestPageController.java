@@ -83,7 +83,7 @@ public abstract class serviceRequestPageController extends containsSideMenu {
       A hashmap with floor name keys and lists of room names as values is used to
       associate rooms with their corresponding floor
     */
-    List<Location> locations = locationDB.getAllLocations();
+    List<Location> locations = locationDB.getAll();
     List<String> floors = new ArrayList<>();
     HashMap<String, ArrayList<String>> floorToRooms = new HashMap<>();
     //Makes the room combo box hidden until a floor value is selected
