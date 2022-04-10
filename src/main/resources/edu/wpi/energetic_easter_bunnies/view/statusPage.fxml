@@ -170,8 +170,8 @@
                   </AnchorPane>
                </children>
             </Pane>
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
          </children>
       </StackPane>
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
    </children>
 </VBox>
