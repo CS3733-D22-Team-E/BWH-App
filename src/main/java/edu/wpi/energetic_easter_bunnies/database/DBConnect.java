@@ -17,7 +17,6 @@ public enum DBConnect {
       System.out.println("Apache Derby Driver not found.");
       e.printStackTrace();
     }
-    System.out.println("Apache Derby driver registered!");
   }
 
   public static DBConnect getInstance() {
@@ -26,9 +25,5 @@ public enum DBConnect {
 
   public Connection getConnection() {
     return connection;
-  }
-
-  public void closeConnection() throws SQLException {
-    connection.close();
   }
 }
