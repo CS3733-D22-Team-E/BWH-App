@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.entity.accounts;
 
-public class Account {
+public abstract class Account {
 
   private String accountID; // staff assignee
   private String employeeID; //if empty
