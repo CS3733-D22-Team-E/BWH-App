@@ -29,6 +29,11 @@ public enum DBConnect {
     return EMBEDDED_INSTANCE;
   }
 
+  /**
+   * Method to get the client instance
+   *
+   * @return CLIENT_INSTANCE
+   */
   public static DBConnect getClientInstance() {
     return CLIENT_INSTANCE;
   }
