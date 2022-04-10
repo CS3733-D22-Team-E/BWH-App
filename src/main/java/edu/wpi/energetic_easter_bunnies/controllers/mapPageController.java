@@ -216,7 +216,7 @@ public class mapPageController implements Initializable {
   public void filterMedEquip(ActionEvent event) throws SQLException, FileNotFoundException {
 
     String floor = floorDropdown.getValue().toString();
-    List<MedicalEquipment> medEqList = medEq.getAllMedicalEquipment();
+    List<MedicalEquipment> medEqList = medEq.getAll();
 
     List<MedicalEquipment> filteredEquipment =
         medEqList.stream()

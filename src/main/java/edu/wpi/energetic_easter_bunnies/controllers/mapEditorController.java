@@ -266,7 +266,7 @@ public class mapEditorController implements Initializable {
 
     // Only render existing dots if the delete or update functions are selected
     if (Objects.equals(editMode, "delete") || Objects.equals(editMode, "update")) {
-      List<Location> locationList = db.getAllLocations();
+      List<Location> locationList = db.getAll();
       displayFloorLocations(locationList);
     }
   }
