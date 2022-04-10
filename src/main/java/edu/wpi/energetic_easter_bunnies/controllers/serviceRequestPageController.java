@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.ServiceRequestDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.*;
 import java.net.URL;
 import java.sql.SQLException;
@@ -31,6 +32,13 @@ public abstract class serviceRequestPageController extends containsSideMenu {
   @FXML JFXDrawer drawer;
   @FXML JFXComboBox<String> floor;
   @FXML JFXComboBox<String> room;
+
+  @FXML TableView<serviceRequest> requestTable;
+  @FXML TableColumn<serviceRequest, String> tableFloorID;
+  @FXML TableColumn<serviceRequest, String> tableRoomID;
+  @FXML TableColumn<serviceRequest, String> tableRequestStatus;
+  @FXML TableColumn<serviceRequest, String> tableStaffAssignee;
+  @FXML TableColumn<serviceRequest, String> tableOtherNotes;
 
   LocationDAOImpl locationDB;
 
@@ -123,11 +131,17 @@ public abstract class serviceRequestPageController extends containsSideMenu {
     return true;
   }
 
-  public void populateRequestTable() {
+  protected void populateRequestTable() {
     // todo : get all service requests as list
     // todo : filter through to match MY type
     // todo : populate my table
+
+
   }
+
+  /*
+  protected ObservableList<serviceRequest> populateServiceRequestList(ServiceRequestDAOImpl)
+   */
 
   @FXML
   public abstract void submitButton(ActionEvent event) throws SQLException;
