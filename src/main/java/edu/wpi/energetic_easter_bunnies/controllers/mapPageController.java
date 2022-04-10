@@ -5,6 +5,8 @@ import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.ServiceRequestDAOImpl;
+import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,12 +37,15 @@ public class mapPageController implements Initializable {
   @FXML MenuBar menuBar;
   LocationDAOImpl db;
   MedicalEquipmentDAOImpl medEq;
+  ServiceRequestDAOImpl servReq;
   List<MedicalEquipment> medEqList;
+  List<serviceRequest> servReqList;
 
   @FXML AnchorPane mapBox;
   @FXML ComboBox floorDropdown;
   @FXML Button mapEditorButton;
   @FXML Button showMedicalEquipment;
+  @FXML Button showServiceRequests;
 
   ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
 
@@ -56,7 +61,9 @@ public class mapPageController implements Initializable {
     try {
       db = new LocationDAOImpl();
       medEq = new MedicalEquipmentDAOImpl();
+      servReq = new ServiceRequestDAOImpl();
       medEqList = medEq.getAll();
+      servReqList = servReq.getAll();
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -166,6 +173,30 @@ public class mapPageController implements Initializable {
                 })
             .collect(Collectors.toList());
     displayMedEquipLocations(filteredEquipment);
+  }
+
+  // Starter code to implement showing all service requests on the map
+  @FXML
+  public void filterServReq(ActionEvent event) throws SQLException, FileNotFoundException {
+
+    String floor = floorDropdown.getValue().toString();
+    // servReqList = servReq.getAll();
+
+    //    List<serviceRequest> filteredRequests =
+    //            medEqList.stream()
+    //                    .filter(
+    //                            medicalEquipment -> {
+    //                              try {
+    //                                if (Objects.equals(medicalEquipment.getFloor(), floor)) {
+    //                                  return true;
+    //                                }
+    //                              } catch (SQLException e) {
+    //                                e.printStackTrace();
+    //                              }
+    //                              return false;
+    //                            })
+    //                    .collect(Collectors.toList());
+    //    displayMedEquipLocations(filteredEquipment);
   }
 
   @FXML

@@ -78,7 +78,8 @@ public class sanitationServiceController extends serviceRequestPageController {
 
       request.setOtherNotes(notes.getText());
 
-      if (staffAssignee.getText().isEmpty() || staffAssignee.getText().isBlank()) throw new NullPointerException();
+      if (staffAssignee.getText().isEmpty() || staffAssignee.getText().isBlank())
+        throw new NullPointerException();
       else request.setStaffAssignee(staffAssignee.getText());
 
       request.setRequestStatus("To Do");

@@ -5,7 +5,6 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
-import edu.wpi.energetic_easter_bunnies.database.daos.ServiceRequestDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.*;
 import java.net.URL;
 import java.sql.SQLException;
@@ -61,6 +60,7 @@ public abstract class serviceRequestPageController extends containsSideMenu {
 
   /**
    * Initializes and returns a LocationDAOImpl object to be used for populating location combo boxes
+   *
    * @return an initialized LocationDAOImpl object
    * @throws SQLException if there is an error accessing the database
    */
@@ -75,7 +75,7 @@ public abstract class serviceRequestPageController extends containsSideMenu {
    * determined based on the selection from the floor combo box.
    */
   protected void populateLocationComboBoxes() throws SQLException {
-    //Initializes the locationDB object
+    // Initializes the locationDB object
     initalizeLocationDAO();
 
     /*
@@ -86,10 +86,10 @@ public abstract class serviceRequestPageController extends containsSideMenu {
     List<Location> locations = locationDB.getAll();
     List<String> floors = new ArrayList<>();
     HashMap<String, ArrayList<String>> floorToRooms = new HashMap<>();
-    //Makes the room combo box hidden until a floor value is selected
+    // Makes the room combo box hidden until a floor value is selected
     room.setVisible(false);
 
-    //Populates location list and hashmap
+    // Populates location list and hashmap
     for (Location l : locations) {
       String floor = l.getFloor();
       if (!floors.contains(floor)) {
@@ -105,11 +105,12 @@ public abstract class serviceRequestPageController extends containsSideMenu {
       floorToRooms.put(floor, roomsOnFloor);
     }
 
-    //Sets value of floor combo box to list of floor names
+    // Sets value of floor combo box to list of floor names
     floor.setItems(FXCollections.observableArrayList(floors));
 
-    //Adds a listener to the floor combo box so that once a selection is made, the corresponding room values
-    //for that floor populate the room combo box
+    // Adds a listener to the floor combo box so that once a selection is made, the corresponding
+    // room values
+    // for that floor populate the room combo box
     floor
         .getSelectionModel()
         .selectedItemProperty()
@@ -135,7 +136,6 @@ public abstract class serviceRequestPageController extends containsSideMenu {
     // todo : get all service requests as list
     // todo : filter through to match MY type
     // todo : populate my table
-
 
   }
 

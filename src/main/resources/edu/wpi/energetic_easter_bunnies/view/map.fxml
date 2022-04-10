@@ -113,6 +113,7 @@
             <JFXComboBox fx:id="floorDropdown" layoutX="28.0" layoutY="110.0" onAction="#floorDropdown" promptText="Select Floor" />
             <JFXButton fx:id="mapEditorButton" layoutX="444.0" layoutY="557.0" onAction="#mapEditorButton" prefHeight="25.0" prefWidth="76.0" text="Editor" />
             <JFXButton fx:id="showMedicalEquipment" layoutX="181.0" layoutY="110.0" onAction="#filterMedEquip" text="Show Med Equip" />
+            <JFXButton fx:id="showServiceRequests" layoutX="311.0" layoutY="110.0" onAction="#filterServReq" text="Show Serv Req" />
             </children>
         </AnchorPane>
     </children>
