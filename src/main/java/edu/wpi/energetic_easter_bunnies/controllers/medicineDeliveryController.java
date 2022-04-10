@@ -1,7 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
-import edu.wpi.energetic_easter_bunnies.entity.medicineDelivery;
+import edu.wpi.energetic_easter_bunnies.database.medicineDelivery;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;

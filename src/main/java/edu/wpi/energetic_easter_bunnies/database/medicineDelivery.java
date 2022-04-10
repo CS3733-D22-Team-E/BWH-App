@@ -1,4 +1,8 @@
-package edu.wpi.energetic_easter_bunnies.entity;
+package edu.wpi.energetic_easter_bunnies.database;
+
+import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
+
+import java.time.LocalDate;
 
 public class medicineDelivery extends serviceRequest {
 
@@ -13,6 +17,36 @@ public class medicineDelivery extends serviceRequest {
   boolean fri;
   boolean sat;
   boolean sun;
+
+  public medicineDelivery(String serviceRequestID, String serviceRequestType, String otherNotes, String floorID, String roomID, boolean isUrgent, String requestStatus, String staffAssignee, LocalDate requestDate, LocalDate deliveryDate, String medicine, String amount, String unit, String deliveryTime, boolean mon, boolean tues, boolean wed, boolean thurs, boolean fri, boolean sat, boolean sun) {
+    super(serviceRequestID, serviceRequestType, otherNotes, floorID, roomID, isUrgent, requestStatus, staffAssignee, requestDate, deliveryDate);
+    this.medicine = medicine;
+    this.amount = amount;
+    this.unit = unit;
+    this.deliveryTime = deliveryTime;
+    this.mon = mon;
+    this.tues = tues;
+    this.wed = wed;
+    this.thurs = thurs;
+    this.fri = fri;
+    this.sat = sat;
+    this.sun = sun;
+  }
+
+  public medicineDelivery() {
+    super();
+    this.medicine = "";
+    this.amount = "";
+    this.unit = "";
+    this.deliveryTime = "";
+    this.mon = false;
+    this.tues = false;
+    this.wed = false;
+    this.thurs = false;
+    this.fri = false;
+    this.sat = false;
+    this.sun = false;
+  }
 
   public String getMedicine() {
     return medicine;
