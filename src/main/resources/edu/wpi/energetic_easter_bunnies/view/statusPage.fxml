@@ -39,6 +39,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -58,7 +59,7 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
                   <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/beaker.png" />
+                        <Image url="@icons/status.png" />
                      </image>
                   </ImageView>
                </children>
@@ -93,32 +94,82 @@
             </Pane>
          </children>
       </HBox>
-      <StackPane minHeight="-Infinity" minWidth="-Infinity">
+      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
          <children>
-            <AnchorPane>
-               <StackPane.margin>
-                  <Insets bottom="20.0" left="80.0" right="20.0" top="60.0" />
-               </StackPane.margin>
+            <Pane>
                <children>
-                  <ScrollPane prefWidth="-1.0">
-                     <content>
-                        <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0">
+                  <Pane layoutX="79.0" layoutY="14.0" prefHeight="42.0" prefWidth="920.0">
+                     <children>
+                        <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="88.0">
                            <children>
-                              <TableView fx:id="requestTable" editable="true" layoutY="-4.0">
-                                 <columns>
-                                    <TableColumn fx:id="idColumn" prefWidth="92.0" text="ID" />
-                                    <TableColumn fx:id="typeColumn" prefWidth="184.0" text="Type" />
-                                    <TableColumn fx:id="statusColumn" prefWidth="195.0" text="Status" />
-                                    <TableColumn fx:id="assignedColumn" minWidth="7.0" prefWidth="250.0" text="Assigned To" />
-                                    <TableColumn fx:id="dateColumn" prefWidth="176.0" text="Date" />
-                                 </columns>
-                              </TableView>
+                              <Label text="Filter by ID" />
+                              <TextField fx:id="filterFieldID" prefWidth="-1.0" />
                            </children>
-                        </AnchorPane>
-                     </content>
-                  </ScrollPane>
+                           <padding>
+                              <Insets right="4.0" />
+                           </padding>
+                        </VBox>
+                        <VBox layoutX="88.0" prefWidth="180.0">
+                           <children>
+                              <Label text="Filter by Type" />
+                              <TextField fx:id="filterFieldType" />
+                           </children>
+                           <padding>
+                              <Insets left="4.0" right="4.0" />
+                           </padding>
+                        </VBox>
+                        <VBox layoutX="268.0" prefWidth="191.0">
+                           <children>
+                              <Label text="Filter by Status" />
+                              <TextField fx:id="filterFieldStatus" />
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="4.0" />
+                           </padding>
+                        </VBox>
+                        <VBox layoutX="459.0" prefWidth="246.0">
+                           <children>
+                              <Label text="Filter by Assignee" />
+                              <TextField fx:id="filterFieldAssign" />
+                           </children>
+                           <padding>
+                              <Insets left="12.0" right="4.0" />
+                           </padding>
+                        </VBox>
+                        <VBox layoutX="705.0" prefHeight="42.0" prefWidth="197.0">
+                           <children>
+                              <Label text="Filter by Date (mm/dd/yy)" />
+                              <TextField fx:id="filterFieldDate" prefWidth="-1.0" />
+                           </children>
+                           <padding>
+                              <Insets left="16.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <AnchorPane layoutX="80.0" layoutY="60.0">
+                     <children>
+                        <ScrollPane prefWidth="-1.0">
+                           <content>
+                              <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0">
+                                 <children>
+                                    <TableView fx:id="requestTable" editable="true" layoutY="-4.0">
+                                       <columns>
+                                          <TableColumn fx:id="idColumn" prefWidth="92.0" text="ID" />
+                                          <TableColumn fx:id="typeColumn" prefWidth="184.0" text="Type" />
+                                          <TableColumn fx:id="statusColumn" prefWidth="195.0" text="Status" />
+                                          <TableColumn fx:id="assignedColumn" minWidth="7.0" prefWidth="250.0" text="Assigned To" />
+                                          <TableColumn fx:id="dateColumn" prefWidth="176.0" text="Request Date" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
                </children>
-            </AnchorPane>
+            </Pane>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
          </children>
       </StackPane>

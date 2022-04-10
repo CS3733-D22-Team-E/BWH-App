@@ -17,7 +17,6 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML ComboBox<String> entreeDropDown;
   @FXML ComboBox<String> beverageDropDown;
   @FXML ComboBox<String> dessertDropDown;
-  @FXML TextField roomNumberTxt;
   @FXML DatePicker dateTime;
   @FXML TextField timeTxt;
   @FXML TextField staffAssignee;
@@ -126,7 +125,6 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     entreeDropDown.getSelectionModel().clearSelection();
     beverageDropDown.getSelectionModel().clearSelection();
     dessertDropDown.getSelectionModel().clearSelection();
-    roomNumberTxt.clear();
     dateTime.getEditor().clear();
     timeTxt.clear();
     asapCheck.setSelected(false);

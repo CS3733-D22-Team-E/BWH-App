@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
@@ -54,7 +55,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.medicineDeliveryController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.medicineDeliveryController">
     <children>
       <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;">
          <children>
@@ -173,8 +174,8 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                           </columnResizePolicy>
                       </TableView>
-                      <ComboBox fx:id="floor" layoutX="204.0" layoutY="33.0" prefWidth="150.0" promptText="Select Floor" />
-                      <ComboBox fx:id="room" layoutX="376.0" layoutY="33.0" prefWidth="150.0" promptText="Select Room" />
+                  <JFXComboBox fx:id="room" layoutX="377.0" layoutY="32.0" prefHeight="23.0" prefWidth="150.0" promptText="Select Room" />
+                  <JFXComboBox fx:id="floor" layoutX="203.0" layoutY="32.0" prefHeight="25.0" prefWidth="149.0" promptText="Select Floor" />
                       <ComboBox fx:id="medicine" layoutX="204.0" layoutY="71.0" prefWidth="150.0" promptText="Select medicine" />
                       <ComboBox fx:id="unit" layoutX="370.0" layoutY="117.0" prefHeight="25.0" prefWidth="76.0" promptText="Unit" />
                       <Button fx:id="resetButton" alignment="CENTER" layoutX="872.0" layoutY="406.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="75.0" prefWidth="152.0" text="Reset Fields ">

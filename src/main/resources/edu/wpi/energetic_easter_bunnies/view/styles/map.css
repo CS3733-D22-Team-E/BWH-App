@@ -4,10 +4,6 @@
     -fx-border-radius: 8px;
 }
 
-.floorDefaultMap {
-    -fx-background-image: url('../images/maps/00_thegroundfloor.png');
-}
-
 .floor1Map {
     -fx-background-image: url('../images/maps/01_thefirstfloor.png');
 }

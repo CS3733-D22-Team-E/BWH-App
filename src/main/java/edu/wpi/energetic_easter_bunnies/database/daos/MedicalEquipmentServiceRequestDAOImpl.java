@@ -1,13 +1,13 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
-import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentServiceRequestDAO {
-  static Connection connection = DBConnection.getConnection();
+public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipmentRequest> {
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<medicalEquipmentRequest> medicalRequests;
 
   public MedicalEquipmentServiceRequestDAOImpl() throws SQLException {
@@ -50,20 +50,27 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
     rs.close();
   }
 
-  public List<medicalEquipmentRequest> getAllMedicalEquipmentServiceRequests() {
+  public List<medicalEquipmentRequest> getAll() {
     return medicalRequests;
   }
 
-  public medicalEquipmentRequest getMedicalEquipmentServiceRequest(String MedEquipReqID) {
+  public medicalEquipmentRequest get(String id) {
     for (medicalEquipmentRequest request : medicalRequests) {
-      if (request.getServiceRequestID().equalsIgnoreCase(MedEquipReqID)) return request;
+      if (request.getServiceRequestID().equals(id)) return request;
     }
-    return null; // TODO: Make a better return if ID is not found
+
+    System.out.println(
+        "Medical Equipment Request with medical equipment request id " + id + " not found");
+    throw new NullPointerException();
   }
 
-  public void updateMedicalEquipmentServiceRequest(medicalEquipmentRequest request) {}
+  public void update(medicalEquipmentRequest request) {
+    medicalRequests.add(request);
+  }
 
-  public void deleteMedicalEquipmentServiceRequest(medicalEquipmentRequest request) {}
+  public void delete(medicalEquipmentRequest request) {
+    medicalRequests.remove(request);
+  }
 
   public void addMedEquipReq(medicalEquipmentRequest request) throws SQLException {
     medicalRequests.add(request);

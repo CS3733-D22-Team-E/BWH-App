@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="640.0" prefWidth="400.0" stylesheets="@styles/map.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mapEditorController">
+<VBox prefHeight="640.0" prefWidth="400.0" stylesheets="@styles/map.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mapEditorController">
     <children>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
             <menus>
@@ -71,7 +71,7 @@
                   </Text>
                   <Button fx:id="smallUpdateLocation" disable="true" layoutX="74.0" layoutY="220.0" mnemonicParsing="false" onAction="#smallUpdateLocationButton" prefHeight="31.0" prefWidth="141.0" text="Update Location" />
                   <Button fx:id="changePosition" layoutX="88.0" layoutY="122.0" mnemonicParsing="false" onAction="#changePositionButton" text="Change Position" textAlignment="CENTER" />
-                  <Text layoutX="44.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click Location to Change, then Change Position Button " textAlignment="CENTER" wrappingWidth="200.0" />
+                  <Text fx:id="currentLocation" layoutX="44.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click Location to Change, then Change Position Button " textAlignment="CENTER" wrappingWidth="200.0" />
                   <Text layoutX="45.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Then Click the new Location, and Update Location Button" textAlignment="CENTER" wrappingWidth="200.0" />
                </children>
             </Pane>
@@ -129,7 +129,7 @@
                 <AnchorPane fx:id="mapBox" layoutX="538.0" layoutY="96.0" maxHeight="509.0" maxWidth="535.0" onMouseClicked="#mapClick" prefHeight="509.0" prefWidth="535.0">
                     <styleClass>
                         <String fx:value="mapBox" />
-                        <String fx:value="floorDefaultMap" />
+                        <String fx:value="floor1Map" />
                     </styleClass>
                 </AnchorPane>
             <JFXButton fx:id="BigAddLocation" layoutX="31.0" layoutY="171.0" onAction="#BigAddLocationButton" prefHeight="55.0" prefWidth="171.0" text="Add Location" />

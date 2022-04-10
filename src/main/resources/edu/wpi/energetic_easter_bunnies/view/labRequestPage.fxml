@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
@@ -20,7 +21,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.labRequestController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.labRequestController">
     <children>
       <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;">
          <children>
@@ -61,7 +62,7 @@
             </Pane>
          </children>
       </HBox>
-      <StackPane>
+      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
          <children>
               <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefWidth="1082.0">
                   <children>
@@ -81,8 +82,8 @@
                                     </Label>
                                     <HBox spacing="15.0">
                                         <children>
-                                    <ComboBox fx:id="floor" prefWidth="150.0" promptText="Select Floor" />
-                                    <ComboBox fx:id="room" prefWidth="150.0" promptText="Select Room" />
+                                    <JFXComboBox fx:id="floor" promptText="Select Floor" />
+                                    <JFXComboBox fx:id="room" promptText="Select Room" />
                                         </children>
                                     </HBox>
                                 </children>
@@ -180,7 +181,7 @@
                      </font></Button>
                   </children>
               </AnchorPane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" prefHeight="560.0" style="-fx-background-color: transparent;" />
          </children>
       </StackPane>
     </children>

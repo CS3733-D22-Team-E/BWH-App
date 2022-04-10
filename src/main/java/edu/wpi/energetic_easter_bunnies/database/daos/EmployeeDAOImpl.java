@@ -1,13 +1,13 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
-import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.database.Employee;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDAOImpl implements EmployeeDAO {
-  static Connection connection = DBConnection.getConnection();
+public class EmployeeDAOImpl implements DAO<Employee> {
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<Employee> employees;
 
   public EmployeeDAOImpl() throws SQLException {
@@ -34,22 +34,26 @@ public class EmployeeDAOImpl implements EmployeeDAO {
   }
 
   @Override
-  public List<Employee> getAllEmployees() {
+  public List<Employee> getAll() {
     return employees;
   }
 
   @Override
-  public Employee getEmployee(int numID) {
-    return employees.get(numID);
+  public Employee get(String id) {
+    for (Employee employee : employees) {
+      if (employee.getEmployeeID().equals(id)) return employee;
+    }
+    System.out.println("Employee with EmployeeID " + id + " not found");
+    throw new NullPointerException();
   }
 
   @Override
-  public void updateEmployee(Employee employee) {
+  public void update(Employee employee) {
     employees.add(employee);
   }
 
   @Override
-  public void deleteEmployee(Employee employee) {
+  public void delete(Employee employee) {
     employees.remove(employee);
   }
 }
