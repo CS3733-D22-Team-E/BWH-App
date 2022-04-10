@@ -7,7 +7,7 @@ import java.io.*;
 import java.sql.*;
 
 public class CSVManager {
-  static Connection connection = DBConnect.INSTANCE.getConnection();
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   /**
    * Loads the location database from the location csv
    *

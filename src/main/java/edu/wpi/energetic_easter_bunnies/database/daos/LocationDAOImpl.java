@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LocationDAOImpl implements DAO<Location> {
-  static Connection connection = DBConnect.INSTANCE.getConnection();
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<Location> locations;
 
   /**

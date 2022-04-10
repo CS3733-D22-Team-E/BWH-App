@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDAOImpl implements DAO<Employee> {
-  static Connection connection = DBConnect.INSTANCE.getConnection();
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<Employee> employees;
 
   public EmployeeDAOImpl() throws SQLException {

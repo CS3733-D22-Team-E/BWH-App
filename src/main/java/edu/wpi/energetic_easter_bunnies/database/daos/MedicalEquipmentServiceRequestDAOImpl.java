@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipmentRequest> {
-  static Connection connection = DBConnect.INSTANCE.getConnection();
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<medicalEquipmentRequest> medicalRequests;
 
   public MedicalEquipmentServiceRequestDAOImpl() throws SQLException {

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
-  static Connection connection = DBConnect.INSTANCE.getConnection();
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<serviceRequest> serviceRequests;
 
   public ServiceRequestDAOImpl() throws SQLException {

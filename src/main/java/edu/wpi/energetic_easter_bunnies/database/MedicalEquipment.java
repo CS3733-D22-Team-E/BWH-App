@@ -67,7 +67,7 @@ public class MedicalEquipment extends Equipment {
   }
 
   public int getXCoord() throws SQLException {
-    Connection connection = DBConnect.INSTANCE.getConnection();
+    Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
     String locationID = getCurrentLocation();
     int result = -1;
 
@@ -82,7 +82,7 @@ public class MedicalEquipment extends Equipment {
   }
 
   public int getYCoord() throws SQLException {
-    Connection connection = DBConnect.INSTANCE.getConnection();
+    Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
     String locationID = getCurrentLocation();
     int result = -1;
 
@@ -97,7 +97,7 @@ public class MedicalEquipment extends Equipment {
   }
 
   public String getFloor() throws SQLException {
-    Connection connection = DBConnect.INSTANCE.getConnection();
+    Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
     String locationID = getCurrentLocation();
     String result = "";
 

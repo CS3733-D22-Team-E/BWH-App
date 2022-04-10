@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LabRequestDAOImpl implements DAO<labRequest> {
 
-  static Connection connection = DBConnect.INSTANCE.getConnection();
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<labRequest> labRequests;
 
   public LabRequestDAOImpl() throws SQLException {

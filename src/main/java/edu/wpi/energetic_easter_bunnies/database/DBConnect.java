@@ -5,11 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public enum DBConnect {
-  INSTANCE;
+  EMBEDDED_INSTANCE("jdbc:derby:myDB;create=true"),
+  CLIENT_INSTANCE("jdbc:derby://localhost:1527/BWDB");
+
   private Connection connection;
 
-  DBConnect() {
-    String url = "jdbc:derby:myDB;create=true";
+  DBConnect(String url) {
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
       connection = DriverManager.getConnection(url);
@@ -19,10 +20,24 @@ public enum DBConnect {
     }
   }
 
-  public static DBConnect getInstance() {
-    return INSTANCE;
+  /**
+   * Method to get the embedded instance
+   *
+   * @return EMBEDDED_INSTANCE
+   */
+  public static DBConnect getEmbeddedInstance() {
+    return EMBEDDED_INSTANCE;
   }
 
+  public static DBConnect getClientInstance() {
+    return CLIENT_INSTANCE;
+  }
+
+  /**
+   * Method to get connection
+   *
+   * @return connection
+   */
   public Connection getConnection() {
     return connection;
   }
