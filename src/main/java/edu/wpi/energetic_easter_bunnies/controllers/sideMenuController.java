@@ -212,5 +212,24 @@ public class sideMenuController implements Initializable, menuButtons {
   }
 
   @Override
+  public void dashboardButton(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader();
+
+    URL url = Main.class.getResource("view/DashboardPage.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      Parent newRoot = loader.load();
+
+      try {
+        root.getScene().setRoot(newRoot);
+      } catch (NullPointerException e) {
+        System.out.println("mainStage never sent to side Panel");
+      }
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
+  }
+
+  @Override
   public void initialize(URL location, ResourceBundle resources) {}
 }

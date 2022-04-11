@@ -23,6 +23,7 @@ public class mainController implements menuButtons {
   @FXML Button medicineDeliveryButton;
   @FXML Button labRequestButton;
   @FXML Button mapButton;
+  @FXML Button dashboardButton;
 
   public mainController() {}
 
@@ -119,6 +120,16 @@ public class mainController implements menuButtons {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     loader.setLocation(Main.class.getResource("view/map.fxml"));
+    root = loader.load();
+
+    thisStage.getScene().setRoot(root);
+  }
+
+  @FXML
+  public void dashboardButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    loader.setLocation(Main.class.getResource("view/DashboardPage.fxml"));
     root = loader.load();
 
     thisStage.getScene().setRoot(root);
