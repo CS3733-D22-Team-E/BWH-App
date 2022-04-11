@@ -41,7 +41,7 @@ public class labRequest extends serviceRequest {
   }
 
   public labRequest() {
-    super();
+    super(String.valueOf(Type.LAB_REQUEST));
     this.labRequestType = "";
     this.timeFrame = "";
   }

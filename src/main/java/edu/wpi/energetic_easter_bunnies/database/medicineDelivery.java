@@ -63,7 +63,7 @@ public class medicineDelivery extends serviceRequest {
   }
 
   public medicineDelivery() {
-    super();
+    super(String.valueOf(Type.MED_DELIV_REQ));
     this.medicine = "";
     this.amount = "";
     this.unit = "";

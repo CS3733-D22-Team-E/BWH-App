@@ -18,7 +18,7 @@ public class languageInterpreterRequest extends serviceRequest {
   }
 
   public languageInterpreterRequest() {
-    super();
+    super(String.valueOf(Type.LANG_INTERP_REQ));
   }
 
   /*public languageInterpreterRequest(

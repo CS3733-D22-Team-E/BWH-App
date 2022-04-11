@@ -50,7 +50,7 @@ public class sanitationRequest extends serviceRequest {
   }
 
   public sanitationRequest() { //TODO: Talk wtih Colin about how he wants to initialize in the blank constructor
-    super();
+    super(String.valueOf(Type.SANITATION_REQ));
     this.sizeOfCleaning = Size.Light;
     this.biohazardOnSite = Biohazard.No;
   }
