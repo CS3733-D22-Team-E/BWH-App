@@ -56,10 +56,40 @@ public class AccountDAOImpl implements DAO<Account> {
   @Override
   public void update(Account account) {
     accounts.add(account);
+    try {
+      Statement statement = connection.createStatement();
+      String query =
+              "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES ('"
+                      + account.getAccountID()
+                      + "','"
+                      + account.getEmployeeID()
+                      + "',"
+                      + account.getAuthorityLevel()
+                      + ",'"
+                      + account.getPasswordHash()
+                      + "','"
+                      + account.getFirstName()
+                      + "','"
+                      + account.getLastName()
+                      + "','"
+                      + account.getPosition()
+                      + "')"; // Insert into database; does not check if the employeeID already exists
+      statement.executeUpdate(query);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public void delete(Account account) {
     accounts.remove(account);
+    try {
+      Statement statement = connection.createStatement();
+      String query =
+              "DELETE FROM ACCOUNTS WHERE ACCOUNTID = ('" + account.getAccountID() + "')";
+      statement.executeUpdate(query);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }
