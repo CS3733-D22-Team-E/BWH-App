@@ -15,6 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
+/**
+ * This class
+ */
 public class containsSideMenu implements Initializable {
   @FXML public JFXHamburger burger;
   @FXML JFXDrawer drawer;

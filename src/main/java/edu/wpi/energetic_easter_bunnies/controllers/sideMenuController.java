@@ -12,15 +12,27 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 
+/** Adds functionality to the side menu. */
 public class sideMenuController implements Initializable, menuButtons {
 
   @FXML StackPane root;
 
+  /**
+   * Exits the program.
+   *
+   * @param event           Pressing the exit button
+   * @throws IOException    ??
+   */
   @FXML
   public void exitButton(ActionEvent event) throws IOException {
     System.exit(0);
   }
 
+  /**
+   * Opens the map page from the side menu.
+   * @param event             Pressing the Map button
+   * @throws IOException      ??
+   */
   @Override
   public void locationButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -40,6 +52,11 @@ public class sideMenuController implements Initializable, menuButtons {
     }
   }
 
+  /**
+   * Opens the lab request page from the side menu.
+   * @param event             Pressing the Lab Request button
+   * @throws IOException      ??
+   */
   @Override
   public void labRequestButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -59,6 +76,11 @@ public class sideMenuController implements Initializable, menuButtons {
     }
   }
 
+  /**
+   * Opens the Status page from the side menu.
+   * @param event             Pressing the Status Page button
+   * @throws IOException      ??
+   */
   @Override
   public void statusButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -78,6 +100,11 @@ public class sideMenuController implements Initializable, menuButtons {
     }
   }
 
+  /**
+   * Opens the home page from the side menu.
+   * @param event             Pressing the Home button
+   * @throws IOException      ??
+   */
   @Override
   public void homeButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -97,6 +124,11 @@ public class sideMenuController implements Initializable, menuButtons {
     }
   }
 
+  /**
+   * Opens the Sanitation page from the side menu.
+   * @param event             Pressing the Sanitation button
+   * @throws IOException      ??
+   */
   @FXML
   public void sanitationButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -116,6 +148,11 @@ public class sideMenuController implements Initializable, menuButtons {
     }
   }
 
+  /**
+   * Opens the map page from the side menu.
+   * @param event             Pressing the Map button
+   * @throws IOException      ??
+   */
   @Override
   public void mealDeliveryButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -135,6 +172,11 @@ public class sideMenuController implements Initializable, menuButtons {
     }
   }
 
+  /**
+   * Opens the Language Interpreter page from the side menu.
+   * @param event             Pressing the Language Interpreter button
+   * @throws IOException      ??
+   */
   @Override
   public void languageButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -154,6 +196,11 @@ public class sideMenuController implements Initializable, menuButtons {
     }
   }
 
+  /**
+   * Opens the Medical Equipment page from the side menu.
+   * @param event             Pressing the Medical Equipment button
+   * @throws IOException      ??
+   */
   @Override
   public void medicalEquipmentButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -173,6 +220,11 @@ public class sideMenuController implements Initializable, menuButtons {
     }
   }
 
+  /**
+   * Opens the Medicine Delivery page from the side menu.
+   * @param event             Pressing the Medicine Delivery button
+   * @throws IOException      ??
+   */
   @Override
   public void medicineDeliveryButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -192,6 +244,11 @@ public class sideMenuController implements Initializable, menuButtons {
     }
   }
 
+  /**
+   * Opens the Profile page from the side menu.
+   * @param event             Pressing the Profile button
+   * @throws IOException      ??
+   */
   @Override
   public void profileButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -211,6 +268,9 @@ public class sideMenuController implements Initializable, menuButtons {
     }
   }
 
+  /**
+   * Not being used atm.
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
 }
