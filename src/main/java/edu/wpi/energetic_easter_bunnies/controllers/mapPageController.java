@@ -1,6 +1,5 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
-import com.jfoenix.controls.pannable.PannableScrollPane;
 import edu.wpi.energetic_easter_bunnies.Main;
 import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
@@ -28,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -41,7 +41,7 @@ public class mapPageController implements Initializable {
   List<MedicalEquipment> medEqList;
   List<serviceRequest> servReqList;
 
-  @FXML PannableScrollPane mapBox;
+  @FXML AnchorPane mapBox;
   @FXML ComboBox floorDropdown;
   @FXML Button mapEditorButton;
   @FXML Button showMedicalEquipment;
