@@ -201,7 +201,6 @@ public class DBCreation {
       createServiceRequestTable();
       createMedicineRequestTable();
       createSanitationRequestTable();
-      createMealRequestTable();
       createLanguageInterpreterRequestTable();
     } catch (SQLException | IOException e) {
       e.printStackTrace();
