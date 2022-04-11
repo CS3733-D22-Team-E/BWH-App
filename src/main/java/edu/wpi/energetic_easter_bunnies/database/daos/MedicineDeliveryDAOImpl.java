@@ -9,13 +9,13 @@ import java.util.List;
 public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<medicineDelivery> medicineRequests;
-/*
-  public static void main(String[] args) throws SQLException {
-    MedicineDeliveryDAOImpl db = new MedicineDeliveryDAOImpl();
-    medicineDelivery delivery = new medicineDelivery();
-    db.update(delivery);
-  }
-*/
+  /*
+    public static void main(String[] args) throws SQLException {
+      MedicineDeliveryDAOImpl db = new MedicineDeliveryDAOImpl();
+      medicineDelivery delivery = new medicineDelivery();
+      db.update(delivery);
+    }
+  */
   public MedicineDeliveryDAOImpl() throws SQLException {
     medicineRequests = new ArrayList<>();
     Statement statement = connection.createStatement();

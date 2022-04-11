@@ -113,22 +113,79 @@ public class DBCreation {
 
   public static void createMedicineRequestTable() throws SQLException {
     String query =
-        "create table MEDICINEREQUEST\n"
-            + "(\n"
-            + "    MEDICINE_REQ_ID    VARCHAR(35), \n"
+            "create table MEDICINEREQUEST\n"
+                    + "(\n"
+                    + "    MEDICINE_REQ_ID    VARCHAR(35), \n"
+                    + "    REQUEST_DATE       DATE, \n"
+                    + "    DELIVERY_DATE      DATE, \n"
+                    + "    STATUS             VARCHAR(35), \n"
+                    + "    ASSIGNEE           VARCHAR(35),\n"
+                    + "    ISURGENT           BOOLEAN, \n"
+                    + "    DELIVERYLOCATIONID VARCHAR(35), \n "
+                    + "    FLOOR              VARCHAR(25), \n "
+                    + "    MEDICINETYPE       VARCHAR(25), \n "
+                    + "    MEDICINEQUANTITY   VARCHAR(25), \n"
+                    + "    MEDICINEUNIT       VARCHAR(25), \n"
+                    + "    REOCURRINGDAYS     VARCHAR(255), \n"
+                    + "    OTHERNOTES         VARCHAR(255), \n"
+                    + "    DELIVERYTIME       VARCHAR(35) \n"
+                    + ")";
+    Statement statement = connection.createStatement();
+    statement.executeUpdate(query);
+  }
+
+    public static void createSanitationRequestTable() throws SQLException {
+      String query = "create table SANITATIONREQUEST\n" +
+              "(\n"
+              + "    MEDICINE_REQ_ID    VARCHAR(35), \n"
+              + "    REQUEST_DATE       DATE, \n"
+              + "    DELIVERY_DATE      DATE, \n"
+              + "    STATUS             VARCHAR(35), \n"
+              + "    ASSIGNEE           VARCHAR(35),\n"
+              + "    ISURGENT           BOOLEAN, \n"
+              + "    ROOMID             VARCHAR(35), \n "
+              + "    FLOOR              VARCHAR(25), \n "
+              + "    CLEANINGSIZE       VARCHAR(25), \n"
+              + "    ISBIOHAZARD        VARCHAR(25), \n"
+              + "    OTHERNOTES         VARCHAR(255)\n"
+              + ")";
+      Statement statement = connection.createStatement();
+      statement.executeUpdate(query);
+    }
+
+    public static void createMealRequestTable() throws SQLException {
+      String query = "create table MEALDELIVERYREQUEST\n" +
+              "(\n"
+              + "    MEAL_REQ_ID    VARCHAR(35), \n"
+              + "    REQUEST_DATE       DATE, \n"
+              + "    DELIVERY_DATE      DATE, \n"
+              + "    STATUS             VARCHAR(35), \n"
+              + "    ASSIGNEE           VARCHAR(35),\n"
+              + "    ISURGENT           BOOLEAN, \n"
+              + "    ROOMID             VARCHAR(35), \n "
+              + "    FLOOR              VARCHAR(25), \n "
+              + "    ENTREE             VARCHAR(25), \n"
+              + "    BEVERAGE           VARCHAR(25), \n"
+              + "    DESSERT            VARCHAR(25), \n"
+              + "    OTHERNOTES         VARCHAR(255)\n"
+              + ")";
+      Statement statement = connection.createStatement();
+      statement.executeUpdate(query);
+    }
+
+  public static void createLanguageInterpreterRequestTable() throws SQLException {
+    String query = "create table LANGUAGEREQUEST\n" +
+            "(\n"
+            + "    LAN_INTERP_REQ_ID    VARCHAR(35), \n"
             + "    REQUEST_DATE       DATE, \n"
             + "    DELIVERY_DATE      DATE, \n"
             + "    STATUS             VARCHAR(35), \n"
             + "    ASSIGNEE           VARCHAR(35),\n"
             + "    ISURGENT           BOOLEAN, \n"
-            + "    DELIVERYLOCATIONID VARCHAR(35), \n "
+            + "    ROOMID             VARCHAR(35), \n "
             + "    FLOOR              VARCHAR(25), \n "
-            + "    MEDICINETYPE       VARCHAR(25), \n "
-            + "    MEDICINEQUANTITY   VARCHAR(25), \n"
-            + "    MEDICINEUNIT       VARCHAR(25), \n"
-            + "    REOCURRINGDAYS     VARCHAR(255), \n"
-            + "    OTHERNOTES         VARCHAR(255), \n"
-            + "    DELIVERYTIME       VARCHAR(35) \n"
+            + "    LANGUAGE           VARCHAR(25), \n"
+            + "    OTHERNOTES         VARCHAR(255)\n"
             + ")";
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
@@ -143,6 +200,9 @@ public class DBCreation {
       createTowerLocationTable();
       createServiceRequestTable();
       createMedicineRequestTable();
+      createSanitationRequestTable();
+      createMealRequestTable();
+      createLanguageInterpreterRequestTable();
     } catch (SQLException | IOException e) {
       e.printStackTrace();
     }
