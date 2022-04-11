@@ -1,8 +1,14 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import static edu.wpi.energetic_easter_bunnies.RSAEncryption.validatePassword;
+
 import edu.wpi.energetic_easter_bunnies.Main;
+import edu.wpi.energetic_easter_bunnies.database.daos.AccountDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.DAO;
+import edu.wpi.energetic_easter_bunnies.entity.accounts.Account;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
 
 public class loginPageController {
   private @FXML TextField usernameField;
@@ -53,7 +61,25 @@ public class loginPageController {
   }
 
   private boolean verifyUser() {
-    // todo : send username and password to database and verify
-    return (!getPassword().isEmpty() && !getUsername().isEmpty());
+    try {
+      DAO<Account> accountDAO = new AccountDAOImpl();
+      Account account = accountDAO.get(getUsername());
+      if (!validatePassword(getPassword(), account.getPasswordHash())) {
+        return false;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return false;
+    } catch (NullPointerException e) {
+      e.printStackTrace();
+      return false;
+    } catch (IllegalBlockSizeException e) {
+      e.printStackTrace();
+      return false;
+    } catch (BadPaddingException e) {
+      e.printStackTrace();
+      return false;
+    }
+    return true;
   }
 }

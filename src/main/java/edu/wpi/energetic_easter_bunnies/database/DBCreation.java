@@ -111,6 +111,22 @@ public class DBCreation {
     statement.executeUpdate(query);
   }
 
+  public static void createAccountsTable() throws SQLException {
+    String query =
+        "create table ACCOUNTS\n"
+            + "(\n"
+            + "    ACCOUNTID      VARCHAR(35) not null,\n"
+            + "    EMPLOYEEID     VARCHAR(35) not null,\n"
+            + "    AUTHORITYLEVEL INTEGER,\n"
+            + "    PASSWORDHASH   VARCHAR(500) not null,\n"
+            + "    FIRSTNAME      VARCHAR(35) not null,\n"
+            + "    LASTNAME       VARCHAR(35),\n"
+            + "    POSITION       VARCHAR(35)\n"
+            + ")";
+    Statement statement = connection.createStatement();
+    statement.executeUpdate(query);
+  }
+
   public static void createTables() {
     try {
       createEmployeesTable();
@@ -119,6 +135,7 @@ public class DBCreation {
       createMedEquipReqTable();
       createTowerLocationTable();
       createServiceRequestTable();
+      createAccountsTable();
     } catch (SQLException | IOException e) {
       e.printStackTrace();
     }
