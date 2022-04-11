@@ -1,8 +1,8 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
 import edu.wpi.energetic_easter_bunnies.database.DBConnect;
-import edu.wpi.energetic_easter_bunnies.database.Employee;
 import edu.wpi.energetic_easter_bunnies.entity.accounts.Account;
+import edu.wpi.energetic_easter_bunnies.entity.accounts.staffAccount;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,8 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountDAOImpl extends DAO<Account> {
-  static Connection connection = DBConnect.getEmbeddedInstance().getConnection();
+public class AccountDAOImpl implements DAO<Account> {
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<Account> accounts;
 
   public AccountDAOImpl() throws SQLException {
@@ -27,9 +27,11 @@ public class AccountDAOImpl extends DAO<Account> {
       String passwordHash = rs.getString("PASSWORDHASH");
       String firstName = rs.getString("FIRSTNAME");
       String lastName = rs.getString("LASTNAME");
+      String position = rs.getString("POSITION");
 
       Account account =
-          new Employee(accountID, employeeID, authorityLevel, passwordHash, firstName, lastName);
+          new staffAccount(
+              accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position);
 
       accounts.add(account);
       numID++;

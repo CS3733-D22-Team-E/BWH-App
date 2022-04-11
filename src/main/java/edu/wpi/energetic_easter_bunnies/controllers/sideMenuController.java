@@ -10,11 +10,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 
 public class sideMenuController implements Initializable, menuButtons {
 
-  @FXML VBox root;
+  @FXML StackPane root;
 
   @FXML
   public void exitButton(ActionEvent event) throws IOException {

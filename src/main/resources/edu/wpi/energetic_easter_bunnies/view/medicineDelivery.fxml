@@ -177,16 +177,21 @@
                   <JFXComboBox fx:id="room" layoutX="377.0" layoutY="32.0" prefHeight="23.0" prefWidth="150.0" promptText="Select Room" />
                   <JFXComboBox fx:id="floor" layoutX="203.0" layoutY="32.0" prefHeight="25.0" prefWidth="149.0" promptText="Select Floor" />
                       <ComboBox fx:id="medicine" layoutX="204.0" layoutY="71.0" prefWidth="150.0" promptText="Select medicine" />
-                      <ComboBox fx:id="unit" layoutX="370.0" layoutY="117.0" prefHeight="25.0" prefWidth="76.0" promptText="Unit" />
                       <Button fx:id="resetButton" alignment="CENTER" layoutX="872.0" layoutY="406.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="75.0" prefWidth="152.0" text="Reset Fields ">
                           <font>
                               <Font size="18.0" />
                           </font>
                       </Button>
                       <TextField fx:id="notes" layoutX="649.0" layoutY="59.0" prefHeight="161.0" prefWidth="364.0" promptText="Please write additional notes here" />
+                  <JFXComboBox fx:id="unit" layoutX="371.0" layoutY="117.0" promptText="Unit" />
                   </children>
               </AnchorPane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" overLayVisible="false" style="-fx-background-color: transparent;" visible="false">
+               <children>
+                  <JFXComboBox />
+                  <JFXComboBox />
+               </children>
+            </JFXDrawer>
          </children>
       </StackPane>
     </children>
