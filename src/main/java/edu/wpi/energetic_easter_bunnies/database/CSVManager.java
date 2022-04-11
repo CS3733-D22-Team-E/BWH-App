@@ -14,12 +14,21 @@ import java.sql.*;
 public class CSVManager {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
 
+  private final static String locationFormat = "NODEID, XCOORD, YCOORD, BUILDING, NODETYPE, LONGNAME, SHORTNAME, FLOOR";
+  private final static String medEquipFormat = "";
+  private final static String medEquipRequestFormat = "";
+  private final static String labRequestFormat = "";
+  private final static String employeeFormat = "";
+  private final static String serviceRequestFormat = "REQUESTID, STATUS, TYPE, ASSIGNEE, REQUEST_DATE, DELIVERY_DATE, ISURGENT";
+
+
+
   /*
        SAVING CSV FILES FROM THE DATABASE
    */
 
   public static void saveLocationCSV(String fileName) throws IOException, SQLException {
-    String format = "nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName";
+    String format = locationFormat;
     DAO<Location> dao = new LocationDAOImpl();
     //nothing to change here
     BufferedWriter out;
@@ -50,7 +59,7 @@ public class CSVManager {
   }
 
   public static void saveMedEquipCSV(String fileName) throws IOException, SQLException {
-    String format = "ID,isInUse,isClean,cleanLocationID,storageLocationID";
+    String format = medEquipFormat;//"ID,isInUse,isClean,cleanLocationID,storageLocationID";
     DAO<MedicalEquipment> equipDAO = new MedicalEquipmentDAOImpl();
     //nothing to change here
     BufferedWriter out;
@@ -81,7 +90,7 @@ public class CSVManager {
   }
 
   public static void saveMedEquipRequestCSV(String fileName) throws IOException, SQLException {
-    String format = "ID,requestDate,deliveryDate,isUrgent,equipment,equipQuantity,staffAssignee,locationID,requestStatus,otherNotes";
+    String format = medEquipRequestFormat;//"ID,requestDate,deliveryDate,isUrgent,equipment,equipQuantity,staffAssignee,locationID,requestStatus,otherNotes";
      DAO<medicalEquipmentRequest> MESRDAO = new MedicalEquipmentServiceRequestDAOImpl();
     //nothing to change here
     BufferedWriter out;
@@ -118,7 +127,7 @@ public class CSVManager {
   }
 
   public static void saveLabRequestCSV(String fileName) throws IOException, SQLException {
-    String format = "ID,labRequestType,StaffAssignee,locationID,timeFrame,requestStatus,otherNotes";
+    String format = labRequestFormat;//"ID,labRequestType,StaffAssignee,locationID,timeFrame,requestStatus,otherNotes";
     DAO<labRequest> labRequestDAO = new LabRequestDAOImpl();
     //nothing to change here
     BufferedWriter out;
@@ -147,13 +156,13 @@ public class CSVManager {
   }
 
   public static void saveEmployeeCSV(String fileName) throws IOException, SQLException {
-    String format = "employeeID,name,location,position,available,salary";
-    DAO employeeDAO = new EmployeeDAOImpl();
+    String format = employeeFormat;//"employeeID,name,location,position,available,salary";
+    DAO<Employee> employeeDAO = new EmployeeDAOImpl();
     //nothing to change here
     BufferedWriter out;
     if ((out = fullSaveHelper(fileName,format))==null) return;
     //change with the proper format in first line of function
-    for (Employee employee : employeeDAO.getAllEmployees()) {
+    for (Employee employee : employeeDAO.getAll()) {
       String csvLine = "" +
               employee.getEmployeeID()
               + ','
@@ -163,7 +172,7 @@ public class CSVManager {
               + ','
               + employee.getPosition()
               + ','
-              + employee.getAvailable()
+              + employee.isAvailable()
               + ','
               + employee.getSalary()
               + "\n";
@@ -173,29 +182,65 @@ public class CSVManager {
     out.close();
   }
 
+  public static void saveServiceRequestCSV(String fileName) throws IOException, SQLException {
+    String format = serviceRequestFormat;
+    DAO<serviceRequest> dao = new ServiceRequestDAOImpl();
+    //nothing to change here
+    BufferedWriter out;
+    if ((out = fullSaveHelper(fileName,format))==null) return;
+    //change with the proper format in first line of function
+    for (serviceRequest d : dao.getAll()) {
+      String csvLine = "" +
+              d.getServiceRequestID()
+              + ','
+              + d.getRequestStatus()
+              + ','
+              + d.getRequestType()
+              + ','
+              + d.getDeliveryDate()
+              + ','
+              + d.getRequestDate()
+              + ','
+              + d.isUrgent()
+              + "\n";
+      //change nothing
+      out.write(csvLine);
+    }
+    out.close();
+  }
+
+
   /*
        LOADING CSV FILES INTO THE DATABASE
    */
 
   public static void loadLocationCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName, "TOWERLOCATIONS", "NODEID, XCOORD, YCOORD, BUILDING, NODETYPE, LONGNAME, SHORTNAME, FLOOR");
+    loadCSVGeneral(fileName, "TOWERLOCATIONS", locationFormat);
   }
 
   public static void loadEquipmentCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName, "EQUIPMENT", "ID, ISINUSE, ISCLEAN, CLEANLOCATIONID, STORAGELOCATIONID");
+    loadCSVGeneral(fileName, "EQUIPMENT", medEquipFormat);
   }
 
   public static void loadMedEquipReqCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName, "MED_EQUIP_REQ",  "ID, REQUESTDATE, DELIVERYDATE, ISURGENT, EQUIP, EQUIPQUANTITY, STAFFASSIGNEE, LOCATIONID, REQUESTSTATUS, OTHERNOTES");
+    loadCSVGeneral(fileName, "MED_EQUIP_REQ", medEquipRequestFormat);
   }
 
   public static void loadLabRequestCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName,"LAB_REQUEST", "ID, LAB_REQUEST_TYPE, STAFFASSIGNEE, LOCATIONID, TIMEFRAME, REQUESTSTATUS, OTHERNOTES");
+    loadCSVGeneral(fileName,"LAB_REQUEST", labRequestFormat);
   }
 
   public static void loadEmployeesCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName,"EMPLOYEES", "EMPLOYEEID, NAME, LOCATION, POSITION, AVAILABLE, SALARY");
+    loadCSVGeneral(fileName,"EMPLOYEES", employeeFormat);
   }
+
+  public static void loadServiceRequestCSV(String fileName) throws SQLException, IOException {
+    loadCSVGeneral(fileName,"SERVICEREQUEST", serviceRequestFormat);
+  }
+
+  /*public static void loadUsersCSV(String fileName) throws SQLException, IOException {
+    loadCSVGeneral(fileName,"USERS", usersFormat);
+    }*/
 
   /*
        HELPER FUNCTIONS
