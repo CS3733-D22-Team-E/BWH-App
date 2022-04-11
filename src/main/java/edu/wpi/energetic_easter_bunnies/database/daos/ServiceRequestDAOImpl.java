@@ -32,8 +32,6 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
     }
   }
 
-
-
   @Override
   public serviceRequest get(String id) {
     for (serviceRequest request : serviceRequests) {
