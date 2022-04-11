@@ -12,11 +12,9 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
 
   public MedicalEquipmentServiceRequestDAOImpl() throws SQLException {
     medicalRequests = new ArrayList<>();
-    // String url = "jdbc:derby:myDB;";
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM MED_EQUIP_REQ ORDER BY REQUESTDATE DESC";
     ResultSet rs = statement.executeQuery(query);
-    // int numID = 0; //TODO: Assign Medical Requests an ID value
     while (rs.next()) {
       String medEquipReqID = rs.getString("MED_EQUIPMENTID");
       java.sql.Date reqDate = rs.getDate("REQUESTDATE");
@@ -45,7 +43,6 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
               deliveryDate.toLocalDate(),
               "");
       medicalRequests.add(equipRequest);
-      // numID++;
     }
     rs.close();
   }
@@ -66,40 +63,40 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
 
   public void update(medicalEquipmentRequest request) {
     medicalRequests.add(request);
+
+    try {
+      Statement statement = connection.createStatement();
+      String query =
+          "INSERT INTO MED_EQUIP_REQ VALUES ('"
+              + request.getServiceRequestID()
+              + "','"
+              + request.getDeliveryDate()
+              + "','"
+              + request.getRequestDate()
+              + "',"
+              + request.getIsUrgent()
+              + ",'"
+              + request.getEquipment()
+              + "',"
+              + request.getEquipmentQuantity()
+              + ",'"
+              + request.getStaffAssignee()
+              + "','"
+              + request.getRoomID()
+              + "','"
+              + request.getFloorID()
+              + "','"
+              + request.getRequestStatus()
+              + "','"
+              + request.getOtherNotes()
+              + "')";
+      statement.executeUpdate(query);
+    } catch (SQLException e) {
+      System.out.println("SQL Error"); // TODO: Replace with something else
+    }
   }
 
-  public void delete(medicalEquipmentRequest request) {
+  public void delete(medicalEquipmentRequest request) { // TODO: Remove from DB table as well
     medicalRequests.remove(request);
-  }
-
-  public void addMedEquipReq(medicalEquipmentRequest request) throws SQLException {
-    medicalRequests.add(request);
-
-    Statement statement = connection.createStatement();
-    String query =
-        "INSERT INTO MED_EQUIP_REQ VALUES ('"
-            + request.getServiceRequestID()
-            + "','"
-            + request.getDeliveryDate()
-            + "','"
-            + request.getRequestDate()
-            + "',"
-            + request.getIsUrgent()
-            + ",'"
-            + request.getEquipment()
-            + "',"
-            + request.getEquipmentQuantity()
-            + ",'"
-            + request.getStaffAssignee()
-            + "','"
-            + request.getRoomID()
-            + "','"
-            + request.getFloorID()
-            + "','"
-            + request.getRequestStatus()
-            + "','"
-            + request.getOtherNotes()
-            + "')";
-    statement.executeUpdate(query);
   }
 }

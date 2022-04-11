@@ -1,3 +1,4 @@
+nodeID	xcoord	ycoord	floor	building	nodeType	longName	shortName
 FDEPT00101	402	190	1	Tower	DEPT	Center for International Medicine	CIM
 FDEPT00201	395	485	1	Tower	DEPT	Bretholtz Center for Patients and Families	Bretholtz WR
 FDEPT00301	506	296	1	Tower	DEPT	Multifaith Chapel	Chapel

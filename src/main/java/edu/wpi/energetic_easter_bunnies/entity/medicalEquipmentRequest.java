@@ -38,7 +38,7 @@ public class medicalEquipmentRequest extends serviceRequest {
   }
 
   public medicalEquipmentRequest() {
-    super();
+    super(String.valueOf(Type.MED_EQUIP_REQ));
     this.equipment = "";
     this.equipmentQuantity = 0;
     this.deliveryTime = "";
