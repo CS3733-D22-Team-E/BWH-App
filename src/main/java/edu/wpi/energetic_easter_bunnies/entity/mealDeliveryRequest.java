@@ -8,10 +8,34 @@ public class mealDeliveryRequest extends serviceRequest {
   private String beverageType;
   private String dessertType;
 
-  private int deliveryTime; //TODO: Talk with Phillip about whether or not this is still needed, considering serviceRequest has a LocalDate DeliveryDate
+  private int deliveryTime; // TODO: Talk with Phillip about whether or not this is still needed,
+  // considering serviceRequest has a LocalDate DeliveryDate
 
-  public mealDeliveryRequest(String serviceRequestID, String otherNotes, String floorID, String roomID, boolean isUrgent, String requestStatus, String staffAssignee, LocalDate requestDate, LocalDate deliveryDate, String entreeType, String beverageType, String dessertType, int deliveryTime) {
-    super(serviceRequestID, String.valueOf(Type.MEAL_DELIV_REQ), otherNotes, floorID, roomID, isUrgent, requestStatus, staffAssignee, requestDate, deliveryDate);
+  public mealDeliveryRequest(
+      String serviceRequestID,
+      String otherNotes,
+      String floorID,
+      String roomID,
+      boolean isUrgent,
+      String requestStatus,
+      String staffAssignee,
+      LocalDate requestDate,
+      LocalDate deliveryDate,
+      String entreeType,
+      String beverageType,
+      String dessertType,
+      int deliveryTime) {
+    super(
+        serviceRequestID,
+        String.valueOf(Type.MEAL_DELIV_REQ),
+        otherNotes,
+        floorID,
+        roomID,
+        isUrgent,
+        requestStatus,
+        staffAssignee,
+        requestDate,
+        deliveryDate);
     this.entreeType = entreeType;
     this.beverageType = beverageType;
     this.dessertType = dessertType;

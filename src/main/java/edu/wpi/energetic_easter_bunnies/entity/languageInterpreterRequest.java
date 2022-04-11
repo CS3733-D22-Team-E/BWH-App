@@ -3,10 +3,11 @@ package edu.wpi.energetic_easter_bunnies.entity;
 import java.time.LocalDate;
 
 public class languageInterpreterRequest extends serviceRequest {
-  //private String languageSelected; //TODO: never used?
+  // private String languageSelected; //TODO: never used?
 
-  //private LocalDate startDate; TODO: Ask Frank if these are needed since both can be represented with requestDate and deliveryDate
-  //private LocalDate endDate;
+  // private LocalDate startDate; TODO: Ask Frank if these are needed since both can be represented
+  // with requestDate and deliveryDate
+  // private LocalDate endDate;
 
   Language langforInterpreter;
 
@@ -19,31 +20,31 @@ public class languageInterpreterRequest extends serviceRequest {
 
   public languageInterpreterRequest() {
     super(String.valueOf(Type.LANG_INTERP_REQ));
-    langforInterpreter = Language.En; //TODO: Default Language?
+    langforInterpreter = Language.En; // TODO: Default Language?
   }
 
   public languageInterpreterRequest(
-          String lanInterpID,
-          String otherNotes,
-          String floorID,
-          String roomID,
-          boolean isUrgent,
-          String requestStatus,
-          String staffAssignee,
-          Language langforInterpreter,
-          LocalDate deliveryDate,
-          LocalDate requestDate) {
+      String lanInterpID,
+      String otherNotes,
+      String floorID,
+      String roomID,
+      boolean isUrgent,
+      String requestStatus,
+      String staffAssignee,
+      Language langforInterpreter,
+      LocalDate deliveryDate,
+      LocalDate requestDate) {
     super(
-            lanInterpID,
-            String.valueOf(Type.LANG_INTERP_REQ),
-            otherNotes,
-            floorID,
-            roomID,
-            isUrgent,
-            requestStatus,
-            staffAssignee,
-            requestDate,
-            deliveryDate);
+        lanInterpID,
+        String.valueOf(Type.LANG_INTERP_REQ),
+        otherNotes,
+        floorID,
+        roomID,
+        isUrgent,
+        requestStatus,
+        staffAssignee,
+        requestDate,
+        deliveryDate);
     this.langforInterpreter = langforInterpreter;
   }
 
@@ -52,7 +53,9 @@ public class languageInterpreterRequest extends serviceRequest {
     return langforInterpreter;
   }
 
-  public String getLanguageValue() { return langforInterpreter.toString(); }
+  public String getLanguageValue() {
+    return langforInterpreter.toString();
+  }
 
   public void setLang(Language langforInterpreter) {
     this.langforInterpreter = langforInterpreter;
