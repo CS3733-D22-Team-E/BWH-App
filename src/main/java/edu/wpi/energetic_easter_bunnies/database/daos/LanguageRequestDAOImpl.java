@@ -21,7 +21,7 @@ public class LanguageRequestDAOImpl implements DAO<languageInterpreterRequest> {
             String otherNotes = rs.getString("OTHERNOTES");
             String floorID = rs.getString("FLOOR");
             String roomID = rs.getString("DELIVERYLOCATIONID");
-            Boolean isUrgent = rs.getBoolean("ISURGENT");
+            boolean isUrgent = rs.getBoolean("ISURGENT");
             String status = rs.getString("STATUS");
             String staffAssignee = rs.getString("ASSIGNEE");
             java.sql.Date requestDate = rs.getDate("REQUEST_DATE");
