@@ -94,8 +94,6 @@ public class LocationDAOImpl implements DAO<Location> {
     locations.add(location);
     try {
       Statement statement = connection.createStatement();
-      locations.add(location);
-
       String query =
           "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
               + location.getNodeID()
