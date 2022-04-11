@@ -125,6 +125,14 @@ public class DBCreation {
             + ")";
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
+    query =
+        "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES "
+            + "('admin', 'admin' , 3, 'noX02xa/PHv+4gIyDcIpBatOY+obqqV0NZyFUMerwxPocipLSUMDXmlGJeek5aiC0XxUN049xayum+87fCVQv3yh/h9Fk1Nnr1jYBbPL4hH6/1MM5ZjHK9pPWFLK1s1uUqzFc+NmBJaBsJlBhysl62TNY7aDvf7GrFzRMwGMhFTh2F05Vp8pYCehwuYJSYRLkI7jwiti83YysMRUTCfvLsgetah+Ry+/6kkhobOFLONAWrrcImo+7J5qQ2baIEzszVjjEKd4n1OzBRucrxJfF16TKe7TmnfOEo8jQMdCAELYX2guLjTrUbEP/iwuFT3u9qBIsbsfswY76ZLX/Udq1w==', 'admin', 'admin', 'admin')";
+    statement.executeUpdate(query);
+    query =
+        "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES "
+            + "('staff', 'staff' , 1, 'noX02xa/PHv+4gIyDcIpBatOY+obqqV0NZyFUMerwxPocipLSUMDXmlGJeek5aiC0XxUN049xayum+87fCVQv3yh/h9Fk1Nnr1jYBbPL4hH6/1MM5ZjHK9pPWFLK1s1uUqzFc+NmBJaBsJlBhysl62TNY7aDvf7GrFzRMwGMhFTh2F05Vp8pYCehwuYJSYRLkI7jwiti83YysMRUTCfvLsgetah+Ry+/6kkhobOFLONAWrrcImo+7J5qQ2baIEzszVjjEKd4n1OzBRucrxJfF16TKe7TmnfOEo8jQMdCAELYX2guLjTrUbEP/iwuFT3u9qBIsbsfswY76ZLX/Udq1w==', 'staff', 'staff', 'staff')";
+    statement.executeUpdate(query);
   }
 
   public static void createTables() {
