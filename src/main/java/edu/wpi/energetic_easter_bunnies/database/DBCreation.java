@@ -92,7 +92,7 @@ public class DBCreation {
             + ")";
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
-    CSVManager.loadLocationCSV("TowerLocations.csv");
+    // CSVManager.loadLocationCSV("TowerLocations.csv"); // TODO: data[1] is getting an OOB Exception
   }
 
   public static void createServiceRequestTable() throws SQLException {
