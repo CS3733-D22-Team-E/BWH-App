@@ -1,8 +1,5 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.entity.sanitationRequest;
 import java.net.URL;
@@ -11,10 +8,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+/**
+ * Controller Class for the Sanitation Service Request. Inherits from the serviceRequestController
+ * super class.
+ */
 public class sanitationServiceController extends serviceRequestPageController {
 
-  @FXML JFXComboBox<String> floor;
-  @FXML JFXComboBox<String> room;
   @FXML RadioButton mediumSelect;
   @FXML RadioButton heavySelect;
   @FXML RadioButton lightSelect;
@@ -23,19 +22,30 @@ public class sanitationServiceController extends serviceRequestPageController {
   @FXML RadioButton bioNo;
   @FXML RadioButton bioUnsure;
   @FXML RadioButton bioYes;
-  @FXML JFXHamburger burger;
-  @FXML JFXDrawer drawer;
   @FXML ToggleGroup biohazardGroup;
   @FXML ToggleGroup urgencyGroup;
   @FXML ToggleGroup sizeGroup;
 
+  /** Constructor */
   public sanitationServiceController() {}
 
+  /**
+   * Initializes the super class.
+   *
+   * @param location ??
+   * @param resources ??
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
   }
 
+  /**
+   * Takes the inputs from the buttons, drop downs, text fields etc. and stores that data in the
+   * sanitationService object.
+   *
+   * @param event Pressing the submitButton
+   */
   @FXML
   public void submitButton(ActionEvent event) {
     sanitationRequest request = new sanitationRequest();
@@ -93,6 +103,11 @@ public class sanitationServiceController extends serviceRequestPageController {
     }
   }
 
+  /**
+   * clears all of the inputs on the page.
+   *
+   * @param event Pressing the resetButton
+   */
   @FXML
   public void resetFields(ActionEvent event) {
     floor.getSelectionModel().clearSelection();
@@ -102,5 +117,6 @@ public class sanitationServiceController extends serviceRequestPageController {
     urgencyGroup.selectToggle(notUrgent);
     notes.clear();
     staffAssignee.clear();
+    room.setVisible(false);
   }
 }

@@ -1,7 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
-import edu.wpi.energetic_easter_bunnies.entity.medicineDelivery;
+import edu.wpi.energetic_easter_bunnies.database.medicineDelivery;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -12,6 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+/**
+ * Controller Class for the Medicine Delivery Service Request. Inherits from the
+ * serviceRequestController super class.
+ */
 public class medicineDeliveryController extends serviceRequestPageController
     implements Initializable {
 
@@ -29,15 +33,26 @@ public class medicineDeliveryController extends serviceRequestPageController
   @FXML CheckBox sun;
   @FXML Button resetButton;
 
+  /** Creating a medicineDeliveryRequest object to store the inputted data in. */
   medicineDelivery medicineDeliveryRequest = new medicineDelivery();
 
+  /** Creating the ObservableList of medicines and units for the drop downs. */
   ObservableList<String> medicines =
       FXCollections.observableArrayList(
           "Halothane", "Isoflurane", "Propofol", "midazolam", "ibuprofen");
+
   ObservableList<String> units = FXCollections.observableArrayList("mg", "g", "mL");
 
+  /** Constructor */
   public medicineDeliveryController() {}
 
+  /**
+   * Initializes the drops downs with the respective observable lists and the table columns with the
+   * values from current service requests.
+   *
+   * @param location ??
+   * @param resources ??
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
@@ -45,6 +60,12 @@ public class medicineDeliveryController extends serviceRequestPageController
     unit.setItems(units);
   }
 
+  /**
+   * Takes the inputs from the buttons, drop downs, text fields etc. and stores that data in the
+   * mealDeliveryRequest object.
+   *
+   * @param event Pressing the submitButton
+   */
   @FXML
   public void submitButton(ActionEvent event) {
     try {
@@ -72,6 +93,11 @@ public class medicineDeliveryController extends serviceRequestPageController
     }
   }
 
+  /**
+   * clears all of the inputs on the page.
+   *
+   * @param event Pressing the resetButton
+   */
   @FXML
   private void resetButton(ActionEvent event) {
     floor.getSelectionModel().clearSelection();

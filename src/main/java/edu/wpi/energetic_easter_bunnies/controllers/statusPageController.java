@@ -17,6 +17,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
 
+/**
+ * This is the controller class for the Status Page.  It inherits from the containsSideMenu class to give
+ * the side menu functionality.
+ */
 public class statusPageController extends containsSideMenu {
   @FXML TextField filterFieldDate;
   @FXML TextField filterFieldID;
@@ -32,10 +36,18 @@ public class statusPageController extends containsSideMenu {
   @FXML TableColumn<serviceRequestModel, String> dateColumn;
   ServiceRequestDAOImpl db;
 
+  /**
+   * Constructor
+   */
   public statusPageController() {
     super();
   }
 
+  /**
+   * Initialize the super class and the database object.
+   * @param url     ??
+   * @param rb      ??
+   */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     super.initialize(url, rb);
@@ -156,6 +168,10 @@ public class statusPageController extends containsSideMenu {
     }
   }
 
+    /**
+     * Populates the table with the respective data for the active service requests.
+     * @return      an ObservableList of serviceRequestModels
+     */
   protected ObservableList<serviceRequestModel> populateList() {
     List<serviceRequest> list = db.getAll();
     ObservableList<serviceRequestModel> tableList = FXCollections.observableArrayList();
