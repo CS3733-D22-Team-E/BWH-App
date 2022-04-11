@@ -50,10 +50,12 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
     rs.close();
   }
 
+  @Override
   public List<medicalEquipmentRequest> getAll() {
     return medicalRequests;
   }
 
+  @Override
   public medicalEquipmentRequest get(String id) {
     for (medicalEquipmentRequest request : medicalRequests) {
       if (request.getServiceRequestID().equals(id)) return request;
@@ -64,10 +66,12 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
     throw new NullPointerException();
   }
 
+  @Override
   public void update(medicalEquipmentRequest request) {
     medicalRequests.add(request);
   }
 
+  @Override
   public void delete(medicalEquipmentRequest request) {
     medicalRequests.remove(request);
   }
