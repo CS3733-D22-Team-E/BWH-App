@@ -3,6 +3,7 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.database.medicineDelivery;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,10 +15,9 @@ import javafx.scene.control.*;
 public class medicineDeliveryController extends serviceRequestPageController
     implements Initializable {
 
-  @FXML ComboBox<String> floor;
-  @FXML ComboBox<String> room;
   @FXML ComboBox<String> medicine;
   @FXML TextField amount;
+  @FXML ComboBox<String> unit;
   @FXML DatePicker date;
   @FXML TextField time;
   @FXML CheckBox mon;
@@ -31,22 +31,18 @@ public class medicineDeliveryController extends serviceRequestPageController
 
   medicineDelivery medicineDeliveryRequest = new medicineDelivery();
 
-  ObservableList<String> floors =
-      FXCollections.observableArrayList(
-          "Ground Floor", "First Floor", "Second Floor", "Third Floor");
-  ObservableList<String> rooms = FXCollections.observableArrayList("101", "102", "104", "105");
   ObservableList<String> medicines =
       FXCollections.observableArrayList(
           "Halothane", "Isoflurane", "Propofol", "midazolam", "ibuprofen");
+  ObservableList<String> units = FXCollections.observableArrayList("mg", "g", "mL");
 
   public medicineDeliveryController() {}
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    floor.setItems(floors);
-    room.setItems(rooms);
     medicine.setItems(medicines);
+    unit.setItems(units);
   }
 
   @FXML
@@ -58,6 +54,7 @@ public class medicineDeliveryController extends serviceRequestPageController
       medicineDeliveryRequest.setAmount(amount.getText());
       medicineDeliveryRequest.setMedicine(String.valueOf(medicine.getItems()));
       // medicineDeliveryRequest.setDeliveryDate(String.valueOf(date.getValue()));
+      medicineDeliveryRequest.setUnit(String.valueOf(unit.getItems()));
       medicineDeliveryRequest.setDeliveryTime(time.getText());
       medicineDeliveryRequest.setMon(mon.isSelected());
       medicineDeliveryRequest.setTues(tues.isSelected());
@@ -67,6 +64,7 @@ public class medicineDeliveryController extends serviceRequestPageController
       medicineDeliveryRequest.setSat(sat.isSelected());
       medicineDeliveryRequest.setSun(sun.isSelected());
       medicineDeliveryRequest.setOtherNotes(notes.getText());
+      medicineDeliveryRequest.setRequestDate(LocalDate.now());
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");

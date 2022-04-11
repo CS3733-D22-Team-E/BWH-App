@@ -5,7 +5,8 @@ import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentDAOImpl;
-import edu.wpi.energetic_easter_bunnies.entity.locationModel;
+import edu.wpi.energetic_easter_bunnies.database.daos.ServiceRequestDAOImpl;
+import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,7 +25,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -37,75 +37,39 @@ public class mapPageController implements Initializable {
   @FXML MenuBar menuBar;
   LocationDAOImpl db;
   MedicalEquipmentDAOImpl medEq;
+  ServiceRequestDAOImpl servReq;
   List<MedicalEquipment> medEqList;
+  List<serviceRequest> servReqList;
 
-  @FXML TableView<locationModel> locationTable;
-  @FXML TableColumn<locationModel, String> nodeID;
-  @FXML TableColumn<locationModel, Integer> xcoord;
-  @FXML TableColumn<locationModel, Integer> ycoord;
-  @FXML TableColumn<locationModel, String> floor;
-  @FXML TableColumn<locationModel, String> building;
-  @FXML TableColumn<locationModel, String> nodeType;
-  @FXML TableColumn<locationModel, String> longName;
-  @FXML TableColumn<locationModel, String> shortName;
   @FXML AnchorPane mapBox;
   @FXML ComboBox floorDropdown;
-  @FXML ComboBox nodeTypeDropdown;
   @FXML Button mapEditorButton;
   @FXML Button showMedicalEquipment;
+  @FXML Button showServiceRequests;
 
   ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
-  ObservableList<String> nodeTypes =
-      FXCollections.observableArrayList(
-          "DEPT", "EXIT", "HALL", "INFO", "LABS", "REST", "RETL", "SERV", "STAI", "ELEV", "BATH");
 
-  public mapPageController() throws SQLException {}
+  public mapPageController() throws SQLException {
+    int i = 3;
+  }
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 
     // Add items to dropdown
     floorDropdown.setItems(floors);
-    nodeTypeDropdown.setItems(nodeTypes);
     floorDropdown.setValue("1");
 
     try {
       db = new LocationDAOImpl();
       medEq = new MedicalEquipmentDAOImpl();
-      ObservableList<locationModel> locationList = populateList();
-      nodeID.setCellValueFactory(new PropertyValueFactory<locationModel, String>("nodeID"));
-      xcoord.setCellValueFactory(new PropertyValueFactory<locationModel, Integer>("xcoord"));
-      ycoord.setCellValueFactory(new PropertyValueFactory<locationModel, Integer>("ycoord"));
-      floor.setCellValueFactory(new PropertyValueFactory<locationModel, String>("floor"));
-      building.setCellValueFactory(new PropertyValueFactory<locationModel, String>("building"));
-      nodeType.setCellValueFactory(new PropertyValueFactory<locationModel, String>("nodeType"));
-      longName.setCellValueFactory(new PropertyValueFactory<locationModel, String>("longName"));
-      shortName.setCellValueFactory(new PropertyValueFactory<locationModel, String>("shortName"));
-      locationTable.setItems(locationList);
+      servReq = new ServiceRequestDAOImpl();
       medEqList = medEq.getAll();
+      servReqList = servReq.getAll();
 
     } catch (SQLException e) {
       e.printStackTrace();
     }
-  }
-
-  // Populate locations table
-  protected ObservableList<locationModel> populateList() {
-    List<Location> list = db.getAll();
-    ObservableList<locationModel> tableList = FXCollections.observableArrayList();
-    for (Location l : list) {
-      tableList.add(
-          new locationModel(
-              l.getNodeID(),
-              l.getXcoord(),
-              l.getYcoord(),
-              l.getFloor(),
-              l.getBuilding(),
-              l.getNodeType(),
-              l.getLongName(),
-              l.getShortName()));
-    }
-    return tableList;
   }
 
   // Display location on the map
@@ -191,28 +155,6 @@ public class mapPageController implements Initializable {
   }
 
   @FXML
-  public void nodeTypeDropdown(ActionEvent event) throws IOException {
-
-    String floor = floorDropdown.getValue().toString();
-    String nodeType = nodeTypeDropdown.getValue().toString();
-
-    List<Location> locationList = db.getAll();
-
-    List<Location> filteredLocations =
-        locationList.stream()
-            .filter(
-                location -> {
-                  if (Objects.equals(location.getFloor(), floor)
-                      && Objects.equals(location.getNodeType(), nodeType)) {
-                    return true;
-                  }
-                  return false;
-                })
-            .collect(Collectors.toList());
-    displayFloorLocations(filteredLocations);
-  }
-
-  @FXML
   public void filterMedEquip(ActionEvent event) throws SQLException, FileNotFoundException {
 
     String floor = floorDropdown.getValue().toString();
@@ -233,6 +175,30 @@ public class mapPageController implements Initializable {
                 })
             .collect(Collectors.toList());
     displayMedEquipLocations(filteredEquipment);
+  }
+
+  // Starter code to implement showing all service requests on the map
+  @FXML
+  public void filterServReq(ActionEvent event) throws SQLException, FileNotFoundException {
+
+    String floor = floorDropdown.getValue().toString();
+    // servReqList = servReq.getAll();
+
+    //    List<serviceRequest> filteredRequests =
+    //            medEqList.stream()
+    //                    .filter(
+    //                            medicalEquipment -> {
+    //                              try {
+    //                                if (Objects.equals(medicalEquipment.getFloor(), floor)) {
+    //                                  return true;
+    //                                }
+    //                              } catch (SQLException e) {
+    //                                e.printStackTrace();
+    //                              }
+    //                              return false;
+    //                            })
+    //                    .collect(Collectors.toList());
+    //    displayMedEquipLocations(filteredEquipment);
   }
 
   @FXML
@@ -372,10 +338,5 @@ public class mapPageController implements Initializable {
     } else {
       System.out.println("Path Doesn't Exist");
     }
-  }
-
-  @FXML
-  public void showMedicalEquipment(ActionEvent event) throws IOException, SQLException {
-    displayMedEquipLocations(medEqList);
   }
 }

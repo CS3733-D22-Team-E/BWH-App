@@ -10,11 +10,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 
 public class sideMenuController implements Initializable, menuButtons {
 
-  @FXML VBox root;
+  @FXML StackPane root;
 
   @FXML
   public void exitButton(ActionEvent event) throws IOException {
@@ -178,6 +178,25 @@ public class sideMenuController implements Initializable, menuButtons {
     FXMLLoader loader = new FXMLLoader();
 
     URL url = Main.class.getResource("view/medicineDelivery.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      Parent newRoot = loader.load();
+
+      try {
+        root.getScene().setRoot(newRoot);
+      } catch (NullPointerException e) {
+        System.out.println("mainStage never sent to side Panel");
+      }
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
+  }
+
+  @Override
+  public void profileButton(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader();
+
+    URL url = Main.class.getResource("view/profilePage.fxml");
     if (url != null) {
       loader.setLocation(url);
       Parent newRoot = loader.load();

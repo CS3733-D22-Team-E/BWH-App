@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import java.lang.String?>
@@ -73,7 +74,7 @@
                   <Pane layoutX="6.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Label fx:id="mealTypeLbl" layoutX="42.0" layoutY="37.0" prefHeight="35.0" prefWidth="62.0" text="Meal Type:" />
-                        <Label fx:id="roomNumberLbl" layoutX="18.0" layoutY="77.0" text="Room Number:" />
+                        <Label fx:id="roomNumberLbl" layoutX="53.0" layoutY="77.0" prefHeight="17.0" prefWidth="50.0" text="Location:" />
                         <DatePicker fx:id="dateTime" layoutX="113.0" layoutY="107.0" prefHeight="26.0" prefWidth="130.0" promptText="Select Date" />
                         <Label fx:id="deliveryTimeLbl" layoutX="24.0" layoutY="112.0" text="Delivery Time:" />
                         <ComboBox fx:id="entreeDropDown" layoutX="112.0" layoutY="42.0" prefHeight="26.0" prefWidth="130.0" promptText="Select an Entree">
@@ -116,7 +117,7 @@
                         <TableColumn fx:id="tableOtherNotes" prefWidth="75.0" text="Notes" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="roomNumberTxt" layoutX="117.0" layoutY="89.0" prefHeight="26.0" prefWidth="130.0" promptText="Enter a number" />
+                  <JFXComboBox fx:id="floor" layoutX="116.0" layoutY="88.0" prefHeight="26.0" prefWidth="130.0" promptText="Select Floor" />
                   <Label fx:id="otherNotesLbl" layoutX="611.0" layoutY="55.0" text="Other Notes:" />
                   <ComboBox fx:id="beverageDropDown" layoutX="256.0" layoutY="56.0" prefHeight="26.0" prefWidth="137.0" promptText="Select a Beverage">
                      <items>
@@ -127,6 +128,7 @@
                   </ComboBox>
                   <TextField fx:id="staffAssignee" layoutX="117.0" layoutY="153.0" prefHeight="26.0" prefWidth="130.0" promptText="Employee" />
                   <TextField fx:id="requestStatus" layoutX="256.0" layoutY="153.0" prefHeight="26.0" prefWidth="138.0" promptText="Status" />
+                  <JFXComboBox fx:id="room" layoutX="255.0" layoutY="89.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Room" />
                </children>
             </AnchorPane>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" maxHeight="-Infinity" prefHeight="560.0" style="-fx-background-color: transparent;" />
