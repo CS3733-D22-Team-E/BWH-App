@@ -77,13 +77,6 @@ public class LocationDAOImpl implements DAO<Location> {
     return locations.get(numID);
   }
 
-  /** Prints all the location information */
-  public void printLocations() {
-    for (Location location : locations) {
-      System.out.println(location);
-    }
-  }
-
   /**
    * Creates a new location entry in the database
    *
