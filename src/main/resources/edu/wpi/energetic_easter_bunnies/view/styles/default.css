@@ -14,3 +14,8 @@
   -fx-background-color: rgba(200, 200, 200, 0.9);
   -fx-background-radius: 8px;
 }
+
+.header {
+  -fx-background-color: #5c59f3;
+  -fx-border-color: black;
+}

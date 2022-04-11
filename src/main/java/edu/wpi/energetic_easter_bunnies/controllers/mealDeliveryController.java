@@ -13,11 +13,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * This is the controller class for the meal delivery service request. Inherits from the
+ * serviceDeliveryController super class.
+ */
 public class mealDeliveryController extends serviceRequestPageController implements Initializable {
   @FXML ComboBox<String> entreeDropDown;
   @FXML ComboBox<String> beverageDropDown;
   @FXML ComboBox<String> dessertDropDown;
-  @FXML TextField roomNumberTxt;
   @FXML DatePicker dateTime;
   @FXML TextField timeTxt;
   @FXML TextField staffAssignee;
@@ -37,23 +40,29 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML TableColumn<mealDeliveryRequest, Boolean> tableASAP;
   @FXML TableColumn<mealDeliveryRequest, String> tableOtherNotes;
 
-  // todo:  add DAOImpl
-  // work with Jeremy
-
-  // todo: implement the DAO stuff to make table functional
-
+  /** Creating a mealDeliveryRequest Object to store the inputted data. */
   mealDeliveryRequest mealDeliveryRequest = new mealDeliveryRequest();
 
+  /** Constructor */
   public mealDeliveryController() {}
 
+  /** Creating the ObservableLists for the pages' drop down. */
   ObservableList<String> meals =
       FXCollections.observableArrayList(
           "Chicken Parmesan", "Turkey Dinner", "Chicken Noodle Soup", "Two Cookies");
+
   ObservableList<String> beverages =
       FXCollections.observableArrayList("Water", "Coca-Cola", "Pepsi", "Root Beer");
   ObservableList<String> desserts =
       FXCollections.observableArrayList("Cookies", "Vanilla Cake", "Tiramisu", "Chocolate Cake");
 
+  /**
+   * Initializes the drops downs with the respective observable lists and the table columns with the
+   * values from current service requests.
+   *
+   * @param location ??
+   * @param resources ??
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
@@ -82,12 +91,20 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     tableOtherNotes.setCellValueFactory(
         new PropertyValueFactory<mealDeliveryRequest, String>("Other Notes"));
 
+    // entreeDropDown.prefWidthProperty().bind(vbox.widthProperty());
+
     //      mealDeliveryTable.setItems(mealDeliveryRequest);
     //    } catch (SQLException e) {
     //      e.printStackTrace();
     //    }
   }
 
+  /**
+   * Takes the inputs from the buttons, drop downs, text fields etc. and stores that data in the
+   * mealDeliveryRequest object.
+   *
+   * @param event Pressing the submitButton
+   */
   @FXML
   public void submitButton(ActionEvent event) {
     try {
@@ -121,12 +138,16 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     }
   }
 
+  /**
+   * clears all of the inputs on the page.
+   *
+   * @param event Pressing the resetButton
+   */
   @FXML
   private void resetButton(ActionEvent event) {
     entreeDropDown.getSelectionModel().clearSelection();
     beverageDropDown.getSelectionModel().clearSelection();
     dessertDropDown.getSelectionModel().clearSelection();
-    roomNumberTxt.clear();
     dateTime.getEditor().clear();
     timeTxt.clear();
     asapCheck.setSelected(false);

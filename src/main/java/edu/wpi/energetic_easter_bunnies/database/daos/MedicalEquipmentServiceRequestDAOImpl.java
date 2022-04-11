@@ -12,11 +12,9 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
 
   public MedicalEquipmentServiceRequestDAOImpl() throws SQLException {
     medicalRequests = new ArrayList<>();
-    // String url = "jdbc:derby:myDB;";
     Statement statement = connection.createStatement();
     String query = "SELECT * FROM MED_EQUIP_REQ ORDER BY REQUESTDATE DESC";
     ResultSet rs = statement.executeQuery(query);
-    // int numID = 0; //TODO: Assign Medical Requests an ID value
     while (rs.next()) {
       String medEquipReqID = rs.getString("MED_EQUIPMENTID");
       java.sql.Date reqDate = rs.getDate("REQUESTDATE");
@@ -45,7 +43,6 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
               deliveryDate.toLocalDate(),
               "");
       medicalRequests.add(equipRequest);
-      // numID++;
     }
     rs.close();
   }
@@ -71,11 +68,10 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
     medicalRequests.add(request);
   }
 
-  @Override
-  public void delete(medicalEquipmentRequest request) {
+  public void delete(medicalEquipmentRequest request) { // TODO: Remove from DB table as well
     medicalRequests.remove(request);
   }
-
+  
   public void addMedEquipReq(medicalEquipmentRequest request) throws SQLException {
     medicalRequests.add(request);
 
