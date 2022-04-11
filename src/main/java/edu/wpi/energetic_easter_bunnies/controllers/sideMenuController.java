@@ -1,216 +1,81 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
-import edu.wpi.energetic_easter_bunnies.Main;
-import edu.wpi.energetic_easter_bunnies.menuButtons;
+import edu.wpi.energetic_easter_bunnies.pageControlFacade;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
+import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-public class sideMenuController implements Initializable, menuButtons {
+public class sideMenuController {
 
   @FXML StackPane root;
 
   @FXML
-  public void exitButton(ActionEvent event) throws IOException {
-    System.exit(0);
+  public void mealDeliveryButton(ActionEvent event) throws IOException {
+
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("mealDeliveryPage.fxml", thisStage);
   }
 
-  @Override
-  public void locationButton(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader();
-
-    URL url = Main.class.getResource("view/map.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      Parent newRoot = loader.load();
-
-      try {
-        root.getScene().setRoot(newRoot);
-      } catch (NullPointerException e) {
-        System.out.println("mainStage never sent to side Panel");
-      }
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
-  }
-
-  @Override
-  public void labRequestButton(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader();
-
-    URL url = Main.class.getResource("view/labRequestPage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      Parent newRoot = loader.load();
-
-      try {
-        root.getScene().setRoot(newRoot);
-      } catch (NullPointerException e) {
-        System.out.println("mainStage never sent to side Panel");
-      }
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
-  }
-
-  @Override
+  @FXML
   public void statusButton(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader();
 
-    URL url = Main.class.getResource("view/statusPage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      Parent newRoot = loader.load();
-
-      try {
-        root.getScene().setRoot(newRoot);
-      } catch (NullPointerException e) {
-        System.out.println("mainStage never sent to side Panel");
-      }
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("statusPage.fxml", thisStage);
   }
 
-  @Override
-  public void homeButton(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader();
+  @FXML
+  public void languageButton(ActionEvent event) throws IOException {
 
-    URL url = Main.class.getResource("view/defaultPage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      Parent newRoot = loader.load();
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("languagePage.fxml", thisStage);
+  }
 
-      try {
-        root.getScene().setRoot(newRoot);
-      } catch (NullPointerException e) {
-        System.out.println("mainStage never sent to side Panel");
-      }
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
+  @FXML
+  public void medicalEquipmentButton(ActionEvent event) throws IOException {
+
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("medicalEquipmentPage.fxml", thisStage);
+  }
+
+  @FXML
+  public void medicineDeliveryButton(ActionEvent event) throws IOException {
+
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("medicineDelivery.fxml", thisStage);
+  }
+
+  @FXML
+  public void exitButton(ActionEvent event) throws IOException {
+    pageControlFacade.exitApp();
   }
 
   @FXML
   public void sanitationButton(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader();
 
-    URL url = Main.class.getResource("view/sanitationPage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      Parent newRoot = loader.load();
-
-      try {
-        root.getScene().setRoot(newRoot);
-      } catch (NullPointerException e) {
-        System.out.println("mainStage never sent to side Panel");
-      }
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("sanitationPage.fxml", thisStage);
   }
 
-  @Override
-  public void mealDeliveryButton(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader();
+  @FXML
+  public void labRequestButton(ActionEvent event) throws IOException {
 
-    URL url = Main.class.getResource("view/mealDeliveryPage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      Parent newRoot = loader.load();
-
-      try {
-        root.getScene().setRoot(newRoot);
-      } catch (NullPointerException e) {
-        System.out.println("mainStage never sent to side Panel");
-      }
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("labRequestPage.fxml", thisStage);
   }
 
-  @Override
-  public void languageButton(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader();
+  @FXML
+  public void mapButton(ActionEvent event) throws IOException {
 
-    URL url = Main.class.getResource("view/languagePage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      Parent newRoot = loader.load();
-
-      try {
-        root.getScene().setRoot(newRoot);
-      } catch (NullPointerException e) {
-        System.out.println("mainStage never sent to side Panel");
-      }
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("map.fxml", thisStage);
   }
 
-  @Override
-  public void medicalEquipmentButton(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader();
-
-    URL url = Main.class.getResource("view/medicalEquipmentPage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      Parent newRoot = loader.load();
-
-      try {
-        root.getScene().setRoot(newRoot);
-      } catch (NullPointerException e) {
-        System.out.println("mainStage never sent to side Panel");
-      }
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
+  @FXML
+  public void homeButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("defaultPage.fxml", thisStage);
   }
-
-  @Override
-  public void medicineDeliveryButton(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader();
-
-    URL url = Main.class.getResource("view/medicineDelivery.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      Parent newRoot = loader.load();
-
-      try {
-        root.getScene().setRoot(newRoot);
-      } catch (NullPointerException e) {
-        System.out.println("mainStage never sent to side Panel");
-      }
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
-  }
-
-  @Override
-  public void profileButton(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader();
-
-    URL url = Main.class.getResource("view/profilePage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      Parent newRoot = loader.load();
-
-      try {
-        root.getScene().setRoot(newRoot);
-      } catch (NullPointerException e) {
-        System.out.println("mainStage never sent to side Panel");
-      }
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
-  }
-
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {}
 }

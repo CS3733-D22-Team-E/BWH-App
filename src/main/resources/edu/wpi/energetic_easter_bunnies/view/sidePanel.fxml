@@ -51,7 +51,7 @@
                               <Insets bottom="6.0" top="6.0" />
                            </VBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="b1111111" buttonType="RAISED" onAction="#locationButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Map">
+                        <JFXButton fx:id="b1111111" buttonType="RAISED" onAction="#mapButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Map">
                            <VBox.margin>
                               <Insets bottom="6.0" top="6.0" />
                            </VBox.margin>

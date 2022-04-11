@@ -1,5 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import static edu.wpi.energetic_easter_bunnies.entity.loginPage.verifyUser;
+
 import edu.wpi.energetic_easter_bunnies.Main;
 import java.io.IOException;
 import java.net.URL;
@@ -21,7 +23,7 @@ public class loginPageController {
 
   @FXML
   public void submitLogin(ActionEvent event) throws IOException {
-    if (verifyUser()) {
+    if (verifyUser(getUsername(), getPassword())) {
       Node node = (Node) event.getSource();
 
       FXMLLoader loader = new FXMLLoader();
@@ -50,10 +52,5 @@ public class loginPageController {
 
   private String getUsername() {
     return usernameField.getText();
-  }
-
-  private boolean verifyUser() {
-    // todo : send username and password to database and verify
-    return (!getPassword().isEmpty() && !getUsername().isEmpty());
   }
 }
