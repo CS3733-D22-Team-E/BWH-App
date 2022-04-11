@@ -1,8 +1,5 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.entity.sanitationRequest;
 import java.net.URL;
@@ -13,8 +10,6 @@ import javafx.scene.control.*;
 
 public class sanitationServiceController extends serviceRequestPageController {
 
-  @FXML JFXComboBox<String> floor;
-  @FXML JFXComboBox<String> room;
   @FXML RadioButton mediumSelect;
   @FXML RadioButton heavySelect;
   @FXML RadioButton lightSelect;
@@ -23,8 +18,6 @@ public class sanitationServiceController extends serviceRequestPageController {
   @FXML RadioButton bioNo;
   @FXML RadioButton bioUnsure;
   @FXML RadioButton bioYes;
-  @FXML JFXHamburger burger;
-  @FXML JFXDrawer drawer;
   @FXML ToggleGroup biohazardGroup;
   @FXML ToggleGroup urgencyGroup;
   @FXML ToggleGroup sizeGroup;
@@ -102,5 +95,6 @@ public class sanitationServiceController extends serviceRequestPageController {
     urgencyGroup.selectToggle(notUrgent);
     notes.clear();
     staffAssignee.clear();
+    room.setVisible(false);
   }
 }
