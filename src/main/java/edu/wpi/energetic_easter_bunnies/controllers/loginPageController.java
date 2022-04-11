@@ -61,7 +61,7 @@ public class loginPageController {
   }
 
   private boolean verifyUser() {
-    try {
+    /*try {
       DAO<Account> accountDAO = new AccountDAOImpl();
       Account account = accountDAO.get(getUsername());
       if (!validatePassword(getPassword(), account.getPasswordHash())) {
@@ -79,7 +79,7 @@ public class loginPageController {
     } catch (BadPaddingException e) {
       e.printStackTrace();
       return false;
-    }
+    }*/
     return true;
   }
 }
