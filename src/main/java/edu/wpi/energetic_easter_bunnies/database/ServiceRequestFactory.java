@@ -13,7 +13,8 @@ public class ServiceRequestFactory {
       return new mealDeliveryRequest();
     else if (serviceRequestType.equalsIgnoreCase("SANITATION_REQ")) return new sanitationRequest();
     else if (serviceRequestType.equalsIgnoreCase("MED_DELIV_REQ")) return new medicineDelivery();
-    else if (serviceRequestType.equalsIgnoreCase("SERVICEREQUEST")) return new serviceRequest();
+    else if (serviceRequestType.equalsIgnoreCase("SERVICEREQUEST"))
+      return new serviceRequest(String.valueOf(serviceRequest.Type.SERVICEREQUEST));
     return null;
   }
 }
