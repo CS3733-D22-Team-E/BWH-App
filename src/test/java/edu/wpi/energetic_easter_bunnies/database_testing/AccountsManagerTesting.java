@@ -14,9 +14,9 @@ public class AccountsManagerTesting extends DBCreation {
     Account a;
     for (int i = 0; i < 20; i++) {
       a = new adminAccount();
-      assertTrue(a.getAuthorityLevel() == 5);
+      assertTrue(a.getAuthorityLevel() == 2);
       assertTrue(a.getAccountID().length() == 8);
-      assertTrue(a.getFirstName() == "First"); // by default
+      assertTrue(a.getFirstName() == "defaultFirstName"); // by default
     }
   }
 }

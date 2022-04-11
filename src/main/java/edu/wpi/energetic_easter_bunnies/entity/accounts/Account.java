@@ -3,7 +3,7 @@ package edu.wpi.energetic_easter_bunnies.entity.accounts;
 public abstract class Account {
 
   private String accountID; // staff assignee
-  private String employeeID; //if empty
+  private String employeeID; // if empty
   private int authorityLevel; // 0 basic user, 1 staff, 2... admin
   private String passwordHash;
   private String firstName;
@@ -28,7 +28,7 @@ public abstract class Account {
       String firstName,
       String lastName,
       String position) {
-    this.accountID = accountID;//AccountsManager.generateRandom8DigitID();;
+    this.accountID = accountID; // AccountsManager.generateRandom8DigitID();;
     this.employeeID = employeeID;
     this.authorityLevel = authorityLevel;
     this.passwordHash = passwordHash;
@@ -37,9 +37,7 @@ public abstract class Account {
     this.position = position;
   }
 
-  /**
-   * generally for testing purposes
-   */
+  /** generally for testing purposes */
   public Account() {
     this.accountID = "00000000";
     this.employeeID = "00000000";
@@ -51,14 +49,15 @@ public abstract class Account {
   }
 
   /**
-   * temporary function? in future we should check for current user permissions
-   * to set their own authority higher
+   * temporary function? in future we should check for current user permissions to set their own
+   * authority higher
+   *
    * @param level
    */
   public void setAuthorityLevel(int level) {
-    if (level > 1) this.authorityLevel = 2;//admin
-    if (level == 1) this.authorityLevel = 1;//staff
-    if (level < 1) this.authorityLevel = 0;//basic user
+    if (level > 1) this.authorityLevel = 2; // admin
+    if (level == 1) this.authorityLevel = 1; // staff
+    if (level < 1) this.authorityLevel = 0; // basic user
   }
 
   public int getAuthorityLevel() {

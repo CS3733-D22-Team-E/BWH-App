@@ -34,9 +34,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   ObservableList<String> medicines =
       FXCollections.observableArrayList(
           "Halothane", "Isoflurane", "Propofol", "midazolam", "ibuprofen");
-  ObservableList<String> units =
-          FXCollections.observableArrayList(
-                  "mg", "g", "mL");
+  ObservableList<String> units = FXCollections.observableArrayList("mg", "g", "mL");
 
   public medicineDeliveryController() {}
 
