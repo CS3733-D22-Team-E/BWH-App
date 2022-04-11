@@ -137,7 +137,7 @@ public class DBCreation {
     public static void createSanitationRequestTable() throws SQLException {
       String query = "create table SANITATIONREQUEST\n" +
               "(\n"
-              + "    MEDICINE_REQ_ID    VARCHAR(35), \n"
+              + "    SANITATION_REQ_ID    VARCHAR(35), \n"
               + "    REQUEST_DATE       DATE, \n"
               + "    DELIVERY_DATE      DATE, \n"
               + "    STATUS             VARCHAR(35), \n"

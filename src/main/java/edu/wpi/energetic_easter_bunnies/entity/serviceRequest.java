@@ -92,7 +92,7 @@ public class serviceRequest {
     this.deliveryDate = deliveryDate;
   }
 
-  public serviceRequest() {
+  public serviceRequest() { //TODO: Does not generate a Type value?
     this.serviceRequestID = generateRandomID(6);
     this.otherNotes = "";
     this.floorID = "";
