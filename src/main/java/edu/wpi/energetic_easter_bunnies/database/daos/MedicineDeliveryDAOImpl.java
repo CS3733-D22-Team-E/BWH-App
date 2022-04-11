@@ -2,17 +2,20 @@ package edu.wpi.energetic_easter_bunnies.database.daos;
 
 import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.database.medicineDelivery;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<medicineDelivery> medicineRequests;
-
+/*
+  public static void main(String[] args) throws SQLException {
+    MedicineDeliveryDAOImpl db = new MedicineDeliveryDAOImpl();
+    medicineDelivery delivery = new medicineDelivery();
+    db.update(delivery);
+  }
+*/
   public MedicineDeliveryDAOImpl() throws SQLException {
     medicineRequests = new ArrayList<>();
     Statement statement = connection.createStatement();
@@ -81,10 +84,35 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
   @Override
   public void update(medicineDelivery item) {
     medicineRequests.add(item);
+
+    try {
+      String query = "INSERT INTO MEDICINEREQUEST VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.setString(1, item.getServiceRequestID());
+      statement.setObject(2, item.getRequestDate());
+      statement.setObject(3, item.getDeliveryDate());
+      statement.setString(4, item.getRequestStatus());
+      statement.setString(5, item.getStaffAssignee());
+      statement.setBoolean(6, item.getIsUrgent());
+      statement.setString(7, item.getRoomID());
+      statement.setString(8, item.getFloorID());
+      statement.setString(9, item.getMedicine());
+      statement.setString(10, item.getAmount());
+      statement.setString(11, item.getUnit());
+      statement.setString(12, item.getRepeatingDays());
+      statement.setString(13, item.getOtherNotes());
+
+      statement.executeUpdate();
+
+    } catch (SQLException e) {
+      System.out.println("Add Medicine Request failed!"); // TODO: Come up with a better catch block
+    }
   }
 
   @Override
-  public void delete(medicineDelivery item) {
+  public void delete(
+      medicineDelivery
+          item) { // TODO: Figure out what to do with Request in DB after its marked as done
     medicineRequests.remove(item);
   }
 

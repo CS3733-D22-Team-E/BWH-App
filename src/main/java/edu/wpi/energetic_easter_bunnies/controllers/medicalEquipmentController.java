@@ -236,7 +236,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
   }
 
   private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) throws SQLException {
-    medEquipmentServiceRequestDB.addMedEquipReq(medEquipmentRequest);
+    medEquipmentServiceRequestDB.update(medEquipmentRequest);
     tableList.add(medEquipmentRequest);
     List<MedicalEquipment> equipmentUsed =
         medEquipmentDB.getMedicalEquipments(

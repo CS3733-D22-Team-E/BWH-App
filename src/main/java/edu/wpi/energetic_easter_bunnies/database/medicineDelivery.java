@@ -164,4 +164,25 @@ public class medicineDelivery extends serviceRequest {
   public void setSun(boolean sun) {
     this.sun = sun;
   }
+
+  public String getRepeatingDays() {
+    String result = "";
+
+    if (sun) {
+      result += "SUN ";
+    } else if (mon) {
+      result += "MON ";
+    } else if (tues) {
+      result += "TUES";
+    } else if (wed) {
+      result += "WED";
+    } else if (thurs) {
+      result += "THURS";
+    } else if (fri) {
+      result += "FRI";
+    } else if (sat) {
+      result += "SAT";
+    }
+    return result;
+  }
 }

@@ -108,7 +108,7 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
                 + equipment.getEquipmentID()
                 + "'"; // Make sure this is actually formatted right
         System.out.println(query);
-        statement.executeUpdate(query); //TODO: FIX "currentLocationID" can't be found??"
+        statement.executeUpdate(query); // TODO: FIX "currentLocationID" can't be found??"
         i++;
       }
       if (i == equipmentQuantity) {
