@@ -99,7 +99,9 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
                 + " = "
                 + false
                 + ","
-                + "CURRENTLOCATIONID"
+                + "\""
+                + "currentLocationID"
+                + "\""
                 + " = '"
                 + roomID
                 + "', MED_EQUIP_REQ_ID = '"
