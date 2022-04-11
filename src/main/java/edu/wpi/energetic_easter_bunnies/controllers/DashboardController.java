@@ -35,8 +35,8 @@ public class DashboardController extends containsSideMenu implements Initializab
   Toggle currentToggle;
 
   @FXML TableView<Equipment> floorEquipmentTable;
-  @FXML TableColumn<Equipment, String> tableEquipment;
-  @FXML TableColumn<Equipment, String> tableLocation;
+  @FXML TableColumn<MedicalEquipment, String> tableEquipment;
+  @FXML TableColumn<MedicalEquipment, String> tableLocation;
 
   @FXML Button floorViewButton;
   @FXML Button mapEditorButton;
@@ -69,6 +69,8 @@ public class DashboardController extends containsSideMenu implements Initializab
               @Override
               public void changed(
                   ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                System.out.println("Toggle listener");
+                currentToggle = newValue;
                 if (selectFloor.getValue() != null) {
                   try {
                     populateFloorEquipmentTable(selectFloor.getValue());
@@ -90,6 +92,7 @@ public class DashboardController extends containsSideMenu implements Initializab
               public void changed(
                   ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
+                  System.out.println("Floor Selection Listener");
                   populateFloorEquipmentTable(newValue);
                 } catch (SQLException e) {
                   e.printStackTrace();
@@ -111,18 +114,21 @@ public class DashboardController extends containsSideMenu implements Initializab
         floorID = floor;
         break;
     }
+    System.out.println("Floor ID:" + floorID);
     ArrayList<MedicalEquipment> equipmentOnFloor = new ArrayList<>();
     for (MedicalEquipment curEquipment : allEquipment) {
+      System.out.println("Current equipment: " + curEquipment);
+      System.out.println("Current equipment floor: " + curEquipment.getFloor());
       if (curEquipment.getFloor().equals(floorID)) {
         equipmentOnFloor.add(curEquipment);
       }
     }
+    System.out.println("Equipment on floor: " + equipmentOnFloor);
     return equipmentOnFloor;
   }
 
   private ArrayList<MedicalEquipment> filterEquipment(
       ArrayList<MedicalEquipment> equipmentOnFloor, Toggle filter) {
-    String filterString = filter.toString();
     ArrayList<MedicalEquipment> filteredEquipment = new ArrayList<>();
 
     // TODO: optimize this so that it isn't spaghetti
@@ -147,6 +153,7 @@ public class DashboardController extends containsSideMenu implements Initializab
     } else if (filter.equals(allFilter)) {
       filteredEquipment = equipmentOnFloor;
     }
+    System.out.println("Filtered equipment: " + filteredEquipment);
     return filteredEquipment;
   }
 
@@ -156,17 +163,21 @@ public class DashboardController extends containsSideMenu implements Initializab
         filterEquipment(equipmentOnFloor, currentToggle);
 
     ObservableList<Equipment> equipmentList = FXCollections.observableArrayList(filteredEquipment);
-    tableEquipment.setCellValueFactory(new PropertyValueFactory<Equipment, String>("equipmentID"));
     tableEquipment.setCellValueFactory(
-        new Callback<TableColumn.CellDataFeatures<Equipment, String>, ObservableValue<String>>() {
+        new PropertyValueFactory<MedicalEquipment, String>("equipmentID"));
+    tableEquipment.setCellValueFactory(
+        new Callback<
+            TableColumn.CellDataFeatures<MedicalEquipment, String>, ObservableValue<String>>() {
           @Override
           public ObservableValue<String> call(
-              TableColumn.CellDataFeatures<Equipment, String> param) {
-            Equipment curEquipment = param.getValue();
+              TableColumn.CellDataFeatures<MedicalEquipment, String> param) {
+            MedicalEquipment curEquipment = param.getValue();
             Location curEquipmentLocation = locationDAO.get(curEquipment.getCurrentLocation());
             return new SimpleStringProperty(curEquipmentLocation.getShortName());
           }
         });
+
+    floorEquipmentTable.setItems(equipmentList);
   }
 
   @FXML
