@@ -123,29 +123,30 @@ CHALL010L2,915,214,L2,Tower,HALL,Hallway 10 Floor L2,Hallway C010L2
 WELEV00LL2,570,289,L2,Tower,ELEV,Elevator L Floor L2,Elevator LL2
 WELEV00ML2,605,645,L2,Tower,ELEV,Elevator M Floor L2,Elevator ML2
 WHALL001L2,530,889,L2,Tower,HALL,Hallway Connector 1 Floor L2,Hallway W01L2
-WPLAZAL1,290,295,1,Tower,RETL,West Plaza Floor 1,West Plaza
-STRGCLEANPODBL3,460,238,3,Tower,STRG,Pod B Clean Equipment Storage,Pod B Storage
-STRGCLEANPODCL3,490,238,3,Tower,STRG,Pod C Clean Equipment Storage,Pod C Storage
-STRGDIRTYL3,320,292,3,Tower,STRG,Dirty Equipment Storage,Dirty Storage
-BBED103,420,124,3,Tower,BED,Pod B Bed 1 Floor 3,Pod B Bed 1
-BBED203,389,72,3,Tower,BED,Pod B Bed 2 Floor 3,Pod B Bed 2
-BBED303,360,50,3,Tower,BED,Pod B Bed 3 Floor 3,Pod B Bed 3
-BBED403,300,40,3,Tower,BED,Pod B Bed 4 Floor 3,Pod B Bed 4
-BBED503,268,51,3,Tower,BED,Pod B Bed 5 Floor 3,Pod B Bed 5
-BBED603,222,90,3,Tower,BED,Pod B Bed 6 Floor 3,Pod B Bed 6
-BBED703,215,120,3,Tower,BED,Pod B Bed 7 Floor 3,Pod B Bed 7
-BBED803,220,182,3,Tower,BED,Pod B Bed 8 Floor 3,Pod B Bed 8
-BBED903,240,217,3,Tower,BED,Pod B Bed 9 Floor 3,Pod B Bed 9
-BBED1003,294,246,3,Tower,BED,Pod B Bed 10 Floor 3,Pod B Bed 10
-CBED103,420,470,3,Tower,BED,Pod C Bed 1 Floor 3,Pod C Bed 1
-CBED203,389,521,3,Tower,BED,Pod C Bed 2 Floor 3,Pod C Bed 2
-CBED303,360,544,3,Tower,BED,Pod C Bed 3 Floor 3,Pod C Bed 3
-CBED403,300,544,3,Tower,BED,Pod C Bed 4 Floor 3,Pod C Bed 4
-CBED503,268,537,3,Tower,BED,Pod C Bed 5 Floor 3,Pod C Bed 5
-CBED603,222,496,3,Tower,BED,Pod C Bed 6 Floor 3,Pod C Bed 6
-CBED703,215,436,3,Tower,BED,Pod C Bed 7 Floor 3,Pod C Bed 7
-CBED803,220,404,3,Tower,BED,Pod C Bed 8 Floor 3,Pod C Bed 8
-CBED903,240,372,3,Tower,BED,Pod C Bed 9 Floor 3,Pod C Bed 9
-CBED1003,294,347,3,Tower,BED,Pod C Bed 10 Floor 3,Pod C Bed 10
-ABBPRK03,494,178,3,Tower,BPRK,Pod A-B Bed and Recliner Parking,Pod A-B Bed Parking
-CDBPRK03,494,408,3,Tower,BPRK,Pod C-D Bed and Recliner Parking,Pod C-D Bed Parking
+eSTOR00101,290,295,1,Tower,STOR,West Plaza,Plaza 1
+eSTOR00103,460,238,3,Tower,STOR,Clean Equipment Storage Pod B,In-Patient Unit Storage B
+eSTOR00203,490,238,3,Tower,STOR,Clean Equipment Storage Pod C,In-Patient Unit Storage C
+eDIRT00103,320,292,3,Tower,DIRT,Dirty Equipment Storage,Dirty Pickup
+ePATI00103,420,124,3,Tower,PATI,Patient Room Pod B 1 Floor 3,Pod B Room 1
+ePATI00203,389,72,3,Tower,PATI,Patient Room Pod B 2 Floor 3,Pod B Room 2
+ePATI00303,360,50,3,Tower,PATI,Patient Room Pod B 3 Floor 3,Pod B Room 3
+ePATI00403,300,40,3,Tower,PATI,Patient Room Pod B 4 Floor 3,Pod B Room 4
+ePATI00503,268,51,3,Tower,PATI,Patient Room Pod B 5 Floor 3,Pod B Room 5
+ePATI00603,222,90,3,Tower,PATI,Patient Room Pod B 6 Floor 3,Pod B Room 6
+ePATI00703,215,120,3,Tower,PATI,Patient Room Pod B 7 Floor 3,Pod B Room 7
+ePATI00803,220,182,3,Tower,PATI,Patient Room Pod B 8 Floor 3,Pod B Room 8
+ePATI00903,240,217,3,Tower,PATI,Patient Room Pod B 9 Floor 3,Pod B Room 9
+ePATI01003,294,246,3,Tower,PATI,Patient Room Pod B 10 Floor 3,Pod B Room 10
+ePATI01103,420,470,3,Tower,PATI,Patient Room Pod C 11 Floor 3,Pod C Room 11
+ePATI01203,389,521,3,Tower,PATI,Patient Room Pod C 12 Floor 3,Pod C Room 12
+ePATI01303,360,544,3,Tower,PATI,Patient Room Pod C 13 Floor 3,Pod C Room 13
+ePATI01403,300,544,3,Tower,PATI,Patient Room Pod C 14 Floor 3,Pod C Room 14
+ePATI01503,268,537,3,Tower,PATI,Patient Room Pod C 15 Floor 3,Pod C Room 15
+ePATI01603,222,496,3,Tower,PATI,Patient Room Pod C 16 Floor 3,Pod C Room 16
+ePATI01703,215,436,3,Tower,PATI,Patient Room Pod C 17 Floor 3,Pod C Room 17
+ePATI01803,220,404,3,Tower,PATI,Patient Room Pod C 18 Floor 3,Pod C Room 18
+ePATI01903,240,372,3,Tower,PATI,Patient Room Pod C 19 Floor 3,Pod C Room 19
+ePATI02003,294,347,3,Tower,PATI,Patient Room Pod C 20 Floor 3,Pod C Room 20
+eSTOR00303,494,178,3,Tower,STOR,Bed and Recliner Parking Pods AB Floor 3,Pod AB Bed Parking
+eSTOR00403,494,408,3,Tower,STOR,Bed and Recliner Parking Pods CD Floor 3,Pod CD Bed Parking
+eSTOR001L1,340,174,L1,Tower,STOR,OR Bed Park L1,OR Bed Park

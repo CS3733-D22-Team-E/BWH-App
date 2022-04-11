@@ -4,70 +4,69 @@ import edu.wpi.energetic_easter_bunnies.database.daos.*;
 import edu.wpi.energetic_easter_bunnies.entity.labRequest;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
-
 import java.io.*;
 import java.sql.*;
 
-/**
- * uses format from Iteration 1 final ERD Diagram
- */
+/** uses format from Iteration 1 final ERD Diagram */
 public class CSVManager {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
 
-  private final static String locationFormat = "NODEID, XCOORD, YCOORD, BUILDING, NODETYPE, LONGNAME, SHORTNAME, FLOOR";
-  private final static String medEquipFormat = "";
-  private final static String medEquipRequestFormat = "";
-  private final static String labRequestFormat = "";
-  private final static String employeeFormat = "";
-  private final static String serviceRequestFormat = "REQUESTID, STATUS, TYPE, ASSIGNEE, REQUEST_DATE, DELIVERY_DATE, ISURGENT";
-
-
+  private static final String locationFormat =
+      "NODEID, XCOORD, YCOORD, BUILDING, NODETYPE, LONGNAME, SHORTNAME, FLOOR";
+  private static final String medEquipFormat = "";
+  private static final String medEquipRequestFormat = "";
+  private static final String labRequestFormat = "";
+  private static final String employeeFormat = "";
+  private static final String serviceRequestFormat =
+      "REQUESTID, STATUS, TYPE, ASSIGNEE, REQUEST_DATE, DELIVERY_DATE, ISURGENT";
 
   /*
-       SAVING CSV FILES FROM THE DATABASE
-   */
+      SAVING CSV FILES FROM THE DATABASE
+  */
 
   public static void saveLocationCSV(String fileName) throws IOException, SQLException {
     String format = locationFormat;
     DAO<Location> dao = new LocationDAOImpl();
-    //nothing to change here
+    // nothing to change here
     BufferedWriter out;
-    if ((out = fullSaveHelper(fileName,format))==null) return;
-    //change with the proper format in first line of function
+    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    // change with the proper format in first line of function
     for (Location d : dao.getAll()) {
-      String csvLine = "" +
-                      d.getNodeID()
-                      + ','
-                      + d.getXcoord()
-                      + ','
-                      + d.getYcoord()
-                      + ','
-                      + d.getFloor()
-                      + ','
-                      + d.getBuilding()
-                      + ','
-                      + d.getNodeType()
-                      + ','
-                      + d.getLongName()
-                      + ','
-                      + d.getShortName()
-                      + "\n";
-      //change nothing
+      String csvLine =
+          ""
+              + d.getNodeID()
+              + ','
+              + d.getXcoord()
+              + ','
+              + d.getYcoord()
+              + ','
+              + d.getFloor()
+              + ','
+              + d.getBuilding()
+              + ','
+              + d.getNodeType()
+              + ','
+              + d.getLongName()
+              + ','
+              + d.getShortName()
+              + "\n";
+      // change nothing
       out.write(csvLine);
     }
     out.close();
   }
 
   public static void saveMedEquipCSV(String fileName) throws IOException, SQLException {
-    String format = medEquipFormat;//"ID,isInUse,isClean,cleanLocationID,storageLocationID";
+    String format = medEquipFormat; // "ID,isInUse,isClean,cleanLocationID,storageLocationID";
     DAO<MedicalEquipment> equipDAO = new MedicalEquipmentDAOImpl();
-    //nothing to change here
+    // nothing to change here
     BufferedWriter out;
-    if ((out = fullSaveHelper(fileName,format))==null) return;
-    //change with the proper format in first line of function
+    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    // change with the proper format in first line of function
     for (MedicalEquipment equip : equipDAO.getAll()) {
-      String csvLine = "" +
-              equip.getEquipmentID()
+      String csvLine =
+          ""
+              + equip.getEquipmentID()
               + ','
               + equip.getMed_equipmentID()
               + ','
@@ -83,22 +82,26 @@ public class CSVManager {
               + ','
               + equip.getEquipmentType()
               + "\n";
-      //change nothing
+      // change nothing
       out.write(csvLine);
     }
     out.close();
   }
 
   public static void saveMedEquipRequestCSV(String fileName) throws IOException, SQLException {
-    String format = medEquipRequestFormat;//"ID,requestDate,deliveryDate,isUrgent,equipment,equipQuantity,staffAssignee,locationID,requestStatus,otherNotes";
-     DAO<medicalEquipmentRequest> MESRDAO = new MedicalEquipmentServiceRequestDAOImpl();
-    //nothing to change here
+    String format =
+        medEquipRequestFormat; // "ID,requestDate,deliveryDate,isUrgent,equipment,equipQuantity,staffAssignee,locationID,requestStatus,otherNotes";
+    DAO<medicalEquipmentRequest> MESRDAO = new MedicalEquipmentServiceRequestDAOImpl();
+    // nothing to change here
     BufferedWriter out;
-    if ((out = fullSaveHelper(fileName,format))==null) return;
-    //change with the proper format in first line of function
-    for (medicalEquipmentRequest mesr : MESRDAO.getAll()) { //MED_EQUIPMENTID,REQUESTDATE,DELIVERYDATE,ISURGENT,EQUIP,EQUIPQUANTITY,STAFFASSIGNEE,LOCATIONID,FLOOR,REQUESTSTATUS,OTHERNOTES
-      String csvLine = "" +
-              mesr.getServiceRequestID()
+    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    // change with the proper format in first line of function
+    for (medicalEquipmentRequest mesr :
+        MESRDAO
+            .getAll()) { // MED_EQUIPMENTID,REQUESTDATE,DELIVERYDATE,ISURGENT,EQUIP,EQUIPQUANTITY,STAFFASSIGNEE,LOCATIONID,FLOOR,REQUESTSTATUS,OTHERNOTES
+      String csvLine =
+          ""
+              + mesr.getServiceRequestID()
               + ','
               + mesr.getRequestDate()
               + ','
@@ -120,22 +123,24 @@ public class CSVManager {
               + ','
               + mesr.getOtherNotes()
               + "\n";
-      //change nothing
+      // change nothing
       out.write(csvLine);
     }
     out.close();
   }
 
   public static void saveLabRequestCSV(String fileName) throws IOException, SQLException {
-    String format = labRequestFormat;//"ID,labRequestType,StaffAssignee,locationID,timeFrame,requestStatus,otherNotes";
+    String format =
+        labRequestFormat; // "ID,labRequestType,StaffAssignee,locationID,timeFrame,requestStatus,otherNotes";
     DAO<labRequest> labRequestDAO = new LabRequestDAOImpl();
-    //nothing to change here
+    // nothing to change here
     BufferedWriter out;
-    if ((out = fullSaveHelper(fileName,format))==null) return;
-    //change with the proper format in first line of function
+    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    // change with the proper format in first line of function
     for (labRequest labRequest : labRequestDAO.getAll()) {
-      String csvLine = "" +
-              labRequest.getServiceRequestID()
+      String csvLine =
+          ""
+              + labRequest.getServiceRequestID()
               + ','
               + labRequest.getLabRequestType()
               + ','
@@ -149,22 +154,23 @@ public class CSVManager {
               + ','
               + labRequest.getOtherNotes()
               + "\n";
-      //change nothing
+      // change nothing
       out.write(csvLine);
     }
     out.close();
   }
 
   public static void saveEmployeeCSV(String fileName) throws IOException, SQLException {
-    String format = employeeFormat;//"employeeID,name,location,position,available,salary";
+    String format = employeeFormat; // "employeeID,name,location,position,available,salary";
     DAO<Employee> employeeDAO = new EmployeeDAOImpl();
-    //nothing to change here
+    // nothing to change here
     BufferedWriter out;
-    if ((out = fullSaveHelper(fileName,format))==null) return;
-    //change with the proper format in first line of function
+    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    // change with the proper format in first line of function
     for (Employee employee : employeeDAO.getAll()) {
-      String csvLine = "" +
-              employee.getEmployeeID()
+      String csvLine =
+          ""
+              + employee.getEmployeeID()
               + ','
               + employee.getName()
               + ','
@@ -176,7 +182,7 @@ public class CSVManager {
               + ','
               + employee.getSalary()
               + "\n";
-      //change nothing
+      // change nothing
       out.write(csvLine);
     }
     out.close();
@@ -185,13 +191,14 @@ public class CSVManager {
   public static void saveServiceRequestCSV(String fileName) throws IOException, SQLException {
     String format = serviceRequestFormat;
     DAO<serviceRequest> dao = new ServiceRequestDAOImpl();
-    //nothing to change here
+    // nothing to change here
     BufferedWriter out;
-    if ((out = fullSaveHelper(fileName,format))==null) return;
-    //change with the proper format in first line of function
+    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    // change with the proper format in first line of function
     for (serviceRequest d : dao.getAll()) {
-      String csvLine = "" +
-              d.getServiceRequestID()
+      String csvLine =
+          ""
+              + d.getServiceRequestID()
               + ','
               + d.getRequestStatus()
               + ','
@@ -203,51 +210,50 @@ public class CSVManager {
               + ','
               + d.isUrgent()
               + "\n";
-      //change nothing
+      // change nothing
       out.write(csvLine);
     }
     out.close();
   }
 
-
   /*
-       LOADING CSV FILES INTO THE DATABASE
-   */
+      LOADING CSV FILES INTO THE DATABASE
+  */
 
-  public static void loadLocationCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName, "TOWERLOCATIONS", locationFormat);
+  public static boolean loadLocationCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "TOWERLOCATIONS", locationFormat);
   }
 
-  public static void loadEquipmentCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName, "EQUIPMENT", medEquipFormat);
+  public static boolean loadEquipmentCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "EQUIPMENT", medEquipFormat);
   }
 
-  public static void loadMedEquipReqCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName, "MED_EQUIP_REQ", medEquipRequestFormat);
+  public static boolean loadMedEquipReqCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "MED_EQUIP_REQ", medEquipRequestFormat);
   }
 
-  public static void loadLabRequestCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName,"LAB_REQUEST", labRequestFormat);
+  public static boolean loadLabRequestCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "LAB_REQUEST", labRequestFormat);
   }
 
-  public static void loadEmployeesCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName,"EMPLOYEES", employeeFormat);
+  public static boolean loadEmployeesCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "EMPLOYEES", employeeFormat);
   }
 
-  public static void loadServiceRequestCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName,"SERVICEREQUEST", serviceRequestFormat);
+  public static boolean loadServiceRequestCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "SERVICEREQUEST", serviceRequestFormat);
   }
 
   /*public static void loadUsersCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName,"USERS", usersFormat);
-    }*/
+  loadCSVGeneral(fileName,"USERS", usersFormat);
+  }*/
 
   /*
-       HELPER FUNCTIONS
-   */
+      HELPER FUNCTIONS
+  */
 
   /**
-   *  PUT PARAMETERS IN CAPITALS WHERE POSSIBLE
+   * PUT PARAMETERS IN CAPITALS WHERE POSSIBLE
    *
    * @param fileName - with or without .csv, will be included
    * @param tableName - SQL table name
@@ -255,15 +261,19 @@ public class CSVManager {
    * @throws SQLException
    * @throws IOException
    */
-  public static boolean loadCSVGeneral(String fileName, String tableName, String ColumnsCSV) throws SQLException, IOException {
+  public static boolean loadCSVGeneral(String fileName, String tableName, String ColumnsCSV)
+      throws SQLException, IOException {
     int IDindex0 = 0;
     int count = 0;
-    for( int i= 0; i < ColumnsCSV.length(); i++) {if(ColumnsCSV.charAt(i) == ',') count++;} //counts # of commas
-    count = count + 1; //commas is number of results minus one
-    String[] csvData = ColumnsCSV.split(",");//for query later
+    for (int i = 0; i < ColumnsCSV.length(); i++) {
+      if (ColumnsCSV.charAt(i) == ',') count++;
+    } // counts # of commas
+    count = count + 1; // commas is number of results minus one
+    String[] csvData = ColumnsCSV.split(","); // for query later
     BufferedReader in;
-    try { in = new BufferedReader(new FileReader(fileName)); }
-    catch (IOException e) {
+    try {
+      in = new BufferedReader(new FileReader(fileName));
+    } catch (IOException e) {
       System.out.println("ERROR: " + e.getMessage());
       return false; // shouldnt do anything if there's nothing to load
     }
@@ -276,24 +286,30 @@ public class CSVManager {
 
       // check if nodeID is already in the database
       // ensures the database is up to date and correct without overwriting
-      String query = "SELECT * FROM "+tableName+" WHERE "+csvData[IDindex0]+" = '" + Identification + "'";
+      String query =
+          "SELECT * FROM "
+              + tableName
+              + " WHERE "
+              + csvData[IDindex0]
+              + " = '"
+              + Identification
+              + "'";
       PreparedStatement statement = connection.prepareStatement(query);
       ResultSet rs = statement.executeQuery(query);
       if (rs.next()) { // true if exists, false if does not exist
         continue;
       }
-      String questionMarks="";
-      for (int i = 0; i<count-1;i++) questionMarks += "?, ";
+      String questionMarks = "";
+      for (int i = 0; i < count - 1; i++) questionMarks += "?, ";
       questionMarks += "?";
       String insertQuery =
-              "INSERT INTO "+tableName+" ("+ColumnsCSV+")"
-                      + " VALUES ("+questionMarks+")";
+          "INSERT INTO " + tableName + " (" + ColumnsCSV + ")" + " VALUES (" + questionMarks + ")";
       statement = connection.prepareStatement(insertQuery);
 
-      for (int i=0; i<count-1; i++) { // sets the question marks in the query
-        statement.setString(i+1, String.valueOf(data[i]));
+      for (int i = 0; i < count - 1; i++) { // sets the question marks in the query
+        statement.setString(i + 1, String.valueOf(data[i]));
       }
-      statement.executeUpdate(); //runs the query
+      statement.executeUpdate(); // runs the query
     }
     in.close();
     connection.commit();
@@ -302,6 +318,7 @@ public class CSVManager {
 
   /**
    * save CSV function helper,
+   *
    * @param fileName
    * @return
    * @throws IOException
@@ -318,6 +335,7 @@ public class CSVManager {
 
   /**
    * full helper - does a lot of ugly stuff be hind the scenes
+   *
    * @param fileName
    * @param format
    * @return
@@ -325,11 +343,17 @@ public class CSVManager {
    */
   private static BufferedWriter fullSaveHelper(String fileName, String format) throws IOException {
     format.replaceAll(" ", "");
-    if (!format.endsWith("\n")) { format += "\n"; }
+    if (!format.endsWith("\n")) {
+      format += "\n";
+    }
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
     BufferedWriter out;
-    try { out = readyIO(fileName); }
-    catch (IOException e) { System.err.println("Error: " + e.getMessage()); return null; }//ends execution
+    try {
+      out = readyIO(fileName);
+    } catch (IOException e) {
+      System.err.println("Error: " + e.getMessage());
+      return null;
+    } // ends execution
     out.write(format);
     return out;
   }

@@ -1,7 +1,10 @@
 package edu.wpi.energetic_easter_bunnies.database_testing;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import edu.wpi.energetic_easter_bunnies.database.CSVManager;
 import edu.wpi.energetic_easter_bunnies.database.DBCreation;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,20 +12,24 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.SQLException;
 import java.time.Instant;
-
+import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 public class CSVManagerTesting {
+
   @Test
   public void testLoadLocationFile() throws SQLException, IOException {
     DBCreation.createTables();
-    CSVManager.loadLocationCSV("TowerLocations.csv");
+    assertTrue(CSVManager.loadLocationCSV("TowerLocations.csv"));
   }
 
   @Test
   public void testSaveLocationFile() throws SQLException, IOException {
     DBCreation.createTables();
-    CSVManager.saveLocationCSV("saveLocationFile.csv");
+    String filename = "saveLocationFile.csv";
+    CSVManager.saveLocationCSV(filename);
+    assertTrue(new File("c:/temp/temp.txt").exists());
+    // assertTrue(fileCreatedinLast15s(filename));
   }
 
   /*@Test
@@ -37,26 +44,25 @@ public class CSVManagerTesting {
     CSVManager.saveLocationCSV("saveMedEquipRequestFile.csv");
   }*/
 
-  private boolean fileCreatedinLastMinute(String filename) {
+  private boolean fileCreatedinLast15s(String filename) {
 
     try {
       Path fileDir = Paths.get(filename);
-      System.out.println(fileDir.toAbsolutePath());
+      fileDir = fileDir.toAbsolutePath();
 
-      BasicFileAttributes attr =
-              Files.readAttributes(fileDir, BasicFileAttributes.class);
+      BasicFileAttributes attr = Files.readAttributes(fileDir, BasicFileAttributes.class);
 
       System.out.println("creationTime: " + attr.creationTime());
-      System.out.println("lastAccessTime: " + attr.lastAccessTime());
-      System.out.println("lastModifiedTime: " + attr.lastModifiedTime());
 
       Instant I = attr.creationTime().toInstant();
-      I.getEpochSecond();// seconds since 1970
+      long fileTime = I.getEpochSecond(); // file creation time in seconds
+      long currentTime =
+          (new Date()).getTime() / 1000; // current system time in ms converted to seconds
+      return (currentTime - fileTime < 15); // if file was created less than 15 seconds ago
 
     } catch (IOException e) {
       e.printStackTrace();
+      return false;
     }
-
-    Instant.getEpochSeconds();
   }
 }
