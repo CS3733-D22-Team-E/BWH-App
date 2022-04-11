@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -91,10 +92,10 @@
                                  <children>
                                     <HBox prefHeight="31.0" prefWidth="372.0">
                                        <children>
-                                          <Button fx:id="cleanFilter" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" text="Clean" />
-                                          <Button fx:id="dirtyFilter" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" text="Dirty" />
-                                          <Button fx:id="inUseFilter" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" text="In Use" />
-                                          <Button fx:id="allFilter" mnemonicParsing="false" prefHeight="31.0" prefWidth="116.0" text="All" />
+                                          <ToggleButton fx:id="cleanFilter" mnemonicParsing="false" prefHeight="36.0" prefWidth="71.0" text="Clean" />
+                                          <ToggleButton fx:id="dirtyFilter" mnemonicParsing="false" prefHeight="36.0" prefWidth="71.0" text="Dirty" />
+                                          <ToggleButton fx:id="inUseFilter" mnemonicParsing="false" prefHeight="36.0" prefWidth="71.0" text="In Use" />
+                                          <ToggleButton fx:id="allFilter" mnemonicParsing="false" prefHeight="31.0" prefWidth="158.0" text="All" />
                                        </children>
                                     </HBox>
                                           <TableView fx:id="floorEquipmentTable" prefHeight="397.0" prefWidth="372.0">
