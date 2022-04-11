@@ -3,6 +3,7 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.entity.medicineDelivery;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ public class medicineDeliveryController extends serviceRequestPageController
 
   @FXML ComboBox<String> medicine;
   @FXML TextField amount;
+  @FXML ComboBox<String> unit;
   @FXML DatePicker date;
   @FXML TextField time;
   @FXML CheckBox mon;
@@ -32,6 +34,9 @@ public class medicineDeliveryController extends serviceRequestPageController
   ObservableList<String> medicines =
       FXCollections.observableArrayList(
           "Halothane", "Isoflurane", "Propofol", "midazolam", "ibuprofen");
+  ObservableList<String> units =
+          FXCollections.observableArrayList(
+                  "mg", "g", "mL");
 
   public medicineDeliveryController() {}
 
@@ -39,6 +44,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     medicine.setItems(medicines);
+    unit.setItems(units);
   }
 
   @FXML
@@ -50,6 +56,7 @@ public class medicineDeliveryController extends serviceRequestPageController
       medicineDeliveryRequest.setAmount(amount.getText());
       medicineDeliveryRequest.setMedicine(String.valueOf(medicine.getItems()));
       // medicineDeliveryRequest.setDeliveryDate(String.valueOf(date.getValue()));
+      medicineDeliveryRequest.setUnit(String.valueOf(unit.getItems()));
       medicineDeliveryRequest.setDeliveryTime(time.getText());
       medicineDeliveryRequest.setMon(mon.isSelected());
       medicineDeliveryRequest.setTues(tues.isSelected());
@@ -59,6 +66,7 @@ public class medicineDeliveryController extends serviceRequestPageController
       medicineDeliveryRequest.setSat(sat.isSelected());
       medicineDeliveryRequest.setSun(sun.isSelected());
       medicineDeliveryRequest.setOtherNotes(notes.getText());
+      medicineDeliveryRequest.setRequestDate(LocalDate.now());
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
