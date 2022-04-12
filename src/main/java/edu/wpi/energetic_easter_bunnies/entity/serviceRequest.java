@@ -60,8 +60,6 @@ public class serviceRequest {
   private int xCoord;
   private int yCoord;
 
-
-
   private String requestStatus;
   private String staffAssignee;
 
@@ -195,7 +193,6 @@ public class serviceRequest {
     return isUrgent;
   }
 
-
   public int getxCoord() {
     return xCoord;
   }
@@ -212,4 +209,8 @@ public class serviceRequest {
     this.yCoord = yCoord;
   }
 
+  @Override
+  public String toString() {
+    return getRequestType().toString() + " : {" + getServiceRequestID() + "}";
+  }
 }

@@ -41,20 +41,20 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
     }
   }
 
-  public void getCoords() throws SQLException{
-      DAO<Location> locationDAO = new LocationDAOImpl();
-      for(serviceRequest request : serviceRequests){
-        try{
-          Location location = locationDAO.get(request.getRoomID());
-          request.setxCoord(location.getXcoord());
-          request.setyCoord(location.getYcoord());
-          request.setFloorID(location.getFloor());
-        } catch (NullPointerException e){
-          e.printStackTrace();
-          request.setxCoord(-1);
-          request.setyCoord(-1);
-        }
+  public void getCoords() throws SQLException {
+    DAO<Location> locationDAO = new LocationDAOImpl();
+    for (serviceRequest request : serviceRequests) {
+      try {
+        Location location = locationDAO.get(request.getRoomID());
+        request.setxCoord(location.getXcoord());
+        request.setyCoord(location.getYcoord());
+        request.setFloorID(location.getFloor());
+      } catch (NullPointerException e) {
+        e.printStackTrace();
+        request.setxCoord(-1);
+        request.setyCoord(-1);
       }
+    }
   }
 
   @Override
