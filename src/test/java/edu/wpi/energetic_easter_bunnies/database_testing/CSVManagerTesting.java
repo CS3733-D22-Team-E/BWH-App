@@ -6,13 +6,9 @@ import edu.wpi.energetic_easter_bunnies.database.CSVManager;
 import edu.wpi.energetic_easter_bunnies.database.DBCreation;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.SQLException;
-import java.time.Instant;
-import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 public class CSVManagerTesting {
@@ -34,5 +30,4 @@ public class CSVManagerTesting {
 
     assertTrue(new File(fileDir.toAbsolutePath().toString()).exists());
   }
-
 }

@@ -295,7 +295,7 @@ public class CSVManager {
               + Identification
               + "'";
       PreparedStatement statement = connection.prepareStatement(query);
-      ResultSet rs = statement.executeQuery(query);
+      ResultSet rs = statement.executeQuery();
       if (rs.next()) { // true if exists, false if does not exist
         continue;
       }

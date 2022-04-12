@@ -1,4 +1,4 @@
-nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName
+NODEID, XCOORD, YCOORD, BUILDING, NODETYPE, LONGNAME, SHORTNAME, FLOOR
 WHALL001L2,530,889,L2,Tower,HALL,Hallway Connector 1 Floor L2,Hallway W01L2
 WELEV00ML2,605,645,L2,Tower,ELEV,Elevator M Floor L2,Elevator ML2
 WELEV00LL2,570,289,L2,Tower,ELEV,Elevator L Floor L2,Elevator LL2
