@@ -19,7 +19,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 
 /**
  * This is the controller class for the Status Page. It inherits from the containsSideMenu class to
@@ -151,9 +150,10 @@ public class statusPageController extends containsSideMenu {
     idColumn.setCellValueFactory(new PropertyValueFactory<serviceRequestModel, String>("ID"));
     typeColumn.setCellValueFactory(new PropertyValueFactory<serviceRequestModel, String>("Type"));
     typeColumn.setCellFactory(CustomTextFieldTableCell.forTableColumn());
+    typeColumn.setEditable(false);
     statusColumn.setCellValueFactory(
         new PropertyValueFactory<serviceRequestModel, String>("Status"));
-    statusColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+    statusColumn.setCellFactory(CustomTextFieldTableCell.forTableColumn());
     statusColumn.setOnEditCommit(
         new EventHandler<TableColumn.CellEditEvent<serviceRequestModel, String>>() {
           @Override
