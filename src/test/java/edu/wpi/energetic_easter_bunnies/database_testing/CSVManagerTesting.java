@@ -28,41 +28,11 @@ public class CSVManagerTesting {
     DBCreation.createTables();
     String filename = "saveLocationFile.csv";
     CSVManager.saveLocationCSV(filename);
-    assertTrue(new File("c:/temp/temp.txt").exists());
-    // assertTrue(fileCreatedinLast15s(filename));
+
+    Path fileDir = Paths.get(filename);
+    fileDir = fileDir.toAbsolutePath();
+
+    assertTrue(new File(fileDir.toAbsolutePath().toString()).exists());
   }
 
-  /*@Test
-  public void testLoadMedEquipReqFile() throws SQLException, IOException {
-    DBCreation.createTables();
-    CSVManager.loadMedEquipReqCSV("MedEquipRequest.csv");
-  }
-
-  @Test
-  public void testSaveMedEquipReqFile() throws SQLException, IOException {
-    DBCreation.createTables();
-    CSVManager.saveLocationCSV("saveMedEquipRequestFile.csv");
-  }*/
-
-  private boolean fileCreatedinLast15s(String filename) {
-
-    try {
-      Path fileDir = Paths.get(filename);
-      fileDir = fileDir.toAbsolutePath();
-
-      BasicFileAttributes attr = Files.readAttributes(fileDir, BasicFileAttributes.class);
-
-      System.out.println("creationTime: " + attr.creationTime());
-
-      Instant I = attr.creationTime().toInstant();
-      long fileTime = I.getEpochSecond(); // file creation time in seconds
-      long currentTime =
-          (new Date()).getTime() / 1000; // current system time in ms converted to seconds
-      return (currentTime - fileTime < 15); // if file was created less than 15 seconds ago
-
-    } catch (IOException e) {
-      e.printStackTrace();
-      return false;
-    }
-  }
 }
