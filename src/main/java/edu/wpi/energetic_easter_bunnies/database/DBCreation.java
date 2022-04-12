@@ -23,6 +23,14 @@ public class DBCreation {
             + ")";
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
+    query =
+        "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES "
+            + "('admin', 'admin' , 'admin', 'admin', TRUE, 1)";
+    statement.executeUpdate(query);
+    query =
+        "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES "
+            + "('staff', 'staff' , 'staff', 'staff', TRUE, 1)";
+    statement.executeUpdate(query);
   }
 
   public static void createEquipmentTable() throws SQLException, IOException {
