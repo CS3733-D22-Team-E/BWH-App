@@ -12,9 +12,9 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
 
   public MedicalEquipmentDAOImpl() throws SQLException {
     equipmentList = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM EQUIPMENT ORDER BY EQUIPMENTID DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
     int numID = 0;
     while (rs.next()) {
       String equipmentID = rs.getString("EQUIPMENTID");
@@ -84,7 +84,6 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
         equipments.add(equipment);
 
         // DB Query to update said values
-        Statement statement = connection.createStatement();
         String query =
             "UPDATE EQUIPMENT SET "
                 + "\""
@@ -109,8 +108,9 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
                 + "' WHERE EQUIPMENTID = '"
                 + equipment.getEquipmentID()
                 + "'"; // Make sure this is actually formatted right
+        PreparedStatement statement = connection.prepareStatement(query);
         System.out.println(query);
-        statement.executeUpdate(query); // TODO: FIX "currentLocationID" can't be found??"
+        statement.executeUpdate(); // TODO: FIX "currentLocationID" can't be found??"
         i++;
       }
       if (i == equipmentQuantity) {
@@ -128,14 +128,14 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
       // TODO: Add MedicalEquipment.cleanEquipment() here?
 
       // DB Query to set currentLocation to cleaningLocation
-      Statement statement = connection.createStatement();
       String query =
           "UPDATE EQUIPMENT SET CURRENTLOCATIONID = '"
               + equipment.getCleanLocation()
               + "' WHERE EQUIPMENTID = '"
               + equipment.getEquipmentID()
               + "'";
-      statement.executeUpdate(query);
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
     }
   }
 }

@@ -84,7 +84,6 @@ public class LabRequestDAOImpl implements DAO<labRequest> {
     labRequests.add(labRequest);
 
     try {
-      Statement statement = connection.createStatement();
       String query =
           "INSERT INTO LAB_REQUEST VALUES ('"
               + labRequest.getServiceRequestID()
@@ -101,8 +100,9 @@ public class LabRequestDAOImpl implements DAO<labRequest> {
               + "','"
               + labRequest.getOtherNotes()
               + "')";
+      PreparedStatement statement = connection.prepareStatement(query);
       System.out.println(query);
-      statement.executeUpdate(query);
+      statement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     }
