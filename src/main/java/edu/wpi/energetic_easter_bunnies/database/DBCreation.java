@@ -95,6 +95,7 @@ public class DBCreation {
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
     CSVManager.loadLocationCSV("TowerLocations.csv"); // TODO: data[1] is getting an OOB
+    // CSVManager.loadLocationCSV("TowerLocations.csv"); // TODO: data[1] is getting an OOB
     // Exception
   }
 
@@ -202,13 +203,13 @@ public class DBCreation {
     String query =
         "create table ACCOUNTS\n"
             + "(\n"
-            + "    ACCOUNTID      VARCHAR(35) not null,\n"
-            + "    EMPLOYEEID     VARCHAR(35) not null,\n"
-            + "    AUTHORITYLEVEL INTEGER,\n"
+            + "    ACCOUNTID      VARCHAR(35)  not null,\n"
+            + "    EMPLOYEEID     VARCHAR(35),          \n"
+            + "    AUTHORITYLEVEL INTEGER,              \n"
             + "    PASSWORDHASH   VARCHAR(500) not null,\n"
-            + "    FIRSTNAME      VARCHAR(35) not null,\n"
-            + "    LASTNAME       VARCHAR(35),\n"
-            + "    POSITION       VARCHAR(35)\n"
+            + "    FIRSTNAME      VARCHAR(35)  not null,\n"
+            + "    LASTNAME       VARCHAR(35),          \n"
+            + "    POSITION       VARCHAR(35)           \n"
             + ")";
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
