@@ -2,6 +2,8 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -19,8 +21,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox prefHeight="640.0" prefWidth="400.0" stylesheets="@styles/map.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mapPageController">
+<VBox prefHeight="640.0" prefWidth="400.0" stylesheets="@styles/map.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mapPageController">
     <children>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
             <menus>
@@ -105,14 +108,12 @@
                </columnResizePolicy>
             </TableView>
             <JFXComboBox fx:id="floorDropdown" layoutX="28.0" layoutY="110.0" onAction="#floorDropdown" promptText="Select Floor" />
-            <JFXButton fx:id="mapEditorButton" layoutX="444.0" layoutY="557.0" onAction="#mapEditorButton" prefHeight="25.0" prefWidth="76.0" text="Editor" />
-            <JFXButton fx:id="showMedicalEquipment" layoutX="181.0" layoutY="110.0" onAction="#filterMedEquip" text="Show Med Equip" />
-            <JFXButton fx:id="showServiceRequests" layoutX="311.0" layoutY="110.0" onAction="#filterServReq" text="Show Serv Req" />
-            <ScrollPane layoutX="605.0" layoutY="124.0" prefHeight="356.0" prefWidth="378.0">
+            <JFXButton fx:id="mapEditorButton" layoutX="951.0" layoutY="98.0" onAction="#mapEditorButton" prefHeight="25.0" prefWidth="76.0" text="Editor" />
+            <ScrollPane layoutX="553.0" layoutY="131.0" prefHeight="468.0" prefWidth="468.0">
                <content>
                   <AnchorPane fx:id="mapBox">
                      <children>
-                        <ImageView fitHeight="909.0" fitWidth="935.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="mapImage" fitHeight="909.0" fitWidth="935.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@images/maps/01_thefirstfloor.png" />
                            </image>
@@ -121,6 +122,12 @@
                   </AnchorPane>
                </content>
             </ScrollPane>
+            <JFXButton fx:id="zoomUp" layoutX="1035.0" layoutY="97.0" onAction="#zoomUp" text="+" />
+            <JFXButton fx:id="zoomDown" layoutX="1034.0" layoutY="568.0" onAction="#zoomDown" text="-" />
+            <JFXSlider fx:id="zoomSlider" blockIncrement="100.0" layoutX="1034.0" layoutY="123.0" majorTickUnit="100.0" max="1035.0" min="435.0" minorTickCount="10" onMouseClicked="#changeZoom" onMouseDragged="#changeZoom" orientation="VERTICAL" prefHeight="438.0" prefWidth="28.0" showTickMarks="true" snapToTicks="true" value="535.0" />
+            <JFXToggleButton fx:id="filterMode" layoutX="675.0" layoutY="81.0" onAction="#setFilterMode" prefHeight="40.0" prefWidth="81.0" toggleColor="#fafafa" toggleLineColor="#999999" />
+            <Text layoutX="571.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medical Equipment" wrappingWidth="105.44501843082708" />
+            <Text layoutX="743.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Requests" wrappingWidth="105.44501843082708" />
             </children>
         </AnchorPane>
     </children>
