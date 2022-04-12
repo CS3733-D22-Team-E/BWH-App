@@ -1,7 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.energetic_easter_bunnies.PopUpWarning;
+import edu.wpi.energetic_easter_bunnies.PopUp;
 import edu.wpi.energetic_easter_bunnies.database.daos.MedicineDeliveryDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.medicineDelivery;
 import java.net.URL;
@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
@@ -153,7 +154,7 @@ public class medicineDeliveryController extends serviceRequestPageController
     //    }
     catch (SQLException error) {
       System.out.println("SQL Error ");
-      PopUpWarning.createWarning("SQL Error");
+      PopUp.createWarning("Warning : A required value was not filled", (Node) event.getSource());
     }
   }
 

@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
-import edu.wpi.energetic_easter_bunnies.PopUpWarning;
+import edu.wpi.energetic_easter_bunnies.PopUp;
 import edu.wpi.energetic_easter_bunnies.customUI.CustomTextFieldTableCell;
 import edu.wpi.energetic_easter_bunnies.database.daos.DAOSystem;
 import edu.wpi.energetic_easter_bunnies.entity.sanitationRequest;
@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -164,7 +165,7 @@ public class sanitationServiceController extends serviceRequestPageController {
     } catch (NullPointerException error) {
       error.printStackTrace();
       System.out.println(error.getMessage());
-      PopUpWarning.createWarning("Warning : A required value was not filled");
+      PopUp.createWarning("Warning : A required value was not filled", (Node) event.getSource());
     }
   }
 

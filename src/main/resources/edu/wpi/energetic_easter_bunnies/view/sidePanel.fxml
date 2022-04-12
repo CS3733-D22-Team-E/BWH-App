@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<StackPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.sideMenuController">
+<StackPane fx:id="root" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.sideMenuController">
    <children>
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="120.0">
          <content>
@@ -21,6 +20,10 @@
                               <Insets bottom="6.0" />
                            </VBox.margin>
                         </JFXButton>
+                        <JFXButton fx:id="b13" buttonType="RAISED" layoutX="10.0" layoutY="72.0" onAction="#profButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Profile">
+                           <VBox.margin>
+                              <Insets bottom="6.0" top="6.0" />
+                           </VBox.margin></JFXButton>
                         <JFXButton fx:id="b1" buttonType="RAISED" onAction="#medicalEquipmentButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Medical Equipment">
                            <VBox.margin>
                               <Insets bottom="6.0" top="6.0" />

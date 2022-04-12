@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
-import edu.wpi.energetic_easter_bunnies.PopUpWarning;
+import edu.wpi.energetic_easter_bunnies.PopUp;
 import edu.wpi.energetic_easter_bunnies.database.daos.LabRequestDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.labRequest;
@@ -100,7 +100,7 @@ public class labRequestController extends serviceRequestPageController {
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
-      PopUpWarning.createWarning("Warning : A required value was not filled");
+      PopUp.createWarning("Warning : A required value was not filled", null);
     }
   }
 
