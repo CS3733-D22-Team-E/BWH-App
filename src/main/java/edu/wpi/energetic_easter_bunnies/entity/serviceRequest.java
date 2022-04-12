@@ -60,8 +60,6 @@ public class serviceRequest {
   private int xCoord;
   private int yCoord;
 
-
-
   private String requestStatus;
   private String staffAssignee;
 
@@ -195,7 +193,6 @@ public class serviceRequest {
     return isUrgent;
   }
 
-
   public int getxCoord() {
     return xCoord;
   }
@@ -211,5 +208,4 @@ public class serviceRequest {
   public void setyCoord(int yCoord) {
     this.yCoord = yCoord;
   }
-
 }

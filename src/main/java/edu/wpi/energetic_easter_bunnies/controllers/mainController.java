@@ -1,11 +1,13 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.energetic_easter_bunnies.pageControlFacade;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class mainController {
@@ -19,6 +21,8 @@ public class mainController {
   @FXML Button labRequestButton;
   @FXML Button mapButton;
   @FXML Button aboutButton;
+  @FXML JFXToggleButton seeAuthors;
+  @FXML Pane authors;
 
   public mainController() {}
 
@@ -95,5 +99,14 @@ public class mainController {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     pageControlFacade.loadPage("defaultPage.fxml", thisStage);
+  }
+
+  @FXML
+  public void seeAuthors(ActionEvent event) throws IOException {
+    if (seeAuthors.isSelected()) {
+      authors.setVisible(true);
+    } else {
+      authors.setVisible(false);
+    }
   }
 }
