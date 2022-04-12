@@ -8,6 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+/**
+ * Controller Class for the Sanitation Service Request. Inherits from the serviceRequestController
+ * super class.
+ */
 public class sanitationServiceController extends serviceRequestPageController {
 
   @FXML RadioButton mediumSelect;
@@ -22,13 +26,26 @@ public class sanitationServiceController extends serviceRequestPageController {
   @FXML ToggleGroup urgencyGroup;
   @FXML ToggleGroup sizeGroup;
 
+  /** Constructor */
   public sanitationServiceController() {}
 
+  /**
+   * Initializes the super class.
+   *
+   * @param location ??
+   * @param resources ??
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
   }
 
+  /**
+   * Takes the inputs from the buttons, drop downs, text fields etc. and stores that data in the
+   * sanitationService object.
+   *
+   * @param event Pressing the submitButton
+   */
   @FXML
   public void submitButton(ActionEvent event) {
     sanitationRequest request = new sanitationRequest();
@@ -86,6 +103,11 @@ public class sanitationServiceController extends serviceRequestPageController {
     }
   }
 
+  /**
+   * clears all of the inputs on the page.
+   *
+   * @param event Pressing the resetButton
+   */
   @FXML
   public void resetFields(ActionEvent event) {
     floor.getSelectionModel().clearSelection();

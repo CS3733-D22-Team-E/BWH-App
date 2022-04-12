@@ -78,13 +78,6 @@ public class LocationDAOImpl implements DAO<Location> {
     return locations.get(numID);
   }
 
-  /** Prints all the location information */
-  public void printLocations() {
-    for (Location location : locations) {
-      System.out.println(location);
-    }
-  }
-
   /**
    * Creates a new location entry in the database
    *
@@ -95,8 +88,6 @@ public class LocationDAOImpl implements DAO<Location> {
     locations.add(location);
     try {
       Statement statement = connection.createStatement();
-      locations.add(location);
-
       String query =
           "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
               + location.getNodeID()

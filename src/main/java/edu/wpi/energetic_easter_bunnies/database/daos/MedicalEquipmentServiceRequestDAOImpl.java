@@ -47,10 +47,12 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
     rs.close();
   }
 
+  @Override
   public List<medicalEquipmentRequest> getAll() {
     return medicalRequests;
   }
 
+  @Override
   public medicalEquipmentRequest get(String id) {
     for (medicalEquipmentRequest request : medicalRequests) {
       if (request.getServiceRequestID().equals(id)) return request;
@@ -61,42 +63,43 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
     throw new NullPointerException();
   }
 
+  @Override
   public void update(medicalEquipmentRequest request) {
     medicalRequests.add(request);
-
-    try {
-      Statement statement = connection.createStatement();
-      String query =
-          "INSERT INTO MED_EQUIP_REQ VALUES ('"
-              + request.getServiceRequestID()
-              + "','"
-              + request.getDeliveryDate()
-              + "','"
-              + request.getRequestDate()
-              + "',"
-              + request.getIsUrgent()
-              + ",'"
-              + request.getEquipment()
-              + "',"
-              + request.getEquipmentQuantity()
-              + ",'"
-              + request.getStaffAssignee()
-              + "','"
-              + request.getRoomID()
-              + "','"
-              + request.getFloorID()
-              + "','"
-              + request.getRequestStatus()
-              + "','"
-              + request.getOtherNotes()
-              + "')";
-      statement.executeUpdate(query);
-    } catch (SQLException e) {
-      System.out.println("SQL Error"); // TODO: Replace with something else
-    }
   }
 
   public void delete(medicalEquipmentRequest request) { // TODO: Remove from DB table as well
     medicalRequests.remove(request);
+  }
+
+  public void addMedEquipReq(medicalEquipmentRequest request) throws SQLException {
+    medicalRequests.add(request);
+
+    Statement statement = connection.createStatement();
+    String query =
+        "INSERT INTO MED_EQUIP_REQ VALUES ('"
+            + request.getServiceRequestID()
+            + "','"
+            + request.getDeliveryDate()
+            + "','"
+            + request.getRequestDate()
+            + "',"
+            + request.getIsUrgent()
+            + ",'"
+            + request.getEquipment()
+            + "',"
+            + request.getEquipmentQuantity()
+            + ",'"
+            + request.getStaffAssignee()
+            + "','"
+            + request.getRoomID()
+            + "','"
+            + request.getFloorID()
+            + "','"
+            + request.getRequestStatus()
+            + "','"
+            + request.getOtherNotes()
+            + "')";
+    statement.executeUpdate(query);
   }
 }

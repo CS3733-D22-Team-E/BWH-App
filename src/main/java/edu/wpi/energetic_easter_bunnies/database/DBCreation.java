@@ -1,5 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.database;
 
+import static edu.wpi.energetic_easter_bunnies.RSAEncryption.generatePasswordHASH;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -92,7 +94,7 @@ public class DBCreation {
             + ")";
     Statement statement = connection.createStatement();
     statement.executeUpdate(query);
-    // CSVManager.loadLocationCSV("TowerLocations.csv"); // TODO: data[1] is getting an OOB
+    CSVManager.loadLocationCSV("TowerLocations.csv"); // TODO: data[1] is getting an OOB
     // Exception
   }
 
@@ -193,6 +195,34 @@ public class DBCreation {
             + "    OTHERNOTES         VARCHAR(255)\n"
             + ")";
     Statement statement = connection.createStatement();
+  }
+
+  public static void createAccountsTable() throws SQLException {
+    String query =
+        "create table ACCOUNTS\n"
+            + "(\n"
+            + "    ACCOUNTID      VARCHAR(35) not null,\n"
+            + "    EMPLOYEEID     VARCHAR(35) not null,\n"
+            + "    AUTHORITYLEVEL INTEGER,\n"
+            + "    PASSWORDHASH   VARCHAR(500) not null,\n"
+            + "    FIRSTNAME      VARCHAR(35) not null,\n"
+            + "    LASTNAME       VARCHAR(35),\n"
+            + "    POSITION       VARCHAR(35)\n"
+            + ")";
+    Statement statement = connection.createStatement();
+    statement.executeUpdate(query);
+    System.out.println(generatePasswordHASH("admin"));
+    query =
+        "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES "
+            + "('admin', 'admin' , 3, '"
+            + generatePasswordHASH("admin")
+            + "', 'admin', 'admin', 'admin')";
+    statement.executeUpdate(query);
+    query =
+        "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES "
+            + "('staff', 'staff' , 1, '"
+            + generatePasswordHASH("staff")
+            + "', 'staff', 'staff', 'staff')";
     statement.executeUpdate(query);
   }
 
@@ -208,6 +238,7 @@ public class DBCreation {
       createSanitationRequestTable();
       createMealRequestTable();
       createLanguageInterpreterRequestTable();
+      createAccountsTable();
     } catch (SQLException | IOException e) {
       e.printStackTrace();
     }

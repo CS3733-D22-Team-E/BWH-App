@@ -19,13 +19,13 @@ public class EmployeeDAOImpl implements DAO<Employee> {
     while (rs.next()) {
       String employeeID = rs.getString("EMPLOYEEID");
       String name = rs.getString("NAME");
-      double salary = rs.getDouble("SALARY");
-      String location = rs.getString("LOCATION");
+      String locationID = rs.getString("LOCATIONID");
       String position = rs.getString("POSITION");
       boolean available = rs.getBoolean("AVAILABLE");
+      double salary = rs.getDouble("SALARY");
 
       Employee employee =
-          new Employee(employeeID, name, position, salary, location, available, numID);
+          new Employee(employeeID, name, position, salary, locationID, available, numID);
 
       employees.add(employee);
       numID++;
@@ -50,10 +50,38 @@ public class EmployeeDAOImpl implements DAO<Employee> {
   @Override
   public void update(Employee employee) {
     employees.add(employee);
+    try {
+      Statement statement = connection.createStatement();
+      String query =
+          "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES ('"
+              + employee.getEmployeeID()
+              + "','"
+              + employee.getName()
+              + "','"
+              + employee.getLocation()
+              + "','"
+              + employee.getPosition()
+              + "',"
+              + employee.getAvailable()
+              + ","
+              + employee.getSalary()
+              + ")"; // Insert into database; does not check if the employeeID already exists
+      statement.executeUpdate(query);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public void delete(Employee employee) {
     employees.remove(employee);
+    try {
+      Statement statement = connection.createStatement();
+      String query =
+          "DELETE FROM EMPLOYEES WHERE EMPLOYEEID = ('" + employee.getEmployeeID() + "')";
+      statement.executeUpdate(query);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }

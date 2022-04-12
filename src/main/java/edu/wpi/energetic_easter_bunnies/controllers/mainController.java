@@ -19,8 +19,7 @@ public class mainController {
   @FXML Button labRequestButton;
   @FXML Button mapButton;
   @FXML Button dashboardButton;
-
-  pageControlFacade facade = new pageControlFacade();
+  @FXML Button aboutButton;
 
   public mainController() {}
 
@@ -28,74 +27,81 @@ public class mainController {
   public void mealDeliveryButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    facade.loadPage("mealDeliveryPage.fxml", thisStage);
+    pageControlFacade.loadPage("mealDeliveryPage.fxml", thisStage);
   }
 
   @FXML
   public void statusButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    facade.loadPage("statusPage.fxml", thisStage);
+    pageControlFacade.loadPage("statusPage.fxml", thisStage);
   }
 
   @FXML
   public void languageButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    facade.loadPage("languagePage.fxml", thisStage);
+    pageControlFacade.loadPage("languagePage.fxml", thisStage);
   }
 
   @FXML
   public void medicalEquipmentButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    facade.loadPage("medicalEquipmentPage.fxml", thisStage);
+    pageControlFacade.loadPage("medicalEquipmentPage.fxml", thisStage);
   }
 
   @FXML
   public void medicineDeliveryButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    facade.loadPage("medicineDelivery.fxml", thisStage);
+    pageControlFacade.loadPage("medicineDelivery.fxml", thisStage);
   }
 
   @FXML
   public void exitButton(ActionEvent event) throws IOException {
-    facade.exitApp();
+    pageControlFacade.exitApp();
   }
 
   @FXML
   public void sanitationButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    facade.loadPage("sanitationPage.fxml", thisStage);
+    pageControlFacade.loadPage("sanitationPage.fxml", thisStage);
   }
 
   @FXML
   public void labRequestButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    facade.loadPage("labRequestPage.fxml", thisStage);
+    pageControlFacade.loadPage("labRequestPage.fxml", thisStage);
   }
 
   @FXML
   public void mapButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    facade.loadPage("map.fxml", thisStage);
+    pageControlFacade.loadPage("map.fxml", thisStage);
+  }
+
+  @FXML
+  public void aboutButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    pageControlFacade.loadPage("aboutPage.fxml", thisStage);
   }
 
   @FXML
   public void dashboardButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    facade.loadPage("DashboardPage.fxml", thisStage);
+    pageControlFacade.loadPage("DashboardPage.fxml", thisStage);
   }
 
   @FXML
   public void homeButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    facade.loadPage("defaultPage.fxml", thisStage);
+    pageControlFacade.loadPage("defaultPage.fxml", thisStage);
   }
 }

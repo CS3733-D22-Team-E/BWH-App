@@ -13,17 +13,17 @@ public class sideMenuController {
   @FXML StackPane root;
 
   @FXML
+  public void medicineDeliveryButton(ActionEvent event) throws IOException {
+
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("medicineDelivery.fxml", thisStage);
+  }
+
+  @FXML
   public void mealDeliveryButton(ActionEvent event) throws IOException {
 
     Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     pageControlFacade.loadPage("mealDeliveryPage.fxml", thisStage);
-  }
-
-  @FXML
-  public void statusButton(ActionEvent event) throws IOException {
-
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("statusPage.fxml", thisStage);
   }
 
   @FXML
@@ -34,22 +34,21 @@ public class sideMenuController {
   }
 
   @FXML
-  public void medicalEquipmentButton(ActionEvent event) throws IOException {
+  public void statusButton(ActionEvent event) throws IOException {
 
     Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("medicalEquipmentPage.fxml", thisStage);
-  }
-
-  @FXML
-  public void medicineDeliveryButton(ActionEvent event) throws IOException {
-
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("medicineDelivery.fxml", thisStage);
+    pageControlFacade.loadPage("statusPage.fxml", thisStage);
   }
 
   @FXML
   public void exitButton(ActionEvent event) throws IOException {
     pageControlFacade.exitApp();
+  }
+
+  @FXML
+  public void medicalEquipmentButton(ActionEvent event) {
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("medicalEquipmentPage.fxml", thisStage);
   }
 
   @FXML
