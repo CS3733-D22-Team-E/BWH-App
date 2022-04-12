@@ -57,6 +57,10 @@ public class serviceRequest {
   private String roomID;
   private boolean isUrgent;
   private Type requestType;
+  private int xCoord;
+  private int yCoord;
+
+
 
   private String requestStatus;
   private String staffAssignee;
@@ -190,4 +194,22 @@ public class serviceRequest {
   public boolean isUrgent() {
     return isUrgent;
   }
+
+
+  public int getxCoord() {
+    return xCoord;
+  }
+
+  public void setxCoord(int xCoord) {
+    this.xCoord = xCoord;
+  }
+
+  public int getyCoord() {
+    return yCoord;
+  }
+
+  public void setyCoord(int yCoord) {
+    this.yCoord = yCoord;
+  }
+
 }

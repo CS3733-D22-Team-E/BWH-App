@@ -74,8 +74,13 @@ public class loginPageController {
         AccountsManager.getInstance().setAccount(account);
         DAO<Employee> employeeDAO = new EmployeeDAOImpl();
         if (account.getEmployeeID() != null && account.getEmployeeID() != "") {
-          Employee employee = employeeDAO.get(account.getEmployeeID());
-          AccountsManager.getInstance().setEmployee(employee);
+          try {
+            Employee employee = employeeDAO.get(account.getEmployeeID());
+            AccountsManager.getInstance().setEmployee(employee);
+          } catch (NullPointerException e) {
+            e.printStackTrace();
+            return true;
+          }
         }
       }
     } catch (SQLException e) {
