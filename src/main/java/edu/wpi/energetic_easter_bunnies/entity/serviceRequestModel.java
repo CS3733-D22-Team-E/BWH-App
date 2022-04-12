@@ -1,12 +1,19 @@
 package edu.wpi.energetic_easter_bunnies.entity;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class serviceRequestModel {
 
-  SimpleBooleanProperty isUrgent;
-  SimpleStringProperty ID, Status, Type, Assignee, requestDate, deliveryDate, floorID, roomID;
+  SimpleStringProperty ID,
+      Status,
+      Type,
+      Assignee,
+      requestDate,
+      deliveryDate,
+      floorID,
+      roomID,
+      notes,
+      isUrgent;
 
   public serviceRequestModel(
       String ID,
@@ -15,14 +22,28 @@ public class serviceRequestModel {
       String Assignee,
       String requestDate,
       String deliveryDate,
-      boolean isUrgent) {
+      boolean isUrgent,
+      String note) {
     this.ID = new SimpleStringProperty(ID);
     this.Status = new SimpleStringProperty(Status);
     this.Type = new SimpleStringProperty(Type);
     this.Assignee = new SimpleStringProperty(Assignee);
     this.requestDate = new SimpleStringProperty(requestDate);
     this.deliveryDate = new SimpleStringProperty(deliveryDate);
-    this.isUrgent = new SimpleBooleanProperty(isUrgent);
+    this.isUrgent = new SimpleStringProperty(String.valueOf(isUrgent));
+    this.notes = new SimpleStringProperty(note);
+  }
+
+  public String getNotes() {
+    return notes.get();
+  }
+
+  public SimpleStringProperty notesProperty() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes.set(notes);
   }
 
   public String getID() {
@@ -37,16 +58,16 @@ public class serviceRequestModel {
     this.ID.set(ID);
   }
 
-  public boolean isIsUrgent() {
+  public String isIsUrgent() {
     return isUrgent.get();
   }
 
-  public SimpleBooleanProperty isUrgentProperty() {
+  public SimpleStringProperty isUrgentProperty() {
     return isUrgent;
   }
 
   public void setIsUrgent(boolean isUrgent) {
-    this.isUrgent.set(isUrgent);
+    this.isUrgent.set(String.valueOf(isUrgent));
   }
 
   public String getStatus() {
