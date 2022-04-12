@@ -73,7 +73,7 @@ public class loginPageController {
       } else {
         AccountsManager.getInstance().setAccount(account);
         DAO<Employee> employeeDAO = new EmployeeDAOImpl();
-        if(account.getEmployeeID() != null && account.getEmployeeID() != ""){
+        if (account.getEmployeeID() != null && account.getEmployeeID() != "") {
           Employee employee = employeeDAO.get(account.getEmployeeID());
           AccountsManager.getInstance().setEmployee(employee);
         }
