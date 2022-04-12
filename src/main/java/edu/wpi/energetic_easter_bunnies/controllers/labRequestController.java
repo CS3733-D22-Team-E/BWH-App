@@ -16,8 +16,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
- * This is the controller class for the Lab Request service page.
- * It inherits from the serviceRequestController super class.
+ * This is the controller class for the Lab Request service page. It inherits from the
+ * serviceRequestController super class.
  */
 public class labRequestController extends serviceRequestPageController {
 
@@ -38,13 +38,12 @@ public class labRequestController extends serviceRequestPageController {
   LabRequestDAOImpl labRequestDB;
   labRequest labReq = new labRequest();
 
-  /**
-   * Constructor
-   */
+  /** Constructor */
   public labRequestController() {}
 
   /**
    * Initializes the
+   *
    * @param location
    * @param resources
    */

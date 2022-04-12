@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public enum DBConnect {
-  EMBEDDED_INSTANCE("jdbc:derby:myDB;create=true", "org.apache.derby.jdbc.EmbeddedDriver"),
-  CLIENT_INSTANCE("jdbc:derby://localhost:1527/BWDB", "org.apache.derby.jdbc.ClientDriver");
+  EMBEDDED_INSTANCE("jdbc:derby:myDB;create=true", "org.apache.derby.jdbc.EmbeddedDriver");
+  // CLIENT_INSTANCE("jdbc:derby://localhost:1527/BWDB", "org.apache.derby.jdbc.ClientDriver");
 
   private Connection connection;
 
@@ -34,9 +34,9 @@ public enum DBConnect {
    *
    * @return CLIENT_INSTANCE
    */
-  public static DBConnect getClientInstance() {
+  /*public static DBConnect getClientInstance() {
     return CLIENT_INSTANCE;
-  }
+  }*/
 
   /**
    * Method to get connection

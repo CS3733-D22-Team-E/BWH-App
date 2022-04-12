@@ -71,7 +71,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
   public void delete(medicalEquipmentRequest request) { // TODO: Remove from DB table as well
     medicalRequests.remove(request);
   }
-  
+
   public void addMedEquipReq(medicalEquipmentRequest request) throws SQLException {
     medicalRequests.add(request);
 
