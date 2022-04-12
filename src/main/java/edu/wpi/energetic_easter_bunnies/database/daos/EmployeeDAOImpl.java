@@ -12,9 +12,9 @@ public class EmployeeDAOImpl implements DAO<Employee> {
 
   public EmployeeDAOImpl() throws SQLException {
     employees = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM EMPLOYEES ORDER BY SALARY DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
     int numID = 0;
     while (rs.next()) {
       String employeeID = rs.getString("EMPLOYEEID");
@@ -51,7 +51,6 @@ public class EmployeeDAOImpl implements DAO<Employee> {
   public void update(Employee employee) {
     employees.add(employee);
     try {
-      Statement statement = connection.createStatement();
       String query =
           "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES ('"
               + employee.getEmployeeID()
@@ -66,7 +65,8 @@ public class EmployeeDAOImpl implements DAO<Employee> {
               + ","
               + employee.getSalary()
               + ")"; // Insert into database; does not check if the employeeID already exists
-      statement.executeUpdate(query);
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -76,10 +76,10 @@ public class EmployeeDAOImpl implements DAO<Employee> {
   public void delete(Employee employee) {
     employees.remove(employee);
     try {
-      Statement statement = connection.createStatement();
       String query =
           "DELETE FROM EMPLOYEES WHERE EMPLOYEEID = ('" + employee.getEmployeeID() + "')";
-      statement.executeUpdate(query);
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     }

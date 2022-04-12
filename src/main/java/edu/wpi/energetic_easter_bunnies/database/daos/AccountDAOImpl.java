@@ -3,10 +3,7 @@ package edu.wpi.energetic_easter_bunnies.database.daos;
 import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.entity.accounts.Account;
 import edu.wpi.energetic_easter_bunnies.entity.accounts.staffAccount;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +13,10 @@ public class AccountDAOImpl implements DAO<Account> {
 
   public AccountDAOImpl() throws SQLException {
     accounts = new ArrayList<Account>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM ACCOUNTS ORDER BY ACCOUNTID DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.execute();
+    ResultSet rs = statement.executeQuery();
     int numID = 0;
     while (rs.next()) {
       String accountID = rs.getString("ACCOUNTID");
@@ -57,7 +55,6 @@ public class AccountDAOImpl implements DAO<Account> {
   public void update(Account account) {
     accounts.add(account);
     try {
-      Statement statement = connection.createStatement();
       String query =
           "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES ('"
               + account.getAccountID()
@@ -74,7 +71,8 @@ public class AccountDAOImpl implements DAO<Account> {
               + "','"
               + account.getPosition()
               + "')"; // Insert into database; does not check if the employeeID already exists
-      statement.executeUpdate(query);
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -84,9 +82,9 @@ public class AccountDAOImpl implements DAO<Account> {
   public void delete(Account account) {
     accounts.remove(account);
     try {
-      Statement statement = connection.createStatement();
       String query = "DELETE FROM ACCOUNTS WHERE ACCOUNTID = ('" + account.getAccountID() + "')";
-      statement.executeUpdate(query);
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     }

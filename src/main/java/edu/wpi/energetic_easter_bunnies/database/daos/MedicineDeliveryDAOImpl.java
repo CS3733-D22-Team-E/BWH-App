@@ -18,9 +18,9 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
   */
   public MedicineDeliveryDAOImpl() throws SQLException {
     medicineRequests = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM MEDICINEREQUEST ORDER BY MEDICINE_REQ_ID DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
 
     while (rs.next()) {
       String medicineReqID = rs.getString("MEDICINE_REQ_ID");
