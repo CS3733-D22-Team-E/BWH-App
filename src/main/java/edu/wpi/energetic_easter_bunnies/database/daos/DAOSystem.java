@@ -3,21 +3,54 @@ package edu.wpi.energetic_easter_bunnies.database.daos;
 import edu.wpi.energetic_easter_bunnies.database.Employee;
 import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
-import edu.wpi.energetic_easter_bunnies.entity.labRequest;
-import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
-import edu.wpi.energetic_easter_bunnies.entity.sanitationRequest;
-import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
+import edu.wpi.energetic_easter_bunnies.database.medicineDelivery;
+import edu.wpi.energetic_easter_bunnies.entity.*;
+import edu.wpi.energetic_easter_bunnies.entity.accounts.Account;
 import java.sql.SQLException;
 import java.util.List;
 
 public class DAOSystem {
+  private final AccountDAOImpl accountDAO;
   private final EmployeeDAOImpl employeeDAO;
   private final LabRequestDAOImpl labRequestDAO;
+  private final LanguageRequestDAOImpl languageRequestDAO;
   private final LocationDAOImpl locationDAO;
+  private final MealDeliveryRequestDAOImpl mealDeliveryRequestDAO;
   private final MedicalEquipmentDAOImpl medicalEquipmentDAO;
   private final MedicalEquipmentServiceRequestDAOImpl medicalEquipmentServiceRequestDAO;
+  private final MedicineDeliveryDAOImpl medicineDeliveryDAO;
   private final SanitationRequestDAOImpl sanitationRequestDAO;
   private final ServiceRequestDAOImpl serviceRequestDAO;
+
+  public DAOSystem() throws SQLException {
+    accountDAO = new AccountDAOImpl();
+    employeeDAO = new EmployeeDAOImpl();
+    labRequestDAO = new LabRequestDAOImpl();
+    languageRequestDAO = new LanguageRequestDAOImpl();
+    locationDAO = new LocationDAOImpl();
+    mealDeliveryRequestDAO = new MealDeliveryRequestDAOImpl();
+    medicalEquipmentDAO = new MedicalEquipmentDAOImpl();
+    medicalEquipmentServiceRequestDAO = new MedicalEquipmentServiceRequestDAOImpl();
+    medicineDeliveryDAO = new MedicineDeliveryDAOImpl();
+    sanitationRequestDAO = new SanitationRequestDAOImpl();
+    serviceRequestDAO = new ServiceRequestDAOImpl();
+  }
+
+  public List<Account> getAllAccounts() {
+    return accountDAO.getAll();
+  }
+
+  public Account getAccount(String id) {
+    return accountDAO.get(id);
+  }
+
+  public void updateAccount(Account account) {
+    accountDAO.update(account);
+  }
+
+  public void deleteAccount(Account account) {
+    accountDAO.delete(account);
+  }
 
   public List<Employee> getAllEmployee() {
     return employeeDAO.getAll();
@@ -51,6 +84,22 @@ public class DAOSystem {
     labRequestDAO.delete(labRequest);
   }
 
+  public List<languageInterpreterRequest> getAllLangInterpRequests() {
+    return languageRequestDAO.getAll();
+  }
+
+  public languageInterpreterRequest getLangInterpRequest(String id) {
+    return languageRequestDAO.get(id);
+  }
+
+  public void updateLangInterpRequest(languageInterpreterRequest languageInterpreterRequest) {
+    languageRequestDAO.update(languageInterpreterRequest);
+  }
+
+  public void deleteLangInterpRequest(languageInterpreterRequest languageInterpreterRequest) {
+    languageRequestDAO.delete(languageInterpreterRequest);
+  }
+
   public List<Location> getAllLocations() {
     return locationDAO.getAll();
   }
@@ -65,6 +114,22 @@ public class DAOSystem {
 
   public void deleteLocation(Location location) {
     locationDAO.delete(location);
+  }
+
+  public List<mealDeliveryRequest> getAllMealDelivReq() {
+    return mealDeliveryRequestDAO.getAll();
+  }
+
+  public mealDeliveryRequest getMealDelivReq(String id) {
+    return mealDeliveryRequestDAO.get(id);
+  }
+
+  public void updateMealDelivReq(mealDeliveryRequest mealDeliveryRequest) {
+    mealDeliveryRequestDAO.update(mealDeliveryRequest);
+  }
+
+  public void deleteMealDelivReq(mealDeliveryRequest mealDeliveryRequest) {
+    mealDeliveryRequestDAO.delete(mealDeliveryRequest);
   }
 
   public List<MedicalEquipment> getAllMedEquip() {
@@ -99,6 +164,22 @@ public class DAOSystem {
     medicalEquipmentServiceRequestDAO.delete(request);
   }
 
+  public List<medicineDelivery> getAllMedDeliveries() {
+    return medicineDeliveryDAO.getAll();
+  }
+
+  public medicineDelivery getMedDelivery(String id) {
+    return medicineDeliveryDAO.get(id);
+  }
+
+  public void updateMedDelivery(medicineDelivery medicineDelivery) {
+    medicineDeliveryDAO.update(medicineDelivery);
+  }
+
+  public void deleteMedDelivery(medicineDelivery medicineDelivery) {
+    medicineDeliveryDAO.delete(medicineDelivery);
+  }
+
   public List<serviceRequest> getAllServiceRequests() {
     return serviceRequestDAO.getAll();
   }
@@ -113,16 +194,6 @@ public class DAOSystem {
 
   public void deleteServiceRequest(serviceRequest request) {
     serviceRequestDAO.delete(request);
-  }
-
-  public DAOSystem() throws SQLException {
-    employeeDAO = new EmployeeDAOImpl();
-    labRequestDAO = new LabRequestDAOImpl();
-    locationDAO = new LocationDAOImpl();
-    medicalEquipmentDAO = new MedicalEquipmentDAOImpl();
-    medicalEquipmentServiceRequestDAO = new MedicalEquipmentServiceRequestDAOImpl();
-    serviceRequestDAO = new ServiceRequestDAOImpl();
-    sanitationRequestDAO = new SanitationRequestDAOImpl();
   }
 
   public void updateLabServiceRequest(labRequest labRequest, String newRequestStatus)
