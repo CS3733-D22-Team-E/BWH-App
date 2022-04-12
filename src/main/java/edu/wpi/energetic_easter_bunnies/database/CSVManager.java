@@ -12,7 +12,7 @@ public class CSVManager {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
 
   private static final String locationFormat =
-      "NODEID, XCOORD, YCOORD, BUILDING, NODETYPE, LONGNAME, SHORTNAME, FLOOR";
+      "NODEID, XCOORD, YCOORD, FLOOR, BUILDING, NODETYPE, LONGNAME, SHORTNAME";
   private static final String medEquipFormat = "";
   private static final String medEquipRequestFormat = "";
   private static final String labRequestFormat = "";
@@ -306,8 +306,8 @@ public class CSVManager {
           "INSERT INTO " + tableName + " (" + ColumnsCSV + ")" + " VALUES (" + questionMarks + ")";
       statement = connection.prepareStatement(insertQuery);
 
-      for (int i = 0; i < count - 1; i++) { // sets the question marks in the query
-        statement.setString(i + 1, String.valueOf(data[i]));
+      for (int i = 0; i < count; i++) { // sets the question marks in the query
+        statement.setObject(i + 1, data[i]);
       }
       statement.executeUpdate(); // runs the query
     }
