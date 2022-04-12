@@ -1,14 +1,10 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import static edu.wpi.energetic_easter_bunnies.entity.loginPage.verifyUser;
-import static edu.wpi.energetic_easter_bunnies.RSAEncryption.validatePassword;
+
 import edu.wpi.energetic_easter_bunnies.Main;
-import edu.wpi.energetic_easter_bunnies.database.daos.AccountDAOImpl;
-import edu.wpi.energetic_easter_bunnies.database.daos.DAO;
-import edu.wpi.energetic_easter_bunnies.entity.accounts.Account;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
 
 public class loginPageController {
   private @FXML TextField usernameField;
@@ -59,6 +53,7 @@ public class loginPageController {
   private String getUsername() {
     return usernameField.getText();
   }
+
   private boolean verifyUser(String username, String password) {
     /*try {
       DAO<Account> accountDAO = new AccountDAOImpl();

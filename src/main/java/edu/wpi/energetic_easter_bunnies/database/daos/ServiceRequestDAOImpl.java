@@ -3,7 +3,6 @@ package edu.wpi.energetic_easter_bunnies.database.daos;
 import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.database.medicineDelivery;
 import edu.wpi.energetic_easter_bunnies.entity.*;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +13,10 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
 
   public ServiceRequestDAOImpl() throws SQLException {
     serviceRequests = new ArrayList<>();
-    DAO<medicalEquipmentRequest> medicalEquipmentServiceRequestDAO = new MedicalEquipmentServiceRequestDAOImpl();
+    DAO<medicalEquipmentRequest> medicalEquipmentServiceRequestDAO =
+        new MedicalEquipmentServiceRequestDAOImpl();
     DAO<labRequest> labRequestDAO = new LabRequestDAOImpl();
-    DAO<languageInterpreterRequest>  languageInterpreterRequestDAO = new LanguageRequestDAOImpl();
+    DAO<languageInterpreterRequest> languageInterpreterRequestDAO = new LanguageRequestDAOImpl();
     DAO<mealDeliveryRequest> mealDeliveryRequestDAO = new MealDeliveryRequestDAOImpl();
     DAO<medicineDelivery> medicineDeliveryDAO = new MedicineDeliveryDAOImpl();
     DAO<sanitationRequest> sanitationRequestDAO = new SanitationRequestDAOImpl();
