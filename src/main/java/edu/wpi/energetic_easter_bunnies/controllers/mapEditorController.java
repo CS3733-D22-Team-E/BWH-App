@@ -222,7 +222,7 @@ public class mapEditorController implements Initializable {
   }
 
   // Switching Floors
-  private void switchMap(String floor) {
+  protected void switchMap(String floor) {
 
     // Clear and add back mapBox CSS class
     mapBox.getStyleClass().clear();

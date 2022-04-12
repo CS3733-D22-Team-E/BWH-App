@@ -6,6 +6,7 @@ import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentDAOImpl;
+import edu.wpi.energetic_easter_bunnies.pageControlFacade;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,9 +22,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class DashboardController extends containsSideMenu implements Initializable {
+
+  @FXML private VBox baseComponent;
 
   @FXML JFXComboBox<String> selectFloor;
 
@@ -181,8 +186,16 @@ public class DashboardController extends containsSideMenu implements Initializab
   }
 
   @FXML
-  private void floorViewButton(ActionEvent event) {}
+  private void floorViewButton(ActionEvent event) {
+    Stage thisStage = (Stage) baseComponent.getScene().getWindow();
+
+    pageControlFacade.loadPage("map.fxml", thisStage);
+  }
 
   @FXML
-  private void mapEditorButton(ActionEvent event) {}
+  private void mapEditorButton(ActionEvent event) {
+    Stage thisStage = (Stage) baseComponent.getScene().getWindow();
+
+    pageControlFacade.loadPage("map.fxml", thisStage);
+  }
 }
