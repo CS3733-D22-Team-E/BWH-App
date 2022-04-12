@@ -12,18 +12,13 @@ public class CSVManager {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
 
   private static final String locationFormat =
-      "NODEID, XCOORD, YCOORD, BUILDING, NODETYPE, LONGNAME, SHORTNAME, FLOOR";
-  private static final String medEquipFormat =
-      "EQUIPMENTID, MED_EQUIP_REQ_ID, ISINUSE, ISCLEAN, CLEANLOCATIONID, STORAGELOCATIONID, CURRENTLOCATIONID, EQUIPMENTTYPE";
-  private static final String medEquipRequestFormat =
-      "MED_EQUIPMENTID, REQUESTDATE, ISURGENT, EQUIP, EQUIPQUANTITY, STAFFASSIGNEE, LOCATIONID, FLOOR, REQUESTSTATUS, OTHERNOTES";
-  private static final String labRequestFormat =
-      "LAB_REQUESTID, LAB_REQUEST_TYPE, STAFFASSIGNEE, LOCATIONID, TIMEFRAME, REQUESTSTATUS, OTHERNOTES";
-  private static final String employeeFormat =
-      "EMPLOYEEID, NAME, LOCATIONID, POSITION, AVAILABLE, SALARY";
+      "NODEID, XCOORD, YCOORD, FLOOR, BUILDING, NODETYPE, LONGNAME, SHORTNAME";
+  private static final String medEquipFormat = "";
+  private static final String medEquipRequestFormat = "";
+  private static final String labRequestFormat = "";
+  private static final String employeeFormat = "";
   private static final String serviceRequestFormat =
       "REQUESTID, STATUS, TYPE, ASSIGNEE, REQUEST_DATE, DELIVERY_DATE, ISURGENT";
-  private static final String accountFormat = "";
 
   /*
       SAVING CSV FILES FROM THE DATABASE
@@ -249,9 +244,9 @@ public class CSVManager {
     return loadCSVGeneral(fileName, "SERVICEREQUEST", serviceRequestFormat);
   }
 
-  public static void loadUsersCSV(String fileName) throws SQLException, IOException {
-    loadCSVGeneral(fileName, "ACCOUNTS", accountFormat);
-  }
+  /*public static void loadUsersCSV(String fileName) throws SQLException, IOException {
+  loadCSVGeneral(fileName,"USERS", usersFormat);
+  }*/
 
   /*
       HELPER FUNCTIONS
@@ -311,8 +306,8 @@ public class CSVManager {
           "INSERT INTO " + tableName + " (" + ColumnsCSV + ")" + " VALUES (" + questionMarks + ")";
       statement = connection.prepareStatement(insertQuery);
 
-      for (int i = 0; i < count - 1; i++) { // sets the question marks in the query
-        statement.setString(i + 1, String.valueOf(data[i]));
+      for (int i = 0; i < count; i++) { // sets the question marks in the query
+        statement.setObject(i + 1, data[i]);
       }
       statement.executeUpdate(); // runs the query
     }
