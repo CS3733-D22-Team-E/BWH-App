@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.energetic_easter_bunnies.database.Equipment;
 import edu.wpi.energetic_easter_bunnies.database.Location;
@@ -45,6 +46,21 @@ public class DashboardController extends containsSideMenu implements Initializab
 
   @FXML Button floorViewButton;
   @FXML Button mapEditorButton;
+
+  @FXML JFXButton ll2Floor;
+  @FXML Tooltip ll2FloorTooltip;
+  @FXML JFXButton ll1Floor;
+  @FXML Tooltip ll1FloorTooltip;
+  @FXML JFXButton firstFloor;
+  @FXML Tooltip firstFloorTooltip;
+  @FXML JFXButton secondFloor;
+  @FXML Tooltip secondFloorTooltip;
+  @FXML JFXButton thirdFloor;
+  @FXML Tooltip thirdFloorTooltip;
+  @FXML JFXButton fourthFloor;
+  @FXML Tooltip fourthFloorTooltip;
+  @FXML JFXButton fifthFloor;
+  @FXML Tooltip fifthFloorTooltip;
 
   LocationDAOImpl locationDAO;
   MedicalEquipmentDAOImpl equipmentDAO;
@@ -104,6 +120,18 @@ public class DashboardController extends containsSideMenu implements Initializab
                 }
               }
             });
+
+    try {
+      populateTooltip(ll2FloorTooltip, "LL2");
+      populateTooltip(ll1FloorTooltip, "LL1");
+      populateTooltip(firstFloorTooltip, "1");
+      populateTooltip(secondFloorTooltip, "2");
+      populateTooltip(thirdFloorTooltip, "3");
+      populateTooltip(fourthFloorTooltip, "4");
+      populateTooltip(fifthFloorTooltip, "5");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   private ArrayList<MedicalEquipment> getEquipmentOnFloor(String floor) throws SQLException {
@@ -183,6 +211,26 @@ public class DashboardController extends containsSideMenu implements Initializab
         });
 
     floorEquipmentTable.setItems(equipmentList);
+  }
+
+  private void populateTooltip(Tooltip tooltip, String floor) throws SQLException {
+    ArrayList<MedicalEquipment> equipmentOnFloor = getEquipmentOnFloor(floor);
+    Integer allEquipment = equipmentOnFloor.size();
+    Integer cleanEquipment = filterEquipment(equipmentOnFloor, cleanFilter).size();
+    Integer dirtyEquipment = filterEquipment(equipmentOnFloor, dirtyFilter).size();
+    Integer inUseEquipment = filterEquipment(equipmentOnFloor, inUseFilter).size();
+
+    tooltip.setText(
+        "Floor: "
+            + floor
+            + "\nEquipment Count: "
+            + allEquipment
+            + "\nClean Equipment Count: "
+            + cleanEquipment
+            + "\nDirty Equipment Count: "
+            + dirtyEquipment
+            + "\nIn Use Equipment Count: "
+            + inUseEquipment);
   }
 
   @FXML
