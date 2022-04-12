@@ -5,6 +5,7 @@ import edu.wpi.energetic_easter_bunnies.database.Location;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LocationDAOImpl implements DAO<Location> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
@@ -59,11 +60,11 @@ public class LocationDAOImpl implements DAO<Location> {
    */
   public Location get(String NodeID) {
     for (Location location : locations) {
-      if (location.getNodeID() == NodeID) {
+      System.out.println(location.getNodeID());
+      if (Objects.equals(location.getNodeID(), NodeID)) {
         return location;
       }
     }
-    System.out.println("Location with NodeID " + NodeID + " not found");
     throw new NullPointerException();
   }
 

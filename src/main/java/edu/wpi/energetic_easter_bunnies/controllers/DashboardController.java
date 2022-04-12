@@ -57,11 +57,11 @@ public class DashboardController extends containsSideMenu implements Initializab
 
     filters = new ToggleGroup();
     cleanFilter.setToggleGroup(filters);
-    cleanFilter.setSelected(true);
-    currentToggle = cleanFilter;
     dirtyFilter.setToggleGroup(filters);
     inUseFilter.setToggleGroup(filters);
     allFilter.setToggleGroup(filters);
+    allFilter.setSelected(true);
+    currentToggle = allFilter;
     filters
         .selectedToggleProperty()
         .addListener(
@@ -117,8 +117,6 @@ public class DashboardController extends containsSideMenu implements Initializab
     System.out.println("Floor ID:" + floorID);
     ArrayList<MedicalEquipment> equipmentOnFloor = new ArrayList<>();
     for (MedicalEquipment curEquipment : allEquipment) {
-      System.out.println("Current equipment: " + curEquipment);
-      System.out.println("Current equipment floor: " + curEquipment.getFloor());
       if (curEquipment.getFloor().equals(floorID)) {
         equipmentOnFloor.add(curEquipment);
       }
@@ -153,7 +151,6 @@ public class DashboardController extends containsSideMenu implements Initializab
     } else if (filter.equals(allFilter)) {
       filteredEquipment = equipmentOnFloor;
     }
-    System.out.println("Filtered equipment: " + filteredEquipment);
     return filteredEquipment;
   }
 
@@ -161,11 +158,13 @@ public class DashboardController extends containsSideMenu implements Initializab
     ArrayList<MedicalEquipment> equipmentOnFloor = getEquipmentOnFloor(floor);
     ArrayList<MedicalEquipment> filteredEquipment =
         filterEquipment(equipmentOnFloor, currentToggle);
+    System.out.println("Filtered equipment: " + filteredEquipment);
 
     ObservableList<Equipment> equipmentList = FXCollections.observableArrayList(filteredEquipment);
     tableEquipment.setCellValueFactory(
-        new PropertyValueFactory<MedicalEquipment, String>("equipmentID"));
-    tableEquipment.setCellValueFactory(
+        new PropertyValueFactory<MedicalEquipment, String>("equipmentType"));
+    System.out.println("Populating location column");
+    tableLocation.setCellValueFactory(
         new Callback<
             TableColumn.CellDataFeatures<MedicalEquipment, String>, ObservableValue<String>>() {
           @Override
@@ -173,7 +172,8 @@ public class DashboardController extends containsSideMenu implements Initializab
               TableColumn.CellDataFeatures<MedicalEquipment, String> param) {
             MedicalEquipment curEquipment = param.getValue();
             Location curEquipmentLocation = locationDAO.get(curEquipment.getCurrentLocation());
-            return new SimpleStringProperty(curEquipmentLocation.getShortName());
+            System.out.println("Equipment location: " + curEquipmentLocation);
+            return new SimpleStringProperty(curEquipmentLocation.getLongName());
           }
         });
 

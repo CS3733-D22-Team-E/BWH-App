@@ -89,10 +89,7 @@ public class mainController {
   public void dashboardButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    loader.setLocation(Main.class.getResource("view/DashboardPage.fxml"));
-    root = loader.load();
-
-    thisStage.getScene().setRoot(root);
+    facade.loadPage("DashboardPage.fxml", thisStage);
   }
 
   @FXML
