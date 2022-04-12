@@ -46,7 +46,6 @@ public class DashboardController extends containsSideMenu implements Initializab
   @FXML TableColumn<MedicalEquipment, String> tableEquipment;
   @FXML TableColumn<MedicalEquipment, String> tableLocation;
 
-  @FXML JFXButton floorViewButton;
   @FXML JFXButton mapEditorButton;
 
   @FXML JFXButton ll2Floor;
@@ -302,13 +301,7 @@ public class DashboardController extends containsSideMenu implements Initializab
     tooltip.setShowDelay(Duration.seconds(.2));
   }
 
-  // TODO: make it so this loads the map page with the selected floor
-  @FXML
-  private void floorViewButton(ActionEvent event) {
-    Stage thisStage = (Stage) baseComponent.getScene().getWindow();
-
-    pageControlFacade.loadPage("map.fxml", thisStage);
-  }
+  // TODO: implement the floor view button
 
   @FXML
   private void mapEditorButton(ActionEvent event) {
