@@ -160,12 +160,6 @@ public class medicalEquipmentController extends serviceRequestPageController {
     return tableList;
   }
 
-  /**
-   * Takes the inputs from the buttons, drop downs, text fields etc. and stores that data in the
-   * mealDeliveryRequest object.
-   *
-   * @param event Pressing the submitButton
-   */
   @FXML
   public void submitButton(ActionEvent event) throws SQLException {
     try {
@@ -187,11 +181,6 @@ public class medicalEquipmentController extends serviceRequestPageController {
     }
   }
 
-  /**
-   * clears all of the inputs on the page.
-   *
-   * @param event Pressing the resetButton
-   */
   @FXML
   private void resetButton(ActionEvent event) {
     floor.getSelectionModel().clearSelection();
@@ -205,12 +194,6 @@ public class medicalEquipmentController extends serviceRequestPageController {
     notes.clear();
   }
 
-  /**
-   * Sends a medical request to the database and updates the table on the page.
-   *
-   * @param medEquipmentRequest A medicalEquipment object
-   * @throws SQLException ??
-   */
   private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) throws SQLException {
     medEquipmentServiceRequestDB.update(medEquipmentRequest);
     tableList.add(medEquipmentRequest);

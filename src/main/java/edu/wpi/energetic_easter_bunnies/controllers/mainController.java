@@ -18,7 +18,6 @@ public class mainController {
   @FXML Button medicineDeliveryButton;
   @FXML Button labRequestButton;
   @FXML Button mapButton;
-  @FXML Button aboutButton;
 
   pageControlFacade facade = new pageControlFacade();
 
@@ -83,16 +82,6 @@ public class mainController {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     facade.loadPage("map.fxml", thisStage);
-  }
-
-  @FXML
-  public void aboutButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) mainPane.getScene().getWindow();
-
-    loader.setLocation((Main.class.getResource("view/aboutPage.fxml")));
-    root = loader.load();
-
-    thisStage.getScene().setRoot(root);
   }
 
   @FXML

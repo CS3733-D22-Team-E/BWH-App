@@ -15,10 +15,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-/**
- * This is the controller class for the Lab Request service page.
- * It inherits from the serviceRequestController super class.
- */
 public class labRequestController extends serviceRequestPageController {
 
   @FXML ComboBox<String> labRequestType;
@@ -38,16 +34,8 @@ public class labRequestController extends serviceRequestPageController {
   LabRequestDAOImpl labRequestDB;
   labRequest labReq = new labRequest();
 
-  /**
-   * Constructor
-   */
   public labRequestController() {}
 
-  /**
-   * Initializes the
-   * @param location
-   * @param resources
-   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     try {

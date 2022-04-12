@@ -20,10 +20,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-/**
- * Is an abstract class meant to be the super class for each service request page. Inherits from
- * contains sideMeny
- */
 public abstract class serviceRequestPageController extends containsSideMenu {
 
   @FXML TextField notes;
@@ -131,13 +127,11 @@ public abstract class serviceRequestPageController extends containsSideMenu {
             });
   }
 
-  /** Sends the respective data to the respective data base. */
   public boolean sendToDB(serviceRequest request) {
     // todo : implement DB communication
     return true;
   }
 
-  /** Populates the respective table with the respective data. */
   protected void populateRequestTable() {
     // todo : get all service requests as list
     // todo : filter through to match MY type
@@ -149,13 +143,6 @@ public abstract class serviceRequestPageController extends containsSideMenu {
   protected ObservableList<serviceRequest> populateServiceRequestList(ServiceRequestDAOImpl)
    */
 
-  /**
-   * Abstract method for submitting information from the page to the respective service request
-   * object.
-   *
-   * @param event Pressing the submit button.
-   * @throws SQLException ??
-   */
   @FXML
   public abstract void submitButton(ActionEvent event) throws SQLException;
 }

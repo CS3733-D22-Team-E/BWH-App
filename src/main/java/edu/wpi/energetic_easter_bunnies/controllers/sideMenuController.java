@@ -1,37 +1,26 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
-import edu.wpi.energetic_easter_bunnies.pageControlFacade;
+import edu.wpi.energetic_easter_bunnies.Main;
+import edu.wpi.energetic_easter_bunnies.menuButtons;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
-<<<<<<< HEAD
-/** Adds functionality to the side menu. */
 public class sideMenuController implements Initializable, menuButtons {
-=======
-public class sideMenuController {
->>>>>>> origin/Joey_Working_Branch
 
   @FXML StackPane root;
 
-  /**
-   * Exits the program.
-   *
-   * @param event           Pressing the exit button
-   * @throws IOException    ??
-   */
   @FXML
-  public void mealDeliveryButton(ActionEvent event) throws IOException {
+  public void exitButton(ActionEvent event) throws IOException {
+    System.exit(0);
+  }
 
-<<<<<<< HEAD
-  /**
-   * Opens the map page from the side menu.
-   * @param event             Pressing the Map button
-   * @throws IOException      ??
-   */
   @Override
   public void locationButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -51,11 +40,6 @@ public class sideMenuController {
     }
   }
 
-  /**
-   * Opens the lab request page from the side menu.
-   * @param event             Pressing the Lab Request button
-   * @throws IOException      ??
-   */
   @Override
   public void labRequestButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -75,31 +59,25 @@ public class sideMenuController {
     }
   }
 
-  /**
-   * Opens the Status page from the side menu.
-   * @param event             Pressing the Status Page button
-   * @throws IOException      ??
-   */
   @Override
-=======
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("mealDeliveryPage.fxml", thisStage);
-  }
-
-  @FXML
->>>>>>> origin/Joey_Working_Branch
   public void statusButton(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader();
 
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("statusPage.fxml", thisStage);
+    URL url = Main.class.getResource("view/statusPage.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      Parent newRoot = loader.load();
+
+      try {
+        root.getScene().setRoot(newRoot);
+      } catch (NullPointerException e) {
+        System.out.println("mainStage never sent to side Panel");
+      }
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
   }
 
-<<<<<<< HEAD
-  /**
-   * Opens the home page from the side menu.
-   * @param event             Pressing the Home button
-   * @throws IOException      ??
-   */
   @Override
   public void homeButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -117,33 +95,27 @@ public class sideMenuController {
     } else {
       System.out.println("Path Doesn't Exist");
     }
-=======
-  @FXML
-  public void languageButton(ActionEvent event) throws IOException {
-
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("languagePage.fxml", thisStage);
->>>>>>> origin/Joey_Working_Branch
   }
 
-  /**
-   * Opens the Sanitation page from the side menu.
-   * @param event             Pressing the Sanitation button
-   * @throws IOException      ??
-   */
   @FXML
-  public void medicalEquipmentButton(ActionEvent event) throws IOException {
+  public void sanitationButton(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader();
 
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("medicalEquipmentPage.fxml", thisStage);
+    URL url = Main.class.getResource("view/sanitationPage.fxml");
+    if (url != null) {
+      loader.setLocation(url);
+      Parent newRoot = loader.load();
+
+      try {
+        root.getScene().setRoot(newRoot);
+      } catch (NullPointerException e) {
+        System.out.println("mainStage never sent to side Panel");
+      }
+    } else {
+      System.out.println("Path Doesn't Exist");
+    }
   }
 
-<<<<<<< HEAD
-  /**
-   * Opens the map page from the side menu.
-   * @param event             Pressing the Map button
-   * @throws IOException      ??
-   */
   @Override
   public void mealDeliveryButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -163,11 +135,6 @@ public class sideMenuController {
     }
   }
 
-  /**
-   * Opens the Language Interpreter page from the side menu.
-   * @param event             Pressing the Language Interpreter button
-   * @throws IOException      ??
-   */
   @Override
   public void languageButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -187,11 +154,6 @@ public class sideMenuController {
     }
   }
 
-  /**
-   * Opens the Medical Equipment page from the side menu.
-   * @param event             Pressing the Medical Equipment button
-   * @throws IOException      ??
-   */
   @Override
   public void medicalEquipmentButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -211,11 +173,6 @@ public class sideMenuController {
     }
   }
 
-  /**
-   * Opens the Medicine Delivery page from the side menu.
-   * @param event             Pressing the Medicine Delivery button
-   * @throws IOException      ??
-   */
   @Override
   public void medicineDeliveryButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -235,11 +192,6 @@ public class sideMenuController {
     }
   }
 
-  /**
-   * Opens the Profile page from the side menu.
-   * @param event             Pressing the Profile button
-   * @throws IOException      ??
-   */
   @Override
   public void profileButton(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader();
@@ -259,49 +211,6 @@ public class sideMenuController {
     }
   }
 
-  /**
-   * Not being used atm.
-   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
-=======
-  @FXML
-  public void medicineDeliveryButton(ActionEvent event) throws IOException {
-
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("medicineDelivery.fxml", thisStage);
-  }
-
-  @FXML
-  public void exitButton(ActionEvent event) throws IOException {
-    pageControlFacade.exitApp();
-  }
-
-  @FXML
-  public void sanitationButton(ActionEvent event) throws IOException {
-
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("sanitationPage.fxml", thisStage);
-  }
-
-  @FXML
-  public void labRequestButton(ActionEvent event) throws IOException {
-
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("labRequestPage.fxml", thisStage);
-  }
-
-  @FXML
-  public void mapButton(ActionEvent event) throws IOException {
-
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("map.fxml", thisStage);
-  }
-
-  @FXML
-  public void homeButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("defaultPage.fxml", thisStage);
-  }
->>>>>>> origin/Joey_Working_Branch
 }
