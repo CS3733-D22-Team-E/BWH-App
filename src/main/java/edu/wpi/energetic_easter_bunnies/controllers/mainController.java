@@ -1,8 +1,12 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import edu.wpi.energetic_easter_bunnies.Main;
 import edu.wpi.energetic_easter_bunnies.pageControlFacade;
 import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,29 +33,41 @@ public class mainController {
   @FXML private VBox parent;
   @FXML private Label title;
 
+  private final String darkModeURL =
+      Objects.requireNonNull(Main.class.getResource("view/styles/darkMode.css")).toExternalForm();
+  private final String lightModeURL =
+      Objects.requireNonNull(Main.class.getResource("view/styles/default.css")).toExternalForm();
   private boolean isLightMode = true;
 
-  public void changeMode(ActionEvent event) {
+  public void changeMode(ActionEvent event) throws FileNotFoundException {
+    System.out.println("Button Works!");
     isLightMode = !isLightMode;
     if (isLightMode) {
       setLightMode();
-      System.out.println("It's work");
+      System.out.println("Light Mode");
     } else {
+      System.out.println("Dark Mode");
       setDarkMode();
     }
   }
 
-  private void setLightMode() {
-    parent.getStylesheets().remove("styles/darkMode.css");
-    parent.getStylesheets().add("styles/default.css");
-    Image newImg = new Image("icons/ic_dark.png");
+  private void setLightMode() throws FileNotFoundException {
+    parent.getStylesheets().removeAll();
+    parent.getStylesheets().add(lightModeURL);
+    Image newImg =
+        new Image(
+            new FileInputStream(
+                "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/ic-dark.png"));
     imgMode.setImage(newImg);
   }
 
-  private void setDarkMode() {
-    parent.getStylesheets().remove("styles/default.css");
-    parent.getStylesheets().add("styles/darkMode.css");
-    Image newImg = new Image("view/icons/ic_light.png");
+  private void setDarkMode() throws FileNotFoundException {
+    parent.getStylesheets().removeAll();
+    parent.getStylesheets().add(darkModeURL);
+    Image newImg =
+        new Image(
+            new FileInputStream(
+                "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/ic-light.png"));
     imgMode.setImage(newImg);
   }
 
@@ -62,6 +78,7 @@ public class mainController {
   @FXML
   public void mealDeliveryButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
+    ;
 
     facade.loadPage("mealDeliveryPage.fxml", thisStage);
   }
