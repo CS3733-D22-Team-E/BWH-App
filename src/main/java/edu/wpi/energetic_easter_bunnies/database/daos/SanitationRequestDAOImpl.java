@@ -12,9 +12,9 @@ public class SanitationRequestDAOImpl implements DAO<sanitationRequest> {
 
   public SanitationRequestDAOImpl() throws SQLException {
     sanitationRequests = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM SANITATIONREQUEST ORDER BY SANITATION_REQ_ID DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
 
     while (rs.next()) {
       String sanitationReqID = rs.getString("SANITATION_REQ_ID");
