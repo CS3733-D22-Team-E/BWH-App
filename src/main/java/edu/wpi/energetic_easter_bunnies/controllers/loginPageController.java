@@ -53,4 +53,27 @@ public class loginPageController {
   private String getUsername() {
     return usernameField.getText();
   }
+
+  private boolean verifyUser(String username, String password) {
+    /*try {
+      DAO<Account> accountDAO = new AccountDAOImpl();
+      Account account = accountDAO.get(username);
+      if (!validatePassword(password, account.getPasswordHash())) {
+        return false;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return false;
+    } catch (NullPointerException e) {
+      e.printStackTrace();
+      return false;
+    } catch (IllegalBlockSizeException e) {
+      e.printStackTrace();
+      return false;
+    } catch (BadPaddingException e) {
+      e.printStackTrace();
+      return false;
+    }*/
+    return true;
+  }
 }

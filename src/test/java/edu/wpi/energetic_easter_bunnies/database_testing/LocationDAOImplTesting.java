@@ -19,12 +19,6 @@ public class LocationDAOImplTesting {
   }
 
   @Test
-  public void testGetLocation2() throws SQLException {
-    LocationDAOImpl locationDAO = new LocationDAOImpl();
-    System.out.println(locationDAO.getLocationWithNumID(2));
-  }
-
-  @Test
   public void testUpdateLocation() throws SQLException {
     LocationDAOImpl locationDAO = new LocationDAOImpl();
     Location location = new Location();
