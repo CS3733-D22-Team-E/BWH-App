@@ -91,5 +91,14 @@ public class SanitationRequestDAOImpl implements DAO<sanitationRequest> {
   @Override
   public void delete(sanitationRequest item) {
     sanitationRequests.remove(item);
+    String query = "DELETE FROM SANITATIONREQUEST WHERE SANITATION_REQ_ID = (?)";
+    PreparedStatement statement = null;
+    try {
+      statement = connection.prepareStatement(query);
+      statement.setString(1, item.getServiceRequestID());
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }

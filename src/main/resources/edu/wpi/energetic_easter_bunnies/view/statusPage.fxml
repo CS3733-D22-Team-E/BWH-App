@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
@@ -168,6 +169,7 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
+                  <JFXButton buttonType="RAISED" layoutX="80.0" layoutY="473.0" onAction="#deleteReqButton" prefHeight="39.0" prefWidth="205.0" ripplerFill="RED" style="-fx-background-color: #f1f1f1;" text="Delete Selected Request" />
                </children>
             </Pane>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
