@@ -18,9 +18,9 @@ public class LocationDAOImpl implements DAO<Location> {
    */
   public LocationDAOImpl() throws SQLException {
     locations = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM TOWERLOCATIONS ORDER BY FLOOR DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
     int numID = 0;
     while (rs.next()) {
       String nodeID = rs.getString("nodeID");
@@ -87,7 +87,6 @@ public class LocationDAOImpl implements DAO<Location> {
   public void update(Location location) {
     locations.add(location);
     try {
-      Statement statement = connection.createStatement();
       String query =
           "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
               + location.getNodeID()
@@ -106,7 +105,8 @@ public class LocationDAOImpl implements DAO<Location> {
               + "','"
               + location.getShortName()
               + "')"; // Insert into database; does not check if the nodeID already exists
-      statement.executeUpdate(query);
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -128,7 +128,6 @@ public class LocationDAOImpl implements DAO<Location> {
     location.setNodeType(newNodeType);
 
     // Update location floor and node type in the db
-    Statement statement = connection.createStatement();
     String query =
         "UPDATE TOWERLOCATIONS SET FLOOR = '"
             + newFloor
@@ -137,7 +136,8 @@ public class LocationDAOImpl implements DAO<Location> {
             + "' WHERE NODEID = '"
             + location.getNodeID()
             + "'";
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   /**
@@ -155,7 +155,6 @@ public class LocationDAOImpl implements DAO<Location> {
     location.setYCoord(newYCoord);
 
     // Update location XCoord and YCoord in the db
-    Statement statement = connection.createStatement();
     String query =
         "UPDATE TOWERLOCATIONS SET XCOORD = "
             + newXCoord
@@ -164,7 +163,8 @@ public class LocationDAOImpl implements DAO<Location> {
             + " WHERE NODEID = '"
             + location.getNodeID()
             + "'";
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   /**
@@ -181,9 +181,9 @@ public class LocationDAOImpl implements DAO<Location> {
 
     // Remove location in the db
     try {
-      Statement statement = connection.createStatement();
       String query = "DELETE FROM TOWERLOCATIONS WHERE nodeID = ('" + location.getNodeID() + "')";
-      statement.executeUpdate(query);
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     }

@@ -12,9 +12,9 @@ public class MealDeliveryRequestDAOImpl implements DAO<mealDeliveryRequest> {
 
   public MealDeliveryRequestDAOImpl() throws SQLException {
     mealDeliveryRequests = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM MEALDELIVERYREQUEST ORDER BY MEAL_REQ_ID DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
 
     while (rs.next()) {
       String medicineReqID = rs.getString("MEAL_REQ_ID");
@@ -75,8 +75,8 @@ public class MealDeliveryRequestDAOImpl implements DAO<mealDeliveryRequest> {
           "INSERT INTO MEALDELIVERYREQUEST VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, item.getServiceRequestID());
-      statement.setObject(2, item.getRequestDate());
-      statement.setObject(3, item.getDeliveryDate());
+      statement.setDate(2, Date.valueOf(item.getRequestDate()));
+      statement.setDate(3, Date.valueOf(item.getDeliveryDate()));
       statement.setString(4, item.getRequestStatus());
       statement.setString(5, item.getStaffAssignee());
       statement.setBoolean(6, item.getIsUrgent());

@@ -1,12 +1,21 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
+import edu.wpi.energetic_easter_bunnies.customUI.CustomTextFieldTableCell;
+import edu.wpi.energetic_easter_bunnies.database.daos.DAOSystem;
 import edu.wpi.energetic_easter_bunnies.entity.sanitationRequest;
+import edu.wpi.energetic_easter_bunnies.entity.sanitationRequestModel;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * Controller Class for the Sanitation Service Request. Inherits from the serviceRequestController
@@ -14,6 +23,15 @@ import javafx.scene.control.*;
  */
 public class sanitationServiceController extends serviceRequestPageController {
 
+  @FXML TableColumn<sanitationRequestModel, String> floorCol;
+  @FXML TableColumn<sanitationRequestModel, String> roomCol;
+  @FXML TableColumn<sanitationRequestModel, String> size;
+  @FXML TableColumn<sanitationRequestModel, String> bio;
+  @FXML TableColumn<sanitationRequestModel, String> id;
+  @FXML TableColumn<sanitationRequestModel, String> status;
+  @FXML TableColumn<sanitationRequestModel, String> assign;
+  @FXML TableColumn<sanitationRequestModel, String> urgent;
+  @FXML TableView<sanitationRequestModel> table;
   @FXML RadioButton mediumSelect;
   @FXML RadioButton heavySelect;
   @FXML RadioButton lightSelect;
@@ -26,8 +44,18 @@ public class sanitationServiceController extends serviceRequestPageController {
   @FXML ToggleGroup urgencyGroup;
   @FXML ToggleGroup sizeGroup;
 
+  DAOSystem system;
+
   /** Constructor */
-  public sanitationServiceController() {}
+  public sanitationServiceController() {
+    try {
+      system = new DAOSystem();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  ObservableList<sanitationRequestModel> tableList = FXCollections.observableArrayList();
 
   /**
    * Initializes the super class.
@@ -38,6 +66,38 @@ public class sanitationServiceController extends serviceRequestPageController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    populateSanReqTable();
+  }
+
+  private void populateSanReqTable() {
+    populateList();
+
+    floorCol.setCellValueFactory(new PropertyValueFactory<>("floorID"));
+    floorCol.setCellFactory(CustomTextFieldTableCell.forTableColumn());
+    roomCol.setCellValueFactory(new PropertyValueFactory<>("roomID"));
+    roomCol.setCellFactory(CustomTextFieldTableCell.forTableColumn());
+    id.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    id.setCellFactory(CustomTextFieldTableCell.forTableColumn());
+    status.setCellValueFactory(new PropertyValueFactory<>("Status"));
+    status.setCellFactory(CustomTextFieldTableCell.forTableColumn());
+    assign.setCellValueFactory(new PropertyValueFactory<>("Assignee"));
+    assign.setCellFactory(CustomTextFieldTableCell.forTableColumn());
+    urgent.setCellValueFactory(new PropertyValueFactory<>("isUrgent"));
+    urgent.setCellFactory(CustomTextFieldTableCell.forTableColumn());
+    size.setCellValueFactory(new PropertyValueFactory<>("sizeString"));
+    size.setCellFactory(CustomTextFieldTableCell.forTableColumn());
+    bio.setCellValueFactory(new PropertyValueFactory<>("bioString"));
+    bio.setCellFactory(CustomTextFieldTableCell.forTableColumn());
+
+    table.setItems(tableList);
+  }
+
+  private void populateList() {
+    tableList = FXCollections.observableArrayList();
+    List<sanitationRequest> l = system.getAllSanReq();
+    for (sanitationRequest r : l) {
+      tableList.add(new sanitationRequestModel(r));
+    }
   }
 
   /**
@@ -47,7 +107,7 @@ public class sanitationServiceController extends serviceRequestPageController {
    * @param event Pressing the submitButton
    */
   @FXML
-  public void submitButton(ActionEvent event) {
+  public void submitButton(ActionEvent event) throws SQLException {
     sanitationRequest request = new sanitationRequest();
     try {
       RadioButton selectBiohazard = (RadioButton) biohazardGroup.getSelectedToggle();
@@ -97,9 +157,26 @@ public class sanitationServiceController extends serviceRequestPageController {
       request.setFloorID(floor.getValue());
       request.setRoomID(room.getValue());
 
+      System.out.println(request);
+      sanSendToDB(request);
+      resetFields(new ActionEvent());
+
     } catch (NullPointerException error) {
+      error.printStackTrace();
       System.out.println(error.getMessage());
       PopUpWarning.createWarning("Warning : A required value was not filled");
+    }
+  }
+
+  private void sanSendToDB(sanitationRequest request) {
+    try {
+      request.setDeliveryDate(LocalDate.now());
+      request.setRequestDate(LocalDate.now());
+      system.addSanReq(request);
+      populateSanReqTable();
+      // tableList.add(new sanitationRequestModel(request));
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
   }
 
