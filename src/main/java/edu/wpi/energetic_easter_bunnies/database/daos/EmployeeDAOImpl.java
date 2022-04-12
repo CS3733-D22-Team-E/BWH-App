@@ -50,10 +50,38 @@ public class EmployeeDAOImpl implements DAO<Employee> {
   @Override
   public void update(Employee employee) {
     employees.add(employee);
+    try {
+      Statement statement = connection.createStatement();
+      String query =
+          "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES ('"
+              + employee.getEmployeeID()
+              + "','"
+              + employee.getName()
+              + "','"
+              + employee.getLocation()
+              + "','"
+              + employee.getPosition()
+              + "',"
+              + employee.getAvailable()
+              + ","
+              + employee.getSalary()
+              + ")"; // Insert into database; does not check if the employeeID already exists
+      statement.executeUpdate(query);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public void delete(Employee employee) {
     employees.remove(employee);
+    try {
+      Statement statement = connection.createStatement();
+      String query =
+          "DELETE FROM EMPLOYEES WHERE EMPLOYEEID = ('" + employee.getEmployeeID() + "')";
+      statement.executeUpdate(query);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }
