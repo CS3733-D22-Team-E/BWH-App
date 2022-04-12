@@ -19,13 +19,13 @@ public class EmployeeDAOImpl implements DAO<Employee> {
     while (rs.next()) {
       String employeeID = rs.getString("EMPLOYEEID");
       String name = rs.getString("NAME");
-      double salary = rs.getDouble("SALARY");
-      String location = rs.getString("LOCATION");
+      String locationID = rs.getString("LOCATIONID");
       String position = rs.getString("POSITION");
       boolean available = rs.getBoolean("AVAILABLE");
+      double salary = rs.getDouble("SALARY");
 
       Employee employee =
-          new Employee(employeeID, name, position, salary, location, available, numID);
+          new Employee(employeeID, name, position, salary, locationID, available, numID);
 
       employees.add(employee);
       numID++;
