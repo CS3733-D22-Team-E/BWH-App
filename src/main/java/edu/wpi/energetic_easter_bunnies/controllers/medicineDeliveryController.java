@@ -57,6 +57,7 @@ public class medicineDeliveryController extends serviceRequestPageController
 
   /** Creating a medicineDeliveryRequest object to store the inputted data in. */
   medicineDelivery medicineDeliveryRequest = new medicineDelivery();
+
   MedicineDeliveryDAOImpl medicineDeliveryDB;
 
   ObservableList<medicineDelivery> tableList;
