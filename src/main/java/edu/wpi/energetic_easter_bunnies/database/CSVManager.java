@@ -1,338 +1,360 @@
 package edu.wpi.energetic_easter_bunnies.database;
 
 import edu.wpi.energetic_easter_bunnies.database.daos.*;
+import edu.wpi.energetic_easter_bunnies.entity.labRequest;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
 import java.io.*;
 import java.sql.*;
 
+/** uses format from Iteration 1 final ERD Diagram */
 public class CSVManager {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
-  /**
-   * Loads the location database from the location csv
-   *
-   * @param fileName - The file name where the database will be loaded from
-   */
-  public static void loadLocationCSV(String fileName) throws SQLException, IOException {
-    BufferedReader in = new BufferedReader(new FileReader(fileName));
-    String line;
-    in.readLine();
-    String[] data;
-    while ((line = in.readLine()) != null) {
-      data = line.split(",");
-      String nodeID = data[0];
 
-      // check if nodeID is already in the database
-      // ensures the database is up to date and correct without overwriting
-      String query = "SELECT * FROM TOWERLOCATIONS WHERE NODEID = '" + nodeID + "'";
-      PreparedStatement statement = connection.prepareStatement(query);
-      ResultSet rs = statement.executeQuery();
-      if (rs.next()) continue;
+  private static final String locationFormat =
+      "NODEID, XCOORD, YCOORD, BUILDING, NODETYPE, LONGNAME, SHORTNAME, FLOOR";
+  private static final String medEquipFormat = "";
+  private static final String medEquipRequestFormat = "";
+  private static final String labRequestFormat = "";
+  private static final String employeeFormat = "";
+  private static final String serviceRequestFormat =
+      "REQUESTID, STATUS, TYPE, ASSIGNEE, REQUEST_DATE, DELIVERY_DATE, ISURGENT";
 
-      String insertQuery =
-          "INSERT INTO TOWERLOCATIONS (NODEID, XCOORD, YCOORD, FLOOR, BUILDING, "
-              + "NODETYPE, LONGNAME, SHORTNAME) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-      statement = connection.prepareStatement(insertQuery);
+  /*
+      SAVING CSV FILES FROM THE DATABASE
+  */
 
-      statement.setString(1, data[0]);
-      statement.setInt(2, Integer.parseInt(data[1])); // xcoord
-      statement.setInt(3, Integer.parseInt(data[2])); // ycoord
-      statement.setString(4, data[3]); // floor
-      statement.setString(5, data[4]); // building
-      statement.setString(6, data[5]); // nodetype
-      statement.setString(7, data[6]); // longname
-      statement.setString(8, data[7]); // shortname
-
-      statement.executeUpdate();
-    }
-    in.close();
-    connection.commit();
-  }
-
-  /**
-   * The program first loads all of the contents of the SQL Location table into Java Location
-   * objects. Then the CSV file is created from the Java objects.
-   *
-   * @param fileName - The file name where the CSV will be saved
-   * @throws IOException - Writing to the CSV file
-   */
   public static void saveLocationCSV(String fileName) throws IOException, SQLException {
-    DAO<Location> locationDAO = new LocationDAOImpl();
-    if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
-    File tempFile = new File(fileName);
-    boolean exists = tempFile.exists();
-    if (exists) tempFile.delete();
-
-    BufferedWriter out = null;
-
-    try {
-      FileWriter fstream = new FileWriter(fileName, true); // appending each line.
-      out = new BufferedWriter(fstream); // ready to write
-      // write format
-      out.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName\n");
-      // write actual data
-      for (Location location : locationDAO.getAll()) {
-        String csvLine =
-            ""
-                + // might be extraneous, shouldn't affect anything
-                location.getNodeID()
-                + ','
-                + location.getXcoord()
-                + ','
-                + location.getYcoord()
-                + ','
-                + location.getFloor()
-                + ','
-                + location.getBuilding()
-                + ','
-                + location.getNodeType()
-                + ','
-                + location.getLongName()
-                + ','
-                + location.getShortName()
-                + "\n";
-        out.write(csvLine);
-      }
-    } catch (IOException e) {
-      System.err.println("Error: " + e.getMessage());
-    } finally {
-      if (out != null) {
-        out.close();
-      }
+    String format = locationFormat;
+    DAO<Location> dao = new LocationDAOImpl();
+    // nothing to change here
+    BufferedWriter out;
+    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    // change with the proper format in first line of function
+    for (Location d : dao.getAll()) {
+      String csvLine =
+          ""
+              + d.getNodeID()
+              + ','
+              + d.getXcoord()
+              + ','
+              + d.getYcoord()
+              + ','
+              + d.getFloor()
+              + ','
+              + d.getBuilding()
+              + ','
+              + d.getNodeType()
+              + ','
+              + d.getLongName()
+              + ','
+              + d.getShortName()
+              + "\n";
+      // change nothing
+      out.write(csvLine);
     }
+    out.close();
   }
 
-  /**
-   * Loads the location database from the location csv
-   *
-   * @param fileName - The file name where the database will be loaded from
-   */
-  public static void loadMedEquipReqCSV(String fileName) throws SQLException, IOException {
-    BufferedReader in = new BufferedReader(new FileReader(fileName));
-    String line;
-    in.readLine();
-    String[] data;
-    while ((line = in.readLine()) != null) {
-      data = line.split(",");
-      String equipID = data[0];
-
-      // check if nodeID is already in the database
-      // ensures the database is up to date and correct without overwriting
-      String query = "SELECT * FROM MED_EQUIP_REQ WHERE MED_EQUIPMENTID = '" + equipID + "'";
-      PreparedStatement statement = connection.prepareStatement(query);
-      ResultSet rs = statement.executeQuery();
-      if (rs.next()) { // true if exists, false if does not exist
-        continue; // so it does not add a duplicate item into the database - issue from meeting
-        // 3/28/2022
-      }
-      String insertQuery = "INSERT INTO MED_EQUIP_REQ (floor, locationID) VALUES (?, ?)";
-      statement = connection.prepareStatement(insertQuery);
-      statement.setString(1, data[0]);
-      statement.setString(2, data[1]); // floor
-      statement.executeUpdate();
-    }
-    in.close();
-    connection.commit();
-  }
-
-  /**
-   * The program first loads all of the contents of the SQL Medical Equipment Request table into
-   * Java Location objects. Then the CSV file is created from the Java objects.
-   *
-   * @param fileName - The file name where the CSV will be saved
-   * @throws IOException - Writing to the CSV file
-   */
-  public static void saveMedEquipReqCSV(String fileName) throws IOException, SQLException {
-    DAO<medicalEquipmentRequest> MESR = new MedicalEquipmentServiceRequestDAOImpl();
-    if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
-    File tempFile = new File(fileName);
-    boolean exists = tempFile.exists();
-    if (exists) tempFile.delete();
-
-    BufferedWriter out = null;
-
-    try {
-      FileWriter fstream = new FileWriter(fileName, true); // appending each line.
-      out = new BufferedWriter(fstream); // ready to write
-      // write format
-      out.write("floorID,roomID\n");
-      // write actual data
-      for (serviceRequest medEquipServReq : MESR.getAll()) {
-        String csvLine =
-            "" + medEquipServReq.getFloorID() + ',' + medEquipServReq.getRoomID() + "\n";
-        out.write(csvLine);
-      }
-    } catch (IOException e) {
-      System.err.println("Error: " + e.getMessage());
-    } finally {
-      if (out != null) {
-        out.close();
-      }
-    }
-  }
-
-  /**
-   * loads CSV information of medical equipment into the database
-   *
-   * @param fileName - The file name where the database will be loaded from
-   */
-  public static void loadMedEquipCSV(String fileName) throws SQLException, IOException {
-    BufferedReader in = new BufferedReader(new FileReader(fileName));
-    String line;
-    in.readLine();
-    String[] data;
-    while ((line = in.readLine()) != null) {
-      data = line.split(",");
-      String equipID = data[0];
-
-      // check if nodeID is already in the database
-      // ensures the database is up to date and correct without overwriting
-      String query = "SELECT * FROM EQUIPMENT WHERE ID = '" + equipID + "'";
-      PreparedStatement statement = connection.prepareStatement(query);
-      ResultSet rs = statement.executeQuery(query);
-      if (rs.next()) { // true if exists, false if does not exist
-        continue; // so it does not add a duplicate item into the database - issue from meeting
-        // 3/28/2022
-      }
-      String insertQuery =
-          "INSERT INTO MED_EQUIP_REQ (EQUIPID, INUSE, ISCLEAN, CLEANLOCATION, STORAGELOCATION)"
-              + " VALUES (?, ?, ?, ?, ?)";
-      statement = connection.prepareStatement(insertQuery);
-      statement.setString(1, data[0]); // equipID
-      statement.setString(2, String.valueOf(data[1])); // inuse
-      statement.setString(3, String.valueOf(data[2])); // isclean
-      statement.setString(4, data[3]); // cleanlocation
-      statement.setString(5, data[4]); // storagelocation
-      statement.executeUpdate();
-    }
-    in.close();
-    connection.commit();
-  }
-
-  /**
-   * The program first loads all of the contents of the SQL Medical Equipment table into Java
-   * Location objects. Then the CSV file is created from the Java objects.
-   *
-   * @param fileName - The file name where the CSV will be saved
-   * @throws IOException - Writing to the CSV file
-   */
   public static void saveMedEquipCSV(String fileName) throws IOException, SQLException {
-    DAO<MedicalEquipment> equipment = new MedicalEquipmentDAOImpl();
-    if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
-    File tempFile = new File(fileName);
-    boolean exists = tempFile.exists();
-    if (exists) tempFile.delete();
-
-    BufferedWriter out = null;
-
-    try {
-      FileWriter fstream = new FileWriter(fileName, true); // appending each line.
-      out = new BufferedWriter(fstream); // ready to write
-      // write format
-      out.write("ID,isInUse,isClean,cleanLocation,storageLocation\n");
-      // write actual data
-      for (Equipment medEquip : equipment.getAll()) {
-        String csvLine =
-            ""
-                + medEquip.getEquipmentID()
-                + ','
-                + String.valueOf(medEquip.isInUse())
-                + ','
-                + String.valueOf(medEquip.isClean())
-                + ','
-                + medEquip.getCleanLocation()
-                + ','
-                + medEquip.getStorageLocation()
-                + "\n";
-        out.write(csvLine);
-      }
-    } catch (IOException e) {
-      System.err.println("Error: " + e.getMessage());
-    } finally {
-      if (out != null) {
-        out.close();
-      }
+    String format = medEquipFormat; // "ID,isInUse,isClean,cleanLocationID,storageLocationID";
+    DAO<MedicalEquipment> equipDAO = new MedicalEquipmentDAOImpl();
+    // nothing to change here
+    BufferedWriter out;
+    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    // change with the proper format in first line of function
+    for (MedicalEquipment equip : equipDAO.getAll()) {
+      String csvLine =
+          ""
+              + equip.getEquipmentID()
+              + ','
+              + equip.getMed_equipmentID()
+              + ','
+              + equip.isInUse()
+              + ','
+              + equip.isClean()
+              + ','
+              + equip.getCleanLocation()
+              + ','
+              + equip.getStorageLocation()
+              + ','
+              + equip.getCurrentLocation()
+              + ','
+              + equip.getEquipmentType()
+              + "\n";
+      // change nothing
+      out.write(csvLine);
     }
+    out.close();
   }
 
+  public static void saveMedEquipRequestCSV(String fileName) throws IOException, SQLException {
+    String format =
+        medEquipRequestFormat; // "ID,requestDate,deliveryDate,isUrgent,equipment,equipQuantity,staffAssignee,locationID,requestStatus,otherNotes";
+    DAO<medicalEquipmentRequest> MESRDAO = new MedicalEquipmentServiceRequestDAOImpl();
+    // nothing to change here
+    BufferedWriter out;
+    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    // change with the proper format in first line of function
+    for (medicalEquipmentRequest mesr :
+        MESRDAO
+            .getAll()) { // MED_EQUIPMENTID,REQUESTDATE,DELIVERYDATE,ISURGENT,EQUIP,EQUIPQUANTITY,STAFFASSIGNEE,LOCATIONID,FLOOR,REQUESTSTATUS,OTHERNOTES
+      String csvLine =
+          ""
+              + mesr.getServiceRequestID()
+              + ','
+              + mesr.getRequestDate()
+              + ','
+              + mesr.getDeliveryDate()
+              + ','
+              + mesr.getIsUrgent()
+              + ','
+              + mesr.getEquipment()
+              + ','
+              + mesr.getEquipmentQuantity()
+              + ','
+              + mesr.getStaffAssignee()
+              + ','
+              + mesr.getRoomID()
+              + ','
+              + mesr.getFloorID()
+              + ','
+              + mesr.getRequestStatus()
+              + ','
+              + mesr.getOtherNotes()
+              + "\n";
+      // change nothing
+      out.write(csvLine);
+    }
+    out.close();
+  }
+
+  public static void saveLabRequestCSV(String fileName) throws IOException, SQLException {
+    String format =
+        labRequestFormat; // "ID,labRequestType,StaffAssignee,locationID,timeFrame,requestStatus,otherNotes";
+    DAO<labRequest> labRequestDAO = new LabRequestDAOImpl();
+    // nothing to change here
+    BufferedWriter out;
+    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    // change with the proper format in first line of function
+    for (labRequest labRequest : labRequestDAO.getAll()) {
+      String csvLine =
+          ""
+              + labRequest.getServiceRequestID()
+              + ','
+              + labRequest.getLabRequestType()
+              + ','
+              + labRequest.getStaffAssignee()
+              + ','
+              + labRequest.getRoomID()
+              + ','
+              + labRequest.getTimeFrame()
+              + ','
+              + labRequest.getRequestStatus()
+              + ','
+              + labRequest.getOtherNotes()
+              + "\n";
+      // change nothing
+      out.write(csvLine);
+    }
+    out.close();
+  }
+
+  public static void saveEmployeeCSV(String fileName) throws IOException, SQLException {
+    String format = employeeFormat; // "employeeID,name,location,position,available,salary";
+    DAO<Employee> employeeDAO = new EmployeeDAOImpl();
+    // nothing to change here
+    BufferedWriter out;
+    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    // change with the proper format in first line of function
+    for (Employee employee : employeeDAO.getAll()) {
+      String csvLine =
+          ""
+              + employee.getEmployeeID()
+              + ','
+              + employee.getName()
+              + ','
+              + employee.getLocation()
+              + ','
+              + employee.getPosition()
+              + ','
+              + employee.isAvailable()
+              + ','
+              + employee.getSalary()
+              + "\n";
+      // change nothing
+      out.write(csvLine);
+    }
+    out.close();
+  }
+
+  public static void saveServiceRequestCSV(String fileName) throws IOException, SQLException {
+    String format = serviceRequestFormat;
+    DAO<serviceRequest> dao = new ServiceRequestDAOImpl();
+    // nothing to change here
+    BufferedWriter out;
+    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    // change with the proper format in first line of function
+    for (serviceRequest d : dao.getAll()) {
+      String csvLine =
+          ""
+              + d.getServiceRequestID()
+              + ','
+              + d.getRequestStatus()
+              + ','
+              + d.getRequestType()
+              + ','
+              + d.getDeliveryDate()
+              + ','
+              + d.getRequestDate()
+              + ','
+              + d.isUrgent()
+              + "\n";
+      // change nothing
+      out.write(csvLine);
+    }
+    out.close();
+  }
+
+  /*
+      LOADING CSV FILES INTO THE DATABASE
+  */
+
+  public static boolean loadLocationCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "TOWERLOCATIONS", locationFormat);
+  }
+
+  public static boolean loadEquipmentCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "EQUIPMENT", medEquipFormat);
+  }
+
+  public static boolean loadMedEquipReqCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "MED_EQUIP_REQ", medEquipRequestFormat);
+  }
+
+  public static boolean loadLabRequestCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "LAB_REQUEST", labRequestFormat);
+  }
+
+  public static boolean loadEmployeesCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "EMPLOYEES", employeeFormat);
+  }
+
+  public static boolean loadServiceRequestCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "SERVICEREQUEST", serviceRequestFormat);
+  }
+
+  /*public static void loadUsersCSV(String fileName) throws SQLException, IOException {
+  loadCSVGeneral(fileName,"USERS", usersFormat);
+  }*/
+
+  /*
+      HELPER FUNCTIONS
+  */
+
   /**
-   * loads CSV information of employees into the database
+   * PUT PARAMETERS IN CAPITALS WHERE POSSIBLE
    *
-   * @param fileName - The file name where the database will be loaded from
+   * @param fileName - with or without .csv, will be included
+   * @param tableName - SQL table name
+   * @param ColumnsCSV - comma separated with spaces, the columns of the table
+   * @throws SQLException
+   * @throws IOException
    */
-  public static void loadEmployeeCSV(String fileName) throws SQLException, IOException {
-    BufferedReader in = new BufferedReader(new FileReader(fileName));
+  public static boolean loadCSVGeneral(String fileName, String tableName, String ColumnsCSV)
+      throws SQLException, IOException {
+    int IDindex0 = 0;
+    int count = 0;
+    for (int i = 0; i < ColumnsCSV.length(); i++) {
+      if (ColumnsCSV.charAt(i) == ',') count++;
+    } // counts # of commas
+    count = count + 1; // commas is number of results minus one
+    String[] csvData = ColumnsCSV.split(","); // for query later
+    BufferedReader in;
+    try {
+      in = new BufferedReader(new FileReader(fileName));
+    } catch (IOException e) {
+      System.out.println("ERROR: " + e.getMessage());
+      return false; // shouldnt do anything if there's nothing to load
+    }
     String line;
     in.readLine();
     String[] data;
     while ((line = in.readLine()) != null) {
       data = line.split(",");
-      String employeeID = data[0];
+      String Identification = data[IDindex0];
 
       // check if nodeID is already in the database
       // ensures the database is up to date and correct without overwriting
-      String query = "SELECT * FROM EmployeeTable WHERE NODEID = '" + employeeID + "'";
+      String query =
+          "SELECT * FROM "
+              + tableName
+              + " WHERE "
+              + csvData[IDindex0]
+              + " = '"
+              + Identification
+              + "'";
       PreparedStatement statement = connection.prepareStatement(query);
       ResultSet rs = statement.executeQuery(query);
       if (rs.next()) { // true if exists, false if does not exist
-        continue; // so it does not add a duplicate item into the database - issue from meeting
-        // 3/28/2022
+        continue;
       }
+      String questionMarks = "";
+      for (int i = 0; i < count - 1; i++) questionMarks += "?, ";
+      questionMarks += "?";
       String insertQuery =
-          "INSERT INTO EmployeeTable (ID, NAME, LOCATION, POSITION, AVAILABLE, SALARY)"
-              + " VALUES (?, ?, ?, ?, ?, ?)";
+          "INSERT INTO " + tableName + " (" + ColumnsCSV + ")" + " VALUES (" + questionMarks + ")";
       statement = connection.prepareStatement(insertQuery);
-      statement.setString(1, data[0]); // employeeID
-      statement.setString(2, data[1]); // name
-      statement.setString(3, data[3]); // position
-      statement.setString(4, String.valueOf(data[4])); // isavailable
-      statement.executeUpdate();
+
+      for (int i = 0; i < count - 1; i++) { // sets the question marks in the query
+        statement.setString(i + 1, String.valueOf(data[i]));
+      }
+      statement.executeUpdate(); // runs the query
     }
     in.close();
     connection.commit();
+    return true;
   }
 
   /**
-   * The program first loads all of the contents of the SQL employee table into Java Location
-   * objects. Then the CSV file is created from the Java objects.
+   * save CSV function helper,
    *
-   * @param fileName - The file name where the CSV will be saved
-   * @throws IOException - Writing to the CSV file
+   * @param fileName
+   * @return
+   * @throws IOException
    */
-  public static void saveEmployeeCSV(String fileName) throws IOException, SQLException {
-    DAO<Employee> employeeDAO = new EmployeeDAOImpl();
-    if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
+  private static BufferedWriter readyIO(String fileName) throws IOException {
     File tempFile = new File(fileName);
     boolean exists = tempFile.exists();
-    if (exists) tempFile.delete();
-
+    if (exists) tempFile.delete(); // this makes append=true work fine
     BufferedWriter out = null;
+    FileWriter fstream = new FileWriter(fileName, true); // appending each line.
+    out = new BufferedWriter(fstream); // ready to write
+    return out;
+  }
 
+  /**
+   * full helper - does a lot of ugly stuff be hind the scenes
+   *
+   * @param fileName
+   * @param format
+   * @return
+   * @throws IOException
+   */
+  private static BufferedWriter fullSaveHelper(String fileName, String format) throws IOException {
+    format.replaceAll(" ", "");
+    if (!format.endsWith("\n")) {
+      format += "\n";
+    }
+    if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
+    BufferedWriter out;
     try {
-      FileWriter fstream = new FileWriter(fileName, true); // appending each line.
-      out = new BufferedWriter(fstream); // ready to write
-      // write format
-      out.write("ID,name,position,isFree\n");
-      // write actual data
-      for (Employee employee : employeeDAO.getAll()) {
-        String csvLine =
-            ""
-                + employee.getEmployeeID()
-                + ','
-                + employee.getName()
-                + ','
-                + employee.getPosition()
-                + ','
-                + String.valueOf(employee.isAvailable())
-                + "\n";
-        out.write(csvLine);
-      }
+      out = readyIO(fileName);
     } catch (IOException e) {
       System.err.println("Error: " + e.getMessage());
-    } finally {
-      if (out != null) {
-        out.close();
-      }
-    }
+      return null;
+    } // ends execution
+    out.write(format);
+    return out;
   }
 }
