@@ -193,16 +193,16 @@
                                       </TextField>
                                   </children>
                               </VBox>
-                              <TableView layoutX="398.0" layoutY="35.0" prefHeight="400.0" prefWidth="631.0">
+                              <TableView fx:id="table" layoutX="398.0" layoutY="35.0" prefHeight="400.0" prefWidth="631.0">
                                   <columns>
-                                      <TableColumn prefWidth="75.0" text="Request ID" />
-                                      <TableColumn prefWidth="65.0" text="Status" />
-                                      <TableColumn prefWidth="101.0" text="Assigned Staff" />
-                                      <TableColumn prefWidth="63.0" text="Urgency" />
-                                      <TableColumn prefWidth="76.0" text="Biohazard" />
-                                      <TableColumn prefWidth="63.0" text="Size" />
-                                      <TableColumn prefWidth="97.0" text="Floor ID" />
-                              <TableColumn prefWidth="90.0" text="Room ID" />
+                                      <TableColumn fx:id="id" prefWidth="75.0" text="Request ID" />
+                                      <TableColumn fx:id="status" prefWidth="65.0" text="Status" />
+                                      <TableColumn fx:id="assign" prefWidth="101.0" text="Assigned Staff" />
+                                      <TableColumn fx:id="urgent" prefWidth="63.0" text="Urgency" />
+                                      <TableColumn fx:id="bio" prefWidth="76.0" text="Biohazard" />
+                                      <TableColumn fx:id="size" prefWidth="63.0" text="Size" />
+                                      <TableColumn fx:id="floorCol" prefWidth="97.0" text="Floor ID" />
+                                      <TableColumn fx:id="roomCol" prefWidth="90.0" text="Room ID" />
                                   </columns>
                               </TableView>
                               <VBox layoutY="81.0">

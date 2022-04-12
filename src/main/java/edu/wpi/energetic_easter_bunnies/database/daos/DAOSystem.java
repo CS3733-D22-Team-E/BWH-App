@@ -5,6 +5,7 @@ import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
 import edu.wpi.energetic_easter_bunnies.entity.labRequest;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
+import edu.wpi.energetic_easter_bunnies.entity.sanitationRequest;
 import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,6 +16,7 @@ public class DAOSystem {
   private final LocationDAOImpl locationDAO;
   private final MedicalEquipmentDAOImpl medicalEquipmentDAO;
   private final MedicalEquipmentServiceRequestDAOImpl medicalEquipmentServiceRequestDAO;
+  private final SanitationRequestDAOImpl sanitationRequestDAO;
   private final ServiceRequestDAOImpl serviceRequestDAO;
 
   public List<Employee> getAllEmployee() {
@@ -120,6 +122,7 @@ public class DAOSystem {
     medicalEquipmentDAO = new MedicalEquipmentDAOImpl();
     medicalEquipmentServiceRequestDAO = new MedicalEquipmentServiceRequestDAOImpl();
     serviceRequestDAO = new ServiceRequestDAOImpl();
+    sanitationRequestDAO = new SanitationRequestDAOImpl();
   }
 
   public void updateLabServiceRequest(labRequest labRequest, String newRequestStatus)
@@ -153,5 +156,13 @@ public class DAOSystem {
 
   public void addMedEquipReq(medicalEquipmentRequest medicalEquipmentRequest) throws SQLException {
     medicalEquipmentServiceRequestDAO.addMedEquipReq(medicalEquipmentRequest);
+  }
+
+  public void addSanReq(sanitationRequest r) throws SQLException {
+    sanitationRequestDAO.update(r);
+  }
+
+  public List<sanitationRequest> getAllSanReq() {
+    return sanitationRequestDAO.getAll();
   }
 }
