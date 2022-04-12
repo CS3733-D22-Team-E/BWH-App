@@ -5,14 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public enum DBConnect {
-  EMBEDDED_INSTANCE("jdbc:derby:myDB;create=true"),
-  CLIENT_INSTANCE("jdbc:derby://localhost:1527/BWDB");
+  EMBEDDED_INSTANCE("jdbc:derby:myDB;create=true", "org.apache.derby.jdbc.EmbeddedDriver");
+  // CLIENT_INSTANCE("jdbc:derby://localhost:1527/BWDB", "org.apache.derby.jdbc.ClientDriver");
 
   private Connection connection;
 
-  DBConnect(String url) {
+  DBConnect(String url, String className) {
     try {
-      Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+      Class.forName(className);
       connection = DriverManager.getConnection(url);
     } catch (SQLException | ClassNotFoundException e) {
       System.out.println("Apache Derby Driver not found.");
@@ -29,9 +29,14 @@ public enum DBConnect {
     return EMBEDDED_INSTANCE;
   }
 
-  public static DBConnect getClientInstance() {
+  /**
+   * Method to get the client instance
+   *
+   * @return CLIENT_INSTANCE
+   */
+  /*public static DBConnect getClientInstance() {
     return CLIENT_INSTANCE;
-  }
+  }*/
 
   /**
    * Method to get connection

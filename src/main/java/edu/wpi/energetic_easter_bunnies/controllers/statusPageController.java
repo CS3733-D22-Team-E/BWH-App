@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
-import edu.wpi.energetic_easter_bunnies.database.daos.ServiceRequestDAOImpl;
+import edu.wpi.energetic_easter_bunnies.database.daos.DAOSystem;
 import edu.wpi.energetic_easter_bunnies.entity.*;
 import java.net.URL;
 import java.sql.SQLException;
@@ -17,6 +17,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
 
+/**
+ * This is the controller class for the Status Page. It inherits from the containsSideMenu class to
+ * give the side menu functionality.
+ */
 public class statusPageController extends containsSideMenu {
   @FXML TextField filterFieldDate;
   @FXML TextField filterFieldID;
@@ -30,17 +34,24 @@ public class statusPageController extends containsSideMenu {
   @FXML TableColumn<serviceRequestModel, String> statusColumn;
   @FXML TableColumn<serviceRequestModel, String> assignedColumn;
   @FXML TableColumn<serviceRequestModel, String> dateColumn;
-  ServiceRequestDAOImpl db;
+  DAOSystem db;
 
+  /** Constructor */
   public statusPageController() {
     super();
   }
 
+  /**
+   * Initialize the super class and the database object.
+   *
+   * @param url ??
+   * @param rb ??
+   */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     super.initialize(url, rb);
     try {
-      db = new ServiceRequestDAOImpl();
+      db = new DAOSystem();
       ObservableList<serviceRequestModel> requestList = populateList();
       FilteredList<serviceRequestModel> filteredData = new FilteredList<>(requestList, p -> true);
       filterFieldID
@@ -156,10 +167,15 @@ public class statusPageController extends containsSideMenu {
     }
   }
 
+  /**
+   * Populates the table with the respective data for the active service requests.
+   *
+   * @return an ObservableList of serviceRequestModels
+   */
   protected ObservableList<serviceRequestModel> populateList() {
-    List<serviceRequest> list = db.getAll();
+    List<serviceRequest> list = db.getAllServiceRequests();
     ObservableList<serviceRequestModel> tableList = FXCollections.observableArrayList();
-    /*for (serviceRequest r : list) {
+    for (serviceRequest r : list) {
       tableList.add(
           new serviceRequestModel(
               r.getServiceRequestID(),
@@ -169,10 +185,7 @@ public class statusPageController extends containsSideMenu {
               r.getRequestDate().toString(),
               ((r.getDeliveryDate() == null) ? "" : r.getDeliveryDate().toString()),
               r.getIsUrgent()));
-    }*/
-    for (int i = 0; i < 100; i++)
-      tableList.add(
-          new serviceRequestModel(String.valueOf(i), "Done", "Temp", "Temp", "Now", "Now", false));
+    }
     return tableList;
   }
 }

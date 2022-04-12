@@ -4,22 +4,21 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.events.JFXDrawerEvent;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
-import edu.wpi.energetic_easter_bunnies.Main;
-import java.io.IOException;
+import edu.wpi.energetic_easter_bunnies.pageControlFacade;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 
+/** This class */
 public class containsSideMenu implements Initializable {
   @FXML public JFXHamburger burger;
   @FXML JFXDrawer drawer;
   // Node box;
-  StackPane box;
+  Node box;
   // ScrollPane box;
 
   @Override
@@ -29,15 +28,8 @@ public class containsSideMenu implements Initializable {
     // scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     // scrollPane.setFitToWidth(true);
     HamburgerSlideCloseTransition transition = new HamburgerSlideCloseTransition(burger);
-    FXMLLoader l = new FXMLLoader();
-    l.setLocation(Main.class.getResource("view/sidePanel.fxml"));
-    box = null;
-    try {
-      box = l.load();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    assert (box != null);
+    box = pageControlFacade.getPageRoot("sidePanel.fxml");
+    System.out.println(box);
     drawer.setSidePane(box);
     drawer.setOnDrawerClosed(
         new EventHandler<JFXDrawerEvent>() {

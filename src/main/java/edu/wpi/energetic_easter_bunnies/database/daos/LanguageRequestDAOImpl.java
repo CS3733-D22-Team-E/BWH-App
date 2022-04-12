@@ -68,8 +68,8 @@ public class LanguageRequestDAOImpl implements DAO<languageInterpreterRequest> {
       String query = "INSERT INTO SANITATIONREQUEST VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, item.getServiceRequestID());
-      statement.setObject(2, item.getRequestDate());
-      statement.setObject(3, item.getDeliveryDate());
+      statement.setDate(2, Date.valueOf(item.getRequestDate()));
+      statement.setDate(3, Date.valueOf(item.getDeliveryDate()));
       statement.setString(4, item.getRequestStatus());
       statement.setString(5, item.getStaffAssignee());
       statement.setBoolean(6, item.getIsUrgent());
