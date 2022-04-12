@@ -227,21 +227,21 @@ public class CSVManager {
     // change with the proper format in first line of function
     for (Account d : dao.getAll()) {
       String csvLine =
-              ""
-                      + d.getAccountID()
-                      + ','
-                      + d.getEmployeeID()
-                      + ','
-                      + d.getAuthorityLevel()
-                      + ','
-                      + d.getPasswordHash()
-                      + ','
-                      + d.getFirstName()
-                      + ','
-                      + d.getLastName()
-                      + ','
-                      + d.getPosition()
-                      + "\n";
+          ""
+              + d.getAccountID()
+              + ','
+              + d.getEmployeeID()
+              + ','
+              + d.getAuthorityLevel()
+              + ','
+              + d.getPasswordHash()
+              + ','
+              + d.getFirstName()
+              + ','
+              + d.getLastName()
+              + ','
+              + d.getPosition()
+              + "\n";
       // change nothing
       out.write(csvLine);
     }
@@ -277,7 +277,7 @@ public class CSVManager {
   }
 
   public static boolean loadAccountCSV(String fileName) throws SQLException, IOException {
-    return loadCSVGeneral(fileName,"ACCOUNTS", accountFormat);
+    return loadCSVGeneral(fileName, "ACCOUNTS", accountFormat);
   }
 
   /*
