@@ -102,7 +102,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   public void submitButton(ActionEvent event) {
     try {
       medicineDeliveryRequest.setFloorID(floor.getValue());
-      medicineDeliveryRequest.setRoomID(room.getValue());
+      medicineDeliveryRequest.setRoomID(roomNameToRoomID.get(room.getValue()));
       medicineDeliveryRequest.setAmount(amount.getText());
       medicineDeliveryRequest.setMedicine(medicine.getValue());
       medicineDeliveryRequest.setUrgent(urgent.isSelected());
@@ -191,7 +191,16 @@ public class medicineDeliveryController extends serviceRequestPageController
   private void populateMedicineTable() {
     ObservableList<medicineDelivery> medicineRequests = populateMedicineDeliveriesList();
     tableFloor.setCellValueFactory(new PropertyValueFactory<medicineDelivery, String>("floorID"));
-    tableRoom.setCellValueFactory(new PropertyValueFactory<medicineDelivery, String>("roomID"));
+    tableRoom.setCellValueFactory(
+        new Callback<
+            TableColumn.CellDataFeatures<medicineDelivery, String>, ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TableColumn.CellDataFeatures<medicineDelivery, String> param) {
+            medicineDelivery curMedicineReq = param.getValue();
+            return new SimpleStringProperty(roomIDToRoomName.get(curMedicineReq.getRoomID()));
+          }
+        });
     tableMedicine.setCellValueFactory(
         new PropertyValueFactory<medicineDelivery, String>("medicine"));
     tableQuantity.setCellValueFactory(new PropertyValueFactory<medicineDelivery, String>("amount"));
