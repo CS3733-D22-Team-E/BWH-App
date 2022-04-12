@@ -45,8 +45,8 @@ public class DashboardController extends containsSideMenu implements Initializab
   @FXML TableColumn<MedicalEquipment, String> tableEquipment;
   @FXML TableColumn<MedicalEquipment, String> tableLocation;
 
-  @FXML Button floorViewButton;
-  @FXML Button mapEditorButton;
+  @FXML JFXButton floorViewButton;
+  @FXML JFXButton mapEditorButton;
 
   @FXML JFXButton ll2Floor;
   @FXML Tooltip ll2FloorTooltip;
@@ -91,7 +91,6 @@ public class DashboardController extends containsSideMenu implements Initializab
               @Override
               public void changed(
                   ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                System.out.println("Toggle listener");
                 currentToggle = newValue;
                 if (selectFloor.getValue() != null) {
                   try {
@@ -114,7 +113,6 @@ public class DashboardController extends containsSideMenu implements Initializab
               public void changed(
                   ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                  System.out.println("Floor Selection Listener");
                   populateFloorEquipmentTable(newValue);
                 } catch (SQLException e) {
                   e.printStackTrace();
@@ -148,14 +146,12 @@ public class DashboardController extends containsSideMenu implements Initializab
         floorID = floor;
         break;
     }
-    System.out.println("Floor ID:" + floorID);
     ArrayList<MedicalEquipment> equipmentOnFloor = new ArrayList<>();
     for (MedicalEquipment curEquipment : allEquipment) {
       if (curEquipment.getFloor().equals(floorID)) {
         equipmentOnFloor.add(curEquipment);
       }
     }
-    System.out.println("Equipment on floor: " + equipmentOnFloor);
     return equipmentOnFloor;
   }
 
@@ -192,12 +188,10 @@ public class DashboardController extends containsSideMenu implements Initializab
     ArrayList<MedicalEquipment> equipmentOnFloor = getEquipmentOnFloor(floor);
     ArrayList<MedicalEquipment> filteredEquipment =
         filterEquipment(equipmentOnFloor, currentToggle);
-    System.out.println("Filtered equipment: " + filteredEquipment);
 
     ObservableList<Equipment> equipmentList = FXCollections.observableArrayList(filteredEquipment);
     tableEquipment.setCellValueFactory(
-        new PropertyValueFactory<MedicalEquipment, String>("equipmentType"));
-    System.out.println("Populating location column");
+        new PropertyValueFactory<MedicalEquipment, String>("equipmentID"));
     tableLocation.setCellValueFactory(
         new Callback<
             TableColumn.CellDataFeatures<MedicalEquipment, String>, ObservableValue<String>>() {
@@ -206,7 +200,6 @@ public class DashboardController extends containsSideMenu implements Initializab
               TableColumn.CellDataFeatures<MedicalEquipment, String> param) {
             MedicalEquipment curEquipment = param.getValue();
             Location curEquipmentLocation = locationDAO.get(curEquipment.getCurrentLocation());
-            System.out.println("Equipment location: " + curEquipmentLocation);
             return new SimpleStringProperty(curEquipmentLocation.getLongName());
           }
         });
@@ -236,7 +229,7 @@ public class DashboardController extends containsSideMenu implements Initializab
     tooltip.setShowDelay(Duration.seconds(.2));
   }
 
-  //TODO: make it so this loads the map page with the selected floor
+  // TODO: make it so this loads the map page with the selected floor
   @FXML
   private void floorViewButton(ActionEvent event) {
     Stage thisStage = (Stage) baseComponent.getScene().getWindow();
