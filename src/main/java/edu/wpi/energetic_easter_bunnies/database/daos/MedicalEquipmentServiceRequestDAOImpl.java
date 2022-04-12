@@ -1,22 +1,20 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
-import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentServiceRequestDAO {
-  static Connection connection = DBConnection.getConnection();
+public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipmentRequest> {
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<medicalEquipmentRequest> medicalRequests;
 
   public MedicalEquipmentServiceRequestDAOImpl() throws SQLException {
     medicalRequests = new ArrayList<>();
-    // String url = "jdbc:derby:myDB;";
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM MED_EQUIP_REQ ORDER BY REQUESTDATE DESC";
-    ResultSet rs = statement.executeQuery(query);
-    // int numID = 0; //TODO: Assign Medical Requests an ID value
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
     while (rs.next()) {
       String medEquipReqID = rs.getString("MED_EQUIPMENTID");
       java.sql.Date reqDate = rs.getDate("REQUESTDATE");
@@ -45,30 +43,38 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
               deliveryDate.toLocalDate(),
               "");
       medicalRequests.add(equipRequest);
-      // numID++;
     }
     rs.close();
   }
 
-  public List<medicalEquipmentRequest> getAllMedicalEquipmentServiceRequests() {
+  @Override
+  public List<medicalEquipmentRequest> getAll() {
     return medicalRequests;
   }
 
-  public medicalEquipmentRequest getMedicalEquipmentServiceRequest(String MedEquipReqID) {
+  @Override
+  public medicalEquipmentRequest get(String id) {
     for (medicalEquipmentRequest request : medicalRequests) {
-      if (request.getServiceRequestID().equalsIgnoreCase(MedEquipReqID)) return request;
+      if (request.getServiceRequestID().equals(id)) return request;
     }
-    return null; // TODO: Make a better return if ID is not found
+
+    System.out.println(
+        "Medical Equipment Request with medical equipment request id " + id + " not found");
+    throw new NullPointerException();
   }
 
-  public void updateMedicalEquipmentServiceRequest(medicalEquipmentRequest request) {}
+  @Override
+  public void update(medicalEquipmentRequest request) {
+    medicalRequests.add(request);
+  }
 
-  public void deleteMedicalEquipmentServiceRequest(medicalEquipmentRequest request) {}
+  public void delete(medicalEquipmentRequest request) { // TODO: Remove from DB table as well
+    medicalRequests.remove(request);
+  }
 
   public void addMedEquipReq(medicalEquipmentRequest request) throws SQLException {
     medicalRequests.add(request);
 
-    Statement statement = connection.createStatement();
     String query =
         "INSERT INTO MED_EQUIP_REQ VALUES ('"
             + request.getServiceRequestID()
@@ -93,6 +99,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
             + "','"
             + request.getOtherNotes()
             + "')";
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 }

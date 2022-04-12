@@ -2,45 +2,75 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="120.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.sideMenuController">
+
+<StackPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.sideMenuController">
    <children>
-      <JFXButton fx:id="b1" buttonType="RAISED" onAction="#medicalEquipmentButton" prefHeight="65.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Medical Equipment">
-         <VBox.margin>
-            <Insets bottom="6.0" />
-         </VBox.margin></JFXButton>
-      <JFXButton fx:id="b11" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#sanitationButton" prefHeight="65.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Sanitation">
-         <VBox.margin>
-            <Insets bottom="6.0" top="6.0" />
-         </VBox.margin></JFXButton>
-      <JFXButton fx:id="b111" buttonType="RAISED" layoutX="10.0" layoutY="60.0" onAction="#labRequestButton" prefHeight="65.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Lab Requests">
-         <VBox.margin>
-            <Insets bottom="6.0" top="6.0" />
-         </VBox.margin></JFXButton>
-      <JFXButton fx:id="b1111" buttonType="RAISED" layoutX="10.0" layoutY="110.0" onAction="#mealDeliveryButton" prefHeight="65.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Meal Delivery">
-         <VBox.margin>
-            <Insets bottom="6.0" top="6.0" />
-         </VBox.margin></JFXButton>
-      <JFXButton fx:id="b11111" buttonType="RAISED" layoutX="10.0" layoutY="160.0" onAction="#languageButton" prefHeight="65.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Language Service">
-         <VBox.margin>
-            <Insets bottom="6.0" top="6.0" />
-         </VBox.margin></JFXButton>
-      <JFXButton fx:id="b111111" buttonType="RAISED" layoutX="10.0" layoutY="210.0" onAction="#medicineDeliveryButton" prefHeight="65.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Medicine Delivery">
-         <VBox.margin>
-            <Insets bottom="6.0" top="6.0" />
-         </VBox.margin></JFXButton>
-      <JFXButton fx:id="b1111111" buttonType="RAISED" layoutX="10.0" layoutY="260.0" onAction="#locationButton" prefHeight="65.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Map">
-         <VBox.margin>
-            <Insets bottom="6.0" top="6.0" />
-         </VBox.margin></JFXButton>
-      <JFXButton fx:id="b11111111" buttonType="RAISED" layoutX="10.0" layoutY="310.0" onAction="#statusButton" prefHeight="65.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Status Page">
-         <VBox.margin>
-            <Insets bottom="6.0" top="6.0" />
-         </VBox.margin></JFXButton>
-      <JFXButton fx:id="exit" buttonType="RAISED" onAction="#exitButton" prefHeight="65.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="EXIT">
-         <VBox.margin>
-            <Insets top="6.0" />
-         </VBox.margin></JFXButton>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="120.0">
+         <content>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="120.0" style="-fx-background-color: blue;">
+               <children>
+                  <VBox>
+                     <children>
+                        <JFXButton fx:id="b12" buttonType="RAISED" onAction="#homeButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Home">
+                           <VBox.margin>
+                              <Insets bottom="6.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="b1" buttonType="RAISED" onAction="#medicalEquipmentButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Medical Equipment">
+                           <VBox.margin>
+                              <Insets bottom="6.0" top="6.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="b11" buttonType="RAISED" onAction="#sanitationButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Sanitation">
+                           <VBox.margin>
+                              <Insets bottom="6.0" top="6.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="b111" buttonType="RAISED" onAction="#labRequestButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Lab Requests">
+                           <VBox.margin>
+                              <Insets bottom="6.0" top="6.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="b1111" buttonType="RAISED" onAction="#mealDeliveryButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Meal Delivery">
+                           <VBox.margin>
+                              <Insets bottom="6.0" top="6.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="b11111" buttonType="RAISED" onAction="#languageButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Language Service">
+                           <VBox.margin>
+                              <Insets bottom="6.0" top="6.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="b111111" buttonType="RAISED" onAction="#medicineDeliveryButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Medicine Delivery">
+                           <VBox.margin>
+                              <Insets bottom="6.0" top="6.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="b1111111" buttonType="RAISED" onAction="#mapButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Map">
+                           <VBox.margin>
+                              <Insets bottom="6.0" top="6.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="b11111111" buttonType="RAISED" onAction="#statusButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Status Page">
+                           <VBox.margin>
+                              <Insets bottom="6.0" top="6.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="exit" buttonType="RAISED" onAction="#exitButton" prefHeight="50.0" prefWidth="120.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="EXIT">
+                           <VBox.margin>
+                              <Insets top="6.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
    </children>
-</VBox>
+</StackPane>

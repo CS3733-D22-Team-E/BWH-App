@@ -1,22 +1,22 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
-import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.entity.labRequest;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LabRequestDAOImpl implements LabRequestDAO {
+public class LabRequestDAOImpl implements DAO<labRequest> {
 
-  static Connection connection = DBConnection.getConnection();
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<labRequest> labRequests;
 
   public LabRequestDAOImpl() throws SQLException {
     labRequests = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM LAB_REQUEST ORDER BY LAB_REQUESTID DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
     // int numID = 0; //TODO: Assign Medical Requests an ID value
     while (rs.next()) {
       String labReqID = rs.getString("LAB_REQUESTID");
@@ -45,7 +45,6 @@ public class LabRequestDAOImpl implements LabRequestDAO {
               requestDate.toLocalDate(),
               deliveryDate.toLocalDate());
       labRequests.add(LabRequest);
-      // numID++;
     }
     rs.close();
   }
@@ -56,49 +55,66 @@ public class LabRequestDAOImpl implements LabRequestDAO {
    * @return a list of all lab requests
    */
   @Override
-  public List<labRequest> getAllLabRequests() {
+  public List<labRequest> getAll() {
     return labRequests;
+  }
+
+  /**
+   * Method to get a specific lab request
+   *
+   * @param id The id of the specific lab request wanted
+   * @return
+   */
+  @Override
+  public labRequest get(String id) {
+    for (labRequest labRequest : labRequests) {
+      if (labRequest.getServiceRequestID().equals(id)) return labRequest;
+    }
+    System.out.println("Lab Request with lab request id " + id + " not found");
+    throw new NullPointerException();
   }
 
   /**
    * Add a new lab request to the DB
    *
    * @param labRequest lab request to add
-   * @throws SQLException
    */
   @Override
-  public void addLabRequest(labRequest labRequest) throws SQLException {
+  public void update(labRequest labRequest) {
     labRequests.add(labRequest);
 
-    Statement statement = connection.createStatement();
-    String query =
-        "INSERT INTO LAB_REQUEST VALUES ('"
-            + labRequest.getServiceRequestID()
-            + "','"
-            + labRequest.getLabRequestType()
-            + "','"
-            + labRequest.getStaffAssignee()
-            + "','"
-            + labRequest.getRoomID()
-            + "','"
-            + labRequest.getTimeFrame()
-            + "','"
-            + labRequest.getRequestStatus()
-            + "','"
-            + labRequest.getOtherNotes()
-            + "')";
-    System.out.println(query);
-    statement.executeUpdate(query);
+    try {
+      String query =
+          "INSERT INTO LAB_REQUEST VALUES ('"
+              + labRequest.getServiceRequestID()
+              + "','"
+              + labRequest.getLabRequestType()
+              + "','"
+              + labRequest.getStaffAssignee()
+              + "','"
+              + labRequest.getRoomID()
+              + "','"
+              + labRequest.getTimeFrame()
+              + "','"
+              + labRequest.getRequestStatus()
+              + "','"
+              + labRequest.getOtherNotes()
+              + "')";
+      PreparedStatement statement = connection.prepareStatement(query);
+      System.out.println(query);
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
-   * Update request status for a lab request
+   * Update request status for a lab request TODO find what to do with this function
    *
    * @param labRequest lab request to update
    * @param newRequestStatus new request status for the lab request
    * @throws SQLException
    */
-  @Override
   public void updateLabServiceRequest(labRequest labRequest, String newRequestStatus)
       throws SQLException {
 
@@ -106,34 +122,37 @@ public class LabRequestDAOImpl implements LabRequestDAO {
     labRequest.setRequestStatus(newRequestStatus);
 
     // Update status of request in the db
-    Statement statement = connection.createStatement();
     String query =
         "UPDATE LAB_REQUEST SET REQUESTSTATUS = '"
             + newRequestStatus
             + "' WHERE LAB_REQUESTID = '"
             + labRequest.getServiceRequestID()
             + "'";
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   /**
    * Deletes lab request from DB
    *
    * @param labRequest lab request to delete
-   * @throws SQLException
    */
   @Override
-  public void deleteLabRequest(labRequest labRequest) throws SQLException {
+  public void delete(labRequest labRequest) {
 
     // Deleting the lab request from the array list
     labRequests.remove(labRequest);
 
     // Remove lab request in the db
-    Statement statement = connection.createStatement();
-    String query =
-        "DELETE FROM LAB_REQUEST WHERE LAB_REQUESTID = ('"
-            + labRequest.getServiceRequestID()
-            + "')";
-    statement.executeUpdate(query);
+    try {
+      String query =
+          "DELETE FROM LAB_REQUEST WHERE LAB_REQUESTID = ('"
+              + labRequest.getServiceRequestID()
+              + "')";
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }

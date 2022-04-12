@@ -1,13 +1,13 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
-import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.database.Location;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationDAOImpl implements LocationDAO {
-  static Connection connection = DBConnection.getConnection();
+public class LocationDAOImpl implements DAO<Location> {
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<Location> locations;
 
   /**
@@ -17,9 +17,9 @@ public class LocationDAOImpl implements LocationDAO {
    */
   public LocationDAOImpl() throws SQLException {
     locations = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM TOWERLOCATIONS ORDER BY FLOOR DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
     int numID = 0;
     while (rs.next()) {
       String nodeID = rs.getString("nodeID");
@@ -47,7 +47,7 @@ public class LocationDAOImpl implements LocationDAO {
    * @return Arraylist of locations
    */
   @Override
-  public List<Location> getAllLocations() {
+  public List<Location> getAll() {
     return locations;
   }
 
@@ -56,9 +56,8 @@ public class LocationDAOImpl implements LocationDAO {
    *
    * @param NodeID the NodeID of the location
    * @return location requested
-   * @throws NullPointerException Location not found with NodeID
    */
-  public Location getLocation(String NodeID) throws NullPointerException {
+  public Location get(String NodeID) {
     for (Location location : locations) {
       if (location.getNodeID() == NodeID) {
         return location;
@@ -78,45 +77,38 @@ public class LocationDAOImpl implements LocationDAO {
     return locations.get(numID);
   }
 
-  /** Prints all the location information */
-  @Override
-  public void printLocations() {
-    for (Location location : locations) {
-      System.out.println(location);
-    }
-  }
-
   /**
    * Creates a new location entry in the database
    *
    * @param location - new location to be added
-   * @throws SQLException - Accesses Database
    */
   @Override
-  public void addLocation(Location location) throws SQLException {
-
-    Statement statement = connection.createStatement();
+  public void update(Location location) {
     locations.add(location);
-
-    String query =
-        "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
-            + location.getNodeID()
-            + "',"
-            + location.getXcoord()
-            + ","
-            + location.getYcoord()
-            + ",'"
-            + location.getFloor()
-            + "','"
-            + location.getBuilding()
-            + "','"
-            + location.getNodeType()
-            + "','"
-            + location.getLongName()
-            + "','"
-            + location.getShortName()
-            + "')"; // Insert into database; does not check if the nodeID already exists
-    statement.executeUpdate(query);
+    try {
+      String query =
+          "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
+              + location.getNodeID()
+              + "',"
+              + location.getXcoord()
+              + ","
+              + location.getYcoord()
+              + ",'"
+              + location.getFloor()
+              + "','"
+              + location.getBuilding()
+              + "','"
+              + location.getNodeType()
+              + "','"
+              + location.getLongName()
+              + "','"
+              + location.getShortName()
+              + "')"; // Insert into database; does not check if the nodeID already exists
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -127,7 +119,6 @@ public class LocationDAOImpl implements LocationDAO {
    * @param newNodeType - the new node type
    * @throws SQLException - Accesses Database
    */
-  @Override
   public void updateLocation(Location location, String newFloor, String newNodeType)
       throws SQLException {
 
@@ -136,7 +127,6 @@ public class LocationDAOImpl implements LocationDAO {
     location.setNodeType(newNodeType);
 
     // Update location floor and node type in the db
-    Statement statement = connection.createStatement();
     String query =
         "UPDATE TOWERLOCATIONS SET FLOOR = '"
             + newFloor
@@ -145,7 +135,8 @@ public class LocationDAOImpl implements LocationDAO {
             + "' WHERE NODEID = '"
             + location.getNodeID()
             + "'";
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   /**
@@ -156,7 +147,6 @@ public class LocationDAOImpl implements LocationDAO {
    * @param newYCoord - the new Y coordinate
    * @throws SQLException - Accesses Database
    */
-  @Override
   public void updateCoord(Location location, int newXCoord, int newYCoord) throws SQLException {
 
     // Updating location XCoord and YCoord
@@ -164,7 +154,6 @@ public class LocationDAOImpl implements LocationDAO {
     location.setYCoord(newYCoord);
 
     // Update location XCoord and YCoord in the db
-    Statement statement = connection.createStatement();
     String query =
         "UPDATE TOWERLOCATIONS SET XCOORD = "
             + newXCoord
@@ -173,7 +162,8 @@ public class LocationDAOImpl implements LocationDAO {
             + " WHERE NODEID = '"
             + location.getNodeID()
             + "'";
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   /**
@@ -183,14 +173,18 @@ public class LocationDAOImpl implements LocationDAO {
    * @throws SQLException - Accesses Database
    */
   @Override
-  public void deleteLocation(Location location) throws SQLException {
+  public void delete(Location location) {
 
     // Deleting the location from the array list
     locations.remove(location);
 
     // Remove location in the db
-    Statement statement = connection.createStatement();
-    String query = "DELETE FROM TOWERLOCATIONS WHERE nodeID = ('" + location.getNodeID() + "')";
-    statement.executeUpdate(query);
+    try {
+      String query = "DELETE FROM TOWERLOCATIONS WHERE nodeID = ('" + location.getNodeID() + "')";
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }

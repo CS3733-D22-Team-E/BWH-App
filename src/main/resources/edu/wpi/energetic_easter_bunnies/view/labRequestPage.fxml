@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
@@ -81,8 +82,8 @@
                                     </Label>
                                     <HBox spacing="15.0">
                                         <children>
-                                    <ComboBox fx:id="floor" prefWidth="150.0" promptText="Select Floor" />
-                                    <ComboBox fx:id="room" prefWidth="150.0" promptText="Select Room" />
+                                    <JFXComboBox fx:id="floor" promptText="Select Floor" />
+                                    <JFXComboBox fx:id="room" promptText="Select Room" />
                                         </children>
                                     </HBox>
                                 </children>

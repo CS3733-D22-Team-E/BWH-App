@@ -1,20 +1,20 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
-import edu.wpi.energetic_easter_bunnies.database.DBConnection;
+import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
-  static Connection connection = DBConnection.getConnection();
+public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<MedicalEquipment> equipmentList;
 
   public MedicalEquipmentDAOImpl() throws SQLException {
     equipmentList = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM EQUIPMENT ORDER BY EQUIPMENTID DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
     int numID = 0;
     while (rs.next()) {
       String equipmentID = rs.getString("EQUIPMENTID");
@@ -44,11 +44,29 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
   }
 
   @Override
-  public List<MedicalEquipment> getAllMedicalEquipment() {
+  public List<MedicalEquipment> getAll() {
     return equipmentList;
   }
 
   @Override
+  public MedicalEquipment get(String id) {
+    for (MedicalEquipment equipment : equipmentList) {
+      if (equipment.getEquipmentID().equals(id)) return equipment;
+    }
+    System.out.println("Location with equipment id " + id + " not found");
+    throw new NullPointerException();
+  }
+
+  @Override
+  public void update(MedicalEquipment equipment) {
+    equipmentList.add(equipment);
+  }
+
+  @Override
+  public void delete(MedicalEquipment equipment) {
+    equipmentList.remove(equipment);
+  }
+
   public List<MedicalEquipment> getMedicalEquipments(
       String equipmentType, int equipmentQuantity, String roomID, String MED_EQUIPMENTID)
       throws SQLException { // TODO: Maybe figure out better way than a double for-loop
@@ -66,7 +84,6 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
         equipments.add(equipment);
 
         // DB Query to update said values
-        Statement statement = connection.createStatement();
         String query =
             "UPDATE EQUIPMENT SET "
                 + "\""
@@ -80,14 +97,20 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
                 + "\""
                 + " = "
                 + false
-                + ", CURRENTLOCATIONID = '"
+                + ","
+                + "\""
+                + "currentLocationID"
+                + "\""
+                + " = '"
                 + roomID
-                + "', MED_EQUIPMENTID = '"
+                + "', MED_EQUIP_REQ_ID = '"
                 + MED_EQUIPMENTID
                 + "' WHERE EQUIPMENTID = '"
                 + equipment.getEquipmentID()
                 + "'"; // Make sure this is actually formatted right
-        statement.executeUpdate(query);
+        PreparedStatement statement = connection.prepareStatement(query);
+        System.out.println(query);
+        statement.executeUpdate(); // TODO: FIX "currentLocationID" can't be found??"
         i++;
       }
       if (i == equipmentQuantity) {
@@ -97,7 +120,6 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
     return equipments;
   }
 
-  @Override
   public void sendToCleaning(List<MedicalEquipment> equipments) throws SQLException {
     for (MedicalEquipment equipment : equipments) {
       equipment.setCurrentLocation(
@@ -106,14 +128,14 @@ public class MedicalEquipmentDAOImpl implements MedicalEquipmentDAO {
       // TODO: Add MedicalEquipment.cleanEquipment() here?
 
       // DB Query to set currentLocation to cleaningLocation
-      Statement statement = connection.createStatement();
       String query =
           "UPDATE EQUIPMENT SET CURRENTLOCATIONID = '"
               + equipment.getCleanLocation()
               + "' WHERE EQUIPMENTID = '"
               + equipment.getEquipmentID()
               + "'";
-      statement.executeUpdate(query);
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
     }
   }
 }

@@ -92,8 +92,9 @@ public class serviceRequest {
     this.deliveryDate = deliveryDate;
   }
 
-  public serviceRequest() {
+  public serviceRequest(String serviceRequestType) {
     this.serviceRequestID = generateRandomID(6);
+    this.requestType = Type.valueOf(serviceRequestType);
     this.otherNotes = "";
     this.floorID = "";
     this.roomID = "";

@@ -39,6 +39,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -67,7 +68,7 @@
                   </ImageView>
                </children>
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </StackPane>
                 <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
@@ -115,13 +116,13 @@
                                       </Label>
                                       <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
                                           <children>
-                                              <RadioButton mnemonicParsing="false" text="Yes">
+                                              <RadioButton fx:id="bioYes" mnemonicParsing="false" text="Yes">
                                                   <toggleGroup>
                                                       <ToggleGroup fx:id="biohazardGroup" />
                                                   </toggleGroup>
                                               </RadioButton>
-                                              <RadioButton mnemonicParsing="false" selected="true" text="No" toggleGroup="$biohazardGroup" />
-                                              <RadioButton mnemonicParsing="false" text="Unsure" toggleGroup="$biohazardGroup" />
+                                              <RadioButton fx:id="bioNo" mnemonicParsing="false" selected="true" text="No" toggleGroup="$biohazardGroup" />
+                                              <RadioButton fx:id="bioUnsure" mnemonicParsing="false" text="Unsure" toggleGroup="$biohazardGroup" />
                                           </children>
                                       </VBox>
                                   </children>
@@ -135,37 +136,28 @@
                                       </Label>
                                       <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
                                           <children>
-                                              <RadioButton mnemonicParsing="false" text="Critical">
+                                              <RadioButton fx:id="Urgent" mnemonicParsing="false" text="Urgent">
                                                   <toggleGroup>
                                                       <ToggleGroup fx:id="urgencyGroup" />
                                                   </toggleGroup>
                                               </RadioButton>
-                                              <RadioButton mnemonicParsing="false" selected="true" text="Not Critical" toggleGroup="$urgencyGroup" />
+                                              <RadioButton fx:id="notUrgent" mnemonicParsing="false" selected="true" text="Not Urgent" toggleGroup="$urgencyGroup" />
                                           </children>
                                       </VBox>
                                   </children>
                               </VBox>
-                              <VBox>
+                              <VBox prefHeight="69.0" prefWidth="208.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="398.0" text="Request Status             Assigned Staff Member">
+                                      <Label prefHeight="39.0" prefWidth="398.0" text="Assigned Staff Member">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
                                       </Label>
-                                      <HBox spacing="15.0">
-                                          <children>
-                                    <JFXComboBox prefWidth="105.0">
-                                       <HBox.margin>
-                                          <Insets right="70.0" />
-                                       </HBox.margin>
-                                    </JFXComboBox>
-                                              <TextField fx:id="locationField1" layoutX="10.0" layoutY="10.0" promptText="Assigned Staff...">
-                                                  <font>
-                                                      <Font size="14.0" />
-                                                  </font>
-                                              </TextField>
-                                          </children>
-                                      </HBox>
+                                        <TextField fx:id="staffAssignee" promptText="Assigned Staff...">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </TextField>
                                   </children>
                               </VBox>
                               <VBox layoutY="259.0" prefHeight="114.0" prefWidth="157.0">
@@ -177,13 +169,13 @@
                                       </Label>
                                       <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
                                           <children>
-                                              <RadioButton mnemonicParsing="false" selected="true" text="Light">
+                                              <RadioButton fx:id="lightSelect" mnemonicParsing="false" selected="true" text="Light">
                                                   <toggleGroup>
                                                       <ToggleGroup fx:id="sizeGroup" />
                                                   </toggleGroup>
                                               </RadioButton>
-                                              <RadioButton mnemonicParsing="false" text="Medium" toggleGroup="$sizeGroup" />
-                                              <RadioButton mnemonicParsing="false" text="Heavy" toggleGroup="$sizeGroup" />
+                                              <RadioButton fx:id="mediumSelect" mnemonicParsing="false" text="Medium" toggleGroup="$sizeGroup" />
+                                              <RadioButton fx:id="heavySelect" mnemonicParsing="false" text="Heavy" toggleGroup="$sizeGroup" />
                                           </children>
                                       </VBox>
                                   </children>
@@ -202,18 +194,6 @@
                                       </TextField>
                                   </children>
                               </VBox>
-                              <TableView layoutX="398.0" layoutY="35.0" prefHeight="400.0" prefWidth="631.0">
-                                  <columns>
-                                      <TableColumn prefWidth="75.0" text="Request ID" />
-                                      <TableColumn prefWidth="65.0" text="Status" />
-                                      <TableColumn prefWidth="101.0" text="Assigned Staff" />
-                                      <TableColumn prefWidth="63.0" text="Urgency" />
-                                      <TableColumn prefWidth="76.0" text="Biohazard" />
-                                      <TableColumn prefWidth="63.0" text="Size" />
-                                      <TableColumn prefWidth="97.0" text="Floor ID" />
-                              <TableColumn prefWidth="90.0" text="Room ID" />
-                                  </columns>
-                              </TableView>
                               <VBox layoutY="81.0">
                                   <children>
                                       <Label prefHeight="39.0" prefWidth="398.0" text="Floor Number              Room Number">
@@ -223,12 +203,12 @@
                                       </Label>
                                       <HBox spacing="15.0">
                                  <children>
-                                    <JFXComboBox prefWidth="105.0">
+                                    <JFXComboBox fx:id="floor" prefWidth="105.0">
                                        <HBox.margin>
                                           <Insets right="50.0" />
                                        </HBox.margin>
                                     </JFXComboBox>
-                                    <JFXComboBox layoutX="60.0" layoutY="10.0" prefWidth="105.0">
+                                    <JFXComboBox fx:id="room" layoutX="60.0" layoutY="10.0" prefWidth="105.0">
                                        <HBox.margin>
                                           <Insets left="20.0" />
                                        </HBox.margin>
@@ -241,9 +221,29 @@
                         <JFXButton buttonType="RAISED" layoutX="173.0" layoutY="382.0" onAction="#resetFields" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" style="-fx-background-color: #f1f1f1;" text="Reset Fields" />
                      </children>
                   </Pane>
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="378.0" layoutY="14.0" prefHeight="402.0" prefWidth="634.0">
+                     <content>
+                        <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0">
+                           <children>
+                                    <TableView fx:id="table" prefHeight="400.0" prefWidth="631.0">
+                                        <columns>
+                                            <TableColumn fx:id="id" prefWidth="75.0" text="Request ID" />
+                                            <TableColumn fx:id="status" prefWidth="65.0" text="Status" />
+                                            <TableColumn fx:id="assign" prefWidth="101.0" text="Assigned Staff" />
+                                            <TableColumn fx:id="urgent" prefWidth="63.0" text="Urgency" />
+                                            <TableColumn fx:id="bio" prefWidth="76.0" text="Biohazard" />
+                                            <TableColumn fx:id="size" prefWidth="63.0" text="Size" />
+                                            <TableColumn fx:id="floorCol" prefWidth="97.0" text="Floor ID" />
+                                            <TableColumn fx:id="roomCol" prefWidth="90.0" text="Room ID" />
+                                        </columns>
+                                    </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
                </children>
             </AnchorPane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" disable="true" style="-fx-background-color: transparent;" />
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
             </children>
         </StackPane>
     </children>
