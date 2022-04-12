@@ -39,7 +39,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML TableColumn<mealDeliveryRequest, String> tableFloorNumber;
   @FXML TableColumn<mealDeliveryRequest, LocalDate> tableDateTime;
   @FXML TableColumn<mealDeliveryRequest, LocalDate> tableRequestDate;
-  @FXML TableColumn<mealDeliveryRequest, String> tableTime;
+  @FXML TableColumn<mealDeliveryRequest, Integer> tableTime;
   @FXML TableColumn<mealDeliveryRequest, String> tableStaffAssignee;
   @FXML TableColumn<mealDeliveryRequest, String> tableRequestStatus;
   @FXML TableColumn<mealDeliveryRequest, Boolean> tableUrgent;
@@ -110,7 +110,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     tableRequestDate.setCellValueFactory(
         new PropertyValueFactory<mealDeliveryRequest, LocalDate>("requestDate"));
     tableTime.setCellValueFactory(
-        new PropertyValueFactory<mealDeliveryRequest, String>("deliveryTime"));
+        new PropertyValueFactory<mealDeliveryRequest, Integer>("deliveryTime"));
     tableStaffAssignee.setCellValueFactory(
         new PropertyValueFactory<mealDeliveryRequest, String>("staffAssignee"));
     tableRequestStatus.setCellValueFactory(
@@ -137,16 +137,24 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       mealDeliveryRequest.setDessertType(dessertDropDown.getValue());
       mealDeliveryRequest.setRoomID(room.getValue());
       mealDeliveryRequest.setFloorID(floor.getValue());
+      mealDeliveryRequest.setRequestDate(LocalDate.now());
       mealDeliveryRequest.setDeliveryDate(dateTime.getValue());
       mealDeliveryRequest.setDeliveryTime(Integer.parseInt("0" + timeTxt.getText()));
       mealDeliveryRequest.setUrgent(isUrgent.isSelected());
       mealDeliveryRequest.setOtherNotes(otherNotesTxt.getText());
       mealDeliveryRequest.setStaffAssignee(staffAssignee.getText());
       mealDeliveryRequest.setRequestStatus(requestStatus.getText());
-    } catch (NullPointerException error) {
+      mealSendToDB(mealDeliveryRequest);
+
+    } catch (NullPointerException | SQLException error) {
       System.out.println("Error : Some Value is NULL");
       PopUpWarning.createWarning("Warning : A required value was not filled");
     }
+  }
+
+  private void mealSendToDB(mealDeliveryRequest meal) throws SQLException {
+    mealRequestDB.update(meal);
+    tableList.add(meal);
   }
 
   /**
