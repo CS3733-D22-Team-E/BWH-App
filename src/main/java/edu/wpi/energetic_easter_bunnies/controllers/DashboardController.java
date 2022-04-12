@@ -33,6 +33,7 @@ public class DashboardController extends containsSideMenu implements Initializab
   @FXML private VBox baseComponent;
 
   @FXML JFXComboBox<String> selectFloor;
+  @FXML JFXComboBox<String> selectEquipmentType;
 
   @FXML ToggleButton cleanFilter;
   @FXML ToggleButton dirtyFilter;
@@ -66,6 +67,10 @@ public class DashboardController extends containsSideMenu implements Initializab
   LocationDAOImpl locationDAO;
   MedicalEquipmentDAOImpl equipmentDAO;
   List<MedicalEquipment> allEquipment;
+
+  String equipmentSelected;
+  String equipmentSelectedFilter;
+  String equipmentSelectedTooltipText;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -120,16 +125,72 @@ public class DashboardController extends containsSideMenu implements Initializab
               }
             });
 
+    selectEquipmentType
+        .getItems()
+        .addAll("All Equipment Types", "Beds", "Infusion Pumps", "Recliners", "X-ray Machines");
+    selectEquipmentType.getSelectionModel().select(0);
+    equipmentSelected = "All Equipment Types";
+    equipmentSelectedFilter = "";
+    equipmentSelectedTooltipText = "Equipment ";
     try {
-      populateTooltip(ll2FloorTooltip, "LL2");
-      populateTooltip(ll1FloorTooltip, "LL1");
-      populateTooltip(firstFloorTooltip, "1");
-      populateTooltip(secondFloorTooltip, "2");
-      populateTooltip(thirdFloorTooltip, "3");
-      populateTooltip(fourthFloorTooltip, "4");
-      populateTooltip(fifthFloorTooltip, "5");
+      populateTooltips();
     } catch (SQLException e) {
       e.printStackTrace();
+    }
+    selectEquipmentType
+        .getSelectionModel()
+        .selectedItemProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                equipmentSelected = newValue;
+                generateEquipmentStrings();
+                try {
+                  populateFloorEquipmentTable(selectFloor.getValue());
+                  populateTooltips();
+                } catch (SQLException e) {
+                  e.printStackTrace();
+                }
+              }
+            });
+  }
+
+  private void populateTooltips() throws SQLException {
+    populateTooltip(ll2FloorTooltip, "LL2");
+    populateTooltip(ll1FloorTooltip, "LL1");
+    populateTooltip(firstFloorTooltip, "1");
+    populateTooltip(secondFloorTooltip, "2");
+    populateTooltip(thirdFloorTooltip, "3");
+    populateTooltip(fourthFloorTooltip, "4");
+    populateTooltip(fifthFloorTooltip, "5");
+  }
+
+  private void generateEquipmentStrings() {
+    switch (equipmentSelected) {
+      case "All Equipment Types":
+        equipmentSelectedFilter = "";
+        equipmentSelectedTooltipText = "Equipment";
+        break;
+      case "Beds":
+        equipmentSelectedFilter = "BED";
+        equipmentSelectedTooltipText = "Beds";
+        break;
+      case "Infusion Pumps":
+        equipmentSelectedFilter = "INFUSION PUMP";
+        equipmentSelectedTooltipText = "Infusion Pumps";
+        break;
+      case "Recliners":
+        equipmentSelectedFilter = "RECLINER";
+        equipmentSelectedTooltipText = "Recliners";
+        break;
+      case "X-ray Machines":
+        equipmentSelectedFilter = "XRAY";
+        equipmentSelectedTooltipText = "X-ray Machines";
+        break;
+      default:
+        break;
     }
   }
 
@@ -149,7 +210,10 @@ public class DashboardController extends containsSideMenu implements Initializab
     ArrayList<MedicalEquipment> equipmentOnFloor = new ArrayList<>();
     for (MedicalEquipment curEquipment : allEquipment) {
       if (curEquipment.getFloor().equals(floorID)) {
-        equipmentOnFloor.add(curEquipment);
+        if (equipmentSelectedFilter.equals("")
+            || curEquipment.getEquipmentType().equals(equipmentSelectedFilter)) {
+          equipmentOnFloor.add(curEquipment);
+        }
       }
     }
     return equipmentOnFloor;
@@ -217,13 +281,22 @@ public class DashboardController extends containsSideMenu implements Initializab
     tooltip.setText(
         "Floor: "
             + floor
-            + "\nEquipment Count: "
+            + "\n"
+            + "Total "
+            + equipmentSelectedTooltipText
+            + " Count: "
             + allEquipment
-            + "\nClean Equipment Count: "
+            + "\nClean "
+            + equipmentSelectedTooltipText
+            + " Count: "
             + cleanEquipment
-            + "\nDirty Equipment Count: "
+            + "\nDirty "
+            + equipmentSelectedTooltipText
+            + " Count: "
             + dirtyEquipment
-            + "\nIn Use Equipment Count: "
+            + "\nIn Use "
+            + equipmentSelectedTooltipText
+            + " Count: "
             + inUseEquipment);
 
     tooltip.setShowDelay(Duration.seconds(.2));

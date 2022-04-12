@@ -78,37 +78,37 @@
                                     </ImageView>
                                     <Pane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <JFXButton fx:id="fifthFloor" layoutX="163.0" layoutY="38.0" prefHeight="39.0" prefWidth="215.0" text=" ">
+                                          <JFXButton fx:id="fifthFloor" layoutX="148.0" layoutY="38.0" prefHeight="39.0" prefWidth="215.0" text=" ">
                                              <tooltip>
                                                 <Tooltip fx:id="fifthFloorTooltip" text="Empty Tooltip" />
                                              </tooltip>
                                           </JFXButton>
-                                          <JFXButton fx:id="fourthFloor" layoutX="167.0" layoutY="82.0" prefHeight="31.0" prefWidth="209.0" text=" ">
+                                          <JFXButton fx:id="fourthFloor" layoutX="149.0" layoutY="82.0" prefHeight="31.0" prefWidth="215.0" text=" ">
                                              <tooltip>
                                                 <Tooltip fx:id="fourthFloorTooltip" text="Empty Tooltip" />
                                              </tooltip>
                                           </JFXButton>
-                                          <JFXButton fx:id="thirdFloor" layoutX="113.0" layoutY="118.0" prefHeight="31.0" prefWidth="296.0" text=" ">
+                                          <JFXButton fx:id="thirdFloor" layoutX="96.0" layoutY="118.0" prefHeight="31.0" prefWidth="296.0" text=" ">
                                              <tooltip>
                                                 <Tooltip fx:id="thirdFloorTooltip" text="Empty Tooltip" />
                                              </tooltip>
                                           </JFXButton>
-                                          <JFXButton fx:id="secondFloor" layoutX="113.0" layoutY="157.0" prefHeight="31.0" prefWidth="296.0" text=" ">
+                                          <JFXButton fx:id="secondFloor" layoutX="98.0" layoutY="157.0" prefHeight="31.0" prefWidth="296.0" text=" ">
                                              <tooltip>
                                                 <Tooltip fx:id="secondFloorTooltip" text="Empty Tooltip" />
                                              </tooltip>
                                           </JFXButton>
-                                          <JFXButton fx:id="firstFloor" layoutX="113.0" layoutY="193.0" prefHeight="31.0" prefWidth="296.0" text=" ">
+                                          <JFXButton fx:id="firstFloor" layoutX="97.0" layoutY="193.0" prefHeight="31.0" prefWidth="296.0" text=" ">
                                              <tooltip>
                                                 <Tooltip fx:id="firstFloorTooltip" text="Empty Tooltip" />
                                              </tooltip>
                                           </JFXButton>
-                                          <JFXButton fx:id="ll1Floor" layoutX="114.0" layoutY="231.0" prefHeight="31.0" prefWidth="296.0" text=" ">
+                                          <JFXButton fx:id="ll1Floor" layoutX="97.0" layoutY="231.0" prefHeight="31.0" prefWidth="296.0" text=" ">
                                              <tooltip>
                                                 <Tooltip fx:id="ll1FloorTooltip" text="Empty Tooltip" />
                                              </tooltip>
                                           </JFXButton>
-                                          <JFXButton fx:id="ll2Floor" layoutX="113.0" layoutY="268.0" prefHeight="31.0" prefWidth="296.0" text=" ">
+                                          <JFXButton fx:id="ll2Floor" layoutX="97.0" layoutY="268.0" prefHeight="31.0" prefWidth="296.0" text=" ">
                                              <tooltip>
                                                 <Tooltip fx:id="ll2FloorTooltip" text="Empty Tooltip" />
                                              </tooltip>
@@ -125,17 +125,22 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <VBox prefHeight="492.0" prefWidth="372.0" spacing="30.0">
+                        <VBox prefHeight="492.0" prefWidth="418.0" spacing="30.0">
                            <children>
-                              <JFXComboBox fx:id="selectFloor" prefHeight="25.0" prefWidth="173.0" promptText="Select Floor" />
-                              <VBox>
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <JFXComboBox fx:id="selectFloor" prefHeight="25.0" prefWidth="173.0" promptText="Select Floor" />
+                                    <JFXComboBox fx:id="selectEquipmentType" promptText="Select Equipment Type" />
+                                 </children>
+                              </HBox>
+                              <VBox prefWidth="404.0">
                                  <children>
                                     <HBox prefHeight="31.0" prefWidth="372.0">
                                        <children>
                                           <ToggleButton fx:id="cleanFilter" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" text="Clean" />
                                           <ToggleButton fx:id="dirtyFilter" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" text="Dirty" />
                                           <ToggleButton fx:id="inUseFilter" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" text="In Use" />
-                                          <ToggleButton fx:id="allFilter" mnemonicParsing="false" prefHeight="31.0" prefWidth="116.0" text="All" />
+                                          <ToggleButton fx:id="allFilter" mnemonicParsing="false" prefHeight="31.0" prefWidth="146.0" text="All" />
                                        </children>
                                     </HBox>
                                           <TableView fx:id="floorEquipmentTable" prefHeight="397.0" prefWidth="372.0">
