@@ -3,6 +3,7 @@ package edu.wpi.energetic_easter_bunnies.database.daos;
 import edu.wpi.energetic_easter_bunnies.database.Employee;
 import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
+import edu.wpi.energetic_easter_bunnies.entity.accounts.Account;
 import edu.wpi.energetic_easter_bunnies.entity.labRequest;
 import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import edu.wpi.energetic_easter_bunnies.entity.sanitationRequest;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DAOSystem {
+  private final AccountDAOImpl accountDAO;
   private final EmployeeDAOImpl employeeDAO;
   private final LabRequestDAOImpl labRequestDAO;
   private final LocationDAOImpl locationDAO;
@@ -18,6 +20,33 @@ public class DAOSystem {
   private final MedicalEquipmentServiceRequestDAOImpl medicalEquipmentServiceRequestDAO;
   private final SanitationRequestDAOImpl sanitationRequestDAO;
   private final ServiceRequestDAOImpl serviceRequestDAO;
+
+  public DAOSystem() throws SQLException {
+    accountDAO = new AccountDAOImpl();
+    employeeDAO = new EmployeeDAOImpl();
+    labRequestDAO = new LabRequestDAOImpl();
+    locationDAO = new LocationDAOImpl();
+    medicalEquipmentDAO = new MedicalEquipmentDAOImpl();
+    medicalEquipmentServiceRequestDAO = new MedicalEquipmentServiceRequestDAOImpl();
+    serviceRequestDAO = new ServiceRequestDAOImpl();
+    sanitationRequestDAO = new SanitationRequestDAOImpl();
+  }
+
+  public List<Account> getAllAccounts() {
+    return accountDAO.getAll();
+  }
+
+  public Account getAccount(String id) {
+    return accountDAO.get(id);
+  }
+
+  public void updateAccount(Account account) {
+    accountDAO.update(account);
+  }
+
+  public void deleteAccount(Account account) {
+    accountDAO.delete(account);
+  }
 
   public List<Employee> getAllEmployee() {
     return employeeDAO.getAll();
@@ -113,16 +142,6 @@ public class DAOSystem {
 
   public void deleteServiceRequest(serviceRequest request) {
     serviceRequestDAO.delete(request);
-  }
-
-  public DAOSystem() throws SQLException {
-    employeeDAO = new EmployeeDAOImpl();
-    labRequestDAO = new LabRequestDAOImpl();
-    locationDAO = new LocationDAOImpl();
-    medicalEquipmentDAO = new MedicalEquipmentDAOImpl();
-    medicalEquipmentServiceRequestDAO = new MedicalEquipmentServiceRequestDAOImpl();
-    serviceRequestDAO = new ServiceRequestDAOImpl();
-    sanitationRequestDAO = new SanitationRequestDAOImpl();
   }
 
   public void updateLabServiceRequest(labRequest labRequest, String newRequestStatus)
