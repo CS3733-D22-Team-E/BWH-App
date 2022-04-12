@@ -13,12 +13,17 @@ public class CSVManager {
 
   private static final String locationFormat =
       "NODEID, XCOORD, YCOORD, BUILDING, NODETYPE, LONGNAME, SHORTNAME, FLOOR";
-  private static final String medEquipFormat = "";
-  private static final String medEquipRequestFormat = "";
-  private static final String labRequestFormat = "";
-  private static final String employeeFormat = "";
+  private static final String medEquipFormat =
+      "EQUIPMENTID, MED_EQUIP_REQ_ID, ISINUSE, ISCLEAN, CLEANLOCATIONID, STORAGELOCATIONID, CURRENTLOCATIONID, EQUIPMENTTYPE";
+  private static final String medEquipRequestFormat =
+      "MED_EQUIPMENTID, REQUESTDATE, ISURGENT, EQUIP, EQUIPQUANTITY, STAFFASSIGNEE, LOCATIONID, FLOOR, REQUESTSTATUS, OTHERNOTES";
+  private static final String labRequestFormat =
+      "LAB_REQUESTID, LAB_REQUEST_TYPE, STAFFASSIGNEE, LOCATIONID, TIMEFRAME, REQUESTSTATUS, OTHERNOTES";
+  private static final String employeeFormat =
+      "EMPLOYEEID, NAME, LOCATIONID, POSITION, AVAILABLE, SALARY";
   private static final String serviceRequestFormat =
       "REQUESTID, STATUS, TYPE, ASSIGNEE, REQUEST_DATE, DELIVERY_DATE, ISURGENT";
+  private static final String accountFormat = "";
 
   /*
       SAVING CSV FILES FROM THE DATABASE
@@ -244,9 +249,9 @@ public class CSVManager {
     return loadCSVGeneral(fileName, "SERVICEREQUEST", serviceRequestFormat);
   }
 
-  /*public static void loadUsersCSV(String fileName) throws SQLException, IOException {
-  loadCSVGeneral(fileName,"USERS", usersFormat);
-  }*/
+  public static void loadUsersCSV(String fileName) throws SQLException, IOException {
+    loadCSVGeneral(fileName, "ACCOUNTS", accountFormat);
+  }
 
   /*
       HELPER FUNCTIONS
