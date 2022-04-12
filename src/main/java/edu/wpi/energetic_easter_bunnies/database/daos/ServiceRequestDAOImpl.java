@@ -1,6 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
 import edu.wpi.energetic_easter_bunnies.database.DBConnect;
+import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.medicineDelivery;
 import edu.wpi.energetic_easter_bunnies.entity.*;
 import java.sql.*;
@@ -38,6 +39,22 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
     for (serviceRequest request : serviceRequests) {
       System.out.println(request.getRequestType());
     }
+  }
+
+  public void getCoords() throws SQLException{
+      DAO<Location> locationDAO = new LocationDAOImpl();
+      for(serviceRequest request : serviceRequests){
+        try{
+          Location location = locationDAO.get(request.getRoomID());
+          request.setxCoord(location.getXcoord());
+          request.setyCoord(location.getYcoord());
+          request.setFloorID(location.getFloor());
+        } catch (NullPointerException e){
+          e.printStackTrace();
+          request.setxCoord(-1);
+          request.setyCoord(-1);
+        }
+      }
   }
 
   @Override
