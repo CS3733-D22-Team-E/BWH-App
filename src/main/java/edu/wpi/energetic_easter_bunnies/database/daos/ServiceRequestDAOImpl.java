@@ -48,6 +48,7 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
           Location location = locationDAO.get(request.getRoomID());
           request.setxCoord(location.getXcoord());
           request.setyCoord(location.getYcoord());
+          request.setFloorID(location.getFloor());
         } catch (NullPointerException e){
           e.printStackTrace();
           request.setxCoord(-1);
