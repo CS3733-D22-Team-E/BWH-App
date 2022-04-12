@@ -12,6 +12,13 @@ import javafx.scene.control.*;
 public class languageInterpreterRequestController extends serviceRequestPageController
     implements Initializable {
 
+  @FXML private ChoiceBox<String> languageSelection;
+  private String[] langList = {"English", "Spanish", "Russian", "Mandarin Chinese"};
+
+  @FXML TextField noteField;
+  @FXML DatePicker startSelection;
+  @FXML DatePicker endSelection;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
@@ -19,13 +26,6 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
     languageSelection.setValue("Select Language");
     languageSelection.getItems().addAll(langList);
   }
-
-  @FXML private ChoiceBox<String> languageSelection;
-  private String[] langList = {"English", "Spanish", "Russian", "Mandarin Chinese"};
-
-  @FXML TextField noteField;
-  @FXML DatePicker startSelection;
-  @FXML DatePicker endSelection;
 
   languageInterpreterRequest languageInterpreterRequest = new languageInterpreterRequest();
 
