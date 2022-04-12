@@ -26,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
 
 public class DashboardController extends containsSideMenu implements Initializable {
 
@@ -231,6 +232,8 @@ public class DashboardController extends containsSideMenu implements Initializab
             + dirtyEquipment
             + "\nIn Use Equipment Count: "
             + inUseEquipment);
+
+    tooltip.setShowDelay(Duration.seconds(.2));
   }
 
   @FXML
