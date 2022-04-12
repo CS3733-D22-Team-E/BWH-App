@@ -236,6 +236,7 @@ public class DashboardController extends containsSideMenu implements Initializab
     tooltip.setShowDelay(Duration.seconds(.2));
   }
 
+  //TODO: make it so this loads the map page with the selected floor
   @FXML
   private void floorViewButton(ActionEvent event) {
     Stage thisStage = (Stage) baseComponent.getScene().getWindow();
