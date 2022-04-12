@@ -92,7 +92,7 @@
                   <Group layoutX="74.0" layoutY="210.0" />
                   <Group layoutX="77.0" layoutY="245.0" />
                   <Button fx:id="submitButton" layoutX="413.0" layoutY="423.0" mnemonicParsing="false" onAction="#submitButton" prefHeight="38.0" prefWidth="147.0" text="Submit Request" />
-                  <CheckBox fx:id="asapCheck" layoutX="402.0" layoutY="125.0" mnemonicParsing="false" text="ASAP" />
+                  <CheckBox fx:id="isUrgent" layoutX="402.0" layoutY="125.0" mnemonicParsing="false" text="Urgent" />
                   <TextArea fx:id="otherNotesTxt" layoutX="611.0" layoutY="78.0" prefHeight="101.0" prefWidth="339.0" promptText="Type to add text..." />
                   <TextField fx:id="timeTxt" layoutX="256.0" layoutY="121.0" prefHeight="26.0" prefWidth="138.0" promptText="__ __ : __ __ AM/PM" />
                   <ComboBox fx:id="dessertDropDown" layoutX="402.0" layoutY="56.0" prefHeight="26.0" prefWidth="130.0" promptText="Select a Dessert">

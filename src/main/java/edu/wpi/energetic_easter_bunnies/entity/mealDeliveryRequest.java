@@ -9,6 +9,7 @@ public class mealDeliveryRequest extends serviceRequest {
   private String dessertType;
 
   private int deliveryTime; // TODO: Talk with Phillip about whether or not this is still needed,
+  // Yes I "need" this TODO: Make it a String in DAOImpl
   // considering serviceRequest has a LocalDate DeliveryDate
 
   public mealDeliveryRequest(
