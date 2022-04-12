@@ -19,6 +19,7 @@ public class mainController implements pageButtons {
   @FXML Button medicineDeliveryButton;
   @FXML Button labRequestButton;
   @FXML Button mapButton;
+  @FXML Button dashboardButton;
   @FXML Button aboutButton;
 
   public mainController() {}
@@ -89,6 +90,13 @@ public class mainController implements pageButtons {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     pageControlFacade.loadPage("aboutPage.fxml", thisStage);
+  }
+
+  @FXML
+  public void dashboardButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    pageControlFacade.loadPage("DashboardPage.fxml", thisStage);
   }
 
   @FXML

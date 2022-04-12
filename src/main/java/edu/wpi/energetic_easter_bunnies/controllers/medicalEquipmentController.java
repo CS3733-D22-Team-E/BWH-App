@@ -153,6 +153,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
    */
   protected ObservableList<medicalEquipmentRequest> populateMedEquipList() {
     List<medicalEquipmentRequest> list = medEquipmentServiceRequestDB.getAll();
+    // TODO: FXCollections.observableArrayList(list) ???
     tableList = FXCollections.observableArrayList();
     for (medicalEquipmentRequest m : list) {
       tableList.add(m);
