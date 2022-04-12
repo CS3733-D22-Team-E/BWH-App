@@ -52,14 +52,19 @@ public class RSAEncryption {
     }
   }
 
-  public static String generatePasswordHASH(String password)
-      throws IllegalBlockSizeException, BadPaddingException {
+  public static String generatePasswordHASH(String password) {
+    try {
+      byte[] secretMessageBytes = password.getBytes(StandardCharsets.UTF_8);
 
-    byte[] secretMessageBytes = password.getBytes(StandardCharsets.UTF_8);
-
-    byte[] e = encryptCipher.doFinal(secretMessageBytes);
-
-    return Base64.getEncoder().encodeToString(e);
+      byte[] e = encryptCipher.doFinal(secretMessageBytes);
+      return Base64.getEncoder().encodeToString(e);
+    } catch (IllegalBlockSizeException e) {
+      e.printStackTrace();
+      return "";
+    } catch (BadPaddingException e) {
+      e.printStackTrace();
+      return "";
+    }
   }
 
   private static String decryptHASH(String hash)

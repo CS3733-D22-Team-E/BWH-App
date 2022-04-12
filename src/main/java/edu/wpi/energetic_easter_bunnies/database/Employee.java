@@ -83,4 +83,8 @@ public class Employee {
   public void setNumID(int numID) {
     this.numID = numID;
   }
+
+  public boolean getAvailable() {
+    return available;
+  }
 }
