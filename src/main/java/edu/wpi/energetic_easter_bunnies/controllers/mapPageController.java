@@ -219,7 +219,7 @@ public class mapPageController implements Initializable {
 
   @FXML
   public void zoomUp(ActionEvent event) throws SQLException, FileNotFoundException {
-    if (mapBox.getPrefHeight() < maxZoom) {
+    if (mapBox.getPrefHeight() < zoomSlider.getMax()) {
       mapBox.setPrefHeight(mapBox.getPrefHeight() + zoomIncrement);
       mapBox.setPrefWidth(mapBox.getPrefWidth() + zoomIncrement);
       mapImage.setFitHeight(mapImage.getFitHeight() + zoomIncrement);
@@ -238,7 +238,7 @@ public class mapPageController implements Initializable {
 
   @FXML
   public void zoomDown(ActionEvent event) throws SQLException, FileNotFoundException {
-    if (mapBox.getPrefHeight() > minZoom) {
+    if (mapBox.getPrefHeight() > zoomSlider.getMin()) {
       mapBox.setPrefHeight(mapBox.getPrefHeight() - zoomIncrement);
       mapBox.setPrefWidth(mapBox.getPrefWidth() - zoomIncrement);
       mapImage.setFitHeight(mapImage.getFitHeight() - zoomIncrement);
