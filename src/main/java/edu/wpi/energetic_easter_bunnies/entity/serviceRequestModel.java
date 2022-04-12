@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 public class serviceRequestModel {
 
   SimpleBooleanProperty isUrgent;
-  SimpleStringProperty ID, Status, Type, Assignee, requestDate, deliveryDate;
+  SimpleStringProperty ID, Status, Type, Assignee, requestDate, deliveryDate, floorID, roomID;
 
   public serviceRequestModel(
       String ID,
@@ -107,5 +107,29 @@ public class serviceRequestModel {
 
   public void setDeliveryDate(String deliveryDate) {
     this.deliveryDate.set(deliveryDate);
+  }
+
+  public String getFloorID() {
+    return floorID.get();
+  }
+
+  public SimpleStringProperty floorIDProperty() {
+    return floorID;
+  }
+
+  public void setFloorID(String floorID) {
+    this.floorID.set(floorID);
+  }
+
+  public String getRoomID() {
+    return roomID.get();
+  }
+
+  public SimpleStringProperty roomIDProperty() {
+    return roomID;
+  }
+
+  public void setRoomID(String roomID) {
+    this.roomID.set(roomID);
   }
 }

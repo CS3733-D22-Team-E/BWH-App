@@ -195,6 +195,7 @@ public class DBCreation {
             + "    OTHERNOTES         VARCHAR(255)\n"
             + ")";
     Statement statement = connection.createStatement();
+    statement.executeUpdate(query);
   }
 
   public static void createAccountsTable() throws SQLException {
