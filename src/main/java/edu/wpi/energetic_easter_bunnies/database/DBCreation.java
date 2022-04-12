@@ -4,8 +4,8 @@ import static edu.wpi.energetic_easter_bunnies.RSAEncryption.generatePasswordHAS
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DBCreation {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
@@ -21,16 +21,18 @@ public class DBCreation {
             + "    AVAILABLE  BOOLEAN     not null,\n"
             + "    SALARY     DOUBLE      not null\n"
             + ")";
-    Statement statement = connection.createStatement();
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
     query =
         "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES "
             + "('admin', 'admin' , 'admin', 'admin', TRUE, 1)";
-    statement.executeUpdate(query);
+    statement = connection.prepareStatement(query);
+    statement.executeUpdate();
     query =
         "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES "
             + "('staff', 'staff' , 'staff', 'staff', TRUE, 1)";
-    statement.executeUpdate(query);
+    statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   public static void createEquipmentTable() throws SQLException, IOException {
@@ -46,8 +48,8 @@ public class DBCreation {
             + "    \"currentLocationID\" VARCHAR(35),\n"
             + "    \"equipmentType\"     VARCHAR(35)\n"
             + ")";
-    Statement statement = connection.createStatement();
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   public static void createLabRequestTable() throws SQLException, IOException {
@@ -62,8 +64,8 @@ public class DBCreation {
             + "    REQUESTSTATUS    VARCHAR(35) not null,\n"
             + "    OTHERNOTES       VARCHAR(35) not null\n"
             + ")";
-    Statement statement = connection.createStatement();
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   public static void createMedEquipReqTable() throws SQLException, IOException {
@@ -82,8 +84,8 @@ public class DBCreation {
             + "    REQUESTSTATUS   VARCHAR(31)  not null,\n"
             + "    OTHERNOTES      VARCHAR(255) not null\n"
             + ")";
-    Statement statement = connection.createStatement();
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
     // CSVManager.loadMedEquipReqCSV("MedEquipRequest.csv");
   }
 
@@ -100,10 +102,9 @@ public class DBCreation {
             + "    SHORTNAME VARCHAR(35) not null,\n"
             + "    FLOOR     VARCHAR(25) not null\n"
             + ")";
-    Statement statement = connection.createStatement();
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
     CSVManager.loadLocationCSV("TowerLocations.csv"); // TODO: data[1] is getting an OOB
-    // CSVManager.loadLocationCSV("TowerLocations.csv"); // TODO: data[1] is getting an OOB
     // Exception
   }
 
@@ -119,8 +120,8 @@ public class DBCreation {
             + "    DELIVERY_DATE DATE,\n"
             + "    ISURGENT      BOOLEAN     not null\n"
             + ")";
-    Statement statement = connection.createStatement();
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   public static void createMedicineRequestTable() throws SQLException {
@@ -142,8 +143,8 @@ public class DBCreation {
             + "    OTHERNOTES         VARCHAR(255), \n"
             + "    DELIVERYTIME       VARCHAR(35) \n"
             + ")";
-    Statement statement = connection.createStatement();
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   public static void createSanitationRequestTable() throws SQLException {
@@ -162,8 +163,8 @@ public class DBCreation {
             + "    ISBIOHAZARD        VARCHAR(25), \n"
             + "    OTHERNOTES         VARCHAR(255)\n"
             + ")";
-    Statement statement = connection.createStatement();
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   public static void createMealRequestTable() throws SQLException {
@@ -184,8 +185,8 @@ public class DBCreation {
             + "    DELIVERYTIME       int, \n"
             + "    OTHERNOTES         VARCHAR(255)\n"
             + ")";
-    Statement statement = connection.createStatement();
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   public static void createLanguageInterpreterRequestTable() throws SQLException {
@@ -203,8 +204,8 @@ public class DBCreation {
             + "    LANGUAGE           VARCHAR(25), \n"
             + "    OTHERNOTES         VARCHAR(255)\n"
             + ")";
-    Statement statement = connection.createStatement();
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   public static void createAccountsTable() throws SQLException {
@@ -219,21 +220,23 @@ public class DBCreation {
             + "    LASTNAME       VARCHAR(35),          \n"
             + "    POSITION       VARCHAR(35)           \n"
             + ")";
-    Statement statement = connection.createStatement();
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
     System.out.println(generatePasswordHASH("admin"));
     query =
         "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES "
             + "('admin', 'admin' , 3, '"
             + generatePasswordHASH("admin")
             + "', 'admin', 'admin', 'admin')";
-    statement.executeUpdate(query);
+    statement = connection.prepareStatement(query);
+    statement.executeUpdate();
     query =
         "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES "
             + "('staff', 'staff' , 1, '"
             + generatePasswordHASH("staff")
             + "', 'staff', 'staff', 'staff')";
-    statement.executeUpdate(query);
+    statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 
   public static void createTables() {
