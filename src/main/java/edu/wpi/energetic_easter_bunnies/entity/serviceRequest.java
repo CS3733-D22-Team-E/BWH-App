@@ -208,12 +208,9 @@ public class serviceRequest {
   public void setyCoord(int yCoord) {
     this.yCoord = yCoord;
   }
-<<<<<<< HEAD
-=======
 
   @Override
   public String toString() {
     return getRequestType().toString() + " : {" + getServiceRequestID() + "}";
   }
->>>>>>> Joey_Working_Branch
 }
