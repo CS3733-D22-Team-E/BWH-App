@@ -156,6 +156,7 @@ public class mainController implements pageButtons {
     pageControlFacade.loadPage("helpPage.fxml", thisStage);
   }
 
+  @FXML
   public void dashboardButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 

@@ -2,12 +2,12 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXToggleButton;
-import edu.wpi.energetic_easter_bunnies.Main;
 import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.ServiceRequestDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
+import edu.wpi.energetic_easter_bunnies.pageControlFacade;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,7 +24,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,7 +32,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javax.swing.*;
 
-public class mapPageController implements Initializable {
+public class mapPageController extends containsSideMenu implements Initializable {
   FXMLLoader loader = new FXMLLoader();
   Parent root;
   @FXML MenuBar menuBar;
@@ -43,6 +42,7 @@ public class mapPageController implements Initializable {
   List<MedicalEquipment> medEqList;
   List<MedicalEquipment> filteredMedEqList;
   List<serviceRequest> servReqList;
+  List<serviceRequest> filteredServReqList;
 
   int zoomIncrement = 50;
   int maxZoom = 1035;
@@ -57,7 +57,8 @@ public class mapPageController implements Initializable {
   @FXML JFXSlider zoomSlider;
   @FXML JFXToggleButton filterMode;
 
-  ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
+  ObservableList<String> floors =
+      FXCollections.observableArrayList("L1", "L2", "1", "2", "3", "4", "5");
 
   public mapPageController() throws SQLException {
     int i = 3;
@@ -65,6 +66,7 @@ public class mapPageController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+    super.initialize(url, rb);
 
     // Add items to dropdown
     floorDropdown.setItems(floors);
@@ -88,7 +90,11 @@ public class mapPageController implements Initializable {
     }
 
     filterMedicalEquipment();
-    filterServiceRequests();
+    try {
+      filterServiceRequests();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
 
     // Display the currently selected filterMode
     if (filterMode.isSelected() == false) {
@@ -100,7 +106,11 @@ public class mapPageController implements Initializable {
         e.printStackTrace();
       }
     } else {
-      // Show service request locations
+      try {
+        displayServiceRequestLocations(filteredServReqList);
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
     }
   }
 
@@ -152,6 +162,69 @@ public class mapPageController implements Initializable {
     }
   }
 
+  private void displayServiceRequestLocations(List<serviceRequest> servReqList)
+      throws FileNotFoundException {
+
+    System.out.println("Display Service Request Locations");
+
+    double imageX = mapImage.getFitWidth();
+    double coordinateX = 935;
+    double scaleFactor = imageX / coordinateX;
+
+    // Remove all the icons from the map
+    mapBox.getChildren().clear();
+    mapBox.getChildren().add(mapImage);
+
+    // Display an icon for each item in the filtered list
+    for (serviceRequest e : filteredServReqList) {
+      Image image =
+          new Image(
+              new FileInputStream(
+                  "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/location.png"));
+
+      if (e.getRequestType() == serviceRequest.Type.MED_DELIV_REQ) {
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/medicine.png"));
+      } else if (e.getRequestType() == serviceRequest.Type.LAB_REQUEST) {
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/beaker.png"));
+      } else if (e.getRequestType() == serviceRequest.Type.MED_EQUIP_REQ) {
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/microscope.png"));
+      } else if (e.getRequestType() == serviceRequest.Type.MEAL_DELIV_REQ) {
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/mealDelivery.png"));
+      } else if (e.getRequestType() == serviceRequest.Type.SANITATION_REQ) {
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/sanitizer.png"));
+      } else if (e.getRequestType() == serviceRequest.Type.LANG_INTERP_REQ) {
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/Language.png"));
+      }
+      double prefWidth = (int) image.getWidth() / 2.5;
+      double prefHeight = (int) image.getHeight() / 2.5;
+
+      ImageView i = new ImageView(image);
+      i.setFitWidth(prefWidth);
+      i.setFitHeight(prefHeight);
+      i.setX(e.getxCoord() * scaleFactor - (prefWidth / 2));
+      i.setY(e.getyCoord() * scaleFactor - (prefHeight / 2));
+      mapBox.getChildren().add(i);
+    }
+  }
+
   private void switchMap(String floor) throws FileNotFoundException, SQLException {
 
     // Clears the medical Equipment Icons
@@ -170,6 +243,18 @@ public class mapPageController implements Initializable {
             new Image(
                 new FileInputStream(
                     "src/main/resources/edu/wpi/energetic_easter_bunnies/view/images/maps/03_thethirdfloor.png")));
+        break;
+      case "4":
+        mapImage.setImage(
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/images/maps/04_thefourthfloor.png")));
+        break;
+      case "5":
+        mapImage.setImage(
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/images/maps/05_thefifthfloor.png")));
         break;
       case "L1":
         mapImage.setImage(
@@ -198,7 +283,7 @@ public class mapPageController implements Initializable {
     if (filterMode.isSelected() == false) {
       displayMedEquipLocations(filteredMedEqList);
     } else {
-      // Show service request locations
+      displayServiceRequestLocations(filteredServReqList);
     }
   }
 
@@ -213,7 +298,7 @@ public class mapPageController implements Initializable {
     if (filterMode.isSelected() == false) {
       displayMedEquipLocations(filteredMedEqList);
     } else {
-      // Show service request locations
+      displayServiceRequestLocations(filteredServReqList);
     }
   }
 
@@ -231,7 +316,7 @@ public class mapPageController implements Initializable {
       if (filterMode.isSelected() == false) {
         displayMedEquipLocations(filteredMedEqList);
       } else {
-        // Show service request locations
+        displayServiceRequestLocations(filteredServReqList);
       }
     }
   }
@@ -250,7 +335,7 @@ public class mapPageController implements Initializable {
       if (filterMode.isSelected() == false) {
         displayMedEquipLocations(filteredMedEqList);
       } else {
-        // Show service request locations
+        displayServiceRequestLocations(filteredServReqList);
       }
     }
   }
@@ -284,26 +369,23 @@ public class mapPageController implements Initializable {
   }
 
   // Filter service requests by floor
-  public void filterServiceRequests() {
+  public void filterServiceRequests() throws SQLException {
     // Starter code to implement showing all service requests on the map
     String floor = floorDropdown.getValue().toString();
-    // servReqList = servReq.getAll();
+    ServiceRequestDAOImpl serviceRequestDAO = new ServiceRequestDAOImpl();
+    serviceRequestDAO.getCoords();
 
-    //    List<serviceRequest> filteredRequests =
-    //            medEqList.stream()
-    //                    .filter(
-    //                            medicalEquipment -> {
-    //                              try {
-    //                                if (Objects.equals(medicalEquipment.getFloor(), floor)) {
-    //                                  return true;
-    //                                }
-    //                              } catch (SQLException e) {
-    //                                e.printStackTrace();
-    //                              }
-    //                              return false;
-    //                            })
-    //                    .collect(Collectors.toList());
-    //    displayMedEquipLocations(filteredEquipment);
+    // Filter service request list to only show the current floor
+    filteredServReqList =
+        serviceRequestDAO.getAll().stream()
+            .filter(
+                serviceRequest -> {
+                  if (Objects.equals(serviceRequest.getFloorID(), floor)) {
+                    return true;
+                  }
+                  return false;
+                })
+            .collect(Collectors.toList());
   }
 
   @FXML
@@ -324,145 +406,14 @@ public class mapPageController implements Initializable {
       mapBox.getChildren().add(mapImage);
 
       filterServiceRequests();
-    }
-  }
-
-  @FXML
-  public void mealDeliveryButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) menuBar.getScene().getWindow();
-
-    URL url = Main.class.getResource("view/mealDeliveryPage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      root = loader.load();
-
-      thisStage.setScene(new Scene(root));
-    } else {
-      System.out.println("Path Doesn't Exist");
+      displayServiceRequestLocations(filteredServReqList);
     }
   }
 
   @FXML
   public void mapEditorButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) menuBar.getScene().getWindow();
+    Stage thisStage = (Stage) mapBox.getScene().getWindow();
 
-    URL url = Main.class.getResource("view/mapEditor.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      root = loader.load();
-
-      thisStage.setScene(new Scene(root));
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
-  }
-
-  @FXML
-  public void languageButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) menuBar.getScene().getWindow();
-
-    URL url = Main.class.getResource("view/languagePage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      root = loader.load();
-
-      thisStage.setScene(new Scene(root));
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
-  }
-
-  @FXML
-  public void medicalEquipmentButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) menuBar.getScene().getWindow();
-
-    URL url = Main.class.getResource("view/medicalEquipmentPage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      root = loader.load();
-
-      thisStage.setScene(new Scene(root));
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
-  }
-
-  @FXML
-  public void medicineDeliveryButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) menuBar.getScene().getWindow();
-
-    URL url = Main.class.getResource("view/medicineDelivery.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      root = loader.load();
-
-      thisStage.setScene(new Scene(root));
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
-  }
-
-  public void exitButton(ActionEvent event) throws IOException {
-    System.exit(0);
-  }
-
-  @FXML
-  public void sanitationButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) menuBar.getScene().getWindow();
-
-    URL url = Main.class.getResource("view/sanitationPage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      root = loader.load();
-
-      thisStage.setScene(new Scene(root));
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
-  }
-
-  @FXML
-  public void labRequestButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) menuBar.getScene().getWindow();
-
-    URL url = Main.class.getResource("view/labRequestPage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      root = loader.load();
-
-      thisStage.setScene(new Scene(root));
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
-  }
-
-  @FXML
-  public void homeButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) menuBar.getScene().getWindow();
-
-    URL url = Main.class.getResource("view/defaultPage.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      root = loader.load();
-
-      thisStage.setScene(new Scene(root));
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
-  }
-
-  @FXML
-  public void locationButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) menuBar.getScene().getWindow();
-
-    URL url = Main.class.getResource("view/map.fxml");
-    if (url != null) {
-      loader.setLocation(url);
-      root = loader.load();
-
-      thisStage.setScene(new Scene(root));
-    } else {
-      System.out.println("Path Doesn't Exist");
-    }
+    pageControlFacade.loadPage("mapEditor.fxml", thisStage);
   }
 }
