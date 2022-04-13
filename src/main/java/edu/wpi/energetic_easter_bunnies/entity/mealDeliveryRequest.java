@@ -60,7 +60,7 @@ public class mealDeliveryRequest extends serviceRequest {
   }
 
   public void setBeverageType(String beverage) {
-    this.entreeType = beverage;
+    this.beverageType = beverage;
   }
 
   public String getBeverageType() {
@@ -68,7 +68,7 @@ public class mealDeliveryRequest extends serviceRequest {
   }
 
   public void setDessertType(String dessert) {
-    this.entreeType = dessert;
+    this.dessertType = dessert;
   }
 
   public String getDessertType() {

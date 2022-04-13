@@ -39,7 +39,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML TableColumn<mealDeliveryRequest, String> tableFloorNumber;
   @FXML TableColumn<mealDeliveryRequest, LocalDate> tableDateTime;
   @FXML TableColumn<mealDeliveryRequest, LocalDate> tableRequestDate;
-  @FXML TableColumn<mealDeliveryRequest, Integer> tableTime;
+  @FXML TableColumn<mealDeliveryRequest, String> tableTime;
   @FXML TableColumn<mealDeliveryRequest, String> tableStaffAssignee;
   @FXML TableColumn<mealDeliveryRequest, String> tableRequestStatus;
   @FXML TableColumn<mealDeliveryRequest, Boolean> tableUrgent;
@@ -102,15 +102,15 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     tableDessert.setCellValueFactory(
         new PropertyValueFactory<mealDeliveryRequest, String>("dessertType"));
     tableRoomNumber.setCellValueFactory(
-        new PropertyValueFactory<mealDeliveryRequest, String>("roomNumber"));
-    tableFloorNumber.setCellValueFactory(
-        new PropertyValueFactory<mealDeliveryRequest, String>("floorNumber"));
+        new PropertyValueFactory<mealDeliveryRequest, String>("roomID"));
+    tableFloorNumber.setCellValueFactory( // throwing npe
+        new PropertyValueFactory<mealDeliveryRequest, String>("floorID"));
     tableDateTime.setCellValueFactory(
         new PropertyValueFactory<mealDeliveryRequest, LocalDate>("deliveryDate"));
     tableRequestDate.setCellValueFactory(
         new PropertyValueFactory<mealDeliveryRequest, LocalDate>("requestDate"));
     tableTime.setCellValueFactory(
-        new PropertyValueFactory<mealDeliveryRequest, Integer>("deliveryTime"));
+        new PropertyValueFactory<mealDeliveryRequest, String>("deliveryTime"));
     tableStaffAssignee.setCellValueFactory(
         new PropertyValueFactory<mealDeliveryRequest, String>("staffAssignee"));
     tableRequestStatus.setCellValueFactory(
@@ -139,7 +139,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       mealDeliveryRequest.setFloorID(floor.getValue());
       mealDeliveryRequest.setRequestDate(LocalDate.now());
       mealDeliveryRequest.setDeliveryDate(dateTime.getValue());
-      mealDeliveryRequest.setDeliveryTime(Integer.parseInt("0" + timeTxt.getText()));
+      mealDeliveryRequest.setDeliveryTime(timeTxt.getText());
       mealDeliveryRequest.setUrgent(isUrgent.isSelected());
       mealDeliveryRequest.setOtherNotes(otherNotesTxt.getText());
       mealDeliveryRequest.setStaffAssignee(staffAssignee.getText());
