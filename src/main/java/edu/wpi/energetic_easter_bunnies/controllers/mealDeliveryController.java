@@ -112,7 +112,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       mealDeliveryRequest.setEntreeType(entreeDropDown.getValue());
       mealDeliveryRequest.setBeverageType(beverageDropDown.getValue());
       mealDeliveryRequest.setDessertType(dessertDropDown.getValue());
-      // mealDeliveryRequest.setRoomNumber(Integer.parseInt("0" + roomNumberTxt.getText()));
+      // mealDeliveryRequest.setRoomID(Integer.parseInt("0" + roomNumberTxt.getText()));
       mealDeliveryRequest.setDeliveryDate(dateTime.getValue());
       mealDeliveryRequest.setDeliveryTime(Integer.parseInt("0" + timeTxt.getText()));
       // mealDeliveryRequest.setASAP(asapCheck.isSelected());

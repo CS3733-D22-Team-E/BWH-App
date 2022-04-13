@@ -103,7 +103,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   public void submitButton(ActionEvent event) {
     try {
       medicineDeliveryRequest.setFloorID(floor.getValue());
-      medicineDeliveryRequest.setRoomID(room.getValue());
+      medicineDeliveryRequest.setRoomID(roomNameToRoomID.get(room.getValue()));
       medicineDeliveryRequest.setAmount(amount.getText());
       medicineDeliveryRequest.setMedicine(medicine.getValue());
       medicineDeliveryRequest.setUrgent(urgent.isSelected());
@@ -117,6 +117,7 @@ public class medicineDeliveryController extends serviceRequestPageController
       medicineDeliveryRequest.setFri(fri.isSelected());
       medicineDeliveryRequest.setSat(sat.isSelected());
       medicineDeliveryRequest.setSun(sun.isSelected());
+      medicineDeliveryRequest.setReocurringDays(medicineDeliveryRequest.getRepeatingDays());
       medicineDeliveryRequest.setOtherNotes(notes.getText());
       medicineDeliveryRequest.setRequestDate(LocalDate.now());
       medicineDeliveryRequest.setStaffAssignee(staffAssignee.getText());
@@ -192,7 +193,16 @@ public class medicineDeliveryController extends serviceRequestPageController
   private void populateMedicineTable() {
     ObservableList<medicineDelivery> medicineRequests = populateMedicineDeliveriesList();
     tableFloor.setCellValueFactory(new PropertyValueFactory<medicineDelivery, String>("floorID"));
-    tableRoom.setCellValueFactory(new PropertyValueFactory<medicineDelivery, String>("roomID"));
+    tableRoom.setCellValueFactory(
+        new Callback<
+            TableColumn.CellDataFeatures<medicineDelivery, String>, ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TableColumn.CellDataFeatures<medicineDelivery, String> param) {
+            medicineDelivery curMedicineReq = param.getValue();
+            return new SimpleStringProperty(roomIDToRoomName.get(curMedicineReq.getRoomID()));
+          }
+        });
     tableMedicine.setCellValueFactory(
         new PropertyValueFactory<medicineDelivery, String>("medicine"));
     tableQuantity.setCellValueFactory(new PropertyValueFactory<medicineDelivery, String>("amount"));
@@ -202,38 +212,7 @@ public class medicineDeliveryController extends serviceRequestPageController
     tableTime.setCellValueFactory(
         new PropertyValueFactory<medicineDelivery, String>("deliveryTime"));
     tableReoccurringDays.setCellValueFactory(
-        new Callback<
-            TableColumn.CellDataFeatures<medicineDelivery, String>, ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(
-              TableColumn.CellDataFeatures<medicineDelivery, String> param) {
-            medicineDelivery delivery = param.getValue();
-
-            String reoccurringDays = new String();
-            if (delivery.getMon()) {
-              reoccurringDays += "Mon, ";
-            }
-            if (delivery.getTues()) {
-              reoccurringDays += "Tues, ";
-            }
-            if (delivery.getWed()) {
-              reoccurringDays += "Wed, ";
-            }
-            if (delivery.getThurs()) {
-              reoccurringDays += "Thurs, ";
-            }
-            if (delivery.getFri()) {
-              reoccurringDays += "Fri, ";
-            }
-            if (delivery.getSat()) {
-              reoccurringDays += "Sat, ";
-            }
-            if (delivery.getSun()) {
-              reoccurringDays += "Sun, ";
-            }
-            return new SimpleStringProperty(reoccurringDays);
-          }
-        });
+        new PropertyValueFactory<medicineDelivery, String>("reocurringDays"));
     tableStaff.setCellValueFactory(
         new PropertyValueFactory<medicineDelivery, String>("staffAssignee"));
     tableProgress.setCellValueFactory(

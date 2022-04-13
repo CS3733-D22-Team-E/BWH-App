@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class medicalEquipmentController extends serviceRequestPageController {
 
@@ -135,7 +137,16 @@ public class medicalEquipmentController extends serviceRequestPageController {
     tableStaffAssignee.setCellValueFactory(
         new PropertyValueFactory<medicalEquipmentRequest, String>("staffAssignee"));
     tableRoomID.setCellValueFactory(
-        new PropertyValueFactory<medicalEquipmentRequest, String>("roomID"));
+        new Callback<
+            TableColumn.CellDataFeatures<medicalEquipmentRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TableColumn.CellDataFeatures<medicalEquipmentRequest, String> param) {
+            medicalEquipmentRequest curMedicalEquipReq = param.getValue();
+            return new SimpleStringProperty(roomIDToRoomName.get(curMedicalEquipReq.getRoomID()));
+          }
+        });
     tableFloorID.setCellValueFactory(
         new PropertyValueFactory<medicalEquipmentRequest, String>("floorID"));
     tableRequestStatus.setCellValueFactory(
@@ -171,7 +182,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
   public void submitButton(ActionEvent event) throws SQLException {
     try {
       medicalEquipmentRequest.setFloorID(floor.getValue());
-      medicalEquipmentRequest.setRoomID(room.getValue());
+      medicalEquipmentRequest.setRoomID(roomNameToRoomID.get(room.getValue()));
       medicalEquipmentRequest.setEquipment(equipmentType.getValue());
       medicalEquipmentRequest.setEquipmentQuantity(equipmentQuantity.getValue());
       medicalEquipmentRequest.setRequestStatus(requestStatus.getText());
@@ -213,7 +224,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
    * @throws SQLException ??
    */
   private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) throws SQLException {
-    medEquipmentServiceRequestDB.update(medEquipmentRequest);
+    medEquipmentServiceRequestDB.addMedEquipReq(medEquipmentRequest);
     tableList.add(medEquipmentRequest);
     List<MedicalEquipment> equipmentUsed =
         medEquipmentDB.getMedicalEquipments(

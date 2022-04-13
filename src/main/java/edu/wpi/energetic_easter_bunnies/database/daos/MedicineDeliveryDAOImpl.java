@@ -102,6 +102,8 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
       statement.setString(9, item.getMedicine());
       statement.setString(10, item.getAmount());
       statement.setString(11, item.getUnit());
+      System.out.println(
+          "Yabbla 0: " + item.getRepeatingDays()); // TODO: GOOD DEBUGGING PRACTICE !!!
       statement.setString(12, item.getRepeatingDays());
       statement.setString(13, item.getOtherNotes());
       statement.setString(14, item.getDeliveryTime());
