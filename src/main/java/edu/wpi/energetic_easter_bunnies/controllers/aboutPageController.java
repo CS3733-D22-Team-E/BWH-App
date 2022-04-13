@@ -8,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 
-/** Oop its gone now lol */
 public class aboutPageController {
 
   @FXML Hyperlink wilsonWong;

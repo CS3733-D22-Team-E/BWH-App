@@ -198,6 +198,20 @@
                         <Label layoutX="13.0" layoutY="76.0" text="About Page" textAlignment="CENTER" />
                      </children>
                   </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="helpButton" alignment="CENTER" mnemonicParsing="false" onAction="#helpButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/help.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="13.0" layoutY="76.0" text="Help Page" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
                </children>
                <opaqueInsets>
                   <Insets />
