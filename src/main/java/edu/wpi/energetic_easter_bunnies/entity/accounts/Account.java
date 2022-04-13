@@ -80,7 +80,11 @@ public abstract class Account {
     return this.lastName;
   }
 
-  private /* ? */ String getPasswordHash() {
+  public String getPasswordHash() {
     return this.passwordHash;
+  }
+
+  public String getEmployeeID() {
+    return employeeID;
   }
 }

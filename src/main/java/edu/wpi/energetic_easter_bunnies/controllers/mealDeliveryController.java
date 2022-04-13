@@ -1,6 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
-import edu.wpi.energetic_easter_bunnies.PopUpWarning;
+import edu.wpi.energetic_easter_bunnies.PopUp;
 import edu.wpi.energetic_easter_bunnies.entity.mealDeliveryRequest;
 import java.net.URL;
 import java.time.LocalDate;
@@ -10,9 +10,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * This is the controller class for the meal delivery service request. Inherits from the
+ * serviceDeliveryController super class.
+ */
 public class mealDeliveryController extends serviceRequestPageController implements Initializable {
   @FXML ComboBox<String> entreeDropDown;
   @FXML ComboBox<String> beverageDropDown;
@@ -36,23 +41,29 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML TableColumn<mealDeliveryRequest, Boolean> tableASAP;
   @FXML TableColumn<mealDeliveryRequest, String> tableOtherNotes;
 
-  // todo:  add DAOImpl
-  // work with Jeremy
-
-  // todo: implement the DAO stuff to make table functional
-
+  /** Creating a mealDeliveryRequest Object to store the inputted data. */
   mealDeliveryRequest mealDeliveryRequest = new mealDeliveryRequest();
 
+  /** Constructor */
   public mealDeliveryController() {}
 
+  /** Creating the ObservableLists for the pages' drop down. */
   ObservableList<String> meals =
       FXCollections.observableArrayList(
           "Chicken Parmesan", "Turkey Dinner", "Chicken Noodle Soup", "Two Cookies");
+
   ObservableList<String> beverages =
       FXCollections.observableArrayList("Water", "Coca-Cola", "Pepsi", "Root Beer");
   ObservableList<String> desserts =
       FXCollections.observableArrayList("Cookies", "Vanilla Cake", "Tiramisu", "Chocolate Cake");
 
+  /**
+   * Initializes the drops downs with the respective observable lists and the table columns with the
+   * values from current service requests.
+   *
+   * @param location ??
+   * @param resources ??
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
@@ -81,19 +92,27 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     tableOtherNotes.setCellValueFactory(
         new PropertyValueFactory<mealDeliveryRequest, String>("Other Notes"));
 
+    // entreeDropDown.prefWidthProperty().bind(vbox.widthProperty());
+
     //      mealDeliveryTable.setItems(mealDeliveryRequest);
     //    } catch (SQLException e) {
     //      e.printStackTrace();
     //    }
   }
 
+  /**
+   * Takes the inputs from the buttons, drop downs, text fields etc. and stores that data in the
+   * mealDeliveryRequest object.
+   *
+   * @param event Pressing the submitButton
+   */
   @FXML
   public void submitButton(ActionEvent event) {
     try {
       mealDeliveryRequest.setEntreeType(entreeDropDown.getValue());
       mealDeliveryRequest.setBeverageType(beverageDropDown.getValue());
       mealDeliveryRequest.setDessertType(dessertDropDown.getValue());
-      // mealDeliveryRequest.setRoomNumber(Integer.parseInt("0" + roomNumberTxt.getText()));
+      // mealDeliveryRequest.setRoomID(Integer.parseInt("0" + roomNumberTxt.getText()));
       mealDeliveryRequest.setDeliveryDate(dateTime.getValue());
       mealDeliveryRequest.setDeliveryTime(Integer.parseInt("0" + timeTxt.getText()));
       // mealDeliveryRequest.setASAP(asapCheck.isSelected());
@@ -116,10 +135,15 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       }
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
-      PopUpWarning.createWarning("Warning : A required value was not filled");
+      PopUp.createWarning("Warning : A required value was not filled", (Node) event.getSource());
     }
   }
 
+  /**
+   * clears all of the inputs on the page.
+   *
+   * @param event Pressing the resetButton
+   */
   @FXML
   private void resetButton(ActionEvent event) {
     entreeDropDown.getSelectionModel().clearSelection();

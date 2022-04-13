@@ -12,11 +12,9 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
 
   public MedicalEquipmentServiceRequestDAOImpl() throws SQLException {
     medicalRequests = new ArrayList<>();
-    // String url = "jdbc:derby:myDB;";
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM MED_EQUIP_REQ ORDER BY REQUESTDATE DESC";
-    ResultSet rs = statement.executeQuery(query);
-    // int numID = 0; //TODO: Assign Medical Requests an ID value
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
     while (rs.next()) {
       String medEquipReqID = rs.getString("MED_EQUIPMENTID");
       java.sql.Date reqDate = rs.getDate("REQUESTDATE");
@@ -45,15 +43,16 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
               deliveryDate.toLocalDate(),
               "");
       medicalRequests.add(equipRequest);
-      // numID++;
     }
     rs.close();
   }
 
+  @Override
   public List<medicalEquipmentRequest> getAll() {
     return medicalRequests;
   }
 
+  @Override
   public medicalEquipmentRequest get(String id) {
     for (medicalEquipmentRequest request : medicalRequests) {
       if (request.getServiceRequestID().equals(id)) return request;
@@ -64,18 +63,18 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
     throw new NullPointerException();
   }
 
+  @Override
   public void update(medicalEquipmentRequest request) {
     medicalRequests.add(request);
   }
 
-  public void delete(medicalEquipmentRequest request) {
+  public void delete(medicalEquipmentRequest request) { // TODO: Remove from DB table as well
     medicalRequests.remove(request);
   }
 
   public void addMedEquipReq(medicalEquipmentRequest request) throws SQLException {
     medicalRequests.add(request);
 
-    Statement statement = connection.createStatement();
     String query =
         "INSERT INTO MED_EQUIP_REQ VALUES ('"
             + request.getServiceRequestID()
@@ -100,6 +99,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
             + "','"
             + request.getOtherNotes()
             + "')";
-    statement.executeUpdate(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 }

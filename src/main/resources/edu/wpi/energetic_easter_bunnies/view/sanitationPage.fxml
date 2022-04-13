@@ -39,6 +39,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -193,18 +194,6 @@
                                       </TextField>
                                   </children>
                               </VBox>
-                              <TableView layoutX="398.0" layoutY="35.0" prefHeight="400.0" prefWidth="631.0">
-                                  <columns>
-                                      <TableColumn prefWidth="75.0" text="Request ID" />
-                                      <TableColumn prefWidth="65.0" text="Status" />
-                                      <TableColumn prefWidth="101.0" text="Assigned Staff" />
-                                      <TableColumn prefWidth="63.0" text="Urgency" />
-                                      <TableColumn prefWidth="76.0" text="Biohazard" />
-                                      <TableColumn prefWidth="63.0" text="Size" />
-                                      <TableColumn prefWidth="97.0" text="Floor ID" />
-                              <TableColumn prefWidth="90.0" text="Room ID" />
-                                  </columns>
-                              </TableView>
                               <VBox layoutY="81.0">
                                   <children>
                                       <Label prefHeight="39.0" prefWidth="398.0" text="Floor Number              Room Number">
@@ -232,9 +221,29 @@
                         <JFXButton buttonType="RAISED" layoutX="173.0" layoutY="382.0" onAction="#resetFields" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" style="-fx-background-color: #f1f1f1;" text="Reset Fields" />
                      </children>
                   </Pane>
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="378.0" layoutY="14.0" prefHeight="402.0" prefWidth="634.0">
+                     <content>
+                        <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0">
+                           <children>
+                                    <TableView fx:id="table" prefHeight="400.0" prefWidth="631.0">
+                                        <columns>
+                                            <TableColumn fx:id="id" prefWidth="75.0" text="Request ID" />
+                                            <TableColumn fx:id="status" prefWidth="65.0" text="Status" />
+                                            <TableColumn fx:id="assign" prefWidth="101.0" text="Assigned Staff" />
+                                            <TableColumn fx:id="urgent" prefWidth="63.0" text="Urgency" />
+                                            <TableColumn fx:id="bio" prefWidth="76.0" text="Biohazard" />
+                                            <TableColumn fx:id="size" prefWidth="63.0" text="Size" />
+                                            <TableColumn fx:id="floorCol" prefWidth="97.0" text="Floor ID" />
+                                            <TableColumn fx:id="roomCol" prefWidth="90.0" text="Room ID" />
+                                        </columns>
+                                    </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
                </children>
             </AnchorPane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" disable="true" style="-fx-background-color: transparent;" />
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
             </children>
         </StackPane>
     </children>

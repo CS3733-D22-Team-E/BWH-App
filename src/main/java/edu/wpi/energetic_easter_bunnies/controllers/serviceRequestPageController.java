@@ -20,6 +20,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+/**
+ * Is an abstract class meant to be the super class for each service request page. Inherits from
+ * contains sideMeny
+ */
 public abstract class serviceRequestPageController extends containsSideMenu {
 
   @FXML TextField notes;
@@ -40,6 +44,8 @@ public abstract class serviceRequestPageController extends containsSideMenu {
   @FXML TableColumn<serviceRequest, String> tableOtherNotes;
 
   LocationDAOImpl locationDB;
+  HashMap<String, String> roomNameToRoomID;
+  HashMap<String, String> roomIDToRoomName;
 
   serviceRequestPageController() {
     super();
@@ -86,6 +92,8 @@ public abstract class serviceRequestPageController extends containsSideMenu {
     List<Location> locations = locationDB.getAll();
     List<String> floors = new ArrayList<>();
     HashMap<String, ArrayList<String>> floorToRooms = new HashMap<>();
+    roomNameToRoomID = new HashMap<>();
+    roomIDToRoomName = new HashMap<>();
     // Makes the room combo box hidden until a floor value is selected
     room.setVisible(false);
 
@@ -102,6 +110,8 @@ public abstract class serviceRequestPageController extends containsSideMenu {
         roomsOnFloor = floorToRooms.get(floor);
       }
       roomsOnFloor.add(l.getShortName());
+      roomNameToRoomID.put(l.getShortName(), l.getNodeID());
+      roomIDToRoomName.put(l.getNodeID(), l.getShortName());
       floorToRooms.put(floor, roomsOnFloor);
     }
 
@@ -127,11 +137,13 @@ public abstract class serviceRequestPageController extends containsSideMenu {
             });
   }
 
+  /** Sends the respective data to the respective data base. */
   public boolean sendToDB(serviceRequest request) {
     // todo : implement DB communication
     return true;
   }
 
+  /** Populates the respective table with the respective data. */
   protected void populateRequestTable() {
     // todo : get all service requests as list
     // todo : filter through to match MY type
@@ -143,6 +155,13 @@ public abstract class serviceRequestPageController extends containsSideMenu {
   protected ObservableList<serviceRequest> populateServiceRequestList(ServiceRequestDAOImpl)
    */
 
+  /**
+   * Abstract method for submitting information from the page to the respective service request
+   * object.
+   *
+   * @param event Pressing the submit button.
+   * @throws SQLException ??
+   */
   @FXML
   public abstract void submitButton(ActionEvent event) throws SQLException;
 }

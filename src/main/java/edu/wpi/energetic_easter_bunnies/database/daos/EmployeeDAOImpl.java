@@ -12,20 +12,20 @@ public class EmployeeDAOImpl implements DAO<Employee> {
 
   public EmployeeDAOImpl() throws SQLException {
     employees = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM EMPLOYEES ORDER BY SALARY DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
     int numID = 0;
     while (rs.next()) {
       String employeeID = rs.getString("EMPLOYEEID");
       String name = rs.getString("NAME");
-      double salary = rs.getDouble("SALARY");
-      String location = rs.getString("LOCATION");
+      String locationID = rs.getString("LOCATIONID");
       String position = rs.getString("POSITION");
       boolean available = rs.getBoolean("AVAILABLE");
+      double salary = rs.getDouble("SALARY");
 
       Employee employee =
-          new Employee(employeeID, name, position, salary, location, available, numID);
+          new Employee(employeeID, name, position, salary, locationID, available, numID);
 
       employees.add(employee);
       numID++;
@@ -50,10 +50,38 @@ public class EmployeeDAOImpl implements DAO<Employee> {
   @Override
   public void update(Employee employee) {
     employees.add(employee);
+    try {
+      String query =
+          "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES ('"
+              + employee.getEmployeeID()
+              + "','"
+              + employee.getName()
+              + "','"
+              + employee.getLocation()
+              + "','"
+              + employee.getPosition()
+              + "',"
+              + employee.getAvailable()
+              + ","
+              + employee.getSalary()
+              + ")"; // Insert into database; does not check if the employeeID already exists
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public void delete(Employee employee) {
     employees.remove(employee);
+    try {
+      String query =
+          "DELETE FROM EMPLOYEES WHERE EMPLOYEEID = ('" + employee.getEmployeeID() + "')";
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }
