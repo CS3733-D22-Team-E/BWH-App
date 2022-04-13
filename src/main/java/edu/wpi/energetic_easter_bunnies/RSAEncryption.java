@@ -7,6 +7,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
+import java.util.Objects;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -23,16 +24,19 @@ public class RSAEncryption {
     try {
       kf = KeyFactory.getInstance("RSA");
 
-      FileInputStream inputStream = new FileInputStream("rsa/public.key");
+      // FileInputStream inputStream = new FileInputStream("rsa/public.key");
 
-      byte[] publicKeyBytes = inputStream.readAllBytes();
+      byte[] publicKeyBytes =
+          (Objects.requireNonNull(Main.class.getResourceAsStream("rsa/public.key"))).readAllBytes();
       X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(publicKeyBytes);
 
       publicKey = kf.generatePublic(publicKeySpec);
 
-      inputStream = new FileInputStream("rsa/private.key");
+      // inputStream = new FileInputStream("rsa/private.key");
 
-      byte[] privateKeyBytes = inputStream.readAllBytes();
+      byte[] privateKeyBytes =
+          (Objects.requireNonNull(Main.class.getResourceAsStream("rsa/private.key")))
+              .readAllBytes();
       PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
 
       privateKey = kf.generatePrivate(privateKeySpec);
