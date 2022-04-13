@@ -2,6 +2,7 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.database.daos.MealDeliveryRequestDAOImpl;
+import edu.wpi.energetic_easter_bunnies.PopUp;
 import edu.wpi.energetic_easter_bunnies.entity.mealDeliveryRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -138,6 +140,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       mealDeliveryRequest.setRoomID(room.getValue());
       mealDeliveryRequest.setFloorID(floor.getValue());
       mealDeliveryRequest.setRequestDate(LocalDate.now());
+      // mealDeliveryRequest.setRoomID(Integer.parseInt("0" + roomNumberTxt.getText()));
       mealDeliveryRequest.setDeliveryDate(dateTime.getValue());
       mealDeliveryRequest.setDeliveryTime(timeTxt.getText());
       mealDeliveryRequest.setUrgent(isUrgent.isSelected());
@@ -148,7 +151,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
 
     } catch (NullPointerException | SQLException error) {
       System.out.println("Error : Some Value is NULL");
-      PopUpWarning.createWarning("Warning : A required value was not filled");
+      PopUp.createWarning("Warning : A required value was not filled", (Node) event.getSource());
     }
   }
 

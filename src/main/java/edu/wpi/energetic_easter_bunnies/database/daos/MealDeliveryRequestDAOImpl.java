@@ -12,9 +12,9 @@ public class MealDeliveryRequestDAOImpl implements DAO<mealDeliveryRequest> {
 
   public MealDeliveryRequestDAOImpl() throws SQLException {
     mealDeliveryRequests = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM MEALDELIVERYREQUEST ORDER BY MEAL_REQ_ID DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
 
     while (rs.next()) {
       String medicineReqID = rs.getString("MEAL_REQ_ID");

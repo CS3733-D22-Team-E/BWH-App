@@ -19,3 +19,7 @@
   -fx-background-color: #5c59f3;
   -fx-border-color: black;
 }
+
+.round-border{
+  -fx-background-radius: 100;
+}

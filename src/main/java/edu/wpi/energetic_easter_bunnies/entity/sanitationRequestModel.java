@@ -17,8 +17,9 @@ public class sanitationRequestModel extends serviceRequestModel {
       String size,
       String biohazard,
       String roomID,
-      String floorID) {
-    super(ID, Status, Type, Assignee, requestDate, deliveryDate, isUrgent);
+      String floorID,
+      String notes) {
+    super(ID, Status, Type, Assignee, requestDate, deliveryDate, isUrgent, notes);
     sizeString = new SimpleStringProperty(size);
     bioString = new SimpleStringProperty(biohazard);
     this.roomID = new SimpleStringProperty(roomID);
@@ -33,7 +34,8 @@ public class sanitationRequestModel extends serviceRequestModel {
         r.getStaffAssignee(),
         String.valueOf(LocalDate.now()),
         "null",
-        r.isUrgent());
+        r.isUrgent(),
+        r.getOtherNotes());
     sizeString = new SimpleStringProperty(r.getSizeValue());
     bioString = new SimpleStringProperty(r.getBiohazardValue());
     this.roomID = new SimpleStringProperty(r.getRoomID());

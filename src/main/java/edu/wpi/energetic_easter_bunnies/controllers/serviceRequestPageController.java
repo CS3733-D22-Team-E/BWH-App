@@ -44,6 +44,8 @@ public abstract class serviceRequestPageController extends containsSideMenu {
   @FXML TableColumn<serviceRequest, String> tableOtherNotes;
 
   LocationDAOImpl locationDB;
+  HashMap<String, String> roomNameToRoomID;
+  HashMap<String, String> roomIDToRoomName;
 
   serviceRequestPageController() {
     super();
@@ -90,6 +92,8 @@ public abstract class serviceRequestPageController extends containsSideMenu {
     List<Location> locations = locationDB.getAll();
     List<String> floors = new ArrayList<>();
     HashMap<String, ArrayList<String>> floorToRooms = new HashMap<>();
+    roomNameToRoomID = new HashMap<>();
+    roomIDToRoomName = new HashMap<>();
     // Makes the room combo box hidden until a floor value is selected
     room.setVisible(false);
 
@@ -106,6 +110,8 @@ public abstract class serviceRequestPageController extends containsSideMenu {
         roomsOnFloor = floorToRooms.get(floor);
       }
       roomsOnFloor.add(l.getShortName());
+      roomNameToRoomID.put(l.getShortName(), l.getNodeID());
+      roomIDToRoomName.put(l.getNodeID(), l.getShortName());
       floorToRooms.put(floor, roomsOnFloor);
     }
 
