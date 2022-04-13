@@ -155,8 +155,10 @@ public class sanitationServiceController extends serviceRequestPageController {
 
       request.setRequestStatus("To Do");
 
-      request.setFloorID(floor.getValue());
-      request.setRoomID(room.getValue());
+      if (floor.getValue() != null && room.getValue() != null) {
+        request.setFloorID(floor.getValue());
+        request.setRoomID(roomNameToRoomID.get(room.getValue()));
+      } else throw new NullPointerException();
 
       System.out.println(request);
       sanSendToDB(request);
