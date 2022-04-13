@@ -180,7 +180,39 @@ public class mapPageController extends containsSideMenu implements Initializable
       Image image =
           new Image(
               new FileInputStream(
-                  "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/medicine.png"));
+                  "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/location.png"));
+
+      if (e.getRequestType() == serviceRequest.Type.MED_DELIV_REQ) {
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/medicine.png"));
+      } else if (e.getRequestType() == serviceRequest.Type.LAB_REQUEST) {
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/beaker.png"));
+      } else if (e.getRequestType() == serviceRequest.Type.MED_EQUIP_REQ) {
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/microscope.png"));
+      } else if (e.getRequestType() == serviceRequest.Type.MEAL_DELIV_REQ) {
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/mealDelivery.png"));
+      } else if (e.getRequestType() == serviceRequest.Type.SANITATION_REQ) {
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/sanitizer.png"));
+      } else if (e.getRequestType() == serviceRequest.Type.LANG_INTERP_REQ) {
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/Language.png"));
+      }
       double prefWidth = (int) image.getWidth() / 2.5;
       double prefHeight = (int) image.getHeight() / 2.5;
 
@@ -374,6 +406,7 @@ public class mapPageController extends containsSideMenu implements Initializable
       mapBox.getChildren().add(mapImage);
 
       filterServiceRequests();
+      displayServiceRequestLocations(filteredServReqList);
     }
   }
 
