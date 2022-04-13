@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 /**
  * This is the controller class for the meal delivery service request. Inherits from the
@@ -103,7 +106,15 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     tableDessert.setCellValueFactory(
         new PropertyValueFactory<mealDeliveryRequest, String>("dessertType"));
     tableRoomNumber.setCellValueFactory(
-        new PropertyValueFactory<mealDeliveryRequest, String>("roomID"));
+        new Callback<
+            TableColumn.CellDataFeatures<mealDeliveryRequest, String>, ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TableColumn.CellDataFeatures<mealDeliveryRequest, String> param) {
+            mealDeliveryRequest curMealDeliveryReq = param.getValue();
+            return new SimpleStringProperty(roomIDToRoomName.get(curMealDeliveryReq.getRoomID()));
+          }
+        });
     tableFloorNumber.setCellValueFactory( // throwing npe
         new PropertyValueFactory<mealDeliveryRequest, String>("floorID"));
     tableDateTime.setCellValueFactory(
@@ -136,7 +147,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       mealDeliveryRequest.setEntreeType(entreeDropDown.getValue());
       mealDeliveryRequest.setBeverageType(beverageDropDown.getValue());
       mealDeliveryRequest.setDessertType(dessertDropDown.getValue());
-      mealDeliveryRequest.setRoomID(room.getValue());
+      mealDeliveryRequest.setRoomID(roomNameToRoomID.get(room.getValue()));
       mealDeliveryRequest.setFloorID(floor.getValue());
       mealDeliveryRequest.setRequestDate(LocalDate.now());
       // mealDeliveryRequest.setRoomID(Integer.parseInt("0" + roomNumberTxt.getText()));
