@@ -60,12 +60,6 @@ public class DashboardController extends containsSideMenu implements Initializab
   @FXML JFXButton fourthFloor;
   @FXML Tooltip fourthFloorTooltip;
   @FXML JFXButton fifthFloor;
-  @FXML Tooltip ll2FloorTooltip;
-  @FXML Tooltip ll1FloorTooltip;
-  @FXML Tooltip firstFloorTooltip;
-  @FXML Tooltip secondFloorTooltip;
-  @FXML Tooltip thirdFloorTooltip;
-  @FXML Tooltip fourthFloorTooltip;
   @FXML Tooltip fifthFloorTooltip;
 
   LocationDAOImpl locationDAO;
