@@ -95,7 +95,7 @@
                            <children>
                                   <VBox prefHeight="75.0" prefWidth="161.0">
                                       <children>
-                                    <Label prefHeight="37.0" prefWidth="150.0" styleClass="requestFields" text="Lab Request Type">
+                                    <Label prefHeight="37.0" prefWidth="170.0" styleClass="requestFields" text="Lab Request Type">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -129,7 +129,7 @@
                                   </VBox>
                               <VBox>
                                  <children>
-                                    <Label prefHeight="39.0" prefWidth="129.0" styleClass="requestFields" text="Request Status">
+                                    <Label prefHeight="39.0" prefWidth="178.0" styleClass="requestFields" text="Request Status">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>
@@ -141,7 +141,7 @@
                         </HBox>
                         <VBox prefHeight="108.0" prefWidth="360.0">
                            <children>
-                              <Label prefHeight="32.0" prefWidth="104.0" styleClass="requestFields" text="Other Notes">
+                              <Label prefHeight="32.0" prefWidth="155.0" styleClass="requestFields" text="Other Notes">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -184,7 +184,7 @@
                      </font></JFXButton>
                   </children>
               </AnchorPane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" prefHeight="560.0" style="-fx-background-color: transparent;" styleClass="submitButton" />
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" prefHeight="560.0" style="-fx-background-color: transparent;" visible="false" />
          </children>
       </StackPane>
     </children>
