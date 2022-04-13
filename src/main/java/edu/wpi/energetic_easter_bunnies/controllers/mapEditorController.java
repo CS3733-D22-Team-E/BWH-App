@@ -63,7 +63,7 @@ public class mapEditorController implements Initializable {
   String editMode;
   Location selectedLoc;
 
-  ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
+  ObservableList<String> floors = FXCollections.observableArrayList("L1", "L2", "1", "2", "3", "4", "5");
   ObservableList<String> nodes =
       FXCollections.observableArrayList(
           "PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF",
@@ -237,6 +237,12 @@ public class mapEditorController implements Initializable {
         break;
       case "3":
         mapBox.getStyleClass().add("floor3Map");
+        break;
+      case "4":
+        mapBox.getStyleClass().add("floor4Map");
+        break;
+      case "5":
+        mapBox.getStyleClass().add("floor5Map");
         break;
       case "L1":
         mapBox.getStyleClass().add("floorL1Map");

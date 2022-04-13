@@ -43,6 +43,7 @@ public class mapPageController implements Initializable {
   List<MedicalEquipment> medEqList;
   List<MedicalEquipment> filteredMedEqList;
   List<serviceRequest> servReqList;
+  List<serviceRequest> filteredServReqList;
 
   int zoomIncrement = 50;
   int maxZoom = 1035;
@@ -57,7 +58,7 @@ public class mapPageController implements Initializable {
   @FXML JFXSlider zoomSlider;
   @FXML JFXToggleButton filterMode;
 
-  ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
+  ObservableList<String> floors = FXCollections.observableArrayList("L1", "L2", "1", "2", "3", "4", "5");
 
   public mapPageController() throws SQLException {
     int i = 3;
@@ -88,7 +89,11 @@ public class mapPageController implements Initializable {
     }
 
     filterMedicalEquipment();
-    filterServiceRequests();
+    try {
+      filterServiceRequests();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
 
     // Display the currently selected filterMode
     if (filterMode.isSelected() == false) {
@@ -100,7 +105,11 @@ public class mapPageController implements Initializable {
         e.printStackTrace();
       }
     } else {
-      // Show service request locations
+      try {
+        displayServiceRequestLocations(filteredServReqList);
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
     }
   }
 
@@ -152,6 +161,37 @@ public class mapPageController implements Initializable {
     }
   }
 
+  private void displayServiceRequestLocations(List<serviceRequest> servReqList)
+      throws FileNotFoundException {
+
+    System.out.println("Display Service Request Locations");
+
+    double imageX = mapImage.getFitWidth();
+    double coordinateX = 935;
+    double scaleFactor = imageX / coordinateX;
+
+    // Remove all the icons from the map
+    mapBox.getChildren().clear();
+    mapBox.getChildren().add(mapImage);
+
+    // Display an icon for each item in the filtered list
+    for (serviceRequest e : filteredServReqList) {
+      Image image =
+          new Image(
+              new FileInputStream(
+                  "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/medicine.png"));
+      double prefWidth = (int) image.getWidth() / 2.5;
+      double prefHeight = (int) image.getHeight() / 2.5;
+
+      ImageView i = new ImageView(image);
+      i.setFitWidth(prefWidth);
+      i.setFitHeight(prefHeight);
+      i.setX(e.getxCoord() * scaleFactor - (prefWidth / 2));
+      i.setY(e.getyCoord() * scaleFactor - (prefHeight / 2));
+      mapBox.getChildren().add(i);
+    }
+  }
+
   private void switchMap(String floor) throws FileNotFoundException, SQLException {
 
     // Clears the medical Equipment Icons
@@ -170,6 +210,18 @@ public class mapPageController implements Initializable {
             new Image(
                 new FileInputStream(
                     "src/main/resources/edu/wpi/energetic_easter_bunnies/view/images/maps/03_thethirdfloor.png")));
+        break;
+      case "4":
+        mapImage.setImage(
+                new Image(
+                        new FileInputStream(
+                                "src/main/resources/edu/wpi/energetic_easter_bunnies/view/images/maps/04_thefourthfloor.png")));
+        break;
+      case "5":
+        mapImage.setImage(
+                new Image(
+                        new FileInputStream(
+                                "src/main/resources/edu/wpi/energetic_easter_bunnies/view/images/maps/05_thefifthfloor.png")));
         break;
       case "L1":
         mapImage.setImage(
@@ -198,7 +250,7 @@ public class mapPageController implements Initializable {
     if (filterMode.isSelected() == false) {
       displayMedEquipLocations(filteredMedEqList);
     } else {
-      // Show service request locations
+      displayServiceRequestLocations(filteredServReqList);
     }
   }
 
@@ -213,7 +265,7 @@ public class mapPageController implements Initializable {
     if (filterMode.isSelected() == false) {
       displayMedEquipLocations(filteredMedEqList);
     } else {
-      // Show service request locations
+      displayServiceRequestLocations(filteredServReqList);
     }
   }
 
@@ -231,7 +283,7 @@ public class mapPageController implements Initializable {
       if (filterMode.isSelected() == false) {
         displayMedEquipLocations(filteredMedEqList);
       } else {
-        // Show service request locations
+        displayServiceRequestLocations(filteredServReqList);
       }
     }
   }
@@ -250,7 +302,7 @@ public class mapPageController implements Initializable {
       if (filterMode.isSelected() == false) {
         displayMedEquipLocations(filteredMedEqList);
       } else {
-        // Show service request locations
+        displayServiceRequestLocations(filteredServReqList);
       }
     }
   }
@@ -284,26 +336,23 @@ public class mapPageController implements Initializable {
   }
 
   // Filter service requests by floor
-  public void filterServiceRequests() {
+  public void filterServiceRequests() throws SQLException {
     // Starter code to implement showing all service requests on the map
     String floor = floorDropdown.getValue().toString();
-    // servReqList = servReq.getAll();
+    ServiceRequestDAOImpl serviceRequestDAO = new ServiceRequestDAOImpl();
+    serviceRequestDAO.getCoords();
 
-    //    List<serviceRequest> filteredRequests =
-    //            medEqList.stream()
-    //                    .filter(
-    //                            medicalEquipment -> {
-    //                              try {
-    //                                if (Objects.equals(medicalEquipment.getFloor(), floor)) {
-    //                                  return true;
-    //                                }
-    //                              } catch (SQLException e) {
-    //                                e.printStackTrace();
-    //                              }
-    //                              return false;
-    //                            })
-    //                    .collect(Collectors.toList());
-    //    displayMedEquipLocations(filteredEquipment);
+    // Filter service request list to only show the current floor
+    filteredServReqList =
+        serviceRequestDAO.getAll().stream()
+            .filter(
+                serviceRequest -> {
+                  if (Objects.equals(serviceRequest.getFloorID(), floor)) {
+                    return true;
+                  }
+                  return false;
+                })
+            .collect(Collectors.toList());
   }
 
   @FXML

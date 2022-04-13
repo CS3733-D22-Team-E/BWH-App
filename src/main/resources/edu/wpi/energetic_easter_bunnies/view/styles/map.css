@@ -16,6 +16,14 @@
     -fx-background-image: url('../images/maps/03_thethirdfloor.png');
 }
 
+.floor4Map {
+    -fx-background-image: url('../images/maps/04_thefourthfloor.png');
+}
+
+.floor5Map {
+    -fx-background-image: url('../images/maps/05_thefifthfloor.png');
+}
+
 .floorL1Map {
     -fx-background-image: url('../images/maps/00_thelowerlevel1.png');
 }
