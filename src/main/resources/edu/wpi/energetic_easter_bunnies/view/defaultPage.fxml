@@ -44,7 +44,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mainController">
+<VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mainController">
    <children>
       <AnchorPane fx:id="mainPane" maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -139,7 +139,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label layoutX="-6.0" layoutY="82.0" text="Meal Delivery" />
+                        <Label layoutX="5.0" layoutY="82.0" text="Meal Delivery" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0">
@@ -167,7 +167,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label layoutX="13.0" layoutY="76.0" text="Map" textAlignment="CENTER" />
+                        <Label layoutX="27.0" layoutY="82.0" text="Map" textAlignment="CENTER" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0">
@@ -181,7 +181,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label layoutX="13.0" layoutY="76.0" text="Status Page" textAlignment="CENTER" />
+                        <Label layoutX="-1.0" layoutY="76.0" text="Request Status" textAlignment="CENTER" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0">
@@ -195,7 +195,35 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label layoutX="13.0" layoutY="76.0" text="About Page" textAlignment="CENTER" />
+                        <Label layoutX="22.0" layoutY="76.0" text="About" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="310.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="aboutButton1" alignment="CENTER" mnemonicParsing="false" onAction="#profButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/profile.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="22.0" layoutY="76.0" text="Profile" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="dashboardButton" alignment="CENTER" mnemonicParsing="false" onAction="#dashboardButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/building.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="13.0" layoutY="76.0" text="Dashboard" textAlignment="CENTER" />
                      </children>
                   </Pane>
                </children>
