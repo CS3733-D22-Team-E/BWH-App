@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 /** Oop its gone */
-public class helpPageController {
+public class helpPageController extends containsSideMenu {
 
   @FXML Button serviceHelp;
   @FXML Button mapHelp;

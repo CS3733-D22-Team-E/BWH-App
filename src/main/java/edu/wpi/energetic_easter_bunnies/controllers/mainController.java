@@ -79,8 +79,6 @@ public class mainController implements pageButtons {
     imgMode.setImage(newImg);
   }
 
-  pageControlFacade facade = new pageControlFacade();
-
   public mainController() {}
 
   @FXML
@@ -180,6 +178,8 @@ public class mainController implements pageButtons {
     } else {
       authors.setVisible(false);
     }
+  }
+
   @Override
   public void profButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();

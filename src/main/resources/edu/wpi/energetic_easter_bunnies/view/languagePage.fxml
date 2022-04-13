@@ -53,7 +53,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.languageInterpreterRequestController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.languageInterpreterRequestController">
     <children>
       <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" styleClass="headerBackground">
          <children>
@@ -102,7 +102,6 @@
       </HBox>
       <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
          <children>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" prefWidth="887.0" />
               <AnchorPane maxHeight="-1.0" maxWidth="-1.0">
                   <children>
                   <Group layoutX="18.0" layoutY="88.0">
@@ -173,6 +172,7 @@
                   </JFXButton>
                   </children>
               </AnchorPane>
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" prefWidth="887.0" />
          </children>
       </StackPane>
     </children>

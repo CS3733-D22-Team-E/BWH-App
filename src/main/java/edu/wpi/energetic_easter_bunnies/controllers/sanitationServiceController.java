@@ -158,6 +158,9 @@ public class sanitationServiceController extends serviceRequestPageController {
       request.setFloorID(floor.getValue());
       request.setRoomID(room.getValue());
 
+      System.out.println(floor.getValue());
+      System.out.println(room.getValue());
+
       System.out.println(request);
       sanSendToDB(request);
       resetFields(new ActionEvent());

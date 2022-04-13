@@ -26,7 +26,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mealDeliveryController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mealDeliveryController">
    <children>
       <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" styleClass="headerBackground">
          <children>
@@ -94,7 +94,7 @@
                   <Group layoutX="64.0" layoutY="180.0" />
                   <Group layoutX="74.0" layoutY="210.0" />
                   <Group layoutX="77.0" layoutY="245.0" />
-                  <JFXButton fx:id="submitButton" layoutX="413.0" layoutY="423.0" mnemonicParsing="false" onAction="#submitButton"  text="Submit" />
+                  <JFXButton fx:id="submitButton" layoutX="413.0" layoutY="423.0" mnemonicParsing="false" onAction="#submitButton" text="Submit" />
                   <CheckBox fx:id="asapCheck" layoutX="445.0" layoutY="125.0" mnemonicParsing="false" text="ASAP" />
                   <TextArea fx:id="otherNotesTxt" layoutX="611.0" layoutY="78.0" prefHeight="101.0" prefWidth="339.0" promptText="Type to add text..." />
                   <TextField fx:id="timeTxt" layoutX="293.0" layoutY="121.0" prefHeight="26.0" prefWidth="138.0" promptText="__ __ : __ __ AM/PM" />
@@ -106,7 +106,7 @@
                      </items>
                   </JFXComboBox>
                   <JFXButton fx:id="resetButton" alignment="CENTER" layoutX="571.0" layoutY="423.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="38.0" prefWidth="147.0" styleClass="resetButton" text="Reset" />
-                  <TableView layoutX="113.0" layoutY="213.0" prefHeight="200.0" prefWidth="748.0">
+                  <TableView fx:id="mealDeliveryTable" layoutX="113.0" layoutY="213.0" prefHeight="200.0" prefWidth="748.0">
                      <columns>
                         <TableColumn fx:id="tableEntree" prefWidth="75.0" text="Entree" />
                         <TableColumn fx:id="tableBeverage" prefWidth="75.0" text="Beverage" />
