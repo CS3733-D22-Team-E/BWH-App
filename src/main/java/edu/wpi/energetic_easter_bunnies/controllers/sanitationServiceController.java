@@ -160,6 +160,9 @@ public class sanitationServiceController extends serviceRequestPageController {
         request.setRoomID(roomNameToRoomID.get(room.getValue()));
       } else throw new NullPointerException();
 
+      System.out.println(floor.getValue());
+      System.out.println(room.getValue());
+
       System.out.println(request);
       sanSendToDB(request);
       resetFields(new ActionEvent());

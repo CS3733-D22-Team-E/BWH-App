@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.energetic_easter_bunnies.PopUp;
 import edu.wpi.energetic_easter_bunnies.database.daos.MealDeliveryRequestDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.mealDeliveryRequest;
@@ -25,9 +26,9 @@ import javafx.util.Callback;
  * serviceDeliveryController super class.
  */
 public class mealDeliveryController extends serviceRequestPageController implements Initializable {
-  @FXML ComboBox<String> entreeDropDown;
-  @FXML ComboBox<String> beverageDropDown;
-  @FXML ComboBox<String> dessertDropDown;
+  @FXML JFXComboBox<String> entreeDropDown;
+  @FXML JFXComboBox<String> beverageDropDown;
+  @FXML JFXComboBox<String> dessertDropDown;
   @FXML DatePicker dateTime;
   @FXML TextField timeTxt;
   @FXML CheckBox isUrgent;

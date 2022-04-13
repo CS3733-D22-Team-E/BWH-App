@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.energetic_easter_bunnies.Main;
 import edu.wpi.energetic_easter_bunnies.pageButtons;
 import edu.wpi.energetic_easter_bunnies.pageControlFacade;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -30,6 +32,8 @@ public class mainController implements pageButtons {
   @FXML Button mapButton;
   @FXML Button dashboardButton;
   @FXML Button aboutButton;
+  @FXML JFXToggleButton seeAuthors;
+  @FXML Pane authors;
   @FXML Button helpButton;
 
   @FXML private Button btnMode;
@@ -74,8 +78,6 @@ public class mainController implements pageButtons {
                 "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/ic-light.png"));
     imgMode.setImage(newImg);
   }
-
-  pageControlFacade facade = new pageControlFacade();
 
   public mainController() {}
 
@@ -168,6 +170,15 @@ public class mainController implements pageButtons {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     pageControlFacade.loadPage("defaultPage.fxml", thisStage);
+  }
+
+  @FXML
+  public void seeAuthors(ActionEvent event) throws IOException {
+    if (seeAuthors.isSelected()) {
+      authors.setVisible(true);
+    } else {
+      authors.setVisible(false);
+    }
   }
 
   @Override

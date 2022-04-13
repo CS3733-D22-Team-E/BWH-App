@@ -90,4 +90,16 @@ public class sideMenuController implements pageButtons {
     Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     pageControlFacade.loadPage("profilePage.fxml", thisStage);
   }
+
+  @Override
+  public void helpButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("helpPage.fxml", thisStage);
+  }
+
+  @Override
+  public void dashboardButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("DashboardPage.fxml", thisStage);
+  }
 }

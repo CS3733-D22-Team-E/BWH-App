@@ -42,6 +42,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -49,13 +50,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.languageInterpreterRequestController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.languageInterpreterRequestController">
     <children>
-      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;">
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" styleClass="headerBackground">
          <children>
                   <StackPane minHeight="-Infinity" minWidth="-Infinity">
                       <children>
@@ -70,14 +70,14 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
                   </StackPane>
-            <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="890.0">
+            <VBox alignment="BASELINE_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="890.0" styleClass="headerHospital">
                <children>
-                  <Label alignment="CENTER" text="Brigham and Women's Hospital" textFill="WHITE">
+                  <Label alignment="CENTER" styleClass="headerHospital" text="Brigham and Women's Hospital" textFill="WHITE">
                      <font>
-                        <Font name="Book Antiqua Bold" size="30.0" />
+                        <Font name="Book Antiqua" size="30.0" />
                      </font>
                   </Label>
-                        <Label alignment="CENTER" text="Language Interpreter " textFill="WHITE">
+                        <Label alignment="CENTER" styleClass="headerRequest" text="Language Interpreter " textFill="WHITE">
                             <font>
                                 <Font name="Book Antiqua Bold" size="18.0" />
                             </font>
@@ -96,20 +96,17 @@
          <VBox.margin>
             <Insets />
          </VBox.margin>
+         <effect>
+            <DropShadow />
+         </effect>
       </HBox>
       <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
          <children>
               <AnchorPane maxHeight="-1.0" maxWidth="-1.0">
                   <children>
-                  <Line endX="948.0000610351562" endY="106.39998626708984" layoutX="-1.0" layoutY="-56.0" startX="15.999987602233887" startY="106.39998626708984" />
-                  <Label alignment="CENTER" layoutX="14.0" layoutY="26.0" text="Language Interpreter Application" textAlignment="CENTER">
-                     <font>
-                        <Font name="Book Antiqua Bold" size="18.0" />
-                     </font>
-                  </Label>
                   <Group layoutX="18.0" layoutY="88.0">
                      <children>
-                        <Label text="Location:">
+                        <Label layoutY="-52.0" styleClass="requestFields" text="Location:">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -118,26 +115,26 @@
                   </Group>
                   <Group layoutX="18.0" layoutY="125.0">
                      <children>
-                        <Label layoutY="1.0" text="Your language:">
+                        <Label layoutY="-51.0" styleClass="requestFields" text="Your language:">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
                         <Pane layoutX="152.0">
                            <children>
-                              <ChoiceBox fx:id="languageSelection" layoutY="3.0" prefHeight="30.0" prefWidth="243.0" />
+                              <ChoiceBox fx:id="languageSelection" layoutX="-5.0" layoutY="-55.0" prefHeight="30.0" prefWidth="243.0" />
                            </children>
                         </Pane>
                      </children>
                   </Group>
                   <Group layoutX="14.0" layoutY="228.0">
                      <children>
-                        <TextField fx:id="noteField" layoutX="157.0" prefHeight="132.0" prefWidth="708.0" text="Type to add text...">
+                        <TextField fx:id="noteField" layoutX="149.0" layoutY="-69.0" prefHeight="132.0" prefWidth="708.0" promptText="Type to add text...">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </TextField>
-                        <Label text="Other Notes:">
+                        <Label layoutY="-75.0" styleClass="requestFields" text="Other Notes:">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -146,33 +143,29 @@
                   </Group>
                   <Group layoutX="17.0" layoutY="179.0">
                      <children>
-                        <Label text="Time Period: ">
+                        <Label layoutY="-67.0" styleClass="requestFields" text="Time Period: ">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="153.0" text="From">
+                        <Label layoutX="147.0" layoutY="-67.0" text="From">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="409.0" text="to">
+                        <Label layoutX="399.0" layoutY="-68.0" text="to">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="startSelection" layoutX="214.0" layoutY="3.0" />
+                        <DatePicker fx:id="startSelection" layoutX="205.0" layoutY="-64.0" />
                      </children>
                   </Group>
-                  <JFXComboBox fx:id="room" layoutX="297.0" layoutY="91.0" promptText="Select Room" />
-                  <JFXComboBox fx:id="floor" layoutX="166.0" layoutY="91.0" promptText="Select Floor" />
-                  <DatePicker fx:id="endSelection" layoutX="458.0" layoutY="182.0" />
-                  <JFXButton fx:id="submitButton" layoutX="405.0" layoutY="391.0" onAction="#submitButton" prefHeight="75.0" prefWidth="152.0" ripplerFill="RED" style="-fx-background-color: #c0c0c0;" text="Submit Request" AnchorPane.bottomAnchor="32.199999999999974" AnchorPane.rightAnchor="525.4000000000001" AnchorPane.topAnchor="391.0">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="resetButton" layoutX="872.0" layoutY="391.0" onAction="#resetButton" prefHeight="75.0" prefWidth="152.0" ripplerFill="RED" style="-fx-background-color: #c0c0c0;" text="Reset Fields">
+                  <JFXComboBox fx:id="room" layoutX="297.0" layoutY="34.0" promptText="Select Room" />
+                  <JFXComboBox fx:id="floor" layoutX="166.0" layoutY="35.0" promptText="Select Floor" />
+                  <DatePicker fx:id="endSelection" layoutX="454.0" layoutY="116.0" />
+                  <JFXButton fx:id="submitButton" layoutX="432.0" layoutY="371.0" mnemonicParsing="false" onAction="#submitButton" ripplerFill="RED" styleClass="submitButton" text="Submit" />
+                  <JFXButton fx:id="resetButton" layoutX="595.0" layoutY="371.0" onAction="#resetButton" prefHeight="75.0" prefWidth="152.0" ripplerFill="RED" styleClass="resetButton" text="Reset">
                      <font>
                         <Font size="17.0" />
                      </font>
