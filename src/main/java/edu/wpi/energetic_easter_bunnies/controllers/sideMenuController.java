@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import edu.wpi.energetic_easter_bunnies.pageButtons;
 import edu.wpi.energetic_easter_bunnies.pageControlFacade;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -8,7 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class sideMenuController {
+public class sideMenuController implements pageButtons {
 
   @FXML StackPane root;
 
@@ -72,9 +73,21 @@ public class sideMenuController {
     pageControlFacade.loadPage("map.fxml", thisStage);
   }
 
+  @Override
+  public void aboutButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("aboutPage.fxml", thisStage);
+  }
+
   @FXML
   public void homeButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     pageControlFacade.loadPage("defaultPage.fxml", thisStage);
+  }
+
+  @Override
+  public void profButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    pageControlFacade.loadPage("profilePage.fxml", thisStage);
   }
 }

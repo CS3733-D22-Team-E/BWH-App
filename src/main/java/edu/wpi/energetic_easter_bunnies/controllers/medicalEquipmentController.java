@@ -1,7 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.energetic_easter_bunnies.PopUpWarning;
+import edu.wpi.energetic_easter_bunnies.PopUp;
 import edu.wpi.energetic_easter_bunnies.database.*;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentDAOImpl;
@@ -10,7 +10,6 @@ import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
@@ -164,6 +164,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
    */
   protected ObservableList<medicalEquipmentRequest> populateMedEquipList() {
     List<medicalEquipmentRequest> list = medEquipmentServiceRequestDB.getAll();
+    // TODO: FXCollections.observableArrayList(list) ???
     tableList = FXCollections.observableArrayList();
     for (medicalEquipmentRequest m : list) {
       tableList.add(m);
@@ -194,7 +195,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
-      PopUpWarning.createWarning("Warning : A required value was not filled");
+      PopUp.createWarning("Warning : A required value was not filled", (Node) event.getSource());
     }
   }
 

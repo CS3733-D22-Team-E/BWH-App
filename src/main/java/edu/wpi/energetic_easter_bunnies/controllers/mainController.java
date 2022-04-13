@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import edu.wpi.energetic_easter_bunnies.pageButtons;
 import edu.wpi.energetic_easter_bunnies.pageControlFacade;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -8,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class mainController {
+public class mainController implements pageButtons {
   public AnchorPane mainPane;
 
   @FXML Button sanitationButton;
@@ -18,6 +19,7 @@ public class mainController {
   @FXML Button medicineDeliveryButton;
   @FXML Button labRequestButton;
   @FXML Button mapButton;
+  @FXML Button dashboardButton;
   @FXML Button aboutButton;
 
   public mainController() {}
@@ -91,9 +93,23 @@ public class mainController {
   }
 
   @FXML
+  public void dashboardButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    pageControlFacade.loadPage("DashboardPage.fxml", thisStage);
+  }
+
+  @FXML
   public void homeButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     pageControlFacade.loadPage("defaultPage.fxml", thisStage);
+  }
+
+  @Override
+  public void profButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    pageControlFacade.loadPage("profilePage.fxml", thisStage);
   }
 }

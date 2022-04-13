@@ -208,4 +208,9 @@ public class serviceRequest {
   public void setyCoord(int yCoord) {
     this.yCoord = yCoord;
   }
+
+  @Override
+  public String toString() {
+    return getRequestType().toString() + " : {" + getServiceRequestID() + "}";
+  }
 }
