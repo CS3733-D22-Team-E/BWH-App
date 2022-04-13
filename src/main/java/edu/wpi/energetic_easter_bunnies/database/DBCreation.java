@@ -182,7 +182,7 @@ public class DBCreation {
             + "    ENTREE             VARCHAR(25), \n"
             + "    BEVERAGE           VARCHAR(25), \n"
             + "    DESSERT            VARCHAR(25), \n"
-            + "    DELIVERYTIME       int, \n"
+            + "    DELIVERYTIME       VARCHAR(25), \n"
             + "    OTHERNOTES         VARCHAR(255)\n"
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);

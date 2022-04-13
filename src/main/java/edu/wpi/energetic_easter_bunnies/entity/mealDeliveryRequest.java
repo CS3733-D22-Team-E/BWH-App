@@ -8,7 +8,8 @@ public class mealDeliveryRequest extends serviceRequest {
   private String beverageType;
   private String dessertType;
 
-  private int deliveryTime; // TODO: Talk with Phillip about whether or not this is still needed,
+  private String deliveryTime; // TODO: Talk with Phillip about whether or not this is still needed,
+  // Yes I "need" this TODO: Make it a String in DAOImpl
   // considering serviceRequest has a LocalDate DeliveryDate
 
   public mealDeliveryRequest(
@@ -24,7 +25,7 @@ public class mealDeliveryRequest extends serviceRequest {
       String entreeType,
       String beverageType,
       String dessertType,
-      int deliveryTime) {
+      String deliveryTime) {
     super(
         serviceRequestID,
         String.valueOf(Type.MEAL_DELIV_REQ),
@@ -47,7 +48,7 @@ public class mealDeliveryRequest extends serviceRequest {
     this.entreeType = "";
     this.beverageType = "";
     this.dessertType = "";
-    this.deliveryTime = 0;
+    this.deliveryTime = "";
   }
 
   public void setEntreeType(String entree) {
@@ -59,7 +60,7 @@ public class mealDeliveryRequest extends serviceRequest {
   }
 
   public void setBeverageType(String beverage) {
-    this.entreeType = beverage;
+    this.beverageType = beverage;
   }
 
   public String getBeverageType() {
@@ -67,18 +68,18 @@ public class mealDeliveryRequest extends serviceRequest {
   }
 
   public void setDessertType(String dessert) {
-    this.entreeType = dessert;
+    this.dessertType = dessert;
   }
 
   public String getDessertType() {
     return this.dessertType;
   }
 
-  public void setDeliveryTime(int time) {
+  public void setDeliveryTime(String time) {
     this.deliveryTime = time;
   }
 
-  public int getDeliveryTime() {
+  public String getDeliveryTime() {
     return this.deliveryTime;
   }
 }

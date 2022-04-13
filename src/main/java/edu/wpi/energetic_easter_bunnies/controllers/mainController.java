@@ -30,6 +30,7 @@ public class mainController implements pageButtons {
   @FXML Button mapButton;
   @FXML Button dashboardButton;
   @FXML Button aboutButton;
+  @FXML Button helpButton;
 
   @FXML private Button btnMode;
   @FXML private ImageView imgMode;
@@ -83,7 +84,8 @@ public class mainController implements pageButtons {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
     ;
 
-    pageControlFacade.loadPage("mealDeliveryPage.fxml", thisStage);
+    pageControlFacade.loadPage(
+        "mealDeliveryPage.fxml", thisStage); // TODO: Load exception at this line?
   }
 
   @FXML
@@ -148,6 +150,11 @@ public class mainController implements pageButtons {
   }
 
   @FXML
+  public void helpButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    pageControlFacade.loadPage("helpPage.fxml", thisStage);
+    
   public void dashboardButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
