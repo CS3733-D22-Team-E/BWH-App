@@ -5,9 +5,6 @@ import edu.wpi.energetic_easter_bunnies.customUI.CustomTextFieldTableCell;
 import edu.wpi.energetic_easter_bunnies.database.daos.DAOSystem;
 import edu.wpi.energetic_easter_bunnies.entity.sanitationRequest;
 import edu.wpi.energetic_easter_bunnies.entity.sanitationRequestModel;
-import edu.wpi.energetic_easter_bunnies.themeControl;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -20,8 +17,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 
 /**
  * Controller Class for the Sanitation Service Request. Inherits from the serviceRequestController
@@ -51,31 +46,7 @@ public class sanitationServiceController extends serviceRequestPageController {
   @FXML ToggleGroup sizeGroup;
 
   DAOSystem system;
-  @FXML private Button btnMode;
-  @FXML private ImageView imgMode;
-  @FXML private VBox parent;
 
-  private boolean isLightMode = true;
-
-  public void changeMode(ActionEvent event) throws FileNotFoundException {
-    if (isLightMode) {
-      themeControl.setDarkMode(parent);
-      javafx.scene.image.Image newImg =
-          new javafx.scene.image.Image(
-              new FileInputStream(
-                  "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/ic-light.png"));
-      imgMode.setImage(newImg);
-      isLightMode = false;
-    } else {
-      themeControl.setLightMode(parent);
-      javafx.scene.image.Image newImg =
-          new javafx.scene.image.Image(
-              new FileInputStream(
-                  "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/ic-dark.png"));
-      imgMode.setImage(newImg);
-      isLightMode = true;
-    }
-  }
   /** Constructor */
   public sanitationServiceController() {
     try {

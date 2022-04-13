@@ -4,88 +4,22 @@
   -fx-background-size: cover;
 }
 
-.label {
-  /**font color*/
-  -fx-dark-text-color: #ffffff;
-  -fx-light-text-color: #404040;
-  -fx-text-color: ladder(-fx-main-base, -fx-dark-text-color 29%, -fx-light-text-color 30%);
-  -fx-text-fill: -fx-text-color;
-
-}
-
 #main-box {
   -fx-background-color: rgba(255, 255, 255, 1);
   -fx-background-radius: 10px;
   -fx-padding: 10px;
 }
-#main-page {
-  -fx-background-color: rgb(255, 255, 255);
-  -fx-padding: 10px;
-}
+
 .serviceButton {
   -fx-background-color: rgba(200, 200, 200, 0.9);
   -fx-background-radius: 8px;
 }
 
-.commonButton {
-  -fx-background-color: rgba(200, 200, 200, 0.9);
-  -fx-background-radius: 8px;
-}
-
 .header {
-  -fx-background-color: #3b36d0;
+  -fx-background-color: #5c59f3;
   -fx-border-color: black;
-  -fx-opacity: 0.95;
-}
-
-.title{
-  -fx-text-color: #000000;
 }
 
 .round-border{
   -fx-background-radius: 100;
-}
-
-.primary-color{
-  -fx-background-color: #FFFFFF;
-}
-
-.secondary-color{
-  -fx-background-color: #E7E7E7;
-}
-
-.table-column {
-  -fx-pref-height: 49;
-  -fx-background-color: transparent;
-  -fx-alignment: center;
-  -fx-border-width: 0.4;
-}
-
-* {
-   -fx-darkest-grey-color: #323232;
- }
-
-.radio-button .radio {
-  -fx-border-width: 1px;
-  -fx-border-color: -fx-darkest-grey-color;
-  -fx-background-color: white;
-  -fx-background-image: null;
-  -fx-border-radius: 15px;
-  -fx-padding: 3px;
-  -fx-text-fill: black;
-}
-
-.inner-color{
-  -fx-text-inner-color: #000000;
-}
-
-.combo-box .cell{
-  -fx-text-fill: #000000;
-  -fx-font: 12px "Arial";
-}
-.my-list-cell {
-  -fx-text-fill: #000000;
-  -fx-font: 12px "Arial";
-  /* No alternate highlighting */
-  -fx-background-color: #FFF;
 }
