@@ -29,7 +29,7 @@ public class MealDeliveryRequestDAOImpl implements DAO<mealDeliveryRequest> {
       String entree = rs.getString("ENTREE");
       String beverage = rs.getString("BEVERAGE");
       String dessert = rs.getString("DESSERT");
-      int deliveryTime = rs.getInt("DELIVERYTIME");
+      String deliveryTime = rs.getString("DELIVERYTIME");
 
       mealDeliveryRequest request =
           new mealDeliveryRequest(
@@ -85,7 +85,7 @@ public class MealDeliveryRequestDAOImpl implements DAO<mealDeliveryRequest> {
       statement.setString(9, item.getEntreeType());
       statement.setString(10, item.getBeverageType());
       statement.setString(11, item.getDessertType());
-      statement.setInt(12, item.getDeliveryTime());
+      statement.setString(12, item.getDeliveryTime());
       statement.setString(13, item.getOtherNotes());
 
       statement.executeUpdate();

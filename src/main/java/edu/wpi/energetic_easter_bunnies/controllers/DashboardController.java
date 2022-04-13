@@ -47,7 +47,6 @@ public class DashboardController extends containsSideMenu implements Initializab
   @FXML TableColumn<MedicalEquipment, String> tableLocation;
 
   @FXML JFXButton mapEditorButton;
-
   @FXML JFXButton ll2Floor;
   @FXML Tooltip ll2FloorTooltip;
   @FXML JFXButton ll1Floor;
@@ -61,6 +60,12 @@ public class DashboardController extends containsSideMenu implements Initializab
   @FXML JFXButton fourthFloor;
   @FXML Tooltip fourthFloorTooltip;
   @FXML JFXButton fifthFloor;
+  @FXML Tooltip ll2FloorTooltip;
+  @FXML Tooltip ll1FloorTooltip;
+  @FXML Tooltip firstFloorTooltip;
+  @FXML Tooltip secondFloorTooltip;
+  @FXML Tooltip thirdFloorTooltip;
+  @FXML Tooltip fourthFloorTooltip;
   @FXML Tooltip fifthFloorTooltip;
 
   LocationDAOImpl locationDAO;
