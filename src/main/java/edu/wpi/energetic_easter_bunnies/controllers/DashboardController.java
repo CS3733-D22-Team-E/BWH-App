@@ -48,19 +48,12 @@ public class DashboardController extends containsSideMenu implements Initializab
 
   @FXML JFXButton mapEditorButton;
 
-  @FXML JFXButton ll2Floor;
   @FXML Tooltip ll2FloorTooltip;
-  @FXML JFXButton ll1Floor;
   @FXML Tooltip ll1FloorTooltip;
-  @FXML JFXButton firstFloor;
   @FXML Tooltip firstFloorTooltip;
-  @FXML JFXButton secondFloor;
   @FXML Tooltip secondFloorTooltip;
-  @FXML JFXButton thirdFloor;
   @FXML Tooltip thirdFloorTooltip;
-  @FXML JFXButton fourthFloor;
   @FXML Tooltip fourthFloorTooltip;
-  @FXML JFXButton fifthFloor;
   @FXML Tooltip fifthFloorTooltip;
 
   LocationDAOImpl locationDAO;

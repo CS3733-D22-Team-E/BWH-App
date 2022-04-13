@@ -1,7 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
-import edu.wpi.energetic_easter_bunnies.pageButtons;
 import edu.wpi.energetic_easter_bunnies.Main;
+import edu.wpi.energetic_easter_bunnies.pageButtons;
 import edu.wpi.energetic_easter_bunnies.pageControlFacade;
 import java.awt.*;
 import java.io.FileInputStream;
@@ -154,7 +154,8 @@ public class mainController implements pageButtons {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     pageControlFacade.loadPage("helpPage.fxml", thisStage);
-    
+  }
+
   public void dashboardButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
