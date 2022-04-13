@@ -2,6 +2,7 @@ package edu.wpi.energetic_easter_bunnies.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
+import edu.wpi.energetic_easter_bunnies.PopUp;
 import edu.wpi.energetic_easter_bunnies.database.daos.LabRequestDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.entity.labRequest;
@@ -9,12 +10,15 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 /**
  * This is the controller class for the Lab Request service page. It inherits from the
@@ -69,7 +73,15 @@ public class labRequestController extends serviceRequestPageController {
         new PropertyValueFactory<labRequest, String>("labRequestType"));
     tableStaffAssignee.setCellValueFactory(
         new PropertyValueFactory<labRequest, String>("staffAssignee"));
-    tableLocNodeID.setCellValueFactory(new PropertyValueFactory<labRequest, String>("roomID"));
+    tableLocNodeID.setCellValueFactory(
+        new Callback<TableColumn.CellDataFeatures<labRequest, String>, ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TableColumn.CellDataFeatures<labRequest, String> param) {
+            labRequest curLabRequest = param.getValue();
+            return new SimpleStringProperty(roomIDToRoomName.get(curLabRequest.getRoomID()));
+          }
+        });
     tableTimeFrame.setCellValueFactory(new PropertyValueFactory<labRequest, String>("timeFrame"));
     tableRequestStatus.setCellValueFactory(
         new PropertyValueFactory<labRequest, String>("requestStatus"));
@@ -93,7 +105,7 @@ public class labRequestController extends serviceRequestPageController {
       labReq.setLabRequestType(labRequestType.getValue());
       labReq.setTimeFrame(timeFrameComboBox.getValue());
       labReq.setFloorID(floor.getValue());
-      labReq.setRoomID(room.getValue());
+      labReq.setRoomID(roomNameToRoomID.get(room.getValue()));
       labReq.setOtherNotes(notes.getText());
       labReq.setRequestStatus(requestStatus.getText());
       labReq.setStaffAssignee(staffAssignee.getText());
@@ -101,7 +113,7 @@ public class labRequestController extends serviceRequestPageController {
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
-      PopUpWarning.createWarning("Warning : A required value was not filled");
+      PopUp.createWarning("Warning : A required value was not filled", null);
     }
   }
 

@@ -39,22 +39,32 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
 <VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mainController">
    <children>
       <AnchorPane fx:id="mainPane" maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <Pane id="main-box" layoutX="33.0" layoutY="108.0" prefHeight="395.0" prefWidth="1014.0">
                <children>
-                  <Label layoutX="19.0" layoutY="16.0" prefHeight="39.0" prefWidth="192.0" text="Service Request Pages">
+                  <Label layoutX="19.0" layoutY="16.0" prefHeight="39.0" prefWidth="192.0" text="About our App">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
+                  <Label layoutX="19.0" layoutY="55.0" prefHeight="327.0" prefWidth="976.0" text="This app is the culmination what students have learned from Wilson Wong's CS3733, a class from WPI's Computer Science Department that teaches students about Software Engineering through agile methodologies.   This app was developed by the team The Energetic Easter Bunnies, along with help from their Team Coach Sam Laird.  The team would like to give a special thanks to Brigham and Women's Hospital, especially Andrew Shinn, for their time and input." wrapText="true" />
+                  <Hyperlink fx:id="wilsonWong" layoutX="337.0" layoutY="190.0" onAction="#wilsonWongLink" text="Wilson Wong" />
                </children>
             </Pane>
             <Pane prefHeight="90.0" prefWidth="1080.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5c59f3" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f35959" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
                   <Label alignment="CENTER" layoutX="14.0" layoutY="26.0" text="Brigham and Women's Hospital" textFill="WHITE">
                      <font>
                         <Font name="Book Antiqua Bold" size="30.0" />

@@ -1,16 +1,26 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import com.jfoenix.controls.JFXToggleButton;
+import edu.wpi.energetic_easter_bunnies.Main;
+import edu.wpi.energetic_easter_bunnies.pageButtons;
 import edu.wpi.energetic_easter_bunnies.pageControlFacade;
+import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class mainController {
+public class mainController implements pageButtons {
   public AnchorPane mainPane;
 
   @FXML Button sanitationButton;
@@ -20,17 +30,66 @@ public class mainController {
   @FXML Button medicineDeliveryButton;
   @FXML Button labRequestButton;
   @FXML Button mapButton;
+  @FXML Button dashboardButton;
   @FXML Button aboutButton;
   @FXML JFXToggleButton seeAuthors;
   @FXML Pane authors;
+  @FXML Button helpButton;
+
+  @FXML private Button btnMode;
+  @FXML private ImageView imgMode;
+  @FXML private VBox parent;
+  @FXML private Label title;
+
+  private final String darkModeURL =
+      Objects.requireNonNull(Main.class.getResource("view/styles/darkMode.css")).toExternalForm();
+  private final String lightModeURL =
+      Objects.requireNonNull(Main.class.getResource("view/styles/default.css")).toExternalForm();
+  private boolean isLightMode = true;
+
+  public void changeMode(ActionEvent event) throws FileNotFoundException {
+    System.out.println("Button Works!");
+    isLightMode = !isLightMode;
+    if (isLightMode) {
+      setLightMode();
+      System.out.println("Light Mode");
+    } else {
+      System.out.println("Dark Mode");
+      setDarkMode();
+    }
+  }
+
+  private void setLightMode() throws FileNotFoundException {
+    parent.getStylesheets().removeAll();
+    parent.getStylesheets().add(lightModeURL);
+    Image newImg =
+        new Image(
+            new FileInputStream(
+                "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/ic-dark.png"));
+    imgMode.setImage(newImg);
+  }
+
+  private void setDarkMode() throws FileNotFoundException {
+    parent.getStylesheets().removeAll();
+    parent.getStylesheets().add(darkModeURL);
+    Image newImg =
+        new Image(
+            new FileInputStream(
+                "src/main/resources/edu/wpi/energetic_easter_bunnies/view/icons/ic-light.png"));
+    imgMode.setImage(newImg);
+  }
+
+  pageControlFacade facade = new pageControlFacade();
 
   public mainController() {}
 
   @FXML
   public void mealDeliveryButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
+    ;
 
-    pageControlFacade.loadPage("mealDeliveryPage.fxml", thisStage);
+    pageControlFacade.loadPage(
+        "mealDeliveryPage.fxml", thisStage); // TODO: Load exception at this line?
   }
 
   @FXML
@@ -95,6 +154,19 @@ public class mainController {
   }
 
   @FXML
+  public void helpButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    pageControlFacade.loadPage("helpPage.fxml", thisStage);
+  }
+
+  public void dashboardButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    pageControlFacade.loadPage("DashboardPage.fxml", thisStage);
+  }
+
+  @FXML
   public void homeButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
@@ -108,5 +180,10 @@ public class mainController {
     } else {
       authors.setVisible(false);
     }
+  @Override
+  public void profButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    pageControlFacade.loadPage("profilePage.fxml", thisStage);
   }
 }

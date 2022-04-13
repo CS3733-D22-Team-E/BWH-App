@@ -47,7 +47,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mainController">
+<VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.mainController">
    <children>
       <AnchorPane fx:id="mainPane" maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -200,6 +200,48 @@
                            </graphic>
                         </Button>
                         <Label layoutX="6.0" layoutY="76.0" text="About Page" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="310.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="aboutButton1" alignment="CENTER" mnemonicParsing="false" onAction="#profButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/profile.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="22.0" layoutY="76.0" text="Profile" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="dashboardButton" alignment="CENTER" mnemonicParsing="false" onAction="#dashboardButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/building.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="13.0" layoutY="76.0" text="Dashboard" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="helpButton" alignment="CENTER" mnemonicParsing="false" onAction="#helpButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/help.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="13.0" layoutY="76.0" text="Help Page" textAlignment="CENTER" />
                      </children>
                   </Pane>
                   <JFXTogglePane />

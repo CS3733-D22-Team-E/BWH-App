@@ -9,6 +9,8 @@ public class medicineDelivery extends serviceRequest {
   String amount;
   String unit;
   String deliveryTime;
+
+  String reocurringDays;
   boolean mon;
   boolean tues;
   boolean wed;
@@ -60,6 +62,7 @@ public class medicineDelivery extends serviceRequest {
     this.fri = fri;
     this.sat = sat;
     this.sun = sun;
+    this.reocurringDays = getRepeatingDays();
   }
 
   public medicineDelivery() {
@@ -75,6 +78,7 @@ public class medicineDelivery extends serviceRequest {
     this.fri = false;
     this.sat = false;
     this.sun = false;
+    this.reocurringDays = getRepeatingDays();
   }
 
   public String getMedicine() {
@@ -165,24 +169,39 @@ public class medicineDelivery extends serviceRequest {
     this.sun = sun;
   }
 
+  public String getReocurringDays() {
+    return reocurringDays;
+  }
+
+  public void setReocurringDays(String reocurringDays) {
+    this.reocurringDays = reocurringDays;
+  }
+
   public String getRepeatingDays() {
     String result = "";
 
     if (sun) {
       result += "SUN ";
-    } else if (mon) {
-      result += "MON ";
-    } else if (tues) {
-      result += "TUES";
-    } else if (wed) {
-      result += "WED";
-    } else if (thurs) {
-      result += "THURS";
-    } else if (fri) {
-      result += "FRI";
-    } else if (sat) {
-      result += "SAT";
     }
-    return result;
+    if (mon) {
+      result += "MON ";
+    }
+    if (tues) {
+      result += "TUES ";
+    }
+    if (wed) {
+      result += "WED ";
+    }
+    if (thurs) {
+      result += "THURS ";
+    }
+    if (fri) {
+      result += "FRI ";
+    }
+    if (sat) {
+      result += "SAT ";
+    }
+
+    return result; // TODO: Trim last parentheses if string is not empty
   }
 }
