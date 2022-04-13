@@ -1,7 +1,8 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import com.jfoenix.controls.JFXSlider;
+import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.energetic_easter_bunnies.Main;
-import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.MedicalEquipment;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentDAOImpl;
@@ -27,9 +28,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javax.swing.*;
 
 public class mapPageController implements Initializable {
   FXMLLoader loader = new FXMLLoader();
@@ -39,13 +41,21 @@ public class mapPageController implements Initializable {
   MedicalEquipmentDAOImpl medEq;
   ServiceRequestDAOImpl servReq;
   List<MedicalEquipment> medEqList;
+  List<MedicalEquipment> filteredMedEqList;
   List<serviceRequest> servReqList;
 
+  int zoomIncrement = 50;
+  int maxZoom = 1035;
+  int minZoom = 435;
+
   @FXML AnchorPane mapBox;
+  @FXML ImageView mapImage;
   @FXML ComboBox floorDropdown;
   @FXML Button mapEditorButton;
-  @FXML Button showMedicalEquipment;
-  @FXML Button showServiceRequests;
+  @FXML Button zoomUp;
+  @FXML Button zoomDown;
+  @FXML JFXSlider zoomSlider;
+  @FXML JFXToggleButton filterMode;
 
   ObservableList<String> floors = FXCollections.observableArrayList("1", "2", "3", "L1", "L2");
 
@@ -60,6 +70,12 @@ public class mapPageController implements Initializable {
     floorDropdown.setItems(floors);
     floorDropdown.setValue("1");
 
+    // Set the image size to the default slider value
+    mapBox.setPrefHeight(zoomSlider.getValue());
+    mapBox.setPrefWidth(zoomSlider.getValue());
+    mapImage.setFitHeight(zoomSlider.getValue());
+    mapImage.setFitWidth(zoomSlider.getValue());
+
     try {
       db = new LocationDAOImpl();
       medEq = new MedicalEquipmentDAOImpl();
@@ -70,38 +86,56 @@ public class mapPageController implements Initializable {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+
+    filterMedicalEquipment();
+    filterServiceRequests();
+
+    // Display the currently selected filterMode
+    if (filterMode.isSelected() == false) {
+      try {
+        displayMedEquipLocations(filteredMedEqList);
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    } else {
+      // Show service request locations
+    }
   }
 
   // Display location on the map
-  private void displayFloorLocations(List<Location> locationList) {
-
-    double imageX = 535;
-    double coordinateX = 935;
-    double scaleFactor = imageX / coordinateX;
-
-    mapBox.getChildren().clear();
-
-    for (Location l : locationList) {
-      Circle c = new Circle();
-      c.setRadius(8);
-      c.setCenterX(l.getXcoord() * scaleFactor);
-      c.setCenterY(l.getYcoord() * scaleFactor);
-      c.getStyleClass().add("locationDot");
-      mapBox.getChildren().add(c);
-    }
-  }
+  //  private void displayFloorLocations(List<Location> locationList) {
+  //
+  //    double imageX = mapImage.getFitWidth();
+  //    double coordinateX = 935;
+  //    double scaleFactor = imageX / coordinateX;
+  //
+  //    mapBox.getChildren().clear();
+  //
+  //    for (Location l : locationList) {
+  //      Circle c = new Circle();
+  //      c.setRadius(8);
+  //      c.setCenterX(l.getXcoord() * scaleFactor);
+  //      c.setCenterY(l.getYcoord() * scaleFactor);
+  //      c.getStyleClass().add("locationDot");
+  //      mapBox.getChildren().add(c);
+  //    }
+  //  }
 
   private void displayMedEquipLocations(List<MedicalEquipment> medEquipList)
       throws FileNotFoundException, SQLException {
 
-    double imageX = 535;
+    double imageX = mapImage.getFitWidth();
     double coordinateX = 935;
     double scaleFactor = imageX / coordinateX;
 
-    System.out.println(medEquipList);
-
+    // Remove all the icons from the map
     mapBox.getChildren().clear();
-    for (MedicalEquipment e : medEquipList) {
+    mapBox.getChildren().add(mapImage);
+
+    // Display an icon for each item in the filtered list
+    for (MedicalEquipment e : filteredMedEqList) {
       Image image =
           new Image(
               new FileInputStream(
@@ -118,49 +152,122 @@ public class mapPageController implements Initializable {
     }
   }
 
-  private void switchMap(String floor) {
-
-    // Clear and add back mapBox CSS class
-    mapBox.getStyleClass().clear();
-    mapBox.getStyleClass().add("mapBox");
+  private void switchMap(String floor) throws FileNotFoundException, SQLException {
 
     // Clears the medical Equipment Icons
     mapBox.getChildren().clear();
+    mapBox.getChildren().add(mapImage);
 
     switch (floor) {
-      case "1":
-        mapBox.getStyleClass().add("floor1Map");
-        break;
       case "2":
-        mapBox.getStyleClass().add("floor2Map");
+        mapImage.setImage(
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/images/maps/02_thesecondfloor.png")));
         break;
       case "3":
-        mapBox.getStyleClass().add("floor3Map");
+        mapImage.setImage(
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/images/maps/03_thethirdfloor.png")));
         break;
       case "L1":
-        mapBox.getStyleClass().add("floorL1Map");
+        mapImage.setImage(
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/images/maps/00_thelowerlevel1.png")));
         break;
       case "L2":
-        mapBox.getStyleClass().add("floorL2Map");
+        mapImage.setImage(
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/images/maps/00_thelowerlevel2.png")));
         break;
       default:
-        mapBox.getStyleClass().add("floor1Map");
+        mapImage.setImage(
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/energetic_easter_bunnies/view/images/maps/01_thefirstfloor.png")));
+        break;
+    }
+
+    filterMedicalEquipment();
+    filterServiceRequests();
+
+    // Display the currently selected filterMode
+    if (filterMode.isSelected() == false) {
+      displayMedEquipLocations(filteredMedEqList);
+    } else {
+      // Show service request locations
     }
   }
 
   @FXML
-  public void floorDropdown(ActionEvent event) throws IOException {
+  public void changeZoom(MouseEvent event) throws SQLException, FileNotFoundException {
+    mapBox.setPrefHeight(zoomSlider.getValue());
+    mapBox.setPrefWidth(zoomSlider.getValue());
+    mapImage.setFitHeight(zoomSlider.getValue());
+    mapImage.setFitWidth(zoomSlider.getValue());
+
+    // Display the currently selected filterMode
+    if (filterMode.isSelected() == false) {
+      displayMedEquipLocations(filteredMedEqList);
+    } else {
+      // Show service request locations
+    }
+  }
+
+  @FXML
+  public void zoomUp(ActionEvent event) throws SQLException, FileNotFoundException {
+    if (mapBox.getPrefHeight() < zoomSlider.getMax()) {
+      mapBox.setPrefHeight(mapBox.getPrefHeight() + zoomIncrement);
+      mapBox.setPrefWidth(mapBox.getPrefWidth() + zoomIncrement);
+      mapImage.setFitHeight(mapImage.getFitHeight() + zoomIncrement);
+      mapImage.setFitWidth(mapImage.getFitWidth() + zoomIncrement);
+
+      zoomSlider.setValue(mapImage.getFitWidth() + zoomIncrement);
+
+      // Display the currently selected filterMode
+      if (filterMode.isSelected() == false) {
+        displayMedEquipLocations(filteredMedEqList);
+      } else {
+        // Show service request locations
+      }
+    }
+  }
+
+  @FXML
+  public void zoomDown(ActionEvent event) throws SQLException, FileNotFoundException {
+    if (mapBox.getPrefHeight() > zoomSlider.getMin()) {
+      mapBox.setPrefHeight(mapBox.getPrefHeight() - zoomIncrement);
+      mapBox.setPrefWidth(mapBox.getPrefWidth() - zoomIncrement);
+      mapImage.setFitHeight(mapImage.getFitHeight() - zoomIncrement);
+      mapImage.setFitWidth(mapImage.getFitWidth() - zoomIncrement);
+
+      zoomSlider.setValue(mapImage.getFitWidth() + zoomIncrement);
+
+      // Display the currently selected filterMode
+      if (filterMode.isSelected() == false) {
+        displayMedEquipLocations(filteredMedEqList);
+      } else {
+        // Show service request locations
+      }
+    }
+  }
+
+  @FXML
+  public void floorDropdown(ActionEvent event) throws IOException, SQLException {
 
     switchMap(floorDropdown.getValue().toString());
   }
 
-  @FXML
-  public void filterMedEquip(ActionEvent event) throws SQLException, FileNotFoundException {
-
+  // Filter medical equipment by floor
+  public void filterMedicalEquipment() {
+    // Get the current floor
     String floor = floorDropdown.getValue().toString();
-    List<MedicalEquipment> medEqList = medEq.getAll();
 
-    List<MedicalEquipment> filteredEquipment =
+    // Filter medical equipment list to only show the current floor
+    filteredMedEqList =
         medEqList.stream()
             .filter(
                 medicalEquipment -> {
@@ -174,13 +281,11 @@ public class mapPageController implements Initializable {
                   return false;
                 })
             .collect(Collectors.toList());
-    displayMedEquipLocations(filteredEquipment);
   }
 
-  // Starter code to implement showing all service requests on the map
-  @FXML
-  public void filterServReq(ActionEvent event) throws SQLException, FileNotFoundException {
-
+  // Filter service requests by floor
+  public void filterServiceRequests() {
+    // Starter code to implement showing all service requests on the map
     String floor = floorDropdown.getValue().toString();
     // servReqList = servReq.getAll();
 
@@ -199,6 +304,27 @@ public class mapPageController implements Initializable {
     //                            })
     //                    .collect(Collectors.toList());
     //    displayMedEquipLocations(filteredEquipment);
+  }
+
+  @FXML
+  public void setFilterMode(ActionEvent event) throws IOException, SQLException {
+    // Get direction the filterMode toggle is switched to
+    if (filterMode.isSelected() == false) {
+      // Clear all icons
+      mapBox.getChildren().clear();
+      mapBox.getChildren().add(mapImage);
+
+      // Filter and display medical equipment locations
+      filterMedicalEquipment();
+      displayMedEquipLocations(filteredMedEqList);
+    } else {
+
+      // Clear all icons
+      mapBox.getChildren().clear();
+      mapBox.getChildren().add(mapImage);
+
+      filterServiceRequests();
+    }
   }
 
   @FXML

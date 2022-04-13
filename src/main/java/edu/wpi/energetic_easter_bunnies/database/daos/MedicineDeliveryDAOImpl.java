@@ -18,9 +18,9 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
   */
   public MedicineDeliveryDAOImpl() throws SQLException {
     medicineRequests = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM MEDICINEREQUEST ORDER BY MEDICINE_REQ_ID DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
 
     while (rs.next()) {
       String medicineReqID = rs.getString("MEDICINE_REQ_ID");
@@ -36,6 +36,7 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
       String medicineQuantity = rs.getString("MEDICINEQUANTITY");
       String medicineUnit = rs.getString("MEDICINEUNIT");
       String reocurringDays = rs.getString("REOCURRINGDAYS");
+      String deliveryTime = rs.getString("DELIVERYTIME");
 
       boolean[] repeatDays = getRepeatingDays(reocurringDays);
 
@@ -53,7 +54,7 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
               medicine,
               medicineQuantity,
               medicineUnit,
-              deliveryDate.toString(),
+              deliveryTime,
               repeatDays[1],
               repeatDays[2],
               repeatDays[3],
@@ -86,7 +87,9 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
     medicineRequests.add(item);
 
     try {
-      String query = "INSERT INTO MEDICINEREQUEST VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      String query =
+          "INSERT INTO MEDICINEREQUEST VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, item.getServiceRequestID());
       statement.setDate(2, Date.valueOf(item.getRequestDate()));
@@ -99,9 +102,11 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
       statement.setString(9, item.getMedicine());
       statement.setString(10, item.getAmount());
       statement.setString(11, item.getUnit());
+      System.out.println(
+          "Yabbla 0: " + item.getRepeatingDays()); // TODO: GOOD DEBUGGING PRACTICE !!!
       statement.setString(12, item.getRepeatingDays());
       statement.setString(13, item.getOtherNotes());
-
+      statement.setString(14, item.getDeliveryTime());
       statement.executeUpdate();
 
     } catch (SQLException e) {

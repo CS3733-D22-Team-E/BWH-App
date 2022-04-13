@@ -12,9 +12,9 @@ public class SanitationRequestDAOImpl implements DAO<sanitationRequest> {
 
   public SanitationRequestDAOImpl() throws SQLException {
     sanitationRequests = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM SANITATIONREQUEST ORDER BY SANITATION_REQ_ID DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
 
     while (rs.next()) {
       String sanitationReqID = rs.getString("SANITATION_REQ_ID");
@@ -91,5 +91,14 @@ public class SanitationRequestDAOImpl implements DAO<sanitationRequest> {
   @Override
   public void delete(sanitationRequest item) {
     sanitationRequests.remove(item);
+    String query = "DELETE FROM SANITATIONREQUEST WHERE SANITATION_REQ_ID = (?)";
+    PreparedStatement statement = null;
+    try {
+      statement = connection.prepareStatement(query);
+      statement.setString(1, item.getServiceRequestID());
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }

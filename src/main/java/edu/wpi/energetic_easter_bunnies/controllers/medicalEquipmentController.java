@@ -1,7 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.energetic_easter_bunnies.PopUpWarning;
+import edu.wpi.energetic_easter_bunnies.PopUp;
 import edu.wpi.energetic_easter_bunnies.database.*;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.MedicalEquipmentDAOImpl;
@@ -10,19 +10,21 @@ import edu.wpi.energetic_easter_bunnies.entity.medicalEquipmentRequest;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class medicalEquipmentController extends serviceRequestPageController {
 
@@ -135,7 +137,16 @@ public class medicalEquipmentController extends serviceRequestPageController {
     tableStaffAssignee.setCellValueFactory(
         new PropertyValueFactory<medicalEquipmentRequest, String>("staffAssignee"));
     tableRoomID.setCellValueFactory(
-        new PropertyValueFactory<medicalEquipmentRequest, String>("roomID"));
+        new Callback<
+            TableColumn.CellDataFeatures<medicalEquipmentRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TableColumn.CellDataFeatures<medicalEquipmentRequest, String> param) {
+            medicalEquipmentRequest curMedicalEquipReq = param.getValue();
+            return new SimpleStringProperty(roomIDToRoomName.get(curMedicalEquipReq.getRoomID()));
+          }
+        });
     tableFloorID.setCellValueFactory(
         new PropertyValueFactory<medicalEquipmentRequest, String>("floorID"));
     tableRequestStatus.setCellValueFactory(
@@ -153,6 +164,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
    */
   protected ObservableList<medicalEquipmentRequest> populateMedEquipList() {
     List<medicalEquipmentRequest> list = medEquipmentServiceRequestDB.getAll();
+    // TODO: FXCollections.observableArrayList(list) ???
     tableList = FXCollections.observableArrayList();
     for (medicalEquipmentRequest m : list) {
       tableList.add(m);
@@ -164,7 +176,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
   public void submitButton(ActionEvent event) throws SQLException {
     try {
       medicalEquipmentRequest.setFloorID(floor.getValue());
-      medicalEquipmentRequest.setRoomID(room.getValue());
+      medicalEquipmentRequest.setRoomID(roomNameToRoomID.get(room.getValue()));
       medicalEquipmentRequest.setEquipment(equipmentType.getValue());
       medicalEquipmentRequest.setEquipmentQuantity(equipmentQuantity.getValue());
       medicalEquipmentRequest.setRequestStatus(requestStatus.getText());
@@ -177,7 +189,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
-      PopUpWarning.createWarning("Warning : A required value was not filled");
+      PopUp.createWarning("Warning : A required value was not filled", (Node) event.getSource());
     }
   }
 
@@ -195,7 +207,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
   }
 
   private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) throws SQLException {
-    medEquipmentServiceRequestDB.update(medEquipmentRequest);
+    medEquipmentServiceRequestDB.addMedEquipReq(medEquipmentRequest);
     tableList.add(medEquipmentRequest);
     List<MedicalEquipment> equipmentUsed =
         medEquipmentDB.getMedicalEquipments(

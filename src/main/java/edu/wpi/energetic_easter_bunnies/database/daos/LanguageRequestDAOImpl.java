@@ -12,9 +12,9 @@ public class LanguageRequestDAOImpl implements DAO<languageInterpreterRequest> {
 
   public LanguageRequestDAOImpl() throws SQLException {
     languageRequests = new ArrayList<>();
-    Statement statement = connection.createStatement();
     String query = "SELECT * FROM LANGUAGEREQUEST ORDER BY LAN_INTERP_REQ_ID DESC";
-    ResultSet rs = statement.executeQuery(query);
+    PreparedStatement statement = connection.prepareStatement(query);
+    ResultSet rs = statement.executeQuery();
     while (rs.next()) {
       String langInterpReqID = rs.getString("LAN_INTERP_REQ_ID");
       String otherNotes = rs.getString("OTHERNOTES");

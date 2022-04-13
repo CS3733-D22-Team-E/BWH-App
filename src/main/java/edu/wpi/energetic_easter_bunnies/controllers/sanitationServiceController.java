@@ -1,6 +1,7 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
-import edu.wpi.energetic_easter_bunnies.PopUpWarning;
+import edu.wpi.energetic_easter_bunnies.PopUp;
+import edu.wpi.energetic_easter_bunnies.customUI.CustomTextFieldTableCell;
 import edu.wpi.energetic_easter_bunnies.database.daos.DAOSystem;
 import edu.wpi.energetic_easter_bunnies.entity.sanitationRequest;
 import edu.wpi.energetic_easter_bunnies.entity.sanitationRequestModel;
@@ -9,11 +10,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -30,7 +31,7 @@ public class sanitationServiceController extends serviceRequestPageController {
   @FXML TableColumn<sanitationRequestModel, String> id;
   @FXML TableColumn<sanitationRequestModel, String> status;
   @FXML TableColumn<sanitationRequestModel, String> assign;
-  @FXML TableColumn<sanitationRequestModel, SimpleBooleanProperty> urgent;
+  @FXML TableColumn<sanitationRequestModel, String> urgent;
   @FXML TableView<sanitationRequestModel> table;
   @FXML RadioButton mediumSelect;
   @FXML RadioButton heavySelect;
@@ -73,18 +74,27 @@ public class sanitationServiceController extends serviceRequestPageController {
     populateList();
 
     floorCol.setCellValueFactory(new PropertyValueFactory<>("floorID"));
+    floorCol.setCellFactory(CustomTextFieldTableCell.forTableColumn());
     roomCol.setCellValueFactory(new PropertyValueFactory<>("roomID"));
+    roomCol.setCellFactory(CustomTextFieldTableCell.forTableColumn());
     id.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    id.setCellFactory(CustomTextFieldTableCell.forTableColumn());
     status.setCellValueFactory(new PropertyValueFactory<>("Status"));
+    status.setCellFactory(CustomTextFieldTableCell.forTableColumn());
     assign.setCellValueFactory(new PropertyValueFactory<>("Assignee"));
+    assign.setCellFactory(CustomTextFieldTableCell.forTableColumn());
     urgent.setCellValueFactory(new PropertyValueFactory<>("isUrgent"));
+    urgent.setCellFactory(CustomTextFieldTableCell.forTableColumn());
     size.setCellValueFactory(new PropertyValueFactory<>("sizeString"));
+    size.setCellFactory(CustomTextFieldTableCell.forTableColumn());
     bio.setCellValueFactory(new PropertyValueFactory<>("bioString"));
+    bio.setCellFactory(CustomTextFieldTableCell.forTableColumn());
 
     table.setItems(tableList);
   }
 
   private void populateList() {
+    tableList = FXCollections.observableArrayList();
     List<sanitationRequest> l = system.getAllSanReq();
     for (sanitationRequest r : l) {
       tableList.add(new sanitationRequestModel(r));
@@ -150,11 +160,12 @@ public class sanitationServiceController extends serviceRequestPageController {
 
       System.out.println(request);
       sanSendToDB(request);
+      resetFields(new ActionEvent());
 
     } catch (NullPointerException error) {
       error.printStackTrace();
       System.out.println(error.getMessage());
-      PopUpWarning.createWarning("Warning : A required value was not filled");
+      PopUp.createWarning("Warning : A required value was not filled", (Node) event.getSource());
     }
   }
 
@@ -163,7 +174,7 @@ public class sanitationServiceController extends serviceRequestPageController {
       request.setDeliveryDate(LocalDate.now());
       request.setRequestDate(LocalDate.now());
       system.addSanReq(request);
-      populateList();
+      populateSanReqTable();
       // tableList.add(new sanitationRequestModel(request));
     } catch (SQLException e) {
       e.printStackTrace();
