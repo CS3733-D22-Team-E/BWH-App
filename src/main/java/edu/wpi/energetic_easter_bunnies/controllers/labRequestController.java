@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.database.daos.LabRequestDAOImpl;
 import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
@@ -21,8 +22,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class labRequestController extends serviceRequestPageController {
 
-  @FXML ComboBox<String> labRequestType;
-  @FXML ComboBox<String> timeFrameComboBox;
+  @FXML JFXComboBox<String> labRequestType;
+  @FXML JFXComboBox<String> timeFrameComboBox;
 
   @FXML TableView<labRequest> requestsTable;
 

@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.energetic_easter_bunnies.PopUpWarning;
 import edu.wpi.energetic_easter_bunnies.entity.mealDeliveryRequest;
 import java.net.URL;
@@ -18,9 +19,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * serviceDeliveryController super class.
  */
 public class mealDeliveryController extends serviceRequestPageController implements Initializable {
-  @FXML ComboBox<String> entreeDropDown;
-  @FXML ComboBox<String> beverageDropDown;
-  @FXML ComboBox<String> dessertDropDown;
+  @FXML JFXComboBox<String> entreeDropDown;
+  @FXML JFXComboBox<String> beverageDropDown;
+  @FXML JFXComboBox<String> dessertDropDown;
   @FXML DatePicker dateTime;
   @FXML TextField timeTxt;
   @FXML TextField staffAssignee;

@@ -199,7 +199,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label layoutX="13.0" layoutY="76.0" text="About Page" textAlignment="CENTER" />
+                        <Label layoutX="6.0" layoutY="76.0" text="About Page" textAlignment="CENTER" />
                      </children>
                   </Pane>
                   <JFXTogglePane />
@@ -208,7 +208,7 @@
                   <Insets />
                </opaqueInsets>
             </TilePane>
-            <Pane fx:id="authors" layoutX="39.0" layoutY="270.0" prefHeight="31.0" prefWidth="946.0">
+            <Pane fx:id="authors" layoutX="39.0" layoutY="270.0" prefHeight="31.0" prefWidth="946.0" visible="false">
                <children>
                   <Text layoutX="203.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sizhe Li">
                      <font>

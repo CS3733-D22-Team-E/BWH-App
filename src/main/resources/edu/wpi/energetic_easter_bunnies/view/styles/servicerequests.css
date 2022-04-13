@@ -1,0 +1,35 @@
+.submitButton{
+    -fx-background-color: #ba2130;
+    -fx-pref-height: 24;
+    -fx-pref-width: 150;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 18;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+}
+.resetButton{
+    -fx-background-color: #FFFFFF;
+    -fx-pref-height: 24;
+    -fx-pref-width: 150;
+    -fx-text-fill: #000000;
+    -fx-font-size: 18;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+}
+
+.headerBackground{
+    -fx-background-color:  #f35959;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+.headerHospital{
+    -fx-font-family: Calibri;
+    -fx-font-style: Regular;
+}
+.headerRequest {
+    -fx-font-family: Calibri ;
+    -fx-font-style: "Bold";
+}
+.requestFields{
+    -fx-font-family: 'Calibri Bold';
+    -fx-font-size: 20;
+}

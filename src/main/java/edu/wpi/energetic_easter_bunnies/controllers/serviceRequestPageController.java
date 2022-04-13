@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -27,8 +28,8 @@ import javafx.scene.control.*;
 public abstract class serviceRequestPageController extends containsSideMenu {
 
   @FXML TextField notes;
-  @FXML Button submitButton;
-  @FXML Button resetButton;
+  @FXML JFXButton submitButton;
+  @FXML JFXButton resetButton;
   @FXML TextField requestStatus;
   @FXML TextField staffAssignee;
   @FXML JFXHamburger burger;

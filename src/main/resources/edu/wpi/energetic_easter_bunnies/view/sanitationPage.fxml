@@ -44,6 +44,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -54,9 +55,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.sanitationServiceController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.sanitationServiceController">
     <children>
-        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;" VBox.vgrow="NEVER">
+        <HBox alignment="BOTTOM_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;" styleClass="headerHospital" VBox.vgrow="NEVER">
             <children>
             <StackPane minHeight="-Infinity" minWidth="-Infinity">
                <children>
@@ -71,14 +72,14 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </StackPane>
-                <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
+                <VBox alignment="BASELINE_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
                     <children>
-                        <Label alignment="CENTER" text="Brigham and Women's Hospital" textFill="WHITE">
+                        <Label alignment="CENTER" styleClass="headerHospital" text="Brigham and Women's Hospital" textFill="WHITE">
                             <font>
-                                <Font name="Book Antiqua Bold" size="30.0" />
+                                <Font name="Book Antiqua" size="30.0" />
                             </font>
                         </Label>
-                        <Label alignment="CENTER" text="Sanitation Services" textFill="WHITE">
+                        <Label alignment="CENTER" styleClass="headerRequest" text="Sanitation Services" textFill="WHITE">
                             <font>
                                 <Font name="Book Antiqua Bold" size="18.0" />
                             </font>
@@ -97,6 +98,9 @@
                     </children>
                 </Pane>
             </children>
+         <effect>
+            <DropShadow />
+         </effect>
         </HBox>
         <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
             <children>
@@ -109,7 +113,7 @@
                      <children>
                               <VBox layoutX="173.0" layoutY="159.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="157.0" text="Biohazard On Site">
+                                      <Label prefHeight="39.0" prefWidth="157.0" styleClass="requestFields" text="Biohazard On Site">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
@@ -129,7 +133,7 @@
                               </VBox>
                               <VBox layoutY="159.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="157.0" text="Urgency">
+                                      <Label prefHeight="39.0" prefWidth="157.0" styleClass="requestFields" text="Urgency">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
@@ -148,7 +152,7 @@
                               </VBox>
                               <VBox prefHeight="69.0" prefWidth="208.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="398.0" text="Assigned Staff Member">
+                                      <Label prefHeight="39.0" prefWidth="398.0" styleClass="requestFields" text="Assigned Staff Member">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
@@ -162,7 +166,7 @@
                               </VBox>
                               <VBox layoutY="259.0" prefHeight="114.0" prefWidth="157.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="157.0" text="Size">
+                                      <Label prefHeight="39.0" prefWidth="157.0" styleClass="requestFields" text="Size">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
@@ -182,7 +186,7 @@
                               </VBox>
                               <VBox layoutX="173.0" layoutY="296.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="152.0" text="Additional Notes">
+                                      <Label prefHeight="39.0" prefWidth="152.0" styleClass="requestFields" text="Additional Notes">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
@@ -196,7 +200,7 @@
                               </VBox>
                               <VBox layoutY="81.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="398.0" text="Floor Number              Room Number">
+                                      <Label prefHeight="39.0" prefWidth="398.0" styleClass="requestFields" text="Floor Number              Room Number">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
@@ -217,8 +221,8 @@
                                       </HBox>
                                   </children>
                               </VBox>
-                        <JFXButton buttonType="RAISED" layoutY="382.0" onAction="#submitButton" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" style="-fx-background-color: #f1f1f1;" text="Submit" />
-                        <JFXButton buttonType="RAISED" layoutX="173.0" layoutY="382.0" onAction="#resetFields" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" style="-fx-background-color: #f1f1f1;" text="Reset Fields" />
+                        <JFXButton layoutY="417.0" onAction="#submitButton" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" styleClass="submitButton" text="Submit" />
+                        <JFXButton layoutX="157.0" layoutY="417.0" onAction="#resetFields" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" styleClass="resetButton" text="Reset" />
                      </children>
                   </Pane>
                   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="378.0" layoutY="14.0" prefHeight="402.0" prefWidth="634.0">
