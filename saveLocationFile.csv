@@ -121,8 +121,6 @@ HDEPT00203,475,195,3,Tower,DEPT,MICU 3BC Waiting Room,MICU 3BC WR
 HDEPT00103,510,265,3,Tower,DEPT,Dialysis Waiting Room,Dialysis WR
 HBATH00203,535,350,3,Tower,BATH,Bathroom 2 Tower Floor 3,Bathroom 0203
 HBATH00103,570,195,3,Tower,BATH,Bathroom 1 Tower Floor 3,Bathroom 0103
-1,1,1,2,,HALL,,
-1,1,1,2,,HALL,,
 WHALL00702,525,865,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway W0702
 WELEV00M02,610,645,2,Tower,ELEV,Elevator M Floor 2,Elevator M2
 WELEV00L02,590,290,2,Tower,ELEV,Elevator L Floor 2,Elevator L2
