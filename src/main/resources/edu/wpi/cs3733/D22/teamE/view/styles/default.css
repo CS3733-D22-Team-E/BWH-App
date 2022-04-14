@@ -9,8 +9,7 @@
   -fx-dark-text-color: #ffffff;
   -fx-light-text-color: #404040;
   -fx-text-color: ladder(-fx-main-base, -fx-dark-text-color 29%, -fx-light-text-color 30%);
-  -fx-text-fill: -fx-text-color;
-
+  -fx-text-fill: black;
 }
 
 #main-box {
