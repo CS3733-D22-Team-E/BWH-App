@@ -36,7 +36,10 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
@@ -44,7 +47,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -55,55 +57,70 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.sanitationServiceController">
+<VBox fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.energetic_easter_bunnies.controllers.sanitationServiceController">
     <children>
-        <HBox alignment="BOTTOM_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;" styleClass="headerHospital" VBox.vgrow="NEVER">
+        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" VBox.vgrow="NEVER">
             <children>
-            <StackPane minHeight="-Infinity" minWidth="-Infinity">
+            <Pane prefHeight="0.0" prefWidth="1080.0" styleClass="header">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
-                  <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/sanitizer.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </StackPane>
-                <VBox alignment="BASELINE_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
-                    <children>
-                        <Label alignment="CENTER" styleClass="headerHospital" text="Brigham and Women's Hospital" textFill="WHITE">
-                            <font>
-                                <Font name="Book Antiqua" size="30.0" />
-                            </font>
-                        </Label>
-                        <Label alignment="CENTER" styleClass="headerRequest" text="Sanitation Services" textFill="WHITE">
-                            <font>
-                                <Font name="Book Antiqua Bold" size="18.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets left="50.0" />
-                            </VBox.margin>
-                        </Label>
-                    </children>
-                </VBox>
-                <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="120.0" style="-fx-border-color: black;">
-                    <HBox.margin>
+                      <Pane layoutX="960.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="90.0" prefWidth="120.0" style="-fx-border-color: black;">
+                          <children>
+                              <JFXHamburger fx:id="burger" layoutX="45.0" layoutY="35.0" />
+                          </children>
+                      </Pane>
+                      <VBox layoutX="95.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="634.0">
+                          <children>
+                              <Label alignment="CENTER" text="Brigham and Women's Hospital" textFill="WHITE">
+                                  <font>
+                                      <Font name="Book Antiqua Bold" size="30.0" />
+                                  </font>
+                              </Label>
+                              <Label alignment="CENTER" text="Sanitation Services" textFill="WHITE">
+                                  <font>
+                                      <Font name="Book Antiqua Bold" size="18.0" />
+                                  </font>
+                                  <VBox.margin>
+                                      <Insets left="50.0" />
+                                  </VBox.margin>
+                              </Label>
+                          </children>
+                      </VBox>
+                  <StackPane layoutX="24.0" layoutY="12.0" minHeight="-Infinity" minWidth="-Infinity">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+                        <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/sanitizer.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <Button fx:id="btnMode" contentDisplay="CENTER" layoutX="885.0" layoutY="20.0" mnemonicParsing="false" onAction="#changeMode" prefHeight="50.0" prefWidth="50.0">
+                     <opaqueInsets>
                         <Insets />
-                    </HBox.margin>
-                    <children>
-                        <JFXHamburger fx:id="burger" layoutX="45.0" layoutY="35.0" />
-                    </children>
-                </Pane>
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <styleClass>
+                        <String fx:value="round-border" />
+                        <String fx:value="primary-color" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fx:id="imgMode" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/ic-dark.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </Pane>
             </children>
-         <effect>
-            <DropShadow />
-         </effect>
         </HBox>
-        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
+        <StackPane id="main-page" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
             <children>
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
             <AnchorPane>
                <StackPane.margin>
                   <Insets bottom="20.0" left="40.0" right="20.0" top="60.0" />
@@ -113,46 +130,46 @@
                      <children>
                               <VBox layoutX="173.0" layoutY="159.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="157.0" styleClass="requestFields" text="Biohazard On Site">
+                                      <Label prefHeight="39.0" prefWidth="157.0" text="Biohazard On Site">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
                                       </Label>
                                       <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
                                           <children>
-                                              <RadioButton fx:id="bioYes" mnemonicParsing="false" text="Yes">
+                                              <RadioButton fx:id="bioYes" mnemonicParsing="false" styleClass="label" text="Yes">
                                                   <toggleGroup>
                                                       <ToggleGroup fx:id="biohazardGroup" />
                                                   </toggleGroup>
                                               </RadioButton>
-                                              <RadioButton fx:id="bioNo" mnemonicParsing="false" selected="true" text="No" toggleGroup="$biohazardGroup" />
-                                              <RadioButton fx:id="bioUnsure" mnemonicParsing="false" text="Unsure" toggleGroup="$biohazardGroup" />
+                                              <RadioButton fx:id="bioNo" mnemonicParsing="false" selected="true" styleClass="label" text="No" toggleGroup="$biohazardGroup" />
+                                              <RadioButton fx:id="bioUnsure" mnemonicParsing="false" styleClass="label" text="Unsure" toggleGroup="$biohazardGroup" />
                                           </children>
                                       </VBox>
                                   </children>
                               </VBox>
                               <VBox layoutY="159.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="157.0" styleClass="requestFields" text="Urgency">
+                                      <Label prefHeight="39.0" prefWidth="157.0" text="Urgency">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
                                       </Label>
                                       <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
                                           <children>
-                                              <RadioButton fx:id="Urgent" mnemonicParsing="false" text="Urgent">
+                                              <RadioButton fx:id="Urgent" mnemonicParsing="false" styleClass="label" text="Urgent">
                                                   <toggleGroup>
                                                       <ToggleGroup fx:id="urgencyGroup" />
                                                   </toggleGroup>
                                               </RadioButton>
-                                              <RadioButton fx:id="notUrgent" mnemonicParsing="false" selected="true" text="Not Urgent" toggleGroup="$urgencyGroup" />
+                                              <RadioButton fx:id="notUrgent" mnemonicParsing="false" selected="true" styleClass="label" text="Not Urgent" toggleGroup="$urgencyGroup" />
                                           </children>
                                       </VBox>
                                   </children>
                               </VBox>
                               <VBox prefHeight="69.0" prefWidth="208.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="398.0" styleClass="requestFields" text="Assigned Staff Member">
+                                      <Label prefHeight="39.0" prefWidth="398.0" text="Assigned Staff Member">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
@@ -161,32 +178,36 @@
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
+                                 <styleClass>
+                                    <String fx:value="secondary-color" />
+                                    <String fx:value="inner-color" />
+                                 </styleClass>
                                         </TextField>
                                   </children>
                               </VBox>
                               <VBox layoutY="259.0" prefHeight="114.0" prefWidth="157.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="157.0" styleClass="requestFields" text="Size">
+                                      <Label prefHeight="39.0" prefWidth="157.0" text="Size">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
                                       </Label>
                                       <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
                                           <children>
-                                              <RadioButton fx:id="lightSelect" mnemonicParsing="false" selected="true" text="Light">
+                                              <RadioButton fx:id="lightSelect" mnemonicParsing="false" selected="true" styleClass="label" text="Light">
                                                   <toggleGroup>
                                                       <ToggleGroup fx:id="sizeGroup" />
                                                   </toggleGroup>
                                               </RadioButton>
-                                              <RadioButton fx:id="mediumSelect" mnemonicParsing="false" text="Medium" toggleGroup="$sizeGroup" />
-                                              <RadioButton fx:id="heavySelect" mnemonicParsing="false" text="Heavy" toggleGroup="$sizeGroup" />
+                                              <RadioButton fx:id="mediumSelect" mnemonicParsing="false" styleClass="label" text="Medium" toggleGroup="$sizeGroup" />
+                                              <RadioButton fx:id="heavySelect" mnemonicParsing="false" styleClass="label" text="Heavy" toggleGroup="$sizeGroup" />
                                           </children>
                                       </VBox>
                                   </children>
                               </VBox>
                               <VBox layoutX="173.0" layoutY="296.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="152.0" styleClass="requestFields" text="Additional Notes">
+                                      <Label prefHeight="39.0" prefWidth="152.0" text="Additional Notes">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
@@ -195,12 +216,16 @@
                                           <font>
                                               <Font size="14.0" />
                                           </font>
+                                 <styleClass>
+                                    <String fx:value="secondary-color" />
+                                    <String fx:value="inner-color" />
+                                 </styleClass>
                                       </TextField>
                                   </children>
                               </VBox>
                               <VBox layoutY="81.0">
                                   <children>
-                                      <Label prefHeight="39.0" prefWidth="398.0" styleClass="requestFields" text="Floor Number              Room Number">
+                                      <Label prefHeight="39.0" prefWidth="398.0" text="Floor Number              Room Number">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
@@ -211,23 +236,31 @@
                                        <HBox.margin>
                                           <Insets right="50.0" />
                                        </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="secondary-color" />
+                                          <String fx:value="inner-color" />
+                                       </styleClass>
                                     </JFXComboBox>
                                     <JFXComboBox fx:id="room" layoutX="60.0" layoutY="10.0" prefWidth="105.0">
                                        <HBox.margin>
                                           <Insets left="20.0" />
                                        </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="secondary-color" />
+                                          <String fx:value="inner-color" />
+                                       </styleClass>
                                     </JFXComboBox>
                                  </children>
                                       </HBox>
                                   </children>
                               </VBox>
-                        <JFXButton layoutY="417.0" onAction="#submitButton" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" styleClass="submitButton" text="Submit" />
-                        <JFXButton layoutX="157.0" layoutY="417.0" onAction="#resetFields" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" styleClass="resetButton" text="Reset" />
+                        <JFXButton buttonType="RAISED" layoutY="382.0" onAction="#submitButton" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" styleClass="commonButton" text="Submit" />
+                        <JFXButton buttonType="RAISED" layoutX="173.0" layoutY="382.0" onAction="#resetFields" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" styleClass="commonButton" text="Reset Fields" />
                      </children>
                   </Pane>
                   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="378.0" layoutY="14.0" prefHeight="402.0" prefWidth="634.0">
                      <content>
-                        <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0">
+                        <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" styleClass="secondary-color">
                            <children>
                                     <TableView fx:id="table" prefHeight="400.0" prefWidth="631.0">
                                         <columns>
@@ -247,7 +280,6 @@
                   </ScrollPane>
                </children>
             </AnchorPane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
             </children>
         </StackPane>
     </children>

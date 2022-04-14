@@ -1,6 +1,5 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
-import edu.wpi.energetic_easter_bunnies.controllers.mainController;
 import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.entity.mealDeliveryRequest;
 import java.sql.*;
@@ -8,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MealDeliveryRequestDAOImpl implements DAO<mealDeliveryRequest> {
-  static Connection connection =
-      DBConnect.valueOf(mainController.getDatabaseMode()).getConnection();
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<mealDeliveryRequest> mealDeliveryRequests;
 
   public MealDeliveryRequestDAOImpl() throws SQLException {

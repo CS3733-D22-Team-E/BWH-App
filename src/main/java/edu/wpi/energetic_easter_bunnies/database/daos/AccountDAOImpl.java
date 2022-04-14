@@ -1,6 +1,5 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
-import edu.wpi.energetic_easter_bunnies.controllers.mainController;
 import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.entity.accounts.Account;
 import edu.wpi.energetic_easter_bunnies.entity.accounts.staffAccount;
@@ -9,8 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDAOImpl implements DAO<Account> {
-  static Connection connection =
-      DBConnect.valueOf(mainController.getDatabaseMode()).getConnection();
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<Account> accounts;
 
   public AccountDAOImpl() throws SQLException {
