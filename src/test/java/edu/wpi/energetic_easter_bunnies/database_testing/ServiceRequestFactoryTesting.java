@@ -2,8 +2,8 @@ package edu.wpi.energetic_easter_bunnies.database_testing;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import edu.wpi.energetic_easter_bunnies.database.ServiceRequestFactory;
-import edu.wpi.energetic_easter_bunnies.entity.serviceRequest;
+import edu.wpi.cs3733.D22.teamE.database.ServiceRequestFactory;
+import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
 import org.junit.jupiter.api.Test;
 
 public class ServiceRequestFactoryTesting {

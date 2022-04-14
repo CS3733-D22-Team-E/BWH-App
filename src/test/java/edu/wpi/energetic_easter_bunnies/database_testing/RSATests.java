@@ -2,7 +2,7 @@ package edu.wpi.energetic_easter_bunnies.database_testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.wpi.energetic_easter_bunnies.RSAEncryption;
+import edu.wpi.cs3733.D22.teamE.RSAEncryption;
 import java.io.*;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
