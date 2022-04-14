@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.database.daos;
 
+import edu.wpi.energetic_easter_bunnies.controllers.mainController;
 import edu.wpi.energetic_easter_bunnies.database.DBConnect;
 import edu.wpi.energetic_easter_bunnies.database.Location;
 import edu.wpi.energetic_easter_bunnies.database.medicineDelivery;
@@ -9,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
-  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+  static Connection connection =
+      DBConnect.valueOf(mainController.getDatabaseMode()).getConnection();
   List<serviceRequest> serviceRequests;
   DAO<medicalEquipmentRequest> medicalEquipmentServiceRequestDAO =
       new MedicalEquipmentServiceRequestDAOImpl();

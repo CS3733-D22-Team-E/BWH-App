@@ -1,5 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.database;
 
+import edu.wpi.energetic_easter_bunnies.controllers.mainController;
 import edu.wpi.energetic_easter_bunnies.database.daos.*;
 import edu.wpi.energetic_easter_bunnies.entity.accounts.Account;
 import edu.wpi.energetic_easter_bunnies.entity.labRequest;
@@ -10,7 +11,8 @@ import java.sql.*;
 
 /** uses format from Iteration 1 final ERD Diagram */
 public class CSVManager {
-  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+  static Connection connection =
+      DBConnect.valueOf(mainController.getDatabaseMode()).getConnection();
 
   private static final String locationFormat =
       "NODEID, XCOORD, YCOORD, FLOOR, BUILDING, NODETYPE, LONGNAME, SHORTNAME";
