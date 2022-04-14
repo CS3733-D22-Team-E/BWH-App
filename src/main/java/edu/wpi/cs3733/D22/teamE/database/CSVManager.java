@@ -5,12 +5,24 @@ import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.entity.labRequest;
 import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
 import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
-import java.io.*;
-import java.sql.*;
+import org.apache.commons.io.FileUtils;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /** uses format from Iteration 1 final ERD Diagram */
 public class CSVManager {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+
+  // ends with a slash (used with path+filename)
+  public static String CSVFilePath = "src/main/resources/edu/wpi/cs3733/D22/teamE/CsvFiles/";
 
   private static final String locationFormat =
       "NODEID, XCOORD, YCOORD, FLOOR, BUILDING, NODETYPE, LONGNAME, SHORTNAME";
@@ -34,8 +46,7 @@ public class CSVManager {
     String format = locationFormat;
     DAO<Location> dao = new LocationDAOImpl();
     // nothing to change here
-    BufferedWriter out;
-    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
     for (Location d : dao.getAll()) {
       String csvLine =
@@ -57,17 +68,15 @@ public class CSVManager {
               + d.getShortName()
               + "\n";
       // change nothing
-      out.write(csvLine);
+      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
     }
-    out.close();
   }
 
   public static void saveMedEquipCSV(String fileName) throws IOException, SQLException {
     String format = medEquipFormat;
     DAO<MedicalEquipment> equipDAO = new MedicalEquipmentDAOImpl();
     // nothing to change here
-    BufferedWriter out;
-    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
     for (MedicalEquipment equip : equipDAO.getAll()) {
       String csvLine =
@@ -89,17 +98,15 @@ public class CSVManager {
               + equip.getEquipmentType()
               + "\n";
       // change nothing
-      out.write(csvLine);
+      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
     }
-    out.close();
   }
 
   public static void saveMedEquipRequestCSV(String fileName) throws IOException, SQLException {
     String format = medEquipRequestFormat;
     DAO<medicalEquipmentRequest> MESRDAO = new MedicalEquipmentServiceRequestDAOImpl();
     // nothing to change here
-    BufferedWriter out;
-    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
     for (medicalEquipmentRequest mesr : MESRDAO.getAll()) {
       String csvLine =
@@ -127,17 +134,15 @@ public class CSVManager {
               + mesr.getOtherNotes()
               + "\n";
       // change nothing
-      out.write(csvLine);
+      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
     }
-    out.close();
   }
 
   public static void saveLabRequestCSV(String fileName) throws IOException, SQLException {
     String format = labRequestFormat;
     DAO<labRequest> labRequestDAO = new LabRequestDAOImpl();
     // nothing to change here
-    BufferedWriter out;
-    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
     for (labRequest labRequest : labRequestDAO.getAll()) {
       String csvLine =
@@ -157,17 +162,15 @@ public class CSVManager {
               + labRequest.getOtherNotes()
               + "\n";
       // change nothing
-      out.write(csvLine);
+      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
     }
-    out.close();
   }
 
   public static void saveEmployeeCSV(String fileName) throws IOException, SQLException {
     String format = employeeFormat;
     DAO<Employee> employeeDAO = new EmployeeDAOImpl();
     // nothing to change here
-    BufferedWriter out;
-    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
     for (Employee employee : employeeDAO.getAll()) {
       String csvLine =
@@ -185,17 +188,15 @@ public class CSVManager {
               + employee.getSalary()
               + "\n";
       // change nothing
-      out.write(csvLine);
+      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
     }
-    out.close();
   }
 
   public static void saveServiceRequestCSV(String fileName) throws IOException, SQLException {
     String format = serviceRequestFormat;
     DAO<serviceRequest> dao = new ServiceRequestDAOImpl();
     // nothing to change here
-    BufferedWriter out;
-    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
     for (serviceRequest d : dao.getAll()) {
       String csvLine =
@@ -213,17 +214,15 @@ public class CSVManager {
               + d.isUrgent()
               + "\n";
       // change nothing
-      out.write(csvLine);
+      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
     }
-    out.close();
   }
 
   public static void saveAccountCSV(String fileName) throws IOException, SQLException {
     String format = accountFormat;
     DAO<Account> dao = new AccountDAOImpl();
     // nothing to change here
-    BufferedWriter out;
-    if ((out = fullSaveHelper(fileName, format)) == null) return;
+    File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
     for (Account d : dao.getAll()) {
       String csvLine =
@@ -243,9 +242,8 @@ public class CSVManager {
               + d.getPosition()
               + "\n";
       // change nothing
-      out.write(csvLine);
+      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
     }
-    out.close();
   }
 
   /*
@@ -304,7 +302,8 @@ public class CSVManager {
     String[] csvData = ColumnsCSV.split(","); // for query later
     BufferedReader in;
     try {
-      in = new BufferedReader(new FileReader(fileName));
+      String filePath = CSVFilePath;
+      in = new BufferedReader(new FileReader(CSVFilePath + fileName));
     } catch (IOException e) {
       System.err.println("ERROR: " + e.getMessage());
       return false; // shouldnt do anything if there's nothing to load
@@ -354,23 +353,6 @@ public class CSVManager {
   }
 
   /**
-   * save CSV function helper,
-   *
-   * @param fileName
-   * @return
-   * @throws IOException
-   */
-  private static BufferedWriter readyIO(String fileName) throws IOException {
-    File tempFile = new File(fileName);
-    boolean exists = tempFile.exists();
-    if (exists) tempFile.delete(); // this makes append=true work fine
-    BufferedWriter out = null;
-    FileWriter fstream = new FileWriter(fileName, true); // appending each line.
-    out = new BufferedWriter(fstream); // ready to write
-    return out;
-  }
-
-  /**
    * full helper - does a lot of ugly stuff be hind the scenes
    *
    * @param fileName
@@ -378,20 +360,21 @@ public class CSVManager {
    * @return
    * @throws IOException
    */
-  private static BufferedWriter fullSaveHelper(String fileName, String format) throws IOException {
+  private static File fullSaveHelper(String fileName, String format) throws IOException {
     format.replaceAll(" ", "");
     if (!format.endsWith("\n")) {
       format += "\n";
     }
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
-    BufferedWriter out;
-    try {
-      out = readyIO(fileName);
-    } catch (IOException e) {
-      System.err.println("Error: " + e.getMessage());
-      return null;
-    } // ends execution
-    out.write(format);
-    return out;
+
+    File tempFile = new File(fileName);
+    boolean exists = tempFile.exists();
+    if (exists) tempFile.delete(); // this makes append=true work
+
+    File file = new File("./CSVsaveFiles/" + fileName);
+    FileUtils.writeStringToFile(file, format, (Charset) null, true);
+    ; // true means append=true
+
+    return file;
   }
 }
