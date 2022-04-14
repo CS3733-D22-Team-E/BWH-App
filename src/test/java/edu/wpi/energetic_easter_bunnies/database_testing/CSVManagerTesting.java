@@ -16,7 +16,9 @@ public class CSVManagerTesting {
   @Test
   public void testLoadLocationFile() throws SQLException, IOException {
     DBCreation.createTables();
-    assertTrue(CSVManager.loadLocationCSV("TowerLocations.csv"));
+    assertTrue(
+        CSVManager.loadLocationCSV(
+            "src/main/resources/edu/wpi/cs3733/D22/teamE/CsvFiles/TowerLocations.csv"));
   }
 
   @Test
