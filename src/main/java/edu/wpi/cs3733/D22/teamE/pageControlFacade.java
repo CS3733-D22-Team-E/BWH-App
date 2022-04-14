@@ -33,6 +33,18 @@ public class pageControlFacade {
     }
   }
 
+  public static Node getPageRoot(String url, Object controller) {
+    try {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(Main.class.getResource("view/" + url));
+      loader.setController(controller);
+      return loader.load();
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
   public static void exitApp() {
     System.exit(0);
   }
