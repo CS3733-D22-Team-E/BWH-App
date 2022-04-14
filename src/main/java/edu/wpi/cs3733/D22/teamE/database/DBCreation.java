@@ -104,7 +104,10 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadLocationCSV("TowerLocations.csv"); // TODO: data[1] is getting an OOB
+    CSVManager.loadLocationCSV(
+        "src/main/resources/edu/wpi/cs3733/D22/teamE/CsvFiles/TowerLocations.csv"); // TODO: data[1]
+    // is getting an
+    // OOB
     // Exception
   }
 
