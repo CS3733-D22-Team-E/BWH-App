@@ -29,7 +29,6 @@ public class mainController implements pageButtons {
   @FXML Button dashboardButton;
   @FXML Button aboutButton;
   @FXML Button helpButton;
-  @FXML JFXToggleButton databaseSwitchButton;
 
   @FXML private Button btnMode;
   @FXML private ImageView imgMode;
@@ -37,7 +36,6 @@ public class mainController implements pageButtons {
   @FXML private Label title;
 
   private boolean isLightMode = true;
-  private static String databaseMode = "EMBEDDED_INSTANCE";
 
   public void changeMode(ActionEvent event) throws FileNotFoundException {
     if (isLightMode) {
@@ -158,18 +156,5 @@ public class mainController implements pageButtons {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     pageControlFacade.loadPage("profilePage.fxml", thisStage);
-  }
-
-  @FXML
-  public void databaseSwitchButton(ActionEvent event) throws IOException {
-    if (databaseSwitchButton.isSelected()) {
-      databaseMode = "CLIENT_INSTANCE";
-    } else {
-      databaseMode = "EMBEDDED_INSTANCE";
-    }
-  }
-
-  public static String getDatabaseMode() {
-    return databaseMode;
   }
 }

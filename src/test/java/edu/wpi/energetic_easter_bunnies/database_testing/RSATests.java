@@ -14,10 +14,7 @@ public class RSATests {
   public void testRSA() {
     BufferedReader reader;
     try {
-      reader =
-          new BufferedReader(
-              new FileReader(
-                  "resources/edu/wpi/energetic_easter_bunnies/rsa/test/testPasswordPLAIN.txt"));
+      reader = new BufferedReader(new FileReader("rsa/test/testPasswordPLAIN.txt"));
       String line = reader.readLine();
       int c = 0;
       String[] plaintext = new String[3];
@@ -29,10 +26,7 @@ public class RSATests {
       }
       reader.close();
 
-      reader =
-          new BufferedReader(
-              new FileReader(
-                  "resources/edu/wpi/energetic_easter_bunnies/rsa/test/testPasswordHASH.txt"));
+      reader = new BufferedReader(new FileReader("rsa/test/testPasswordHASH.txt"));
       line = reader.readLine();
       c = 0;
       String[] hashtext = new String[3];
