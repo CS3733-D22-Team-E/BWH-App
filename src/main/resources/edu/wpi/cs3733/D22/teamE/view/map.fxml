@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/map.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.mapPageController">
+    <children>
+      <Pane prefHeight="90.0" prefWidth="1080.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f35959" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
+            <Label alignment="CENTER" layoutX="107.0" layoutY="13.0" text="Brigham &amp; Women's Hospital" textFill="WHITE">
+               <font>
+                  <Font name="Book Antiqua Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="210.0" layoutY="52.0" text="Location Data" textFill="WHITE">
+               <font>
+                  <Font name="Book Antiqua Bold" size="18.0" />
+               </font>
+            </Label>
+            <StackPane layoutX="14.0" layoutY="13.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+                  <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/location.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <Pane layoutX="960.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="90.0" prefWidth="120.0" style="-fx-border-color: black;">
+               <children>
+                  <JFXHamburger fx:id="burger" layoutX="45.0" layoutY="35.0" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <StackPane prefHeight="560.0" prefWidth="1080.0">
+         <children>
+              <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="560.0" prefWidth="1080.0">
+                  <children>
+                      <AnchorPane layoutX="813.0" layoutY="242.0">
+                          <children>
+                              <Group layoutX="6.198883056640625E-6" layoutY="6.198883056640625E-6" />
+                          </children>
+                      </AnchorPane>
+                  <TableView fx:id="locationTable" layoutX="102.0" layoutY="70.0" prefHeight="435.0" prefWidth="885.0" visible="false">
+                    <columns>
+                      <TableColumn fx:id="nodeID" prefWidth="75.0" text="Node ID" />
+                      <TableColumn prefWidth="91.0" text="X Coordinate" fx:id="xcoord" />
+                        <TableColumn fx:id="ycoord" prefWidth="75.0" text="Y Coordinate" />
+                        <TableColumn fx:id="floor" prefWidth="75.0" text="Floor" />
+                        <TableColumn fx:id="building" prefWidth="75.0" text="Building" />
+                        <TableColumn fx:id="nodeType" prefWidth="75.0" text="Node Type" />
+                        <TableColumn fx:id="longName" prefWidth="75.0" text="Long Name" />
+                        <TableColumn fx:id="shortName" prefWidth="75.0" text="Short Name" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <JFXComboBox fx:id="floorDropdown" layoutX="32.0" layoutY="58.0" onAction="#floorDropdown" promptText="Select Floor" />
+                  <JFXButton fx:id="mapEditorButton" buttonType="RAISED" layoutX="955.0" layoutY="46.0" onAction="#mapEditorButton" prefHeight="25.0" prefWidth="76.0" ripplerFill="RED" style="-fx-background-color: #dbd5d5;" text="Editor" />
+                  <ScrollPane layoutX="557.0" layoutY="79.0" prefHeight="468.0" prefWidth="468.0">
+                     <content>
+                        <AnchorPane fx:id="mapBox">
+                           <children>
+                              <ImageView fx:id="mapImage" fitHeight="909.0" fitWidth="935.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/maps/01_thefirstfloor.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+                  <JFXButton fx:id="zoomUp" layoutX="1039.0" layoutY="45.0" onAction="#zoomUp" text="+" />
+                  <JFXButton fx:id="zoomDown" layoutX="1038.0" layoutY="516.0" onAction="#zoomDown" text="-" />
+                  <JFXSlider fx:id="zoomSlider" blockIncrement="100.0" layoutX="1038.0" layoutY="71.0" majorTickUnit="100.0" max="1035.0" min="435.0" minorTickCount="10" onMouseClicked="#changeZoom" onMouseDragged="#changeZoom" orientation="VERTICAL" prefHeight="438.0" prefWidth="28.0" showTickMarks="true" snapToTicks="true" value="535.0" />
+                  <JFXToggleButton fx:id="filterMode" layoutX="679.0" layoutY="29.0" onAction="#setFilterMode" prefHeight="40.0" prefWidth="81.0" toggleColor="#fafafa" toggleLineColor="#999999" />
+                  <Text layoutX="575.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medical Equipment" wrappingWidth="105.44501843082708" />
+                  <Text layoutX="747.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Requests" wrappingWidth="105.44501843082708" />
+                  </children>
+              </AnchorPane>
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
+         </children>
+      </StackPane>
+    </children>
+</VBox>

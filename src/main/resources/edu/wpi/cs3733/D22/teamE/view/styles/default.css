@@ -1,0 +1,25 @@
+#default-background {
+  -fx-background-image: url("../images/hospital.JPG");
+  -fx-background-repeat: no-repeat;
+  -fx-background-size: cover;
+}
+
+#main-box {
+  -fx-background-color: rgba(255, 255, 255, 1);
+  -fx-background-radius: 10px;
+  -fx-padding: 10px;
+}
+
+.serviceButton {
+  -fx-background-color: rgba(200, 200, 200, 0.9);
+  -fx-background-radius: 8px;
+}
+
+.header {
+  -fx-background-color: #5c59f3;
+  -fx-border-color: black;
+}
+
+.round-border{
+  -fx-background-radius: 100;
+}
