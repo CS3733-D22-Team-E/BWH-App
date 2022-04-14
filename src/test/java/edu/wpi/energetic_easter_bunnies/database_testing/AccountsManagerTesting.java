@@ -2,9 +2,9 @@ package edu.wpi.energetic_easter_bunnies.database_testing;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import edu.wpi.energetic_easter_bunnies.database.DBCreation;
-import edu.wpi.energetic_easter_bunnies.entity.accounts.Account;
-import edu.wpi.energetic_easter_bunnies.entity.accounts.adminAccount;
+import edu.wpi.cs3733.D22.teamE.database.DBCreation;
+import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
+import edu.wpi.cs3733.D22.teamE.entity.accounts.adminAccount;
 import org.junit.jupiter.api.Test;
 
 public class AccountsManagerTesting extends DBCreation {
