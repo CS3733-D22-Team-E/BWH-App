@@ -2,7 +2,7 @@ package edu.wpi.energetic_easter_bunnies.database_testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.wpi.energetic_easter_bunnies.RSAEncryption;
+import edu.wpi.cs3733.D22.teamE.RSAEncryption;
 import java.io.*;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -14,7 +14,9 @@ public class RSATests {
   public void testRSA() {
     BufferedReader reader;
     try {
-      reader = new BufferedReader(new FileReader("rsa/test/testPasswordPLAIN.txt"));
+      reader =
+          new BufferedReader(
+              new FileReader("resources/edu/wpi/cs3733/D22/teamE/rsa/test/testPasswordPLAIN.txt"));
       String line = reader.readLine();
       int c = 0;
       String[] plaintext = new String[3];
@@ -26,7 +28,9 @@ public class RSATests {
       }
       reader.close();
 
-      reader = new BufferedReader(new FileReader("rsa/test/testPasswordHASH.txt"));
+      reader =
+          new BufferedReader(
+              new FileReader("resources/edu/wpi/cs3733/D22/teamE/rsa/test/testPasswordHASH.txt"));
       line = reader.readLine();
       c = 0;
       String[] hashtext = new String[3];

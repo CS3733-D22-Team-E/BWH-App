@@ -12,7 +12,7 @@ shadowJar {
     mergeServiceFiles()
 }
 
-mainClassName = 'edu.wpi.energetic_easter_bunnies.Main'
+mainClassName = 'edu.wpi.cs3733.D22.teamE.Main'
 
 repositories {
     mavenCentral()
@@ -69,8 +69,8 @@ jar {
 }
 
 def codeCoverageExcludes = [
-        'edu.wpi.energetic_easter_bunnies.App',
-        'edu.wpi.energetic_easter_bunnies.Main',
+        'edu.wpi.cs3733.D22.teamE.App',
+        'edu.wpi.cs3733.D22.teamE.Main',
 ]
 
 jacoco {
