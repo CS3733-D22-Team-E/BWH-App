@@ -151,7 +151,6 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       mealDeliveryRequest.setRoomID(roomNameToRoomID.get(room.getValue()));
       mealDeliveryRequest.setFloorID(floor.getValue());
       mealDeliveryRequest.setRequestDate(LocalDate.now());
-      // mealDeliveryRequest.setRoomID(Integer.parseInt("0" + roomNumberTxt.getText()));
       mealDeliveryRequest.setDeliveryDate(dateTime.getValue());
       mealDeliveryRequest.setDeliveryTime(timeTxt.getText());
       mealDeliveryRequest.setUrgent(isUrgent.isSelected());

@@ -15,6 +15,8 @@ public class Main {
   //  }
 
   public static void main(String[] args) {
+    ardComm comm = new ardComm();
+    comm.readData();
     DBCreation.createTables();
     App.launch(App.class, args);
     // closeConnection();
