@@ -16,7 +16,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
@@ -155,7 +154,8 @@ public class medicineDeliveryController extends serviceRequestPageController
     //    }
     catch (SQLException error) {
       System.out.println("SQL Error ");
-      PopUp.createWarning("Warning : A required value was not filled", (Node) event.getSource());
+      PopUp.createWarning(
+          "Warning : A required value was not filled", drawer.getScene().getWindow());
     }
   }
 

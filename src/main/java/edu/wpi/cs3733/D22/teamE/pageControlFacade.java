@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class pageControlFacade {
@@ -13,8 +14,10 @@ public class pageControlFacade {
       FXMLLoader loader = new FXMLLoader();
       loader.setLocation(Main.class.getResource("view/" + url));
       Parent root = loader.load();
+      StackPane p = new StackPane();
+      p.getChildren().add(root);
 
-      stage.getScene().setRoot(root);
+      stage.getScene().setRoot(p);
       return true;
     } catch (IOException e) {
       e.printStackTrace();
