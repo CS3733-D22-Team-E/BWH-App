@@ -14,7 +14,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -170,7 +169,8 @@ public class sanitationServiceController extends serviceRequestPageController {
     } catch (NullPointerException error) {
       error.printStackTrace();
       System.out.println(error.getMessage());
-      PopUp.createWarning("Warning : A required value was not filled", (Node) event.getSource());
+      PopUp.createWarning(
+          "Warning : A required value was not filled", drawer.getScene().getWindow());
     }
   }
 
