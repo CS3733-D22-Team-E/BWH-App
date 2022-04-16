@@ -40,6 +40,7 @@ public class serviceRequest implements requestPage {
     }
     ScrollPane p = new ScrollPane();
     p.setFitToWidth(true);
+    p.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     p.setContent(box);
     return p;
   }

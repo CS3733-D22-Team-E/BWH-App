@@ -35,12 +35,13 @@ public class PopUp {
     JFXDialogLayout layout = new JFXDialogLayout();
     layout.setHeading(new Label(request.toString()));
     try {
+      layout.setMaxHeight(owner.getHeight() / 2);
       layout.setBody(request.getAsPage(editable));
       JFXButton closeButton = new JFXButton("Finished");
+      closeButton.setStyle("-fx-background-color: grey");
       closeButton.setOnAction(event -> alert.hideWithAnimation());
       layout.setActions(closeButton);
       alert.setContent(layout);
-      alert.setWidth(layout.getWidth());
       alert.showAndWait();
     } catch (InvocationTargetException | IllegalAccessException e) {
       e.printStackTrace();
