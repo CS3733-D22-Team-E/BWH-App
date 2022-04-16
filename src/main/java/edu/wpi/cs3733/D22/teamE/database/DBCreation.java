@@ -20,6 +20,7 @@ public class DBCreation {
             + "    POSITION   VARCHAR(25) not null,\n"
             + "    AVAILABLE  BOOLEAN     not null,\n"
             + "    SALARY     DOUBLE      not null\n"
+            + "    FOREIGN KEY (LOCATIONID) REFERENCES TOWERLOCATIONS (LOCATIONID)\n"
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
@@ -63,6 +64,7 @@ public class DBCreation {
             + "    TIMEFRAME        VARCHAR(35) not null,\n"
             + "    REQUESTSTATUS    VARCHAR(35) not null,\n"
             + "    OTHERNOTES       VARCHAR(35) not null\n"
+            + "    FOREIGN KEY (LOCATIONID) REFERENCES TOWERLOCATIONS (LOCATIONID)\n"
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
@@ -83,6 +85,7 @@ public class DBCreation {
             + "    FLOOR           VARCHAR(31)  not null,\n"
             + "    REQUESTSTATUS   VARCHAR(31)  not null,\n"
             + "    OTHERNOTES      VARCHAR(255) not null\n"
+            + "    FOREIGN KEY (LOCATIONID) REFERENCES TOWERLOCATIONS (LOCATIONID)\n"
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
