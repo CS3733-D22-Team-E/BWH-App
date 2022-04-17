@@ -5,8 +5,6 @@ import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.entity.labRequest;
 import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
 import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
-import org.apache.commons.io.FileUtils;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -16,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.apache.commons.io.FileUtils;
 
 /** uses format from Iteration 1 final ERD Diagram */
 public class CSVManager {
