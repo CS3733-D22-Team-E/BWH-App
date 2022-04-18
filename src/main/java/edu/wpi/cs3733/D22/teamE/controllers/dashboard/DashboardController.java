@@ -1,12 +1,14 @@
-package edu.wpi.cs3733.D22.teamE.controllers;
+package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.D22.teamE.controllers.containsSideMenu;
 import edu.wpi.cs3733.D22.teamE.database.Equipment;
 import edu.wpi.cs3733.D22.teamE.database.Location;
 import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
+import edu.wpi.cs3733.D22.teamE.entity.DashboardPage;
 import edu.wpi.cs3733.D22.teamE.pageControlFacade;
 import java.net.URL;
 import java.sql.SQLException;
@@ -65,6 +67,7 @@ public class DashboardController extends containsSideMenu implements Initializab
   LocationDAOImpl locationDAO;
   MedicalEquipmentDAOImpl equipmentDAO;
   List<MedicalEquipment> allEquipment;
+  DashboardPage dashboardEntity;
 
   String equipmentSelected;
   String equipmentSelectedFilter;
@@ -73,6 +76,7 @@ public class DashboardController extends containsSideMenu implements Initializab
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     super.initialize(url, rb);
+    dashboardEntity = new DashboardPage("All", "All", null);
     try {
       equipmentDAO = new MedicalEquipmentDAOImpl();
       locationDAO = new LocationDAOImpl();
