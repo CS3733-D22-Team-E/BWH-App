@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamE.database.Location;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.pageControlFacade;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -19,9 +21,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -85,7 +89,7 @@ public class mapEditorController implements Initializable {
     }
   }
 
-  private void fetchDB() throws SQLException {
+  private void fetchDB() throws SQLException, FileNotFoundException {
     db = new LocationDAOImpl();
     List<Location> locationList = db.getAll();
     displayFloorLocations(locationList);
@@ -93,23 +97,23 @@ public class mapEditorController implements Initializable {
 
   // Switching Panes
   @FXML
-  public void BigAddLocationButton(ActionEvent event) {
+  public void BigAddLocationButton(ActionEvent event) throws FileNotFoundException {
     paneSwitch("add");
   }
 
   @FXML
-  public void BigUpdateLocationButton(ActionEvent event) {
+  public void BigUpdateLocationButton(ActionEvent event) throws FileNotFoundException {
     paneSwitch("update");
   }
 
   @FXML
-  public void BigDeleteLocationButton(ActionEvent event) {
+  public void BigDeleteLocationButton(ActionEvent event) throws FileNotFoundException {
     paneSwitch("delete");
   }
 
   // New Locations, Update Location, Delete Location
   @FXML
-  public void smallAddLocationButton(ActionEvent event) throws SQLException {
+  public void smallAddLocationButton(ActionEvent event) throws SQLException, FileNotFoundException {
 
     List<Location> locationList = db.getAll();
 
@@ -153,7 +157,8 @@ public class mapEditorController implements Initializable {
   }
 
   @FXML
-  public void smallUpdateLocationButton(ActionEvent event) throws SQLException {
+  public void smallUpdateLocationButton(ActionEvent event)
+      throws SQLException, FileNotFoundException {
     int locationPadding = 7;
 
     // Check if the location has been moved
@@ -177,7 +182,8 @@ public class mapEditorController implements Initializable {
   }
 
   @FXML
-  public void smallDeleteLocationButton(ActionEvent event) throws SQLException {
+  public void smallDeleteLocationButton(ActionEvent event)
+      throws SQLException, FileNotFoundException {
 
     // Reset delete text
     deleteText.setText("Click on the location you would like to delete");
@@ -187,7 +193,7 @@ public class mapEditorController implements Initializable {
   }
 
   // Display location on the map
-  private void displayFloorLocations(List<Location> locationList) {
+  private void displayFloorLocations(List<Location> locationList) throws FileNotFoundException {
 
     // Remove all location dots
     mapBox.getChildren().clear();
@@ -205,10 +211,15 @@ public class mapEditorController implements Initializable {
             .collect(Collectors.toList());
 
     for (Location l : filteredLocations) {
+
+      // Create a new location dot
       Circle c = new Circle();
-      c.setRadius(8);
+      c.setRadius(12);
       c.setCenterX(l.getXcoord() * scaleFactor);
       c.setCenterY(l.getYcoord() * scaleFactor);
+
+      // Set the location dot image
+      c.setFill(new ImagePattern(nodeToIcon(l.getNodeType())));
 
       // Conditional styling
       if (selectedLoc == l) {
@@ -219,6 +230,105 @@ public class mapEditorController implements Initializable {
 
       mapBox.getChildren().add(c);
     }
+  }
+
+  private Image nodeToIcon(String nodeType) throws FileNotFoundException {
+
+    Image image =
+        new Image(
+            new FileInputStream(
+                "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/location.png"));
+
+    // If the node type is null, return the default location icon
+    if (nodeType == null) {
+      return image;
+    }
+
+    // Apply the correct image based on the location type
+    switch (nodeType) {
+      case "ELEV":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/elev.png"));
+        break;
+      case "STAI":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/stai.png"));
+        break;
+      case "REST":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/rest.png"));
+        break;
+      case "BATH":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/rest.png"));
+        break;
+      case "STOR":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/stor.png"));
+        break;
+      case "DEPT":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/dept.png"));
+        break;
+      case "HALL":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/hall.png"));
+        break;
+      case "DIRT":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/dirt.png"));
+        break;
+      case "EXIT":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/exit.png"));
+        break;
+      case "LABS":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/labs.png"));
+        break;
+      case "PATI":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/pati.png"));
+        break;
+      case "RETL":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/retl.png"));
+        break;
+      case "SERV":
+        image =
+            new Image(
+                new FileInputStream(
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/serv.png"));
+        break;
+      default:
+        break;
+    }
+
+    return image;
   }
 
   // Switching Floors
@@ -277,7 +387,7 @@ public class mapEditorController implements Initializable {
     }
   }
 
-  public void paneSwitch(String pane) {
+  public void paneSwitch(String pane) throws FileNotFoundException {
 
     // Reset values to default
     selectedLoc = null;
@@ -348,10 +458,13 @@ public class mapEditorController implements Initializable {
 
       // Add circle to map
       Circle c = new Circle();
-      c.setRadius(8);
+      c.setRadius(12);
       c.setCenterX(mouseX);
       c.setCenterY(mouseY);
+      // Set the location dot image
+      c.setFill(new ImagePattern(nodeToIcon(selectedLoc.getNodeType())));
       c.getStyleClass().add("selectedLocationDot");
+
       mapBox.getChildren().add(c);
 
       // Update change position button text
@@ -397,9 +510,12 @@ public class mapEditorController implements Initializable {
 
       // Place new dot
       Circle c = new Circle();
-      c.setRadius(8);
+      c.setRadius(12);
       c.setCenterX(event.getX());
       c.setCenterY(event.getY());
+      // Set the location dot image
+      c.setFill(new ImagePattern(nodeToIcon(addNodeType.getValue())));
+
       c.getStyleClass().add("selectedLocationDot");
       mapBox.getChildren().add(c);
 

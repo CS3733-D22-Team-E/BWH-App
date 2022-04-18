@@ -146,12 +146,41 @@ public class mapPageController extends containsSideMenu implements Initializable
 
     // Display an icon for each item in the filtered list
     for (MedicalEquipment e : filteredMedEqList) {
+
       Image image =
           new Image(
               new FileInputStream(
-                  "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/microscope.png"));
-      double prefWidth = (int) image.getWidth() / 2.5;
-      double prefHeight = (int) image.getHeight() / 2.5;
+                  "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/medicalEquipment/location.png"));
+
+      // Apply the correct icon based on the equipment type
+      switch (e.getEquipmentType()) {
+        case "RECLINER":
+          image =
+              new Image(
+                  new FileInputStream(
+                      "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/medicalEquipment/recliner.png"));
+          break;
+        case "BED":
+          image =
+              new Image(
+                  new FileInputStream(
+                      "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/medicalEquipment/bed.png"));
+          break;
+        case "INFUSION PUMP":
+          image =
+              new Image(
+                  new FileInputStream(
+                      "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/medicalEquipment/infusion.png"));
+          break;
+        case "XRAY":
+          image =
+              new Image(
+                  new FileInputStream(
+                      "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/medicalEquipment/xray.png"));
+          break;
+      }
+      double prefWidth = ((int) image.getWidth() / 6) * scaleFactor;
+      double prefHeight = ((int) image.getWidth() / 6) * scaleFactor;
 
       ImageView i = new ImageView(image);
       i.setFitWidth(prefWidth);
@@ -180,41 +209,41 @@ public class mapPageController extends containsSideMenu implements Initializable
       Image image =
           new Image(
               new FileInputStream(
-                  "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/location.png"));
+                  "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/location.png"));
 
       if (e.getRequestType() == serviceRequest.Type.MED_DELIV_REQ) {
         image =
             new Image(
                 new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/medicine.png"));
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/medicine.png"));
       } else if (e.getRequestType() == serviceRequest.Type.LAB_REQUEST) {
         image =
             new Image(
                 new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/beaker.png"));
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/labs.png"));
       } else if (e.getRequestType() == serviceRequest.Type.MED_EQUIP_REQ) {
         image =
             new Image(
                 new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/microscope.png"));
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/equipment.png"));
       } else if (e.getRequestType() == serviceRequest.Type.MEAL_DELIV_REQ) {
         image =
             new Image(
                 new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/mealDelivery.png"));
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/meal.png"));
       } else if (e.getRequestType() == serviceRequest.Type.SANITATION_REQ) {
         image =
             new Image(
                 new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/sanitizer.png"));
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/sanitation.png"));
       } else if (e.getRequestType() == serviceRequest.Type.LANG_INTERP_REQ) {
         image =
             new Image(
                 new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/Language.png"));
+                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/language.png"));
       }
-      double prefWidth = (int) image.getWidth() / 2.5;
-      double prefHeight = (int) image.getHeight() / 2.5;
+      double prefWidth = ((int) image.getWidth() / 6) * scaleFactor;
+      double prefHeight = ((int) image.getHeight() / 6) * scaleFactor;
 
       ImageView i = new ImageView(image);
       i.setFitWidth(prefWidth);
