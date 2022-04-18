@@ -25,7 +25,7 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadLocationCSV("TowerLocations.csv"); // TODO: data[1]
+    CSVManager.loadLocationCSV("TowerLocations.csv");
   }
 
   public static void createEmployeesTable() throws SQLException {
