@@ -21,6 +21,7 @@ public class DAOSystem {
   private final MedicineDeliveryDAOImpl medicineDeliveryDAO;
   private final SanitationRequestDAOImpl sanitationRequestDAO;
   private final ServiceRequestDAOImpl serviceRequestDAO;
+  private final GiftRequestDAOImpl giftRequestDAO;
 
   public DAOSystem() throws SQLException {
     accountDAO = new AccountDAOImpl();
@@ -34,6 +35,7 @@ public class DAOSystem {
     medicineDeliveryDAO = new MedicineDeliveryDAOImpl();
     sanitationRequestDAO = new SanitationRequestDAOImpl();
     serviceRequestDAO = new ServiceRequestDAOImpl();
+    giftRequestDAO = new GiftRequestDAOImpl();
   }
 
   public List<Account> getAllAccounts() {
@@ -235,5 +237,21 @@ public class DAOSystem {
 
   public List<sanitationRequest> getAllSanReq() {
     return sanitationRequestDAO.getAll();
+  }
+
+  public List<giftDeliveryRequest> getAllGiftDeliveries() {
+    return giftRequestDAO.getAll();
+  }
+
+  public giftDeliveryRequest getGiftDelivery(String id) {
+    return giftRequestDAO.get(id);
+  }
+
+  public void updateMedDelivery(giftDeliveryRequest request) {
+    giftRequestDAO.update(request);
+  }
+
+  public void deleteMedDelivery(giftDeliveryRequest request) {
+    giftRequestDAO.delete(request);
   }
 }
