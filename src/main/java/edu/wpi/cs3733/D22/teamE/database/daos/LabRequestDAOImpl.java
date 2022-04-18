@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LabRequestDAOImpl implements DAO<labRequest> {
+public class LabRequestDAOImpl extends DAOImpl<labRequest> {
 
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<labRequest> labRequests;
@@ -80,7 +80,7 @@ public class LabRequestDAOImpl implements DAO<labRequest> {
    * @param labRequest lab request to add
    */
   @Override
-  public void update(labRequest labRequest) {
+  public void add(labRequest labRequest) {
     labRequests.add(labRequest);
 
     try {

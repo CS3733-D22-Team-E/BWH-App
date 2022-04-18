@@ -23,6 +23,13 @@ public interface DAO<T> {
    *
    * @param item the item to be added
    */
+  void add(T item);
+
+  /**
+   * Method to update a specific item
+   *
+   * @param item the item to be added
+   */
   void update(T item);
 
   /**

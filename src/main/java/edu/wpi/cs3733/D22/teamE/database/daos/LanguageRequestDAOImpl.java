@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LanguageRequestDAOImpl implements DAO<languageInterpreterRequest> {
+public class LanguageRequestDAOImpl extends DAOImpl<languageInterpreterRequest> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<languageInterpreterRequest> languageRequests;
 
@@ -61,7 +61,7 @@ public class LanguageRequestDAOImpl implements DAO<languageInterpreterRequest> {
   }
 
   @Override
-  public void update(languageInterpreterRequest item) {
+  public void add(languageInterpreterRequest item) {
     languageRequests.add(item);
 
     try {

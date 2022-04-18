@@ -14,7 +14,7 @@ public class LocationDAOImplTesting {
   public void testGetLocation() throws SQLException {
     LocationDAOImpl locationDAO = new LocationDAOImpl();
     Location location = new Location();
-    locationDAO.update(location);
+    locationDAO.add(location);
     assertEquals(locationDAO.get("1"), location);
   }
 
@@ -22,7 +22,7 @@ public class LocationDAOImplTesting {
   public void testUpdateLocation() throws SQLException {
     LocationDAOImpl locationDAO = new LocationDAOImpl();
     Location location = new Location();
-    locationDAO.update(location);
+    locationDAO.add(location);
     locationDAO.updateLocation(location, "2", "HALL");
     assertTrue(locationDAO.getAll().contains(location));
     locationDAO.delete(location);
@@ -32,7 +32,7 @@ public class LocationDAOImplTesting {
   public void testUpdateCoord() throws SQLException {
     LocationDAOImpl locationDAO = new LocationDAOImpl();
     Location location = new Location();
-    locationDAO.update(location);
+    locationDAO.add(location);
     locationDAO.updateCoord(location, 2, 1);
     assertTrue(locationDAO.getAll().contains(location));
     locationDAO.delete(location);
@@ -42,7 +42,7 @@ public class LocationDAOImplTesting {
   public void testDeleteLocation() throws SQLException {
     DAO<Location> locationDAO = new LocationDAOImpl();
     Location location = new Location();
-    locationDAO.update(location);
+    locationDAO.add(location);
     assertTrue(locationDAO.getAll().contains(location));
     locationDAO.delete(location);
     // TODO Figure out whats wrong with this

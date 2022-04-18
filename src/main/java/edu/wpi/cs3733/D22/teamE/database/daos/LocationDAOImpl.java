@@ -2,12 +2,13 @@ package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.database.Location;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class LocationDAOImpl implements DAO<Location> {
+public class LocationDAOImpl extends DAOImpl<Location> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<Location> locations;
 
@@ -84,7 +85,7 @@ public class LocationDAOImpl implements DAO<Location> {
    * @param location - new location to be added
    */
   @Override
-  public void update(Location location) {
+  public void add(Location location) {
     locations.add(location);
     try {
       String query =

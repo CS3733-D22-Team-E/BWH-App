@@ -2,11 +2,12 @@ package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.database.Employee;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDAOImpl implements DAO<Employee> {
+public class EmployeeDAOImpl extends DAOImpl<Employee> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<Employee> employees;
 
@@ -48,7 +49,7 @@ public class EmployeeDAOImpl implements DAO<Employee> {
   }
 
   @Override
-  public void update(Employee employee) {
+  public void add(Employee employee) {
     employees.add(employee);
     try {
       String query =

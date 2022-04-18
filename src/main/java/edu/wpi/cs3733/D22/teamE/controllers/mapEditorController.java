@@ -145,7 +145,7 @@ public class mapEditorController implements Initializable {
             addLongName.getText().toString(),
             addShortName.getText().toString(),
             numID);
-    db.update(location);
+    db.add(location);
 
     // Fetch and switch and to update pane
     fetchDB();

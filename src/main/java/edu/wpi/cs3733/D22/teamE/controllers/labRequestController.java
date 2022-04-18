@@ -117,7 +117,7 @@ public class labRequestController extends serviceRequestPageController {
   }
 
   private void labSendToDB(labRequest labReq) throws SQLException {
-    labRequestDB.update(labReq);
+    labRequestDB.add(labReq);
     tableList.add(labReq);
   }
 

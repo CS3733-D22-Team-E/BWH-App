@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipmentRequest> {
+public class MedicalEquipmentServiceRequestDAOImpl extends DAOImpl<medicalEquipmentRequest> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<medicalEquipmentRequest> medicalRequests;
 
@@ -64,7 +64,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
   }
 
   @Override
-  public void update(medicalEquipmentRequest request) {
+  public void add(medicalEquipmentRequest request) {
     medicalRequests.add(request);
   }
 

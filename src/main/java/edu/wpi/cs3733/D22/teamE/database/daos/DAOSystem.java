@@ -45,7 +45,7 @@ public class DAOSystem {
   }
 
   public void updateAccount(Account account) {
-    accountDAO.update(account);
+    accountDAO.add(account);
   }
 
   public void deleteAccount(Account account) {
@@ -61,7 +61,7 @@ public class DAOSystem {
   }
 
   public void updateEmployee(Employee employee) {
-    employeeDAO.update(employee);
+    employeeDAO.add(employee);
   }
 
   public void deleteEmployee(Employee employee) {
@@ -77,7 +77,7 @@ public class DAOSystem {
   }
 
   public void updateLabRequest(labRequest labRequest) {
-    labRequestDAO.update(labRequest);
+    labRequestDAO.add(labRequest);
   }
 
   public void deleteLabRequest(labRequest labRequest) {
@@ -93,7 +93,7 @@ public class DAOSystem {
   }
 
   public void updateLangInterpRequest(languageInterpreterRequest languageInterpreterRequest) {
-    languageRequestDAO.update(languageInterpreterRequest);
+    languageRequestDAO.add(languageInterpreterRequest);
   }
 
   public void deleteLangInterpRequest(languageInterpreterRequest languageInterpreterRequest) {
@@ -109,7 +109,7 @@ public class DAOSystem {
   }
 
   public void updateLocation(Location location) {
-    locationDAO.update(location);
+    locationDAO.add(location);
   }
 
   public void deleteLocation(Location location) {
@@ -125,7 +125,7 @@ public class DAOSystem {
   }
 
   public void updateMealDelivReq(mealDeliveryRequest mealDeliveryRequest) {
-    mealDeliveryRequestDAO.update(mealDeliveryRequest);
+    mealDeliveryRequestDAO.add(mealDeliveryRequest);
   }
 
   public void deleteMealDelivReq(mealDeliveryRequest mealDeliveryRequest) {
@@ -141,7 +141,7 @@ public class DAOSystem {
   }
 
   public void updateMedEquip(MedicalEquipment equipment) {
-    medicalEquipmentDAO.update(equipment);
+    medicalEquipmentDAO.add(equipment);
   }
 
   public void deleteMedEquip(MedicalEquipment equipment) {
@@ -157,7 +157,7 @@ public class DAOSystem {
   }
 
   public void updateMedEquipReq(medicalEquipmentRequest request) {
-    medicalEquipmentServiceRequestDAO.update(request);
+    medicalEquipmentServiceRequestDAO.add(request);
   }
 
   public void deleteMedicalEquipReq(medicalEquipmentRequest request) {
@@ -173,7 +173,7 @@ public class DAOSystem {
   }
 
   public void updateMedDelivery(medicineDelivery medicineDelivery) {
-    medicineDeliveryDAO.update(medicineDelivery);
+    medicineDeliveryDAO.add(medicineDelivery);
   }
 
   public void deleteMedDelivery(medicineDelivery medicineDelivery) {
@@ -189,7 +189,7 @@ public class DAOSystem {
   }
 
   public void updateServiceRequest(serviceRequest request) {
-    serviceRequestDAO.update(request);
+    serviceRequestDAO.add(request);
   }
 
   public void deleteServiceRequest(serviceRequest request) {
@@ -230,7 +230,7 @@ public class DAOSystem {
   }
 
   public void addSanReq(sanitationRequest r) throws SQLException {
-    sanitationRequestDAO.update(r);
+    sanitationRequestDAO.add(r);
   }
 
   public List<sanitationRequest> getAllSanReq() {

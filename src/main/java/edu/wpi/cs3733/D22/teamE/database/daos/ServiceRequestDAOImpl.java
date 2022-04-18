@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
+public class ServiceRequestDAOImpl extends DAOImpl<serviceRequest> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<serviceRequest> serviceRequests;
   DAO<medicalEquipmentRequest> medicalEquipmentServiceRequestDAO =
@@ -67,27 +67,27 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
   }
 
   @Override
-  public void update(serviceRequest request) {
+  public void add(serviceRequest request) {
     delete(request);
     serviceRequests.add(request);
     switch (request.getRequestType()) {
       case LAB_REQUEST:
-        labRequestDAO.update((labRequest) request);
+        labRequestDAO.add((labRequest) request);
         break;
       case MED_DELIV_REQ:
-        medicineDeliveryDAO.update((medicineDelivery) request);
+        medicineDeliveryDAO.add((medicineDelivery) request);
         break;
       case MEAL_DELIV_REQ:
-        mealDeliveryRequestDAO.update((mealDeliveryRequest) request);
+        mealDeliveryRequestDAO.add((mealDeliveryRequest) request);
         break;
       case MED_EQUIP_REQ:
-        medicalEquipmentServiceRequestDAO.update((medicalEquipmentRequest) request);
+        medicalEquipmentServiceRequestDAO.add((medicalEquipmentRequest) request);
         break;
       case SANITATION_REQ:
-        sanitationRequestDAO.update((sanitationRequest) request);
+        sanitationRequestDAO.add((sanitationRequest) request);
         break;
       case LANG_INTERP_REQ:
-        languageInterpreterRequestDAO.update((languageInterpreterRequest) request);
+        languageInterpreterRequestDAO.add((languageInterpreterRequest) request);
         break;
       default:
         break;

@@ -186,7 +186,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   }
 
   private void medicineSendToDB(medicineDelivery medicineDelivery) throws SQLException {
-    medicineDeliveryDB.update(medicineDelivery);
+    medicineDeliveryDB.add(medicineDelivery);
     tableList.add(medicineDelivery);
   }
 

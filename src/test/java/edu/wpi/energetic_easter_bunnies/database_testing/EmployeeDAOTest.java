@@ -14,7 +14,7 @@ public class EmployeeDAOTest {
   public void testAddLabRequest() throws SQLException {
     DAO<Employee> employeeDAO = new EmployeeDAOImpl();
     Employee Employee = new Employee("1", "1", "1", 100.0, "1", true, 1);
-    employeeDAO.update(Employee);
+    employeeDAO.add(Employee);
     assertTrue(employeeDAO.getAll().contains(Employee));
   }
 
@@ -22,7 +22,7 @@ public class EmployeeDAOTest {
   public void testDeleteLabRequest() throws SQLException {
     DAO<Employee> employeeDAO = new EmployeeDAOImpl();
     Employee Employee = new Employee("1", "1", "1", 100.0, "1", true, 1);
-    employeeDAO.update(Employee);
+    employeeDAO.add(Employee);
     assertTrue(employeeDAO.getAll().contains(Employee));
     employeeDAO.delete(Employee);
     assertFalse(employeeDAO.getAll().contains(Employee));

@@ -2,11 +2,12 @@ package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
+public class MedicineDeliveryDAOImpl extends DAOImpl<medicineDelivery> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<medicineDelivery> medicineRequests;
   /*
@@ -83,7 +84,7 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
   }
 
   @Override
-  public void update(medicineDelivery item) {
+  public void add(medicineDelivery item) {
     medicineRequests.add(item);
 
     try {

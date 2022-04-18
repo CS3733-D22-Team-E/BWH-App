@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountDAOImpl implements DAO<Account> {
+public class AccountDAOImpl extends DAOImpl<Account> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<Account> accounts;
 
@@ -52,7 +52,7 @@ public class AccountDAOImpl implements DAO<Account> {
   }
 
   @Override
-  public void update(Account account) {
+  public void add(Account account) {
     accounts.add(account);
     try {
       String query =

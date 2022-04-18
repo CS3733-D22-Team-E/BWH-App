@@ -18,7 +18,7 @@ public class LabRequestTesting {
     labRequest labRequest =
         new labRequest(
             "1", "1", "1", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
-    labRequestDAO.update(labRequest);
+    labRequestDAO.add(labRequest);
     assertTrue(labRequestDAO.getAll().contains(labRequest));
   }
 
@@ -28,7 +28,7 @@ public class LabRequestTesting {
     labRequest labRequest =
         new labRequest(
             "2", "1", "1", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
-    labRequestDAO.update(labRequest);
+    labRequestDAO.add(labRequest);
     assertTrue(labRequestDAO.getAll().contains(labRequest));
     labRequestDAO.delete(labRequest);
     assertFalse(labRequestDAO.getAll().contains(labRequest));
@@ -40,7 +40,7 @@ public class LabRequestTesting {
     labRequest labRequest =
         new labRequest(
             "3", "1", "1", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
-    labRequestDAO.update(labRequest);
+    labRequestDAO.add(labRequest);
     labRequestDAO.updateLabServiceRequest(labRequest, "2");
     assertTrue(labRequest.getRequestStatus() == "2");
   }

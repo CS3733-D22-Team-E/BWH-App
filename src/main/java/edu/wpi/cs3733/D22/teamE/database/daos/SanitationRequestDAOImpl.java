@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SanitationRequestDAOImpl implements DAO<sanitationRequest> {
+public class SanitationRequestDAOImpl extends DAOImpl<sanitationRequest> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<sanitationRequest> sanitationRequests;
 
@@ -63,7 +63,7 @@ public class SanitationRequestDAOImpl implements DAO<sanitationRequest> {
   }
 
   @Override
-  public void update(sanitationRequest item) {
+  public void add(sanitationRequest item) {
     sanitationRequests.add(item);
 
     try {

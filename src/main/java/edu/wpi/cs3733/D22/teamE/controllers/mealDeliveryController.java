@@ -167,7 +167,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   }
 
   private void mealSendToDB(mealDeliveryRequest meal) throws SQLException {
-    mealRequestDB.update(meal);
+    mealRequestDB.add(meal);
     tableList.add(meal);
   }
 

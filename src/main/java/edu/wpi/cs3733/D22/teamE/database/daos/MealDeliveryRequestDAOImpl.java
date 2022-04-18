@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MealDeliveryRequestDAOImpl implements DAO<mealDeliveryRequest> {
+public class MealDeliveryRequestDAOImpl extends DAOImpl<mealDeliveryRequest> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<mealDeliveryRequest> mealDeliveryRequests;
 
@@ -67,7 +67,7 @@ public class MealDeliveryRequestDAOImpl implements DAO<mealDeliveryRequest> {
   }
 
   @Override
-  public void update(mealDeliveryRequest item) {
+  public void add(mealDeliveryRequest item) {
     mealDeliveryRequests.add(item);
 
     try {
