@@ -247,11 +247,11 @@ public class DAOSystem {
     return giftRequestDAO.get(id);
   }
 
-  public void updateMedDelivery(giftDeliveryRequest request) {
+  public void addGiftDelivery(giftDeliveryRequest request) {
     giftRequestDAO.update(request);
   }
 
-  public void deleteMedDelivery(giftDeliveryRequest request) {
+  public void deleteGiftDelivery(giftDeliveryRequest request) {
     giftRequestDAO.delete(request);
   }
 }

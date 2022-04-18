@@ -1,17 +1,21 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.GiftRequestDAOImpl;
-import edu.wpi.cs3733.D22.teamE.entity.giftDeliveryRequest;
-import edu.wpi.cs3733.D22.teamE.entity.mealDeliveryRequest;
+import edu.wpi.cs3733.D22.teamE.entity.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * This is the controller class for the gift delivery service request. Inherits from the
@@ -43,10 +47,66 @@ public class giftDeliveryController extends serviceRequestPageController impleme
 
     giftDeliveryRequest request = new giftDeliveryRequest(); //object to store inputted page data
 
-    public giftDeliveryController() {}
+    DAOSystem system;
+
+    /** Constructor */
+    public giftDeliveryController() {
+        try {
+            system = new DAOSystem();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
-    public void submitButton(ActionEvent event) throws SQLException {
+    public void initialize(URL location, ResourceBundle resources) { //TODO: Implement
+
+    }
+
+    //TODO: Create a method to populate the gift types combo box
+
+    /**
+     * Gets the full list of gift delivery requests currently in the database.
+     *
+     * @return list of giftDeliveryRequest objects in the database
+     */
+    protected ObservableList<giftDeliveryRequest> populateGiftRequestsList() {
+        List<giftDeliveryRequest> requests = giftRequestDAO.getAll();
+        tableList = FXCollections.observableArrayList();
+        for (giftDeliveryRequest request : requests) {
+            tableList.add(request);
+        }
+        return tableList;
+    }
+
+    private void populateGiftReqTable() { //TODO: Implement
+        ObservableList<giftDeliveryRequest> giftDeliveryRequests = populateGiftRequestsList();
+
+        //TODO: Set Cell Factory stuff?
+    }
+
+    @Override
+    public void submitButton(ActionEvent event) throws SQLException { //TODO: Implement
+
+    }
+
+    private void giftSendToDB(giftDeliveryRequest request) {
+        try {
+            request.setRequestDate(LocalDate.now());
+            system.addGiftDelivery(request);
+            //TODO: Populate table here
+        } catch (Exception e) { //TODO: Should be SQLException
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * clears all of the inputs on the page.
+     *
+     * @param event Pressing the resetButton
+     */
+    @FXML
+    public void resetFields(ActionEvent event) { //TODO: Implement
 
     }
 }
