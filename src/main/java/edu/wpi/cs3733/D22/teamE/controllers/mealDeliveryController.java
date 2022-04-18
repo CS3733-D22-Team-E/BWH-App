@@ -181,7 +181,12 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     beverageDropDown.getSelectionModel().clearSelection();
     dessertDropDown.getSelectionModel().clearSelection();
     dateTime.getEditor().clear();
+    isUrgent.setSelected(false);
+    staffAssignee.clear();
+    requestStatus.clear();
     timeTxt.clear();
     otherNotesTxt.clear();
+    floor.getSelectionModel().clearSelection();
+    room.getSelectionModel().clearSelection();
   }
 }

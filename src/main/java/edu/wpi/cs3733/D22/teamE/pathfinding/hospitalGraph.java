@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 public class hospitalGraph {
 
-    ArrayList<Node> graph;
+  ArrayList<Node> graph;
 
-    public hospitalGraph(){}
-
-
+  public hospitalGraph() {}
 }
