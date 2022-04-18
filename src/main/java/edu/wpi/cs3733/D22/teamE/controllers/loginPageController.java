@@ -94,6 +94,8 @@ public class loginPageController implements Initializable {
     try {
       DAO<Account> accountDAO = new AccountDAOImpl();
       Account account = accountDAO.get(username);
+      System.out.println(account.getAccountID());
+      System.out.println(account.getAuthorityLevel());
       if (!validatePassword(password, account.getPasswordHash())) {
         return false;
       } else {
