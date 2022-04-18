@@ -272,6 +272,7 @@ public class DBCreation {
       createSanitationRequestTable();
       createMealRequestTable();
       createLanguageInterpreterRequestTable();
+      createGiftDeliveryRequestTable();
       createAccountsTable();
     } catch (SQLException | IOException e) {
       e.printStackTrace();
