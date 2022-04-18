@@ -25,8 +25,7 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadLocationCSV(
-        "src/main/resources/edu/wpi/cs3733/D22/teamE/CsvFiles/TowerLocations.csv"); // TODO: data[1]
+    CSVManager.loadLocationCSV("TowerLocations.csv"); // TODO: data[1]
   }
 
   public static void createEmployeesTable() throws SQLException {
@@ -43,16 +42,16 @@ public class DBCreation {
             + "\n";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    /*query =
+    query =
         "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES "
-            + "('admin', 'admin' , 'admin', 'admin', TRUE, 3)";
+            + "('admin', 'admin' , 'FDEPT00101', 'admin', TRUE, 3)";
     statement = connection.prepareStatement(query);
     statement.executeUpdate();
     query =
         "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES "
-            + "('staff', 'staff' , 'staff', 'staff', TRUE, 1)";
+            + "('staff', 'staff' , 'FDEPT00101', 'staff', TRUE, 1)";
     statement = connection.prepareStatement(query);
-    statement.executeUpdate();*/
+    statement.executeUpdate();
   }
 
   public static void createEquipmentTable() throws SQLException, IOException {
