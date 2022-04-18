@@ -104,6 +104,12 @@ public class giftDeliveryController extends serviceRequestPageController impleme
    * @param event Pressing the resetButton
    */
   @FXML
-  public void resetFields(ActionEvent event) { // TODO: Implement
+  private void resetButton(ActionEvent event) {
+    floor.getSelectionModel().clearSelection();
+    room.getSelectionModel().clearSelection();
+    // TODO: Reset le other fields
+    requestStatus.clear();
+    staffAssignee.clear();
+    notes.clear();
   }
 }
