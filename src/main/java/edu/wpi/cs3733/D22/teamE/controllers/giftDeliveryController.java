@@ -90,7 +90,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
 
     }
 
-    private void giftSendToDB(giftDeliveryRequest request) {
+    private void giftSendToDB(giftDeliveryRequest request) { //TODO: Can just be the class variable object instead?
         try {
             request.setRequestDate(LocalDate.now());
             system.addGiftDelivery(request);
