@@ -209,6 +209,26 @@ public class DBCreation {
     statement.executeUpdate();
   }
 
+  public static void createGiftDeliveryRequestTable() throws SQLException {
+    String query =
+        "create table GIFTREQUEST\n"
+            + "(\n"
+            + "    GIFT_REQ_ID    VARCHAR(35) primary key, \n"
+            + "    REQUEST_DATE       DATE, \n"
+            + "    DELIVERY_DATE      DATE, \n"
+            + "    STATUS             VARCHAR(35), \n"
+            + "    ASSIGNEE           VARCHAR(35),\n"
+            + "    ISURGENT           BOOLEAN, \n"
+            + "    ROOMID             VARCHAR(35) references TOWERLOCATIONS(NODEID), \n "
+            + "    FLOOR              VARCHAR(25), \n "
+            + "    PATIENTNAME        VARCHAR(35), \n"
+            + "    GIFTTYPE           VARCHAR(25), \n"
+            + "    OTHERNOTES         VARCHAR(255)\n"
+            + ")";
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
+  }
+
   public static void createAccountsTable() throws SQLException {
     String query =
         "create table ACCOUNTS\n"

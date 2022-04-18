@@ -87,6 +87,10 @@ public class serviceRequest implements requestPage {
       public String toString() {
         return "SERVICEREQUEST";
       }
+    },
+    GIFTREQUEST {
+      @Override
+      public String toString() { return "Gift_Request"; }
     }
   }
 
