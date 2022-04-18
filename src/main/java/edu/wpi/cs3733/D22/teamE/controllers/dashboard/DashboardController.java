@@ -42,7 +42,7 @@ public class DashboardController extends containsSideMenu implements Initializab
   @FXML ToggleButton inUseFilter;
   @FXML ToggleButton allFilter;
   ToggleGroup filters;
-  Toggle currentToggle;
+  Toggle currentFilter;
 
   @FXML TableView<Equipment> floorEquipmentTable;
   @FXML TableColumn<MedicalEquipment, String> tableEquipment;
@@ -84,13 +84,8 @@ public class DashboardController extends containsSideMenu implements Initializab
       e.printStackTrace();
     }
 
-    filters = new ToggleGroup();
-    cleanFilter.setToggleGroup(filters);
-    dirtyFilter.setToggleGroup(filters);
-    inUseFilter.setToggleGroup(filters);
-    allFilter.setToggleGroup(filters);
-    allFilter.setSelected(true);
-    currentToggle = allFilter;
+    DashboardFilters filtersHandler = new DashboardFilters();
+    filtersHandler.initialize(url, rb);
     filters
         .selectedToggleProperty()
         .addListener(
@@ -98,7 +93,7 @@ public class DashboardController extends containsSideMenu implements Initializab
               @Override
               public void changed(
                   ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                currentToggle = newValue;
+                currentFilter = newValue;
                 if (selectFloor.getValue() != null) {
                   try {
                     populateFloorEquipmentTable(selectFloor.getValue());
@@ -253,7 +248,7 @@ public class DashboardController extends containsSideMenu implements Initializab
   private void populateFloorEquipmentTable(String floor) throws SQLException {
     ArrayList<MedicalEquipment> equipmentOnFloor = getEquipmentOnFloor(floor);
     ArrayList<MedicalEquipment> filteredEquipment =
-        filterEquipment(equipmentOnFloor, currentToggle);
+        filterEquipment(equipmentOnFloor, currentFilter);
 
     ObservableList<Equipment> equipmentList = FXCollections.observableArrayList(filteredEquipment);
     tableEquipment.setCellValueFactory(
