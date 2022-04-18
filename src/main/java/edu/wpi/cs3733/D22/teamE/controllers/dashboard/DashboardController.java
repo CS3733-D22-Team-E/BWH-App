@@ -76,7 +76,9 @@ public class DashboardController extends containsSideMenu implements Initializab
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     super.initialize(url, rb);
-    dashboardEntity = new DashboardPage("All", "All", null);
+    //dashboardEntity = new DashboardPage("All", "All", null);
+
+
     try {
       equipmentDAO = new MedicalEquipmentDAOImpl();
       locationDAO = new LocationDAOImpl();
@@ -84,74 +86,94 @@ public class DashboardController extends containsSideMenu implements Initializab
       e.printStackTrace();
     }
 
-    DashboardFilters filtersHandler = new DashboardFilters();
-    filtersHandler.initialize(url, rb);
-    filters
-        .selectedToggleProperty()
-        .addListener(
-            new ChangeListener<Toggle>() {
-              @Override
-              public void changed(
-                  ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                currentFilter = newValue;
-                if (selectFloor.getValue() != null) {
-                  try {
-                    populateFloorEquipmentTable(selectFloor.getValue());
-                  } catch (SQLException e) {
-                    e.printStackTrace();
-                  }
-                }
-              }
-            });
-
     allEquipment = equipmentDAO.getAll();
-    selectFloor.getItems().addAll("LL2", "LL1", "1", "2", "3", "4", "5");
-    selectFloor
-        .getSelectionModel()
-        .selectedItemProperty()
-        .addListener(
-            new ChangeListener<String>() {
-              @Override
-              public void changed(
-                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                try {
-                  populateFloorEquipmentTable(newValue);
-                } catch (SQLException e) {
-                  e.printStackTrace();
-                }
-              }
-            });
 
-    selectEquipmentType
-        .getItems()
-        .addAll("All Equipment Types", "Beds", "Infusion Pumps", "Recliners", "X-ray Machines");
-    selectEquipmentType.getSelectionModel().select(0);
-    equipmentSelected = "All Equipment Types";
-    equipmentSelectedFilter = "";
-    equipmentSelectedTooltipText = "Equipment ";
+    initializeFilters();
+    initializeFloorSelection();
+    initializeEquipmentSelection();
+
     try {
       populateTooltips();
     } catch (SQLException e) {
       e.printStackTrace();
     }
+  }
+
+  private void initializeEquipmentSelection() {
     selectEquipmentType
-        .getSelectionModel()
-        .selectedItemProperty()
-        .addListener(
-            new ChangeListener<String>() {
-              @Override
-              public void changed(
-                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                equipmentSelected = newValue;
-                generateEquipmentStrings();
-                try {
-                  populateFloorEquipmentTable(selectFloor.getValue());
-                  populateTooltips();
-                } catch (SQLException e) {
-                  e.printStackTrace();
-                }
-              }
-            });
+            .getItems()
+            .addAll("All Equipment Types", "Beds", "Infusion Pumps", "Recliners", "X-ray Machines");
+    selectEquipmentType.getSelectionModel().select(0);
+    equipmentSelected = "All Equipment Types";
+    equipmentSelectedFilter = "";
+    equipmentSelectedTooltipText = "Equipment ";
+
+    selectEquipmentType
+            .getSelectionModel()
+            .selectedItemProperty()
+            .addListener(
+                    new ChangeListener<String>() {
+                      @Override
+                      public void changed(
+                              ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                        equipmentSelected = newValue;
+                        generateEquipmentStrings();
+                        try {
+                          populateFloorEquipmentTable(selectFloor.getValue());
+                          populateTooltips();
+                        } catch (SQLException e) {
+                          e.printStackTrace();
+                        }
+                      }
+                    });
+  }
+
+  private void initializeFloorSelection() {
+    selectFloor.getItems().addAll("All Floors", "LL2", "LL1", "1", "2", "3", "4", "5");
+    selectFloor.getSelectionModel().select(0);
+    selectFloor
+            .getSelectionModel()
+            .selectedItemProperty()
+            .addListener(
+                    new ChangeListener<String>() {
+                      @Override
+                      public void changed(
+                              ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                        try {
+                          populateFloorEquipmentTable(newValue);
+                        } catch (SQLException e) {
+                          e.printStackTrace();
+                        }
+                      }
+                    });
+  }
+
+  private void initializeFilters() {
+    filters = new ToggleGroup();
+    cleanFilter.setToggleGroup(filters);
+    dirtyFilter.setToggleGroup(filters);
+    inUseFilter.setToggleGroup(filters);
+    allFilter.setToggleGroup(filters);
+    allFilter.setSelected(true);
+    currentFilter = allFilter;
+
+    filters
+            .selectedToggleProperty()
+            .addListener(
+                    new ChangeListener<Toggle>() {
+                      @Override
+                      public void changed(
+                              ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                        currentFilter = newValue;
+                        if (selectFloor.getValue() != null) {
+                          try {
+                            populateFloorEquipmentTable(selectFloor.getValue());
+                          } catch (SQLException e) {
+                            e.printStackTrace();
+                          }
+                        }
+                      }
+                    });
   }
 
   private void populateTooltips() throws SQLException {
