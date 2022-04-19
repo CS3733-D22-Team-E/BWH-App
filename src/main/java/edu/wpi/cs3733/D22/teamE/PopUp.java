@@ -3,7 +3,9 @@ package edu.wpi.cs3733.D22.teamE;
 import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
-import edu.wpi.cs3733.D22.teamE.entity.requestPage;
+import edu.wpi.cs3733.D22.teamE.controllers.statusPageController;
+import edu.wpi.cs3733.D22.teamE.entity.requestPageFactory;
+import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
 import java.lang.reflect.InvocationTargetException;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -29,23 +31,28 @@ public class PopUp {
     popup.show(owner, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT);*/
   }
 
-  public static void createReq(requestPage request, Window owner, boolean editable) {
+  public static void createReq(
+      serviceRequest request, Window owner, boolean editable, Object controller) {
     JFXAlert reqPage = new JFXAlert(owner);
     reqPage.initModality(Modality.APPLICATION_MODAL);
     reqPage.setOverlayClose(false);
     JFXDialogLayout layout = new JFXDialogLayout();
     layout.setHeading(new Label(request.toString()));
     try {
-      layout.setMaxHeight((3 * owner.getHeight()) / 2.0);
+      layout.setMaxHeight((2 * owner.getHeight()) / 3.0);
       JFXButton updateButton = new JFXButton("Update");
       JFXButton closeButton = new JFXButton("Close");
       closeButton.setStyle("-fx-background-color: lightgrey");
       updateButton.setStyle("-fx-background-color: lightgrey");
-      closeButton.setOnAction(event -> reqPage.hideWithAnimation());
+      closeButton.setOnAction(
+          event -> {
+            reqPage.hideWithAnimation();
+            if (controller instanceof statusPageController)
+              ((statusPageController) controller).genTable();
+          });
       if (editable) {
-        layout.setBody(request.getAsPage(updateButton, reqPage));
-        updateButton.setVisible(false);
-      } else layout.setBody(request.getAsPage(null, reqPage));
+        layout.setBody(requestPageFactory.getAsPage(request, updateButton, reqPage));
+      } else layout.setBody(requestPageFactory.getAsPage(request, null, reqPage));
       HBox b = new HBox();
       b.setSpacing(10);
       b.getChildren().add(updateButton);

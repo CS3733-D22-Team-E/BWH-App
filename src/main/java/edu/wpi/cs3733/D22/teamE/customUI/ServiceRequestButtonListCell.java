@@ -9,8 +9,8 @@ import javafx.scene.control.ListView;
 import javafx.util.Callback;
 
 public class ServiceRequestButtonListCell extends CustomJFXButtonListCell<serviceRequest> {
-  public ServiceRequestButtonListCell() {
-    super();
+  public ServiceRequestButtonListCell(Object controller) {
+    super(controller);
   }
 
   @Override
@@ -20,11 +20,13 @@ public class ServiceRequestButtonListCell extends CustomJFXButtonListCell<servic
         event -> {
           boolean edit =
               AccountsManager.getInstance().getAccount().getAuthorityLevel() >= Account.adminPerm;
-          PopUp.createReq(item, button.getScene().getWindow(), edit);
+          PopUp.createReq(item, button.getScene().getWindow(), edit, controller);
+          db.updateServiceRequest(item);
         });
   }
 
-  public static Callback<ListView<serviceRequest>, ListCell<serviceRequest>> forListView() {
-    return list -> new ServiceRequestButtonListCell();
+  public static Callback<ListView<serviceRequest>, ListCell<serviceRequest>> forListView(
+      Object controller) {
+    return list -> new ServiceRequestButtonListCell(controller);
   }
 }
