@@ -42,8 +42,10 @@ public class PopUp {
       closeButton.setStyle("-fx-background-color: lightgrey");
       updateButton.setStyle("-fx-background-color: lightgrey");
       closeButton.setOnAction(event -> reqPage.hideWithAnimation());
-      if (editable) layout.setBody(request.getAsPage(updateButton, reqPage));
-      else layout.setBody(request.getAsPage(null, reqPage));
+      if (editable) {
+        layout.setBody(request.getAsPage(updateButton, reqPage));
+        updateButton.setVisible(false);
+      } else layout.setBody(request.getAsPage(null, reqPage));
       HBox b = new HBox();
       b.setSpacing(10);
       b.getChildren().add(updateButton);

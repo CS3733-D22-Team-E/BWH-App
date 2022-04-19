@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="spinnerBox" alignment="CENTER" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox fx:id="spinnerBox" VBox.vgrow="ALWAYS">
-         <VBox.margin>
-            <Insets bottom="150.0" left="250.0" right="250.0" top="100.0" />
-         </VBox.margin></HBox>
+      <Label alignment="CENTER" prefHeight="150.0" prefWidth="1080.0" text="LOADING..." VBox.vgrow="ALWAYS">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <StackPane fx:id="spCont" prefHeight="329.0" prefWidth="1080.0" VBox.vgrow="ALWAYS" />
    </children>
 </VBox>

@@ -1,11 +1,14 @@
 package edu.wpi.cs3733.D22.teamE;
 
+import com.jfoenix.controls.JFXSpinner;
 import edu.wpi.cs3733.D22.teamE.controllers.*;
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.database.DBCreation;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -47,15 +50,30 @@ public class App extends Application implements SharedScene {
   public void start(Stage primaryStage) throws Exception {
     AppPreloader p = new AppPreloader();
     p.start(primaryStage);
-    Timeline timeline =
-        new Timeline(
-            new KeyFrame(Duration.ZERO, new KeyValue(p.spinner.progressProperty(), 0)),
-            new KeyFrame(
-                Duration.seconds(10),
-                e -> p.fadeInTo(root),
-                new KeyValue(p.spinner.progressProperty(), 1)));
-    timeline.setCycleCount(1);
-    timeline.play();
+    ArrayList<Timeline> timelines = new ArrayList<>();
+    for (int i = 0; i < p.spinners.size(); i++) {
+      JFXSpinner sp = p.spinners.get(i);
+      Timeline timeline = null;
+      if (i < p.spinners.size() - 1) {
+        timeline =
+            new Timeline(
+                new KeyFrame(Duration.ZERO),
+                new KeyFrame(Duration.seconds(30), new KeyValue(sp.progressProperty(), 1)));
+      } else {
+        timeline =
+            new Timeline(
+                new KeyFrame(Duration.ZERO),
+                new KeyFrame(
+                    Duration.seconds(30),
+                    e -> p.fadeInTo(root),
+                    new KeyValue(sp.progressProperty(), 1)));
+      }
+      timeline.setCycleCount(Animation.INDEFINITE);
+      timelines.add(timeline);
+    }
+    for (Timeline t : timelines) {
+      t.playFromStart();
+    }
   }
 
   @Override
