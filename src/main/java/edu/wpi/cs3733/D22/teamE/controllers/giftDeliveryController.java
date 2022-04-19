@@ -32,14 +32,12 @@ public class giftDeliveryController extends serviceRequestPageController impleme
 
   @FXML TableColumn<giftDeliveryRequest, String> tableGiftType;
   @FXML TableColumn<giftDeliveryRequest, String> tablePatientName;
-  @FXML TableColumn<giftDeliveryRequest, String> tableRoomNumber;
-  @FXML TableColumn<giftDeliveryRequest, String> tableFloorNumber;
-  @FXML TableColumn<giftDeliveryRequest, LocalDate> tableDeliveryDate;
-  @FXML TableColumn<giftDeliveryRequest, LocalDate> tableRequestDate;
+  @FXML TableColumn<giftDeliveryRequest, String> tableLocNodeID;
   @FXML TableColumn<giftDeliveryRequest, String> tableStaffAssignee;
+  @FXML TableColumn<giftDeliveryRequest, LocalDate> tableDeliveryDate;
   @FXML TableColumn<giftDeliveryRequest, String> tableRequestStatus;
-  @FXML TableColumn<giftDeliveryRequest, Boolean> tableUrgent;
-  @FXML TableColumn<giftDeliveryRequest, String> tableOtherNotes;
+  @FXML TableColumn<giftDeliveryRequest, String> tableGreetingCard;
+  @FXML TableColumn<giftDeliveryRequest, Boolean> tableIsUrgent;
 
   GiftRequestDAOImpl giftRequestDAO;
   ObservableList<giftDeliveryRequest> tableList;

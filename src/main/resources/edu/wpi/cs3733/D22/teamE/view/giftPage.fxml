@@ -190,6 +190,7 @@
                                         <TableColumn fx:id="tableDeliveryDate" prefWidth="75.0" text="Delivery Date" />
                                         <TableColumn fx:id="tableRequestStatus" prefWidth="75.0" text="Status" />
                                         <TableColumn fx:id="tableGreetingCard" prefWidth="75.0" text="Greeting Card" />
+                              <TableColumn fx:id="tableIsUrgent" prefWidth="75.0" text="Urgent" />
                                     </columns>
                                     <columnResizePolicy>
                                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
