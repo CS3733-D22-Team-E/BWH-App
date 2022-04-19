@@ -4,30 +4,22 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.controllers.containsSideMenu;
 import edu.wpi.cs3733.D22.teamE.database.Equipment;
-import edu.wpi.cs3733.D22.teamE.database.Location;
 import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
 import edu.wpi.cs3733.D22.teamE.pageControlFacade;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import javafx.util.Duration;
 
 public class DashboardController extends containsSideMenu implements Initializable {
 
@@ -49,6 +41,8 @@ public class DashboardController extends containsSideMenu implements Initializab
   @FXML TableColumn<MedicalEquipment, String> tableLocation;
 
   @FXML JFXButton mapEditorButton;
+  @FXML JFXButton addEquipmentButton;
+
   @FXML JFXButton ll2Floor;
   @FXML Tooltip ll2FloorTooltip;
   @FXML JFXButton ll1Floor;
@@ -92,31 +86,34 @@ public class DashboardController extends containsSideMenu implements Initializab
     initializeFilters();
     initializeFloorSelection();
     initializeEquipmentSelection();
+    toolTipHandler.populateTooltips();
+    tableViewHandler.displayEquipmentTable(currentFilter, currentFloor, equipmentSelectedFilter);
   }
 
   private void initializeEquipmentSelection() {
     selectEquipmentType
-            .getItems()
-            .addAll("All Equipment Types", "Beds", "Infusion Pumps", "Recliners", "X-ray Machines");
+        .getItems()
+        .addAll("All Equipment Types", "Beds", "Infusion Pumps", "Recliners", "X-ray Machines");
     selectEquipmentType.getSelectionModel().select(0);
     equipmentSelected = "All Equipment Types";
     equipmentSelectedFilter = "";
     equipmentSelectedTooltipText = "Equipment ";
 
     selectEquipmentType
-            .getSelectionModel()
-            .selectedItemProperty()
-            .addListener(
-                    new ChangeListener<String>() {
-                      @Override
-                      public void changed(
-                              ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                        equipmentSelected = newValue;
-                        generateEquipmentStrings();
-                        tableViewHandler.displayEquipmentTable(currentFilter, currentFloor, equipmentSelectedFilter);
-                        toolTipHandler.populateTooltips();
-                      }
-                    });
+        .getSelectionModel()
+        .selectedItemProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                equipmentSelected = newValue;
+                generateEquipmentStrings();
+                tableViewHandler.displayEquipmentTable(
+                    currentFilter, currentFloor, equipmentSelectedFilter);
+                toolTipHandler.populateTooltips();
+              }
+            });
   }
 
   private void initializeFloorSelection() {
@@ -124,17 +121,18 @@ public class DashboardController extends containsSideMenu implements Initializab
     selectFloor.getSelectionModel().select(0);
     currentFloor = selectFloor.getSelectionModel().getSelectedItem();
     selectFloor
-            .getSelectionModel()
-            .selectedItemProperty()
-            .addListener(
-                    new ChangeListener<String>() {
-                      @Override
-                      public void changed(
-                              ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                              currentFloor = newValue;
-                              tableViewHandler.displayEquipmentTable(currentFilter, currentFloor, equipmentSelectedFilter);
-                      }
-                    });
+        .getSelectionModel()
+        .selectedItemProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                currentFloor = newValue;
+                tableViewHandler.displayEquipmentTable(
+                    currentFilter, currentFloor, equipmentSelectedFilter);
+              }
+            });
   }
 
   private void initializeFilters() {
@@ -147,18 +145,18 @@ public class DashboardController extends containsSideMenu implements Initializab
     currentFilter = allFilter;
 
     filters
-            .selectedToggleProperty()
-            .addListener(
-                    new ChangeListener<Toggle>() {
-                      @Override
-                      public void changed(
-                              ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                        currentFilter = newValue;
-                        tableViewHandler.displayEquipmentTable(currentFilter, currentFloor, equipmentSelectedFilter);
-                      }
-                    });
+        .selectedToggleProperty()
+        .addListener(
+            new ChangeListener<Toggle>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                currentFilter = newValue;
+                tableViewHandler.displayEquipmentTable(
+                    currentFilter, currentFloor, equipmentSelectedFilter);
+              }
+            });
   }
-
 
   private void generateEquipmentStrings() {
     switch (equipmentSelected) {
@@ -194,5 +192,23 @@ public class DashboardController extends containsSideMenu implements Initializab
     Stage thisStage = (Stage) baseComponent.getScene().getWindow();
 
     pageControlFacade.loadPage("map.fxml", thisStage);
+  }
+
+  //TODO: Remove, for testing purposes only. Or flesh out into a service request-esque user interface
+  @FXML
+  private void addEquipment(ActionEvent event) {
+    MedicalEquipment newEquipment = new MedicalEquipment(
+            "BED41",
+            null,
+            false,
+            false,
+            "eSTOR001L1",
+            "eSTOR001L1",
+            "eSTOR001L1",
+            "BED",
+            489
+
+    );
+    equipmentDAO.update(newEquipment);
   }
 }

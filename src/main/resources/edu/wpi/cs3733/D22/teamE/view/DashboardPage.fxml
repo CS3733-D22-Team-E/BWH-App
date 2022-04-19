@@ -120,6 +120,7 @@
                               <HBox alignment="BOTTOM_LEFT" prefHeight="187.0" prefWidth="759.0" spacing="50.0">
                                  <children>
                                     <JFXButton fx:id="mapEditorButton" buttonType="RAISED" mnemonicParsing="false" onAction="#mapEditorButton" prefHeight="69.0" prefWidth="153.0" style="-fx-background-color: f1f1f1;" text="Map Editor" />
+                                    <JFXButton fx:id="addEquipmentButton" onAction="#addEquipment" text="Add Equipment" />
                                  </children>
                               </HBox>
                            </children>

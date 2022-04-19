@@ -14,6 +14,7 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
 
   public MedicalEquipmentDAOImpl() throws SQLException {
     equipmentList = new ArrayList<>();
+    observers = new ArrayList<>();
     String query = "SELECT * FROM EQUIPMENT ORDER BY EQUIPMENTID DESC";
     PreparedStatement statement = connection.prepareStatement(query);
     ResultSet rs = statement.executeQuery();
@@ -150,9 +151,8 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
   }
 
   private void notifyObservers() {
-    for (DashboardHandler observer: observers) {
+    for (DashboardHandler observer : observers) {
       observer.update();
     }
   }
-
 }
