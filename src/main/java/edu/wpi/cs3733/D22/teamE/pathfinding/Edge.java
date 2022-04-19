@@ -19,6 +19,38 @@ public class Edge {
     this.endNode = endNode;
   }
 
+  public String getEdgeID() {
+    return edgeID;
+  }
+
+  public void setEdgeID(String edgeID) {
+    this.edgeID = edgeID;
+  }
+
+  public Node getStartNode() {
+    return startNode;
+  }
+
+  public void setStartNode(Node startNode) {
+    this.startNode = startNode;
+  }
+
+  public Node getEndNode() {
+    return endNode;
+  }
+
+  public void setEndNode(Node endNode) {
+    this.endNode = endNode;
+  }
+
+  public ArrayList<Node> getNeighboringNodes() {
+    return neighboringNodes;
+  }
+
+  public void setNeighboringNodes(ArrayList<Node> neighboringNodes) {
+    this.neighboringNodes = neighboringNodes;
+  }
+
   public double getLength() {
     return this.length;
   }

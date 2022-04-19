@@ -259,7 +259,7 @@ public class DBCreation {
     statement.executeUpdate();
   }
 
-  public static void createEdgesTable() throws SQLException {
+  public static void createEdgesTable() throws SQLException, IOException {
     String query =
         "create table EDGES\n"
             + "(\n"
@@ -269,6 +269,7 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
+    CSVManager.loadEdgesCSV("AllEdges.csv");
   }
 
   public static void createTables() {
@@ -285,6 +286,7 @@ public class DBCreation {
       createLanguageInterpreterRequestTable();
       createFacilitiesRequestTable();
       createAccountsTable();
+      createEdgesTable();
     } catch (SQLException | IOException e) {
       e.printStackTrace();
     }

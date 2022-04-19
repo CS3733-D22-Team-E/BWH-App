@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.pathfinding;
 
 import edu.wpi.cs3733.D22.teamE.database.Location;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
@@ -9,9 +10,9 @@ public class Node {
   private double dist;
   private final List<Edge> neighboringEdges;
 
-  public Node(Location location, List<Edge> neighboringEdges) {
+  public Node(Location location) {
     this.location = location;
-    this.neighboringEdges = neighboringEdges;
+    this.neighboringEdges = new ArrayList<>();
   }
 
   public void setPrevNode(Node n) {
@@ -48,7 +49,9 @@ public class Node {
     this.location = location;
   }
 
-  public void setNeighbors() {}
+  public void addNeighbor(Edge edge) {
+    neighboringEdges.add(edge);
+  }
 
   public List<Edge> getNeighbors() {
     return this.neighboringEdges;
