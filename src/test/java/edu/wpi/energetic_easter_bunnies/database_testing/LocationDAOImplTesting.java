@@ -25,6 +25,7 @@ public class LocationDAOImplTesting {
     locationDAO.update(location);
     locationDAO.updateLocation(location, "2", "HALL");
     assertTrue(locationDAO.getAll().contains(location));
+    locationDAO.delete(location);
   }
 
   @Test

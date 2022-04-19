@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 
 public class languageInterpreterRequestController extends serviceRequestPageController
@@ -44,7 +43,8 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
-      PopUp.createWarning("Warning : A required value was not filled", (Node) event.getSource());
+      PopUp.createWarning(
+          "Warning : A required value was not filled", drawer.getScene().getWindow());
     }
   }
 
