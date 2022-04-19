@@ -47,11 +47,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.mainController">
+<VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.mainController">
    <children>
       <AnchorPane fx:id="mainPane" maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Pane id="main-box" layoutX="33.0" layoutY="108.0" prefHeight="395.0" prefWidth="1014.0">
+            <Pane id="main-box" layoutX="33.0" layoutY="108.0" prefHeight="464.0" prefWidth="1014.0">
                <children>
                   <Label layoutX="19.0" layoutY="16.0" prefHeight="39.0" prefWidth="192.0" text="Service Request Pages">
                      <font>
@@ -242,6 +242,20 @@
                            </graphic>
                         </Button>
                         <Label layoutX="13.0" layoutY="76.0" text="Help Page" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="giftRequestButton" alignment="CENTER" mnemonicParsing="false" onAction="#giftRequestButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/gift.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="5.0" layoutY="76.0" prefHeight="17.0" prefWidth="68.0" text="Gift Delivery" textAlignment="CENTER" />
                      </children>
                   </Pane>
                   <JFXTogglePane />
