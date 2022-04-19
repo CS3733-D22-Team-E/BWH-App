@@ -159,6 +159,7 @@ public class serviceRequest implements requestPage {
         return "SERVICEREQUEST";
       }
     },
+    GIFT_REQUEST,
     FACILITIES_REQ {
       @Override
       public String toString() {
