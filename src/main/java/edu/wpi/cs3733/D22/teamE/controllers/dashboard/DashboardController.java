@@ -8,7 +8,6 @@ import edu.wpi.cs3733.D22.teamE.database.Location;
 import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
-import edu.wpi.cs3733.D22.teamE.entity.DashboardPage;
 import edu.wpi.cs3733.D22.teamE.pageControlFacade;
 import java.net.URL;
 import java.sql.SQLException;
@@ -35,6 +34,7 @@ public class DashboardController extends containsSideMenu implements Initializab
   @FXML private VBox baseComponent;
 
   @FXML JFXComboBox<String> selectFloor;
+  String currentFloor;
   @FXML JFXComboBox<String> selectEquipmentType;
 
   @FXML ToggleButton cleanFilter;
@@ -67,17 +67,17 @@ public class DashboardController extends containsSideMenu implements Initializab
   LocationDAOImpl locationDAO;
   MedicalEquipmentDAOImpl equipmentDAO;
   List<MedicalEquipment> allEquipment;
-  DashboardPage dashboardEntity;
 
   String equipmentSelected;
   String equipmentSelectedFilter;
   String equipmentSelectedTooltipText;
 
+  DashboardTableViewHandler tableViewHandler;
+  DashboardTooltip toolTipHandler;
+
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     super.initialize(url, rb);
-    //dashboardEntity = new DashboardPage("All", "All", null);
-
 
     try {
       equipmentDAO = new MedicalEquipmentDAOImpl();
@@ -86,17 +86,12 @@ public class DashboardController extends containsSideMenu implements Initializab
       e.printStackTrace();
     }
 
-    allEquipment = equipmentDAO.getAll();
+    tableViewHandler = new DashboardTableViewHandler(equipmentDAO, this);
+    toolTipHandler = new DashboardTooltip(equipmentDAO, this);
 
     initializeFilters();
     initializeFloorSelection();
     initializeEquipmentSelection();
-
-    try {
-      populateTooltips();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
   }
 
   private void initializeEquipmentSelection() {
@@ -118,12 +113,8 @@ public class DashboardController extends containsSideMenu implements Initializab
                               ObservableValue<? extends String> observable, String oldValue, String newValue) {
                         equipmentSelected = newValue;
                         generateEquipmentStrings();
-                        try {
-                          populateFloorEquipmentTable(selectFloor.getValue());
-                          populateTooltips();
-                        } catch (SQLException e) {
-                          e.printStackTrace();
-                        }
+                        tableViewHandler.displayEquipmentTable(currentFilter, currentFloor, equipmentSelectedFilter);
+                        toolTipHandler.populateTooltips();
                       }
                     });
   }
@@ -131,6 +122,7 @@ public class DashboardController extends containsSideMenu implements Initializab
   private void initializeFloorSelection() {
     selectFloor.getItems().addAll("All Floors", "LL2", "LL1", "1", "2", "3", "4", "5");
     selectFloor.getSelectionModel().select(0);
+    currentFloor = selectFloor.getSelectionModel().getSelectedItem();
     selectFloor
             .getSelectionModel()
             .selectedItemProperty()
@@ -139,11 +131,8 @@ public class DashboardController extends containsSideMenu implements Initializab
                       @Override
                       public void changed(
                               ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                        try {
-                          populateFloorEquipmentTable(newValue);
-                        } catch (SQLException e) {
-                          e.printStackTrace();
-                        }
+                              currentFloor = newValue;
+                              tableViewHandler.displayEquipmentTable(currentFilter, currentFloor, equipmentSelectedFilter);
                       }
                     });
   }
@@ -165,26 +154,11 @@ public class DashboardController extends containsSideMenu implements Initializab
                       public void changed(
                               ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                         currentFilter = newValue;
-                        if (selectFloor.getValue() != null) {
-                          try {
-                            populateFloorEquipmentTable(selectFloor.getValue());
-                          } catch (SQLException e) {
-                            e.printStackTrace();
-                          }
-                        }
+                        tableViewHandler.displayEquipmentTable(currentFilter, currentFloor, equipmentSelectedFilter);
                       }
                     });
   }
 
-  private void populateTooltips() throws SQLException {
-    populateTooltip(ll2FloorTooltip, "LL2");
-    populateTooltip(ll1FloorTooltip, "LL1");
-    populateTooltip(firstFloorTooltip, "1");
-    populateTooltip(secondFloorTooltip, "2");
-    populateTooltip(thirdFloorTooltip, "3");
-    populateTooltip(fourthFloorTooltip, "4");
-    populateTooltip(fifthFloorTooltip, "5");
-  }
 
   private void generateEquipmentStrings() {
     switch (equipmentSelected) {
@@ -211,114 +185,6 @@ public class DashboardController extends containsSideMenu implements Initializab
       default:
         break;
     }
-  }
-
-  private ArrayList<MedicalEquipment> getEquipmentOnFloor(String floor) throws SQLException {
-    String floorID;
-    switch (floor) {
-      case "LL2":
-        floorID = "L2";
-        break;
-      case "LL1":
-        floorID = "L1";
-        break;
-      default:
-        floorID = floor;
-        break;
-    }
-    ArrayList<MedicalEquipment> equipmentOnFloor = new ArrayList<>();
-    for (MedicalEquipment curEquipment : allEquipment) {
-      if (curEquipment.getFloor().equals(floorID)) {
-        if (equipmentSelectedFilter.equals("")
-            || curEquipment.getEquipmentType().equals(equipmentSelectedFilter)) {
-          equipmentOnFloor.add(curEquipment);
-        }
-      }
-    }
-    return equipmentOnFloor;
-  }
-
-  private ArrayList<MedicalEquipment> filterEquipment(
-      ArrayList<MedicalEquipment> equipmentOnFloor, Toggle filter) {
-    ArrayList<MedicalEquipment> filteredEquipment = new ArrayList<>();
-
-    // TODO: optimize this so that it isn't spaghetti
-    if (filter.equals(cleanFilter)) {
-      for (MedicalEquipment curEquipment : equipmentOnFloor) {
-        if (curEquipment.isClean()) {
-          filteredEquipment.add(curEquipment);
-        }
-      }
-    } else if (filter.equals(dirtyFilter)) {
-      for (MedicalEquipment curEquipment : equipmentOnFloor) {
-        if (!curEquipment.isClean()) {
-          filteredEquipment.add(curEquipment);
-        }
-      }
-    } else if (filter.equals(inUseFilter)) {
-      for (MedicalEquipment curEquipment : equipmentOnFloor) {
-        if (curEquipment.isInUse()) {
-          filteredEquipment.add(curEquipment);
-        }
-      }
-    } else if (filter.equals(allFilter)) {
-      filteredEquipment = equipmentOnFloor;
-    }
-    return filteredEquipment;
-  }
-
-  private void populateFloorEquipmentTable(String floor) throws SQLException {
-    ArrayList<MedicalEquipment> equipmentOnFloor = getEquipmentOnFloor(floor);
-    ArrayList<MedicalEquipment> filteredEquipment =
-        filterEquipment(equipmentOnFloor, currentFilter);
-
-    ObservableList<Equipment> equipmentList = FXCollections.observableArrayList(filteredEquipment);
-    tableEquipment.setCellValueFactory(
-        new PropertyValueFactory<MedicalEquipment, String>("equipmentID"));
-    tableLocation.setCellValueFactory(
-        new Callback<
-            TableColumn.CellDataFeatures<MedicalEquipment, String>, ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(
-              TableColumn.CellDataFeatures<MedicalEquipment, String> param) {
-            MedicalEquipment curEquipment = param.getValue();
-            Location curEquipmentLocation = locationDAO.get(curEquipment.getCurrentLocation());
-            return new SimpleStringProperty(curEquipmentLocation.getLongName());
-          }
-        });
-
-    floorEquipmentTable.setItems(equipmentList);
-  }
-
-  private void populateTooltip(Tooltip tooltip, String floor) throws SQLException {
-    ArrayList<MedicalEquipment> equipmentOnFloor = getEquipmentOnFloor(floor);
-    Integer allEquipment = equipmentOnFloor.size();
-    Integer cleanEquipment = filterEquipment(equipmentOnFloor, cleanFilter).size();
-    Integer dirtyEquipment = filterEquipment(equipmentOnFloor, dirtyFilter).size();
-    Integer inUseEquipment = filterEquipment(equipmentOnFloor, inUseFilter).size();
-
-    tooltip.setText(
-        "Floor: "
-            + floor
-            + "\n"
-            + "Total "
-            + equipmentSelectedTooltipText
-            + " Count: "
-            + allEquipment
-            + "\nClean "
-            + equipmentSelectedTooltipText
-            + " Count: "
-            + cleanEquipment
-            + "\nDirty "
-            + equipmentSelectedTooltipText
-            + " Count: "
-            + dirtyEquipment
-            + "\nIn Use "
-            + equipmentSelectedTooltipText
-            + " Count: "
-            + inUseEquipment);
-
-    tooltip.setShowDelay(Duration.seconds(.2));
   }
 
   // TODO: implement the floor view button

@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
+import edu.wpi.cs3733.D22.teamE.controllers.dashboard.DashboardHandler;
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
 import java.sql.*;
@@ -9,6 +10,7 @@ import java.util.List;
 public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<MedicalEquipment> equipmentList;
+  ArrayList<DashboardHandler> observers;
 
   public MedicalEquipmentDAOImpl() throws SQLException {
     equipmentList = new ArrayList<>();
@@ -60,11 +62,13 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
   @Override
   public void update(MedicalEquipment equipment) {
     equipmentList.add(equipment);
+    notifyObservers();
   }
 
   @Override
   public void delete(MedicalEquipment equipment) {
     equipmentList.remove(equipment);
+    notifyObservers();
   }
 
   public List<MedicalEquipment> getMedicalEquipments(
@@ -117,6 +121,7 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
         break;
       }
     }
+    notifyObservers();
     return equipments;
   }
 
@@ -137,5 +142,17 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
       PreparedStatement statement = connection.prepareStatement(query);
       statement.executeUpdate();
     }
+    notifyObservers();
   }
+
+  public void attach(DashboardHandler observer) {
+    observers.add(observer);
+  }
+
+  private void notifyObservers() {
+    for (DashboardHandler observer: observers) {
+      observer.update();
+    }
+  }
+
 }
