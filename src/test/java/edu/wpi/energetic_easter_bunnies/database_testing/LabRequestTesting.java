@@ -1,18 +1,8 @@
 package edu.wpi.energetic_easter_bunnies.database_testing;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
-import edu.wpi.cs3733.D22.teamE.database.daos.LabRequestDAOImpl;
-import edu.wpi.cs3733.D22.teamE.entity.labRequest;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import org.junit.jupiter.api.Test;
-
 public class LabRequestTesting {
 
-  @Test
+  /*@Test
   public void testAddLabRequest() throws SQLException {
     DAO<labRequest> labRequestDAO = new LabRequestDAOImpl();
     labRequest labRequest =
@@ -43,5 +33,5 @@ public class LabRequestTesting {
     labRequestDAO.update(labRequest);
     labRequestDAO.updateLabServiceRequest(labRequest, "2");
     assertTrue(labRequest.getRequestStatus() == "2");
-  }
+  }*/
 }
