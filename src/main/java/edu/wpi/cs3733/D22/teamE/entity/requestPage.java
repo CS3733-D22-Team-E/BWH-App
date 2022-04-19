@@ -4,7 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import javafx.scene.Node;
 
 public interface requestPage {
-  Node getAsPage(boolean editable) throws InvocationTargetException, IllegalAccessException;
+  Node getAsPage(Object returnObject, Object displayObject)
+      throws InvocationTargetException, IllegalAccessException;
 
   @Override
   String toString();

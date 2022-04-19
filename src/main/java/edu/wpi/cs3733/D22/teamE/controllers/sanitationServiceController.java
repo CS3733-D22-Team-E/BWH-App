@@ -139,10 +139,10 @@ public class sanitationServiceController extends serviceRequestPageController {
       RadioButton selectUrgency = (RadioButton) urgencyGroup.getSelectedToggle();
       switch (selectUrgency.getText()) {
         case "Critical":
-          request.setUrgent(true);
+          request.setIsUrgent(true);
           break;
         case "NotCritical":
-          request.setUrgent(false);
+          request.setIsUrgent(false);
           break;
       }
 
