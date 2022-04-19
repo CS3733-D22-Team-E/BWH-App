@@ -40,7 +40,7 @@ public class securityRequest extends serviceRequest {
         staffAssignee,
         requestDate,
         deliveryDate);
-    setLabRequestType(securityRequestType);
+    setSecurityRequestType(securityRequestType);
     setTimeFrame(timeFrame);
   }
 
@@ -54,7 +54,7 @@ public class securityRequest extends serviceRequest {
     return securityRequestType;
   }
 
-  public void setLabRequestType(String securityRequestType) {
+  public void setSecurityRequestType(String securityRequestType) {
     this.securityRequestType = securityRequestType;
   }
 
