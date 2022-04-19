@@ -228,6 +228,26 @@ public class DBCreation {
     statement.executeUpdate();
   }
 
+  public static void createSecurityRequestTable() throws SQLException {
+    String query =
+        "create table SECURITYREQUEST\n"
+            + "(\n"
+            + "    SECURITY_REQUESTID    VARCHAR(35) not null primary key,\n"
+            + "    SECURITY_REQUEST_TYPE VARCHAR(35) not null,\n"
+            + "    TIMEFRAME    VARCHAR(35) not null,\n"
+            + "    LOCATIONID       VARCHAR(35) not null references TOWERLOCATIONS (NODEID),\n"
+            + "    FLOORID        VARCHAR(35),\n"
+            + "    ISURGENT    BOOLEAN not null,\n"
+            + "    STAFFASSIGNEE       VARCHAR(35) not null references EMPLOYEES(EMPLOYEEID),\n"
+            + "    REQUESTSTATUS       VARCHAR(35) not null,\n"
+            + "    REQUESTDATE       DATE, \n"
+            + "    DELIVERYDATE       DATE, \n"
+            + "    OTHERNOTES       VARCHAR(35) not null\n"
+            + ")";
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
+  }
+
   public static void createGiftDeliveryRequestTable() throws SQLException {
     String query =
         "create table GIFTREQUEST\n"
@@ -305,6 +325,7 @@ public class DBCreation {
       createMealRequestTable();
       createLanguageInterpreterRequestTable();
       createFacilitiesRequestTable();
+      createSecurityRequestTable();
       createGiftDeliveryRequestTable();
       createAccountsTable();
       createEdgesTable();
