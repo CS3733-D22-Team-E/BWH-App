@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -66,7 +65,9 @@ public class giftDeliveryController extends serviceRequestPageController impleme
       giftRequestDAO = new GiftRequestDAOImpl();
       populateLocationComboBoxes();
       populateGiftReqTable();
-      giftOptionType.getItems().addAll("Board Game", "Book", "Get Well Card", "Movie", "Teddy Bear");
+      giftOptionType
+          .getItems()
+          .addAll("Board Game", "Book", "Get Well Card", "Movie", "Teddy Bear");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -92,13 +93,16 @@ public class giftDeliveryController extends serviceRequestPageController impleme
     ObservableList<giftDeliveryRequest> giftDeliveryRequests = populateGiftRequestsList();
     tableGiftType.setCellValueFactory(new PropertyValueFactory<>("gift"));
     tablePatientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
-    tableLocNodeID.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<giftDeliveryRequest, String>, ObservableValue<String>>() {
-      @Override
-      public ObservableValue<String> call(TableColumn.CellDataFeatures<giftDeliveryRequest, String> param) {
-          giftDeliveryRequest curGiftDelivery = param.getValue();
-          return new SimpleStringProperty(roomIDToRoomName.get(curGiftDelivery.getRoomID()));
-      }
-    });
+    tableLocNodeID.setCellValueFactory(
+        new Callback<
+            TableColumn.CellDataFeatures<giftDeliveryRequest, String>, ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TableColumn.CellDataFeatures<giftDeliveryRequest, String> param) {
+            giftDeliveryRequest curGiftDelivery = param.getValue();
+            return new SimpleStringProperty(roomIDToRoomName.get(curGiftDelivery.getRoomID()));
+          }
+        });
     tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
     tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
     tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
@@ -126,7 +130,8 @@ public class giftDeliveryController extends serviceRequestPageController impleme
 
     } catch (NullPointerException e) {
       System.out.println("Error : Some Value is NULL");
-      PopUp.createWarning("Warning : A required value was not filled", drawer.getScene().getWindow());
+      PopUp.createWarning(
+          "Warning : A required value was not filled", drawer.getScene().getWindow());
     }
   }
 

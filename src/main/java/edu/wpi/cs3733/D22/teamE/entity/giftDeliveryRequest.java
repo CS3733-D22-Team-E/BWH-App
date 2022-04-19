@@ -20,7 +20,7 @@ public class giftDeliveryRequest extends serviceRequest {
       String gift) {
     super(
         serviceRequestID,
-        String.valueOf(Type.GIFTREQUEST),
+        String.valueOf(Type.GIFT_REQUEST),
         otherNotes,
         floorID,
         roomID,
@@ -34,7 +34,7 @@ public class giftDeliveryRequest extends serviceRequest {
   }
 
   public giftDeliveryRequest() {
-    super(String.valueOf(Type.GIFTREQUEST));
+    super(String.valueOf(Type.GIFT_REQUEST));
     this.patientName = "";
     this.gift = ""; // TODO: Maybe make default something else later
   }

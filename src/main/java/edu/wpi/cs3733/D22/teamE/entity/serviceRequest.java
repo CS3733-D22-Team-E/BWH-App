@@ -88,10 +88,10 @@ public class serviceRequest implements requestPage {
         return "SERVICEREQUEST";
       }
     },
-    GIFTREQUEST {
+    GIFT_REQUEST {
       @Override
       public String toString() {
-        return "Gift_Request";
+        return "GIFT_REQUEST";
       }
     },
     FACILITIES_REQ {
