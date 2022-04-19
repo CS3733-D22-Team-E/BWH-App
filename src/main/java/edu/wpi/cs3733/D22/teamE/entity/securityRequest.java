@@ -12,8 +12,8 @@ public class securityRequest extends serviceRequest {
       new ArrayList<>() {
         {
           add("ASAP");
+          add("<1 hour");
           add("<1 day");
-          add("<1 week");
         }
       };
 

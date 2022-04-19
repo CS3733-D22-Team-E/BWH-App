@@ -55,12 +55,11 @@ public class securityRequestController extends serviceRequestPageController{
     public void initialize(URL location, ResourceBundle resources) {
         try {
             super.initialize(location, resources);
-            securityRequestType.getItems().addAll("Blood Sample", "Urine Sample", "X-Ray", "CAT Scan", "MRI");
-            timeFrameComboBox.getItems().addAll("ASAP", "<1 day", "<1 week");
+            securityRequestType.getItems().addAll("Aid", "Secure", "Danger", "Other: detail in other notes");
+            timeFrameComboBox.getItems().addAll("ASAP", "<1 hour", "<1 day");
 
             securityRequestDB = new SecurityRequestDAOImpl();
             populateSecurityRequestTable();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
