@@ -7,7 +7,6 @@ import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.pathfinding.Edge;
-
 import java.sql.SQLException;
 import java.util.List;
 
