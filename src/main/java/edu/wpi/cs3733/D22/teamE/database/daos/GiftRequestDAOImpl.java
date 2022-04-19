@@ -67,7 +67,7 @@ public class GiftRequestDAOImpl implements DAO<giftDeliveryRequest> {
     giftRequests.add(item);
 
     try {
-      String query = "INSERT INTO GIFTREQUEST VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      String query = "INSERT INTO GIFTREQUEST VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, item.getServiceRequestID());
       statement.setDate(2, Date.valueOf(item.getRequestDate()));
@@ -84,6 +84,7 @@ public class GiftRequestDAOImpl implements DAO<giftDeliveryRequest> {
       statement.executeUpdate();
     } catch (SQLException e) {
       System.out.println("Add Gift Request failed!"); // TODO: Come up with a better catch block
+      e.printStackTrace();
     }
   }
 
