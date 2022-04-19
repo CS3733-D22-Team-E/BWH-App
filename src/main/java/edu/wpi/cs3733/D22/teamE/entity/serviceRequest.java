@@ -93,6 +93,12 @@ public class serviceRequest implements requestPage {
       public String toString() {
         return "Gift_Request";
       }
+    },
+    FACILITIES_REQ {
+      @Override
+      public String toString() {
+        return "FACILITIES_REQ";
+      }
     }
   }
 
