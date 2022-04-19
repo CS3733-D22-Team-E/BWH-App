@@ -6,5 +6,7 @@ public class hospitalGraph {
 
   ArrayList<Node> graph;
 
-  public hospitalGraph() {}
+  public hospitalGraph() {
+
+  }
 }

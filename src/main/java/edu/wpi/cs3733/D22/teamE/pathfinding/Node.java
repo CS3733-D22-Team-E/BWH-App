@@ -1,29 +1,20 @@
 package edu.wpi.cs3733.D22.teamE.pathfinding;
 
-import java.util.ArrayList;
+import edu.wpi.cs3733.D22.teamE.database.Location;
+
+import java.util.List;
 
 public class Node {
-  private double xCoord;
-  private double yCoord;
+  Location location;
   private Node prevNode;
   private double dist;
-  private ArrayList<Edge> neighboringEdges;
-  private int edgeLength;
+  private final List<Edge> neighboringEdges;
 
-  public void setXCoord(double x) {
-    this.xCoord = x;
-  }
-
-  public double getXCoord() {
-    return this.xCoord;
-  }
-
-  public void setYCoord(double y) {
-    this.yCoord = y;
-  }
-
-  public double getYCoord() {
-    return this.yCoord;
+  public Node(Location location, Node prevNode, double dist, List<Edge> neighboringEdges) {
+    this.location = location;
+    this.prevNode = prevNode;
+    this.dist = dist;
+    this.neighboringEdges = neighboringEdges;
   }
 
   public void setPrevNode(Node n) {
@@ -52,17 +43,18 @@ public class Node {
     }
   }
 
+  public Location getLocation() {
+    return location;
+  }
+
+  public void setLocation(Location location) {
+    this.location = location;
+  }
+
   public void setNeighbors() {}
 
-  public ArrayList<Edge> getNeighbors() {
+  public List<Edge> getNeighbors() {
     return this.neighboringEdges;
   }
 
-  public void setEdgeLength(int edgeLength) {
-    this.edgeLength = edgeLength;
-  }
-
-  public int getEdgeLength() {
-    return edgeLength;
-  }
 }

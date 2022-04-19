@@ -5,9 +5,19 @@ import java.util.ArrayList;
 public class Edge {
 
     private double length;
+    private String edgeID;
+    private Node startNode;
+    private Node endNode;
+
     private ArrayList<Node> neighboringNodes;
 
     public Edge() {}
+
+    public Edge(String edgeID, Node startNode, Node endNode) {
+        this.edgeID = edgeID;
+        this.startNode = startNode;
+        this.endNode = endNode;
+    }
 
     public double getLength() {
         return this.length;

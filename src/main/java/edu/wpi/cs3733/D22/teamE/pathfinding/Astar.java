@@ -7,12 +7,12 @@ import java.util.PriorityQueue;
 
 public class Astar {
   ArrayList<Node> path;
-  PriorityQueue<Node> prioQ = new PriorityQueue();
+  PriorityQueue<Node> prioQ = new PriorityQueue<>();
 
   public Astar() {}
 
   public double heuristic(Node a, Node b) {
-    return abs(a.getXCoord() - b.getXCoord()) + abs(a.getYCoord() - b.getYCoord());
+    return abs(a.getLocation().getXcoord() - b.getLocation().getXcoord()) + abs(a.getLocation().getYcoord() - b.getLocation().getYcoord());
   }
 
   public ArrayList<Node> constructPath(Node n) {
