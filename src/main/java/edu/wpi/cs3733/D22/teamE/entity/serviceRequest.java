@@ -43,12 +43,19 @@ public class serviceRequest {
         return "MED_DELIV_REQ";
       }
     },
+    SECURITY_REQ {
+      @Override
+      public String toString() {
+        return "SECURITY_REQ";
+      }
+    },
     SERVICEREQUEST {
       @Override
       public String toString() {
         return "SERVICEREQUEST";
       }
     },
+    GIFT_REQUEST,
     FACILITIES_REQ {
       @Override
       public String toString() {
