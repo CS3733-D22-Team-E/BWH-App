@@ -29,9 +29,9 @@ public class hospitalGraph {
   }
 
   private void populateEdges() throws SQLException, IOException {
-    for (Edge edge : system.getAllEdges()) {
-      allEdges.add(edge);
-    }
+    //    for (Edge edge : system.getAllEdges()) {
+    //      allEdges.add(edge);
+    //    }
   }
 
   private void setAllEdges() {
