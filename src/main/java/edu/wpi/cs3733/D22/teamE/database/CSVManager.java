@@ -26,6 +26,7 @@ public class CSVManager {
       "REQUESTID, STATUS, TYPE, ASSIGNEE, REQUEST_DATE, DELIVERY_DATE, ISURGENT";
   private static final String accountFormat =
       "ACCOUNTID, EMPLOYEEID, AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION";
+  private static final String edgesFormat = "EDGEID, START_NODE, END_NODE";
   /*
       SAVING CSV FILES FROM THE DATABASE
   */
@@ -278,6 +279,10 @@ public class CSVManager {
 
   public static boolean loadAccountCSV(String fileName) throws SQLException, IOException {
     return loadCSVGeneral(fileName, "ACCOUNTS", accountFormat);
+  }
+
+  public static boolean loadEdgesCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "EDGES", edgesFormat);
   }
 
   /*
