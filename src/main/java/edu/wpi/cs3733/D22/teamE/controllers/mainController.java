@@ -28,6 +28,7 @@ public class mainController implements pageButtons {
   @FXML Button medicalEquipmentButton;
   @FXML Button medicineDeliveryButton;
   @FXML Button labRequestButton;
+  @FXML Button giftRequestButton;
   @FXML Button mapButton;
   @FXML Button dashboardButton;
   @FXML Button aboutButton;

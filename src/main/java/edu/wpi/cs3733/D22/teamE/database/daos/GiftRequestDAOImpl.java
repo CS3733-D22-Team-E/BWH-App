@@ -41,7 +41,7 @@ public class GiftRequestDAOImpl implements DAO<giftDeliveryRequest> {
               requestDate.toLocalDate(),
               deliveryDate.toLocalDate(),
               patientName,
-              giftDeliveryRequest.Gift.valueOf(giftType));
+              giftType);
       giftRequests.add(request);
     }
     rs.close();
@@ -78,7 +78,7 @@ public class GiftRequestDAOImpl implements DAO<giftDeliveryRequest> {
       statement.setString(7, item.getRoomID());
       statement.setString(8, item.getFloorID());
       statement.setString(9, item.getPatientName());
-      statement.setString(10, item.getStringGift());
+      statement.setString(10, item.getGift());
       statement.setString(11, item.getOtherNotes());
 
       statement.executeUpdate();

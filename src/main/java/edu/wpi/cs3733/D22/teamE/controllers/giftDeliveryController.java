@@ -1,9 +1,10 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.GiftRequestDAOImpl;
-import edu.wpi.cs3733.D22.teamE.entity.*;
+import edu.wpi.cs3733.D22.teamE.entity.giftDeliveryRequest;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -21,14 +22,12 @@ import javafx.scene.control.*;
  * serviceDeliveryController super class.
  */
 public class giftDeliveryController extends serviceRequestPageController implements Initializable {
-  @FXML JFXComboBox<String> giftOptionsDropDown;
-  @FXML DatePicker deliveryDateTime; // TODO: Make requestDate just get local time?
+  @FXML JFXComboBox<String> giftOptionType;
+  @FXML DatePicker deliveryDate;
   @FXML CheckBox isUrgent;
-  @FXML TextField staffAssignee;
-  @FXML TextField requestStatus;
   @FXML TextField patientName;
-  @FXML TextArea otherNotesTxt; // TODO: Rename to gift message text
-  @FXML TableView<giftDeliveryRequest> giftDeliveryTable;
+  @FXML TextArea notes;
+  @FXML TableView<giftDeliveryRequest> requestsTable;
 
   @FXML TableColumn<giftDeliveryRequest, String> tableGiftType;
   @FXML TableColumn<giftDeliveryRequest, String> tablePatientName;
@@ -75,23 +74,40 @@ public class giftDeliveryController extends serviceRequestPageController impleme
     return tableList;
   }
 
-  private void populateGiftReqTable() { // TODO: Implement
+  private void populateGiftReqTable() {
     ObservableList<giftDeliveryRequest> giftDeliveryRequests = populateGiftRequestsList();
 
     // TODO: Set Cell Factory stuff?
   }
 
   @Override
-  public void submitButton(ActionEvent event) throws SQLException { // TODO: Implement
+  public void submitButton(ActionEvent event) throws SQLException {
+    try {
+      request.setGift(giftOptionType.getValue());
+      request.setPatientName(patientName.getText());
+      request.setFloorID(floor.getValue());
+      request.setRoomID(roomNameToRoomID.get(room.getValue()));
+      request.setStaffAssignee(staffAssignee.getText());
+      request.setRequestDate(LocalDate.now());
+      request.setDeliveryDate(deliveryDate.getValue());
+      request.setRequestStatus(requestStatus.getText());
+      request.setOtherNotes(notes.getText());
+      request.setUrgent(isUrgent.isSelected());
+
+      giftSendToDB();
+
+    } catch (NullPointerException e) {
+      System.out.println("Error : Some Value is NULL");
+      PopUp.createWarning("Warning : A required value was not filled", drawer.getScene().getWindow());
+    }
   }
 
-  private void giftSendToDB(
-      giftDeliveryRequest request) { // TODO: Can just be the class variable object instead?
+  private void giftSendToDB() {
     try {
       request.setRequestDate(LocalDate.now());
       system.addGiftDelivery(request);
-      // TODO: Populate table here
-    } catch (Exception e) { // TODO: Should be SQLException
+      tableList.add(request);
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -105,9 +121,12 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   private void resetButton(ActionEvent event) {
     floor.getSelectionModel().clearSelection();
     room.getSelectionModel().clearSelection();
-    // TODO: Reset le other fields
+    giftOptionType.getSelectionModel().clearSelection();
+    isUrgent.setSelected(false);
+    deliveryDate.getEditor().clear();
     requestStatus.clear();
     staffAssignee.clear();
+    patientName.clear();
     notes.clear();
   }
 }

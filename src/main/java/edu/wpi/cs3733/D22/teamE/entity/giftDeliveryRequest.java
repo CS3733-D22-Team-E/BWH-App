@@ -4,35 +4,7 @@ import java.time.LocalDate;
 
 public class giftDeliveryRequest extends serviceRequest {
   private String patientName;
-  Gift gift;
-
-  public enum Gift {
-    BoardGame {
-      public String toString() {
-        return "Board Game";
-      }
-    },
-    Book {
-      public String toString() {
-        return "Book";
-      }
-    },
-    GetWellCard {
-      public String toString() {
-        return "Get Well Card";
-      }
-    },
-    Movie {
-      public String toString() {
-        return "Movie";
-      }
-    },
-    TeddyBear {
-      public String toString() {
-        return "Teddy Bear";
-      }
-    }
-  }
+  private String gift;
 
   public giftDeliveryRequest(
       String serviceRequestID,
@@ -45,7 +17,7 @@ public class giftDeliveryRequest extends serviceRequest {
       LocalDate requestDate,
       LocalDate deliveryDate,
       String patientName,
-      Gift gift) {
+      String gift) {
     super(
         serviceRequestID,
         String.valueOf(Type.GIFTREQUEST),
@@ -64,7 +36,7 @@ public class giftDeliveryRequest extends serviceRequest {
   public giftDeliveryRequest() {
     super(String.valueOf(Type.GIFTREQUEST));
     this.patientName = "";
-    this.gift = Gift.GetWellCard; // TODO: Maybe make default something else later
+    this.gift = ""; // TODO: Maybe make default something else later
   }
 
   public String getPatientName() {
@@ -75,15 +47,11 @@ public class giftDeliveryRequest extends serviceRequest {
     this.patientName = patientName;
   }
 
-  public Gift getGift() {
+  public String getGift() {
     return gift;
   }
 
-  public String getStringGift() {
-    return gift.toString();
-  }
-
-  public void setGift(Gift gift) {
+  public void setGift(String gift) {
     this.gift = gift;
   }
 }
