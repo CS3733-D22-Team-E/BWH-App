@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import edu.wpi.cs3733.D22.teamE.entity.requestPage;
 import java.lang.reflect.InvocationTargetException;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Window;
 
@@ -29,20 +30,29 @@ public class PopUp {
   }
 
   public static void createReq(requestPage request, Window owner, boolean editable) {
-    JFXAlert alert = new JFXAlert(owner);
-    alert.initModality(Modality.APPLICATION_MODAL);
-    alert.setOverlayClose(false);
+    JFXAlert reqPage = new JFXAlert(owner);
+    reqPage.initModality(Modality.APPLICATION_MODAL);
+    reqPage.setOverlayClose(false);
     JFXDialogLayout layout = new JFXDialogLayout();
     layout.setHeading(new Label(request.toString()));
     try {
-      layout.setMaxHeight(owner.getHeight() / 2);
-      layout.setBody(request.getAsPage(editable));
-      JFXButton closeButton = new JFXButton("Finished");
-      closeButton.setStyle("-fx-background-color: grey");
-      closeButton.setOnAction(event -> alert.hideWithAnimation());
-      layout.setActions(closeButton);
-      alert.setContent(layout);
-      alert.showAndWait();
+      layout.setMaxHeight((3 * owner.getHeight()) / 2.0);
+      JFXButton updateButton = new JFXButton("Update");
+      JFXButton closeButton = new JFXButton("Close");
+      closeButton.setStyle("-fx-background-color: lightgrey");
+      updateButton.setStyle("-fx-background-color: lightgrey");
+      closeButton.setOnAction(event -> reqPage.hideWithAnimation());
+      if (editable) {
+        layout.setBody(request.getAsPage(updateButton, reqPage));
+        updateButton.setVisible(false);
+      } else layout.setBody(request.getAsPage(null, reqPage));
+      HBox b = new HBox();
+      b.setSpacing(10);
+      b.getChildren().add(updateButton);
+      b.getChildren().add(closeButton);
+      layout.setActions(b);
+      reqPage.setContent(layout);
+      reqPage.show();
     } catch (InvocationTargetException | IllegalAccessException e) {
       e.printStackTrace();
     }

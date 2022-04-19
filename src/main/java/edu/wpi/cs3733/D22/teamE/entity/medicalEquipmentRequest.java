@@ -49,6 +49,7 @@ public class medicalEquipmentRequest extends serviceRequest {
   }
 
   public void setEquipment(String equipment) {
+    // todo : add equipment name verification
     this.equipment = equipment;
   }
 
@@ -58,6 +59,10 @@ public class medicalEquipmentRequest extends serviceRequest {
 
   public void setEquipmentQuantity(int equipmentQuantity) {
     this.equipmentQuantity = equipmentQuantity;
+  }
+
+  public void setEquipmentQuantity(String equipmentQuantity) {
+    this.equipmentQuantity = Integer.parseInt(equipmentQuantity);
   }
 
   public String getDeliveryTime() {

@@ -55,9 +55,6 @@ public class medicineDeliveryController extends serviceRequestPageController
   @FXML TableColumn<medicineDelivery, String> tableProgress;
   @FXML TableColumn<medicineDelivery, String> tableNotes;
 
-  /** Creating a medicineDeliveryRequest object to store the inputted data in. */
-  medicineDelivery medicineDeliveryRequest = new medicineDelivery();
-
   MedicineDeliveryDAOImpl medicineDeliveryDB;
 
   ObservableList<medicineDelivery> tableList;
@@ -101,11 +98,14 @@ public class medicineDeliveryController extends serviceRequestPageController
   @FXML
   public void submitButton(ActionEvent event) {
     try {
+      medicineDelivery medicineDeliveryRequest =
+          new medicineDelivery(); // Creating a medicineDeliveryRequest object to store the inputted
+      // data in.
       medicineDeliveryRequest.setFloorID(floor.getValue());
       medicineDeliveryRequest.setRoomID(roomNameToRoomID.get(room.getValue()));
       medicineDeliveryRequest.setAmount(amount.getText());
       medicineDeliveryRequest.setMedicine(medicine.getValue());
-      medicineDeliveryRequest.setUrgent(urgent.isSelected());
+      medicineDeliveryRequest.setIsUrgent(urgent.isSelected());
       medicineDeliveryRequest.setDeliveryDate(date.getValue());
       medicineDeliveryRequest.setUnit(unit.getValue());
       medicineDeliveryRequest.setDeliveryTime(time.getText());
