@@ -25,8 +25,7 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadLocationCSV(
-        "src/main/resources/edu/wpi/cs3733/D22/teamE/CsvFiles/TowerLocations.csv"); // TODO: data[1]
+    CSVManager.loadLocationCSV("TowerLocations.csv");
   }
 
   public static void createEmployeesTable() throws SQLException {
@@ -43,16 +42,16 @@ public class DBCreation {
             + "\n";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    /*query =
+    query =
         "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES "
-            + "('admin', 'admin' , 'admin', 'admin', TRUE, 3)";
+            + "('admin', 'admin' , 'FDEPT00101', 'admin', TRUE, 3)";
     statement = connection.prepareStatement(query);
     statement.executeUpdate();
     query =
         "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES "
-            + "('staff', 'staff' , 'staff', 'staff', TRUE, 1)";
+            + "('staff', 'staff' , 'FDEPT00101', 'staff', TRUE, 1)";
     statement = connection.prepareStatement(query);
-    statement.executeUpdate();*/
+    statement.executeUpdate();
   }
 
   public static void createEquipmentTable() throws SQLException, IOException {
@@ -209,6 +208,26 @@ public class DBCreation {
     statement.executeUpdate();
   }
 
+  public static void createFacilitiesRequestTable() throws SQLException, IOException {
+    String query =
+        "create table FACILITIESREQUEST\n"
+            + "(\n"
+            + "    FACILITIESREQID    VARCHAR(35) not null primary key,\n"
+            + "    FACILITIESREQTYPE VARCHAR(35) not null,\n"
+            + "    TIMEFRAME    VARCHAR(35) not null,\n"
+            + "    FLOORID       VARCHAR(35) not null references TOWERLOCATIONS (NODEID),\n"
+            + "    ROOMID        VARCHAR(35) not null,\n"
+            + "    ISURGENT    BOOLEAN not null,\n"
+            + "    STAFFASSIGNEE       VARCHAR(35) not null references EMPLOYEES(EMPLOYEEID),\n"
+            + "    REQUESTSTATUS       VARCHAR(35) not null,\n"
+            + "    REQUESTDATE       DATE, \n"
+            + "    DELIVERYDATE       DATE, \n"
+            + "    OTHERNOTES       VARCHAR(35) not null\n"
+            + ")";
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
+  }
+
   public static void createAccountsTable() throws SQLException {
     String query =
         "create table ACCOUNTS\n"
@@ -252,6 +271,7 @@ public class DBCreation {
       createSanitationRequestTable();
       createMealRequestTable();
       createLanguageInterpreterRequestTable();
+      createFacilitiesRequestTable();
       createAccountsTable();
     } catch (SQLException | IOException e) {
       e.printStackTrace();

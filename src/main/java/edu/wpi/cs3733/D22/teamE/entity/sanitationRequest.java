@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class sanitationRequest extends serviceRequest {
 
@@ -86,19 +87,25 @@ public class sanitationRequest extends serviceRequest {
     this.sizeOfCleaning = sizeOfCleaning;
   }
 
+  public void setSizeOfCleaning(String sizeOfCleaning) {
+    if (!Arrays.toString(Size.values()).contains(sizeOfCleaning))
+      throw new RuntimeException(
+          "Size of Cleaning must be one of " + Arrays.toString(Size.values()));
+    else this.sizeOfCleaning = Size.valueOf(sizeOfCleaning);
+  }
+
   public Biohazard getBiohazardOnSite() {
     return biohazardOnSite;
   }
 
-  public String getBiohazardValue() {
-    return biohazardOnSite.toString();
-  }
-
-  public String getSizeValue() {
-    return sizeOfCleaning.toString();
-  }
-
   public void setBiohazardOnSite(Biohazard biohazardOnSite) {
     this.biohazardOnSite = biohazardOnSite;
+  }
+
+  public void setBiohazardOnSite(String biohazardOnSite) {
+    if (!Arrays.toString(Biohazard.values()).contains(biohazardOnSite))
+      throw new RuntimeException(
+          "Biohazard on Site must be one of " + Arrays.toString(Biohazard.values()));
+    else this.biohazardOnSite = Biohazard.valueOf(biohazardOnSite);
   }
 }

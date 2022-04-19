@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamE;
 
 // import edu.wpi.cs3733.D22.teamE.database.DBConnection;
 // import edu.wpi.energetic_easter_bunnies.database.DBConnection;
-import com.sun.javafx.application.LauncherImpl;
 
 public class Main {
 
@@ -16,7 +15,7 @@ public class Main {
   //  }
 
   public static void main(String[] args) {
-    LauncherImpl.launchApplication(App.class, AppPreloader.class, args);
+    App.launch(App.class, args);
     // closeConnection();
   }
 }

@@ -77,8 +77,8 @@ public class SanitationRequestDAOImpl implements DAO<sanitationRequest> {
       statement.setBoolean(6, item.getIsUrgent());
       statement.setString(7, item.getRoomID());
       statement.setString(8, item.getFloorID());
-      statement.setString(9, item.getSizeValue());
-      statement.setString(10, item.getBiohazardValue());
+      statement.setString(9, item.getSizeOfCleaning().toString());
+      statement.setString(10, item.getBiohazardOnSite().toString());
       statement.setString(11, item.getOtherNotes());
 
       statement.executeUpdate();
