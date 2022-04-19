@@ -31,7 +31,7 @@ public class securityRequest extends serviceRequest {
       LocalDate deliveryDate) {
     super(
         securityRequestID,
-        String.valueOf(Type.LAB_REQUEST),
+        String.valueOf(Type.SECURITY_REQ),
         otherNotes,
         floorID,
         roomID,
@@ -45,7 +45,7 @@ public class securityRequest extends serviceRequest {
   }
 
   public securityRequest() {
-    super(String.valueOf(Type.LAB_REQUEST));
+    super(String.valueOf(Type.SECURITY_REQ));
     this.securityRequestType = "";
     this.timeFrame = "";
   }

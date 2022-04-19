@@ -165,7 +165,12 @@ public class serviceRequest implements requestPage {
         return "SERVICEREQUEST";
       }
     },
-    GIFT_REQUEST,
+    GIFT_REQUEST {
+      @Override
+      public String toString() {
+        return "GIFT_REQUEST";
+      }
+    },
     FACILITIES_REQ {
       @Override
       public String toString() {
