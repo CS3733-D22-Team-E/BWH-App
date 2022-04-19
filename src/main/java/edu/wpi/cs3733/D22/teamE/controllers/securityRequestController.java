@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.SecurityRequestDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.securityRequest;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -13,40 +12,40 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class securityRequestController extends serviceRequestPageController{
 
-    @FXML
-    JFXComboBox<String> securityRequestType;
+    @FXML JFXComboBox<String> securityRequestType;
     @FXML JFXComboBox<String> timeFrameComboBox;
+    @FXML TextField notes;
+    @FXML TableView<securityRequest> requestsTable;
 
-    @FXML
-    TableView<securityRequest> requestsTable;
-
-    @FXML
-    TableColumn<securityRequest, String> tableSecurityRequestType;
+    @FXML TableColumn<securityRequest, String> tableSecurityRequestType;
     @FXML TableColumn<securityRequest, String> tableStaffAssignee;
     @FXML TableColumn<securityRequest, String> tableLocNodeID;
     @FXML TableColumn<securityRequest, String> tableTimeFrame;
     @FXML TableColumn<securityRequest, String> tableRequestStatus;
     @FXML TableColumn<securityRequest, String> tableOtherNotes;
+
     ObservableList<securityRequest> tableList;
 
-    LocationDAOImpl locationDB;
     SecurityRequestDAOImpl securityRequestDB;
+    securityRequest securityReq = new securityRequest();
 
     /** Constructor */
     public securityRequestController() {}
 
     /**
-     * Initializes the
+     * Initializes the combo boxes and populates the request table
      *
      * @param location
      * @param resources
@@ -67,10 +66,8 @@ public class securityRequestController extends serviceRequestPageController{
 
     private void populateSecurityRequestTable() {
         ObservableList<securityRequest> securityRequests = populateSecurityRequestList();
-        tableSecurityRequestType.setCellValueFactory(
-                new PropertyValueFactory<securityRequest, String>("securityRequestType"));
-        tableStaffAssignee.setCellValueFactory(
-                new PropertyValueFactory<securityRequest, String>("staffAssignee"));
+        tableSecurityRequestType.setCellValueFactory(new PropertyValueFactory<>("securityRequestType"));
+        tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
         tableLocNodeID.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<securityRequest, String>, ObservableValue<String>>() {
                     @Override
@@ -80,10 +77,9 @@ public class securityRequestController extends serviceRequestPageController{
                         return new SimpleStringProperty(roomIDToRoomName.get(curSecRequest.getRoomID()));
                     }
                 });
-        tableTimeFrame.setCellValueFactory(new PropertyValueFactory<securityRequest, String>("timeFrame"));
-        tableRequestStatus.setCellValueFactory(
-                new PropertyValueFactory<securityRequest, String>("requestStatus"));
-        tableOtherNotes.setCellValueFactory(new PropertyValueFactory<securityRequest, String>("otherNotes"));
+        tableTimeFrame.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
+        tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
+        tableOtherNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
 
         requestsTable.setItems(securityRequests);
     }
@@ -100,14 +96,17 @@ public class securityRequestController extends serviceRequestPageController{
     @Override
     public void submitButton(ActionEvent event) throws SQLException {
         try {
-            securityRequest securityReq = new securityRequest();
             securityReq.setSecurityRequestType(securityRequestType.getValue());
             securityReq.setTimeFrame(timeFrameComboBox.getValue());
-            securityReq.setFloorID(floor.getValue());
             securityReq.setRoomID(roomNameToRoomID.get(room.getValue()));
-            securityReq.setOtherNotes(notes.getText());
-            securityReq.setRequestStatus(requestStatus.getText());
+            securityReq.setFloorID(floor.getValue());
+            securityReq.setIsUrgent(false); //TODO: Potentially have a field in page to select this
             securityReq.setStaffAssignee(staffAssignee.getText());
+            securityReq.setRequestStatus(requestStatus.getText());
+            securityReq.setRequestDate(LocalDate.now());
+            securityReq.setDeliveryDate(LocalDate.now());
+            securityReq.setOtherNotes(notes.getText());
+
             securitySendToDB(securityReq);
 
         } catch (RuntimeException error) {
@@ -116,9 +115,13 @@ public class securityRequestController extends serviceRequestPageController{
         }
     }
 
-    private void securitySendToDB(securityRequest securityReq) throws SQLException {
-        securityRequestDB.update(securityReq);
-        tableList.add(securityReq);
+    private void securitySendToDB(securityRequest securityReq) {
+        try {
+            securityRequestDB.update(securityReq);
+            tableList.add(securityReq);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

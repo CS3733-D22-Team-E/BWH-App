@@ -65,15 +65,11 @@ public class giftDeliveryController extends serviceRequestPageController impleme
       giftRequestDAO = new GiftRequestDAOImpl();
       populateLocationComboBoxes();
       populateGiftReqTable();
-      giftOptionType
-          .getItems()
-          .addAll("Board Game", "Book", "Get Well Card", "Movie", "Teddy Bear");
+      giftOptionType.getItems().addAll("Board Game", "Book", "Get Well Card", "Movie", "Teddy Bear");
     } catch (SQLException e) {
       e.printStackTrace();
     }
   }
-
-  // TODO: Create a method to populate the gift types combo box
 
   /**
    * Gets the full list of gift delivery requests currently in the database.
