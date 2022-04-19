@@ -51,7 +51,9 @@ public class Node {
     this.location = location;
   }
 
-  public void setNeighbors() {}
+  public void addNeighbor(Edge edge) {
+    neighboringEdges.add(edge);
+  }
 
   public List<Edge> getNeighbors() {
     return this.neighboringEdges;

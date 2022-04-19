@@ -6,6 +6,8 @@ import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
+import edu.wpi.cs3733.D22.teamE.pathfinding.Edge;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class DAOSystem {
   private final MedicineDeliveryDAOImpl medicineDeliveryDAO;
   private final SanitationRequestDAOImpl sanitationRequestDAO;
   private final ServiceRequestDAOImpl serviceRequestDAO;
+  private final EdgesDAOImpl edgesDAO;
 
   public DAOSystem() throws SQLException {
     accountDAO = new AccountDAOImpl();
@@ -34,6 +37,7 @@ public class DAOSystem {
     medicineDeliveryDAO = new MedicineDeliveryDAOImpl();
     sanitationRequestDAO = new SanitationRequestDAOImpl();
     serviceRequestDAO = new ServiceRequestDAOImpl();
+    edgesDAO = new EdgesDAOImpl();
   }
 
   public List<Account> getAllAccounts() {
@@ -235,5 +239,21 @@ public class DAOSystem {
 
   public List<sanitationRequest> getAllSanReq() {
     return sanitationRequestDAO.getAll();
+  }
+
+  public List<Edge> getAllEdges() {
+    return edgesDAO.getAll();
+  }
+
+  public Edge getEdge(String id) {
+    return edgesDAO.get(id);
+  }
+
+  public void updateEdge(Edge edge) {
+    edgesDAO.update(edge);
+  }
+
+  public void deleteEdge(Edge edge) {
+    edgesDAO.delete(edge);
   }
 }
