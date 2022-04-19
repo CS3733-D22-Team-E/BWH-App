@@ -149,7 +149,7 @@ public class mainController implements pageButtons {
 
   @FXML
   public void facilitiesRequestButton(ActionEvent event)
-          throws IOException { // TODO: implement FXML for this page,add button to page
+      throws IOException { // TODO: implement FXML for this page,add button to page
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     pageControlFacade.loadPage("facilitiesPage.fxml", thisStage);
