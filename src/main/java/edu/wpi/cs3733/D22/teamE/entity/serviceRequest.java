@@ -153,6 +153,12 @@ public class serviceRequest implements requestPage {
         return "MED_DELIV_REQ";
       }
     },
+    SECURITY_REQ {
+      @Override
+      public String toString() {
+        return "SECURITY_REQ";
+      }
+    },
     SERVICEREQUEST {
       @Override
       public String toString() {
