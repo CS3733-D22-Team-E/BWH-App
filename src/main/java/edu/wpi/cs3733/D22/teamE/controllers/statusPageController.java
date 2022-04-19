@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
+import edu.wpi.cs3733.D22.teamE.customUI.CustomJFXButtonTableCell;
 import edu.wpi.cs3733.D22.teamE.customUI.CustomTextFieldTableCell;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.entity.*;
@@ -11,13 +12,9 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.event.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -36,6 +33,7 @@ public class statusPageController extends containsSideMenu {
   @FXML TableColumn<serviceRequestModel, String> statusColumn;
   @FXML TableColumn<serviceRequestModel, String> assignedColumn;
   @FXML TableColumn<serviceRequestModel, String> dateColumn;
+  @FXML TableColumn<serviceRequestModel, serviceRequest> buttonColumn;
   DAOSystem db;
 
   /** Constructor */
@@ -60,7 +58,7 @@ public class statusPageController extends containsSideMenu {
     }
   }
 
-  protected void genTable() {
+  public void genTable() {
     ObservableList<serviceRequestModel> requestList = populateList();
     requestTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     FilteredList<serviceRequestModel> filteredData = new FilteredList<>(requestList, p -> true);
@@ -153,37 +151,39 @@ public class statusPageController extends containsSideMenu {
     typeColumn.setEditable(false);
     statusColumn.setCellValueFactory(
         new PropertyValueFactory<serviceRequestModel, String>("Status"));
-    statusColumn.setCellFactory(CustomTextFieldTableCell.forTableColumn());
-    statusColumn.setOnEditCommit(
-        new EventHandler<TableColumn.CellEditEvent<serviceRequestModel, String>>() {
-          @Override
-          public void handle(TableColumn.CellEditEvent<serviceRequestModel, String> event) {
-            serviceRequest r =
-                db.getServiceRequest(
-                    event.getTableView().getItems().get(event.getTablePosition().getRow()).getID());
-            r.setRequestStatus(event.getNewValue());
-            db.updateServiceRequest(r);
-            genTable();
-          }
-        });
+    // statusColumn.setCellFactory(CustomTextFieldTableCell.forTableColumn());
+    /*statusColumn.setOnEditCommit(
+    new EventHandler<TableColumn.CellEditEvent<serviceRequestModel, String>>() {
+      @Override
+      public void handle(TableColumn.CellEditEvent<serviceRequestModel, String> event) {
+        serviceRequest r =
+            db.getServiceRequest(
+                event.getTableView().getItems().get(event.getTablePosition().getRow()).getID());
+        r.setRequestStatus(event.getNewValue());
+        db.updateServiceRequest(r);
+        genTable();
+      }
+    });*/
     assignedColumn.setCellValueFactory(
         new PropertyValueFactory<serviceRequestModel, String>("Assignee"));
-    assignedColumn.setCellFactory(CustomTextFieldTableCell.forTableColumn());
+    // assignedColumn.setCellFactory(CustomTextFieldTableCell.forTableColumn());
     // assignedColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-    assignedColumn.setOnEditCommit(
-        new EventHandler<TableColumn.CellEditEvent<serviceRequestModel, String>>() {
-          @Override
-          public void handle(TableColumn.CellEditEvent<serviceRequestModel, String> event) {
-            serviceRequest r =
-                db.getServiceRequest(
-                    event.getTableView().getItems().get(event.getTablePosition().getRow()).getID());
-            r.setStaffAssignee(event.getNewValue());
-            db.updateServiceRequest(r);
-            genTable();
-          }
-        });
+    /*assignedColumn.setOnEditCommit(
+    new EventHandler<TableColumn.CellEditEvent<serviceRequestModel, String>>() {
+      @Override
+      public void handle(TableColumn.CellEditEvent<serviceRequestModel, String> event) {
+        serviceRequest r =
+            db.getServiceRequest(
+                event.getTableView().getItems().get(event.getTablePosition().getRow()).getID());
+        r.setStaffAssignee(event.getNewValue());
+        db.updateServiceRequest(r);
+        genTable();
+      }
+    });*/
     dateColumn.setCellValueFactory(
         new PropertyValueFactory<serviceRequestModel, String>("requestDate"));
+    buttonColumn.setCellValueFactory(new PropertyValueFactory<>("request"));
+    buttonColumn.setCellFactory(CustomJFXButtonTableCell.forTableColumn(this));
     requestTable.setItems(filteredData);
   }
 
@@ -205,7 +205,8 @@ public class statusPageController extends containsSideMenu {
               r.getRequestDate().toString(),
               ((r.getDeliveryDate() == null) ? "" : r.getDeliveryDate().toString()),
               r.getIsUrgent(),
-              r.getOtherNotes()));
+              r.getOtherNotes(),
+              r));
     }
     return tableList;
   }

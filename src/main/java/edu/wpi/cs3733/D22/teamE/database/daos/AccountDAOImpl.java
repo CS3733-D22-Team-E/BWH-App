@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
+import edu.wpi.cs3733.D22.teamE.entity.accounts.adminAccount;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.staffAccount;
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,9 +28,16 @@ public class AccountDAOImpl implements DAO<Account> {
       String lastName = rs.getString("LASTNAME");
       String position = rs.getString("POSITION");
 
-      Account account =
-          new staffAccount(
-              accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position);
+      Account account = null;
+      if (authorityLevel < Account.adminPerm) {
+        account =
+            new staffAccount(
+                accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position);
+      } else {
+        account =
+            new adminAccount(
+                accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position);
+      }
 
       accounts.add(account);
       numID++;
