@@ -30,7 +30,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   @FXML DatePicker deliveryDate;
   @FXML CheckBox isUrgent;
   @FXML TextField patientName;
-  @FXML TextArea notes;
+  @FXML TextField notes;
   @FXML TableView<giftDeliveryRequest> requestsTable;
 
   @FXML TableColumn<giftDeliveryRequest, String> tableGiftType;
