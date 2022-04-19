@@ -1,12 +1,9 @@
 package edu.wpi.energetic_easter_bunnies.database_testing;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
-import edu.wpi.cs3733.D22.teamE.database.daos.LabRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.SecurityRequestDAOImpl;
-import edu.wpi.cs3733.D22.teamE.entity.labRequest;
 import edu.wpi.cs3733.D22.teamE.entity.securityRequest;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -28,8 +25,8 @@ public class SecurityRequestTesting {
   public void testDeleteSecurityRequest() throws SQLException {
     DAO<securityRequest> securityRequestDAO = new SecurityRequestDAOImpl();
     securityRequest securityRequest =
-            new securityRequest(
-                    "2", "1", "ASAP", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
+        new securityRequest(
+            "2", "1", "ASAP", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
     securityRequestDAO.update(securityRequest);
     assertTrue(securityRequestDAO.getAll().contains(securityRequest));
     securityRequestDAO.delete(securityRequest);
@@ -40,10 +37,10 @@ public class SecurityRequestTesting {
   public void testUpdateSecurityRequest() throws SQLException {
     SecurityRequestDAOImpl securityRequestDAO = new SecurityRequestDAOImpl();
     securityRequest securityRequest =
-            new securityRequest(
-                    "3", "1", "ASAP", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
+        new securityRequest(
+            "3", "1", "ASAP", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
     securityRequestDAO.update(securityRequest);
-    securityRequestDAO.updateSecurityServiceRequest(securityRequest, "2");
-    assertTrue(securityRequest.getRequestStatus() == "2");
+    securityRequestDAO.updateSecurityServiceRequest(securityRequest, "Processing");
+    assertEquals(securityRequest.getRequestStatus(), "Processing");
   }
 }

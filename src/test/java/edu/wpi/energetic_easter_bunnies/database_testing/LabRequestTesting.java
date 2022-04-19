@@ -1,13 +1,22 @@
 package edu.wpi.energetic_easter_bunnies.database_testing;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
+import edu.wpi.cs3733.D22.teamE.database.daos.LabRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.entity.labRequest;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import org.junit.jupiter.api.Test;
+
 public class LabRequestTesting {
 
-  /*@Test
+  @Test
   public void testAddLabRequest() throws SQLException {
     DAO<labRequest> labRequestDAO = new LabRequestDAOImpl();
     labRequest labRequest =
         new labRequest(
-            "1", "1", "1", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
+            "1", "1", "ASAP", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
     labRequestDAO.update(labRequest);
     assertTrue(labRequestDAO.getAll().contains(labRequest));
   }
@@ -17,7 +26,7 @@ public class LabRequestTesting {
     DAO<labRequest> labRequestDAO = new LabRequestDAOImpl();
     labRequest labRequest =
         new labRequest(
-            "2", "1", "1", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
+            "2", "1", "ASAP", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
     labRequestDAO.update(labRequest);
     assertTrue(labRequestDAO.getAll().contains(labRequest));
     labRequestDAO.delete(labRequest);
@@ -29,9 +38,9 @@ public class LabRequestTesting {
     LabRequestDAOImpl labRequestDAO = new LabRequestDAOImpl();
     labRequest labRequest =
         new labRequest(
-            "3", "1", "1", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
+            "3", "1", "ASAP", "1", "1", false, "1", "1", "1", LocalDate.now(), LocalDate.now());
     labRequestDAO.update(labRequest);
-    labRequestDAO.updateLabServiceRequest(labRequest, "2");
-    assertTrue(labRequest.getRequestStatus() == "2");
-  }*/
+    labRequestDAO.updateLabServiceRequest(labRequest, "Processing");
+    assertEquals(labRequest.getRequestStatus(), "Processing");
+  }
 }
