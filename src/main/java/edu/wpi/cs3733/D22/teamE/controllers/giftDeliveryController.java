@@ -124,7 +124,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
       request.setDeliveryDate(deliveryDate.getValue());
       request.setRequestStatus(requestStatus.getText());
       request.setOtherNotes(notes.getText());
-      request.setUrgent(isUrgent.isSelected());
+      request.setIsUrgent(isUrgent.isSelected());
 
       giftSendToDB();
 
