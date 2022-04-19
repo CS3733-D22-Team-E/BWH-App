@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class DashboardController extends containsSideMenu implements Initializable {
@@ -57,6 +58,11 @@ public class DashboardController extends containsSideMenu implements Initializab
   @FXML Tooltip fourthFloorTooltip;
   @FXML JFXButton fifthFloor;
   @FXML Tooltip fifthFloorTooltip;
+
+  @FXML Circle bedAlertCircle;
+  @FXML Label bedAlertLabel;
+  @FXML Circle infusionPumpAlertCircle;
+  @FXML Label infusionPumpAlertLabel;
 
   LocationDAOImpl locationDAO;
   MedicalEquipmentDAOImpl equipmentDAO;
