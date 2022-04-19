@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import com.jfoenix.controls.JFXSpinner?>
 <VBox fx:id="spinnerBox" alignment="CENTER" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label alignment="CENTER" prefHeight="150.0" prefWidth="1080.0" text="LOADING..." VBox.vgrow="ALWAYS">
@@ -12,6 +13,14 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <StackPane fx:id="spCont" prefHeight="329.0" prefWidth="1080.0" VBox.vgrow="ALWAYS" />
+      <StackPane fx:id="spCont" prefHeight="329.0" prefWidth="1080.0" VBox.vgrow="ALWAYS">
+      <JFXSpinner styleClass="materialDesign-purple, first-spinner" startingAngle="-40"/>
+      <JFXSpinner styleClass="materialDesign-blue, second-spinner" startingAngle="-90"/>
+      <JFXSpinner styleClass="materialDesign-cyan, third-spinner" startingAngle="-120"/>
+      <JFXSpinner styleClass="materialDesign-green, fourth-spinner" startingAngle="-150"/>
+      <JFXSpinner styleClass="materialDesign-yellow, fifth-spinner" startingAngle="-180"/>
+      <JFXSpinner styleClass="materialDesign-orange, sixth-spinner" startingAngle="-210"/>
+      <JFXSpinner styleClass="materialDesign-red, seventh-spinner" startingAngle="-240"/>
+   </StackPane>
    </children>
 </VBox>

@@ -1,16 +1,13 @@
 package edu.wpi.cs3733.D22.teamE;
 
-import com.jfoenix.controls.JFXSpinner;
 import edu.wpi.cs3733.D22.teamE.controllers.*;
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.database.DBCreation;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -47,33 +44,17 @@ public class App extends Application implements SharedScene {
   }
 
   @Override
-  public void start(Stage primaryStage) throws Exception {
+  public void start(Stage stage) throws Exception {
     AppPreloader p = new AppPreloader();
-    p.start(primaryStage);
-    ArrayList<Timeline> timelines = new ArrayList<>();
-    for (int i = 0; i < p.spinners.size(); i++) {
-      JFXSpinner sp = p.spinners.get(i);
-      Timeline timeline = null;
-      if (i < p.spinners.size() - 1) {
-        timeline =
-            new Timeline(
-                new KeyFrame(Duration.ZERO),
-                new KeyFrame(Duration.seconds(30), new KeyValue(sp.progressProperty(), 1)));
-      } else {
-        timeline =
-            new Timeline(
-                new KeyFrame(Duration.ZERO),
-                new KeyFrame(
-                    Duration.seconds(30),
-                    e -> p.fadeInTo(root),
-                    new KeyValue(sp.progressProperty(), 1)));
-      }
-      timeline.setCycleCount(Animation.INDEFINITE);
-      timelines.add(timeline);
-    }
-    for (Timeline t : timelines) {
-      t.playFromStart();
-    }
+    stage.setResizable(true);
+    stage.setScene(p.createPreloaderScene(root));
+    stage.show();
+    Timeline timeline = new Timeline();
+    KeyFrame start = new KeyFrame(Duration.ZERO);
+    KeyFrame end = new KeyFrame(Duration.seconds(5), e -> p.fadeInTo(timeline));
+    timeline.getKeyFrames().addAll(start, end);
+    timeline.setCycleCount(Animation.INDEFINITE);
+    timeline.play();
   }
 
   @Override
