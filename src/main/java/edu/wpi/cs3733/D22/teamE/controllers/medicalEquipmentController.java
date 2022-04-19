@@ -21,7 +21,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
@@ -189,7 +188,8 @@ public class medicalEquipmentController extends serviceRequestPageController {
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
-      PopUp.createWarning("Warning : A required value was not filled", (Node) event.getSource());
+      PopUp.createWarning(
+          "Warning : A required value was not filled", drawer.getScene().getWindow());
     }
   }
 

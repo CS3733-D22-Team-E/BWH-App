@@ -130,10 +130,12 @@ public abstract class serviceRequestPageController extends containsSideMenu {
               @Override
               public void changed(
                   ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                ObservableList<String> roomsToDisplay =
-                    FXCollections.observableArrayList((floorToRooms.get(newValue)));
-                room.setItems(roomsToDisplay);
-                room.setVisible(true);
+                if (newValue != null) {
+                  ObservableList<String> roomsToDisplay =
+                      FXCollections.observableArrayList((floorToRooms.get(newValue)));
+                  room.setItems(roomsToDisplay);
+                  room.setVisible(true);
+                }
               }
             });
   }

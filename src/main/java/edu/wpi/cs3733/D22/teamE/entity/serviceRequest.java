@@ -1,9 +1,50 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
+import com.jfoenix.controls.JFXTextField;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.Random;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
-public class serviceRequest {
+public class serviceRequest implements requestPage {
+  @Override
+  public Node getAsPage(boolean editable) throws InvocationTargetException, IllegalAccessException {
+    VBox box = new VBox();
+    for (Method m : this.getClass().getMethods()) {
+      if (m.getName().startsWith("get") && m.getParameterTypes().length == 0) {
+        if (!m.getName().contains("Class")) {
+          final Object r = m.invoke(this);
+          String label = m.getName();
+          String content = r.toString();
+          label = label.trim();
+          label = label.replace("get", "");
+          content = content.trim();
+          HBox innerBox = new HBox();
+          Label l = new Label(label + " : ");
+          innerBox.getChildren().add(l);
+          if (editable) {
+            JFXTextField textField = new JFXTextField();
+            textField.setText(content);
+            innerBox.getChildren().add(textField);
+          } else {
+            l.setText(l.getText() + content);
+          }
+          box.getChildren().add(innerBox);
+        } else System.out.println(m.getName());
+      }
+    }
+    ScrollPane p = new ScrollPane();
+    p.setFitToWidth(true);
+    p.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+    p.setContent(box);
+    return p;
+  }
+
   public enum Type {
     SANITATION_REQ {
       @Override
@@ -45,6 +86,12 @@ public class serviceRequest {
       @Override
       public String toString() {
         return "SERVICEREQUEST";
+      }
+    },
+    FACILITIES_REQ {
+      @Override
+      public String toString() {
+        return "FACILITIES_REQ";
       }
     }
   }

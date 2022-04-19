@@ -1,6 +1,9 @@
 package edu.wpi.cs3733.D22.teamE.entity.accounts;
 
 public abstract class Account {
+  public static int basicPerm = 0;
+  public static int staffPerm = 1;
+  public static int adminPerm = 2;
 
   private String accountID; // staff assignee
   private String employeeID; // if empty
