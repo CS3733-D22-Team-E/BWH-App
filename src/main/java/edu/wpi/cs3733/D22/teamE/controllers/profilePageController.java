@@ -18,6 +18,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -68,5 +70,11 @@ public class profilePageController extends containsSideMenu implements Initializ
     } catch (IOException | SQLException e) {
       e.printStackTrace();
     }
+  }
+
+
+  @FXML
+  public void resetPassword(ActionEvent event) {
+    return;
   }
 }
