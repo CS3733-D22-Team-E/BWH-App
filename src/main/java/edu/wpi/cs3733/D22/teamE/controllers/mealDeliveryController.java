@@ -51,9 +51,6 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   MealDeliveryRequestDAOImpl mealRequestDB;
   ObservableList<mealDeliveryRequest> tableList;
 
-  /** Creating a mealDeliveryRequest Object to store the inputted data. */
-  mealDeliveryRequest mealDeliveryRequest = new mealDeliveryRequest();
-
   /** Constructor */
   public mealDeliveryController() {}
 
@@ -144,6 +141,9 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML
   public void submitButton(ActionEvent event) {
     try {
+      mealDeliveryRequest mealDeliveryRequest =
+          new mealDeliveryRequest(); // Creating a mealDeliveryRequest Object to store the inputted
+      // data.
       mealDeliveryRequest.setEntreeType(entreeDropDown.getValue());
       mealDeliveryRequest.setBeverageType(beverageDropDown.getValue());
       mealDeliveryRequest.setDessertType(dessertDropDown.getValue());
@@ -153,7 +153,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       // mealDeliveryRequest.setRoomID(Integer.parseInt("0" + roomNumberTxt.getText()));
       mealDeliveryRequest.setDeliveryDate(dateTime.getValue());
       mealDeliveryRequest.setDeliveryTime(timeTxt.getText());
-      mealDeliveryRequest.setUrgent(isUrgent.isSelected());
+      mealDeliveryRequest.setIsUrgent(isUrgent.isSelected());
       mealDeliveryRequest.setOtherNotes(otherNotesTxt.getText());
       mealDeliveryRequest.setStaffAssignee(staffAssignee.getText());
       mealDeliveryRequest.setRequestStatus(requestStatus.getText());

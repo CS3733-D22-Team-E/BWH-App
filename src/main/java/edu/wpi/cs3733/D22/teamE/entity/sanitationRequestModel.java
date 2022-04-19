@@ -36,8 +36,8 @@ public class sanitationRequestModel extends serviceRequestModel {
         "null",
         r.isUrgent(),
         r.getOtherNotes());
-    sizeString = new SimpleStringProperty(r.getSizeValue());
-    bioString = new SimpleStringProperty(r.getBiohazardValue());
+    sizeString = new SimpleStringProperty(r.getSizeOfCleaning().toString());
+    bioString = new SimpleStringProperty(r.getBiohazardOnSite().toString());
     this.roomID = new SimpleStringProperty(r.getRoomID());
     this.floorID = new SimpleStringProperty(r.getFloorID());
   }
