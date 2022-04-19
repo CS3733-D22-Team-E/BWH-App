@@ -11,8 +11,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
@@ -23,15 +25,12 @@ import java.util.ResourceBundle;
 
 public class securityRequestController extends serviceRequestPageController{
 
-    @FXML
-    JFXComboBox<String> securityRequestType;
+    @FXML JFXComboBox<String> securityRequestType;
     @FXML JFXComboBox<String> timeFrameComboBox;
+    @FXML TextField notes;
+    @FXML TableView<securityRequest> requestsTable;
 
-    @FXML
-    TableView<securityRequest> requestsTable;
-
-    @FXML
-    TableColumn<securityRequest, String> tableSecurityRequestType;
+    @FXML TableColumn<securityRequest, String> tableSecurityRequestType;
     @FXML TableColumn<securityRequest, String> tableStaffAssignee;
     @FXML TableColumn<securityRequest, String> tableLocNodeID;
     @FXML TableColumn<securityRequest, String> tableTimeFrame;
@@ -39,7 +38,6 @@ public class securityRequestController extends serviceRequestPageController{
     @FXML TableColumn<securityRequest, String> tableOtherNotes;
     ObservableList<securityRequest> tableList;
 
-    LocationDAOImpl locationDB;
     SecurityRequestDAOImpl securityRequestDB;
 
     /** Constructor */
