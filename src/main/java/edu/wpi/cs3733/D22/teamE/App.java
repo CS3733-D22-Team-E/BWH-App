@@ -1,18 +1,20 @@
 package edu.wpi.cs3733.D22.teamE;
 
-import com.sun.javafx.application.LauncherImpl;
 import edu.wpi.cs3733.D22.teamE.controllers.*;
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.database.DBCreation;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import java.io.IOException;
 import java.sql.SQLException;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.application.Preloader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -21,10 +23,6 @@ public class App extends Application implements SharedScene {
   DBConnect connection;
   Stage s;
   Parent root;
-
-  public int getRandomNumber(int min, int max) {
-    return (int) ((Math.random() * (max - min)) + min);
-  }
 
   @Override
   public void init() throws InterruptedException {
@@ -43,15 +41,21 @@ public class App extends Application implements SharedScene {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    AppPreloader p = new AppPreloader();
-    for (int i = 0; i < 100; i++) {
-      Thread.sleep(getRandomNumber(10, 100));
-      LauncherImpl.notifyPreloader(p, new Preloader.ProgressNotification(i / 100.0));
-    }
   }
 
   @Override
-  public void start(Stage primaryStage) throws Exception {}
+  public void start(Stage stage) throws Exception {
+    AppPreloader p = new AppPreloader();
+    stage.setResizable(true);
+    stage.setScene(p.createPreloaderScene(root));
+    stage.show();
+    Timeline timeline = new Timeline();
+    KeyFrame start = new KeyFrame(Duration.ZERO);
+    KeyFrame end = new KeyFrame(Duration.seconds(5), e -> p.fadeInTo(timeline));
+    timeline.getKeyFrames().addAll(start, end);
+    timeline.setCycleCount(Animation.INDEFINITE);
+    timeline.play();
+  }
 
   @Override
   public void stop() {

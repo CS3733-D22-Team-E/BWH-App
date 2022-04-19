@@ -46,7 +46,6 @@ public class medicalEquipmentController extends serviceRequestPageController {
 
   MedicalEquipmentServiceRequestDAOImpl medEquipmentServiceRequestDB;
   MedicalEquipmentDAOImpl medEquipmentDB;
-  medicalEquipmentRequest medicalEquipmentRequest = new medicalEquipmentRequest();
   LocationDAOImpl locationDB;
 
   ObservableList<medicalEquipmentRequest> tableList;
@@ -174,6 +173,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
   @FXML
   public void submitButton(ActionEvent event) throws SQLException {
     try {
+      medicalEquipmentRequest medicalEquipmentRequest = new medicalEquipmentRequest();
       medicalEquipmentRequest.setFloorID(floor.getValue());
       medicalEquipmentRequest.setRoomID(roomNameToRoomID.get(room.getValue()));
       medicalEquipmentRequest.setEquipment(equipmentType.getValue());
@@ -182,7 +182,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
       medicalEquipmentRequest.setStaffAssignee(staffAssignee.getText());
       medicalEquipmentRequest.setDeliveryDate(deliveryDate.getValue());
       medicalEquipmentRequest.setRequestDate(LocalDate.now());
-      medicalEquipmentRequest.setUrgent(isUrgent.isSelected());
+      medicalEquipmentRequest.setIsUrgent(isUrgent.isSelected());
       medicalEquipmentRequest.setOtherNotes(notes.getText());
       medSendToDB(medicalEquipmentRequest);
 

@@ -1,23 +1,23 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-import edu.wpi.cs3733.D22.teamE.entity.sanitationRequest;
+import edu.wpi.cs3733.D22.teamE.entity.giftDeliveryRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SanitationRequestDAOImpl implements DAO<sanitationRequest> {
+public class GiftRequestDAOImpl implements DAO<giftDeliveryRequest> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
-  List<sanitationRequest> sanitationRequests;
+  List<giftDeliveryRequest> giftRequests;
 
-  public SanitationRequestDAOImpl() throws SQLException {
-    sanitationRequests = new ArrayList<>();
-    String query = "SELECT * FROM SANITATIONREQUEST ORDER BY SANITATION_REQ_ID DESC";
+  public GiftRequestDAOImpl() throws SQLException {
+    giftRequests = new ArrayList<>();
+    String query = "SELECT * FROM GIFTREQUEST ORDER BY GIFT_REQ_ID DESC";
     PreparedStatement statement = connection.prepareStatement(query);
     ResultSet rs = statement.executeQuery();
 
     while (rs.next()) {
-      String sanitationReqID = rs.getString("SANITATION_REQ_ID");
+      String giftReqID = rs.getString("GIFT_REQ_ID");
       java.sql.Date requestDate = rs.getDate("REQUEST_DATE");
       java.sql.Date deliveryDate = rs.getDate("DELIVERY_DATE");
       String status = rs.getString("STATUS");
@@ -25,13 +25,13 @@ public class SanitationRequestDAOImpl implements DAO<sanitationRequest> {
       boolean isUrgent = rs.getBoolean("ISURGENT");
       String roomID = rs.getString("ROOMID");
       String floorID = rs.getString("FLOOR");
-      String sizeType = rs.getString("CLEANINGSIZE");
-      String biohazardType = rs.getString("ISBIOHAZARD");
+      String patientName = rs.getString("PATIENTNAME");
+      String giftType = rs.getString("GIFTTYPE");
       String otherNotes = rs.getString("OTHERNOTES");
 
-      sanitationRequest request =
-          new sanitationRequest(
-              sanitationReqID,
+      giftDeliveryRequest request =
+          new giftDeliveryRequest(
+              giftReqID,
               otherNotes,
               floorID,
               roomID,
@@ -40,34 +40,34 @@ public class SanitationRequestDAOImpl implements DAO<sanitationRequest> {
               staffAssignee,
               requestDate.toLocalDate(),
               deliveryDate.toLocalDate(),
-              sanitationRequest.Size.valueOf(sizeType),
-              sanitationRequest.Biohazard.valueOf(biohazardType));
-      sanitationRequests.add(request);
+              patientName,
+              giftType);
+      giftRequests.add(request);
     }
     rs.close();
   }
 
   @Override
-  public List<sanitationRequest> getAll() {
-    return sanitationRequests;
+  public List<giftDeliveryRequest> getAll() {
+    return giftRequests;
   }
 
   @Override
-  public sanitationRequest get(String id) {
-    for (sanitationRequest request : sanitationRequests) {
+  public giftDeliveryRequest get(String id) {
+    for (giftDeliveryRequest request : giftRequests) {
       if (request.getServiceRequestID().equals(id)) return request;
     }
 
-    System.out.println("Sanitation Request with sanitation request id " + id + " not found");
+    System.out.println("Gift Delivery Request with service request id " + id + " not found");
     throw new NullPointerException();
   }
 
   @Override
-  public void update(sanitationRequest item) {
-    sanitationRequests.add(item);
+  public void update(giftDeliveryRequest item) {
+    giftRequests.add(item);
 
     try {
-      String query = "INSERT INTO SANITATIONREQUEST VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      String query = "INSERT INTO GIFTREQUEST VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, item.getServiceRequestID());
       statement.setDate(2, Date.valueOf(item.getRequestDate()));
@@ -77,22 +77,23 @@ public class SanitationRequestDAOImpl implements DAO<sanitationRequest> {
       statement.setBoolean(6, item.getIsUrgent());
       statement.setString(7, item.getRoomID());
       statement.setString(8, item.getFloorID());
-      statement.setString(9, item.getSizeOfCleaning().toString());
-      statement.setString(10, item.getBiohazardOnSite().toString());
+      statement.setString(9, item.getPatientName());
+      statement.setString(10, item.getGift());
       statement.setString(11, item.getOtherNotes());
 
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(
-          "Add Sanitation Request failed!"); // TODO: Come up with a better catch block
+      System.out.println("Add Gift Request failed!"); // TODO: Come up with a better catch block
     }
   }
 
   @Override
-  public void delete(sanitationRequest item) {
-    sanitationRequests.remove(item);
-    String query = "DELETE FROM SANITATIONREQUEST WHERE SANITATION_REQ_ID = (?)";
-    PreparedStatement statement = null;
+  public void delete(giftDeliveryRequest item) {
+    giftRequests.remove(item);
+
+    String query = "DELETE FROM GIFTREQUEST WHERE GIFT_REQ_ID = (?)";
+    PreparedStatement statement;
+
     try {
       statement = connection.prepareStatement(query);
       statement.setString(1, item.getServiceRequestID());

@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class labRequest extends serviceRequest {
 
@@ -12,6 +14,15 @@ public class labRequest extends serviceRequest {
 
   private String labRequestType;
   private String timeFrame;
+
+  private List<String> timeVals =
+      new ArrayList<>() {
+        {
+          add("ASAP");
+          add("<1 day");
+          add("<1 week");
+        }
+      };
 
   public labRequest(
       String labRequestID,
@@ -55,7 +66,9 @@ public class labRequest extends serviceRequest {
   }
 
   public void setTimeFrame(String timeFrame) {
-    this.timeFrame = timeFrame;
+    if (!timeVals.contains(timeFrame))
+      throw new RuntimeException("TimeFrame must be one of " + timeVals);
+    else this.timeFrame = timeFrame;
   }
 
   public String getTimeFrame() {

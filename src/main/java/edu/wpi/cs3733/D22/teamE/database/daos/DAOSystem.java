@@ -6,7 +6,6 @@ import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
-import edu.wpi.cs3733.D22.teamE.pathfinding.Edge;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -22,7 +21,8 @@ public class DAOSystem {
   private final MedicineDeliveryDAOImpl medicineDeliveryDAO;
   private final SanitationRequestDAOImpl sanitationRequestDAO;
   private final ServiceRequestDAOImpl serviceRequestDAO;
-  private final EdgesDAOImpl edgesDAO;
+  private final FacilitiesRequestDAOImpl facilitiesRequestDAO;
+  private final GiftRequestDAOImpl giftRequestDAO;
 
   public DAOSystem() throws SQLException {
     accountDAO = new AccountDAOImpl();
@@ -36,7 +36,8 @@ public class DAOSystem {
     medicineDeliveryDAO = new MedicineDeliveryDAOImpl();
     sanitationRequestDAO = new SanitationRequestDAOImpl();
     serviceRequestDAO = new ServiceRequestDAOImpl();
-    edgesDAO = new EdgesDAOImpl();
+    facilitiesRequestDAO = new FacilitiesRequestDAOImpl();
+    giftRequestDAO = new GiftRequestDAOImpl();
   }
 
   public List<Account> getAllAccounts() {
@@ -240,19 +241,35 @@ public class DAOSystem {
     return sanitationRequestDAO.getAll();
   }
 
-  public List<Edge> getAllEdges() {
-    return edgesDAO.getAll();
+  public List<facilitiesRequest> getAllFacilitiesRequests() {
+    return facilitiesRequestDAO.getAll();
   }
 
-  public Edge getEdge(String id) {
-    return edgesDAO.get(id);
+  public facilitiesRequest getFacilitiesRequest(String id) {
+    return facilitiesRequestDAO.get(id);
   }
 
-  public void updateEdge(Edge edge) {
-    edgesDAO.update(edge);
+  public void updateFacilitiesRequest(facilitiesRequest request) {
+    facilitiesRequestDAO.update(request);
   }
 
-  public void deleteEdge(Edge edge) {
-    edgesDAO.delete(edge);
+  public void deleteFacilitiesRequest(facilitiesRequest request) {
+    facilitiesRequestDAO.delete(request);
+  }
+
+  public List<giftDeliveryRequest> getAllGifts() {
+    return giftRequestDAO.getAll();
+  }
+
+  public giftDeliveryRequest getGiftDelivery(String id) {
+    return giftRequestDAO.get(id);
+  }
+
+  public void updateGiftDelivery(giftDeliveryRequest request) {
+    giftRequestDAO.update(request);
+  }
+
+  public void deleteGiftDelivery(giftDeliveryRequest request) {
+    giftRequestDAO.delete(request);
   }
 }

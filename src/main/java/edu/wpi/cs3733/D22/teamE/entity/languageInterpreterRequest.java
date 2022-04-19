@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class languageInterpreterRequest extends serviceRequest {
   // private String languageSelected; //TODO: never used?
@@ -59,5 +60,11 @@ public class languageInterpreterRequest extends serviceRequest {
 
   public void setLang(Language langforInterpreter) {
     this.langforInterpreter = langforInterpreter;
+  }
+
+  public void setLang(String langforInterpreter) {
+    if (!Arrays.toString(Language.values()).contains(langforInterpreter))
+      throw new RuntimeException("language must be one of " + Arrays.toString(Language.values()));
+    else this.langforInterpreter = Language.valueOf(langforInterpreter);
   }
 }

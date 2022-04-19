@@ -40,7 +40,6 @@ public class labRequestController extends serviceRequestPageController {
 
   LocationDAOImpl locationDB;
   LabRequestDAOImpl labRequestDB;
-  labRequest labReq = new labRequest();
 
   /** Constructor */
   public labRequestController() {}
@@ -101,6 +100,7 @@ public class labRequestController extends serviceRequestPageController {
   @Override
   public void submitButton(ActionEvent event) throws SQLException {
     try {
+      labRequest labReq = new labRequest();
       labReq.setLabRequestType(labRequestType.getValue());
       labReq.setTimeFrame(timeFrameComboBox.getValue());
       labReq.setFloorID(floor.getValue());
@@ -110,7 +110,7 @@ public class labRequestController extends serviceRequestPageController {
       labReq.setStaffAssignee(staffAssignee.getText());
       labSendToDB(labReq);
 
-    } catch (NullPointerException error) {
+    } catch (RuntimeException error) {
       System.out.println("Error : Some Value is NULL");
       PopUp.createWarning("Warning : A required value was not filled", null);
     }
