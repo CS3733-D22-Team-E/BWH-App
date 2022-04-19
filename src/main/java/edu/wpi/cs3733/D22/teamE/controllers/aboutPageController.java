@@ -24,6 +24,9 @@ public class aboutPageController extends containsSideMenu {
   @FXML GridPane joeyPane;
   @FXML Hyperlink wilsonWong;
 
+  //  Tooltip tooltip = new Tooltip("Woot");
+  //  tooltip.install(joeyPane, tooltip);
+
   public void setImages(Stage stage) throws FileNotFoundException {
     Tooltip tooltip = new Tooltip("About Joey");
     ImageView imV =

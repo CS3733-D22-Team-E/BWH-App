@@ -7,7 +7,7 @@ public class ardComm {
 
   public String readData() {
     String data = "";
-    uno = new Arduino("COM4", 9600);
+    uno = new Arduino("COM10", 9600);
     boolean connection = uno.openConnection();
     if (!connection) {
       System.err.println("Error: Unable to connect to serial port");

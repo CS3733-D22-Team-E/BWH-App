@@ -261,12 +261,12 @@ public class DBCreation {
 
   public static void createEdgesTable() throws SQLException {
     String query =
-            "create table EDGES\n"
-                    + "(\n"
-                    + "    EDGEID    VARCHAR(35), \n"
-                    + "    START_NODE       VARCHAR(35), \n"
-                    + "    END_NODE      VARCHAR(35) \n"
-                    + ")";
+        "create table EDGES\n"
+            + "(\n"
+            + "    EDGEID    VARCHAR(35), \n"
+            + "    START_NODE       VARCHAR(35), \n"
+            + "    END_NODE      VARCHAR(35) \n"
+            + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
   }

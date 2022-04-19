@@ -20,17 +20,13 @@ public class hospitalGraph {
   private void populateNodes() throws SQLException {
     DAOSystem system = new DAOSystem();
 
-    for(Location location : system.getAllLocations()) {
+    for (Location location : system.getAllLocations()) {
       Node node = new Node(location, null);
       allNodes.add(node);
     }
   }
 
-  private void populateEdges() {
+  private void populateEdges() {}
 
-  }
-
-  private void setAllEdges() {
-
-  }
+  private void setAllEdges() {}
 }
