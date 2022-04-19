@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 public class SecurityRequestTesting {
-
+/*
   @Test
   public void testAddSecurityRequest() throws SQLException {
     DAO<securityRequest> securityRequestDAO = new SecurityRequestDAOImpl();
@@ -42,5 +42,5 @@ public class SecurityRequestTesting {
     securityRequestDAO.update(securityRequest);
     securityRequestDAO.updateSecurityServiceRequest(securityRequest, "Processing");
     assertEquals(securityRequest.getRequestStatus(), "Processing");
-  }
+  }*/
 }
