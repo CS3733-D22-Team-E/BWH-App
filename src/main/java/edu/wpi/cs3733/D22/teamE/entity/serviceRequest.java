@@ -12,8 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class serviceRequest implements requestPage {
-  public serviceRequest(String newPassword, String confirmNewPassword) {
-  }
+  public serviceRequest(String newPassword, String confirmNewPassword) {}
 
   @Override
   public Node getAsPage(boolean editable) throws InvocationTargetException, IllegalAccessException {
