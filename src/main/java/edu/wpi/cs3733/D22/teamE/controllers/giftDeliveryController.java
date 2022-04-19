@@ -10,12 +10,17 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 /**
  * This is the controller class for the gift delivery service request. Inherits from the
@@ -55,7 +60,16 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   }
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) { // TODO: Implement
+  public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
+    try {
+      giftRequestDAO = new GiftRequestDAOImpl();
+      populateLocationComboBoxes();
+      populateGiftReqTable();
+      giftOptionType.getItems().addAll("Board Game", "Book", "Get Well Card", "Movie", "Teddy Bear");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   // TODO: Create a method to populate the gift types combo box
@@ -76,8 +90,22 @@ public class giftDeliveryController extends serviceRequestPageController impleme
 
   private void populateGiftReqTable() {
     ObservableList<giftDeliveryRequest> giftDeliveryRequests = populateGiftRequestsList();
+    tableGiftType.setCellValueFactory(new PropertyValueFactory<>("gift"));
+    tablePatientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
+    tableLocNodeID.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<giftDeliveryRequest, String>, ObservableValue<String>>() {
+      @Override
+      public ObservableValue<String> call(TableColumn.CellDataFeatures<giftDeliveryRequest, String> param) {
+          giftDeliveryRequest curGiftDelivery = param.getValue();
+          return new SimpleStringProperty(roomIDToRoomName.get(curGiftDelivery.getRoomID()));
+      }
+    });
+    tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
+    tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
+    tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
+    tableGreetingCard.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
+    tableIsUrgent.setCellValueFactory(new PropertyValueFactory<>("isUrgent"));
 
-    // TODO: Set Cell Factory stuff?
+    requestsTable.setItems(giftDeliveryRequests);
   }
 
   @Override
