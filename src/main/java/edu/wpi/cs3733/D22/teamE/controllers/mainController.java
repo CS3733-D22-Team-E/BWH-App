@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.pageButtons;
 import edu.wpi.cs3733.D22.teamE.pageControlFacade;
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -137,6 +136,14 @@ public class mainController implements pageButtons {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     pageControlFacade.loadPage("labRequestPage.fxml", thisStage);
+  }
+
+  @FXML
+  public void giftRequestButton(ActionEvent event)
+      throws IOException { // TODO: Add actual button to page
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    pageControlFacade.loadPage("giftPage.fxml", thisStage);
   }
 
   @FXML
