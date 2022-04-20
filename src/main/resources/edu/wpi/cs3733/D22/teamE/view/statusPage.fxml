@@ -48,16 +48,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.statusPageController">
+<VBox prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.statusPageController">
    <children>
-      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;" VBox.vgrow="NEVER">
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" styleClass="title_bar" VBox.vgrow="NEVER">
          <children>
-            <StackPane minHeight="-Infinity" minWidth="-Infinity">
+            <StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="62.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+                  <Pane maxHeight="65.0" maxWidth="62.0" prefHeight="65.0" prefWidth="62.0" styleClass="diagonal-gradient" />
                   <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/status.png" />
@@ -70,12 +69,12 @@
             </StackPane>
             <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
                <children>
-                  <Label alignment="CENTER" text="Brigham and Women's Hospital" textFill="WHITE">
+                  <Label alignment="CENTER" styleClass="label_title" text="Brigham and Women's Hospital" textFill="WHITE">
                      <font>
                         <Font name="Book Antiqua Bold" size="30.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="Service Request Status Page" textFill="WHITE">
+                  <Label id="label_subtitle" alignment="CENTER" styleClass="label_subtitle" text="Service Request Status Page" textFill="WHITE">
                      <font>
                         <Font name="Book Antiqua Bold" size="18.0" />
                      </font>

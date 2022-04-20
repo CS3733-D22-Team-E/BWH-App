@@ -5,21 +5,52 @@
 
 
 }
-#label_default{
+
+.coverPage{
+  -fx-background-color: rgba(255, 255, 255, 0.59);
+}
+#coverPage_intro{
+  -fx-text-fill: rgb(0, 0, 0);
+  -fx-font-family: Calibri ;
+  -fx-font-style: "Bold";
+}
+.label_default{
   -fx-text-fill: #333333;
   -fx-font-weight: 800;
 }
 
-#label_color{
+.label_color{
   -fx-text-fill: #333333;
 }
-#label_title{
-  -fx-text-fill: #CCCCCC;
+.label_title{
+  -fx-text-fill: #171717;
+  -fx-font-family: Calibri;
+  -fx-font-style: Regular;
+}
+.label_subtitle{
+  -fx-text-fill: #171717;
+  -fx-font-family: Calibri ;
+  -fx-font-style: "Bold";
 }
 #title_bar{
   -fx-opacity: 0.96;
   -fx-background-color:
           linear-gradient(to bottom right, #2e317c, #d276a3);
+}
+.title_bar{
+  -fx-opacity: 0.96;
+  -fx-background-color:
+          linear-gradient(to bottom right, #2e317c, #d276a3);
+}
+
+#diagonal-gradient {
+  -fx-background-color: linear-gradient(to bottom right, #9c78ff, #ffa0ae);
+  -fx-background-radius: 8px;
+}
+
+.diagonal-gradient {
+  -fx-background-color: linear-gradient(to bottom right, #9c78ff, #ffa0ae);
+  -fx-background-radius: 8px;
 }
 .label {
   /**font color*/

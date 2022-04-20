@@ -6,6 +6,7 @@
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.net.URL?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -17,28 +18,26 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/map.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.mapPageController">
+<VBox prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.mapPageController">
     <children>
-      <Pane prefHeight="90.0" prefWidth="1080.0">
+      <Pane prefHeight="90.0" prefWidth="1080.0" styleClass="title_bar">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f35959" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
-            <Label alignment="CENTER" layoutX="107.0" layoutY="13.0" text="Brigham &amp; Women's Hospital" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="107.0" layoutY="13.0" styleClass="label_title" text="Brigham &amp; Women's Hospital" textFill="WHITE">
                <font>
                   <Font name="Book Antiqua Bold" size="30.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="210.0" layoutY="52.0" text="Location Data" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="210.0" layoutY="52.0" styleClass="label_subtitle" text="Location Data" textFill="WHITE">
                <font>
                   <Font name="Book Antiqua Bold" size="18.0" />
                </font>
             </Label>
             <StackPane layoutX="14.0" layoutY="13.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+                  <Pane maxHeight="65.0" maxWidth="62.0" prefHeight="65.0" prefWidth="62.0" styleClass="diagonal-gradient" />
                   <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/location.png" />
@@ -104,4 +103,8 @@
          </children>
       </StackPane>
     </children>
+   <stylesheets>
+      <URL value="@styles/map.css" />
+      <URL value="@styles/default.css" />
+   </stylesheets>
 </VBox>

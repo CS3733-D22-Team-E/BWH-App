@@ -3,12 +3,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" VBox.vgrow="ALWAYS">
          <children>
@@ -17,14 +17,15 @@
                   <Image url="@icons/doctorPhoto2.jpg" />
                </image>
             </ImageView>
+            <Pane prefHeight="708.0" prefWidth="1080.0" styleClass="coverPage" />
             <VBox alignment="CENTER" StackPane.alignment="TOP_CENTER">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="Welcome To...">
+                  <Label id="coverPage_intro" alignment="CENTER" contentDisplay="CENTER" text="Welcome To..." textFill="WHITE">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label text="Brigham And Women's Hospital">
+                  <Label id="coverPage_intro" text="Brigham And Women's Hospital" textFill="WHITE">
                      <font>
                         <Font size="48.0" />
                      </font>

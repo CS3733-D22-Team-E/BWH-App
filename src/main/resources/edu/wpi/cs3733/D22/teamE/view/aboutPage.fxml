@@ -44,9 +44,9 @@
 
 <VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.aboutPageController">
    <children>
-      <Pane id="title_bar" prefHeight="90.0" prefWidth="1080.0">
+      <Pane id="title_bar" prefHeight="90.0" prefWidth="1080.0" styleClass="title_bar">
          <children>
-            <Label id="label_title" alignment="CENTER" layoutX="14.0" layoutY="26.0" text="Brigham and Women's Hospital" textFill="WHITE">
+            <Label id="label_title" alignment="CENTER" layoutX="14.0" layoutY="26.0" styleClass="label_title" text="Brigham and Women's Hospital" textFill="WHITE">
                <font>
                   <Font name="Book Antiqua Bold" size="30.0" />
                </font>

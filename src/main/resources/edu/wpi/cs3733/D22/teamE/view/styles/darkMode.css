@@ -3,15 +3,24 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
 }
-#label_default{
+.label_default{
     -fx-text-fill: #CCCCCC;
     -fx-font-weight: 800;
 }
-#label_color{
+
+.label_color{
     -fx-text-fill: #CCCCCC;
 }
-#label_title{
+.label_title{
     -fx-text-fill: #CCCCCC;
+    -fx-font-family: Calibri;
+    -fx-font-style: Regular;
+}
+
+.label_subtitle{
+    -fx-text-fill: #CCCCCC;
+    -fx-font-family: Calibri ;
+    -fx-font-style: "Bold";
 }
 #title_bar{
     -fx-opacity: 0.96;
@@ -19,6 +28,19 @@
             linear-gradient(to bottom right, #252762, #ab6185);
 }
 
+.title_bar{
+    -fx-opacity: 0.96;
+    -fx-background-color:
+            linear-gradient(to bottom right, #252762, #ab6185);
+}
+#diagonal-gradient {
+    -fx-background-color: linear-gradient(to bottom right, #5d32e7, #af5c68);
+    -fx-background-radius: 8px;
+}
+.diagonal-gradient {
+    -fx-background-color: linear-gradient(to bottom right, #5d32e7, #af5c68);
+    -fx-background-radius: 8px;
+}
 
 #main-box {
     -fx-background-color: #333333;

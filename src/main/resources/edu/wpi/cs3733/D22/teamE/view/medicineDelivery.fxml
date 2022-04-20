@@ -36,6 +36,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.CheckBox?>
@@ -52,16 +53,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.medicineDeliveryController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.medicineDeliveryController">
     <children>
-      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" styleClass="headerBackground">
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" styleClass="title_bar">
          <children>
             <StackPane minHeight="-Infinity" minWidth="-Infinity">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+                  <Pane maxHeight="65.0" maxWidth="62.0" prefHeight="65.0" prefWidth="62.0" styleClass="diagonal-gradient" />
                   <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/pill.png" />
@@ -74,12 +74,12 @@
             </StackPane>
             <VBox alignment="BASELINE_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headerHospital" text="Brigham and Women's Hospital" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label_title" text="Brigham and Women's Hospital" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="30.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" styleClass="headerRequest" text="Medicine Delivery" textFill="WHITE">
+                  <Label alignment="CENTER" styleClass="label_subtitle" text="Medicine Delivery" textFill="WHITE">
                      <font>
                         <Font name="Calibri Bold" size="18.0" />
                      </font>
@@ -205,4 +205,8 @@
          </children>
       </StackPane>
     </children>
+   <stylesheets>
+      <URL value="@styles/default.css" />
+      <URL value="@styles/servicerequests.css" />
+   </stylesheets>
 </VBox>

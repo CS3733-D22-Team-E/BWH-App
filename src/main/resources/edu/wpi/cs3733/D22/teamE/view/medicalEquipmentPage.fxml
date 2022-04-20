@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.CheckBox?>
@@ -20,16 +21,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.medicalEquipmentController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.medicalEquipmentController">
    <children>
-      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" styleClass="headerBackground">
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" styleClass="title_bar">
          <children>
             <StackPane>
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
+                  <Pane maxHeight="65.0" maxWidth="62.0" prefHeight="65.0" prefWidth="62.0" styleClass="diagonal-gradient" />
                   <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/microscope.png" />
@@ -42,12 +42,12 @@
             </StackPane>
             <VBox alignment="BASELINE_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
                <children>
-                  <Label alignment="BASELINE_LEFT" styleClass="headerHospital" text="Brigham and Women's Hospital" textFill="WHITE">
+                  <Label alignment="BASELINE_LEFT" styleClass="label_title" text="Brigham and Women's Hospital" textFill="WHITE">
                      <font>
                         <Font name="Book Antiqua" size="30.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" styleClass="headerRequest" text="Medical Equipment Delivery" textFill="WHITE">
+                  <Label alignment="CENTER" styleClass="label_subtitle" text="Medical Equipment Delivery" textFill="WHITE">
                      <font>
                         <Font name="Book Antiqua Bold" size="18.0" />
                      </font>
@@ -167,4 +167,8 @@
          </children>
       </StackPane>
    </children>
+   <stylesheets>
+      <URL value="@styles/servicerequests.css" />
+      <URL value="@styles/default.css" />
+   </stylesheets>
 </VBox>
