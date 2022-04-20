@@ -139,10 +139,10 @@ public class sanitationServiceController extends serviceRequestPageController {
       RadioButton selectUrgency = (RadioButton) urgencyGroup.getSelectedToggle();
       switch (selectUrgency.getText()) {
         case "Critical":
-          request.setUrgent(true);
+          request.setIsUrgent(true);
           break;
         case "NotCritical":
-          request.setUrgent(false);
+          request.setIsUrgent(false);
           break;
       }
 
@@ -166,11 +166,12 @@ public class sanitationServiceController extends serviceRequestPageController {
       sanSendToDB(request);
       resetFields(new ActionEvent());
 
-    } catch (NullPointerException error) {
+    } catch (RuntimeException error) {
       error.printStackTrace();
       System.out.println(error.getMessage());
       PopUp.createWarning(
-          "Warning : A required value was not filled", drawer.getScene().getWindow());
+          "Warning : A required value was not filled or was incorrectly formatted",
+          drawer.getScene().getWindow());
     }
   }
 

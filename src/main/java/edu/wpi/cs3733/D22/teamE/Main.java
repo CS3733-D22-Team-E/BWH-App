@@ -1,8 +1,7 @@
 package edu.wpi.cs3733.D22.teamE;
 
 // import edu.wpi.cs3733.D22.teamE.database.DBConnection;
-// import edu.wpi.energetic_easter_bunnies.database.DBConnection;
-import com.sun.javafx.application.LauncherImpl;
+import edu.wpi.cs3733.D22.teamE.database.DBCreation;
 
 public class Main {
 
@@ -16,7 +15,10 @@ public class Main {
   //  }
 
   public static void main(String[] args) {
-    LauncherImpl.launchApplication(App.class, AppPreloader.class, args);
+    ardComm comm = new ardComm();
+    System.out.println(comm.readData());
+    DBCreation.createTables();
+    App.launch(App.class, args);
     // closeConnection();
   }
 }

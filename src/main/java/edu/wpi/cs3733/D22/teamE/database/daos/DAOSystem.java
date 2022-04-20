@@ -21,6 +21,8 @@ public class DAOSystem {
   private final MedicineDeliveryDAOImpl medicineDeliveryDAO;
   private final SanitationRequestDAOImpl sanitationRequestDAO;
   private final ServiceRequestDAOImpl serviceRequestDAO;
+  private final FacilitiesRequestDAOImpl facilitiesRequestDAO;
+  private final GiftRequestDAOImpl giftRequestDAO;
 
   public DAOSystem() throws SQLException {
     accountDAO = new AccountDAOImpl();
@@ -34,6 +36,8 @@ public class DAOSystem {
     medicineDeliveryDAO = new MedicineDeliveryDAOImpl();
     sanitationRequestDAO = new SanitationRequestDAOImpl();
     serviceRequestDAO = new ServiceRequestDAOImpl();
+    facilitiesRequestDAO = new FacilitiesRequestDAOImpl();
+    giftRequestDAO = new GiftRequestDAOImpl();
   }
 
   public List<Account> getAllAccounts() {
@@ -235,5 +239,47 @@ public class DAOSystem {
 
   public List<sanitationRequest> getAllSanReq() {
     return sanitationRequestDAO.getAll();
+  }
+
+  public List<facilitiesRequest> getAllFacilitiesRequests() {
+    return facilitiesRequestDAO.getAll();
+  }
+
+  public facilitiesRequest getFacilitiesRequest(String id) {
+    return facilitiesRequestDAO.get(id);
+  }
+
+  public void updateFacilitiesRequest(facilitiesRequest request) {
+    facilitiesRequestDAO.update(request);
+  }
+
+  public void deleteFacilitiesRequest(facilitiesRequest request) {
+    facilitiesRequestDAO.delete(request);
+  }
+
+  public List<giftDeliveryRequest> getAllGifts() {
+    return giftRequestDAO.getAll();
+  }
+
+  public giftDeliveryRequest getGiftDelivery(String id) {
+    return giftRequestDAO.get(id);
+  }
+
+  public void updateGiftDelivery(giftDeliveryRequest request) {
+    giftRequestDAO.update(request);
+  }
+
+  public void updateRoomLocation(serviceRequest request, int newXCoord, int newYCoord)
+      throws SQLException {
+    serviceRequestDAO.updateRoomLocation(request, newXCoord, newYCoord);
+  }
+
+  public void updateCurrentLocation(MedicalEquipment equipment, int newXCoord, int newYCoord)
+      throws SQLException {
+    medicalEquipmentDAO.updateCurrentLocation(equipment, newXCoord, newYCoord);
+  }
+
+  public void deleteGiftDelivery(giftDeliveryRequest request) {
+    giftRequestDAO.delete(request);
   }
 }

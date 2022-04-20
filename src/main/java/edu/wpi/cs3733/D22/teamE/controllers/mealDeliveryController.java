@@ -51,9 +51,6 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   MealDeliveryRequestDAOImpl mealRequestDB;
   ObservableList<mealDeliveryRequest> tableList;
 
-  /** Creating a mealDeliveryRequest Object to store the inputted data. */
-  mealDeliveryRequest mealDeliveryRequest = new mealDeliveryRequest();
-
   /** Constructor */
   public mealDeliveryController() {}
 
@@ -144,16 +141,18 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML
   public void submitButton(ActionEvent event) {
     try {
+      mealDeliveryRequest mealDeliveryRequest =
+          new mealDeliveryRequest(); // Creating a mealDeliveryRequest Object to store the inputted
+      // data.
       mealDeliveryRequest.setEntreeType(entreeDropDown.getValue());
       mealDeliveryRequest.setBeverageType(beverageDropDown.getValue());
       mealDeliveryRequest.setDessertType(dessertDropDown.getValue());
       mealDeliveryRequest.setRoomID(roomNameToRoomID.get(room.getValue()));
       mealDeliveryRequest.setFloorID(floor.getValue());
       mealDeliveryRequest.setRequestDate(LocalDate.now());
-      // mealDeliveryRequest.setRoomID(Integer.parseInt("0" + roomNumberTxt.getText()));
       mealDeliveryRequest.setDeliveryDate(dateTime.getValue());
       mealDeliveryRequest.setDeliveryTime(timeTxt.getText());
-      mealDeliveryRequest.setUrgent(isUrgent.isSelected());
+      mealDeliveryRequest.setIsUrgent(isUrgent.isSelected());
       mealDeliveryRequest.setOtherNotes(otherNotesTxt.getText());
       mealDeliveryRequest.setStaffAssignee(staffAssignee.getText());
       mealDeliveryRequest.setRequestStatus(requestStatus.getText());
@@ -182,7 +181,12 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     beverageDropDown.getSelectionModel().clearSelection();
     dessertDropDown.getSelectionModel().clearSelection();
     dateTime.getEditor().clear();
+    isUrgent.setSelected(false);
+    staffAssignee.clear();
+    requestStatus.clear();
     timeTxt.clear();
     otherNotesTxt.clear();
+    floor.getSelectionModel().clearSelection();
+    room.getSelectionModel().clearSelection();
   }
 }

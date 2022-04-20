@@ -5,7 +5,6 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXSlider?>
-<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -77,7 +76,166 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <JFXComboBox fx:id="floorDropdown" layoutX="32.0" layoutY="58.0" onAction="#floorDropdown" promptText="Select Floor" />
+                  <AnchorPane fx:id="towerLocationsLegend" layoutX="290.0" layoutY="60.0" prefHeight="274.0" prefWidth="263.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/towerLocations/dept.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="40.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Department" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/towerLocations/dirt.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="40.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Dirty Storage" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/towerLocations/elev.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="40.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Elevator" />
+                        <Text layoutX="40.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Exit" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/towerLocations/exit.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="40.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Hallway" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/towerLocations/hall.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="40.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Labs" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/towerLocations/labs.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="140.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/towerLocations/pati.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="180.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Patient" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="140.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/towerLocations/rest.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="180.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Restroom" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="140.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/towerLocations/retl.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="180.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Retail" />
+                        <Text layoutX="180.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Service" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="140.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/towerLocations/serv.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="180.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Stairs" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="140.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/towerLocations/stai.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="180.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Storage" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="140.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/towerLocations/stor.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="4.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tower Locations">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="serviceRequestLegend" layoutX="290.0" layoutY="60.0" prefHeight="159.0" prefWidth="263.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/serviceRequests/equipment.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="40.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Equipment" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/serviceRequests/labs.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="40.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Lab Request" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/serviceRequests/language.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="40.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Language" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="140.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/serviceRequests/meal.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="180.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Meal Delivery" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="140.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/serviceRequests/medicine.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="180.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Medicine" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="140.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/serviceRequests/sanitation.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="180.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Sanitation" />
+                        <Text layoutX="4.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Requests">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="medicalEquipmentLegend" layoutX="290.0" layoutY="60.0" prefHeight="116.0" prefWidth="263.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/medicalEquipment/bed.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="40.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Beds" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/medicalEquipment/infusion.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="40.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Infusion Pump" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="140.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/medicalEquipment/recliner.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="180.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Recliner" />
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="140.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/medicalEquipment/xray.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="180.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Xray" />
+                        <Text layoutX="4.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medical Equipment">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <JFXComboBox fx:id="floorDropdown" layoutX="558.0" layoutY="45.0" onAction="#floorDropdown" promptText="Select Floor" />
                   <JFXButton fx:id="mapEditorButton" buttonType="RAISED" layoutX="955.0" layoutY="46.0" onAction="#mapEditorButton" prefHeight="25.0" prefWidth="76.0" ripplerFill="RED" style="-fx-background-color: #dbd5d5;" text="Editor" />
                   <ScrollPane layoutX="557.0" layoutY="79.0" prefHeight="468.0" prefWidth="468.0">
                      <content>
@@ -95,9 +253,7 @@
                   <JFXButton fx:id="zoomUp" layoutX="1039.0" layoutY="45.0" onAction="#zoomUp" text="+" />
                   <JFXButton fx:id="zoomDown" layoutX="1038.0" layoutY="516.0" onAction="#zoomDown" text="-" />
                   <JFXSlider fx:id="zoomSlider" blockIncrement="100.0" layoutX="1038.0" layoutY="71.0" majorTickUnit="100.0" max="1035.0" min="435.0" minorTickCount="10" onMouseClicked="#changeZoom" onMouseDragged="#changeZoom" orientation="VERTICAL" prefHeight="438.0" prefWidth="28.0" showTickMarks="true" snapToTicks="true" value="535.0" />
-                  <JFXToggleButton fx:id="filterMode" layoutX="679.0" layoutY="29.0" onAction="#setFilterMode" prefHeight="40.0" prefWidth="81.0" toggleColor="#fafafa" toggleLineColor="#999999" />
-                  <Text layoutX="575.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medical Equipment" wrappingWidth="105.44501843082708" />
-                  <Text layoutX="747.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Requests" wrappingWidth="105.44501843082708" />
+                  <JFXComboBox fx:id="locationTypeDropdown" layoutX="682.0" layoutY="45.0" onAction="#locationTypeDropdown" promptText="Select Location Type" />
                   </children>
               </AnchorPane>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />

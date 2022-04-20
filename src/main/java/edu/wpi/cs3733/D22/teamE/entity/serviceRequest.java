@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXTextField;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Random;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -84,10 +85,22 @@ public class serviceRequest implements requestPage {
         return "MED_DELIV_REQ";
       }
     },
+    SECURITY_REQ {
+      @Override
+      public String toString() {
+        return "SECURITY_REQ";
+      }
+    },
     SERVICEREQUEST {
       @Override
       public String toString() {
         return "SERVICEREQUEST";
+      }
+    },
+    GIFT_REQUEST {
+      @Override
+      public String toString() {
+        return "GIFT_REQUEST";
       }
     },
     FACILITIES_REQ {
@@ -118,6 +131,10 @@ public class serviceRequest implements requestPage {
 
   public void setRequestType(Type requestType) {
     this.requestType = requestType;
+  }
+
+  public void setRequestType(String requestType) {
+    this.requestType = Type.valueOf(requestType);
   }
 
   public serviceRequest(
@@ -167,6 +184,7 @@ public class serviceRequest implements requestPage {
   }
 
   public void setFloorID(String floorID) {
+    // todo : verify correct floorID
     this.floorID = floorID;
   }
 
@@ -175,6 +193,7 @@ public class serviceRequest implements requestPage {
   }
 
   public void setRoomID(String roomID) {
+    // todo : verify correct roomID
     this.roomID = roomID;
   }
 
@@ -190,8 +209,15 @@ public class serviceRequest implements requestPage {
     return isUrgent;
   }
 
-  public void setUrgent(boolean urgent) {
+  public void setIsUrgent(boolean urgent) {
     isUrgent = urgent;
+  }
+
+  public void setIsUrgent(String urgent) {
+    boolean t = Boolean.parseBoolean(urgent);
+    if (!t && !urgent.equals("false"))
+      throw new RuntimeException("IsUrgent must be one of {true, false}");
+    else isUrgent = t;
   }
 
   public String getRequestStatus() {
@@ -199,7 +225,11 @@ public class serviceRequest implements requestPage {
   }
 
   public void setRequestStatus(String requestStatus) {
-    this.requestStatus = requestStatus;
+    if (!(requestStatus.equals("Processing")
+        || requestStatus.equals("Complete")
+        || requestStatus.equals("To Do")))
+      throw new RuntimeException("RequestStatus must be one of {To Do, Processing, Complete}");
+    else this.requestStatus = requestStatus;
   }
 
   public String getStaffAssignee() {
@@ -207,6 +237,7 @@ public class serviceRequest implements requestPage {
   }
 
   public void setStaffAssignee(String staffAssignee) {
+    // todo : implement assignee verification
     this.staffAssignee = staffAssignee;
   }
 
@@ -230,12 +261,28 @@ public class serviceRequest implements requestPage {
     this.requestDate = requestDate;
   }
 
+  public void setRequestDate(String requestDate) {
+    try {
+      this.requestDate = LocalDate.parse(requestDate);
+    } catch (DateTimeParseException e) {
+      throw new RuntimeException("Date must be formatted as yyyy-mm-dd");
+    }
+  }
+
   public LocalDate getDeliveryDate() {
     return deliveryDate;
   }
 
   public void setDeliveryDate(LocalDate deliveryDate) {
     this.deliveryDate = deliveryDate;
+  }
+
+  public void setDeliveryDate(String deliveryDate) {
+    try {
+      this.deliveryDate = LocalDate.parse(deliveryDate);
+    } catch (DateTimeParseException e) {
+      throw new RuntimeException("Date must be formatted as yyyy-mm-dd");
+    }
   }
 
   public boolean isUrgent() {
@@ -250,12 +297,20 @@ public class serviceRequest implements requestPage {
     this.xCoord = xCoord;
   }
 
+  public void setxCoord(String xCoord) {
+    this.yCoord = Integer.parseInt(xCoord);
+  }
+
   public int getyCoord() {
     return yCoord;
   }
 
   public void setyCoord(int yCoord) {
     this.yCoord = yCoord;
+  }
+
+  public void setyCoord(String yCoord) {
+    this.yCoord = Integer.parseInt(yCoord);
   }
 
   @Override

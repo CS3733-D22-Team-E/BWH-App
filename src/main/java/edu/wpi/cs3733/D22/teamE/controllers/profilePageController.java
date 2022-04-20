@@ -70,7 +70,7 @@ public class profilePageController extends containsSideMenu implements Initializ
         }
       }
       reqList.setItems(data);
-      reqList.setCellFactory(ServiceRequestButtonListCell.forListView());
+      reqList.setCellFactory(ServiceRequestButtonListCell.forListView(this));
       reqNumLabel.setText(String.valueOf(count));
 
     } catch (IOException | SQLException e) {
