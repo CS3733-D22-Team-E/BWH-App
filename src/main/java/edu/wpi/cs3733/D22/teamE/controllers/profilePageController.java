@@ -67,6 +67,9 @@ public class profilePageController extends containsSideMenu implements Initializ
         if (Objects.equals(employee.getEmployeeID(), "admin")) {
           myReq.add(r);
           data.add(r);
+        } else if (Objects.equals(employee.getEmployeeID(), r.getStaffAssignee())) {
+          myReq.add(r);
+          data.add(r);
         }
       }
       reqList.setItems(data);
