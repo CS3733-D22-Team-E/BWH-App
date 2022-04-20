@@ -282,6 +282,20 @@
                                     <Label layoutX="5.0" layoutY="76.0" prefHeight="17.0" prefWidth="68.0" text="Gift Delivery" textAlignment="CENTER" />
                                  </children>
                               </Pane>
+                              <Pane layoutX="10.0" layoutY="292.0" prefHeight="45.0" prefWidth="51.0">
+                                 <children>
+                                    <Button fx:id="facilitiesRequestButton" alignment="CENTER" mnemonicParsing="false" onAction="#facilitiesRequestButton" styleClass="serviceButton">
+                                       <graphic>
+                                          <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/facilities.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Label layoutX="-6.0" layoutY="81.0" prefHeight="17.0" prefWidth="101.0" text="Facilities Service" textAlignment="CENTER" />
+                                 </children>
+                              </Pane>
                               <Pane prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <Button fx:id="securityRequestButton" alignment="CENTER" mnemonicParsing="false" onAction="#securityRequestButton" styleClass="serviceButton">
