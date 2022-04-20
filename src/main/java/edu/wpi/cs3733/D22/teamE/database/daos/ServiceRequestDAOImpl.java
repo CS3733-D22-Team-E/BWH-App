@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.database.Location;
+import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import java.sql.*;
@@ -128,5 +129,18 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
       default:
         break;
     }
+  }
+
+  public void updateRoomLocation(serviceRequest request, int newXCoord, int newYCoord) throws SQLException {
+    String query =
+            "UPDATE TOWERLOCATIONS SET XCOORD = "
+                    + newXCoord
+                    + ", YCOORD = "
+                    + newYCoord
+                    + " WHERE NODEID = '"
+                    + request.getRoomID()
+                    + "'";
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 }
