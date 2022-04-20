@@ -42,7 +42,6 @@ public class DashboardController extends containsSideMenu implements Initializab
   @FXML TableColumn<MedicalEquipment, String> tableLocation;
 
   @FXML JFXButton mapEditorButton;
-  @FXML JFXButton addEquipmentButton;
 
   @FXML JFXButton ll2Floor;
   @FXML Tooltip ll2FloorTooltip;
@@ -200,16 +199,5 @@ public class DashboardController extends containsSideMenu implements Initializab
     Stage thisStage = (Stage) baseComponent.getScene().getWindow();
 
     pageControlFacade.loadPage("map.fxml", thisStage);
-  }
-
-  // TODO: Remove, for testing purposes only. Or flesh out into a service request-esque user
-  // interface
-  @FXML
-  private void addEquipment(ActionEvent event) {
-    MedicalEquipment newEquipment =
-        new MedicalEquipment(
-            "BED41", null, false, false, "eSTOR001L1", "eSTOR001L1", "eSTOR001L1", "BED", 489);
-
-    equipmentDAO.update(newEquipment);
   }
 }
