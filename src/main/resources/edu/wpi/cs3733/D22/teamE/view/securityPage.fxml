@@ -21,7 +21,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="700.0" maxWidth="1200.0" minHeight="100.0" minWidth="100.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.securityRequestController">
     <children>
         <HBox alignment="CENTER" maxHeight="90.0" maxWidth="1.7976931348623157E308" minHeight="90.0" styleClass="headerBackground" VBox.vgrow="ALWAYS">
@@ -65,7 +64,6 @@
         </HBox>
         <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" minWidth="700.0" VBox.vgrow="ALWAYS">
             <children>
-                <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" visible="false" />
             <HBox spacing="20.0">
                <children>
                   <VBox spacing="20.0" HBox.hgrow="ALWAYS">
@@ -173,6 +171,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </HBox>
+                <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" visible="false" />
             </children>
         </StackPane>
     </children>

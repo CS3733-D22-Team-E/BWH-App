@@ -59,7 +59,7 @@
             </VBox>
             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="70.0" minWidth="70.0" prefHeight="90.0" prefWidth="120.0" style="-fx-border-color: black;" HBox.hgrow="ALWAYS">
                <children>
-                  <JFXHamburger fx:id="burger1" prefHeight="98.0" prefWidth="83.0" HBox.hgrow="ALWAYS" />
+                  <JFXHamburger fx:id="burger" prefHeight="98.0" prefWidth="83.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>
