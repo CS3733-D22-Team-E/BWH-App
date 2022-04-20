@@ -16,7 +16,7 @@ public class SecurityRequestDAOImpl implements DAO<securityRequest> {
     String query = "SELECT * FROM SECURITYREQUEST ORDER BY SECURITY_REQUESTID DESC";
     PreparedStatement statement = connection.prepareStatement(query);
     ResultSet rs = statement.executeQuery();
-    // int numID = 0; //TODO: Assign Medical Requests an ID value
+
     while (rs.next()) {
       String securityReqID = rs.getString("SECURITY_REQUESTID");
       String securityReqType = rs.getString("SECURITY_REQUEST_TYPE");
@@ -25,10 +25,10 @@ public class SecurityRequestDAOImpl implements DAO<securityRequest> {
       String locNodeID = rs.getString("LOCATIONID");
       String requestStatus = rs.getString("REQUESTSTATUS");
       String otherNotes = rs.getString("OTHERNOTES");
-      String floorID = "";
+      String floorID = rs.getString("FLOORID");
       java.sql.Date deliveryDate = Date.valueOf(LocalDate.now());
       java.sql.Date requestDate = Date.valueOf(LocalDate.now());
-      boolean isUrgent = false;
+      boolean isUrgent = rs.getBoolean("ISURGENT");
 
       securityRequest securityReq =
           new securityRequest(
@@ -79,7 +79,7 @@ public class SecurityRequestDAOImpl implements DAO<securityRequest> {
    * @param securityRequest request to add
    */
   @Override
-  public void update(securityRequest securityRequest) {
+  public void update(securityRequest securityRequest) { // TODO: Replace with a PreparedStatement
     securityRequests.add(securityRequest);
 
     try {

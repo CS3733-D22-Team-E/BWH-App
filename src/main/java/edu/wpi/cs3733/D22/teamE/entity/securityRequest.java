@@ -12,8 +12,8 @@ public class securityRequest extends serviceRequest {
       new ArrayList<>() {
         {
           add("ASAP");
+          add("<1 hour");
           add("<1 day");
-          add("<1 week");
         }
       };
 
@@ -31,7 +31,7 @@ public class securityRequest extends serviceRequest {
       LocalDate deliveryDate) {
     super(
         securityRequestID,
-        String.valueOf(Type.LAB_REQUEST),
+        String.valueOf(Type.SECURITY_REQ),
         otherNotes,
         floorID,
         roomID,
@@ -40,12 +40,12 @@ public class securityRequest extends serviceRequest {
         staffAssignee,
         requestDate,
         deliveryDate);
-    setLabRequestType(securityRequestType);
+    setSecurityRequestType(securityRequestType);
     setTimeFrame(timeFrame);
   }
 
   public securityRequest() {
-    super(String.valueOf(Type.LAB_REQUEST));
+    super(String.valueOf(Type.SECURITY_REQ));
     this.securityRequestType = "";
     this.timeFrame = "";
   }
@@ -54,7 +54,7 @@ public class securityRequest extends serviceRequest {
     return securityRequestType;
   }
 
-  public void setLabRequestType(String securityRequestType) {
+  public void setSecurityRequestType(String securityRequestType) {
     this.securityRequestType = securityRequestType;
   }
 
