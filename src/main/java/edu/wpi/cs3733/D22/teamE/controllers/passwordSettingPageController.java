@@ -6,7 +6,6 @@ import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.daos.AccountDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
-import edu.wpi.cs3733.D22.teamE.entity.passwordSettingRequest;
 import edu.wpi.cs3733.D22.teamE.pageControlFacade;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,7 +20,6 @@ public class passwordSettingPageController extends containsSideMenu {
   @FXML TextField newPassword;
   @FXML TextField confirmNewPassword;
   @FXML Button returnButton;
-  passwordSettingRequest passwordSettingRequest = new passwordSettingRequest();
 
   public passwordSettingPageController() {}
   /**
@@ -32,8 +30,8 @@ public class passwordSettingPageController extends containsSideMenu {
    */
   public void submitButton(ActionEvent event) throws SQLException {
     try {
-      passwordSettingRequest.setNewPassword(newPassword.getText());
-      passwordSettingRequest.setConfirmNewPassword(confirmNewPassword.getText());
+     newPassword.getText();
+     confirmNewPassword.getText();
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
