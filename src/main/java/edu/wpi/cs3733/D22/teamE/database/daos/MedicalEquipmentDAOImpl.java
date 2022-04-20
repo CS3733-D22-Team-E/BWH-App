@@ -122,7 +122,7 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
         break;
       }
     }
-    notifyObservers();
+    // notifyObservers();
     return equipments;
   }
 

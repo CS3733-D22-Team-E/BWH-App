@@ -64,8 +64,6 @@
         </HBox>
         <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
             <children>
-                <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0">
-                    <children>
                   <HBox layoutX="11.0" layoutY="55.0" prefHeight="492.0" prefWidth="1052.0">
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="492.0" prefWidth="666.0">
@@ -206,8 +204,6 @@
                         </VBox>
                      </children>
                   </HBox>
-                    </children>
-                </AnchorPane>
                 <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
             </children>
         </StackPane>

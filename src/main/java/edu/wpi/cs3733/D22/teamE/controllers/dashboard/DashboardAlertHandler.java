@@ -35,6 +35,21 @@ public class DashboardAlertHandler extends DashboardHandler {
     infusionPumpAlertCounter = 0;
     bedAlertCounter = 0;
 
+    dirtyAreaInfusionPumps = new HashMap<>();
+    cleanAreaInfusionPumps = new HashMap<>();
+    dirtyFusionPumpAlertLocs = new ArrayList<>();
+    cleanFusionPumpAlertLocs = new ArrayList<>();
+    dirtyAreaBeds = new HashMap<>();
+
+    try {
+      medEqServiceReqDB = new MedicalEquipmentServiceRequestDAOImpl();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    getDirtyAndCleaningLocs();
+    getPumps();
+
     generatesAlertsForFloor("L2");
     generatesAlertsForFloor("L2");
     generatesAlertsForFloor("1");
@@ -42,26 +57,52 @@ public class DashboardAlertHandler extends DashboardHandler {
     generatesAlertsForFloor("3");
     generatesAlertsForFloor("4");
     generatesAlertsForFloor("5");
+
     dashboardController.infusionPumpAlertCircle.setVisible(true);
     dashboardController.infusionPumpAlertLabel.setText(infusionPumpAlertCounter.toString());
+    dashboardController.infusionPumpAlertLabel.setVisible(true);
 
     generateBedAlerts();
+
     dashboardController.bedAlertCircle.setVisible(true);
     dashboardController.bedAlertLabel.setText(bedAlertCounter.toString());
+    dashboardController.infusionPumpAlertLabel.setVisible(true);
   }
 
   private void generateBedAlerts() {
     getDirtyAndCleaningLocsBeds();
+    getBeds();
     checkDirtyBedCounts();
   }
 
+  private void getBeds() {
+    for (MedicalEquipment curMedEq : allEquipment) {
+      if (curMedEq.getEquipmentType().equals("BED")) {
+        Location equipmentLocation =
+            dashboardController.locationDAO.get(curMedEq.getCurrentLocation());
+        if (dirtyAreaBeds.containsKey(equipmentLocation)) {
+          ArrayList<MedicalEquipment> equipmentAtLoc = dirtyAreaBeds.get(equipmentLocation);
+          equipmentAtLoc.add(curMedEq);
+          dirtyAreaBeds.put(equipmentLocation, equipmentAtLoc);
+        }
+      }
+    }
+  }
+
   private void checkDirtyBedCounts() {
+    System.out.println("Checking dirty bed counts");
+    ArrayList<MedicalEquipment> allDirtyBeds = new ArrayList<>();
     for (Location dirtyLoc : dirtyAreaBeds.keySet()) {
       ArrayList<MedicalEquipment> dirtyBedsAtLoc = dirtyAreaBeds.get(dirtyLoc);
-      if (dirtyBedsAtLoc.size() >= 6) {
-        sendBedsToCleaning(dirtyBedsAtLoc);
-        bedAlertCounter++;
+      allDirtyBeds.addAll(dirtyBedsAtLoc);
+    }
+    if (allDirtyBeds.size() >= 6) {
+      System.out.println("Sending beds to cleaning: ");
+      for (MedicalEquipment bed : allDirtyBeds) {
+        System.out.println("\t" + bed.getEquipmentID());
       }
+      sendBedsToCleaning(allDirtyBeds);
+      bedAlertCounter += allDirtyBeds.size();
     }
   }
 
@@ -100,20 +141,6 @@ public class DashboardAlertHandler extends DashboardHandler {
 
   @Override
   public void initialize() {
-    dirtyAreaInfusionPumps = new HashMap<>();
-    cleanAreaInfusionPumps = new HashMap<>();
-    dirtyFusionPumpAlertLocs = new ArrayList<>();
-    cleanFusionPumpAlertLocs = new ArrayList<>();
-    dirtyAreaBeds = new HashMap<>();
-
-    try {
-      medEqServiceReqDB = new MedicalEquipmentServiceRequestDAOImpl();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-
-    getDirtyAndCleaningLocs();
-    getPumps();
     update();
   }
 
@@ -123,7 +150,6 @@ public class DashboardAlertHandler extends DashboardHandler {
       ArrayList<MedicalEquipment> dirtyPumpsInArea = dirtyAreaInfusionPumps.get(curLoc);
       if (dirtyPumpsInArea.size() >= 10) {
         dirtyFusionPumpAlertLocs.add(curLoc);
-        infusionPumpAlertCounter++;
         needToSendToCleaning = true;
       }
     }
@@ -132,14 +158,20 @@ public class DashboardAlertHandler extends DashboardHandler {
       ArrayList<MedicalEquipment> cleanPumpsInArea = cleanAreaInfusionPumps.get(curLoc);
       if (cleanPumpsInArea.size() < 5) {
         cleanFusionPumpAlertLocs.add(curLoc);
-        infusionPumpAlertCounter++;
         needToSendToCleaning = true;
       }
     }
 
     if (needToSendToCleaning) {
       ArrayList<MedicalEquipment> pumpsToClean = getDirtyInfusionPumpsOnFloor(floor);
-      sendPumpsToCleaning(pumpsToClean);
+      if (pumpsToClean.size() > 0) {
+        infusionPumpAlertCounter += pumpsToClean.size();
+        System.out.println("Sending pumps to cleaning: ");
+        for (MedicalEquipment pump : pumpsToClean) {
+          System.out.println("\t" + pump.getEquipmentID());
+        }
+        sendPumpsToCleaning(pumpsToClean);
+      }
     }
   }
 
@@ -165,17 +197,21 @@ public class DashboardAlertHandler extends DashboardHandler {
 
   private void getPumps() {
     for (MedicalEquipment curMedEq : allEquipment) {
-      Location equipmentLocation =
-          dashboardController.locationDAO.get(curMedEq.getCurrentLocation());
-      if (dirtyAreaInfusionPumps.containsKey(equipmentLocation)) {
-        ArrayList<MedicalEquipment> equipmentAtLoc = dirtyAreaInfusionPumps.get(equipmentLocation);
-        equipmentAtLoc.add(curMedEq);
-        dirtyAreaInfusionPumps.put(equipmentLocation, equipmentAtLoc);
-      }
-      if (cleanAreaInfusionPumps.containsKey(equipmentLocation)) {
-        ArrayList<MedicalEquipment> equipmentAtLoc = cleanAreaInfusionPumps.get(equipmentLocation);
-        equipmentAtLoc.add(curMedEq);
-        cleanAreaInfusionPumps.put(equipmentLocation, equipmentAtLoc);
+      if (curMedEq.getEquipmentType().equals("INFUSION PUMP")) {
+        Location equipmentLocation =
+            dashboardController.locationDAO.get(curMedEq.getCurrentLocation());
+        if (dirtyAreaInfusionPumps.containsKey(equipmentLocation)) {
+          ArrayList<MedicalEquipment> equipmentAtLoc =
+              dirtyAreaInfusionPumps.get(equipmentLocation);
+          equipmentAtLoc.add(curMedEq);
+          dirtyAreaInfusionPumps.put(equipmentLocation, equipmentAtLoc);
+        }
+        if (cleanAreaInfusionPumps.containsKey(equipmentLocation)) {
+          ArrayList<MedicalEquipment> equipmentAtLoc =
+              cleanAreaInfusionPumps.get(equipmentLocation);
+          equipmentAtLoc.add(curMedEq);
+          cleanAreaInfusionPumps.put(equipmentLocation, equipmentAtLoc);
+        }
       }
     }
   }
@@ -191,6 +227,7 @@ public class DashboardAlertHandler extends DashboardHandler {
   }
 
   private void sendPumpsToCleaning(ArrayList<MedicalEquipment> dirtyInfusionPumps) {
+
     medicalEquipmentRequest cleaningRequest = new medicalEquipmentRequest();
     cleaningRequest.setFloorID("1");
     cleaningRequest.setRoomID("eSTOR00101");
