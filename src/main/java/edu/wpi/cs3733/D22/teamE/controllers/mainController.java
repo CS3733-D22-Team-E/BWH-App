@@ -20,7 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class mainController implements pageButtons {
-  public AnchorPane mainPane;
+  @FXML VBox mainPane;
 
   @FXML Button sanitationButton;
   @FXML Button mealDeliveryButton;
