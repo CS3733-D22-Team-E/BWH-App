@@ -10,12 +10,13 @@ import edu.wpi.cs3733.D22.teamE.entity.passwordSettingRequest;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class passwordSettingPageController extends serviceRequestPageController {
   @FXML TextField newPassword;
   @FXML TextField confirmNewPassword;
-
+  @FXML Button returnButton;
   passwordSettingRequest passwordSettingRequest = new passwordSettingRequest();
 
   public passwordSettingPageController() {}
