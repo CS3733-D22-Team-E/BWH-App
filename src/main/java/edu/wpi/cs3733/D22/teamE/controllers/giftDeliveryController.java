@@ -73,8 +73,6 @@ public class giftDeliveryController extends serviceRequestPageController impleme
     }
   }
 
-  // TODO: Create a method to populate the gift types combo box
-
   /**
    * Gets the full list of gift delivery requests currently in the database.
    *

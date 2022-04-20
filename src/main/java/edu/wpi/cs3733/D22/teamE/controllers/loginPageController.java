@@ -7,10 +7,11 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.cs3733.D22.teamE.Main;
+import edu.wpi.cs3733.D22.teamE.ardComm;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.Employee;
-import edu.wpi.cs3733.D22.teamE.database.daos.AccountDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.EmployeeDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import java.io.IOException;
@@ -35,9 +36,16 @@ public class loginPageController implements Initializable {
 
   @FXML Label invalidWarning;
 
+  ardComm com = new ardComm();
+
+  private String validRFID = "9352CD1B";
+  // private String invalidRFID = "";
+  DAOSystem db;
+
   @FXML
   public void submitLogin(ActionEvent event) {
-    if (verifyUser(getUsername(), getPassword())) {
+    com.readData();
+    if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
 
       FXMLLoader loader = new FXMLLoader();
 
@@ -60,7 +68,7 @@ public class loginPageController implements Initializable {
   }
 
   public void submitLoginNoParam() {
-    if (verifyUser(getUsername(), getPassword())) {
+    if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
 
       FXMLLoader loader = new FXMLLoader();
 
@@ -92,8 +100,7 @@ public class loginPageController implements Initializable {
 
   private boolean verifyUser(String username, String password) {
     try {
-      DAO<Account> accountDAO = new AccountDAOImpl();
-      Account account = accountDAO.get(username);
+      Account account = db.getAccount(username);
       System.out.println(account.getAccountID());
       System.out.println(account.getAuthorityLevel());
       if (!validatePassword(password, account.getPasswordHash())) {
@@ -121,10 +128,28 @@ public class loginPageController implements Initializable {
     return true;
   }
 
+  private boolean verifyUserRFID() {
+    System.out.println("In verifyUserRFID()");
+    String data = com.readData();
+    System.out.println("Arduino Data: " + data);
+    if (!data.equals("")) {
+      System.out.println("Access Granted.");
+      return true;
+    } else {
+      System.out.println("Access Denied.");
+      return false;
+    }
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     RequiredFieldValidator validator = new RequiredFieldValidator();
     validator.setMessage("Input Required");
+    try {
+      db = new DAOSystem();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
     usernameField.getValidators().add(validator);
     usernameField
         .focusedProperty()

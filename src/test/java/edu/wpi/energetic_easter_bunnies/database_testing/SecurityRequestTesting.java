@@ -2,15 +2,8 @@ package edu.wpi.energetic_easter_bunnies.database_testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
-import edu.wpi.cs3733.D22.teamE.database.daos.SecurityRequestDAOImpl;
-import edu.wpi.cs3733.D22.teamE.entity.securityRequest;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import org.junit.jupiter.api.Test;
-
 public class SecurityRequestTesting {
-
+  /*
   @Test
   public void testAddSecurityRequest() throws SQLException {
     DAO<securityRequest> securityRequestDAO = new SecurityRequestDAOImpl();
@@ -42,5 +35,5 @@ public class SecurityRequestTesting {
     securityRequestDAO.update(securityRequest);
     securityRequestDAO.updateSecurityServiceRequest(securityRequest, "Processing");
     assertEquals(securityRequest.getRequestStatus(), "Processing");
-  }
+  }*/
 }

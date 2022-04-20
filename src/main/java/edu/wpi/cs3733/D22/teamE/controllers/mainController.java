@@ -29,6 +29,8 @@ public class mainController implements pageButtons {
   @FXML Button medicineDeliveryButton;
   @FXML Button labRequestButton;
   @FXML Button giftRequestButton;
+  @FXML Button facilitiesRequestButton;
+  @FXML Button securityRequestButton;
   @FXML Button mapButton;
   @FXML Button dashboardButton;
   @FXML Button aboutButton;
@@ -140,16 +142,22 @@ public class mainController implements pageButtons {
   }
 
   @FXML
-  public void giftRequestButton(ActionEvent event)
-      throws IOException { // TODO: Add actual button to page
+  public void giftRequestButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     pageControlFacade.loadPage("giftPage.fxml", thisStage);
   }
 
   @FXML
-  public void facilitiesRequestButton(ActionEvent event)
-      throws IOException { // TODO: implement FXML for this page,add button to page
+  public void securityRequestButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    pageControlFacade.loadPage("securityPage.fxml", thisStage);
+  }
+
+  @FXML
+  public void facilitiesRequestButton(ActionEvent event) throws IOException {
+    // TODO: implement FXML for this page,add button to page
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     pageControlFacade.loadPage("facilitiesPage.fxml", thisStage);

@@ -1,42 +1,25 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
-import com.jfoenix.controls.JFXAlert;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import edu.wpi.cs3733.D22.teamE.PopUp;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class serviceRequest implements requestPage {
-  @Override
-  public Node getAsPage(Object returnObject, Object displayObject)
-      throws InvocationTargetException, IllegalAccessException {
-    if (returnObject == null) return getAsPage();
-    else if (returnObject instanceof JFXButton && displayObject instanceof JFXAlert)
-      return getAsPage((JFXButton) returnObject, (JFXAlert) displayObject);
-    else throw new RuntimeException("Invalid Return Type");
-  }
+public class serviceRequest {
+  public serviceRequest(String newPassword, String confirmNewPassword) {}
 
-  private Node getAsPage() throws InvocationTargetException, IllegalAccessException {
+  public Node getAsPage(boolean editable) throws InvocationTargetException, IllegalAccessException {
     VBox box = new VBox();
-    box.setSpacing(2);
     for (Method m : this.getClass().getMethods()) {
       if (m.getName().startsWith("get") && m.getParameterTypes().length == 0) {
-        if (!m.getName().contains("Class")
-            && !m.getName().contains("RequestType")
-            && !m.getName().contains("Coord")
-            && !m.getName().contains("ServiceRequestID")) {
+        if (!m.getName().contains("Class")) {
           final Object r = m.invoke(this);
           String label = m.getName();
           String content = r.toString();
@@ -44,8 +27,15 @@ public class serviceRequest implements requestPage {
           label = label.replace("get", "");
           content = content.trim();
           HBox innerBox = new HBox();
-          Label l = new Label(label + " : " + content);
+          Label l = new Label(label + " : ");
           innerBox.getChildren().add(l);
+          if (editable) {
+            JFXTextField textField = new JFXTextField();
+            textField.setText(content);
+            innerBox.getChildren().add(textField);
+          } else {
+            l.setText(l.getText() + content);
+          }
           box.getChildren().add(innerBox);
         } else System.out.println(m.getName());
       }
@@ -53,65 +43,6 @@ public class serviceRequest implements requestPage {
     ScrollPane p = new ScrollPane();
     p.setFitToWidth(true);
     p.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-    p.setPadding(new Insets(20));
-    p.setContent(box);
-    return p;
-  }
-
-  private Node getAsPage(JFXButton button, JFXAlert alert)
-      throws InvocationTargetException, IllegalAccessException {
-    VBox box = new VBox();
-    box.setSpacing(2);
-    List<String> defVal = new ArrayList<>();
-    List<Method> returnMethods = new ArrayList<>();
-    List<JFXTextField> returnFields = new ArrayList<>();
-    for (Method m : this.getClass().getMethods()) {
-      if (m.getName().startsWith("get") && m.getParameterTypes().length == 0) {
-        if (!m.getName().contains("Class")
-            && !m.getName().contains("RequestType")
-            && !m.getName().contains("Coord")
-            && !m.getName().contains("ServiceRequestID")) {
-          final Object r = m.invoke(this);
-          String label = m.getName();
-          String content = r.toString();
-          label = label.trim();
-          label = label.replace("get", "");
-          try {
-            content = content.trim();
-            HBox innerBox = new HBox();
-            Label l = new Label(label + " : ");
-            innerBox.getChildren().add(l);
-            JFXTextField textField = new JFXTextField();
-            textField.setText(content);
-            innerBox.getChildren().add(textField);
-            box.getChildren().add(innerBox);
-            returnMethods.add(this.getClass().getMethod("set" + label, String.class));
-            defVal.add(content);
-            returnFields.add(textField);
-          } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-          }
-        } else System.out.println(m.getName());
-      }
-    }
-    button.setOnAction(
-        event -> {
-          for (int i = 0; i < returnMethods.size(); i++) {
-            Method returnMethod = returnMethods.get(i);
-            try {
-              System.out.println(returnMethod.getName());
-              final Object r = returnMethod.invoke(this, returnFields.get(i).getText());
-            } catch (IllegalAccessException | InvocationTargetException e) {
-              Throwable cause = e.getCause();
-              PopUp.createWarning(cause.getMessage(), alert.getOwner());
-              returnFields.get(i).setText(defVal.get(i));
-            }
-          }
-        });
-    ScrollPane p = new ScrollPane();
-    p.setFitToWidth(true);
-    p.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-    p.setPadding(new Insets(20));
     p.setContent(box);
     return p;
   }
@@ -165,7 +96,12 @@ public class serviceRequest implements requestPage {
         return "SERVICEREQUEST";
       }
     },
-    GIFT_REQUEST,
+    GIFT_REQUEST {
+      @Override
+      public String toString() {
+        return "GIFT_REQUEST";
+      }
+    },
     FACILITIES_REQ {
       @Override
       public String toString() {

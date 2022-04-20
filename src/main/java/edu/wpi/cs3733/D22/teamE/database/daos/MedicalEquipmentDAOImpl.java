@@ -155,4 +155,18 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
       observer.update();
     }
   }
+
+  public void updateCurrentLocation(MedicalEquipment equipment, int newXCoord, int newYCoord)
+      throws SQLException {
+    String query =
+        "UPDATE TOWERLOCATIONS SET XCOORD = "
+            + newXCoord
+            + ", YCOORD = "
+            + newYCoord
+            + " WHERE NODEID = '"
+            + equipment.getCurrentLocation()
+            + "'";
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
+  }
 }
