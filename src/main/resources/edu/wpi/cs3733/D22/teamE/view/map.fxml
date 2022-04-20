@@ -52,7 +52,7 @@
             </Pane>
          </children>
       </Pane>
-      <StackPane prefHeight="560.0" prefWidth="1080.0">
+      <StackPane prefHeight="560.0" prefWidth="1080.0" styleClass="main-page">
          <children>
               <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="560.0" prefWidth="1080.0">
                   <children>

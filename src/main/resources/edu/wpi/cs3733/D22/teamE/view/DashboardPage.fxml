@@ -62,7 +62,7 @@
                 </Pane>
             </children>
         </HBox>
-        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
+        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0" styleClass="main-page">
             <children>
                 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" styleClass="main-page">
                     <children>
@@ -120,7 +120,7 @@
                               </StackPane>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="187.0" prefWidth="759.0" spacing="50.0">
                                  <children>
-                                    <JFXButton fx:id="mapEditorButton" buttonType="RAISED" mnemonicParsing="false" onAction="#mapEditorButton" prefHeight="69.0" prefWidth="153.0" text="Map Editor" />
+                                    <JFXButton fx:id="mapEditorButton" buttonType="RAISED" mnemonicParsing="false" onAction="#mapEditorButton" prefHeight="69.0" prefWidth="153.0" styleClass="submitButton" text="Map Editor" />
                                  </children>
                               </HBox>
                            </children>
@@ -166,6 +166,6 @@
     </children>
    <stylesheets>
       <URL value="@styles/default.css" />
-      <URL value="@styles/darkMode.css" />
+      <URL value="@styles/servicerequests.css" />
    </stylesheets>
 </VBox>

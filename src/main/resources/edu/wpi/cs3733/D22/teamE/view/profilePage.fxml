@@ -85,14 +85,14 @@
             </Pane>
          </children>
       </HBox>
-      <StackPane minHeight="-Infinity" minWidth="-Infinity">
+      <StackPane minHeight="-Infinity" minWidth="-Infinity" styleClass="main-page">
          <children>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
                <StackPane.margin>
                   <Insets />
                </StackPane.margin>
                <children>
-                  <SplitPane dividerPositions="0.5" prefHeight="560.0" prefWidth="1080.0">
+                  <SplitPane dividerPositions="0.5" prefHeight="560.0" prefWidth="1080.0" styleClass="main-page">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0">
                            <children>

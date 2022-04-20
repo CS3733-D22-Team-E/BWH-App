@@ -70,7 +70,7 @@
             <DropShadow />
          </effect>
       </HBox>
-      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
+      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0" styleClass="main-page">
          <children>
             <AnchorPane fx:id="mealType">
                <children>

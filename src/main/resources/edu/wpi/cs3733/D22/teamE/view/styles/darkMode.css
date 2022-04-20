@@ -49,6 +49,7 @@
 }
 
 #main-page {
+    /*-fx-background-color: #313030;*/
     -fx-background-color: #313030;
     -fx-padding: 10px;
 }
@@ -59,7 +60,7 @@
 }
 
 .main-page {
-    -fx-background-color: #313030;
+    -fx-background-color: #696969;
     -fx-padding: 10px;
 }
 .label {
@@ -186,7 +187,7 @@
 *******************************************************************************/
 
 .jfx-button {
-    -fx-accent-color: #666666;
+    -fx-accent-color: #868686;
     -fx-text-color: #CCCCCC;
     -fx-padding: 0.47em 0.47em;
     -fx-background-color: -fx-accent-color;
