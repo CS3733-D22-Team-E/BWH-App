@@ -150,7 +150,6 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       mealDeliveryRequest.setRoomID(roomNameToRoomID.get(room.getValue()));
       mealDeliveryRequest.setFloorID(floor.getValue());
       mealDeliveryRequest.setRequestDate(LocalDate.now());
-      // mealDeliveryRequest.setRoomID(Integer.parseInt("0" + roomNumberTxt.getText()));
       mealDeliveryRequest.setDeliveryDate(dateTime.getValue());
       mealDeliveryRequest.setDeliveryTime(timeTxt.getText());
       mealDeliveryRequest.setIsUrgent(isUrgent.isSelected());
@@ -182,7 +181,12 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     beverageDropDown.getSelectionModel().clearSelection();
     dessertDropDown.getSelectionModel().clearSelection();
     dateTime.getEditor().clear();
+    isUrgent.setSelected(false);
+    staffAssignee.clear();
+    requestStatus.clear();
     timeTxt.clear();
     otherNotesTxt.clear();
+    floor.getSelectionModel().clearSelection();
+    room.getSelectionModel().clearSelection();
   }
 }
