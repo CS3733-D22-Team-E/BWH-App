@@ -3,8 +3,6 @@ package edu.wpi.cs3733.D22.teamE;
 // import edu.wpi.cs3733.D22.teamE.database.DBConnection;
 import edu.wpi.cs3733.D22.teamE.database.DBCreation;
 
-import edu.wpi.cs3733.D22.teamE.database.DBCreation;
-
 public class Main {
 
   // public static void closeConnection() {
