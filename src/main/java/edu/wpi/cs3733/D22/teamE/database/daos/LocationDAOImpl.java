@@ -60,7 +60,6 @@ public class LocationDAOImpl implements DAO<Location> {
    */
   public Location get(String NodeID) {
     for (Location location : locations) {
-      System.out.println(location.getNodeID());
       if (Objects.equals(location.getNodeID(), NodeID)) {
         return location;
       }
