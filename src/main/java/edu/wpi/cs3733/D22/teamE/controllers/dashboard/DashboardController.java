@@ -74,6 +74,7 @@ public class DashboardController extends containsSideMenu implements Initializab
 
   DashboardTableViewHandler tableViewHandler;
   DashboardTooltip toolTipHandler;
+  DashboardAlertHandler alertHandler;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -88,6 +89,7 @@ public class DashboardController extends containsSideMenu implements Initializab
 
     tableViewHandler = new DashboardTableViewHandler(equipmentDAO, this);
     toolTipHandler = new DashboardTooltip(equipmentDAO, this);
+    alertHandler = new DashboardAlertHandler(equipmentDAO, this);
 
     initializeFilters();
     initializeFloorSelection();
@@ -200,21 +202,14 @@ public class DashboardController extends containsSideMenu implements Initializab
     pageControlFacade.loadPage("map.fxml", thisStage);
   }
 
-  //TODO: Remove, for testing purposes only. Or flesh out into a service request-esque user interface
+  // TODO: Remove, for testing purposes only. Or flesh out into a service request-esque user
+  // interface
   @FXML
   private void addEquipment(ActionEvent event) {
-    MedicalEquipment newEquipment = new MedicalEquipment(
-            "BED41",
-            null,
-            false,
-            false,
-            "eSTOR001L1",
-            "eSTOR001L1",
-            "eSTOR001L1",
-            "BED",
-            489
+    MedicalEquipment newEquipment =
+        new MedicalEquipment(
+            "BED41", null, false, false, "eSTOR001L1", "eSTOR001L1", "eSTOR001L1", "BED", 489);
 
-    );
     equipmentDAO.update(newEquipment);
   }
 }
