@@ -93,7 +93,7 @@ public class facilitiesRequestController extends serviceRequestPageController
 
   private void populateFacilitiesReqTable() {
     ObservableList<facilitiesRequest> facilitiesRequests = populateFacilitiesRequestsList();
-    tableRequestType.setCellValueFactory(new PropertyValueFactory<>("facilities"));
+    // tableRequestType.setCellValueFactory(new PropertyValueFactory<>("facilities"));
     tableRoomID.setCellValueFactory(
         new Callback<
             TableColumn.CellDataFeatures<facilitiesRequest, String>, ObservableValue<String>>() {
@@ -108,9 +108,9 @@ public class facilitiesRequestController extends serviceRequestPageController
     tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
     tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
     tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
-    tableNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
+    // tableNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
     tableIsUrgent.setCellValueFactory(new PropertyValueFactory<>("isUrgent"));
-    tableTimeFrame.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
+    // tableTimeFrame.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
 
     requestsTable.setItems(facilitiesRequests);
   }

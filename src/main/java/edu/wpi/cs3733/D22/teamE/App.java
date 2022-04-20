@@ -45,7 +45,7 @@ public class App extends Application implements SharedScene {
   @Override
   public void start(Stage stage) throws Exception {
     AppPreloader p = new AppPreloader();
-    stage.setResizable(true);
+    stage.setResizable(false);
     stage.setScene(p.createPreloaderScene(root));
     stage.show();
     Timeline timeline = new Timeline();
