@@ -54,9 +54,121 @@
 }
 
 .label {
-    -fx-text-color: rgba(255, 255, 255, 0.9);
+    /**font color*/
+    -fx-dark-text-color: #ffffff;
+    -fx-light-text-color: #404040;
+    -fx-text-color: ladder(-fx-main-base, -fx-dark-text-color 29%, -fx-light-text-color 30%);
+    -fx-text-fill: #cccccc;
 }
 
+/*----------------------------------------------------*/
+.table-view, .tree-table-view {
+    /**Globally define theme color variables default*/
+    -fx-main-base: #1B2431;
+    -fx-card-base: #273142;
+    -fx-bar-base: #323D4E;
+
+    /* Used to highlight/highlight objects. For example:
+    selected *text; selected items in menus, lists, trees and tables; progress bars */
+
+    -fx-accent-color: #4880ff;
+    -fx-accent-suspension-color: rgba(72, 128, 255, 0.13);
+    /*border color*/
+    -fx-border-base: #313D4F;;
+    -fx-cell-border-base: rgba(151, 151, 151, .4);
+
+    -fx-font-base14: 14px;
+    -fx-font-base16: 16px;
+
+    /**font color*/
+    -fx-dark-text-color: #ffffff;
+    -fx-light-text-color: #404040;
+    -fx-text-color: ladder(-fx-main-base, -fx-dark-text-color 29%, -fx-light-text-color 30%);
+
+    -fx-icon-svg-color: rgb(3,115,248);
+    /* Constants used throughout the tableview. */
+    -fx-background-color: -fx-card-base;
+    -fx-table-header-border-color: #700128;
+    -fx-table-cell-border-color: -fx-cell-border-base;
+    -fx-border-width: 0.6;
+    -fx-border-color: -fx-border-base;
+    -fx-background-insets: 0;
+    -fx-padding: -0.9;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -fx-border-base;
+    /*-fx-background-insets: 10 10 0 0;*/
+    -fx-pref-height: 49;
+}
+
+/** Column header row set background */
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: transparent;
+}/**TableView column header shows hidden column button*/
+.table-view > .column-header-background > .show-hide-columns-button {
+    -fx-background-color: transparent;
+}
+
+/*Table content area*/
+.table-view .placeholder {
+    -fx-background-color: transparent;
+}
+
+
+.table-column {
+    -fx-pref-height: 49;
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-border-width: 0.4;
+}
+
+/*The style of each row of the table content area*/
+.table-view .table-row-cell {
+    -fx-border-color: -fx-cell-border-base;
+    -fx-border-width: 0 0 0.4 0;
+    -fx-background-color: transparent;
+}
+
+.table-view .table-row-cell .table-cell {
+    -fx-pref-height: 52;
+    -fx-alignment: center;
+    -fx-border-width: 0.4;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell .text {
+    -fx-fill: -fx-text-color;
+}
+
+/*Remove vertical bars without data between cells in TableView */
+.table-view .table-row-cell:empty, .table-view .table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: -fx-accent-suspension-color;
+
+}
+
+.table-view .table-row-cell:selected .table-cell {
+    -fx-border-color: -fx-cell-border-base;
+}
+
+/**TableView column header text label*/
+.table-view .column-header .label {
+    -fx-alignment: center;
+    -fx-font-family: "Microsoft YaHei";
+    -fx-font-weight: 300;
+    -fx-text-fill: -fx-text-color;
+    -fx-font-size: 14px;
+}
+
+/*----------------------------------------------------*/
 .serviceButton {
     -fx-background-color: rgb(153, 153, 153);
     -fx-background-radius: 8px;

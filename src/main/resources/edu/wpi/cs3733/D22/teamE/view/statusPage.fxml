@@ -84,7 +84,7 @@
                   </Label>
                </children>
             </VBox>
-            <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="120.0" style="-fx-border-color: black;">
+            <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="92.0" prefWidth="120.0" style="-fx-border-color: black;">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -94,9 +94,9 @@
             </Pane>
          </children>
       </HBox>
-      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
+      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1082.0">
          <children>
-            <Pane>
+            <Pane id="main-page">
                <children>
                   <Pane layoutX="79.0" layoutY="14.0" prefHeight="42.0" prefWidth="920.0">
                      <children>
@@ -153,7 +153,7 @@
                            <content>
                               <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0">
                                  <children>
-                                    <TableView fx:id="requestTable" editable="true" layoutY="-4.0">
+                                    <TableView fx:id="requestTable" editable="true" layoutY="-4.0" prefHeight="400.0" prefWidth="899.0">
                                        <columns>
                                           <TableColumn fx:id="idColumn" prefWidth="92.0" text="ID" />
                                           <TableColumn fx:id="typeColumn" prefWidth="184.0" text="Type" />
@@ -168,10 +168,10 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
-                  <JFXButton buttonType="RAISED" layoutX="80.0" layoutY="473.0" onAction="#deleteReqButton" prefHeight="39.0" prefWidth="205.0" ripplerFill="RED" style="-fx-background-color: #f1f1f1;" text="Delete Selected Request" />
+                  <JFXButton buttonType="RAISED" layoutX="80.0" layoutY="473.0" onAction="#deleteReqButton" prefHeight="39.0" prefWidth="205.0" ripplerFill="RED" styleClass="serviceButton" text="Delete Selected Request" />
                </children>
             </Pane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" prefHeight="560.0" prefWidth="1110.0" style="-fx-background-color: transparent;" />
          </children>
       </StackPane>
    </children>
