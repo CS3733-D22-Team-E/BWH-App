@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.cs3733.D22.teamE.Main;
+import edu.wpi.cs3733.D22.teamE.ardComm;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.Employee;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
@@ -35,11 +36,16 @@ public class loginPageController implements Initializable {
 
   @FXML Label invalidWarning;
 
+  ardComm com = new ardComm();
+
+  private String validRFID = "9352CD1B";
+  // private String invalidRFID = "";
   DAOSystem db;
 
   @FXML
   public void submitLogin(ActionEvent event) {
-    if (verifyUser(getUsername(), getPassword())) {
+    com.readData();
+    if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
 
       FXMLLoader loader = new FXMLLoader();
 
@@ -62,7 +68,7 @@ public class loginPageController implements Initializable {
   }
 
   public void submitLoginNoParam() {
-    if (verifyUser(getUsername(), getPassword())) {
+    if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
 
       FXMLLoader loader = new FXMLLoader();
 
@@ -120,6 +126,19 @@ public class loginPageController implements Initializable {
       return false;
     }
     return true;
+  }
+
+  private boolean verifyUserRFID() {
+    System.out.println("In verifyUserRFID()");
+    String data = com.readData();
+    System.out.println("Arduino Data: " + data);
+    if (!data.equals("")) {
+      System.out.println("Access Granted.");
+      return true;
+    } else {
+      System.out.println("Access Denied.");
+      return false;
+    }
   }
 
   @Override
