@@ -18,6 +18,8 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
   DAO<mealDeliveryRequest> mealDeliveryRequestDAO = new MealDeliveryRequestDAOImpl();
   DAO<medicineDelivery> medicineDeliveryDAO = new MedicineDeliveryDAOImpl();
   DAO<sanitationRequest> sanitationRequestDAO = new SanitationRequestDAOImpl();
+  DAO<giftDeliveryRequest> giftDeliveryRequestDAO = new GiftRequestDAOImpl();
+  DAO<securityRequest> securityRequestDAO = new SecurityRequestDAOImpl();
 
   public ServiceRequestDAOImpl() throws SQLException {
     serviceRequests = new ArrayList<>();
@@ -28,6 +30,8 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
     serviceRequests.addAll(mealDeliveryRequestDAO.getAll());
     serviceRequests.addAll(medicineDeliveryDAO.getAll());
     serviceRequests.addAll(sanitationRequestDAO.getAll());
+    serviceRequests.addAll(giftDeliveryRequestDAO.getAll());
+    serviceRequests.addAll(securityRequestDAO.getAll());
   }
 
   @Override
@@ -89,6 +93,11 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
       case LANG_INTERP_REQ:
         languageInterpreterRequestDAO.update((languageInterpreterRequest) request);
         break;
+      case GIFT_REQUEST:
+        giftDeliveryRequestDAO.update((giftDeliveryRequest) request);
+        break;
+      case SECURITY_REQ:
+        securityRequestDAO.update((securityRequest) request);
       default:
         break;
     }
@@ -125,6 +134,11 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
       case LANG_INTERP_REQ:
         languageInterpreterRequestDAO.delete((languageInterpreterRequest) request);
         break;
+      case GIFT_REQUEST:
+        giftDeliveryRequestDAO.delete((giftDeliveryRequest) request);
+        break;
+      case SECURITY_REQ:
+        securityRequestDAO.delete((securityRequest) request);
       default:
         break;
     }
