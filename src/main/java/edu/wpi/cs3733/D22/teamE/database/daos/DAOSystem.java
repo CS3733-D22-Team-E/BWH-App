@@ -269,6 +269,16 @@ public class DAOSystem {
     giftRequestDAO.update(request);
   }
 
+  public void updateRoomLocation(serviceRequest request, int newXCoord, int newYCoord)
+      throws SQLException {
+    serviceRequestDAO.updateRoomLocation(request, newXCoord, newYCoord);
+  }
+
+  public void updateCurrentLocation(MedicalEquipment equipment, int newXCoord, int newYCoord)
+      throws SQLException {
+    medicalEquipmentDAO.updateCurrentLocation(equipment, newXCoord, newYCoord);
+  }
+
   public void deleteGiftDelivery(giftDeliveryRequest request) {
     giftRequestDAO.delete(request);
   }

@@ -90,4 +90,8 @@ public abstract class Account {
   public String getEmployeeID() {
     return employeeID;
   }
+
+  public void setPasswordHash(String newPasswordHash) {
+    passwordHash = newPasswordHash;
+  }
 }

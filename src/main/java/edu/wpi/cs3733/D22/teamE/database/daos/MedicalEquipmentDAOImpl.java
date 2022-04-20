@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
+import edu.wpi.cs3733.D22.teamE.controllers.dashboard.DashboardHandler;
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
 import java.sql.*;
@@ -9,9 +10,11 @@ import java.util.List;
 public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<MedicalEquipment> equipmentList;
+  ArrayList<DashboardHandler> observers;
 
   public MedicalEquipmentDAOImpl() throws SQLException {
     equipmentList = new ArrayList<>();
+    observers = new ArrayList<>();
     String query = "SELECT * FROM EQUIPMENT ORDER BY EQUIPMENTID DESC";
     PreparedStatement statement = connection.prepareStatement(query);
     ResultSet rs = statement.executeQuery();
@@ -60,11 +63,13 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
   @Override
   public void update(MedicalEquipment equipment) {
     equipmentList.add(equipment);
+    notifyObservers();
   }
 
   @Override
   public void delete(MedicalEquipment equipment) {
     equipmentList.remove(equipment);
+    notifyObservers();
   }
 
   public List<MedicalEquipment> getMedicalEquipments(
@@ -117,6 +122,7 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
         break;
       }
     }
+    // notifyObservers();
     return equipments;
   }
 
@@ -137,5 +143,30 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
       PreparedStatement statement = connection.prepareStatement(query);
       statement.executeUpdate();
     }
+    notifyObservers();
+  }
+
+  public void attach(DashboardHandler observer) {
+    observers.add(observer);
+  }
+
+  private void notifyObservers() {
+    for (DashboardHandler observer : observers) {
+      observer.update();
+    }
+  }
+
+  public void updateCurrentLocation(MedicalEquipment equipment, int newXCoord, int newYCoord)
+      throws SQLException {
+    String query =
+        "UPDATE TOWERLOCATIONS SET XCOORD = "
+            + newXCoord
+            + ", YCOORD = "
+            + newYCoord
+            + " WHERE NODEID = '"
+            + equipment.getCurrentLocation()
+            + "'";
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 }
