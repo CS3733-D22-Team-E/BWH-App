@@ -9,8 +9,8 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.Employee;
-import edu.wpi.cs3733.D22.teamE.database.daos.AccountDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.EmployeeDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import java.io.IOException;
@@ -34,6 +34,8 @@ public class loginPageController implements Initializable {
   private @FXML JFXPasswordField passwordField;
 
   @FXML Label invalidWarning;
+
+  DAOSystem db;
 
   @FXML
   public void submitLogin(ActionEvent event) {
@@ -92,8 +94,7 @@ public class loginPageController implements Initializable {
 
   private boolean verifyUser(String username, String password) {
     try {
-      DAO<Account> accountDAO = new AccountDAOImpl();
-      Account account = accountDAO.get(username);
+      Account account = db.getAccount(username);
       System.out.println(account.getAccountID());
       System.out.println(account.getAuthorityLevel());
       if (!validatePassword(password, account.getPasswordHash())) {
@@ -125,6 +126,11 @@ public class loginPageController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     RequiredFieldValidator validator = new RequiredFieldValidator();
     validator.setMessage("Input Required");
+    try {
+      db = new DAOSystem();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
     usernameField.getValidators().add(validator);
     usernameField
         .focusedProperty()

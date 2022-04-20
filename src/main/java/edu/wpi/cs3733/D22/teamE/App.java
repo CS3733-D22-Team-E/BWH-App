@@ -2,9 +2,9 @@ package edu.wpi.cs3733.D22.teamE;
 
 import edu.wpi.cs3733.D22.teamE.controllers.*;
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-import edu.wpi.cs3733.D22.teamE.database.DBCreation;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -20,15 +20,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class App extends Application implements SharedScene {
   DAOSystem db;
-  DBConnect connection;
+  Connection connection;
   Stage s;
   Parent root;
 
   @Override
   public void init() throws InterruptedException {
     log.info("Starting Up");
-    DBCreation.createTables();
-    connection = DBConnect.getClientInstance();
+    connection = DBConnect.getClientInstance().getConnection();
     try {
       db = new DAOSystem();
     } catch (SQLException e) {
