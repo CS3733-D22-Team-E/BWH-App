@@ -6,6 +6,7 @@ public class ardComm {
   Arduino uno;
 
   public String readData() {
+    System.out.println("In readData()");
     String data = "";
     uno = new Arduino("COM10", 9600);
     boolean connection = uno.openConnection();
@@ -16,6 +17,7 @@ public class ardComm {
         data = uno.serialRead();
       }
     }
+    uno.closeConnection();
     System.out.println(data);
     return data;
   }

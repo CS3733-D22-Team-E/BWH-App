@@ -43,6 +43,7 @@ public class loginPageController implements Initializable {
 
   @FXML
   public void submitLogin(ActionEvent event) {
+    com.readData();
     if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
 
       FXMLLoader loader = new FXMLLoader();
@@ -128,10 +129,14 @@ public class loginPageController implements Initializable {
   }
 
   private boolean verifyUserRFID() {
+    System.out.println("In verifyUserRFID()");
     String data = com.readData();
-    if (data.equals(validRFID)) {
+    System.out.println("Arduino Data: " + data);
+    if (!data.equals("")) {
+      System.out.println("Access Granted.");
       return true;
     } else {
+      System.out.println("Access Denied.");
       return false;
     }
   }
