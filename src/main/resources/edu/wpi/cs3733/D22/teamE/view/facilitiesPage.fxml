@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.facilitiesRequestController">
+   <children>
+      <VBox layoutX="41.0" layoutY="47.0" style="-fx-background-color: #1b5e20;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="600.0">
+               <children>
+                  <ImageView fitHeight="87.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Brigham and Women's Hospital" wrappingWidth="340.91169714927673">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facilities Service Request" textAlignment="RIGHT" wrappingWidth="185.57971167564392">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox layoutX="200.0" layoutY="87.0" prefHeight="313.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="87.0">
+         <children>
+            <VBox prefHeight="255.0" prefWidth="401.0">
+               <children>
+                  <GridPane alignment="CENTER" hgap="5.0" prefHeight="223.0" prefWidth="281.0" vgap="5.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.5" minWidth="10.0" prefWidth="91.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.5" minWidth="10.0" prefWidth="211.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Text strokeWidth="0.0" text="Location">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <HBox alignment="CENTER" prefHeight="28.0" prefWidth="182.0" spacing="2.0" GridPane.columnIndex="1">
+                           <children>
+                              <JFXComboBox fx:id="floor" prefHeight="26.0" prefWidth="69.0" promptText="Select Floor" />
+                              <JFXComboBox fx:id="room" promptText="Select Room" />
+                           </children>
+                        </HBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Deliver By" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time Frame" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Request Type" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <JFXComboBox fx:id="facilitiesOptionType" prefHeight="26.0" prefWidth="210.0" promptText="Request Type" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="timeFrame" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <TextArea fx:id="notes" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Urgent" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Assignee" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <CheckBox fx:id="isUrgent" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="staffAssignee" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <DatePicker fx:id="deliveryDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+                  <HBox alignment="CENTER" prefHeight="55.0" prefWidth="308.0">
+                     <children>
+                        <JFXButton onAction="#submitButton">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <TableView prefHeight="273.0" prefWidth="384.0">
+              <columns>
+                <TableColumn fx:id="tableRequestType" prefWidth="47.99999922513962" text="Type" />
+                <TableColumn fx:id="tableRoomID" prefWidth="51.200016021728516" text="Room" />
+                  <TableColumn fx:id="tableFloorID" minWidth="0.0" prefWidth="37.60003662109375" text="Floor" />
+                  <TableColumn fx:id="tableIsUrgent" prefWidth="44.800048828125" text="Urgent" />
+                  <TableColumn fx:id="tableStaffAssignee" prefWidth="79.99992370605469" text="Assignee" />
+              </columns>
+            </TableView>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
