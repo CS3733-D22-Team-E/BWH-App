@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXListView?>
@@ -49,7 +50,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.profilePageController">
+<VBox prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.profilePageController">
    <children>
       <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;" VBox.vgrow="NEVER">
          <children>
@@ -110,7 +111,7 @@
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
-                                    <VBox spacing="20.0" GridPane.rowIndex="2">
+                                    <VBox alignment="CENTER" spacing="20.0" GridPane.rowIndex="2">
                                        <children>
                                           <HBox spacing="10.0">
                                              <children>
@@ -154,6 +155,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
+                                          <JFXButton fx:id="resetPassword" alignment="CENTER" buttonType="RAISED" onAction="#resetPassword" prefHeight="43.0" prefWidth="127.0" ripplerFill="RED" style="-fx-background-color: lightgrey;" text="Reset Password" />
                                        </children>
                                        <GridPane.margin>
                                           <Insets top="40.0" />
