@@ -189,7 +189,7 @@
       </StackPane>
     </children>
    <stylesheets>
-      <URL value="@styles/servicerequests.css" />
       <URL value="@styles/default.css" />
+      <URL value="@styles/servicerequests.css" />
    </stylesheets>
 </VBox>

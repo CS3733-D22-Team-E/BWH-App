@@ -156,7 +156,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <JFXButton fx:id="resetPassword" alignment="CENTER" buttonType="RAISED" onAction="#resetPassword" prefHeight="43.0" prefWidth="127.0" ripplerFill="RED" styleClass="resetButton" text="Reset Password" />
+                                          <JFXButton fx:id="resetPassword" alignment="CENTER" buttonType="RAISED" onAction="#resetPassword" prefHeight="43.0" prefWidth="127.0" ripplerFill="WHITE" styleClass="resetButton" text="Reset Password" />
                                        </children>
                                        <GridPane.margin>
                                           <Insets top="40.0" />
