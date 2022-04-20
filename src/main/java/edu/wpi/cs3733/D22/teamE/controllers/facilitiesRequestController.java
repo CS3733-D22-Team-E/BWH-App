@@ -31,12 +31,10 @@ public class facilitiesRequestController extends serviceRequestPageController
   @FXML DatePicker deliveryDate; // when it will be serviced?
   @FXML DatePicker requestDate;
   @FXML CheckBox isUrgent;
-  @FXML TextArea notes;
-  @FXML TextArea timeFrame;
+  @FXML TextField timeFrame;
   @FXML TableView<facilitiesRequest> requestsTable;
   // facilitiesRequest
   @FXML TableColumn<facilitiesRequest, String> tableRequestType;
-  @FXML TableColumn<facilitiesRequest, String> tablePatientName;
   @FXML TableColumn<facilitiesRequest, String> tableFloorID;
   @FXML TableColumn<facilitiesRequest, String> tableRoomID; // TL
   @FXML TableColumn<facilitiesRequest, String> tableStaffAssignee;
@@ -109,7 +107,6 @@ public class facilitiesRequestController extends serviceRequestPageController
     tableFloorID.setCellValueFactory(new PropertyValueFactory<>("FloorID"));
     tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
     tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
-    tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
     tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
     tableNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
     tableIsUrgent.setCellValueFactory(new PropertyValueFactory<>("isUrgent"));
