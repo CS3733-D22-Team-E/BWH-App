@@ -40,7 +40,11 @@ public class passwordSettingPageController extends containsSideMenu {
       PopUp.createWarning(
           "Warning : A required value was not filled", drawer.getScene().getWindow());
     }
-    if (newPassword.getText() != confirmNewPassword.getText()) {
+    String password = newPassword.getText();
+    String confirmation = confirmNewPassword.getText();
+    System.out.println(password);
+    System.out.println(confirmation);
+    if (!password.equals(confirmation)) {
       PopUp.createWarning(
           "Warning : Confirmation Doesn't Match Password!", drawer.getScene().getWindow());
     } else {
