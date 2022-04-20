@@ -2,6 +2,8 @@ package edu.wpi.cs3733.D22.teamE.customUI;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListCell;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import java.sql.SQLException;
 import javafx.geometry.Insets;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -12,9 +14,17 @@ import javafx.util.Callback;
 public class CustomJFXButtonListCell<T> extends JFXListCell<T> {
   JFXButton button = new JFXButton();
   HBox box = new HBox();
+  DAOSystem db;
+  Object controller;
 
-  public CustomJFXButtonListCell() {
+  public CustomJFXButtonListCell(Object controller) {
     super();
+    this.controller = controller;
+    try {
+      db = new DAOSystem();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
     this.setPadding(new Insets(0, 0, 0, 0));
     button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     HBox.setHgrow(button, Priority.ALWAYS);
@@ -34,7 +44,7 @@ public class CustomJFXButtonListCell<T> extends JFXListCell<T> {
     }
   }
 
-  public static <T> Callback<ListView<T>, ListCell<T>> forListView() {
-    return list -> new CustomJFXButtonListCell<>();
+  public static <T> Callback<ListView<T>, ListCell<T>> forListView(Object controller) {
+    return list -> new CustomJFXButtonListCell<>(controller);
   }
 }

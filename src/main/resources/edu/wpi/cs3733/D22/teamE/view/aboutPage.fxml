@@ -36,6 +36,8 @@
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
@@ -43,7 +45,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.aboutPageController">
+<VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.aboutPageController">
    <children>
       <Pane prefHeight="90.0" prefWidth="1080.0">
          <children>
@@ -64,20 +66,115 @@
          <children>
             <AnchorPane fx:id="mainPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="560.0" prefWidth="1080.0">
                <children>
-                  <Pane id="main-box" layoutX="33.0" layoutY="52.0" prefHeight="395.0" prefWidth="1014.0">
+                  <Pane id="main-box" layoutX="33.0" layoutY="11.0" prefHeight="537.0" prefWidth="1014.0">
                      <children>
                         <Label layoutX="19.0" layoutY="16.0" prefHeight="39.0" prefWidth="192.0" text="About our App">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="19.0" layoutY="55.0" prefHeight="327.0" prefWidth="976.0" text="This app is the culmination what students have learned from Wilson Wong's CS3733, a class from WPI's Computer Science Department that teaches students about Software Engineering through agile methodologies.   This app was developed by the team The Energetic Easter Bunnies, along with help from their Team Coach Sam Laird.  The team would like to give a special thanks to Brigham and Women's Hospital, especially Andrew Shinn, for their time and input." wrapText="true" />
-                        <Hyperlink fx:id="wilsonWong" layoutX="337.0" layoutY="190.0" onAction="#wilsonWongLink" text="Wilson Wong" />
+                        <Label layoutX="19.0" layoutY="55.0" prefHeight="69.0" prefWidth="976.0" text="This app is the culmination what students have learned from Wilson Wong's CS3733, a class from WPI's Computer Science Department that teaches students about Software Engineering through agile methodologies.   This app was developed by the team The Energetic Easter Bunnies, along with help from their Team Coach Sam Laird.  The team would like to give a special thanks to Brigham and Women's Hospital, especially Andrew Shinn, for their time and input." wrapText="true" />
+                        <Hyperlink fx:id="wilsonWong" layoutX="337.0" layoutY="61.0" onAction="#wilsonWongLink" text="Wilson Wong" />
+                        <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" layoutX="-188.0" layoutY="167.0" style="-fx-background-color: transparent;" />
+                        <Label layoutX="19.0" layoutY="120.0" prefHeight="39.0" prefWidth="192.0" text="Meet the team!">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Pane layoutX="19.0" layoutY="167.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fitHeight="153.0" fitWidth="153.0" layoutX="-1.0" layoutY="-1.0">
+                                 <image>
+                                    <Image url="@images/joey.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="227.0" layoutY="167.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fitHeight="153.0" fitWidth="153.0" layoutX="-1.0" layoutY="-1.0">
+                                 <image>
+                                    <Image url="@images/phil.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="435.0" layoutY="167.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fitHeight="153.0" fitWidth="153.0" layoutX="-1.0" layoutY="-1.0">
+                                 <image>
+                                    <Image url="@images/hannah.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="642.0" layoutY="167.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fitHeight="153.0" fitWidth="153.0" layoutX="-1.0" layoutY="-1.0">
+                                 <image>
+                                    <Image url="@images/eric.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="845.0" layoutY="167.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fitHeight="153.0" fitWidth="153.0" layoutX="-1.0" layoutY="-1.0">
+                                 <image>
+                                    <Image url="@images/shen.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="19.0" layoutY="348.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fitHeight="153.0" fitWidth="153.0" layoutX="-1.0" layoutY="-1.0">
+                                 <image>
+                                    <Image url="@images/frank.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="227.0" layoutY="348.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fitHeight="153.0" fitWidth="153.0" layoutX="-1.0" layoutY="-1.0">
+                                 <image>
+                                    <Image url="@images/colin.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="435.0" layoutY="348.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fitHeight="153.0" fitWidth="153.0" layoutX="-1.0" layoutY="-1.0">
+                                 <image>
+                                    <Image url="@images/daniel.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="642.0" layoutY="348.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fitHeight="153.0" fitWidth="153.0" layoutX="-1.0" layoutY="-1.0">
+                                 <image>
+                                    <Image url="@images/jeremy.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="845.0" layoutY="348.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fitHeight="153.0" fitWidth="153.0" layoutX="-1.0" layoutY="-1.0">
+                                 <image>
+                                    <Image url="@images/tim.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                </children>
             </AnchorPane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
          </children>
       </StackPane>
    </children>

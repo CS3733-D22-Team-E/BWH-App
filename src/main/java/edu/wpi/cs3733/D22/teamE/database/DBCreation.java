@@ -299,6 +299,19 @@ public class DBCreation {
     statement.executeUpdate();
   }
 
+  public static void createEdgesTable() throws SQLException, IOException {
+    String query =
+        "create table EDGES\n"
+            + "(\n"
+            + "    EDGEID    VARCHAR(35), \n"
+            + "    START_NODE       VARCHAR(35), \n"
+            + "    END_NODE      VARCHAR(35) \n"
+            + ")";
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
+    CSVManager.loadEdgesCSV("AllEdges.csv");
+  }
+
   public static void createTables() {
     try {
       createTowerLocationTable();
@@ -315,6 +328,7 @@ public class DBCreation {
       createSecurityRequestTable();
       createGiftDeliveryRequestTable();
       createAccountsTable();
+      createEdgesTable();
     } catch (SQLException | IOException e) {
       e.printStackTrace();
     }
