@@ -40,6 +40,7 @@ public class facilitiesRequestController extends serviceRequestPageController
   @FXML TableColumn<facilitiesRequest, String> tableStaffAssignee;
   @FXML TableColumn<facilitiesRequest, String> tableTimeFrame;
   @FXML TableColumn<facilitiesRequest, LocalDate> tableDeliveryDate;
+  @FXML TableColumn<facilitiesRequest, LocalDate> tableRequestDate;
   @FXML TableColumn<facilitiesRequest, String> tableRequestStatus;
   @FXML TableColumn<facilitiesRequest, Boolean> tableIsUrgent;
   @FXML TableColumn<facilitiesRequest, String> tableNotes;
@@ -106,12 +107,12 @@ public class facilitiesRequestController extends serviceRequestPageController
         });
     tableFloorID.setCellValueFactory(new PropertyValueFactory<>("FloorID"));
     tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
-    tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
+    // tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
     tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
     tableNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
     tableIsUrgent.setCellValueFactory(new PropertyValueFactory<>("isUrgent"));
-    tableTimeFrame.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
-
+    // tableTimeFrame.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
+    tableRequestDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
     requestsTable.setItems(facilitiesRequests);
   }
 
