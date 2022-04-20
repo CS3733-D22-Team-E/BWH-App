@@ -161,104 +161,6 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="mapButton" alignment="CENTER" mnemonicParsing="false" onAction="#mapButton" styleClass="serviceButton">
-                           <graphic>
-                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/location.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Label alignment="CENTER" layoutX="1.0" layoutY="76.0" prefHeight="17.0" prefWidth="77.0" text="Map" textAlignment="CENTER" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="statusButton" alignment="CENTER" mnemonicParsing="false" onAction="#statusButton" styleClass="serviceButton">
-                           <graphic>
-                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/status.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Label layoutX="2.0" layoutY="76.0" text="Status Page" textAlignment="CENTER" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="aboutButton" alignment="CENTER" mnemonicParsing="false" onAction="#aboutButton" styleClass="serviceButton">
-                           <graphic>
-                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/about.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Label layoutX="6.0" layoutY="76.0" text="About Page" textAlignment="CENTER" />
-                     </children>
-                  </Pane>
-                  <Pane layoutX="310.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="aboutButton1" alignment="CENTER" mnemonicParsing="false" onAction="#profButton" styleClass="serviceButton">
-                           <graphic>
-                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/profile.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Label layoutX="22.0" layoutY="76.0" text="Profile" textAlignment="CENTER" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="dashboardButton" alignment="CENTER" mnemonicParsing="false" onAction="#dashboardButton" styleClass="serviceButton">
-                           <graphic>
-                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/building.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Label layoutX="13.0" layoutY="76.0" text="Dashboard" textAlignment="CENTER" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="helpButton" alignment="CENTER" mnemonicParsing="false" onAction="#helpButton" styleClass="serviceButton">
-                           <graphic>
-                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/help.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Label layoutX="13.0" layoutY="76.0" text="Help Page" textAlignment="CENTER" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="giftRequestButton" alignment="CENTER" mnemonicParsing="false" onAction="#giftRequestButton" styleClass="serviceButton">
-                           <graphic>
-                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/gift.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Label layoutX="5.0" layoutY="76.0" prefHeight="17.0" prefWidth="68.0" text="Gift Delivery" textAlignment="CENTER" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
                         <Button fx:id="securityRequestButton" alignment="CENTER" mnemonicParsing="false" onAction="#securityRequestButton" styleClass="serviceButton">
                            <graphic>
                               <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
@@ -283,6 +185,104 @@
                            </graphic>
                         </Button>
                         <Label layoutX="-6.0" layoutY="81.0" prefHeight="17.0" prefWidth="101.0" text="Facilities Service" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="giftRequestButton" alignment="CENTER" mnemonicParsing="false" onAction="#giftRequestButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/gift.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="5.0" layoutY="76.0" prefHeight="17.0" prefWidth="68.0" text="Gift Delivery" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="mapButton" alignment="CENTER" mnemonicParsing="false" onAction="#mapButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/location.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label alignment="CENTER" layoutX="1.0" layoutY="76.0" prefHeight="17.0" prefWidth="77.0" text="Map" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="310.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="aboutButton1" alignment="CENTER" mnemonicParsing="false" onAction="#profButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/profile.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="22.0" layoutY="76.0" text="Profile" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="aboutButton" alignment="CENTER" mnemonicParsing="false" onAction="#aboutButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/about.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="6.0" layoutY="76.0" text="About Page" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="helpButton" alignment="CENTER" mnemonicParsing="false" onAction="#helpButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/help.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="13.0" layoutY="76.0" text="Help Page" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="statusButton" alignment="CENTER" mnemonicParsing="false" onAction="#statusButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/status.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="2.0" layoutY="76.0" text="Status Page" textAlignment="CENTER" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="dashboardButton" alignment="CENTER" mnemonicParsing="false" onAction="#dashboardButton" styleClass="serviceButton">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/building.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="13.0" layoutY="76.0" text="Dashboard" textAlignment="CENTER" />
                      </children>
                   </Pane>
                </children>

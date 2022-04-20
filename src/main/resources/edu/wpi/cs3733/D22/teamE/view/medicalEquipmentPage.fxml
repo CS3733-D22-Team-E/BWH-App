@@ -140,6 +140,9 @@
                            </font>
                         </Label>
                         <TableView fx:id="medRequestTable" prefHeight="315.0" prefWidth="624.0" VBox.vgrow="ALWAYS">
+                           <placeholder>
+                              <Label text="There currently are no active service requests."/>
+                           </placeholder>
                            <columns>
                               <TableColumn fx:id="tableDeliveryDate" prefWidth="81.0" text="Delivery Date" />
                               <TableColumn fx:id="tableRequestDate" prefWidth="84.0" text="Request Date" />

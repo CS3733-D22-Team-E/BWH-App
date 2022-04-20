@@ -198,7 +198,10 @@
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="requestFields" text="Current Service Requests" VBox.vgrow="ALWAYS" />
                         <TableView prefHeight="493.0" prefWidth="661.0" VBox.vgrow="ALWAYS">
-                          <columns>
+                            <placeholder>
+                                <Label text="There currently are no active service requests."/>
+                            </placeholder>
+                            <columns>
                             <TableColumn prefWidth="75.0" text="Floor" />
                             <TableColumn prefWidth="75.0" text="Room" />
                               <TableColumn prefWidth="75.0" text="Language" />
