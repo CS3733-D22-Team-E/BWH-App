@@ -81,7 +81,7 @@ public class profilePageController extends containsSideMenu implements Initializ
   @FXML
   public void resetPassword(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    //pageControlFacade.loadPage("passwordSettingPage.fxml", thisStage);
-    pageControlFacade.loadPage("helpPage.fxml", thisStage);
+    pageControlFacade.loadPage("passwordSettingPage.fxml", thisStage);
+    // pageControlFacade.loadPage("helpPage.fxml", thisStage);
   }
 }
