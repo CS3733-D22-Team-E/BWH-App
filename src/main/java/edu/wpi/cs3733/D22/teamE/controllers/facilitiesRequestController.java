@@ -94,7 +94,7 @@ public class facilitiesRequestController extends serviceRequestPageController
 
   private void populateFacilitiesReqTable() {
     ObservableList<facilitiesRequest> facilitiesRequests = populateFacilitiesRequestsList();
-    tableRequestType.setCellValueFactory(new PropertyValueFactory<>("facilities"));
+    tableRequestType.setCellValueFactory(new PropertyValueFactory<>("requestType"));
     tableRoomID.setCellValueFactory(
         new Callback<
             TableColumn.CellDataFeatures<facilitiesRequest, String>, ObservableValue<String>>() {
@@ -105,7 +105,7 @@ public class facilitiesRequestController extends serviceRequestPageController
             return new SimpleStringProperty(roomIDToRoomName.get(curFacReq.getRoomID()));
           }
         });
-    tableFloorID.setCellValueFactory(new PropertyValueFactory<>("FloorID"));
+    tableFloorID.setCellValueFactory(new PropertyValueFactory<>("floorID"));
     tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
     // tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
     tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
@@ -119,13 +119,13 @@ public class facilitiesRequestController extends serviceRequestPageController
   @Override
   public void submitButton(ActionEvent event) throws SQLException {
     try {
-      request.setFacilitiesRequestType(facilitiesOptionType.getValue());
+      request.setFacilitiesRequestType(facilitiesOptionType.getValue()); // getValue());
       request.setFloorID(floor.getValue());
       request.setRoomID(roomNameToRoomID.get(room.getValue()));
       request.setStaffAssignee(staffAssignee.getText());
-      request.setRequestDate(LocalDate.now());
+      // request.setRequestDate(LocalDate.now());
       request.setDeliveryDate(deliveryDate.getValue());
-      request.setRequestStatus(requestStatus.getText());
+      // request.setRequestStatus(requestStatus.getText());
       request.setOtherNotes(notes.getText());
       request.setIsUrgent(isUrgent.isSelected());
       request.setTimeFrame(timeFrame.getText());
@@ -159,10 +159,11 @@ public class facilitiesRequestController extends serviceRequestPageController
     floor.getSelectionModel().clearSelection();
     room.getSelectionModel().clearSelection();
     facilitiesOptionType.getSelectionModel().clearSelection();
+    timeFrame.clear();
     isUrgent.setSelected(false);
     deliveryDate.getEditor().clear();
-    requestDate.getEditor().clear();
-    requestStatus.clear();
+    // requestDate.getEditor().clear();
+    // requestStatus.clear();
     staffAssignee.clear();
     notes.clear();
   }

@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
@@ -11,45 +12,26 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import com.jfoenix.controls.JFXDrawer?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1080.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.facilitiesRequestController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="1080.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.facilitiesRequestController">
    <children>
       <VBox layoutX="41.0" layoutY="47.0" style="-fx-background-color: #1b5e20;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <effect>
             <DropShadow />
          </effect>
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="600.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="570.0" prefWidth="1029.0">
                <children>
-                  <StackPane minHeight="-Infinity" minWidth="-Infinity">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
-                        <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/facilities.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                     <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" prefHeight="560.0" style="-fx-background-color: transparent;" visible="false" />
-                  </StackPane>
-                  <VBox alignment="BASELINE_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="890.0">
+                  <VBox alignment="BASELINE_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="953.0">
                      <children>
                         <Label alignment="TOP_RIGHT" styleClass="headerHospital" text="Brigham and Women's Hospital" textFill="WHITE">
                            <font>
@@ -63,21 +45,22 @@
                         </Label>
                      </children>
                   </VBox>
-                  <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="120.0" style="-fx-border-color: black;">
+                  <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="570.0" prefWidth="129.0" style="-fx-border-color: black;">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                      <children>
-                        <JFXHamburger fx:id="burger" layoutX="45.0" layoutY="35.0" />
+                        <JFXHamburger fx:id="burger" layoutX="50.0" layoutY="57.0" />
+                        <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" prefHeight="560.0" prefWidth="129.0" style="-fx-background-color: transparent;" visible="false" />
                      </children>
                   </Pane>
                </children>
             </HBox>
          </children>
       </VBox>
-      <HBox layoutX="200.0" layoutY="87.0" prefHeight="463.0" prefWidth="1085.0" spacing="20.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="87.0">
+      <HBox layoutX="200.0" layoutY="87.0" prefHeight="481.0" prefWidth="963.0" spacing="20.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="117.0" AnchorPane.topAnchor="87.0">
          <children>
-            <VBox prefHeight="255.0" prefWidth="401.0">
+            <VBox prefHeight="342.0" prefWidth="401.0">
                <children>
                   <GridPane alignment="CENTER" hgap="5.0" prefHeight="223.0" prefWidth="281.0" vgap="5.0">
                     <columnConstraints>
@@ -155,16 +138,24 @@
                   </GridPane>
                   <HBox alignment="CENTER" prefHeight="55.0" prefWidth="308.0">
                      <children>
-                        <JFXButton onAction="#submitButton">
+                        <JFXButton onAction="#submitButton" text="Submit">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="161.0" layoutY="15.0" onAction="#resetButton" text="Reset">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
                         </JFXButton>
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <TableView fx:id="requestsTable" prefHeight="576.0" prefWidth="591.0">
+            <TableView fx:id="requestsTable" prefHeight="441.0" prefWidth="520.0">
               <columns>
                 <TableColumn fx:id="tableRequestType" prefWidth="63.0" text="Type" />
                 <TableColumn fx:id="tableRoomID" prefWidth="76.0" text="Room" />
