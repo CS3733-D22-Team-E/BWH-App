@@ -31,7 +31,6 @@ public class facilitiesRequestController extends serviceRequestPageController
   @FXML DatePicker deliveryDate; // when it will be serviced?
   @FXML DatePicker requestDate;
   @FXML CheckBox isUrgent;
-  @FXML TextArea notes;
   @FXML TextField timeFrame;
   @FXML TableView<facilitiesRequest> requestsTable;
   // facilitiesRequest
