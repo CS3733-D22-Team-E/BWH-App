@@ -65,7 +65,9 @@ public class giftDeliveryController extends serviceRequestPageController impleme
       giftRequestDAO = new GiftRequestDAOImpl();
       populateLocationComboBoxes();
       populateGiftReqTable();
-      giftOptionType.getItems().addAll("Board Game", "Book", "Get Well Card", "Movie", "Teddy Bear");
+      giftOptionType
+          .getItems()
+          .addAll("Board Game", "Book", "Get Well Card", "Movie", "Teddy Bear");
     } catch (SQLException e) {
       e.printStackTrace();
     }

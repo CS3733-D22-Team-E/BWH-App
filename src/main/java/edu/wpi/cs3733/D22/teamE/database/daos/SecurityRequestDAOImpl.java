@@ -79,7 +79,7 @@ public class SecurityRequestDAOImpl implements DAO<securityRequest> {
    * @param securityRequest request to add
    */
   @Override
-  public void update(securityRequest securityRequest) { //TODO: Replace with a PreparedStatement
+  public void update(securityRequest securityRequest) { // TODO: Replace with a PreparedStatement
     securityRequests.add(securityRequest);
 
     try {
