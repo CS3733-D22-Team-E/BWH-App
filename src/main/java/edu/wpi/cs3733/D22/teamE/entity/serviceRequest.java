@@ -12,10 +12,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class serviceRequest implements requestPage {
+public class serviceRequest {
   public serviceRequest(String newPassword, String confirmNewPassword) {}
 
-  @Override
   public Node getAsPage(boolean editable) throws InvocationTargetException, IllegalAccessException {
     VBox box = new VBox();
     for (Method m : this.getClass().getMethods()) {
