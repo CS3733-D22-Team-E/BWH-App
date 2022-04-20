@@ -3,9 +3,25 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
 }
+#label_default{
+    -fx-text-fill: #CCCCCC;
+    -fx-font-weight: 800;
+}
+#label_color{
+    -fx-text-fill: #CCCCCC;
+}
+#label_title{
+    -fx-text-fill: #CCCCCC;
+}
+#title_bar{
+    -fx-opacity: 0.96;
+    -fx-background-color:
+            linear-gradient(to bottom right, #252762, #ab6185);
+}
+
 
 #main-box {
-    -fx-background-color: #313030;
+    -fx-background-color: #333333;
     -fx-background-radius: 10px;
     -fx-padding: 10px;
 }
@@ -16,11 +32,11 @@
 }
 
 .label {
-    -fx-text-color: rgba(134, 134, 134, 0.9);
+    -fx-text-color: rgba(255, 255, 255, 0.9);
 }
 
 .serviceButton {
-    -fx-background-color: rgba(200, 200, 200, 0.9);
+    -fx-background-color: rgb(153, 153, 153);
     -fx-background-radius: 8px;
 }
 .commonButton {

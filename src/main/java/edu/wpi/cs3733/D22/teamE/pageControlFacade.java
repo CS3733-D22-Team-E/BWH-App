@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 public class pageControlFacade {
 
+  public static boolean isLightMode = true;
+
   public static boolean loadPage(String url, Stage stage) {
     try {
       FXMLLoader loader = new FXMLLoader();
@@ -16,7 +18,12 @@ public class pageControlFacade {
       Parent root = loader.load();
       StackPane p = new StackPane();
       p.getChildren().add(root);
-
+      // theme setting
+      if (isLightMode) {
+        themeControl.setLightMode(root);
+      } else {
+        themeControl.setDarkMode(root);
+      }
       stage.getScene().setRoot(p);
       return true;
     } catch (IOException e) {

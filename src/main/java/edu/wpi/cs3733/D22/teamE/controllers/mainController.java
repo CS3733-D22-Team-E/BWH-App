@@ -1,23 +1,15 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXToggleButton;
-import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.pageButtons;
 import edu.wpi.cs3733.D22.teamE.pageControlFacade;
 import java.awt.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Objects;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class mainController implements pageButtons {
@@ -37,49 +29,7 @@ public class mainController implements pageButtons {
   @FXML Button helpButton;
   @FXML JFXToggleButton databaseSwitchButton;
 
-  @FXML private Button btnMode;
-  @FXML private ImageView imgMode;
-  @FXML private VBox parent;
-  @FXML private Label title;
-
-  private final String darkModeURL =
-      Objects.requireNonNull(Main.class.getResource("view/styles/darkMode.css")).toExternalForm();
-  private final String lightModeURL =
-      Objects.requireNonNull(Main.class.getResource("view/styles/default.css")).toExternalForm();
-  private boolean isLightMode = true;
   private static String databaseMode = "EMBEDDED_INSTANCE";
-
-  public void changeMode(ActionEvent event) throws FileNotFoundException {
-    System.out.println("Button Works!");
-    isLightMode = !isLightMode;
-    if (isLightMode) {
-      setLightMode();
-      System.out.println("Light Mode");
-    } else {
-      System.out.println("Dark Mode");
-      setDarkMode();
-    }
-  }
-
-  private void setLightMode() throws FileNotFoundException {
-    parent.getStylesheets().removeAll();
-    parent.getStylesheets().add(lightModeURL);
-    Image newImg =
-        new Image(
-            new FileInputStream(
-                "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/ic-dark.png"));
-    imgMode.setImage(newImg);
-  }
-
-  private void setDarkMode() throws FileNotFoundException {
-    parent.getStylesheets().removeAll();
-    parent.getStylesheets().add(darkModeURL);
-    Image newImg =
-        new Image(
-            new FileInputStream(
-                "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/ic-light.png"));
-    imgMode.setImage(newImg);
-  }
 
   public mainController() {}
 

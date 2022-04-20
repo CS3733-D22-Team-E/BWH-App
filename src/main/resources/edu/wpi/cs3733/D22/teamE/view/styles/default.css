@@ -2,8 +2,25 @@
   -fx-background-image: url("../images/hospital.JPG");
   -fx-background-repeat: no-repeat;
   -fx-background-size: cover;
+
+
+}
+#label_default{
+  -fx-text-fill: #333333;
+  -fx-font-weight: 800;
 }
 
+#label_color{
+  -fx-text-fill: #333333;
+}
+#label_title{
+  -fx-text-fill: #CCCCCC;
+}
+#title_bar{
+  -fx-opacity: 0.96;
+  -fx-background-color:
+          linear-gradient(to bottom right, #2e317c, #d276a3);
+}
 .label {
   /**font color*/
   -fx-dark-text-color: #ffffff;
@@ -13,7 +30,7 @@
 }
 
 #main-box {
-  -fx-background-color: rgba(255, 255, 255, 1);
+  -fx-background-color: rgb(225, 225, 225);
   -fx-background-radius: 10px;
   -fx-padding: 10px;
 }
