@@ -9,8 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-public class languageInterpreterRequestController extends serviceRequestPageController
-    implements Initializable {
+public class languageInterpreterRequestController extends serviceRequestPageController implements Initializable {
 
   @FXML private ChoiceBox<String> languageSelection;
   private String[] langList = {"English", "Spanish", "Russian", "Mandarin Chinese"};

@@ -115,9 +115,7 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
   }
 
   @Override
-  public void delete(
-      medicineDelivery
-          item) { // TODO: Figure out what to do with Request in DB after its marked as done
+  public void delete(medicineDelivery item) { // TODO: Figure out what to do with Request in DB after its marked as done
     medicineRequests.remove(item);
   }
 

@@ -4,24 +4,11 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 public class languageInterpreterRequest extends serviceRequest {
-  // private String languageSelected; //TODO: never used?
-
-  // private LocalDate startDate; TODO: Ask Frank if these are needed since both can be represented
-  // with requestDate and deliveryDate
-  // private LocalDate endDate;
-
-  Language langforInterpreter;
-
-  public enum Language {
-    En,
-    Es,
-    FR,
-    CN
-  }
+  private String language;
 
   public languageInterpreterRequest() {
     super(String.valueOf(Type.LANG_INTERP_REQ));
-    langforInterpreter = Language.En; // TODO: Default Language?
+    language = "";
   }
 
   public languageInterpreterRequest(
@@ -32,9 +19,9 @@ public class languageInterpreterRequest extends serviceRequest {
       boolean isUrgent,
       String requestStatus,
       String staffAssignee,
-      Language langforInterpreter,
-      LocalDate deliveryDate,
-      LocalDate requestDate) {
+      String language,
+      LocalDate requestDate,
+      LocalDate deliveryDate) {
     super(
         lanInterpID,
         String.valueOf(Type.LANG_INTERP_REQ),
@@ -46,25 +33,14 @@ public class languageInterpreterRequest extends serviceRequest {
         staffAssignee,
         requestDate,
         deliveryDate);
-    this.langforInterpreter = langforInterpreter;
+    this.language = language;
   }
 
-  // Language
-  public Language getLang() {
-    return langforInterpreter;
+  public String getLanguage() {
+    return language;
   }
 
-  public String getLanguageValue() {
-    return langforInterpreter.toString();
-  }
-
-  public void setLang(Language langforInterpreter) {
-    this.langforInterpreter = langforInterpreter;
-  }
-
-  public void setLang(String langforInterpreter) {
-    if (!Arrays.toString(Language.values()).contains(langforInterpreter))
-      throw new RuntimeException("language must be one of " + Arrays.toString(Language.values()));
-    else this.langforInterpreter = Language.valueOf(langforInterpreter);
+  public void setLanguage(String language) {
+    this.language = language;
   }
 }
