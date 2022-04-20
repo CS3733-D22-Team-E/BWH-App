@@ -36,6 +36,7 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXListView?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -50,7 +51,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.profilePageController">
+<VBox prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.profilePageController">
    <children>
       <HBox id="title_bar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" VBox.vgrow="NEVER">
          <children>
@@ -155,7 +156,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <JFXButton fx:id="resetPassword" alignment="CENTER" buttonType="RAISED" onAction="#resetPassword" prefHeight="43.0" prefWidth="127.0" ripplerFill="RED" style="-fx-background-color: lightgrey;" text="Reset Password" />
+                                          <JFXButton fx:id="resetPassword" alignment="CENTER" buttonType="RAISED" onAction="#resetPassword" prefHeight="43.0" prefWidth="127.0" ripplerFill="RED" styleClass="resetButton" text="Reset Password" />
                                        </children>
                                        <GridPane.margin>
                                           <Insets top="40.0" />
@@ -187,4 +188,8 @@
          </children>
       </StackPane>
    </children>
+   <stylesheets>
+      <URL value="@styles/default.css" />
+      <URL value="@styles/servicerequests.css" />
+   </stylesheets>
 </VBox>

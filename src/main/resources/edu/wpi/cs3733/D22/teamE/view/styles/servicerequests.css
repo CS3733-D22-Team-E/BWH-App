@@ -1,5 +1,5 @@
 .submitButton{
-    -fx-background-color: #ba2130;
+    -fx-background-color: #2e317c, #d276a3;
     -fx-pref-height: 24;
     -fx-pref-width: 150;
     -fx-text-fill: #FFFFFF;
@@ -18,7 +18,7 @@
 }
 
 .headerBackground{
-    -fx-background-color:  #f35959;
+    -fx-background-color: #2e317c, #d276a3;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
 }
 .headerHospital{

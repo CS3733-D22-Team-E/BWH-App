@@ -168,7 +168,7 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
-                  <JFXButton buttonType="RAISED" layoutX="80.0" layoutY="473.0" onAction="#deleteReqButton" prefHeight="39.0" prefWidth="205.0" ripplerFill="RED" styleClass="serviceButton" text="Delete Selected Request" />
+                  <JFXButton buttonType="RAISED" layoutX="80.0" layoutY="473.0" onAction="#deleteReqButton" prefHeight="39.0" prefWidth="205.0" ripplerFill="RED" text="Delete Selected Request" />
                </children>
             </Pane>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" prefHeight="560.0" prefWidth="1110.0" style="-fx-background-color: transparent;" />

@@ -116,12 +116,12 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <Label layoutX="205.0" layoutY="112.0" text="Map Help Page">
+                        <Label layoutX="205.0" layoutY="77.0" text="Map Help Page">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label layoutX="557.0" layoutY="112.0" text="Service Request Page">
+                        <Label layoutX="557.0" layoutY="77.0" text="Service Request Page">
                            <font>
                               <Font size="24.0" />
                            </font>

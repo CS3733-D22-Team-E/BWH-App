@@ -94,7 +94,7 @@
                   <Group layoutX="64.0" layoutY="180.0" />
                   <Group layoutX="74.0" layoutY="210.0" />
                   <Group layoutX="77.0" layoutY="245.0" />
-                  <JFXButton fx:id="submitButton" layoutX="413.0" layoutY="423.0" mnemonicParsing="false" onAction="#submitButton" text="Submit" />
+                  <JFXButton fx:id="submitButton" layoutX="413.0" layoutY="423.0" mnemonicParsing="false" onAction="#submitButton" styleClass="submitButton" text="Submit" />
                   <CheckBox fx:id="asapCheck" layoutX="445.0" layoutY="125.0" mnemonicParsing="false" text="ASAP" />
                   <TextArea fx:id="otherNotesTxt" layoutX="611.0" layoutY="78.0" prefHeight="101.0" prefWidth="339.0" promptText="Type to add text..." />
                   <TextField fx:id="timeTxt" layoutX="293.0" layoutY="121.0" prefHeight="26.0" prefWidth="138.0" promptText="__ __ : __ __ AM/PM" />
@@ -144,7 +144,7 @@
       </StackPane>
    </children>
    <stylesheets>
-      <URL value="@styles/default.css" />
       <URL value="@styles/servicerequests.css" />
+      <URL value="@styles/default.css" />
    </stylesheets>
 </VBox>
