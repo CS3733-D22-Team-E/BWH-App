@@ -129,4 +129,18 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
         break;
     }
   }
+
+  public void updateRoomLocation(serviceRequest request, int newXCoord, int newYCoord)
+      throws SQLException {
+    String query =
+        "UPDATE TOWERLOCATIONS SET XCOORD = "
+            + newXCoord
+            + ", YCOORD = "
+            + newYCoord
+            + " WHERE NODEID = '"
+            + request.getRoomID()
+            + "'";
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
+  }
 }

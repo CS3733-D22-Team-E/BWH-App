@@ -97,7 +97,6 @@ public class securityRequestController extends serviceRequestPageController {
 
   @Override
   public void submitButton(ActionEvent event) throws SQLException {
-    securityReq.setServiceRequestID("SecReq2");
     securityReq.setSecurityRequestType(securityRequestType.getValue());
     securityReq.setTimeFrame(timeFrameComboBox.getValue());
     securityReq.setRoomID(roomNameToRoomID.get(room.getValue()));
