@@ -43,7 +43,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
@@ -51,9 +50,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.statusPageController">
+<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.statusPageController">
    <children>
-      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;" VBox.vgrow="NEVER">
+      <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;">
          <children>
             <StackPane minHeight="-Infinity" minWidth="-Infinity">
                <children>
@@ -68,7 +67,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </StackPane>
-            <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
+            <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="890.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label alignment="CENTER" text="Brigham and Women's Hospital" textFill="WHITE">
                      <font>
@@ -85,7 +84,7 @@
                   </Label>
                </children>
             </VBox>
-            <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="120.0" style="-fx-border-color: black;">
+            <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="90.0" prefWidth="120.0" style="-fx-border-color: black;">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -95,82 +94,105 @@
             </Pane>
          </children>
       </HBox>
-      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
+      <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
          <children>
-            <Pane>
+            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                <children>
-                  <Pane layoutX="2.0" layoutY="39.0" prefHeight="42.0" prefWidth="920.0">
+                  <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="88.0">
+                        <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label text="Filter by ID" />
-                              <TextField fx:id="filterFieldID" prefWidth="-1.0" />
+                              <VBox alignment="CENTER" StackPane.alignment="CENTER">
+                                 <children>
+                                    <HBox alignment="CENTER" VBox.vgrow="NEVER">
+                                       <children>
+                                          <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="88.0">
+                                             <children>
+                                                <Label text="Filter by ID" />
+                                                <TextField fx:id="filterFieldID" prefWidth="-1.0" />
+                                             </children>
+                                             <padding>
+                                                <Insets right="4.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox prefWidth="180.0">
+                                             <children>
+                                                <Label text="Filter by Type" />
+                                                <TextField fx:id="filterFieldType" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="4.0" right="4.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox prefWidth="191.0">
+                                             <children>
+                                                <Label text="Filter by Status" />
+                                                <TextField fx:id="filterFieldStatus" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="10.0" right="4.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox prefWidth="246.0">
+                                             <children>
+                                                <Label text="Filter by Assignee" />
+                                                <TextField fx:id="filterFieldAssign" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="12.0" right="4.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox prefHeight="42.0" prefWidth="197.0">
+                                             <children>
+                                                <Label text="Filter by Date (mm/dd/yy)" />
+                                                <TextField fx:id="filterFieldDate" prefWidth="-1.0" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="16.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets left="-170.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox alignment="CENTER" VBox.vgrow="NEVER">
+                                       <children>
+                                          <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1080.0" vbarPolicy="NEVER">
+                                             <content>
+                                                <TableView fx:id="requestTable" editable="true">
+                                                   <columns>
+                                                      <TableColumn fx:id="idColumn" prefWidth="92.0" text="ID" />
+                                                      <TableColumn fx:id="typeColumn" prefWidth="184.0" text="Type" />
+                                                      <TableColumn fx:id="statusColumn" prefWidth="195.0" text="Status" />
+                                                      <TableColumn fx:id="assignedColumn" minWidth="7.0" prefWidth="250.0" text="Assigned To" />
+                                                      <TableColumn fx:id="dateColumn" prefWidth="176.0" text="Request Date" />
+                                                      <TableColumn fx:id="buttonColumn" prefWidth="176.0" text="Requests" />
+                                                   </columns>
+                                                </TableView>
+                                             </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" VBox.vgrow="NEVER">
+                                       <children>
+                                          <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#deleteReqButton" prefHeight="39.0" prefWidth="205.0" ripplerFill="RED" style="-fx-background-color: #f1f1f1;" text="Delete Selected Request">
+                                             <HBox.margin>
+                                                <Insets left="-700.0" top="20.0" />
+                                             </HBox.margin>
+                                          </JFXButton>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <JFXDrawer fx:id="drawer" direction="RIGHT" />
                            </children>
-                           <padding>
-                              <Insets right="4.0" />
-                           </padding>
-                        </VBox>
-                        <VBox layoutX="88.0" prefWidth="180.0">
-                           <children>
-                              <Label text="Filter by Type" />
-                              <TextField fx:id="filterFieldType" />
-                           </children>
-                           <padding>
-                              <Insets left="4.0" right="4.0" />
-                           </padding>
-                        </VBox>
-                        <VBox layoutX="268.0" prefWidth="191.0">
-                           <children>
-                              <Label text="Filter by Status" />
-                              <TextField fx:id="filterFieldStatus" />
-                           </children>
-                           <padding>
-                              <Insets left="10.0" right="4.0" />
-                           </padding>
-                        </VBox>
-                        <VBox layoutX="459.0" prefWidth="246.0">
-                           <children>
-                              <Label text="Filter by Assignee" />
-                              <TextField fx:id="filterFieldAssign" />
-                           </children>
-                           <padding>
-                              <Insets left="12.0" right="4.0" />
-                           </padding>
-                        </VBox>
-                        <VBox layoutX="705.0" prefHeight="42.0" prefWidth="197.0">
-                           <children>
-                              <Label text="Filter by Date (mm/dd/yy)" />
-                              <TextField fx:id="filterFieldDate" prefWidth="-1.0" />
-                           </children>
-                           <padding>
-                              <Insets left="16.0" />
-                           </padding>
-                        </VBox>
+                        </StackPane>
                      </children>
-                  </Pane>
-                  <ScrollPane layoutX="2.0" layoutY="81.0" prefWidth="-1.0">
-                     <content>
-                        <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0">
-                           <children>
-                              <TableView fx:id="requestTable" editable="true" layoutY="-4.0">
-                                 <columns>
-                                    <TableColumn fx:id="idColumn" prefWidth="92.0" text="ID" />
-                                    <TableColumn fx:id="typeColumn" prefWidth="184.0" text="Type" />
-                                    <TableColumn fx:id="statusColumn" prefWidth="195.0" text="Status" />
-                                    <TableColumn fx:id="assignedColumn" minWidth="7.0" prefWidth="250.0" text="Assigned To" />
-                                    <TableColumn fx:id="dateColumn" prefWidth="176.0" text="Request Date" />
-                                    <TableColumn fx:id="buttonColumn" prefWidth="176.0" text="Requests" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </ScrollPane>
-                  <JFXButton buttonType="RAISED" layoutX="41.0" layoutY="496.0" onAction="#deleteReqButton" prefHeight="39.0" prefWidth="205.0" ripplerFill="RED" style="-fx-background-color: #f1f1f1;" text="Delete Selected Request" />
+                  </HBox>
                </children>
-            </Pane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
+            </VBox>
          </children>
-      </StackPane>
+      </HBox>
    </children>
 </VBox>
