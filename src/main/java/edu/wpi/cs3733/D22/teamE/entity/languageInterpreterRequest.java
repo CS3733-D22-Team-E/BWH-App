@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class languageInterpreterRequest extends serviceRequest {
   private String language;

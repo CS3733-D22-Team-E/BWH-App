@@ -55,7 +55,8 @@ public class LanguageRequestDAOImpl implements DAO<languageInterpreterRequest> {
       if (request.getServiceRequestID().equals(id)) return request;
     }
 
-    System.out.println("Language Interpreter Request with language request id " + id + " not found");
+    System.out.println(
+        "Language Interpreter Request with language request id " + id + " not found");
     throw new NullPointerException();
   }
 
