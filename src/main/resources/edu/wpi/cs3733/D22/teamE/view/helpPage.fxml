@@ -36,77 +36,111 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.helpPageController">
+<VBox id="default-background" alignment="CENTER" maxHeight="150.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="70.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.helpPageController">
    <children>
-      <Pane prefHeight="90.0" prefWidth="1080.0">
+      <HBox alignment="CENTER" maxHeight="150.0" maxWidth="1.7976931348623157E308" minHeight="70.0" minWidth="70.0" prefHeight="100.0" style="-fx-background-color: #f35959;" VBox.vgrow="ALWAYS">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f35959" height="90.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" />
-            <Label alignment="CENTER" layoutX="14.0" layoutY="26.0" text="Brigham and Women's Hospital" textFill="WHITE">
+            <Label prefHeight="300.0" prefWidth="950.0" text="   Brigham and Women's Hospital" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Book Antiqua Bold" size="30.0" />
                </font>
             </Label>
-            <Pane layoutX="960.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="90.0" prefWidth="120.0" style="-fx-border-color: black;">
+            <HBox alignment="CENTER_RIGHT" prefHeight="95.0" prefWidth="83.0" HBox.hgrow="ALWAYS">
                <children>
-                  <JFXHamburger fx:id="burger" layoutX="45.0" layoutY="35.0" />
+                  <JFXHamburger fx:id="burger" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="95.0" prefWidth="87.0" style="-fx-border-color: black;" HBox.hgrow="ALWAYS" />
                </children>
-            </Pane>
+            </HBox>
          </children>
-      </Pane>
+      </HBox>
       <StackPane prefHeight="560.0" prefWidth="1080.0">
          <children>
-            <AnchorPane fx:id="mainPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="560.0" prefWidth="1080.0">
-               <children>
-                  <Pane id="main-box" layoutX="33.0" layoutY="43.0" prefHeight="431.0" prefWidth="1014.0">
-                     <children>
-                        <Label layoutX="19.0" layoutY="16.0" prefHeight="39.0" prefWidth="192.0" text="Help Page">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <JFXButton fx:id="mapHelp" layoutX="211.0" layoutY="129.0" onAction="#mapHelp" prefHeight="150.0" prefWidth="150.0" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/mapHelp.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="serviceHelp" layoutX="595.0" layoutY="129.0" onAction="#serviceHelp" prefHeight="150.0" prefWidth="150.0" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/serviceHelp.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <Label layoutX="205.0" layoutY="112.0" text="Map Help Page">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="557.0" layoutY="112.0" text="Service Request Page">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-               </children>
-            </AnchorPane>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <center>
+                  <HBox alignment="TOP_CENTER" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                     <children>
+                        <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="60.0" prefWidth="87.0" text="Help Page" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox>
+                                 <children>
+                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label text="Service Request Page" VBox.vgrow="ALWAYS">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <JFXButton fx:id="serviceHelp" onAction="#serviceHelp" text=" " VBox.vgrow="ALWAYS">
+                                             <graphic>
+                                                <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@icons/serviceHelp.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label text="Map Help Page" VBox.vgrow="ALWAYS">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <JFXButton fx:id="mapHelp" onAction="#mapHelp" text=" " VBox.vgrow="ALWAYS">
+                                             <graphic>
+                                                <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@icons/mapHelp.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </center>
+               <top>
+                  <HBox prefHeight="100.0" BorderPane.alignment="CENTER" />
+               </top>
+               <left>
+                  <HBox prefWidth="100.0" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <HBox prefWidth="100.0" BorderPane.alignment="CENTER" />
+               </right>
+               <bottom>
+                  <HBox prefHeight="100.0" BorderPane.alignment="CENTER" />
+               </bottom>
+            </BorderPane>
          </children>
       </StackPane>
    </children>
+   <effect>
+      <DropShadow />
+   </effect>
 </VBox>
