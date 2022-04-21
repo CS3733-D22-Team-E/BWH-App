@@ -40,6 +40,7 @@ public class facilitiesRequestController extends serviceRequestPageController
   @FXML TableColumn<facilitiesRequest, String> tableStaffAssignee;
   @FXML TableColumn<facilitiesRequest, String> tableTimeFrame;
   @FXML TableColumn<facilitiesRequest, LocalDate> tableDeliveryDate;
+  @FXML TableColumn<facilitiesRequest, LocalDate> tableRequestDate;
   @FXML TableColumn<facilitiesRequest, String> tableRequestStatus;
   @FXML TableColumn<facilitiesRequest, Boolean> tableIsUrgent;
   @FXML TableColumn<facilitiesRequest, String> tableNotes;
@@ -93,7 +94,7 @@ public class facilitiesRequestController extends serviceRequestPageController
 
   private void populateFacilitiesReqTable() {
     ObservableList<facilitiesRequest> facilitiesRequests = populateFacilitiesRequestsList();
-    // tableRequestType.setCellValueFactory(new PropertyValueFactory<>("facilities"));
+    tableRequestType.setCellValueFactory(new PropertyValueFactory<>("requestType"));
     tableRoomID.setCellValueFactory(
         new Callback<
             TableColumn.CellDataFeatures<facilitiesRequest, String>, ObservableValue<String>>() {
@@ -104,27 +105,27 @@ public class facilitiesRequestController extends serviceRequestPageController
             return new SimpleStringProperty(roomIDToRoomName.get(curFacReq.getRoomID()));
           }
         });
-    tableFloorID.setCellValueFactory(new PropertyValueFactory<>("FloorID"));
+    tableFloorID.setCellValueFactory(new PropertyValueFactory<>("floorID"));
     tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
-    tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
+    // tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
     tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
-    // tableNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
+    tableNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
     tableIsUrgent.setCellValueFactory(new PropertyValueFactory<>("isUrgent"));
     // tableTimeFrame.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
-
+    tableRequestDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
     requestsTable.setItems(facilitiesRequests);
   }
 
   @Override
   public void submitButton(ActionEvent event) throws SQLException {
     try {
-      request.setFacilitiesRequestType(facilitiesOptionType.getValue());
+      request.setFacilitiesRequestType(facilitiesOptionType.getValue()); // getValue());
       request.setFloorID(floor.getValue());
       request.setRoomID(roomNameToRoomID.get(room.getValue()));
       request.setStaffAssignee(staffAssignee.getText());
-      request.setRequestDate(LocalDate.now());
+      // request.setRequestDate(LocalDate.now());
       request.setDeliveryDate(deliveryDate.getValue());
-      request.setRequestStatus(requestStatus.getText());
+      // request.setRequestStatus(requestStatus.getText());
       request.setOtherNotes(notes.getText());
       request.setIsUrgent(isUrgent.isSelected());
       request.setTimeFrame(timeFrame.getText());
@@ -158,10 +159,11 @@ public class facilitiesRequestController extends serviceRequestPageController
     floor.getSelectionModel().clearSelection();
     room.getSelectionModel().clearSelection();
     facilitiesOptionType.getSelectionModel().clearSelection();
+    timeFrame.clear();
     isUrgent.setSelected(false);
     deliveryDate.getEditor().clear();
-    requestDate.getEditor().clear();
-    requestStatus.clear();
+    // requestDate.getEditor().clear();
+    // requestStatus.clear();
     staffAssignee.clear();
     notes.clear();
   }
