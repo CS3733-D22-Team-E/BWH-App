@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.facilitiesRequestController">
+    <children>
+        <HBox alignment="CENTER" styleClass="headerBackground" VBox.vgrow="ALWAYS">
+            <children>
+                <StackPane HBox.hgrow="ALWAYS">
+                    <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="55.0" stroke="BLACK" strokeType="INSIDE" width="72.0" />
+                        <ImageView fitHeight="58.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/facilities.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </StackPane>
+                <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerHospital" text="Brigham and Women's Hospital" wrappingWidth="340.91169714927673" VBox.vgrow="ALWAYS">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Text>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerRequest" text="Facilities Service Request" textAlignment="RIGHT" wrappingWidth="187.07971167564392" VBox.vgrow="ALWAYS">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </VBox>
+                <HBox alignment="CENTER" style="-fx-border-color: black;" HBox.hgrow="ALWAYS">
+                    <HBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                    </HBox.margin>
+                    <children>
+                        <JFXHamburger fx:id="burger" alignment="CENTER" prefHeight="88.0" prefWidth="41.0" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+        <StackPane VBox.vgrow="ALWAYS">
+            <children>
+                <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="600.0" spacing="20.0">
+                    <children>
+                        <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="255.0" prefWidth="401.0" HBox.hgrow="SOMETIMES">
+                            <children>
+                                <GridPane alignment="CENTER" hgap="5.0" prefHeight="223.0" prefWidth="281.0" vgap="5.0" VBox.vgrow="ALWAYS">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.5" minWidth="10.0" prefWidth="91.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.5" minWidth="10.0" prefWidth="211.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Text strokeWidth="0.0" styleClass="requestFields" text="Location" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Text>
+                                        <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                            <children>
+                                                <JFXComboBox fx:id="floor" promptText="Select Floor" HBox.hgrow="ALWAYS" />
+                                                <JFXComboBox fx:id="room" promptText="Select Room" HBox.hgrow="ALWAYS" />
+                                            </children>
+                                        </HBox>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Text>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="requestFields" text="Deliver By" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Text>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Text>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="requestFields" text="Time Frame" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Text>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="requestFields" text="Request Type" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Text>
+                                        <JFXComboBox fx:id="facilitiesOptionType" promptText="Request Type" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="requestFields" text="Notes" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Text>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="requestFields" text="Staff Assignee" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                            <font>
+                                                <Font name="Calibri Bold" size="14.0" />
+                                            </font>
+                                        </Text>
+                                        <TextField fx:id="staffAssignee" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+                                        <DatePicker fx:id="deliveryDate" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+                                        <TextField fx:id="notes" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                            <children>
+                                                <TextField fx:id="timeFrame" />
+                                                <CheckBox fx:id="isUrgent" mnemonicParsing="false" text="Urgent" HBox.hgrow="ALWAYS" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                                <HBox alignment="CENTER" spacing="5.0" VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <JFXButton buttonType="RAISED" onAction="#submitButton" ripplerFill="RED" styleClass="submitButton" text="Submit" HBox.hgrow="SOMETIMES">
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </JFXButton>
+                                        <JFXButton styleClass="resetButton" text="Reset" HBox.hgrow="ALWAYS" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <TableView fx:id="requestsTable" HBox.hgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="tableRequestStatus" prefWidth="47.99999922513962" text="Status" />
+                                <TableColumn fx:id="tableRoomID" prefWidth="51.200016021728516" text="Room" />
+                                <TableColumn fx:id="tableFloorID" minWidth="0.0" prefWidth="37.60003662109375" text="Floor" />
+                                <TableColumn fx:id="tableIsUrgent" prefWidth="44.800048828125" text="Urgent" />
+                                <TableColumn fx:id="tableStaffAssignee" prefWidth="79.99992370605469" text="Assignee" />
+                                <TableColumn fx:id="tableDeliveryDate" prefWidth="40.0" text="Date" />
+                            </columns>
+                        </TableView>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </HBox>
+                <JFXDrawer fx:id="drawer" direction="RIGHT" visible="false">
+                    <children>
+                        <JFXButton />
+                    </children></JFXDrawer>
+            </children>
+        </StackPane>
+    </children>
+</VBox>
