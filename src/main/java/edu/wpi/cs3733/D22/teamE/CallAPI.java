@@ -1,7 +1,10 @@
 package edu.wpi.cs3733.D22.teamE;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
+import edu.wpi.cs3733.D22.teamE.database.dao.FloralRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.entity.FloralServiceRequest;
+import java.sql.SQLException;
+import java.util.List;
+import javax.xml.rpc.ServiceException;
 
 public class CallAPI {
   private static CallAPI singleton;
@@ -15,11 +18,9 @@ public class CallAPI {
   }
 
   public void openAPI() {
-    Application apiApp = new APIApp();
-    Stage stage = new Stage();
     try {
-      apiApp.start(stage);
-    } catch (Exception e) {
+      Run.run(100, 100, 1100, 1000, "default.css", "", "");
+    } catch (ServiceException e) {
       e.printStackTrace();
     }
   }
