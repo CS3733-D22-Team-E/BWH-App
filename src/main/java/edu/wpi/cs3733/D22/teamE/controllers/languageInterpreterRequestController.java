@@ -22,7 +22,7 @@ import javafx.util.Callback;
 public class languageInterpreterRequestController extends serviceRequestPageController
     implements Initializable {
 
-  @FXML ComboBox<String> languageOptions; // TODO: ADD ALL REQUIRED FXML FIELDS
+  @FXML ComboBox<String> languageOptions;
   @FXML CheckBox isUrgent;
   @FXML TextField requestStatus;
   @FXML TextField staffAssignee;
