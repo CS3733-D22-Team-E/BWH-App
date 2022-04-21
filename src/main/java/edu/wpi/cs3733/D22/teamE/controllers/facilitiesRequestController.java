@@ -31,12 +31,10 @@ public class facilitiesRequestController extends serviceRequestPageController
   @FXML DatePicker deliveryDate; // when it will be serviced?
   @FXML DatePicker requestDate;
   @FXML CheckBox isUrgent;
-  @FXML TextArea notes;
-  @FXML TextArea timeFrame;
+  @FXML TextField timeFrame;
   @FXML TableView<facilitiesRequest> requestsTable;
   // facilitiesRequest
   @FXML TableColumn<facilitiesRequest, String> tableRequestType;
-  @FXML TableColumn<facilitiesRequest, String> tablePatientName;
   @FXML TableColumn<facilitiesRequest, String> tableFloorID;
   @FXML TableColumn<facilitiesRequest, String> tableRoomID; // TL
   @FXML TableColumn<facilitiesRequest, String> tableStaffAssignee;
@@ -95,7 +93,7 @@ public class facilitiesRequestController extends serviceRequestPageController
 
   private void populateFacilitiesReqTable() {
     ObservableList<facilitiesRequest> facilitiesRequests = populateFacilitiesRequestsList();
-    tableRequestType.setCellValueFactory(new PropertyValueFactory<>("facilities"));
+    // tableRequestType.setCellValueFactory(new PropertyValueFactory<>("facilities"));
     tableRoomID.setCellValueFactory(
         new Callback<
             TableColumn.CellDataFeatures<facilitiesRequest, String>, ObservableValue<String>>() {
@@ -109,11 +107,10 @@ public class facilitiesRequestController extends serviceRequestPageController
     tableFloorID.setCellValueFactory(new PropertyValueFactory<>("FloorID"));
     tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
     tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
-    tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
     tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
-    tableNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
+    // tableNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
     tableIsUrgent.setCellValueFactory(new PropertyValueFactory<>("isUrgent"));
-    tableTimeFrame.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
+    // tableTimeFrame.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
 
     requestsTable.setItems(facilitiesRequests);
   }

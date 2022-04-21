@@ -14,13 +14,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class mainController implements pageButtons {
-  public AnchorPane mainPane;
+  @FXML VBox mainPane;
 
   @FXML Button sanitationButton;
   @FXML Button mealDeliveryButton;
@@ -35,7 +34,7 @@ public class mainController implements pageButtons {
   @FXML Button dashboardButton;
   @FXML Button aboutButton;
   @FXML JFXToggleButton seeAuthors;
-  @FXML Pane authors;
+  @FXML HBox authors;
   @FXML Button helpButton;
   @FXML JFXToggleButton databaseSwitchButton;
 
@@ -156,8 +155,8 @@ public class mainController implements pageButtons {
   }
 
   @FXML
-  public void facilitiesRequestButton(ActionEvent event)
-      throws IOException { // TODO: implement FXML for this page,add button to page
+  public void facilitiesRequestButton(ActionEvent event) throws IOException {
+    // TODO: implement FXML for this page,add button to page
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
     pageControlFacade.loadPage("facilitiesPage.fxml", thisStage);

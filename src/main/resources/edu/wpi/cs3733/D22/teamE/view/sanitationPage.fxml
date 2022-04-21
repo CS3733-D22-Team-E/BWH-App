@@ -39,7 +39,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -47,22 +46,23 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.sanitationServiceController">
+<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.sanitationServiceController">
     <children>
-        <HBox alignment="BOTTOM_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;" styleClass="headerHospital" VBox.vgrow="NEVER">
+        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;" styleClass="headerHospital" VBox.vgrow="ALWAYS">
             <children>
-            <StackPane minHeight="-Infinity" minWidth="-Infinity">
+            <StackPane minHeight="70.0" minWidth="70.0" HBox.hgrow="NEVER">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" />
-                  <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="62.0" StackPane.alignment="CENTER" />
+                  <ImageView fitHeight="65.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                      <image>
                         <Image url="@icons/sanitizer.png" />
                      </image>
@@ -72,14 +72,14 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </StackPane>
-                <VBox alignment="BASELINE_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0">
+                <VBox alignment="CENTER_LEFT" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="887.0" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label alignment="CENTER" styleClass="headerHospital" text="Brigham and Women's Hospital" textFill="WHITE">
+                        <Label alignment="CENTER" minWidth="100.0" styleClass="headerHospital" text="Brigham and Women's Hospital" textFill="WHITE" VBox.vgrow="ALWAYS">
                             <font>
                                 <Font name="Book Antiqua" size="30.0" />
                             </font>
                         </Label>
-                        <Label alignment="CENTER" styleClass="headerRequest" text="Sanitation Services" textFill="WHITE">
+                        <Label alignment="CENTER" styleClass="headerRequest" text="Sanitation Services" textFill="WHITE" VBox.vgrow="ALWAYS">
                             <font>
                                 <Font name="Book Antiqua Bold" size="18.0" />
                             </font>
@@ -89,165 +89,154 @@
                         </Label>
                     </children>
                 </VBox>
-                <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="120.0" style="-fx-border-color: black;">
-                    <HBox.margin>
-                        <Insets />
-                    </HBox.margin>
-                    <children>
-                        <JFXHamburger fx:id="burger" layoutX="45.0" layoutY="35.0" />
-                    </children>
-                </Pane>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="70.0" minWidth="70.0" prefHeight="90.0" prefWidth="120.0" style="-fx-border-color: black;" HBox.hgrow="ALWAYS">
+               <children>
+                        <JFXHamburger fx:id="burger" prefHeight="98.0" prefWidth="83.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
             </children>
          <effect>
             <DropShadow />
          </effect>
         </HBox>
-        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1080.0">
+        <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" minWidth="700.0" VBox.vgrow="ALWAYS">
             <children>
-            <AnchorPane>
-               <StackPane.margin>
-                  <Insets bottom="20.0" left="40.0" right="20.0" top="60.0" />
-               </StackPane.margin>
+            <HBox spacing="20.0" StackPane.alignment="CENTER">
                <children>
-                  <Pane layoutY="-35.0">
+                  <VBox HBox.hgrow="ALWAYS">
                      <children>
-                              <VBox layoutX="173.0" layoutY="159.0">
-                                  <children>
-                                      <Label prefHeight="39.0" prefWidth="157.0" styleClass="requestFields" text="Biohazard On Site">
+                        <GridPane hgap="10.0" vgap="10.0" VBox.vgrow="ALWAYS">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                                      <Label alignment="CENTER_RIGHT" styleClass="requestFields" text="Urgency" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                           <font>
                                               <Font name="System Bold" size="18.0" />
                                           </font>
                                       </Label>
-                                      <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
-                                          <children>
+                                      <Label alignment="CENTER_RIGHT" styleClass="requestFields" text="Biohazard On Site" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                          <font>
+                                              <Font name="System Bold" size="18.0" />
+                                          </font>
+                                      </Label>
+                                      <Label alignment="CENTER_RIGHT" styleClass="requestFields" text="Size" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                          <font>
+                                              <Font name="System Bold" size="18.0" />
+                                          </font>
+                                      </Label>
+                                      <Label alignment="CENTER_RIGHT" styleClass="requestFields" text="Assigned Staff Member" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                          <font>
+                                              <Font name="System Bold" size="18.0" />
+                                          </font>
+                                      </Label>
+                                        <TextField fx:id="staffAssignee" promptText="Assigned Staff..." GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </TextField>
+                                      <Label alignment="CENTER_RIGHT" styleClass="requestFields" text="Additional Notes" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                          <font>
+                                              <Font name="System Bold" size="18.0" />
+                                          </font>
+                                      </Label>
+                                      <Label alignment="CENTER_RIGHT" styleClass="requestFields" text="Location" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                          <font>
+                                              <Font name="System Bold" size="18.0" />
+                                          </font>
+                                      </Label>
+                                      <TextField fx:id="notes" promptText="Note..." GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                          <font>
+                                              <Font size="14.0" />
+                                          </font>
+                                      </TextField>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                 <children>
+                                    <JFXComboBox fx:id="floor" prefWidth="105.0" promptText="Select Floor" HBox.hgrow="ALWAYS" />
+                                    <JFXComboBox fx:id="room" prefWidth="105.0" promptText="Select Room" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                 <children>
                                               <RadioButton fx:id="bioYes" mnemonicParsing="false" text="Yes">
-                                                  <toggleGroup>
+                                       <toggleGroup>
                                                       <ToggleGroup fx:id="biohazardGroup" />
-                                                  </toggleGroup>
+                                       </toggleGroup>
                                               </RadioButton>
                                               <RadioButton fx:id="bioNo" mnemonicParsing="false" selected="true" text="No" toggleGroup="$biohazardGroup" />
-                                              <RadioButton fx:id="bioUnsure" mnemonicParsing="false" text="Unsure" toggleGroup="$biohazardGroup" />
-                                          </children>
-                                      </VBox>
-                                  </children>
+                                 </children>
                               </VBox>
-                              <VBox layoutY="159.0">
-                                  <children>
-                                      <Label prefHeight="39.0" prefWidth="157.0" styleClass="requestFields" text="Urgency">
-                                          <font>
-                                              <Font name="System Bold" size="18.0" />
-                                          </font>
-                                      </Label>
-                                      <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
-                                          <children>
+                              <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox spacing="5.0">
+                                       <children>
+                                                    <RadioButton fx:id="heavySelect" mnemonicParsing="false" text="Heavy" VBox.vgrow="ALWAYS">
+                                             <toggleGroup>
+                                                            <ToggleGroup fx:id="sizeGroup" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                                    <RadioButton fx:id="mediumSelect" mnemonicParsing="false" text="Medium" toggleGroup="$sizeGroup" VBox.vgrow="ALWAYS" />
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                                    <RadioButton fx:id="bioUnsure" mnemonicParsing="false" text="Unsure" toggleGroup="$biohazardGroup" VBox.vgrow="ALWAYS" />
+                                                    <RadioButton fx:id="lightSelect" mnemonicParsing="false" selected="true" text="Light" toggleGroup="$sizeGroup" VBox.vgrow="ALWAYS" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                 <children>
                                               <RadioButton fx:id="Urgent" mnemonicParsing="false" text="Urgent">
                                                   <toggleGroup>
                                                       <ToggleGroup fx:id="urgencyGroup" />
                                                   </toggleGroup>
                                               </RadioButton>
                                               <RadioButton fx:id="notUrgent" mnemonicParsing="false" selected="true" text="Not Urgent" toggleGroup="$urgencyGroup" />
-                                          </children>
-                                      </VBox>
-                                  </children>
-                              </VBox>
-                              <VBox prefHeight="69.0" prefWidth="208.0">
-                                  <children>
-                                      <Label prefHeight="39.0" prefWidth="398.0" styleClass="requestFields" text="Assigned Staff Member">
-                                          <font>
-                                              <Font name="System Bold" size="18.0" />
-                                          </font>
-                                      </Label>
-                                        <TextField fx:id="staffAssignee" promptText="Assigned Staff...">
-                                            <font>
-                                                <Font size="14.0" />
-                                            </font>
-                                        </TextField>
-                                  </children>
-                              </VBox>
-                              <VBox layoutY="259.0" prefHeight="114.0" prefWidth="157.0">
-                                  <children>
-                                      <Label prefHeight="39.0" prefWidth="157.0" styleClass="requestFields" text="Size">
-                                          <font>
-                                              <Font name="System Bold" size="18.0" />
-                                          </font>
-                                      </Label>
-                                      <VBox prefHeight="75.0" prefWidth="100.0" spacing="10.0">
-                                          <children>
-                                              <RadioButton fx:id="lightSelect" mnemonicParsing="false" selected="true" text="Light">
-                                                  <toggleGroup>
-                                                      <ToggleGroup fx:id="sizeGroup" />
-                                                  </toggleGroup>
-                                              </RadioButton>
-                                              <RadioButton fx:id="mediumSelect" mnemonicParsing="false" text="Medium" toggleGroup="$sizeGroup" />
-                                              <RadioButton fx:id="heavySelect" mnemonicParsing="false" text="Heavy" toggleGroup="$sizeGroup" />
-                                          </children>
-                                      </VBox>
-                                  </children>
-                              </VBox>
-                              <VBox layoutX="173.0" layoutY="296.0">
-                                  <children>
-                                      <Label prefHeight="39.0" prefWidth="152.0" styleClass="requestFields" text="Additional Notes">
-                                          <font>
-                                              <Font name="System Bold" size="18.0" />
-                                          </font>
-                                      </Label>
-                                      <TextField fx:id="notes" promptText="Note...">
-                                          <font>
-                                              <Font size="14.0" />
-                                          </font>
-                                      </TextField>
-                                  </children>
-                              </VBox>
-                              <VBox layoutY="81.0">
-                                  <children>
-                                      <Label prefHeight="39.0" prefWidth="398.0" styleClass="requestFields" text="Floor Number              Room Number">
-                                          <font>
-                                              <Font name="System Bold" size="18.0" />
-                                          </font>
-                                      </Label>
-                                      <HBox spacing="15.0">
-                                 <children>
-                                    <JFXComboBox fx:id="floor" prefWidth="105.0">
-                                       <HBox.margin>
-                                          <Insets right="50.0" />
-                                       </HBox.margin>
-                                    </JFXComboBox>
-                                    <JFXComboBox fx:id="room" layoutX="60.0" layoutY="10.0" prefWidth="105.0">
-                                       <HBox.margin>
-                                          <Insets left="20.0" />
-                                       </HBox.margin>
-                                    </JFXComboBox>
                                  </children>
-                                      </HBox>
-                                  </children>
                               </VBox>
-                        <JFXButton layoutY="417.0" onAction="#submitButton" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" styleClass="submitButton" text="Submit" />
-                        <JFXButton layoutX="157.0" layoutY="417.0" onAction="#resetFields" prefHeight="39.0" prefWidth="105.0" ripplerFill="RED" styleClass="resetButton" text="Reset" />
-                     </children>
-                  </Pane>
-                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="378.0" layoutY="14.0" prefHeight="402.0" prefWidth="634.0">
-                     <content>
-                        <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0">
-                           <children>
-                                    <TableView fx:id="table" prefHeight="400.0" prefWidth="631.0">
-                                        <columns>
-                                            <TableColumn fx:id="id" prefWidth="75.0" text="Request ID" />
-                                            <TableColumn fx:id="status" prefWidth="65.0" text="Status" />
-                                            <TableColumn fx:id="assign" prefWidth="101.0" text="Assigned Staff" />
-                                            <TableColumn fx:id="urgent" prefWidth="63.0" text="Urgency" />
-                                            <TableColumn fx:id="bio" prefWidth="76.0" text="Biohazard" />
-                                            <TableColumn fx:id="size" prefWidth="63.0" text="Size" />
-                                            <TableColumn fx:id="floorCol" prefWidth="97.0" text="Floor ID" />
-                                            <TableColumn fx:id="roomCol" prefWidth="90.0" text="Room ID" />
-                                        </columns>
-                                    </TableView>
                            </children>
-                        </AnchorPane>
-                     </content>
-                  </ScrollPane>
+                        </GridPane>
+                        <HBox alignment="CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <JFXButton onAction="#submitButton" ripplerFill="RED" styleClass="submitButton" text="Submit" HBox.hgrow="ALWAYS" />
+                              <JFXButton onAction="#resetFields" ripplerFill="RED" styleClass="resetButton" text="Reset" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                              <TableView fx:id="table" VBox.vgrow="ALWAYS">
+                                  <columns>
+                                      <TableColumn fx:id="id" prefWidth="75.0" text="Request ID" />
+                                      <TableColumn fx:id="status" prefWidth="65.0" text="Status" />
+                                      <TableColumn fx:id="assign" prefWidth="101.0" text="Assigned Staff" />
+                                      <TableColumn fx:id="urgent" prefWidth="63.0" text="Urgency" />
+                                      <TableColumn fx:id="bio" prefWidth="76.0" text="Biohazard" />
+                                      <TableColumn fx:id="size" prefWidth="63.0" text="Size" />
+                                      <TableColumn fx:id="floorCol" prefWidth="97.0" text="Floor ID" />
+                                      <TableColumn fx:id="roomCol" prefWidth="90.0" text="Room ID" />
+                                  </columns>
+                              </TableView>
+                     </children>
+                  </VBox>
                </children>
-            </AnchorPane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" StackPane.alignment="CENTER" />
             </children>
         </StackPane>
     </children>
