@@ -23,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -31,8 +32,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -51,15 +54,18 @@ public class mapPageController extends containsSideMenu implements Initializable
   List<serviceRequest> servReqList;
   List<serviceRequest> filteredServReqList;
 
-  int zoomIncrement = 50;
+  double zoomIncrement = 0.1;
   String viewMode = "Tower Locations";
   String editMode = "false";
   int mouseX;
   int mouseY;
   double[] selectedLoc;
 
-  @FXML AnchorPane mapBox;
+  @FXML StackPane mapBox;
   @FXML ImageView mapImage;
+  Pane floorLocationsPane;
+  Pane floorEquipmentPane;
+  Pane floorServiceRequestPane;
   @FXML ComboBox floorDropdown;
   @FXML ComboBox locationTypeDropdown;
   @FXML Button zoomUp;
@@ -113,10 +119,10 @@ public class mapPageController extends containsSideMenu implements Initializable
     locationTypeDropdown.setValue("Medical Equipment");
 
     // Set the image size to the default slider value
-    mapBox.setPrefHeight(zoomSlider.getValue());
-    mapBox.setPrefWidth(zoomSlider.getValue());
-    mapImage.setFitHeight(zoomSlider.getValue());
-    mapImage.setFitWidth(zoomSlider.getValue());
+    mapBox.setScaleX(zoomSlider.getValue());
+    mapBox.setScaleY(zoomSlider.getValue());
+    mapImage.setScaleX(zoomSlider.getValue());
+    mapImage.setScaleY(zoomSlider.getValue());
 
     try {
       db = new LocationDAOImpl();
@@ -303,6 +309,8 @@ public class mapPageController extends containsSideMenu implements Initializable
   // Display location on the map
   private void displayTowerLocations() throws FileNotFoundException, SQLException {
 
+    floorLocationsPane = new Pane();
+
     double imageX = mapImage.getFitWidth();
     double coordinateX = 935;
     double scaleFactor = imageX / coordinateX;
@@ -325,13 +333,15 @@ public class mapPageController extends containsSideMenu implements Initializable
           i.getStyleClass().add("selectedLocationDot");
         }
       }
-
-      mapBox.getChildren().add(i);
+      floorLocationsPane.getChildren().add(i);
     }
+    mapBox.getChildren().add(floorLocationsPane);
   }
 
   // Display medical equipment on the map
   private void displayMedEquipLocations() throws FileNotFoundException, SQLException {
+
+    floorEquipmentPane = new Pane();
 
     double imageX = mapImage.getFitWidth();
     double coordinateX = 935;
@@ -388,12 +398,15 @@ public class mapPageController extends containsSideMenu implements Initializable
         }
       }
 
-      mapBox.getChildren().add(i);
+      floorEquipmentPane.getChildren().add(i);
     }
+    mapBox.getChildren().add(floorEquipmentPane);
   }
 
   // Display service request locations
   private void displayServiceRequestLocations() throws FileNotFoundException {
+
+    floorServiceRequestPane = new Pane();
 
     double imageX = mapImage.getFitWidth();
     double coordinateX = 935;
@@ -453,8 +466,9 @@ public class mapPageController extends containsSideMenu implements Initializable
         }
       }
 
-      mapBox.getChildren().add(i);
+      floorEquipmentPane.getChildren().add(i);
     }
+    mapBox.getChildren().add(floorEquipmentPane);
   }
 
   // Filter tower locations by floor
@@ -619,42 +633,49 @@ public class mapPageController extends containsSideMenu implements Initializable
 
   @FXML // Handle zoom scroll bar
   public void changeZoom(MouseEvent event) throws SQLException, FileNotFoundException {
-    mapBox.setPrefHeight(zoomSlider.getValue());
-    mapBox.setPrefWidth(zoomSlider.getValue());
-    mapImage.setFitHeight(zoomSlider.getValue());
-    mapImage.setFitWidth(zoomSlider.getValue());
+    zoomHandler(zoomSlider.getValue());
+  }
 
-    // Display the currently selected viewMode
-    setViewMode(viewMode);
+  private void zoomHandler(double zoomValue) {
+    System.out.println("Changing zoom");
+
+    mapBox.setScaleX(zoomValue);
+    mapBox.setScaleY(zoomValue);
+
+    for (Node child : mapBox.getChildren()) {
+      child.setScaleX(zoomValue);
+      child.setScaleY(zoomValue);
+    }
   }
 
   @FXML // Handle zoom + button
   public void zoomUp(ActionEvent event) throws SQLException, FileNotFoundException {
-    if (mapBox.getPrefHeight() < zoomSlider.getMax()) {
-      mapBox.setPrefHeight(mapBox.getPrefHeight() + zoomIncrement);
-      mapBox.setPrefWidth(mapBox.getPrefWidth() + zoomIncrement);
-      mapImage.setFitHeight(mapImage.getFitHeight() + zoomIncrement);
-      mapImage.setFitWidth(mapImage.getFitWidth() + zoomIncrement);
+    double incrementedZoom = zoomSlider.getValue() + zoomIncrement;
 
-      zoomSlider.setValue(mapImage.getFitWidth() + zoomIncrement);
-
-      // Display the currently selected viewMode
-      setViewMode(viewMode);
+    if (incrementedZoom <= zoomSlider.getMax()) {
+      zoomHandler(incrementedZoom);
+      zoomSlider.setValue(incrementedZoom);
     }
   }
 
   @FXML // Handle zoom - button
-  public void zoomDown(ActionEvent event) throws SQLException, FileNotFoundException {
-    if (mapBox.getPrefHeight() > zoomSlider.getMin()) {
-      mapBox.setPrefHeight(mapBox.getPrefHeight() - zoomIncrement);
-      mapBox.setPrefWidth(mapBox.getPrefWidth() - zoomIncrement);
-      mapImage.setFitHeight(mapImage.getFitHeight() - zoomIncrement);
-      mapImage.setFitWidth(mapImage.getFitWidth() - zoomIncrement);
+  public void zoomDown(ActionEvent event) {
+    double decrementedZoom = zoomSlider.getValue() - zoomIncrement;
 
-      zoomSlider.setValue(mapImage.getFitWidth() + zoomIncrement);
+    if (decrementedZoom >= zoomSlider.getMin()) {
+      zoomHandler(decrementedZoom);
+      zoomSlider.setValue(decrementedZoom);
+    }
+  }
 
-      // Display the currently selected viewMode
-      setViewMode(viewMode);
+  @FXML
+  public void mouseScrollZoom(ScrollEvent event) {
+    double deltaZoom = zoomSlider.getValue() + event.getDeltaY();
+
+    if (event.getDeltaY() > 0 && deltaZoom <= zoomSlider.getMax()) {
+      zoomHandler(deltaZoom);
+    } else if (event.getDeltaY() < 0 && deltaZoom >= zoomSlider.getMin()) {
+      zoomHandler(deltaZoom);
     }
   }
 
