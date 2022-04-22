@@ -12,7 +12,7 @@ shadowJar {
     mergeServiceFiles()
 }
 
-mainClassName = 'edu.wpi.energetic_easter_bunnies.Main'
+mainClassName = 'edu.wpi.cs3733.D22.teamE.Main'
 
 repositories {
     mavenCentral()
@@ -23,7 +23,7 @@ repositories {
 }
 
 javafx {
-    version = "17"
+    version = "18"
     modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media']
 }
 
@@ -38,9 +38,11 @@ dependencies {
             'org.apache.derby:derbyclient:10.15.2.0',
             'org.apache.derby:derbytools:10.15.2.0',
 
+            'commons-io:commons-io:2.11.0',
             'org.slf4j:slf4j-api:1.7.30',
             'org.slf4j:slf4j-simple:1.7.30',
     )
+    compile fileTree(dir: 'libs', includes: ['*.jar'])
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",
@@ -51,6 +53,16 @@ dependencies {
 
 run {
     standardInput = System.in
+    doFirst {
+        jvmArgs += ['--add-opens', 'javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED']
+        jvmArgs += ['--add-opens', 'javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED']
+        jvmArgs += ['--add-exports', 'javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED']
+        jvmArgs += ['--add-exports', 'javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED']
+        jvmArgs += ['--add-opens', 'javafx.base/com.sun.javafx.event=ALL-UNNAMED']
+        jvmArgs += ['--add-exports', 'javafx.base/com.sun.javafx.event=ALL-UNNAMED']
+        jvmArgs += ['--add-exports', 'javafx.controls/com.sun.javafx.scene.control.behavior=ALL-UNNAMED']
+        jvmArgs += ['--add-exports', 'javafx.base/com.sun.javafx.binding=ALL-UNNAMED']
+    }
 }
 
 test {
@@ -69,8 +81,8 @@ jar {
 }
 
 def codeCoverageExcludes = [
-        'edu.wpi.energetic_easter_bunnies.App',
-        'edu.wpi.energetic_easter_bunnies.Main',
+        'edu.wpi.cs3733.D22.teamE.App',
+        'edu.wpi.cs3733.D22.teamE.Main',
 ]
 
 jacoco {

@@ -3,9 +3,9 @@ package edu.wpi.energetic_easter_bunnies.database_testing;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import edu.wpi.energetic_easter_bunnies.database.Location;
-import edu.wpi.energetic_easter_bunnies.database.daos.DAO;
-import edu.wpi.energetic_easter_bunnies.database.daos.LocationDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.Location;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
+import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +25,7 @@ public class LocationDAOImplTesting {
     locationDAO.update(location);
     locationDAO.updateLocation(location, "2", "HALL");
     assertTrue(locationDAO.getAll().contains(location));
+    locationDAO.delete(location);
   }
 
   @Test

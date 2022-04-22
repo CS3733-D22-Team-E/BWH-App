@@ -3,9 +3,9 @@ package edu.wpi.energetic_easter_bunnies.database_testing;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import edu.wpi.energetic_easter_bunnies.database.Employee;
-import edu.wpi.energetic_easter_bunnies.database.daos.DAO;
-import edu.wpi.energetic_easter_bunnies.database.daos.EmployeeDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.Employee;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
+import edu.wpi.cs3733.D22.teamE.database.daos.EmployeeDAOImpl;
 import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 
