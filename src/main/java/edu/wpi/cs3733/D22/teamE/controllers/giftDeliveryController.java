@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
-import edu.wpi.cs3733.D22.teamE.database.daos.GiftRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.giftDeliveryRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -42,7 +41,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   @FXML TableColumn<giftDeliveryRequest, String> tableGreetingCard;
   @FXML TableColumn<giftDeliveryRequest, Boolean> tableIsUrgent;
 
-  GiftRequestDAOImpl giftRequestDAO;
+  // GiftRequestDAOImpl giftRequestDAO;
   ObservableList<giftDeliveryRequest> tableList;
 
   giftDeliveryRequest request = new giftDeliveryRequest(); // object to store inputted page data
@@ -62,7 +61,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     try {
-      giftRequestDAO = new GiftRequestDAOImpl();
+      // giftRequestDAO = new GiftRequestDAOImpl();
       populateLocationComboBoxes();
       populateGiftReqTable();
       giftOptionType
@@ -79,7 +78,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
    * @return list of giftDeliveryRequest objects in the database
    */
   protected ObservableList<giftDeliveryRequest> populateGiftRequestsList() {
-    List<giftDeliveryRequest> requests = giftRequestDAO.getAll();
+    List<giftDeliveryRequest> requests = system.getAllGiftRequests();
     tableList = FXCollections.observableArrayList();
     for (giftDeliveryRequest request : requests) {
       tableList.add(request);
@@ -136,7 +135,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   private void giftSendToDB() {
     try {
       request.setRequestDate(LocalDate.now());
-      system.updateGiftDelivery(request);
+      system.update(request);
       tableList.add(request);
     } catch (Exception e) {
       e.printStackTrace();

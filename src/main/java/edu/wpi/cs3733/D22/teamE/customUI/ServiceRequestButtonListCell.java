@@ -21,7 +21,7 @@ public class ServiceRequestButtonListCell extends CustomJFXButtonListCell<servic
           boolean edit =
               AccountsManager.getInstance().getAccount().getAuthorityLevel() >= Account.adminPerm;
           PopUp.createReq(item, button.getScene().getWindow(), edit, controller);
-          db.updateServiceRequest(item);
+          db.update(item);
         });
   }
 
