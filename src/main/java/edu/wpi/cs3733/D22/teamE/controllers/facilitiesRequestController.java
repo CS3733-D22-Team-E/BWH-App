@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.facilitiesRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -53,11 +54,7 @@ public class facilitiesRequestController extends serviceRequestPageController
 
   /** Constructor */
   public facilitiesRequestController() {
-    try {
-      system = new DAOSystem();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    system = DAOSystemSingleton.INSTANCE.getSystem();
   }
 
   @Override

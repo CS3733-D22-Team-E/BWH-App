@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.cs3733.D22.teamE.database.Location;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import java.net.URL;
 import java.sql.SQLException;
@@ -58,13 +59,7 @@ public abstract class serviceRequestPageController extends containsSideMenu {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    super.initialize(url, rb);
-    try {
-      system = new DAOSystem();
-      populateLocationComboBoxes();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    system = DAOSystemSingleton.INSTANCE.getSystem();
   }
 
   /**

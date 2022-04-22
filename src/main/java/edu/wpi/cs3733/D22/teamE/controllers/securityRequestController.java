@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.securityRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -41,7 +42,9 @@ public class securityRequestController extends serviceRequestPageController {
   securityRequest securityReq = new securityRequest();
 
   /** Constructor */
-  public securityRequestController() {}
+  public securityRequestController() {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+  }
 
   /**
    * Initializes the combo boxes and populates the request table
@@ -57,10 +60,9 @@ public class securityRequestController extends serviceRequestPageController {
           .getItems()
           .addAll("Aid", "Secure", "Danger", "Other: detail in other notes");
       timeFrameComboBox.getItems().addAll("ASAP", "<1 hour", "<1 day");
-
-      system = new DAOSystem();
       populateSecurityRequestTable();
-    } catch (SQLException e) {
+
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

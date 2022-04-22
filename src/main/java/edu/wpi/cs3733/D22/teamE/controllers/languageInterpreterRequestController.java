@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.languageInterpreterRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -44,14 +45,15 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   ObservableList<languageInterpreterRequest> tableList;
   languageInterpreterRequest request = new languageInterpreterRequest();
 
-  public languageInterpreterRequestController() {}
+  public languageInterpreterRequestController() {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+  }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     try {
       super.initialize(location, resources);
       languageOptions.getItems().addAll("English", "Spanish", "Russian", "Mandarin Chinese");
-      system = new DAOSystem();
       populateLanguageRequestTable();
 
     } catch (Exception e) {

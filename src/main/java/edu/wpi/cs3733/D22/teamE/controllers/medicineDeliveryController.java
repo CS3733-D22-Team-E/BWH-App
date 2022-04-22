@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
 import java.net.URL;
 import java.sql.SQLException;
@@ -66,7 +67,9 @@ public class medicineDeliveryController extends serviceRequestPageController
   ObservableList<String> units = FXCollections.observableArrayList("mg", "g", "mL");
 
   /** Constructor */
-  public medicineDeliveryController() {}
+  public medicineDeliveryController() {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+  }
 
   /**
    * Initializes the drops downs with the respective observable lists and the table columns with the
@@ -80,11 +83,6 @@ public class medicineDeliveryController extends serviceRequestPageController
     super.initialize(location, resources);
     medicine.setItems(medicines);
     unit.setItems(units);
-    try {
-      system = new DAOSystem();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
     populateMedicineTable();
   }
 

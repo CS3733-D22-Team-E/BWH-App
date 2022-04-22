@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.labRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -40,7 +41,9 @@ public class labRequestController extends serviceRequestPageController {
   DAOSystem system;
 
   /** Constructor */
-  public labRequestController() {}
+  public labRequestController() {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+  }
 
   /**
    * Initializes the
@@ -50,17 +53,10 @@ public class labRequestController extends serviceRequestPageController {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    try {
-      super.initialize(location, resources);
-      labRequestType.getItems().addAll("Blood Sample", "Urine Sample", "X-Ray", "CAT Scan", "MRI");
-      timeFrameComboBox.getItems().addAll("ASAP", "<1 day", "<1 week");
-
-      system = new DAOSystem();
-      populateLabRequestTable();
-
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    super.initialize(location, resources);
+    labRequestType.getItems().addAll("Blood Sample", "Urine Sample", "X-Ray", "CAT Scan", "MRI");
+    timeFrameComboBox.getItems().addAll("ASAP", "<1 day", "<1 week");
+    populateLabRequestTable();
   }
 
   private void populateLabRequestTable() {

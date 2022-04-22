@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.customUI.CustomTextFieldTableCell;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.sanitationRequest;
 import edu.wpi.cs3733.D22.teamE.entity.sanitationRequestModel;
 import java.net.URL;
@@ -48,11 +49,7 @@ public class sanitationServiceController extends serviceRequestPageController {
 
   /** Constructor */
   public sanitationServiceController() {
-    try {
-      system = new DAOSystem();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    system = DAOSystemSingleton.INSTANCE.getSystem();
   }
 
   ObservableList<sanitationRequestModel> tableList = FXCollections.observableArrayList();
