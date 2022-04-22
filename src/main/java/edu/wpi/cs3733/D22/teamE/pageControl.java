@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class pageControlFacade {
+public class pageControl {
 
   public static boolean loadPage(String url, Stage stage) {
     try {
