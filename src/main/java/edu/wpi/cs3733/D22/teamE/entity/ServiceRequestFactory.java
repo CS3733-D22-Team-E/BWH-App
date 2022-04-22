@@ -1,6 +1,4 @@
-package edu.wpi.cs3733.D22.teamE.database;
-
-import edu.wpi.cs3733.D22.teamE.entity.*;
+package edu.wpi.cs3733.D22.teamE.entity;
 
 public class ServiceRequestFactory {
   public serviceRequest getServiceRequest(String serviceRequestType) {

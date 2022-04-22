@@ -1,9 +1,9 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
-import edu.wpi.cs3733.D22.teamE.database.Employee;
-import edu.wpi.cs3733.D22.teamE.database.Location;
-import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
-import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
+import edu.wpi.cs3733.D22.teamE.entity.Employee;
+import edu.wpi.cs3733.D22.teamE.entity.Location;
+import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
+import edu.wpi.cs3733.D22.teamE.entity.medicineDelivery;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import java.sql.SQLException;

@@ -4,7 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import edu.wpi.cs3733.D22.teamE.database.Location;
+import edu.wpi.cs3733.D22.teamE.entity.Location;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import java.net.URL;
@@ -44,12 +45,19 @@ public abstract class serviceRequestPageController extends containsSideMenu {
   @FXML TableColumn<serviceRequest, String> tableStaffAssignee;
   @FXML TableColumn<serviceRequest, String> tableOtherNotes;
 
+  DAOSystem db;
+
   LocationDAOImpl locationDB;
   HashMap<String, String> roomNameToRoomID;
   HashMap<String, String> roomIDToRoomName;
 
   serviceRequestPageController() {
     super();
+    try {
+      db = new DAOSystem();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -167,4 +175,10 @@ public abstract class serviceRequestPageController extends containsSideMenu {
    */
   @FXML
   public abstract void submitButton(ActionEvent event) throws SQLException;
+
+  public Location getLocation(String RoomID) {
+    return db.getLocation(RoomID);
+  }
+
+
 }

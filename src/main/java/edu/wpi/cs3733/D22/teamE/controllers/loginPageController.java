@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import static edu.wpi.cs3733.D22.teamE.RSAEncryption.validatePassword;
-import static edu.wpi.cs3733.D22.teamE.entity.loginPage.verifyUser;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -9,7 +8,7 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.ardComm;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
-import edu.wpi.cs3733.D22.teamE.database.Employee;
+import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.EmployeeDAOImpl;

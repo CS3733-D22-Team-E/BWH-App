@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.controllers.dashboard.DashboardHandler;
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
+import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

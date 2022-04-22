@@ -1,6 +1,13 @@
-package edu.wpi.cs3733.D22.teamE.database;
+package edu.wpi.cs3733.D22.teamE.entity;
 
-public abstract class Equipment {
+import edu.wpi.cs3733.D22.teamE.database.DBConnect;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public abstract class Equipment implements EntityInterface {
   private final String equipmentID;
   private boolean isInUse;
   private boolean isClean;
@@ -40,6 +47,24 @@ public abstract class Equipment {
 
   public void setNumID(int numID) {
     this.numID = numID;
+  }
+
+  @Override
+  public Location getLocation() {
+    return null;
+  }
+
+  @Override
+  public void setLocation(String NodeID) {
+  }
+
+  @Override
+  public void setLocation(Location location) {
+  }
+
+  @Override
+  public void setLocation(int xcoord, int ycoord) {
+
   }
 
   public void setisInUse(boolean inUse) {

@@ -1,8 +1,8 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-import edu.wpi.cs3733.D22.teamE.database.Location;
-import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
+import edu.wpi.cs3733.D22.teamE.entity.Location;
+import edu.wpi.cs3733.D22.teamE.entity.medicineDelivery;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import java.sql.*;
 import java.util.ArrayList;
