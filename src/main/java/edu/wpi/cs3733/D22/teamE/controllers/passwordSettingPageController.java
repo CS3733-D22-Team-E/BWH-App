@@ -1,29 +1,31 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.RSAEncryption;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
-import edu.wpi.cs3733.D22.teamE.database.daos.AccountDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.entity.passwordSettingRequest;
-import edu.wpi.cs3733.D22.teamE.pageControlFacade;
-import java.io.IOException;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-public class passwordSettingPageController extends containsSideMenu {
-  @FXML TextField newPassword;
-  @FXML TextField confirmNewPassword;
-  @FXML Button returnButton;
-  passwordSettingRequest passwordSettingRequest = new passwordSettingRequest();
+public class passwordSettingPageController {
+  @FXML JFXTextField newPassword;
+  @FXML JFXTextField confirmNewPassword;
+  @FXML JFXButton submitButton;
 
-  public passwordSettingPageController() {}
+  private DAOSystem db;
+
+  public passwordSettingPageController() {
+    try {
+      db = new DAOSystem();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
   /**
    * Takes the inputs from the buttons, drop downs, text fields etc. and stores that data in the
    * mealDeliveryRequest object.
@@ -32,52 +34,41 @@ public class passwordSettingPageController extends containsSideMenu {
    */
   public void submitButton(ActionEvent event) throws SQLException {
     try {
+      passwordSettingRequest passwordSettingRequest = new passwordSettingRequest();
       passwordSettingRequest.setNewPassword(newPassword.getText());
       passwordSettingRequest.setConfirmNewPassword(confirmNewPassword.getText());
 
+      submitPasswordChange(passwordSettingRequest);
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
       PopUp.createWarning(
-          "Warning : A required value was not filled", drawer.getScene().getWindow());
+          "Warning : A required value was not filled", newPassword.getScene().getWindow());
     }
-    String password = newPassword.getText();
-    String confirmation = confirmNewPassword.getText();
+  }
+
+  private void submitPasswordChange(passwordSettingRequest r) {
+
+    String password = r.getNewPassword();
+    String confirmation = r.getConfirmNewPassword();
     System.out.println(password);
     System.out.println(confirmation);
     if (!password.equals(confirmation)) {
       PopUp.createWarning(
-          "Warning : Confirmation Doesn't Match Password!", drawer.getScene().getWindow());
+          "Warning : Confirmation Doesn't Match Password!", newPassword.getScene().getWindow());
     } else {
       try {
         Account account = AccountsManager.getInstance().getAccount();
-        account.setPasswordHash(RSAEncryption.generatePasswordHASH(newPassword.getText()));
-        DAO<Account> accountDAO = new AccountDAOImpl();
-        accountDAO.delete(account);
-        accountDAO.update(account);
+        account.setPasswordHash(RSAEncryption.generatePasswordHASH(r.getNewPassword()));
+        db.updateAccount(account);
       } catch (Exception e) {
         e.printStackTrace();
-        PopUp.createWarning("Error: password change not successful", drawer.getScene().getWindow());
+        PopUp.createWarning(
+            "Error: password change not successful", newPassword.getScene().getWindow());
       }
       PopUp.createWarning(
-          "Congrats! you have reset your password successfully", drawer.getScene().getWindow());
+          "Congrats! you have reset your password successfully",
+          newPassword.getScene().getWindow());
+      newPassword.getScene().getWindow().hide();
     }
-  }
-
-  /**
-   * clears all of the inputs on the page.
-   *
-   * @param event Pressing the resetButton
-   */
-  @FXML
-  private void resetButton(ActionEvent event) {
-    newPassword.clear();
-    confirmNewPassword.clear();
-  }
-
-  @FXML
-  public void returnButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("profilePage.fxml", thisStage);
-    // pageControlFacade.loadPage("helpPage.fxml", thisStage);
   }
 }
