@@ -2,7 +2,8 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
-import edu.wpi.cs3733.D22.teamE.database.daos.MealDeliveryRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.mealDeliveryRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -48,11 +49,14 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML TableColumn<mealDeliveryRequest, String> tableRequestStatus;
   @FXML TableColumn<mealDeliveryRequest, Boolean> tableUrgent;
   @FXML TableColumn<mealDeliveryRequest, String> tableOtherNotes;
-  MealDeliveryRequestDAOImpl mealRequestDB;
+
+  DAOSystem system;
   ObservableList<mealDeliveryRequest> tableList;
 
   /** Constructor */
-  public mealDeliveryController() {}
+  public mealDeliveryController() {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+  }
 
   /** Creating the ObservableLists for the pages' drop down. */
   ObservableList<String> meals =
@@ -78,16 +82,11 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     entreeDropDown.setItems(meals);
     beverageDropDown.setItems(beverages);
     dessertDropDown.setItems(desserts);
-    try {
-      mealRequestDB = new MealDeliveryRequestDAOImpl();
-      populateMealRequestTable();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    populateMealRequestTable();
   }
 
   protected ObservableList<mealDeliveryRequest> populateMealReqList() {
-    List<mealDeliveryRequest> list = mealRequestDB.getAll();
+    List<mealDeliveryRequest> list = system.getAllMealRequests();
     tableList = FXCollections.observableArrayList();
     for (mealDeliveryRequest mR : list) {
       tableList.add(mR);
@@ -167,7 +166,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   }
 
   private void mealSendToDB(mealDeliveryRequest meal) throws SQLException {
-    mealRequestDB.update(meal);
+    system.update(meal);
     tableList.add(meal);
   }
 
