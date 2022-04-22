@@ -1,63 +1,140 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import edu.wpi.cs3733.D22.teamE.PopUp;
+import edu.wpi.cs3733.D22.teamE.database.daos.LanguageRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.languageInterpreterRequest;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class languageInterpreterRequestController extends serviceRequestPageController
     implements Initializable {
 
-  @FXML private ChoiceBox<String> languageSelection;
-  private String[] langList = {"English", "Spanish", "Russian", "Mandarin Chinese"};
+  @FXML ComboBox<String> languageOptions;
+  @FXML CheckBox isUrgent;
+  @FXML TextField requestStatus;
+  @FXML TextField staffAssignee;
+  @FXML DatePicker startDate;
+  @FXML DatePicker endDate;
+  @FXML TextField notes;
 
-  @FXML TextField noteField;
-  @FXML DatePicker startSelection;
-  @FXML DatePicker endSelection;
+  @FXML TableView<languageInterpreterRequest> requestsTable;
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
+  @FXML TableColumn<languageInterpreterRequest, String> tableLanguageType;
+  @FXML TableColumn<languageInterpreterRequest, String> tableStaffAssignee;
+  @FXML TableColumn<languageInterpreterRequest, Boolean> tableUrgent;
+  @FXML TableColumn<languageInterpreterRequest, String> tableLocNodeID;
+  @FXML TableColumn<languageInterpreterRequest, String> tableRequestDate;
+  @FXML TableColumn<languageInterpreterRequest, LocalDate> tableDeliveryDate;
+  @FXML TableColumn<languageInterpreterRequest, LocalDate> tableOtherNotes;
 
-    languageSelection.setValue("Select Language");
-    languageSelection.getItems().addAll(langList);
-  }
-
-  languageInterpreterRequest languageInterpreterRequest = new languageInterpreterRequest();
+  LanguageRequestDAOImpl languageRequestDAO;
+  ObservableList<languageInterpreterRequest> tableList;
+  languageInterpreterRequest request = new languageInterpreterRequest();
 
   public languageInterpreterRequestController() {}
 
-  @FXML
-  public void submitButton(ActionEvent event) {
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
     try {
-      /*      languageInterpreterRequest.setFloorSelected(floorSelection.getValue());
-      languageInterpreterRequest.setLanguageSelected(languageSelection.getValue());
-      languageInterpreterRequest.setRoomSelected(roomSelection.getValue());
-      languageInterpreterRequest.setEndDate(endSelection.getValue());
-      languageInterpreterRequest.setStartDate(startSelection.getValue());
-      languageInterpreterRequest.setOtherNotes(notes.getText());*/
+      super.initialize(location, resources);
+      languageOptions.getItems().addAll("English", "Spanish", "Russian", "Mandarin Chinese");
+      languageRequestDAO = new LanguageRequestDAOImpl();
+      populateLanguageRequestTable();
+
+    } catch (Exception e) {
+      System.out.println("Language Controller initialization failed!");
+      e.printStackTrace();
+    }
+  }
+
+  private void populateLanguageRequestTable() {
+    ObservableList<languageInterpreterRequest> languageRequests = populateLanguageRequestList();
+
+    tableLanguageType.setCellValueFactory(new PropertyValueFactory<>("language"));
+    tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
+    tableUrgent.setCellValueFactory(new PropertyValueFactory<>("isUrgent"));
+    tableLocNodeID.setCellValueFactory(
+        new Callback<
+            TableColumn.CellDataFeatures<languageInterpreterRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TableColumn.CellDataFeatures<languageInterpreterRequest, String> param) {
+            languageInterpreterRequest curLangRequest = param.getValue();
+            return new SimpleStringProperty(roomIDToRoomName.get(curLangRequest.getRoomID()));
+          }
+        });
+    tableRequestDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
+    tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
+    tableOtherNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
+
+    requestsTable.setItems(languageRequests);
+  }
+
+  protected ObservableList<languageInterpreterRequest> populateLanguageRequestList() {
+    List<languageInterpreterRequest> requests = languageRequestDAO.getAll();
+    tableList = FXCollections.observableArrayList();
+    for (languageInterpreterRequest request : requests) {
+      tableList.add(request);
+    }
+    return tableList;
+  }
+
+  @FXML
+  public void submitButton(ActionEvent event) throws SQLException {
+    try {
+      request.setFloorID(floor.getValue());
+      request.setRoomID(roomNameToRoomID.get(room.getValue()));
+      request.setRequestStatus(requestStatus.getText());
+      request.setStaffAssignee(staffAssignee.getText());
+      request.setIsUrgent(isUrgent.isSelected());
+      request.setOtherNotes(notes.getText());
+      request.setLanguage(languageOptions.getValue());
+      request.setRequestDate(startDate.getValue());
+      request.setDeliveryDate(endDate.getValue());
+
+      langSendToDB();
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
       PopUp.createWarning(
           "Warning : A required value was not filled", drawer.getScene().getWindow());
+      error.printStackTrace();
+    }
+  }
+
+  private void langSendToDB() throws SQLException {
+    try {
+      languageRequestDAO.update(request);
+      tableList.add(request);
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 
   @FXML
   private void resetButton(ActionEvent event) {
     floor.getSelectionModel().clearSelection();
-    languageSelection.getSelectionModel().clearSelection();
     room.getSelectionModel().clearSelection();
-    floor.setValue("Select Floor");
-    room.setValue("Select Room");
-    languageSelection.setValue("Select Language");
-    startSelection.getEditor().clear();
-    endSelection.getEditor().clear();
+    languageOptions.getSelectionModel().clearSelection();
+    isUrgent.setSelected(false);
+    requestStatus.clear();
+    staffAssignee.clear();
+    startDate.getEditor().clear();
+    endDate.getEditor().clear();
     notes.clear();
   }
 }

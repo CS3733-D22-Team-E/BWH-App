@@ -17,15 +17,15 @@ public class LanguageRequestDAOImpl implements DAO<languageInterpreterRequest> {
     ResultSet rs = statement.executeQuery();
     while (rs.next()) {
       String langInterpReqID = rs.getString("LAN_INTERP_REQ_ID");
-      String otherNotes = rs.getString("OTHERNOTES");
-      String floorID = rs.getString("FLOOR");
-      String roomID = rs.getString("DELIVERYLOCATIONID");
-      boolean isUrgent = rs.getBoolean("ISURGENT");
-      String status = rs.getString("STATUS");
-      String staffAssignee = rs.getString("ASSIGNEE");
       java.sql.Date requestDate = rs.getDate("REQUEST_DATE");
       java.sql.Date deliveryDate = rs.getDate("DELIVERY_DATE");
+      String status = rs.getString("STATUS");
+      String staffAssignee = rs.getString("ASSIGNEE");
+      boolean isUrgent = rs.getBoolean("ISURGENT");
+      String roomID = rs.getString("ROOMID");
+      String floorID = rs.getString("FLOOR");
       String language = rs.getString("LANGUAGE");
+      String otherNotes = rs.getString("OTHERNOTES");
 
       languageInterpreterRequest request =
           new languageInterpreterRequest(
@@ -36,9 +36,9 @@ public class LanguageRequestDAOImpl implements DAO<languageInterpreterRequest> {
               isUrgent,
               status,
               staffAssignee,
-              languageInterpreterRequest.Language.valueOf(language),
-              deliveryDate.toLocalDate(),
-              requestDate.toLocalDate());
+              language,
+              requestDate.toLocalDate(),
+              deliveryDate.toLocalDate());
       languageRequests.add(request);
     }
     rs.close();
@@ -65,7 +65,7 @@ public class LanguageRequestDAOImpl implements DAO<languageInterpreterRequest> {
     languageRequests.add(item);
 
     try {
-      String query = "INSERT INTO SANITATIONREQUEST VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      String query = "INSERT INTO LANGUAGEREQUEST VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, item.getServiceRequestID());
       statement.setDate(2, Date.valueOf(item.getRequestDate()));
@@ -75,13 +75,12 @@ public class LanguageRequestDAOImpl implements DAO<languageInterpreterRequest> {
       statement.setBoolean(6, item.getIsUrgent());
       statement.setString(7, item.getRoomID());
       statement.setString(8, item.getFloorID());
-      statement.setString(9, item.getLanguageValue());
+      statement.setString(9, item.getLanguage());
       statement.setString(10, item.getOtherNotes());
 
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(
-          "Add Sanitation Request failed!"); // TODO: Come up with a better catch block
+      System.out.println("Add Language Request failed!"); // TODO: Come up with a better catch block
     }
   }
 
