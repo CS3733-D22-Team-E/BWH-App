@@ -1,11 +1,11 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
+import edu.wpi.cs3733.D22.teamE.database.*;
 import edu.wpi.cs3733.D22.teamE.database.Employee;
-import edu.wpi.cs3733.D22.teamE.database.Location;
-import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
-import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
+import edu.wpi.cs3733.D22.teamEAPI.database.dao.FloralRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamEAPI.entity.FloralServiceRequest;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -23,8 +23,10 @@ public class DAOSystem {
   private final ServiceRequestDAOImpl serviceRequestDAO;
   private final FacilitiesRequestDAOImpl facilitiesRequestDAO;
   private final GiftRequestDAOImpl giftRequestDAO;
+  private final FloralRequestDAOImpl floralRequestDAO;
 
   public DAOSystem() throws SQLException {
+    floralRequestDAO = new FloralRequestDAOImpl();
     accountDAO = new AccountDAOImpl();
     employeeDAO = new EmployeeDAOImpl();
     labRequestDAO = new LabRequestDAOImpl();
@@ -185,7 +187,19 @@ public class DAOSystem {
   }
 
   public List<serviceRequest> getAllServiceRequests() {
-    return serviceRequestDAO.getAll();
+    List<serviceRequest> l = serviceRequestDAO.getAll();
+    // now handle API service requests
+    List<FloralServiceRequest> floralL = this.getAllFloralRequests();
+    for (FloralServiceRequest r : floralL) {
+      floralRequest convertedReq = new floralRequest(r);
+      if (!l.contains(convertedReq)) l.add(convertedReq);
+    }
+    return l;
+  }
+
+  public List<FloralServiceRequest> getAllFloralRequests() {
+    return floralRequestDAO.getAll();
+    // return new ArrayList<FloralServiceRequest>();
   }
 
   public serviceRequest getServiceRequest(String id) {
@@ -193,7 +207,24 @@ public class DAOSystem {
   }
 
   public void updateServiceRequest(serviceRequest request) {
-    serviceRequestDAO.update(request);
+    if (request.getRequestType().equals(serviceRequest.Type.SERVICEREQUEST)) {
+      if (request instanceof floralRequest) {
+        FloralServiceRequest newReq = new FloralServiceRequest();
+        newReq.setRequestID(request.getServiceRequestID());
+        newReq.setRequestDate(request.getRequestDate());
+        newReq.setDeliveryDate(request.getDeliveryDate());
+        newReq.setAssignee(request.getStaffAssignee());
+        newReq.setDeliveryTime(((floralRequest) request).getDeliveryTime());
+        newReq.setFloor(request.getFloorID());
+        newReq.setRoomID(request.getRoomID());
+        newReq.setFlower(((floralRequest) request).getFlower());
+        newReq.setStatus(request.getRequestStatus());
+        newReq.setOtherNotes(request.getOtherNotes());
+        newReq.setUrgent(request.isUrgent());
+        floralRequestDAO.delete(floralRequestDAO.get(newReq.getRequestID()));
+        floralRequestDAO.update(newReq);
+      }
+    } else serviceRequestDAO.update(request);
   }
 
   public void deleteServiceRequest(serviceRequest request) {

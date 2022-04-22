@@ -195,18 +195,22 @@ public class statusPageController extends containsSideMenu {
   protected ObservableList<serviceRequestModel> populateList() {
     List<serviceRequest> list = db.getAllServiceRequests();
     ObservableList<serviceRequestModel> tableList = FXCollections.observableArrayList();
+    ArrayList<String> usedIDS = new ArrayList<>();
     for (serviceRequest r : list) {
-      tableList.add(
-          new serviceRequestModel(
-              r.getServiceRequestID(),
-              r.getRequestStatus(),
-              r.getRequestType().toString(),
-              r.getStaffAssignee(),
-              r.getRequestDate().toString(),
-              ((r.getDeliveryDate() == null) ? "" : r.getDeliveryDate().toString()),
-              r.getIsUrgent(),
-              r.getOtherNotes(),
-              r));
+      if (!usedIDS.contains(r.getServiceRequestID())) {
+        usedIDS.add(r.getServiceRequestID());
+        tableList.add(
+            new serviceRequestModel(
+                r.getServiceRequestID(),
+                r.getRequestStatus(),
+                r.getRequestType().toString(),
+                r.getStaffAssignee(),
+                r.getRequestDate().toString(),
+                ((r.getDeliveryDate() == null) ? "" : r.getDeliveryDate().toString()),
+                r.getIsUrgent(),
+                r.getOtherNotes(),
+                r));
+      }
     }
     return tableList;
   }
