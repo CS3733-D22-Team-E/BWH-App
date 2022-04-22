@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXToggleButton;
+import edu.wpi.cs3733.D22.teamE.CallAPI;
 import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.pageButtons;
 import edu.wpi.cs3733.D22.teamE.pageControlFacade;
@@ -37,6 +38,7 @@ public class mainController implements pageButtons {
   @FXML HBox authors;
   @FXML Button helpButton;
   @FXML JFXToggleButton databaseSwitchButton;
+  @FXML Button apiButton;
 
   @FXML private Button btnMode;
   @FXML private ImageView imgMode;
@@ -220,6 +222,11 @@ public class mainController implements pageButtons {
     } else {
       databaseMode = "EMBEDDED_INSTANCE";
     }
+  }
+
+  @FXML
+  public void apiButton(ActionEvent event) {
+    CallAPI.getInstance().openAPI();
   }
 
   public static String getDatabaseMode() {
