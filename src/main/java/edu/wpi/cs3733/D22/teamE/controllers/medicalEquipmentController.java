@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.*;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
 import java.net.URL;
@@ -46,6 +47,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
   // MedicalEquipmentDAOImpl medEquipmentDB;
   // LocationDAOImpl locationDB;
 
+  DAOSystem system;
   ObservableList<medicalEquipmentRequest> tableList;
 
   public medicalEquipmentController() {

@@ -7,7 +7,7 @@ import edu.wpi.cs3733.D22.teamE.database.daos.AccountDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.entity.passwordSettingRequest;
-import edu.wpi.cs3733.D22.teamE.pageControlFacade;
+import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
@@ -77,7 +77,7 @@ public class passwordSettingPageController extends containsSideMenu {
   @FXML
   public void returnButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("profilePage.fxml", thisStage);
+    pageControl.loadPage("profilePage.fxml", thisStage);
     // pageControlFacade.loadPage("helpPage.fxml", thisStage);
   }
 }

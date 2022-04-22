@@ -7,7 +7,7 @@ import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.ServiceRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
-import edu.wpi.cs3733.D22.teamE.pageControlFacade;
+import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -557,6 +557,6 @@ public class mapPageController extends containsSideMenu implements Initializable
   public void mapEditorButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mapBox.getScene().getWindow();
 
-    pageControlFacade.loadPage("mapEditor.fxml", thisStage);
+    pageControl.loadPage("mapEditor.fxml", thisStage);
   }
 }

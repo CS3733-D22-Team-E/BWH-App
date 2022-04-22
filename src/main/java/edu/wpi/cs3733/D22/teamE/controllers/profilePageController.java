@@ -8,7 +8,7 @@ import edu.wpi.cs3733.D22.teamE.database.Employee;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
-import edu.wpi.cs3733.D22.teamE.pageControlFacade;
+import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -84,7 +84,7 @@ public class profilePageController extends containsSideMenu implements Initializ
   @FXML
   public void resetPassword(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControlFacade.loadPage("passwordSettingPage.fxml", thisStage);
+    pageControl.loadPage("passwordSettingPage.fxml", thisStage);
     // pageControlFacade.loadPage("helpPage.fxml", thisStage);
   }
 }

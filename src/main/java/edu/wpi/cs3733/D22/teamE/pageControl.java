@@ -4,10 +4,11 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class pageControlFacade {
+public class pageControl {
 
   public static boolean loadPage(String url, Stage stage) {
     try {
@@ -18,6 +19,21 @@ public class pageControlFacade {
       p.getChildren().add(root);
 
       stage.getScene().setRoot(p);
+      return true;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return false;
+    }
+  }
+
+  public static boolean loadPage(String url) {
+    try {
+      Stage newStage = new Stage();
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(Main.class.getResource("view/" + url));
+      Parent root = loader.load();
+      newStage.setScene(new Scene(root));
+      newStage.show();
       return true;
     } catch (IOException e) {
       e.printStackTrace();
