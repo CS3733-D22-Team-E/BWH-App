@@ -29,12 +29,10 @@ public class facilitiesRequestController extends serviceRequestPageController
     implements Initializable {
   @FXML JFXComboBox<String> facilitiesOptionType;
   @FXML DatePicker deliveryDate; // when it will be serviced?
-  @FXML DatePicker requestDate;
   @FXML CheckBox isUrgent;
   @FXML TextField timeFrame;
   @FXML TableView<facilitiesRequest> requestsTable;
-  // facilitiesRequest
-  @FXML TableColumn<facilitiesRequest, String> tableRequestType;
+  @FXML TableColumn<facilitiesRequest, String> tableType;
   @FXML TableColumn<facilitiesRequest, String> tableFloorID;
   @FXML TableColumn<facilitiesRequest, String> tableRoomID; // TL
   @FXML TableColumn<facilitiesRequest, String> tableStaffAssignee;
@@ -50,6 +48,10 @@ public class facilitiesRequestController extends serviceRequestPageController
   facilitiesRequest request = new facilitiesRequest(); // object to store inputted page data
 
   DAOSystem system;
+
+  ObservableList<String> requestTypes =
+          FXCollections.observableArrayList(
+                  "Elevator", "Light", "Sink", "Heating/Cooling", "Power Outage", "Maintenance", "Network Problem", "Other");
 
   /** Constructor */
   public facilitiesRequestController() {
@@ -69,7 +71,7 @@ public class facilitiesRequestController extends serviceRequestPageController
       populateFacilitiesReqTable();
       facilitiesOptionType
           .getItems()
-          .addAll("Power Outage", "Maintenance", "Network Problem", "Other");
+          .addAll(requestTypes);
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -108,10 +110,9 @@ public class facilitiesRequestController extends serviceRequestPageController
     tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
     tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
     tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
-    // tableNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
+    tableNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
     tableIsUrgent.setCellValueFactory(new PropertyValueFactory<>("isUrgent"));
-    // tableTimeFrame.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
-
+    tableTimeFrame.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
     requestsTable.setItems(facilitiesRequests);
   }
 
@@ -123,6 +124,7 @@ public class facilitiesRequestController extends serviceRequestPageController
       request.setRoomID(roomNameToRoomID.get(room.getValue()));
       request.setStaffAssignee(staffAssignee.getText());
       request.setRequestDate(LocalDate.now());
+
       request.setDeliveryDate(deliveryDate.getValue());
       request.setRequestStatus(requestStatus.getText());
       request.setOtherNotes(notes.getText());
@@ -160,7 +162,7 @@ public class facilitiesRequestController extends serviceRequestPageController
     facilitiesOptionType.getSelectionModel().clearSelection();
     isUrgent.setSelected(false);
     deliveryDate.getEditor().clear();
-    requestDate.getEditor().clear();
+    timeFrame.clear();
     requestStatus.clear();
     staffAssignee.clear();
     notes.clear();
