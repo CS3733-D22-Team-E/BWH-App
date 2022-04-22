@@ -152,6 +152,9 @@
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="requestFields" text="All Existing Requests" VBox.vgrow="ALWAYS" />
                         <TableView fx:id="mealDeliveryTable" minHeight="100.0" minWidth="100.0" prefHeight="400.0" prefWidth="475.0" VBox.vgrow="ALWAYS">
+                           <placeholder>
+                              <Label text="There currently are no active service requests."/>
+                           </placeholder>
                            <columns>
                               <TableColumn fx:id="tableEntree" prefWidth="-1.0" text="Entree" />
                               <TableColumn fx:id="tableBeverage" prefWidth="-1.0" text="Beverage" />
