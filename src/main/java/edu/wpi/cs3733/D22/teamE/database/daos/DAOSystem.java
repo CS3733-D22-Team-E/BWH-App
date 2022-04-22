@@ -3,10 +3,8 @@ package edu.wpi.cs3733.D22.teamE.database.daos;
 import edu.wpi.cs3733.D22.teamE.database.*;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.*;
-import edu.wpi.cs3733.D22.teamE.pathfinding.*;
-import edu.wpi.cs3733.D22.teamE.database.Employee;
-import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
+import edu.wpi.cs3733.D22.teamE.pathfinding.*;
 import edu.wpi.cs3733.D22.teamEAPI.database.dao.FloralRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamEAPI.entity.FloralServiceRequest;
 import java.sql.SQLException;
@@ -28,8 +26,6 @@ public class DAOSystem {
   private final SanitationRequestDAOImpl sanitationRequestDAO;
   private final SecurityRequestDAOImpl securityRequestDAO;
   private final ServiceRequestDAOImpl serviceRequestDAO;
-  private final FacilitiesRequestDAOImpl facilitiesRequestDAO;
-  private final GiftRequestDAOImpl giftRequestDAO;
   private final FloralRequestDAOImpl floralRequestDAO;
 
   public DAOSystem() throws SQLException {
@@ -55,6 +51,7 @@ public class DAOSystem {
   public List<Account> getAllAccounts() {
     return accountDAO.getAll();
   }
+
   /*
     public List<Edge> getAllEdges() {
       return edgesDAO.getAll();
@@ -109,13 +106,21 @@ public class DAOSystem {
   }
 
   public List<serviceRequest> getAllServiceRequests() {
-    return serviceRequestDAO.getAll();
+    List<serviceRequest> l = serviceRequestDAO.getAll();
+    // now handle API service requests
+    List<FloralServiceRequest> floralL = this.getAllFloralRequests();
+    for (FloralServiceRequest r : floralL) {
+      floralRequest convertedReq = new floralRequest(r);
+      if (!l.contains(convertedReq)) l.add(convertedReq);
+    }
+    return l;
   }
 
   // Get Object methods
   public Account getAccount(String id) {
     return accountDAO.get(id);
   }
+
   /*
     public Edge getEdge(String id) {
       return edgesDAO.get(id);
@@ -143,6 +148,10 @@ public class DAOSystem {
 
   public Location getLocation(String id) {
     return locationDAO.get(id);
+  }
+
+  public Location getLocation(int x, int y) {
+    return locationDAO.get(x, y);
   }
 
   public mealDeliveryRequest getMealRequest(String id) {
@@ -177,6 +186,7 @@ public class DAOSystem {
   public void update(Account account) {
     accountDAO.update(account);
   }
+
   /*
     public void update(Edge edge) {
       edgesDAO.update(edge);
@@ -224,16 +234,6 @@ public class DAOSystem {
 
   public void update(sanitationRequest request) {
     sanitationRequestDAO.update(request);
-
-    public List<serviceRequest> getAllServiceRequests() {
-    List<serviceRequest> l = serviceRequestDAO.getAll();
-    // now handle API service requests
-    List<FloralServiceRequest> floralL = this.getAllFloralRequests();
-    for (FloralServiceRequest r : floralL) {
-      floralRequest convertedReq = new floralRequest(r);
-      if (!l.contains(convertedReq)) l.add(convertedReq);
-    }
-    return l;
   }
 
   public List<FloralServiceRequest> getAllFloralRequests() {
@@ -253,6 +253,7 @@ public class DAOSystem {
   public void delete(Account account) {
     accountDAO.delete(account);
   }
+
   /*
     public void delete(Edge edge) {
       edgesDAO.delete(edge);

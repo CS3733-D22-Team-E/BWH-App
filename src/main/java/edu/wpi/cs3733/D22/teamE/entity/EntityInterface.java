@@ -2,15 +2,15 @@ package edu.wpi.cs3733.D22.teamE.entity;
 
 public interface EntityInterface {
 
-    int getNumID();
+  int getNumID();
 
-    void setNumID(int num);
+  void setNumID(int num);
 
-    Location getLocation();
+  Location getLocation();
 
-    void setLocation(String NodeID);
+  void setLocation(String NodeID) throws NullPointerException;
 
-    void setLocation(Location location);
+  void setLocation(Location location) throws NullPointerException;
 
-    void setLocation(int xcoord, int ycoord);
+  void setLocation(int xcoord, int ycoord) throws NullPointerException;
 }

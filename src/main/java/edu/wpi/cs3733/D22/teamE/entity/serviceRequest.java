@@ -1,10 +1,56 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Random;
 
-public class serviceRequest {
+public class serviceRequest implements EntityInterface {
+
+  @Override
+  public int getNumID() {
+    return 0;
+  }
+
+  @Override
+  public void setNumID(int num) {
+
+  }
+
+  @Override
+  public Location getLocation() {
+    return DAOSystemSingleton.INSTANCE.getSystem().getLocation(roomID);
+  }
+
+  @Override
+  public void setLocation(String NodeID) throws NullPointerException {
+    Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(NodeID);
+    if (loc != null) {
+      this.roomID = loc.getNodeID();
+      this.floorID = loc.getFloor();
+    }
+    throw new NullPointerException("No Location There");
+  }
+
+  @Override
+  public void setLocation(Location location) throws NullPointerException {
+    if (location != null) {
+      this.roomID = location.getNodeID();
+      this.floorID = location.getFloor();
+    }
+    throw new NullPointerException("No Location There");
+  }
+
+  @Override
+  public void setLocation(int xcoord, int ycoord) throws NullPointerException {
+    Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(xcoord, ycoord);
+    if (loc != null) {
+      this.roomID = loc.getNodeID();
+      this.floorID = loc.getFloor();
+    }
+    throw new NullPointerException("No Location There");
+  }
 
   public enum Type {
     SANITATION_REQ {
@@ -150,9 +196,8 @@ public class serviceRequest {
     return roomID;
   }
 
-  public void setRoomID(String roomID) {
-    // todo : verify correct roomID
-    this.roomID = roomID;
+  public void setRoomID(String roomID) throws NullPointerException {
+    this.setLocation(roomID);
   }
 
   public String getOtherNotes() {
@@ -245,30 +290,6 @@ public class serviceRequest {
 
   public boolean isUrgent() {
     return isUrgent;
-  }
-
-  public int getxCoord() {
-    return xCoord;
-  }
-
-  public void setxCoord(int xCoord) {
-    this.xCoord = xCoord;
-  }
-
-  public void setxCoord(String xCoord) {
-    this.yCoord = Integer.parseInt(xCoord);
-  }
-
-  public int getyCoord() {
-    return yCoord;
-  }
-
-  public void setyCoord(int yCoord) {
-    this.yCoord = yCoord;
-  }
-
-  public void setyCoord(String yCoord) {
-    this.yCoord = Integer.parseInt(yCoord);
   }
 
   @Override

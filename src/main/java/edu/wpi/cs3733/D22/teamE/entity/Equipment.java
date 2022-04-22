@@ -1,11 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
-import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 
 public abstract class Equipment implements EntityInterface {
   private final String equipmentID;
@@ -41,30 +37,40 @@ public abstract class Equipment implements EntityInterface {
     return isInUse;
   }
 
+  @Override
   public int getNumID() {
     return numID;
   }
 
+  @Override
   public void setNumID(int numID) {
     this.numID = numID;
   }
 
   @Override
   public Location getLocation() {
-    return null;
+    String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
+    return DAOSystemSingleton.INSTANCE.getSystem().getLocation(myLoc);
   }
 
   @Override
-  public void setLocation(String NodeID) {
+  public void setLocation(String NodeID) throws NullPointerException{
+    if (DAOSystemSingleton.INSTANCE.getSystem().getLocation(NodeID) != null) {
+      this.currentLocation = NodeID;
+    }
   }
 
   @Override
-  public void setLocation(Location location) {
+  public void setLocation(Location location) throws NullPointerException {
+    this.currentLocation = location.getNodeID();
   }
 
   @Override
-  public void setLocation(int xcoord, int ycoord) {
-
+  public void setLocation(int xcoord, int ycoord) throws NullPointerException {
+   Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(xcoord, ycoord);
+    if (loc != null) {
+      this.currentLocation = loc.getNodeID();
+    }
   }
 
   public void setisInUse(boolean inUse) {

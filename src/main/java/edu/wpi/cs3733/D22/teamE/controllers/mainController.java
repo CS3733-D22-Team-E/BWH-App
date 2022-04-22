@@ -91,8 +91,7 @@ public class mainController implements pageButtons {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
     ;
 
-    pageControl.loadPage(
-        "mealDeliveryPage.fxml", thisStage); // TODO: Load exception at this line?
+    pageControl.loadPage("mealDeliveryPage.fxml", thisStage); // TODO: Load exception at this line?
   }
 
   @FXML

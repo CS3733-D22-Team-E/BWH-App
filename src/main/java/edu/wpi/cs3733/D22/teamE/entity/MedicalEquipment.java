@@ -1,12 +1,5 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
-import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 public class MedicalEquipment extends Equipment {
   private String med_equipmentID;
   private String equipmentType;

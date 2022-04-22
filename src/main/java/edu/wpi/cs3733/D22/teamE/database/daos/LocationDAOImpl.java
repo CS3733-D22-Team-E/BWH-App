@@ -68,6 +68,22 @@ public class LocationDAOImpl implements DAO<Location> {
   }
 
   /**
+   * Gets location with a given X and Y coordinate
+   *
+   * @param xCoord the X coordinate to be searched
+   * @param yCoord the Y coordinate to be searched
+   * @return location requested
+   */
+  public Location get(int xCoord, int yCoord) {
+    for(Location location : locations) {
+      if((location.getXcoord() == xCoord) && (location.getYcoord() == yCoord)) {
+        return location;
+      }
+    }
+    throw new NullPointerException();
+  }
+
+  /**
    * Gets a location with given numID in the arrayList
    *
    * @param numID - The numerical id of the location node
