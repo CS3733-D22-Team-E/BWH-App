@@ -41,12 +41,9 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   @FXML TableColumn<giftDeliveryRequest, String> tableGreetingCard;
   @FXML TableColumn<giftDeliveryRequest, Boolean> tableIsUrgent;
 
-  // GiftRequestDAOImpl giftRequestDAO;
   ObservableList<giftDeliveryRequest> tableList;
-
-  giftDeliveryRequest request = new giftDeliveryRequest(); // object to store inputted page data
-
   DAOSystem system;
+  giftDeliveryRequest request = new giftDeliveryRequest(); // object to store inputted page data
 
   /** Constructor */
   public giftDeliveryController() {
@@ -61,7 +58,6 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     try {
-      // giftRequestDAO = new GiftRequestDAOImpl();
       populateLocationComboBoxes();
       populateGiftReqTable();
       giftOptionType

@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
-import edu.wpi.cs3733.D22.teamE.database.daos.MedicineDeliveryDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
 import java.net.URL;
 import java.sql.SQLException;
@@ -55,8 +55,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   @FXML TableColumn<medicineDelivery, String> tableProgress;
   @FXML TableColumn<medicineDelivery, String> tableNotes;
 
-  MedicineDeliveryDAOImpl medicineDeliveryDB;
-
+  DAOSystem system;
   ObservableList<medicineDelivery> tableList;
 
   /** Creating the ObservableList of medicines and units for the drop downs. */
@@ -82,7 +81,7 @@ public class medicineDeliveryController extends serviceRequestPageController
     medicine.setItems(medicines);
     unit.setItems(units);
     try {
-      medicineDeliveryDB = new MedicineDeliveryDAOImpl();
+      system = new DAOSystem();
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -186,7 +185,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   }
 
   private void medicineSendToDB(medicineDelivery medicineDelivery) throws SQLException {
-    medicineDeliveryDB.update(medicineDelivery);
+    system.update(medicineDelivery);
     tableList.add(medicineDelivery);
   }
 
@@ -224,7 +223,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   }
 
   private ObservableList<medicineDelivery> populateMedicineDeliveriesList() {
-    List<medicineDelivery> list = medicineDeliveryDB.getAll();
+    List<medicineDelivery> list = system.getAllMedicineRequests();
     tableList = FXCollections.observableArrayList();
     for (medicineDelivery m : list) {
       tableList.add(m);

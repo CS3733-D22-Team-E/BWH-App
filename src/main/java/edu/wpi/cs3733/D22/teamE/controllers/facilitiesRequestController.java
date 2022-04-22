@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
-import edu.wpi.cs3733.D22.teamE.database.daos.FacilitiesRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.facilitiesRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -45,7 +44,7 @@ public class facilitiesRequestController extends serviceRequestPageController
   @FXML TableColumn<facilitiesRequest, Boolean> tableIsUrgent;
   @FXML TableColumn<facilitiesRequest, String> tableNotes;
 
-  FacilitiesRequestDAOImpl facilitiesRequestDAO;
+  // FacilitiesRequestDAOImpl facilitiesRequestDAO;
   ObservableList<facilitiesRequest> tableList;
 
   facilitiesRequest request = new facilitiesRequest(); // object to store inputted page data
@@ -65,7 +64,7 @@ public class facilitiesRequestController extends serviceRequestPageController
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     try {
-      facilitiesRequestDAO = new FacilitiesRequestDAOImpl();
+      // facilitiesRequestDAO = new FacilitiesRequestDAOImpl();
       populateLocationComboBoxes();
       populateFacilitiesReqTable();
       facilitiesOptionType
@@ -84,7 +83,7 @@ public class facilitiesRequestController extends serviceRequestPageController
    * @return list of giftDeliveryRequest objects in the database
    */
   protected ObservableList<facilitiesRequest> populateFacilitiesRequestsList() {
-    List<facilitiesRequest> requests = facilitiesRequestDAO.getAll();
+    List<facilitiesRequest> requests = system.getAllFacilitiesRequests();
     tableList = FXCollections.observableArrayList();
     for (facilitiesRequest request : requests) {
       tableList.add(request);

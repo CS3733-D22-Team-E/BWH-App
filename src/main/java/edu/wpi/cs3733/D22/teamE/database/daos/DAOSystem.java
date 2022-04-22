@@ -230,10 +230,10 @@ public class DAOSystem {
     accountDAO.delete(account);
   }
   /*
-  public void delete(Edge edge) {
-    edgesDAO.delete(edge);
-  }
-*/
+    public void delete(Edge edge) {
+      edgesDAO.delete(edge);
+    }
+  */
   public void delete(Employee employee) {
     employeeDAO.delete(employee);
   }
@@ -262,7 +262,7 @@ public class DAOSystem {
     mealDeliveryRequestDAO.delete(request);
   }
 
-  public void delete(MedicalEquipment equipment) { //TODO: Should honestly never be called?
+  public void delete(MedicalEquipment equipment) { // TODO: Should honestly never be called?
     medicalEquipmentDAO.delete(equipment);
   }
 
