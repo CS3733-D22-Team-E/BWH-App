@@ -314,6 +314,7 @@ public class DBCreation {
 
   public static void createTables() {
     try {
+      edu.wpi.cs3733.D22.teamEAPI.database.DBCreation.createFloralRequestTable();
       createTowerLocationTable();
       createEmployeesTable();
       createEquipmentTable();

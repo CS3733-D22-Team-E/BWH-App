@@ -6,25 +6,23 @@ import static edu.wpi.cs3733.D22.teamE.entity.loginPage.verifyUser;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
-import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.Employee;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.EmployeeDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
-import java.io.IOException;
+import edu.wpi.cs3733.D22.teamE.pageControlFacade;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 
@@ -43,44 +41,8 @@ public class loginPageController implements Initializable {
   public void submitLogin(ActionEvent event) {
     if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
 
-      FXMLLoader loader = new FXMLLoader();
+      pageControlFacade.loadPage("defaultPage.fxml", (Stage) passwordField.getScene().getWindow());
 
-      URL url = Main.class.getResource("view/defaultPage.fxml");
-      if (url != null) {
-        loader.setLocation(url);
-        Parent newRoot = null;
-        try {
-          newRoot = loader.load();
-          passwordField.getScene().setRoot(newRoot);
-        } catch (IOException | NullPointerException e) {
-          e.printStackTrace();
-        }
-      } else {
-        System.out.println("Path Doesn't Exist");
-      }
-    } else {
-      invalidWarning.setVisible(true);
-    }
-  }
-
-  public void submitLoginNoParam() {
-    if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
-
-      FXMLLoader loader = new FXMLLoader();
-
-      URL url = Main.class.getResource("view/defaultPage.fxml");
-      if (url != null) {
-        loader.setLocation(url);
-        Parent newRoot = null;
-        try {
-          newRoot = loader.load();
-          passwordField.getScene().setRoot(newRoot);
-        } catch (IOException | NullPointerException e) {
-          e.printStackTrace();
-        }
-      } else {
-        System.out.println("Path Doesn't Exist");
-      }
     } else {
       invalidWarning.setVisible(true);
     }
@@ -144,32 +106,40 @@ public class loginPageController implements Initializable {
     validator.setMessage("Input Required");
     try {
       db = new DAOSystem();
+      usernameField.getValidators().add(validator);
+      usernameField
+          .focusedProperty()
+          .addListener(
+              (o, oldVal, newVal) -> {
+                if (!newVal) usernameField.validate();
+              });
+
+      passwordField.getValidators().add(validator);
+      passwordField
+          .focusedProperty()
+          .addListener(
+              (o, oldVal, newVal) -> {
+                if (!newVal) passwordField.validate();
+              });
+      invalidWarning.setVisible(false);
+      usernameField.setOnKeyReleased(
+          event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+              if (passwordField.getText().isEmpty() || passwordField.getText().isBlank())
+                passwordField.requestFocus();
+              else submitLogin(new ActionEvent());
+            }
+          });
+      passwordField.setOnKeyReleased(
+          event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+              if (usernameField.getText().isBlank() || passwordField.getText().isEmpty())
+                usernameField.requestFocus();
+              else submitLogin(new ActionEvent());
+            }
+          });
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    usernameField.getValidators().add(validator);
-    usernameField
-        .focusedProperty()
-        .addListener(
-            (o, oldVal, newVal) -> {
-              if (!newVal) usernameField.validate();
-            });
-
-    passwordField.getValidators().add(validator);
-    passwordField
-        .focusedProperty()
-        .addListener(
-            (o, oldVal, newVal) -> {
-              if (!newVal) passwordField.validate();
-            });
-    invalidWarning.setVisible(false);
-    usernameField.setOnKeyReleased(
-        event -> {
-          if (event.getCode() == KeyCode.ENTER) passwordField.requestFocus();
-        });
-    passwordField.setOnKeyReleased(
-        event -> {
-          if (event.getCode() == KeyCode.ENTER) submitLoginNoParam();
-        });
   }
 }
