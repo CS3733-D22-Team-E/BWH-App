@@ -3,7 +3,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
-import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
+import edu.wpi.cs3733.D22.teamE.database.daos.GiftRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.giftDeliveryRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -42,19 +42,26 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   @FXML TableColumn<giftDeliveryRequest, String> tableGreetingCard;
   @FXML TableColumn<giftDeliveryRequest, Boolean> tableIsUrgent;
 
+  GiftRequestDAOImpl giftRequestDAO;
   ObservableList<giftDeliveryRequest> tableList;
+
+
   DAOSystem system;
-  giftDeliveryRequest request = new giftDeliveryRequest(); // object to store inputted page data
 
   /** Constructor */
   public giftDeliveryController() {
-    system = DAOSystemSingleton.INSTANCE.getSystem();
+    try {
+      system = new DAOSystem();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     try {
+      giftRequestDAO = new GiftRequestDAOImpl();
       populateLocationComboBoxes();
       populateGiftReqTable();
       giftOptionType
@@ -71,7 +78,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
    * @return list of giftDeliveryRequest objects in the database
    */
   protected ObservableList<giftDeliveryRequest> populateGiftRequestsList() {
-    List<giftDeliveryRequest> requests = system.getAllGiftRequests();
+    List<giftDeliveryRequest> requests = giftRequestDAO.getAll();
     tableList = FXCollections.observableArrayList();
     for (giftDeliveryRequest request : requests) {
       tableList.add(request);
@@ -129,7 +136,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   private void giftSendToDB(giftDeliveryRequest request) {
     try {
       request.setRequestDate(LocalDate.now());
-      system.update(request);
+      system.updateGiftDelivery(request);
       tableList.add(request);
     } catch (Exception e) {
       e.printStackTrace();

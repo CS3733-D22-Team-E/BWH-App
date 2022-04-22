@@ -221,7 +221,7 @@ public class statusPageController extends containsSideMenu {
         new ArrayList<>(requestTable.getSelectionModel().getSelectedItems());
     for (serviceRequestModel req : p) {
       serviceRequest r = db.getServiceRequest(req.getID());
-      db.delete(r);
+      db.deleteServiceRequest(r);
     }
     genTable();
   }

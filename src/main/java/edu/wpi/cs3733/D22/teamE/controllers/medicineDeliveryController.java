@@ -2,8 +2,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
-import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
-import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
+import edu.wpi.cs3733.D22.teamE.database.daos.MedicineDeliveryDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
 import java.net.URL;
 import java.sql.SQLException;
@@ -56,7 +55,8 @@ public class medicineDeliveryController extends serviceRequestPageController
   @FXML TableColumn<medicineDelivery, String> tableProgress;
   @FXML TableColumn<medicineDelivery, String> tableNotes;
 
-  DAOSystem system;
+  MedicineDeliveryDAOImpl medicineDeliveryDB;
+
   ObservableList<medicineDelivery> tableList;
 
   /** Creating the ObservableList of medicines and units for the drop downs. */
@@ -67,9 +67,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   ObservableList<String> units = FXCollections.observableArrayList("mg", "g", "mL");
 
   /** Constructor */
-  public medicineDeliveryController() {
-    system = DAOSystemSingleton.INSTANCE.getSystem();
-  }
+  public medicineDeliveryController() {}
 
   /**
    * Initializes the drops downs with the respective observable lists and the table columns with the
@@ -83,6 +81,11 @@ public class medicineDeliveryController extends serviceRequestPageController
     super.initialize(location, resources);
     medicine.setItems(medicines);
     unit.setItems(units);
+    try {
+      medicineDeliveryDB = new MedicineDeliveryDAOImpl();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
     populateMedicineTable();
   }
 
@@ -183,7 +186,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   }
 
   private void medicineSendToDB(medicineDelivery medicineDelivery) throws SQLException {
-    system.update(medicineDelivery);
+    medicineDeliveryDB.update(medicineDelivery);
     tableList.add(medicineDelivery);
   }
 
@@ -221,7 +224,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   }
 
   private ObservableList<medicineDelivery> populateMedicineDeliveriesList() {
-    List<medicineDelivery> list = system.getAllMedicineRequests();
+    List<medicineDelivery> list = medicineDeliveryDB.getAll();
     tableList = FXCollections.observableArrayList();
     for (medicineDelivery m : list) {
       tableList.add(m);
