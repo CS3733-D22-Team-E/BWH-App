@@ -25,4 +25,22 @@ public class CSVManagerTesting {
 
     assertTrue(new File("./CSVsaveFiles/" + filename).exists());
   }
+
+  @Test
+  public void testLoadEmployeesFile() throws SQLException, IOException {
+    DBCreation.createTables();
+    assertTrue(CSVManager.loadEmployeesCSV("Employees.csv"));
+  }
+
+  @Test
+  public void testLoadEquipmentFile() throws SQLException, IOException {
+    DBCreation.createTables();
+    assertTrue(CSVManager.loadEquipmentCSV("MedEquip.csv"));
+  }
+
+  @Test
+  public void testLoadMedEquipRequestFile() throws SQLException, IOException {
+    DBCreation.createTables();
+    assertTrue(CSVManager.loadMedEquipReqCSV("MedEquipRequest.csv"));
+  }
 }
