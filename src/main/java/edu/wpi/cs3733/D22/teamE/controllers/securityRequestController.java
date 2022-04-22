@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
-import edu.wpi.cs3733.D22.teamE.database.daos.SecurityRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.entity.securityRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -37,7 +37,7 @@ public class securityRequestController extends serviceRequestPageController {
 
   ObservableList<securityRequest> tableList;
 
-  SecurityRequestDAOImpl securityRequestDB;
+  DAOSystem system;
   securityRequest securityReq = new securityRequest();
 
   /** Constructor */
@@ -58,7 +58,7 @@ public class securityRequestController extends serviceRequestPageController {
           .addAll("Aid", "Secure", "Danger", "Other: detail in other notes");
       timeFrameComboBox.getItems().addAll("ASAP", "<1 hour", "<1 day");
 
-      securityRequestDB = new SecurityRequestDAOImpl();
+      system = new DAOSystem();
       populateSecurityRequestTable();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -87,7 +87,7 @@ public class securityRequestController extends serviceRequestPageController {
   }
 
   protected ObservableList<securityRequest> populateSecurityRequestList() {
-    List<securityRequest> list = securityRequestDB.getAll();
+    List<securityRequest> list = system.getAllSecurityRequests();
     tableList = FXCollections.observableArrayList();
     for (securityRequest l : list) {
       tableList.add(l);
@@ -117,7 +117,7 @@ public class securityRequestController extends serviceRequestPageController {
 
   private void securitySendToDB(securityRequest securityReq) {
     try {
-      securityRequestDB.update(securityReq);
+      system.update(securityReq);
       tableList.add(securityReq);
     } catch (Exception e) {
       e.printStackTrace();
