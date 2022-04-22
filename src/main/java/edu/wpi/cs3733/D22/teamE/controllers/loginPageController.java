@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import static edu.wpi.cs3733.D22.teamE.RSAEncryption.validatePassword;
-import static edu.wpi.cs3733.D22.teamE.entity.loginPage.verifyUser;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -12,7 +11,7 @@ import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.EmployeeDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
-import edu.wpi.cs3733.D22.teamE.pageControlFacade;
+import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -41,7 +40,7 @@ public class loginPageController implements Initializable {
   public void submitLogin(ActionEvent event) {
     if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
 
-      pageControlFacade.loadPage("defaultPage.fxml", (Stage) passwordField.getScene().getWindow());
+      pageControl.loadPage("defaultPage.fxml", (Stage) passwordField.getScene().getWindow());
 
     } else {
       invalidWarning.setVisible(true);
