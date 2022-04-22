@@ -3,7 +3,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
-import edu.wpi.cs3733.D22.teamE.database.daos.GiftRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.giftDeliveryRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -42,27 +42,19 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   @FXML TableColumn<giftDeliveryRequest, String> tableGreetingCard;
   @FXML TableColumn<giftDeliveryRequest, Boolean> tableIsUrgent;
 
-  GiftRequestDAOImpl giftRequestDAO;
   ObservableList<giftDeliveryRequest> tableList;
-
-  giftDeliveryRequest request = new giftDeliveryRequest(); // object to store inputted page data
-
   DAOSystem system;
+  giftDeliveryRequest request = new giftDeliveryRequest(); // object to store inputted page data
 
   /** Constructor */
   public giftDeliveryController() {
-    try {
-      system = new DAOSystem();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    system = DAOSystemSingleton.INSTANCE.getSystem();
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     try {
-      giftRequestDAO = new GiftRequestDAOImpl();
       populateLocationComboBoxes();
       populateGiftReqTable();
       giftOptionType
@@ -79,7 +71,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
    * @return list of giftDeliveryRequest objects in the database
    */
   protected ObservableList<giftDeliveryRequest> populateGiftRequestsList() {
-    List<giftDeliveryRequest> requests = giftRequestDAO.getAll();
+    List<giftDeliveryRequest> requests = system.getAllGiftRequests();
     tableList = FXCollections.observableArrayList();
     for (giftDeliveryRequest request : requests) {
       tableList.add(request);
@@ -113,6 +105,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   @Override
   public void submitButton(ActionEvent event) throws SQLException {
     try {
+      giftDeliveryRequest request = new giftDeliveryRequest(); // object to store inputted page data
       request.setGift(giftOptionType.getValue());
       request.setPatientName(patientName.getText());
       request.setFloorID(floor.getValue());
@@ -124,7 +117,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
       request.setOtherNotes(notes.getText());
       request.setIsUrgent(isUrgent.isSelected());
 
-      giftSendToDB();
+      giftSendToDB(request);
 
     } catch (NullPointerException e) {
       System.out.println("Error : Some Value is NULL");
@@ -133,10 +126,10 @@ public class giftDeliveryController extends serviceRequestPageController impleme
     }
   }
 
-  private void giftSendToDB() {
+  private void giftSendToDB(giftDeliveryRequest request) {
     try {
       request.setRequestDate(LocalDate.now());
-      system.updateGiftDelivery(request);
+      system.update(request);
       tableList.add(request);
     } catch (Exception e) {
       e.printStackTrace();

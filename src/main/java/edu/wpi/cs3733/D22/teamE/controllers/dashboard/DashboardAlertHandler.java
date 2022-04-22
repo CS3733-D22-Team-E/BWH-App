@@ -119,11 +119,7 @@ public class DashboardAlertHandler extends DashboardHandler {
     cleaningRequest.setOtherNotes("Automated request");
     cleaningRequest.setEquipmentQuantity(dirtyBedsAtLoc.size());
 
-    try {
-      medEqServiceReqDB.addMedEquipReq(cleaningRequest);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    medEqServiceReqDB.update(cleaningRequest);
   }
 
   private void getDirtyAndCleaningLocsBeds() {
@@ -240,10 +236,6 @@ public class DashboardAlertHandler extends DashboardHandler {
     cleaningRequest.setOtherNotes("Automated request");
     cleaningRequest.setEquipmentQuantity(dirtyInfusionPumps.size());
 
-    try {
-      medEqServiceReqDB.addMedEquipReq(cleaningRequest);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    medEqServiceReqDB.update(cleaningRequest);
   }
 }

@@ -48,7 +48,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="default-background" fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.mainController">
+<VBox id="default-background" fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.mainController">
    <children>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="1080.0" styleClass="header" VBox.vgrow="ALWAYS">
          <children>
@@ -310,7 +310,23 @@
                                     <Label layoutX="5.0" layoutY="76.0" prefHeight="17.0" prefWidth="68.0" text="Security Request" textAlignment="CENTER" />
                                  </children>
                               </Pane>
-                              <JFXTogglePane />
+                              <JFXTogglePane>
+                                 <children>
+                                    <Pane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Button fx:id="apiButton" alignment="CENTER" mnemonicParsing="false" onAction="#apiButton" styleClass="serviceButton">
+                                             <graphic>
+                                                <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@icons/security.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Label layoutX="-8.0" layoutY="76.0" prefHeight="17.0" prefWidth="100.0" text="Floral Delivery API" textAlignment="CENTER" />
+                                       </children>
+                                    </Pane>
+                                 </children></JFXTogglePane>
                            </children>
                            <opaqueInsets>
                               <Insets />

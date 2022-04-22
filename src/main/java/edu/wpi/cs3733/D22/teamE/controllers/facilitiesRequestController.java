@@ -3,13 +3,15 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
-import edu.wpi.cs3733.D22.teamE.database.daos.FacilitiesRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.facilitiesRequest;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -40,31 +42,27 @@ public class facilitiesRequestController extends serviceRequestPageController
   @FXML TableColumn<facilitiesRequest, String> tableStaffAssignee;
   @FXML TableColumn<facilitiesRequest, String> tableTimeFrame;
   @FXML TableColumn<facilitiesRequest, LocalDate> tableDeliveryDate;
+  @FXML TableColumn<facilitiesRequest, LocalDate> tableRequestDate;
   @FXML TableColumn<facilitiesRequest, String> tableRequestStatus;
   @FXML TableColumn<facilitiesRequest, Boolean> tableIsUrgent;
   @FXML TableColumn<facilitiesRequest, String> tableNotes;
 
-  FacilitiesRequestDAOImpl facilitiesRequestDAO;
+  // FacilitiesRequestDAOImpl facilitiesRequestDAO;
   ObservableList<facilitiesRequest> tableList;
 
-  facilitiesRequest request = new facilitiesRequest(); // object to store inputted page data
 
   DAOSystem system;
 
   /** Constructor */
   public facilitiesRequestController() {
-    try {
-      system = new DAOSystem();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    system = DAOSystemSingleton.INSTANCE.getSystem();
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     try {
-      facilitiesRequestDAO = new FacilitiesRequestDAOImpl();
+      // facilitiesRequestDAO = new FacilitiesRequestDAOImpl();
       populateLocationComboBoxes();
       populateFacilitiesReqTable();
       facilitiesOptionType
@@ -83,7 +81,7 @@ public class facilitiesRequestController extends serviceRequestPageController
    * @return list of giftDeliveryRequest objects in the database
    */
   protected ObservableList<facilitiesRequest> populateFacilitiesRequestsList() {
-    List<facilitiesRequest> requests = facilitiesRequestDAO.getAll();
+    List<facilitiesRequest> requests = system.getAllFacilitiesRequests();
     tableList = FXCollections.observableArrayList();
     for (facilitiesRequest request : requests) {
       tableList.add(request);
@@ -93,7 +91,7 @@ public class facilitiesRequestController extends serviceRequestPageController
 
   private void populateFacilitiesReqTable() {
     ObservableList<facilitiesRequest> facilitiesRequests = populateFacilitiesRequestsList();
-    // tableRequestType.setCellValueFactory(new PropertyValueFactory<>("facilities"));
+    tableRequestType.setCellValueFactory(new PropertyValueFactory<>("requestType"));
     tableRoomID.setCellValueFactory(
         new Callback<
             TableColumn.CellDataFeatures<facilitiesRequest, String>, ObservableValue<String>>() {
@@ -104,32 +102,33 @@ public class facilitiesRequestController extends serviceRequestPageController
             return new SimpleStringProperty(roomIDToRoomName.get(curFacReq.getRoomID()));
           }
         });
-    tableFloorID.setCellValueFactory(new PropertyValueFactory<>("FloorID"));
+    tableFloorID.setCellValueFactory(new PropertyValueFactory<>("floorID"));
     tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
-    tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
+    // tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
     tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
-    // tableNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
+    tableNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
     tableIsUrgent.setCellValueFactory(new PropertyValueFactory<>("isUrgent"));
     // tableTimeFrame.setCellValueFactory(new PropertyValueFactory<>("timeFrame"));
-
+    tableRequestDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
     requestsTable.setItems(facilitiesRequests);
   }
 
   @Override
   public void submitButton(ActionEvent event) throws SQLException {
     try {
-      request.setFacilitiesRequestType(facilitiesOptionType.getValue());
+      facilitiesRequest request = new facilitiesRequest(); // object to store inputted page data
+      request.setFacilitiesRequestType(facilitiesOptionType.getValue()); // getValue());
       request.setFloorID(floor.getValue());
       request.setRoomID(roomNameToRoomID.get(room.getValue()));
       request.setStaffAssignee(staffAssignee.getText());
-      request.setRequestDate(LocalDate.now());
+      // request.setRequestDate(LocalDate.now());
       request.setDeliveryDate(deliveryDate.getValue());
-      request.setRequestStatus(requestStatus.getText());
+      // request.setRequestStatus(requestStatus.getText());
       request.setOtherNotes(notes.getText());
       request.setIsUrgent(isUrgent.isSelected());
       request.setTimeFrame(timeFrame.getText());
 
-      facilitiesSendToDB();
+      facilitiesSendToDB(request);
 
     } catch (NullPointerException e) {
       System.out.println("Error : Some Value is NULL");
@@ -138,10 +137,10 @@ public class facilitiesRequestController extends serviceRequestPageController
     }
   }
 
-  private void facilitiesSendToDB() {
+  private void facilitiesSendToDB(facilitiesRequest request) {
     try {
       request.setRequestDate(LocalDate.now());
-      system.updateFacilitiesRequest(request);
+      system.update(request);
       tableList.add(request);
     } catch (Exception e) {
       e.printStackTrace();
@@ -158,10 +157,11 @@ public class facilitiesRequestController extends serviceRequestPageController
     floor.getSelectionModel().clearSelection();
     room.getSelectionModel().clearSelection();
     facilitiesOptionType.getSelectionModel().clearSelection();
+    timeFrame.clear();
     isUrgent.setSelected(false);
     deliveryDate.getEditor().clear();
-    requestDate.getEditor().clear();
-    requestStatus.clear();
+    // requestDate.getEditor().clear();
+    // requestStatus.clear();
     staffAssignee.clear();
     notes.clear();
   }

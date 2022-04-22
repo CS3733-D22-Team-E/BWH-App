@@ -4,8 +4,10 @@ import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.cs3733.D22.teamE.PopUp;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Insets;
@@ -16,6 +18,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class requestPageFactory {
+
+  private static DAOSystem db;
+
+  static {
+    try {
+      db = new DAOSystem();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
 
   public static Node getAsPage(Object targetRequest, Object returnObject, Object displayObject)
       throws InvocationTargetException, IllegalAccessException {
@@ -108,6 +120,7 @@ public class requestPageFactory {
               returnFields.get(i).setText(defVal.get(i));
             }
           }
+          db.updateServiceRequest(req);
         });
     ScrollPane p = new ScrollPane();
     p.setFitToWidth(true);

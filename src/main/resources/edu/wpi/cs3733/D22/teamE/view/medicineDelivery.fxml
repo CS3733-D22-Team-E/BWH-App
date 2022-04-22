@@ -227,6 +227,9 @@
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="requestFields" text="Current Requests" VBox.vgrow="ALWAYS" />
                             <TableView fx:id="medicineTable" VBox.vgrow="ALWAYS">
+                                <placeholder>
+                                    <Label text="There currently are no active service requests."/>
+                                </placeholder>
                                 <columns>
                                     <TableColumn fx:id="tableFloor" prefWidth="-1.0" text="Floor " />
                                     <TableColumn fx:id="tableRoom" prefWidth="-1.0" text="Room" />

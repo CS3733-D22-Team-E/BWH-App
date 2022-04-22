@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.customUI.CustomTextFieldTableCell;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.sanitationRequest;
 import edu.wpi.cs3733.D22.teamE.entity.sanitationRequestModel;
 import java.net.URL;
@@ -48,11 +49,7 @@ public class sanitationServiceController extends serviceRequestPageController {
 
   /** Constructor */
   public sanitationServiceController() {
-    try {
-      system = new DAOSystem();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    system = DAOSystemSingleton.INSTANCE.getSystem();
   }
 
   ObservableList<sanitationRequestModel> tableList = FXCollections.observableArrayList();
@@ -94,7 +91,7 @@ public class sanitationServiceController extends serviceRequestPageController {
 
   private void populateList() {
     tableList = FXCollections.observableArrayList();
-    List<sanitationRequest> l = system.getAllSanReq();
+    List<sanitationRequest> l = system.getAllSanitationRequests();
     for (sanitationRequest r : l) {
       tableList.add(new sanitationRequestModel(r));
     }
@@ -176,15 +173,11 @@ public class sanitationServiceController extends serviceRequestPageController {
   }
 
   private void sanSendToDB(sanitationRequest request) {
-    try {
-      request.setDeliveryDate(LocalDate.now());
-      request.setRequestDate(LocalDate.now());
-      system.addSanReq(request);
-      populateSanReqTable();
-      // tableList.add(new sanitationRequestModel(request));
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    request.setDeliveryDate(LocalDate.now());
+    request.setRequestDate(LocalDate.now());
+    system.update(request);
+    populateSanReqTable();
+    // tableList.add(new sanitationRequestModel(request));
   }
 
   /**

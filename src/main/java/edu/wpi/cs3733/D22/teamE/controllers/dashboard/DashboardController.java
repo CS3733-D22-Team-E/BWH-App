@@ -7,7 +7,7 @@ import edu.wpi.cs3733.D22.teamE.entity.Equipment;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
-import edu.wpi.cs3733.D22.teamE.pageControlFacade;
+import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -198,6 +198,6 @@ public class DashboardController extends containsSideMenu implements Initializab
   private void mapEditorButton(ActionEvent event) {
     Stage thisStage = (Stage) baseComponent.getScene().getWindow();
 
-    pageControlFacade.loadPage("map.fxml", thisStage);
+    pageControl.loadPage("map.fxml", thisStage);
   }
 }

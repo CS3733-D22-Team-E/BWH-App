@@ -41,7 +41,7 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
 
   public void printAll() {
     for (serviceRequest request : serviceRequests) {
-      System.out.println(request.getRequestType());
+      System.out.println(request.getRequestType() + " : " + request.getServiceRequestID());
     }
   }
 
