@@ -42,7 +42,6 @@ public class CustomJFXButtonTableCell<S> extends TableCell<S, serviceRequest> {
               AccountsManager.getInstance().getAccount().getAuthorityLevel() >= Account.adminPerm;
           System.out.println(edit);
           PopUp.createReq(item, button.getScene().getWindow(), edit, controller);
-          db.update(item);
         });
     if (empty || item == null) {
       setText(null);

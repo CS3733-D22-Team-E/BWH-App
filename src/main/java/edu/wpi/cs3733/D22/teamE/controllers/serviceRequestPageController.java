@@ -5,8 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.cs3733.D22.teamE.database.Location;
-import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
-import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
+import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import java.net.URL;
 import java.sql.SQLException;
@@ -45,8 +44,7 @@ public abstract class serviceRequestPageController extends containsSideMenu {
   @FXML TableColumn<serviceRequest, String> tableStaffAssignee;
   @FXML TableColumn<serviceRequest, String> tableOtherNotes;
 
-  // LocationDAOImpl locationDB;
-  DAOSystem system;
+  LocationDAOImpl locationDB;
   HashMap<String, String> roomNameToRoomID;
   HashMap<String, String> roomIDToRoomName;
 
@@ -59,7 +57,12 @@ public abstract class serviceRequestPageController extends containsSideMenu {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    system = DAOSystemSingleton.INSTANCE.getSystem();
+    super.initialize(url, rb);
+    try {
+      populateLocationComboBoxes();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -68,12 +71,11 @@ public abstract class serviceRequestPageController extends containsSideMenu {
    * @return an initialized LocationDAOImpl object
    * @throws SQLException if there is an error accessing the database
    */
-  /*
-    private LocationDAOImpl initalizeLocationDAO() throws SQLException {
-      locationDB = new LocationDAOImpl();
-      return locationDB;
-    }
-  */
+  private LocationDAOImpl initalizeLocationDAO() throws SQLException {
+    locationDB = new LocationDAOImpl();
+    return locationDB;
+  }
+
   /**
    * Populates the location combo boxes by first grabbing all the floors of the hospital and then
    * mapping them to an ArrayList of all the rooms on that floor. The room combo box selections are
@@ -81,14 +83,14 @@ public abstract class serviceRequestPageController extends containsSideMenu {
    */
   protected void populateLocationComboBoxes() throws SQLException {
     // Initializes the locationDB object
-    // initalizeLocationDAO();
+    initalizeLocationDAO();
 
     /*
       Sets up data structures for storing floor and room values.
       A hashmap with floor name keys and lists of room names as values is used to
       associate rooms with their corresponding floor
     */
-    List<Location> locations = system.getAllLocations();
+    List<Location> locations = locationDB.getAll();
     List<String> floors = new ArrayList<>();
     HashMap<String, ArrayList<String>> floorToRooms = new HashMap<>();
     roomNameToRoomID = new HashMap<>();
