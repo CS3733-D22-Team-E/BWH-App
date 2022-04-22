@@ -26,9 +26,9 @@ public class CSVManager {
   private static final String locationFormat =
       "NODEID, XCOORD, YCOORD, FLOOR, BUILDING, NODETYPE, LONGNAME, SHORTNAME";
   private static final String medEquipFormat =
-      "EQUIPMENTID, MED_EQUIP_REQ_ID, ISINUSE, ISCLEAN, CLEANLOCATIONID, STORAGELOCATIONID, CURRENTLOCATIONID, EQUIPMENTTYPE";
+      "EQUIPMENTID, MED_EQUIP_REQ_ID, \"isInUse\", \"isClean\" , \"cleanLocationID\", \"storageLocationID\", \"currentLocationID\", \"equipmentType\"";
   private static final String medEquipRequestFormat =
-      "MED_EQUIPMENTID, REQUESTDATE, ISURGENT, EQUIP, EQUIPQUANTITY, STAFFASSIGNEE, LOCATIONID, FLOOR, REQUESTSTATUS, OTHERNOTES";
+      "MED_EQUIPMENTID, REQUESTDATE, DELIVERYDATE, ISURGENT, EQUIP, EQUIPQUANTITY, STAFFASSIGNEE, LOCATIONID, FLOOR, REQUESTSTATUS, OTHERNOTES";
   private static final String labRequestFormat =
       "LAB_REQUESTID, LAB_REQUEST_TYPE, STAFFASSIGNEE, LOCATIONID, TIMEFRAME, REQUESTSTATUS, OTHERNOTES";
   private static final String employeeFormat =

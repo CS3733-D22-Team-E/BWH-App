@@ -21,7 +21,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.securityRequestController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" stylesheets="@styles/servicerequests.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.securityRequestController">
     <children>
         <HBox alignment="CENTER" maxHeight="90.0" maxWidth="1.7976931348623157E308" minHeight="90.0" styleClass="headerBackground" VBox.vgrow="ALWAYS">
             <children>
@@ -152,13 +152,16 @@
                                     </font>
                                 </Label>
                                 <TableView fx:id="requestsTable" VBox.vgrow="ALWAYS">
+                                    <placeholder>
+                                        <Label text="There currently are no active service requests." />
+                                    </placeholder>
                                     <columns>
-                                        <TableColumn fx:id="tableSecurityRequestType" prefWidth="75.0" text="Security Type" />
-                                        <TableColumn fx:id="tableStaffAssignee" prefWidth="75.0" text="Staff" />
-                                        <TableColumn fx:id="tableLocNodeID" prefWidth="75.0" text="Location" />
-                                        <TableColumn fx:id="tableTimeFrame" prefWidth="75.0" text="Time Frame" />
-                                        <TableColumn fx:id="tableRequestStatus" prefWidth="75.0" text="Status" />
-                                        <TableColumn fx:id="tableOtherNotes" prefWidth="75.0" text="Notes" />
+                                        <TableColumn fx:id="tableSecurityRequestType" prefWidth="95.99999839067459" text="Security Type" />
+                                        <TableColumn fx:id="tableStaffAssignee" prefWidth="77.59996795654297" text="Staff" />
+                                        <TableColumn fx:id="tableLocNodeID" prefWidth="79.20001220703125" text="Location" />
+                                        <TableColumn fx:id="tableTimeFrame" prefWidth="90.40003967285156" text="Time Frame" />
+                                        <TableColumn fx:id="tableRequestStatus" prefWidth="66.40008544921875" text="Status" />
+                                        <TableColumn fx:id="tableOtherNotes" prefWidth="56.0" text="Notes" />
                                     </columns>
                                 </TableView>
                      </children>

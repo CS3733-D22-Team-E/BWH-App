@@ -61,12 +61,13 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   /** Creating the ObservableLists for the pages' drop down. */
   ObservableList<String> meals =
       FXCollections.observableArrayList(
-          "Chicken Parmesan", "Turkey Dinner", "Chicken Noodle Soup", "Two Cookies");
+          "Chicken Parmesan", "Turkey Dinner", "Chicken Noodle Soup", "Two Cookies", "None");
 
   ObservableList<String> beverages =
-      FXCollections.observableArrayList("Water", "Coca-Cola", "Pepsi", "Root Beer");
+      FXCollections.observableArrayList("Water", "Coca-Cola", "Pepsi", "Root Beer", "None");
   ObservableList<String> desserts =
-      FXCollections.observableArrayList("Cookies", "Vanilla Cake", "Tiramisu", "Chocolate Cake");
+      FXCollections.observableArrayList(
+          "Cookies", "Vanilla Cake", "Tiramisu", "Chocolate Cake", "None");
 
   /**
    * Initializes the drops downs with the respective observable lists and the table columns with the

@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -48,7 +50,6 @@ public class facilitiesRequestController extends serviceRequestPageController
   // FacilitiesRequestDAOImpl facilitiesRequestDAO;
   ObservableList<facilitiesRequest> tableList;
 
-  facilitiesRequest request = new facilitiesRequest(); // object to store inputted page data
 
   DAOSystem system;
 
@@ -115,6 +116,7 @@ public class facilitiesRequestController extends serviceRequestPageController
   @Override
   public void submitButton(ActionEvent event) throws SQLException {
     try {
+      facilitiesRequest request = new facilitiesRequest(); // object to store inputted page data
       request.setFacilitiesRequestType(facilitiesOptionType.getValue()); // getValue());
       request.setFloorID(floor.getValue());
       request.setRoomID(roomNameToRoomID.get(room.getValue()));
@@ -126,7 +128,7 @@ public class facilitiesRequestController extends serviceRequestPageController
       request.setIsUrgent(isUrgent.isSelected());
       request.setTimeFrame(timeFrame.getText());
 
-      facilitiesSendToDB();
+      facilitiesSendToDB(request);
 
     } catch (NullPointerException e) {
       System.out.println("Error : Some Value is NULL");
@@ -135,7 +137,7 @@ public class facilitiesRequestController extends serviceRequestPageController
     }
   }
 
-  private void facilitiesSendToDB() {
+  private void facilitiesSendToDB(facilitiesRequest request) {
     try {
       request.setRequestDate(LocalDate.now());
       system.update(request);

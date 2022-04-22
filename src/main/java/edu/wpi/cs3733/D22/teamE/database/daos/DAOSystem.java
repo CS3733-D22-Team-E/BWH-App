@@ -4,6 +4,11 @@ import edu.wpi.cs3733.D22.teamE.database.*;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.*;
 import edu.wpi.cs3733.D22.teamE.pathfinding.*;
+import edu.wpi.cs3733.D22.teamE.database.Employee;
+import edu.wpi.cs3733.D22.teamE.entity.*;
+import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
+import edu.wpi.cs3733.D22.teamEAPI.database.dao.FloralRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamEAPI.entity.FloralServiceRequest;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -23,8 +28,12 @@ public class DAOSystem {
   private final SanitationRequestDAOImpl sanitationRequestDAO;
   private final SecurityRequestDAOImpl securityRequestDAO;
   private final ServiceRequestDAOImpl serviceRequestDAO;
+  private final FacilitiesRequestDAOImpl facilitiesRequestDAO;
+  private final GiftRequestDAOImpl giftRequestDAO;
+  private final FloralRequestDAOImpl floralRequestDAO;
 
   public DAOSystem() throws SQLException {
+    floralRequestDAO = new FloralRequestDAOImpl();
     accountDAO = new AccountDAOImpl();
     // edgesDAO = new EdgesDAOImpl();
     employeeDAO = new EmployeeDAOImpl();
@@ -215,6 +224,21 @@ public class DAOSystem {
 
   public void update(sanitationRequest request) {
     sanitationRequestDAO.update(request);
+
+    public List<serviceRequest> getAllServiceRequests() {
+    List<serviceRequest> l = serviceRequestDAO.getAll();
+    // now handle API service requests
+    List<FloralServiceRequest> floralL = this.getAllFloralRequests();
+    for (FloralServiceRequest r : floralL) {
+      floralRequest convertedReq = new floralRequest(r);
+      if (!l.contains(convertedReq)) l.add(convertedReq);
+    }
+    return l;
+  }
+
+  public List<FloralServiceRequest> getAllFloralRequests() {
+    return floralRequestDAO.getAll();
+    // return new ArrayList<FloralServiceRequest>();
   }
 
   public void update(securityRequest request) {

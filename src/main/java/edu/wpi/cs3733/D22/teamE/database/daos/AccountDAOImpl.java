@@ -61,6 +61,7 @@ public class AccountDAOImpl implements DAO<Account> {
 
   @Override
   public void update(Account account) {
+    delete(account);
     accounts.add(account);
     try {
       String query =
@@ -88,13 +89,15 @@ public class AccountDAOImpl implements DAO<Account> {
 
   @Override
   public void delete(Account account) {
-    accounts.remove(account);
-    try {
-      String query = "DELETE FROM ACCOUNTS WHERE ACCOUNTID = ('" + account.getAccountID() + "')";
-      PreparedStatement statement = connection.prepareStatement(query);
-      statement.executeUpdate();
-    } catch (SQLException e) {
-      e.printStackTrace();
+    if (get(account.getAccountID()) != null) {
+      accounts.remove(account);
+      try {
+        String query = "DELETE FROM ACCOUNTS WHERE ACCOUNTID = ('" + account.getAccountID() + "')";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.executeUpdate();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
     }
   }
 }

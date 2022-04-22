@@ -196,10 +196,13 @@
                                                    </children>
                                                 </HBox>
                                                       <TableView fx:id="floorEquipmentTable" prefHeight="397.0" prefWidth="372.0">
-                                                   <columns>
-                                                      <TableColumn fx:id="tableEquipment" prefWidth="191.0" text="Equipment" />
-                                                      <TableColumn fx:id="tableLocation" minWidth="0.0" prefWidth="210.0" text="Location" />
-                                                   </columns>
+                                                          <placeholder>
+                                                              <Label text="There currently is no equipment in the db."/>
+                                                          </placeholder>
+                                                          <columns>
+                                                              <TableColumn fx:id="tableEquipment" prefWidth="191.0" text="Equipment" />
+                                                              <TableColumn fx:id="tableLocation" minWidth="0.0" prefWidth="210.0" text="Location" />
+                                                          </columns>
                                                       </TableView>
                                              </children>
                                           </VBox>

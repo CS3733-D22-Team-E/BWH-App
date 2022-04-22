@@ -43,7 +43,6 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
 
   DAOSystem system;
   ObservableList<languageInterpreterRequest> tableList;
-  languageInterpreterRequest request = new languageInterpreterRequest();
 
   public languageInterpreterRequestController() {
     system = DAOSystemSingleton.INSTANCE.getSystem();
@@ -98,6 +97,7 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   @FXML
   public void submitButton(ActionEvent event) throws SQLException {
     try {
+      languageInterpreterRequest request = new languageInterpreterRequest();
       request.setFloorID(floor.getValue());
       request.setRoomID(roomNameToRoomID.get(room.getValue()));
       request.setRequestStatus(requestStatus.getText());
@@ -108,7 +108,7 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
       request.setRequestDate(startDate.getValue());
       request.setDeliveryDate(endDate.getValue());
 
-      langSendToDB();
+      langSendToDB(request);
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
@@ -118,7 +118,7 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
     }
   }
 
-  private void langSendToDB() throws SQLException {
+  private void langSendToDB(languageInterpreterRequest request) throws SQLException {
     try {
       system.update(request);
       tableList.add(request);
