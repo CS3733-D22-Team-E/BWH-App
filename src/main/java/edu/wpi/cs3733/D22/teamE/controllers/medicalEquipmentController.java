@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.*;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
+import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
 import java.net.URL;
 import java.sql.SQLException;

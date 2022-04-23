@@ -2,10 +2,8 @@ package edu.wpi.cs3733.D22.teamE.database;
 
 import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
-import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
+import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
-import edu.wpi.cs3733.D22.teamE.entity.labRequest;
-import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.sql.Connection;
