@@ -45,7 +45,6 @@ public class ProfilePictureManager {
     if (rs.next()) {
       Blob blob = rs.getBlob(1);
       byte[] bytes = blob.getBytes(1L, (int) blob.length());
-      toJpeg(bytes, employee.getEmployeeID());
       ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
       return bis;
     }

@@ -27,15 +27,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class profilePageController extends containsSideMenu implements Initializable {
 
@@ -70,7 +73,14 @@ public class profilePageController extends containsSideMenu implements Initializ
         image = new Image(is);
       }
       EventHandler<MouseEvent> circleEH = e -> changePic(e);
+      EventHandler<MouseEvent> circleEnter = e -> hover(e);
+      EventHandler<MouseEvent> circleLeave = e -> leave(e);
       photoCirc.addEventHandler(MouseEvent.MOUSE_CLICKED, circleEH);
+      photoCirc.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, circleEnter);
+      photoCirc.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, circleLeave);
+      Tooltip t = new Tooltip("Click to Change Profile Picture");
+      t.setShowDelay(Duration.seconds(0.1));
+      Tooltip.install(photoCirc, t);
       photoCirc.setFill(new ImagePattern(image));
       nameLabel.setText(account.getFirstName() + " " + account.getLastName());
       posLabel.setText(account.getPosition());
@@ -114,6 +124,10 @@ public class profilePageController extends containsSideMenu implements Initializ
     if (selectedFile != null) {
       try {
         byte[] bytes = Files.readAllBytes(selectedFile.toPath());
+        if (bytes.length >= 65535) {
+          PopUp.createWarning("Error: File can't be larger than 64 kb", stage);
+          return;
+        }
         ProfilePictureManager.savePersonalPicture(employee, bytes);
       } catch (IOException ioException) {
         ioException.printStackTrace();
@@ -124,5 +138,13 @@ public class profilePageController extends containsSideMenu implements Initializ
       }
       initialize(url, rb);
     }
+  }
+
+  public void hover(MouseEvent e) {
+    ((Node) e.getSource()).getScene().setCursor(Cursor.HAND);
+  }
+
+  public void leave(MouseEvent e) {
+    ((Node) e.getSource()).getScene().setCursor(Cursor.DEFAULT);
   }
 }
