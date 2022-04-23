@@ -168,4 +168,3 @@ gradle-app.setting
 /externalTransportDB/db.lck
 /externalTransportDB/README_DO_NOT_TOUCH_FILES.txt
 /externalTransportDB/service.properties
-/CSVsaveFiles/saveLocationFile.csv
