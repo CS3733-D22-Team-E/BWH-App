@@ -6,7 +6,7 @@ import edu.wpi.cs3733.D22.teamE.database.daos.MedicineDeliveryDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.medicineDelivery;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
-import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
+import edu.wpi.cs3733.D22.teamE.entity.medicineDelivery;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
