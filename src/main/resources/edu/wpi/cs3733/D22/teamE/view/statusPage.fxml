@@ -144,7 +144,7 @@
                                           </VBox>
                                           <VBox prefHeight="42.0" prefWidth="197.0">
                                              <children>
-                                                <Label text="Filter by Date (mm/dd/yy)" />
+                                                <Label text="Filter by Date (yyyy-mm-dd)" />
                                                 <TextField fx:id="filterFieldDate" prefWidth="-1.0" />
                                              </children>
                                              <padding>
@@ -162,7 +162,7 @@
                                              <content>
                                                 <TableView fx:id="requestTable" editable="true">
                                                    <placeholder>
-                                                      <Label text="There currently are no active service requests."/>
+                                                      <Label text="There currently are no active service requests." />
                                                    </placeholder>
                                                    <columns>
                                                       <TableColumn fx:id="idColumn" prefWidth="92.0" text="ID" />
