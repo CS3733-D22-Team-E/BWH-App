@@ -85,17 +85,7 @@ public class LanguageRequestDAOImpl implements DAO<languageInterpreterRequest> {
   }
 
   @Override
-  public void delete(languageInterpreterRequest request) {
-    languageRequests.remove(request);
-
-    String query = "DELETE FROM LANGUAGEREQUEST WHERE LAN_INTERP_REQ_ID = (?)";
-    PreparedStatement statement;
-    try {
-      statement = connection.prepareStatement(query);
-      statement.setString(1, request.getServiceRequestID());
-      statement.executeUpdate();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+  public void delete(languageInterpreterRequest item) {
+    languageRequests.remove(item);
   }
 }
