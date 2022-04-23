@@ -325,12 +325,12 @@ public class mapPageController extends containsSideMenu implements Initializable
       ImageView i = new ImageView(nodeToIcon(l.getNodeType()));
       i.setFitWidth(prefWidth);
       i.setFitHeight(prefHeight);
-      i.setX(l.getXcoord() * scaleFactor - (prefWidth / 2));
-      i.setY(l.getYcoord() * scaleFactor - (prefHeight / 2));
+      i.setX(l.getXCoord() * scaleFactor - (prefWidth / 2));
+      i.setY(l.getYCoord() * scaleFactor - (prefHeight / 2));
 
       // Highlight the selected location
       if (selectedLoc != null) {
-        if (selectedLoc[0] == l.getXcoord() && selectedLoc[1] == l.getYcoord()) {
+        if (selectedLoc[0] == l.getXCoord() && selectedLoc[1] == l.getYCoord()) {
           i.getStyleClass().add("selectedLocationDot");
         }
       }
@@ -457,12 +457,12 @@ public class mapPageController extends containsSideMenu implements Initializable
       ImageView i = new ImageView(image);
       i.setFitWidth(prefWidth);
       i.setFitHeight(prefHeight);
-      i.setX(e.getxCoord() * scaleFactor - (prefWidth / 2));
-      i.setY(e.getyCoord() * scaleFactor - (prefHeight / 2));
+      i.setX(e.getXCoord() * scaleFactor - (prefWidth / 2));
+      i.setY(e.getYCoord() * scaleFactor - (prefHeight / 2));
 
       // Highlight the selected location
       if (selectedLoc != null) {
-        if (e.getxCoord() == selectedLoc[0] && e.getyCoord() == selectedLoc[1]) {
+        if (e.getXCoord() == selectedLoc[0] && e.getYCoord() == selectedLoc[1]) {
           i.getStyleClass().add("selectedLocationDot");
         }
       }
@@ -779,7 +779,7 @@ public class mapPageController extends containsSideMenu implements Initializable
         // Get location by coordinates
         for (int i = 0; i < filteredLocations.size(); i++) {
           Location location = filteredLocations.get(i);
-          if (location.getXcoord() == selectedLoc[0] && location.getYcoord() == selectedLoc[1]) {
+          if (location.getXCoord() == selectedLoc[0] && location.getYCoord() == selectedLoc[1]) {
             db.updateCoord(location, newX, newY);
           }
         }
@@ -805,7 +805,7 @@ public class mapPageController extends containsSideMenu implements Initializable
     // Get location by coordinates
     for (int i = 0; i < filteredLocations.size(); i++) {
       Location location = filteredLocations.get(i);
-      if (location.getXcoord() == selectedLoc[0] && location.getYcoord() == selectedLoc[1]) {
+      if (location.getXCoord() == selectedLoc[0] && location.getYCoord() == selectedLoc[1]) {
         db.delete(location);
       }
     }
@@ -866,13 +866,13 @@ public class mapPageController extends containsSideMenu implements Initializable
         for (Location location : locations) {
 
           // If the user has selected a dot on the map
-          if ((location.getXcoord() * scaleFactor >= mouseX - locationPadding
-                  && location.getXcoord() * scaleFactor <= mouseX + locationPadding)
-              && (location.getYcoord() * scaleFactor >= mouseY - locationPadding
-                  && location.getYcoord() * scaleFactor <= mouseY + locationPadding)) {
+          if ((location.getXCoord() * scaleFactor >= mouseX - locationPadding
+                  && location.getXCoord() * scaleFactor <= mouseX + locationPadding)
+              && (location.getYCoord() * scaleFactor >= mouseY - locationPadding
+                  && location.getYCoord() * scaleFactor <= mouseY + locationPadding)) {
 
             // Update the current selected location variable
-            selectedLoc = new double[] {location.getXcoord(), location.getYcoord()};
+            selectedLoc = new double[] {location.getXCoord(), location.getYCoord()};
           }
         }
         displayTowerLocations();
@@ -892,13 +892,13 @@ public class mapPageController extends containsSideMenu implements Initializable
       } else if (viewMode == "Service Requests") {
         for (RequestInterface servReq : filteredServReqList) {
           // If the user has selected a dot on the map
-          if ((servReq.getxCoord() * scaleFactor >= mouseX - locationPadding
-                  && servReq.getxCoord() * scaleFactor <= mouseX + locationPadding)
-              && (servReq.getyCoord() * scaleFactor >= mouseY - locationPadding
-                  && servReq.getyCoord() * scaleFactor <= mouseY + locationPadding)) {
+          if ((servReq.getXCoord() * scaleFactor >= mouseX - locationPadding
+                  && servReq.getXCoord() * scaleFactor <= mouseX + locationPadding)
+              && (servReq.getYCoord() * scaleFactor >= mouseY - locationPadding
+                  && servReq.getYCoord() * scaleFactor <= mouseY + locationPadding)) {
 
             // Update the current selected location variable
-            selectedLoc = new double[] {servReq.getxCoord(), servReq.getyCoord()};
+            selectedLoc = new double[] {servReq.getXCoord(), servReq.getYCoord()};
           }
         }
         displayServiceRequestLocations();
@@ -919,8 +919,8 @@ public class mapPageController extends containsSideMenu implements Initializable
             filteredLocations.stream()
                 .filter(
                     location -> {
-                      if (selectedLoc[0] == location.getXcoord()
-                          && selectedLoc[1] == location.getYcoord()) {
+                      if (selectedLoc[0] == location.getXCoord()
+                          && selectedLoc[1] == location.getYCoord()) {
                         return false;
                       }
                       return true;
@@ -948,8 +948,8 @@ public class mapPageController extends containsSideMenu implements Initializable
             filteredServReqList.stream()
                 .filter(
                     location -> {
-                      if (selectedLoc[0] == location.getxCoord()
-                          && selectedLoc[1] == location.getyCoord()) {
+                      if (selectedLoc[0] == location.getXCoord()
+                          && selectedLoc[1] == location.getYCoord()) {
                         return false;
                       }
                       return true;

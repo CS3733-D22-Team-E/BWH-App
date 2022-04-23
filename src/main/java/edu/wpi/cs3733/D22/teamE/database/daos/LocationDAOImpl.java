@@ -76,7 +76,7 @@ public class LocationDAOImpl implements DAO<Location> {
    */
   public Location get(int xCoord, int yCoord) {
     for (Location location : locations) {
-      if ((location.getXcoord() == xCoord) && (location.getYcoord() == yCoord)) {
+      if ((location.getXCoord() == xCoord) && (location.getYCoord() == yCoord)) {
         return location;
       }
     }
@@ -106,9 +106,9 @@ public class LocationDAOImpl implements DAO<Location> {
           "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
               + location.getNodeID()
               + "',"
-              + location.getXcoord()
+              + location.getXCoord()
               + ","
-              + location.getYcoord()
+              + location.getYCoord()
               + ",'"
               + location.getFloor()
               + "','"

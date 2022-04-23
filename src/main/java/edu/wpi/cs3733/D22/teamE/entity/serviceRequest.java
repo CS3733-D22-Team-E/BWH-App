@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -13,9 +12,7 @@ public class serviceRequest implements RequestInterface {
   }
 
   @Override
-  public void setNumID(int num) {
-
-  }
+  public void setNumID(int num) {}
 
   @Override
   public Location getLocation() {
@@ -48,12 +45,12 @@ public class serviceRequest implements RequestInterface {
 
   @Override
   public double getXCoord() {
-    return getLocation().getXcoord();
+    return getLocation().getXCoord();
   }
 
   @Override
   public double getYCoord() {
-    return getLocation().getYcoord();
+    return getLocation().getYCoord();
   }
 
   public enum Type {

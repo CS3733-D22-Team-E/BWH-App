@@ -109,4 +109,14 @@ public abstract class Equipment implements EntityInterface {
   }
 
   public abstract void use();
+
+  @Override
+  public double getXCoord() {
+    return this.getLocation().getXCoord();
+  }
+
+  @Override
+  public double getYCoord() {
+    return 0;
+  }
 }

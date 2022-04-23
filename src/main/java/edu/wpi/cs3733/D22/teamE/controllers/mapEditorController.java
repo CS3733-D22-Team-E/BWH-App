@@ -162,11 +162,11 @@ public class mapEditorController implements Initializable {
     int locationPadding = 7;
 
     // Check if the location has been moved
-    if ((selectedLoc.getXcoord() >= (mouseX - locationPadding) / scaleFactor
-            && selectedLoc.getXcoord() <= (mouseX + locationPadding) / scaleFactor)
-        && (selectedLoc.getYcoord() >= (mouseY - locationPadding) / scaleFactor
-            && selectedLoc.getYcoord() <= (mouseY + locationPadding) / scaleFactor)) {
-      db.updateCoord(selectedLoc, selectedLoc.getXcoord(), selectedLoc.getYcoord());
+    if ((selectedLoc.getXCoord() >= (mouseX - locationPadding) / scaleFactor
+            && selectedLoc.getXCoord() <= (mouseX + locationPadding) / scaleFactor)
+        && (selectedLoc.getYCoord() >= (mouseY - locationPadding) / scaleFactor
+            && selectedLoc.getYCoord() <= (mouseY + locationPadding) / scaleFactor)) {
+      db.updateCoord(selectedLoc, selectedLoc.getXCoord(), selectedLoc.getYCoord());
     } else {
 
       // Get a whole number from the scaled up mouseX and mouseY
@@ -215,8 +215,8 @@ public class mapEditorController implements Initializable {
       // Create a new location dot
       Circle c = new Circle();
       c.setRadius(12);
-      c.setCenterX(l.getXcoord() * scaleFactor);
-      c.setCenterY(l.getYcoord() * scaleFactor);
+      c.setCenterX(l.getXCoord() * scaleFactor);
+      c.setCenterY(l.getYCoord() * scaleFactor);
 
       // Set the location dot image
       c.setFill(new ImagePattern(nodeToIcon(l.getNodeType())));
@@ -480,10 +480,10 @@ public class mapEditorController implements Initializable {
 
         // If the user has selected a dot on the map
         int locationPadding = 7;
-        if ((location.getXcoord() * scaleFactor >= mouseX - locationPadding
-                && location.getXcoord() * scaleFactor <= mouseX + locationPadding)
-            && (location.getYcoord() * scaleFactor >= mouseY - locationPadding
-                && location.getYcoord() * scaleFactor <= mouseY + locationPadding)
+        if ((location.getXCoord() * scaleFactor >= mouseX - locationPadding
+                && location.getXCoord() * scaleFactor <= mouseX + locationPadding)
+            && (location.getYCoord() * scaleFactor >= mouseY - locationPadding
+                && location.getYCoord() * scaleFactor <= mouseY + locationPadding)
             && Objects.equals(location.getFloor(), floor.getValue())) {
 
           // Update the current selected location variable
