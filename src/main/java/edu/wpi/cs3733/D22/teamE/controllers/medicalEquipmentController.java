@@ -2,10 +2,6 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
-import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentServiceRequestDAOImpl;
-import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.database.*;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
