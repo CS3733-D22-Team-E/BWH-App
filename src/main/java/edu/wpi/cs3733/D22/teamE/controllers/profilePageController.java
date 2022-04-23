@@ -6,8 +6,8 @@ import edu.wpi.cs3733.D22.teamE.customUI.ServiceRequestButtonListCell;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.Employee;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
-import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,7 +38,7 @@ public class profilePageController extends containsSideMenu implements Initializ
   private Account account;
   private Employee employee;
   private DAOSystem db;
-  public JFXListView<serviceRequest> reqList;
+  public JFXListView<RequestInterface> reqList;
   @FXML Button resetPassword;
 
   @Override
@@ -57,10 +57,10 @@ public class profilePageController extends containsSideMenu implements Initializ
       posLabel.setText(account.getPosition());
       salLabel.setText(String.valueOf(employee.getSalary()));
       int count = 0;
-      List<serviceRequest> l = db.getAllServiceRequests();
-      ArrayList<serviceRequest> myReq = new ArrayList<>();
-      ObservableList<serviceRequest> data = FXCollections.observableArrayList();
-      for (serviceRequest r : l) {
+      List<RequestInterface> l = db.getAllServiceRequests();
+      ArrayList<RequestInterface> myReq = new ArrayList<>();
+      ObservableList<RequestInterface> data = FXCollections.observableArrayList();
+      for (RequestInterface r : l) {
         count++;
         if (Objects.equals(employee.getEmployeeID(), "admin")) {
           myReq.add(r);

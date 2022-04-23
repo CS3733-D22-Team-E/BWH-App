@@ -2,10 +2,10 @@ package edu.wpi.cs3733.D22.teamE.database;
 
 import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
+import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.entity.labRequest;
 import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
-import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.sql.Connection;
@@ -195,11 +195,11 @@ public class CSVManager {
 
   public static void saveServiceRequestCSV(String fileName) throws IOException, SQLException {
     String format = serviceRequestFormat;
-    DAO<serviceRequest> dao = new ServiceRequestDAOImpl();
+    DAO<RequestInterface> dao = new ServiceRequestDAOImpl();
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (serviceRequest d : dao.getAll()) {
+    for (RequestInterface d : dao.getAll()) {
       String csvLine =
           ""
               + d.getServiceRequestID()
@@ -212,7 +212,7 @@ public class CSVManager {
               + ','
               + d.getRequestDate()
               + ','
-              + d.isUrgent()
+              + d.getIsUrgent()
               + "\n";
       // change nothing
       FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);

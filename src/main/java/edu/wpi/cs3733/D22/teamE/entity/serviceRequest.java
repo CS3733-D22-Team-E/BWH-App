@@ -2,9 +2,8 @@ package edu.wpi.cs3733.D22.teamE.entity;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Random;
 
-public class serviceRequest {
+public class serviceRequest implements RequestInterface {
 
   public enum Type {
     SANITATION_REQ {
@@ -119,7 +118,7 @@ public class serviceRequest {
   }
 
   public serviceRequest(String serviceRequestType) {
-    this.serviceRequestID = generateRandomID(6);
+    this.serviceRequestID = RequestInterface.generateRandomID(6);
     this.requestType = Type.valueOf(serviceRequestType);
     this.otherNotes = "";
     this.floorID = "";
@@ -199,18 +198,6 @@ public class serviceRequest {
     this.staffAssignee = staffAssignee;
   }
 
-  public static String generateRandomID(int length) {
-    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    StringBuilder result = new StringBuilder();
-    Random random = new Random();
-
-    for (int i = 0; i < length; i++) {
-      char randChar = alphabet.charAt(random.nextInt(alphabet.length()));
-      result.append(randChar);
-    }
-    return result.toString();
-  }
-
   public LocalDate getRequestDate() {
     return requestDate;
   }
@@ -243,11 +230,7 @@ public class serviceRequest {
     }
   }
 
-  public boolean isUrgent() {
-    return isUrgent;
-  }
-
-  public int getxCoord() {
+  public double getxCoord() {
     return xCoord;
   }
 
@@ -259,7 +242,7 @@ public class serviceRequest {
     this.yCoord = Integer.parseInt(xCoord);
   }
 
-  public int getyCoord() {
+  public double getyCoord() {
     return yCoord;
   }
 
