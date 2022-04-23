@@ -1,8 +1,8 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import edu.wpi.cs3733.D22.teamE.entity.Location;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
+import edu.wpi.cs3733.D22.teamE.entity.Location;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

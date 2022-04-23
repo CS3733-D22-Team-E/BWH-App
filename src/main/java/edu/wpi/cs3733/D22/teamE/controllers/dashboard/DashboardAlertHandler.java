@@ -1,9 +1,9 @@
 package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
-import edu.wpi.cs3733.D22.teamE.entity.Location;
-import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.entity.Location;
+import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
 import java.sql.SQLException;
 import java.time.LocalDate;

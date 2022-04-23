@@ -4,7 +4,6 @@ import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
-
 import java.io.*;
 import java.nio.charset.Charset;
 import java.sql.Connection;
