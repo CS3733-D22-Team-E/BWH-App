@@ -161,3 +161,10 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/java,macos,gradle,intellij+all
 
 /myDB/
+/externalTransportDB/
+/externalTransportDB/log/
+/externalTransportDB/seg0/
+/externalTransportDB/tmp/
+/externalTransportDB/db.lck
+/externalTransportDB/README_DO_NOT_TOUCH_FILES.txt
+/externalTransportDB/service.properties
