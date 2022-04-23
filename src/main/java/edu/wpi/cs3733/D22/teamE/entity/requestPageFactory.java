@@ -3,6 +3,9 @@ package edu.wpi.cs3733.D22.teamE.entity;
 import com.jfoenix.controls.*;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamZ.api.entity.ExternalTransportRequest;
+import edu.wpi.cs3733.D22.teamZ.api.entity.RequestStatus;
+import edu.wpi.cs3733.D22.teamZ.api.entity.TransportMethod;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
@@ -84,44 +87,60 @@ public class requestPageFactory {
             && !m.getName().contains("RequestType")
             && !m.getName().contains("Coord")
             && !m.getName().contains("ServiceRequestID")
-            && !m.getReturnType().isInstance(new FloralServiceRequest())) {
-          final Object r = m.invoke(req);
-          String label = m.getName();
-          String content = r.toString();
-          label = label.trim();
-          label = label.replace("get", "");
-          try {
-            content = content.trim();
-            HBox innerBox = new HBox();
-            Label l = new Label(label + " : ");
-            innerBox.getChildren().add(l);
-            if (r instanceof String) {
-              defVal.add(r);
-              JFXTextField textField = new JFXTextField();
-              textField.setText(content);
-              innerBox.getChildren().add(textField);
-              box.getChildren().add(innerBox);
-              returnMethods.add(req.getClass().getMethod("set" + label, String.class));
-              returnFields.add(textField);
-            } else if (r instanceof LocalDate) {
-              defVal.add(r);
-              JFXDatePicker datePicker = new JFXDatePicker();
-              datePicker.setValue((LocalDate) r);
-              innerBox.getChildren().add(datePicker);
-              box.getChildren().add(innerBox);
-              returnMethods.add(req.getClass().getMethod("set" + label, LocalDate.class));
-              returnFields.add(datePicker);
-            } else {
-              defVal.add(content);
-              JFXTextField textField = new JFXTextField();
-              textField.setText(content);
-              innerBox.getChildren().add(textField);
-              box.getChildren().add(innerBox);
-              returnMethods.add(req.getClass().getMethod("set" + label, String.class));
-              returnFields.add(textField);
+            && !m.getReturnType().isInstance(new FloralServiceRequest())
+            && !m.getReturnType()
+                .isInstance(
+                    new ExternalTransportRequest(
+                        "",
+                        RequestStatus.DONE,
+                        "",
+                        "",
+                        "",
+                        "",
+                        LocalDate.now(),
+                        TransportMethod.PATIENTCAR))) {
+          if (req instanceof ExternalTransportAdapter
+              && (m.getName().contains("RequestDate") || m.getName().contains("DeliveryDate"))) {
+
+          } else {
+            final Object r = m.invoke(req);
+            String label = m.getName();
+            String content = r.toString();
+            label = label.trim();
+            label = label.replace("get", "");
+            try {
+              content = content.trim();
+              HBox innerBox = new HBox();
+              Label l = new Label(label + " : ");
+              innerBox.getChildren().add(l);
+              if (r instanceof String) {
+                defVal.add(r);
+                JFXTextField textField = new JFXTextField();
+                textField.setText(content);
+                innerBox.getChildren().add(textField);
+                box.getChildren().add(innerBox);
+                returnMethods.add(req.getClass().getMethod("set" + label, String.class));
+                returnFields.add(textField);
+              } else if (r instanceof LocalDate) {
+                defVal.add(r);
+                JFXDatePicker datePicker = new JFXDatePicker();
+                datePicker.setValue((LocalDate) r);
+                innerBox.getChildren().add(datePicker);
+                box.getChildren().add(innerBox);
+                returnMethods.add(req.getClass().getMethod("set" + label, LocalDate.class));
+                returnFields.add(datePicker);
+              } else {
+                defVal.add(content);
+                JFXTextField textField = new JFXTextField();
+                textField.setText(content);
+                innerBox.getChildren().add(textField);
+                box.getChildren().add(innerBox);
+                returnMethods.add(req.getClass().getMethod("set" + label, String.class));
+                returnFields.add(textField);
+              }
+            } catch (NoSuchMethodException e) {
+              e.printStackTrace();
             }
-          } catch (NoSuchMethodException e) {
-            e.printStackTrace();
           }
         } else System.out.println(m.getName());
       }

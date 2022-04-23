@@ -1,11 +1,13 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.APIDatabase.dao.FloralRequestDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.*;
-import edu.wpi.cs3733.D22.teamE.database.Employee;
+import edu.wpi.cs3733.D22.teamE.CallAPI;
 import edu.wpi.cs3733.D22.teamE.entity.*;
+import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import edu.wpi.cs3733.D22.teamE.entity.FloralServiceRequest;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
+import edu.wpi.cs3733.D22.teamZ.api.API;
+import edu.wpi.cs3733.D22.teamZ.api.entity.ExternalTransportRequest;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class DAOSystem {
   private final FacilitiesRequestDAOImpl facilitiesRequestDAO;
   private final GiftRequestDAOImpl giftRequestDAO;
   private final FloralRequestDAOImpl floralRequestDAO;
+  private final API externalTransportAPI;
 
   public DAOSystem() throws SQLException {
     floralRequestDAO = new FloralRequestDAOImpl();
@@ -40,6 +43,7 @@ public class DAOSystem {
     serviceRequestDAO = new ServiceRequestDAOImpl();
     facilitiesRequestDAO = new FacilitiesRequestDAOImpl();
     giftRequestDAO = new GiftRequestDAOImpl();
+    externalTransportAPI = CallAPI.getInstance().getExternalTransportAPI();
   }
 
   public List<Account> getAllAccounts() {
@@ -190,8 +194,13 @@ public class DAOSystem {
     List<RequestInterface> l = serviceRequestDAO.getAll();
     // now handle API service requests
     List<FloralServiceRequest> floralL = this.getAllFloralRequests();
+    List<ExternalTransportRequest> externalL = this.getAllExternalTransportRequests();
     for (FloralServiceRequest r : floralL) {
       FloralRequestAdapter convertedReq = new FloralRequestAdapter(r);
+      if (!l.contains(convertedReq)) l.add(convertedReq);
+    }
+    for (ExternalTransportRequest r : externalL) {
+      ExternalTransportAdapter convertedReq = new ExternalTransportAdapter(r);
       if (!l.contains(convertedReq)) l.add(convertedReq);
     }
     return l;
@@ -199,6 +208,11 @@ public class DAOSystem {
 
   public List<FloralServiceRequest> getAllFloralRequests() {
     return floralRequestDAO.getAll();
+    // return new ArrayList<FloralServiceRequest>();
+  }
+
+  public List<ExternalTransportRequest> getAllExternalTransportRequests() {
+    return externalTransportAPI.getAllExternalTransportRequests();
     // return new ArrayList<FloralServiceRequest>();
   }
 
@@ -212,6 +226,9 @@ public class DAOSystem {
         FloralServiceRequest newReq = ((FloralRequestAdapter) request).getRequest();
         floralRequestDAO.delete(floralRequestDAO.get(newReq.getServiceRequestID()));
         floralRequestDAO.update(newReq);
+      } else if (request instanceof ExternalTransportAdapter) {
+        ExternalTransportRequest newReq = ((ExternalTransportAdapter) request).getRequest();
+        externalTransportAPI.updateExternalTransportRequest(newReq);
       }
     } else serviceRequestDAO.update((serviceRequest) request);
   }
