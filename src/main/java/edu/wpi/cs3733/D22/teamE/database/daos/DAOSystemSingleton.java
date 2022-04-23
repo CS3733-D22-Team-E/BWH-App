@@ -4,24 +4,24 @@ import java.sql.SQLException;
 
 /** Singleton to create a DAOSystem Instance */
 public enum DAOSystemSingleton {
-    INSTANCE;
+  INSTANCE;
 
-    private DAOSystem system;
+  private DAOSystem system;
 
-    DAOSystemSingleton() {
-        try {
-            system = new DAOSystem();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+  DAOSystemSingleton() {
+    try {
+      system = new DAOSystem();
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
+  }
 
-    /**
-     * Method to get DAOSystem
-     *
-     * @return system
-     */
-    public DAOSystem getSystem() {
-        return system;
-    }
+  /**
+   * Method to get DAOSystem
+   *
+   * @return system
+   */
+  public DAOSystem getSystem() {
+    return system;
+  }
 }

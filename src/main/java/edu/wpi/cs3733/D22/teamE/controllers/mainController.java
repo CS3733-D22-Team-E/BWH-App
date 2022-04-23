@@ -39,6 +39,7 @@ public class mainController implements pageButtons {
   @FXML Button helpButton;
   @FXML JFXToggleButton databaseSwitchButton;
   @FXML Button apiButton;
+  @FXML Button headerButton;
 
   @FXML private Button btnMode;
   @FXML private ImageView imgMode;
@@ -221,6 +222,13 @@ public class mainController implements pageButtons {
     } else {
       databaseMode = "EMBEDDED_INSTANCE";
     }
+  }
+
+  @FXML
+  public void headerButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    pageControl.loadPage("Header.fxml", thisStage);
   }
 
   @FXML
