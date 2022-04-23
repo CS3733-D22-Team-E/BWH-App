@@ -186,12 +186,12 @@ public class DAOSystem {
     medicineDeliveryDAO.delete(medicineDelivery);
   }
 
-  public List<serviceRequest> getAllServiceRequests() {
-    List<serviceRequest> l = serviceRequestDAO.getAll();
+  public List<RequestInterface> getAllServiceRequests() {
+    List<RequestInterface> l = serviceRequestDAO.getAll();
     // now handle API service requests
     List<FloralServiceRequest> floralL = this.getAllFloralRequests();
     for (FloralServiceRequest r : floralL) {
-      floralRequest convertedReq = new floralRequest(r);
+      FloralRequestAdapter convertedReq = new FloralRequestAdapter(r);
       if (!l.contains(convertedReq)) l.add(convertedReq);
     }
     return l;
@@ -202,32 +202,21 @@ public class DAOSystem {
     // return new ArrayList<FloralServiceRequest>();
   }
 
-  public serviceRequest getServiceRequest(String id) {
+  public RequestInterface getServiceRequest(String id) {
     return serviceRequestDAO.get(id);
   }
 
-  public void updateServiceRequest(serviceRequest request) {
+  public void updateServiceRequest(RequestInterface request) {
     if (request.getRequestType().equals(serviceRequest.Type.SERVICEREQUEST)) {
-      if (request instanceof floralRequest) {
-        FloralServiceRequest newReq = new FloralServiceRequest();
-        newReq.setRequestID(request.getServiceRequestID());
-        newReq.setRequestDate(request.getRequestDate());
-        newReq.setDeliveryDate(request.getDeliveryDate());
-        newReq.setAssignee(request.getStaffAssignee());
-        newReq.setDeliveryTime(((floralRequest) request).getDeliveryTime());
-        newReq.setFloor(request.getFloorID());
-        newReq.setRoomID(request.getRoomID());
-        newReq.setFlower(((floralRequest) request).getFlower());
-        newReq.setStatus(request.getRequestStatus());
-        newReq.setOtherNotes(request.getOtherNotes());
-        newReq.setUrgent(request.isUrgent());
-        floralRequestDAO.delete(floralRequestDAO.get(newReq.getRequestID()));
+      if (request instanceof FloralRequestAdapter) {
+        FloralServiceRequest newReq = ((FloralRequestAdapter) request).getRequest();
+        floralRequestDAO.delete(floralRequestDAO.get(newReq.getServiceRequestID()));
         floralRequestDAO.update(newReq);
       }
-    } else serviceRequestDAO.update(request);
+    } else serviceRequestDAO.update((serviceRequest) request);
   }
 
-  public void deleteServiceRequest(serviceRequest request) {
+  public void deleteServiceRequest(RequestInterface request) {
     serviceRequestDAO.delete(request);
   }
 

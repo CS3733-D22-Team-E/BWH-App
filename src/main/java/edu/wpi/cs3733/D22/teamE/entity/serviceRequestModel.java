@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class serviceRequestModel {
 
-  serviceRequest request;
+  RequestInterface request;
 
   SimpleStringProperty ID,
       Status,
@@ -26,7 +26,7 @@ public class serviceRequestModel {
       String deliveryDate,
       boolean isUrgent,
       String note,
-      serviceRequest request) {
+      RequestInterface request) {
     this.ID = new SimpleStringProperty(ID);
     this.Status = new SimpleStringProperty(Status);
     this.Type = new SimpleStringProperty(Type);
@@ -38,11 +38,11 @@ public class serviceRequestModel {
     this.request = request;
   }
 
-  public serviceRequest getRequest() {
+  public RequestInterface getRequest() {
     return request;
   }
 
-  public void setRequest(serviceRequest request) {
+  public void setRequest(RequestInterface request) {
     this.request = request;
   }
 
