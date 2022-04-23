@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
