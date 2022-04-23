@@ -13,4 +13,8 @@ public interface EntityInterface {
   void setLocation(Location location) throws NullPointerException;
 
   void setLocation(int xcoord, int ycoord) throws NullPointerException;
+
+  double getXCoord();
+
+  double getYCoord();
 }

@@ -1,6 +1,5 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
-import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 
 public abstract class Equipment implements EntityInterface {
@@ -54,7 +53,7 @@ public abstract class Equipment implements EntityInterface {
   }
 
   @Override
-  public void setLocation(String NodeID) throws NullPointerException{
+  public void setLocation(String NodeID) throws NullPointerException {
     if (DAOSystemSingleton.INSTANCE.getSystem().getLocation(NodeID) != null) {
       this.currentLocation = NodeID;
     }
@@ -67,7 +66,7 @@ public abstract class Equipment implements EntityInterface {
 
   @Override
   public void setLocation(int xcoord, int ycoord) throws NullPointerException {
-   Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(xcoord, ycoord);
+    Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(xcoord, ycoord);
     if (loc != null) {
       this.currentLocation = loc.getNodeID();
     }

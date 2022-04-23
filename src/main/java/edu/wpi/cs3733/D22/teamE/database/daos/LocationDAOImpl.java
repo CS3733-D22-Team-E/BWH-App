@@ -75,8 +75,8 @@ public class LocationDAOImpl implements DAO<Location> {
    * @return location requested
    */
   public Location get(int xCoord, int yCoord) {
-    for(Location location : locations) {
-      if((location.getXcoord() == xCoord) && (location.getYcoord() == yCoord)) {
+    for (Location location : locations) {
+      if ((location.getXcoord() == xCoord) && (location.getYcoord() == yCoord)) {
         return location;
       }
     }

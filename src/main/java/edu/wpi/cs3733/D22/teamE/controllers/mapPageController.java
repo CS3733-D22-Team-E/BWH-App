@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXSlider;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.ServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.entity.Location;
+import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
 import java.io.FileInputStream;
@@ -478,13 +480,7 @@ public class mapPageController extends containsSideMenu implements Initializable
     // Filter tower locations list to only show the current floor
     filteredLocations =
         locations.stream()
-            .filter(
-                location -> {
-                  if (Objects.equals(location.getFloor(), floor)) {
-                    return true;
-                  }
-                  return false;
-                })
+            .filter(location -> Objects.equals(location.getFloor(), floor))
             .collect(Collectors.toList());
   }
 
@@ -497,16 +493,8 @@ public class mapPageController extends containsSideMenu implements Initializable
     filteredMedEqList =
         medEqList.stream()
             .filter(
-                medicalEquipment -> {
-                  try {
-                    if (Objects.equals(medicalEquipment.getFloor(), floor)) {
-                      return true;
-                    }
-                  } catch (SQLException e) {
-                    e.printStackTrace();
-                  }
-                  return false;
-                })
+                medicalEquipment ->
+                    Objects.equals(medicalEquipment.getLocation().getFloor(), floor))
             .collect(Collectors.toList());
   }
 
@@ -902,7 +890,7 @@ public class mapPageController extends containsSideMenu implements Initializable
         }
         displayMedEquipLocations();
       } else if (viewMode == "Service Requests") {
-        for (serviceRequest servReq : filteredServReqList) {
+        for (RequestInterface servReq : filteredServReqList) {
           // If the user has selected a dot on the map
           if ((servReq.getxCoord() * scaleFactor >= mouseX - locationPadding
                   && servReq.getxCoord() * scaleFactor <= mouseX + locationPadding)
@@ -947,17 +935,9 @@ public class mapPageController extends containsSideMenu implements Initializable
         filteredMedEqList =
             filteredMedEqList.stream()
                 .filter(
-                    location -> {
-                      try {
-                        if (selectedLoc[0] == location.getXCoord()
-                            && selectedLoc[1] == location.getYCoord()) {
-                          return false;
-                        }
-                      } catch (SQLException e) {
-                        e.printStackTrace();
-                      }
-                      return true;
-                    })
+                    location ->
+                        (selectedLoc[0] != location.getXCoord()
+                            || selectedLoc[1] != location.getYCoord()))
                 .collect(Collectors.toList());
 
         // Display Medical Equipment
