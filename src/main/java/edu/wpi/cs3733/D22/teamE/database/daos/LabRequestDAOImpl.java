@@ -135,16 +135,21 @@ public class LabRequestDAOImpl implements DAO<labRequest> {
   /**
    * Deletes lab request from DB
    *
-   * @param request lab request to delete
+   * @param labRequest lab request to delete
    */
   @Override
-  public void delete(labRequest request) {
-    labRequests.remove(request);
-    String query = "DELETE FROM LAB_REQUEST WHERE LAB_REQUESTID = (?)";
-    PreparedStatement statement;
+  public void delete(labRequest labRequest) {
+
+    // Deleting the lab request from the array list
+    labRequests.remove(labRequest);
+
+    // Remove lab request in the db
     try {
-      statement = connection.prepareStatement(query);
-      statement.setString(1, request.getServiceRequestID());
+      String query =
+          "DELETE FROM LAB_REQUEST WHERE LAB_REQUESTID = ('"
+              + labRequest.getServiceRequestID()
+              + "')";
+      PreparedStatement statement = connection.prepareStatement(query);
       statement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();

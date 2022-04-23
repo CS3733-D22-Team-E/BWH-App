@@ -142,19 +142,19 @@ public class SecurityRequestDAOImpl implements DAO<securityRequest> {
   /**
    * Deletes security request from DB
    *
-   * @param request security request to delete
+   * @param securityRequest security request to delete
    */
   @Override
-  public void delete(securityRequest request) {
+  public void delete(securityRequest securityRequest) {
 
     // Deleting the security request from the array list
-    securityRequests.remove(request);
+    securityRequests.remove(securityRequest);
 
     // Remove security request in the db
     try {
       String query =
           "DELETE FROM SECURITYREQUEST WHERE SECURITY_REQUESTID = ('"
-              + request.getServiceRequestID()
+              + securityRequest.getServiceRequestID()
               + "')";
       PreparedStatement statement = connection.prepareStatement(query);
       statement.executeUpdate();

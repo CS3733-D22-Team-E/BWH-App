@@ -119,16 +119,21 @@ public class FacilitiesRequestDAOImpl implements DAO<facilitiesRequest> {
   /**
    * Deletes facilities Request from DB
    *
-   * @param request lab request to delete
+   * @param facilitiesRequest lab request to delete
    */
   @Override
-  public void delete(facilitiesRequest request) {
-    facilitiesRequests.remove(request);
-    String query = "DELETE FROM FACILITIESREQUEST WHERE FACILITIESREQID = (?)";
-    PreparedStatement statement;
+  public void delete(facilitiesRequest facilitiesRequest) {
+
+    // Deleting the facilities request from the array list
+    facilitiesRequests.remove(facilitiesRequest);
+
+    // Remove lab request in the db
     try {
-      statement = connection.prepareStatement(query);
-      statement.setString(1, request.getServiceRequestID());
+      String query =
+          "DELETE FROM FACILITIESREQUEST WHERE FACILITIESREQID = ('"
+              + facilitiesRequest.getServiceRequestID()
+              + "')";
+      PreparedStatement statement = connection.prepareStatement(query);
       statement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();

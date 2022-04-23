@@ -68,18 +68,8 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
     medicalRequests.add(request);
   }
 
-  public void delete(medicalEquipmentRequest request) {
+  public void delete(medicalEquipmentRequest request) { // TODO: Remove from DB table as well
     medicalRequests.remove(request);
-
-    String query = "DELETE FROM MED_EQUIP_REQ WHERE MED_EQUIPMENTID = (?)";
-    PreparedStatement statement;
-    try {
-      statement = connection.prepareStatement(query);
-      statement.setString(1, request.getServiceRequestID());
-      statement.executeUpdate();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
   }
 
   public void addMedEquipReq(medicalEquipmentRequest request) throws SQLException {

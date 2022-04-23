@@ -117,18 +117,8 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
   @Override
   public void delete(
       medicineDelivery
-          request) { // TODO: Figure out what to do with Request in DB after its marked as done
-    medicineRequests.remove(request);
-
-    String query = "DELETE FROM MEDICINEREQUEST WHERE MEDICINE_REQ_ID = (?)";
-    PreparedStatement statement;
-    try {
-      statement = connection.prepareStatement(query);
-      statement.setString(1, request.getServiceRequestID());
-      statement.executeUpdate();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+          item) { // TODO: Figure out what to do with Request in DB after its marked as done
+    medicineRequests.remove(item);
   }
 
   public boolean[] getRepeatingDays(String reocurringDays) { // converting string to booleans
