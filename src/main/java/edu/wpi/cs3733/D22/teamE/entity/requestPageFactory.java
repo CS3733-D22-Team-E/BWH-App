@@ -48,7 +48,8 @@ public class requestPageFactory {
         if (!m.getName().contains("Class")
             && !m.getName().contains("RequestType")
             && !m.getName().contains("Coord")
-            && !m.getName().contains("ServiceRequestID")) {
+            && !m.getName().contains("ServiceRequestID")
+            && !m.getReturnType().isInstance(new FloralServiceRequest())) {
           final Object r = m.invoke(req);
           String label = m.getName();
           String content = r.toString();
@@ -82,7 +83,8 @@ public class requestPageFactory {
         if (!m.getName().contains("Class")
             && !m.getName().contains("RequestType")
             && !m.getName().contains("Coord")
-            && !m.getName().contains("ServiceRequestID")) {
+            && !m.getName().contains("ServiceRequestID")
+            && !m.getReturnType().isInstance(new FloralServiceRequest())) {
           final Object r = m.invoke(req);
           String label = m.getName();
           String content = r.toString();
