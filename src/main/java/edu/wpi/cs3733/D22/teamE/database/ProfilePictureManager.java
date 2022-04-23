@@ -11,43 +11,45 @@ import javax.imageio.ImageIO;
 
 public class ProfilePictureManager {
 
-  public static byte[] toByte() throws IOException {
-    BufferedImage image = ImageIO.read(Main.class.getResource("view/images/employees/wwong2.jpeg"));
+  public static byte[] toByte(String employeeID) throws IOException {
+    BufferedImage image =
+        ImageIO.read(Main.class.getResource("view/images/employees/" + employeeID + ".jpeg"));
     ByteArrayOutputStream bos = new ByteArrayOutputStream();
     ImageIO.write(image, "jpeg", bos);
     byte[] arr = bos.toByteArray();
     return arr;
   }
 
-  public static void toPng(byte[] byteArr) throws IOException {
+  public static void toJpeg(byte[] byteArr, String employeeID) throws IOException {
     ByteArrayInputStream bis = new ByteArrayInputStream(byteArr);
     BufferedImage bImage2 = ImageIO.read(bis);
     ImageIO.write(
         bImage2,
         "jpeg",
-        new File("src/main/resources/edu/wpi/cs3733/D22/teamE/view/images/employees/wong.jpeg"));
+        new File(
+            "src/main/resources/edu/wpi/cs3733/D22/teamE/view/images/employees/"
+                + employeeID
+                + ".jpeg"));
   }
 
-  public static boolean getPersonalPicture(Employee employee) throws SQLException, IOException {
+  public static ByteArrayInputStream getPersonalPicture(Employee employee)
+      throws SQLException, IOException {
     Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
     Statement s = connection.createStatement();
-    try {
-      ResultSet rs =
-          s.executeQuery(
-              "select PROFILEPIC from EMPLOYEES where EMPLOYEEID = '"
-                  + employee.getEmployeeID()
-                  + "'");
-      if (rs.next()) {
-        Blob blob = rs.getBlob(1);
-        byte[] bytes = blob.getBytes(1L, (int) blob.length());
-        toPng(bytes);
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-      return false;
+    ResultSet rs =
+        s.executeQuery(
+            "select PROFILEPIC from EMPLOYEES where EMPLOYEEID = '"
+                + employee.getEmployeeID()
+                + "'");
+    if (rs.next()) {
+      Blob blob = rs.getBlob(1);
+      byte[] bytes = blob.getBytes(1L, (int) blob.length());
+      toJpeg(bytes, employee.getEmployeeID());
+      ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+      return bis;
     }
     s.close();
-    return true;
+    return null;
   }
 
   public static void savePersonalPicture(Employee employee, byte[] byteArr) throws SQLException {
@@ -56,9 +58,8 @@ public class ProfilePictureManager {
         "UPDATE EMPLOYEES SET PROFILEPIC = (?) where EMPLOYEEID = '"
             + employee.getEmployeeID()
             + "'";
-    int rowsaffected = 0;
     PreparedStatement statement = connection.prepareStatement(sql);
     statement.setBinaryStream(1, new ByteArrayInputStream(byteArr), byteArr.length);
-    rowsaffected = statement.executeUpdate();
+    statement.executeUpdate();
   }
 }
