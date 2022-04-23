@@ -1,7 +1,5 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
-import edu.wpi.cs3733.D22.teamEAPI.entity.FloralServiceRequest;
-
 public class floralRequest extends serviceRequest {
   String flower;
   String deliveryTime;

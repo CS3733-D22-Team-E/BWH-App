@@ -1,14 +1,12 @@
 package edu.wpi.cs3733.D22.teamE.database;
 
+import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.entity.labRequest;
 import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
 import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -308,13 +306,10 @@ public class CSVManager {
     count = count + 1; // commas is number of results minus one
     String[] csvData = ColumnsCSV.split(","); // for query later
     BufferedReader in;
-    try {
-      String filePath = CSVFilePath;
-      in = new BufferedReader(new FileReader(CSVFilePath + fileName));
-    } catch (IOException e) {
-      System.err.println("ERROR: " + e.getMessage());
-      return false; // shouldnt do anything if there's nothing to load
-    }
+    // String filePath = CSVFilePath;
+    InputStream is = Main.class.getResourceAsStream("CsvFiles/" + fileName);
+    in = new BufferedReader(new InputStreamReader(is));
+    // in = new BufferedReader(new FileReader(CSVFilePath + fileName));
     String line;
     in.readLine();
     String[] data;

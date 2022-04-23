@@ -10,8 +10,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -49,7 +47,6 @@ public class facilitiesRequestController extends serviceRequestPageController
 
   FacilitiesRequestDAOImpl facilitiesRequestDAO;
   ObservableList<facilitiesRequest> tableList;
-
 
   DAOSystem system;
 
