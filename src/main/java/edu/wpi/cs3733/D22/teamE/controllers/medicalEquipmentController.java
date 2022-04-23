@@ -6,6 +6,8 @@ import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentServiceRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
+import edu.wpi.cs3733.D22.teamE.database.*;
+import edu.wpi.cs3733.D22.teamE.database.daos.*;
 import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -44,13 +46,16 @@ public class medicalEquipmentController extends serviceRequestPageController {
   @FXML TableColumn<medicalEquipmentRequest, String> tableRequestStatus;
   @FXML TableColumn<medicalEquipmentRequest, String> tableOtherNotes;
 
-  MedicalEquipmentServiceRequestDAOImpl medEquipmentServiceRequestDB;
-  MedicalEquipmentDAOImpl medEquipmentDB;
-  LocationDAOImpl locationDB;
+  // MedicalEquipmentServiceRequestDAOImpl medEquipmentServiceRequestDB;
+  // MedicalEquipmentDAOImpl medEquipmentDB;
+  // LocationDAOImpl locationDB;
+  DAOSystem system;
 
   ObservableList<medicalEquipmentRequest> tableList;
 
-  public medicalEquipmentController() {}
+  public medicalEquipmentController() {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+  }
 
   /**
    * Initializes the page by populating the location combo boxes, equipment combo boxes, and the
@@ -60,12 +65,12 @@ public class medicalEquipmentController extends serviceRequestPageController {
   public void initialize(URL url, ResourceBundle rb) {
     super.initialize(url, rb);
     try {
-      medEquipmentDB = new MedicalEquipmentDAOImpl();
+      // medEquipmentDB = new MedicalEquipmentDAOImpl();
       populateEquipComboBoxes();
 
-      medEquipmentServiceRequestDB = new MedicalEquipmentServiceRequestDAOImpl();
+      // medEquipmentServiceRequestDB = new MedicalEquipmentServiceRequestDAOImpl();
       populateMedEquipRequestTable();
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -81,7 +86,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
     equipmentQuantity.setVisible(false);
 
     ArrayList<MedicalEquipment> allEquipment =
-        (ArrayList<MedicalEquipment>) medEquipmentDB.getAll();
+        (ArrayList<MedicalEquipment>) system.getAllMedicalEquipments();
     ArrayList<String> equipmentNames = new ArrayList<String>();
     HashMap<String, Integer> equipNameToQuantity = new HashMap<>();
     for (MedicalEquipment e : allEquipment) {
@@ -161,7 +166,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
    * @return list of medicalEquipmentRequest objects in the database
    */
   protected ObservableList<medicalEquipmentRequest> populateMedEquipList() {
-    List<medicalEquipmentRequest> list = medEquipmentServiceRequestDB.getAll();
+    List<medicalEquipmentRequest> list = system.getAllMedicalEquipmentRequests();
     // TODO: FXCollections.observableArrayList(list) ???
     tableList = FXCollections.observableArrayList();
     for (medicalEquipmentRequest m : list) {
@@ -207,17 +212,18 @@ public class medicalEquipmentController extends serviceRequestPageController {
   }
 
   private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) throws SQLException {
-    medEquipmentServiceRequestDB.addMedEquipReq(medEquipmentRequest);
+    system.addMedEquipReq(
+        medEquipmentRequest); // TODO FIX MEDEQUIPREQ UPDATE TO REPLACE THIS!!!!!!!!
     tableList.add(medEquipmentRequest);
     List<MedicalEquipment> equipmentUsed =
-        medEquipmentDB.getMedicalEquipments(
+        system.getMedicalEquipments(
             medEquipmentRequest.getEquipment(),
             medEquipmentRequest.getEquipmentQuantity(),
             medEquipmentRequest.getRoomID(),
             medEquipmentRequest.getServiceRequestID());
 
     if (medEquipmentRequest.getRequestStatus().equals("Done")) {
-      medEquipmentDB.sendToCleaning(equipmentUsed);
+      system.sendToCleaning(equipmentUsed);
     }
   }
 }

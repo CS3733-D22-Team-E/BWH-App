@@ -168,7 +168,7 @@ public class requestPageFactory {
               }
             }
           }
-          db.updateServiceRequest(req);
+          db.update(req);
         });
     ScrollPane p = new ScrollPane();
     p.setFitToWidth(true);

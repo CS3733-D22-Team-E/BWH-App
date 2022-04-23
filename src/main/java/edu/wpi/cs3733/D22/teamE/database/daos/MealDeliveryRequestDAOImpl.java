@@ -95,7 +95,17 @@ public class MealDeliveryRequestDAOImpl implements DAO<mealDeliveryRequest> {
   }
 
   @Override
-  public void delete(mealDeliveryRequest item) {
-    mealDeliveryRequests.remove(item);
+  public void delete(mealDeliveryRequest request) {
+    mealDeliveryRequests.remove(request);
+
+    String query = "DELETE FROM MEALDELIVERYREQUEST WHERE MEAL_REQ_ID = (?)";
+    PreparedStatement statement;
+    try {
+      statement = connection.prepareStatement(query);
+      statement.setString(1, request.getServiceRequestID());
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }

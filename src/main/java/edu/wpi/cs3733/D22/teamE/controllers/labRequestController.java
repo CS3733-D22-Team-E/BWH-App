@@ -2,8 +2,8 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
-import edu.wpi.cs3733.D22.teamE.database.daos.LabRequestDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.labRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -38,11 +38,14 @@ public class labRequestController extends serviceRequestPageController {
   @FXML TableColumn<labRequest, String> tableOtherNotes;
   ObservableList<labRequest> tableList;
 
-  LocationDAOImpl locationDB;
-  LabRequestDAOImpl labRequestDB;
+  // LocationDAOImpl locationDB;
+  // LabRequestDAOImpl labRequestDB;
+  DAOSystem system;
 
   /** Constructor */
-  public labRequestController() {}
+  public labRequestController() {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+  }
 
   /**
    * Initializes the
@@ -56,11 +59,9 @@ public class labRequestController extends serviceRequestPageController {
       super.initialize(location, resources);
       labRequestType.getItems().addAll("Blood Sample", "Urine Sample", "X-Ray", "CAT Scan", "MRI");
       timeFrameComboBox.getItems().addAll("ASAP", "<1 day", "<1 week");
-
-      labRequestDB = new LabRequestDAOImpl();
       populateLabRequestTable();
 
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -89,7 +90,7 @@ public class labRequestController extends serviceRequestPageController {
   }
 
   protected ObservableList<labRequest> populateLabRequestList() {
-    List<labRequest> list = labRequestDB.getAll();
+    List<labRequest> list = system.getAllLabRequests();
     tableList = FXCollections.observableArrayList();
     for (labRequest l : list) {
       tableList.add(l);
@@ -117,7 +118,7 @@ public class labRequestController extends serviceRequestPageController {
   }
 
   private void labSendToDB(labRequest labReq) throws SQLException {
-    labRequestDB.update(labReq);
+    system.update(labReq);
     tableList.add(labReq);
   }
 
