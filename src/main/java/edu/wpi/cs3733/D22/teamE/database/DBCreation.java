@@ -306,7 +306,7 @@ public class DBCreation {
 
   public static void createTables() {
     try {
-      edu.wpi.cs3733.D22.teamEAPI.database.DBCreation.createFloralRequestTable();
+      edu.wpi.cs3733.D22.teamE.APIDatabase.DBCreation.createFloralRequestTable();
       createTowerLocationTable();
       createEmployeesTable();
       createEquipmentTable();

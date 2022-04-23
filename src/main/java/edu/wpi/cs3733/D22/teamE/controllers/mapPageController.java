@@ -5,8 +5,7 @@ import com.jfoenix.controls.JFXSlider;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.ServiceRequestDAOImpl;
-import edu.wpi.cs3733.D22.teamE.entity.Location;
-import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
+import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -51,8 +50,8 @@ public class mapPageController extends containsSideMenu implements Initializable
   List<Location> filteredLocations;
   List<MedicalEquipment> medEqList;
   List<MedicalEquipment> filteredMedEqList;
-  List<serviceRequest> servReqList;
-  List<serviceRequest> filteredServReqList;
+  List<RequestInterface> servReqList;
+  List<RequestInterface> filteredServReqList;
 
   double zoomIncrement = 0.1;
   String viewMode = "Tower Locations";
@@ -413,7 +412,7 @@ public class mapPageController extends containsSideMenu implements Initializable
     double scaleFactor = imageX / coordinateX;
 
     // Display an icon for each item in the filtered list
-    for (serviceRequest e : filteredServReqList) {
+    for (RequestInterface e : filteredServReqList) {
       Image image =
           new Image(
               new FileInputStream(
@@ -516,7 +515,7 @@ public class mapPageController extends containsSideMenu implements Initializable
     // Starter code to implement showing all service requests on the map
     String floor = floorDropdown.getValue().toString();
     ServiceRequestDAOImpl serviceRequestDAO = new ServiceRequestDAOImpl();
-    serviceRequestDAO.getCoords();
+    // serviceRequestDAO.getCoords();
 
     // Filter service request list to only show the current floor
     filteredServReqList =

@@ -3,7 +3,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
-import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
+import edu.wpi.cs3733.D22.teamE.database.daos.FacilitiesRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.facilitiesRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -45,21 +45,25 @@ public class facilitiesRequestController extends serviceRequestPageController
   @FXML TableColumn<facilitiesRequest, Boolean> tableIsUrgent;
   @FXML TableColumn<facilitiesRequest, String> tableNotes;
 
-  // FacilitiesRequestDAOImpl facilitiesRequestDAO;
+  FacilitiesRequestDAOImpl facilitiesRequestDAO;
   ObservableList<facilitiesRequest> tableList;
 
   DAOSystem system;
 
   /** Constructor */
   public facilitiesRequestController() {
-    system = DAOSystemSingleton.INSTANCE.getSystem();
+    try {
+      system = new DAOSystem();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     try {
-      // facilitiesRequestDAO = new FacilitiesRequestDAOImpl();
+      facilitiesRequestDAO = new FacilitiesRequestDAOImpl();
       populateLocationComboBoxes();
       populateFacilitiesReqTable();
       facilitiesOptionType
@@ -78,7 +82,7 @@ public class facilitiesRequestController extends serviceRequestPageController
    * @return list of giftDeliveryRequest objects in the database
    */
   protected ObservableList<facilitiesRequest> populateFacilitiesRequestsList() {
-    List<facilitiesRequest> requests = system.getAllFacilitiesRequests();
+    List<facilitiesRequest> requests = facilitiesRequestDAO.getAll();
     tableList = FXCollections.observableArrayList();
     for (facilitiesRequest request : requests) {
       tableList.add(request);
@@ -137,7 +141,7 @@ public class facilitiesRequestController extends serviceRequestPageController
   private void facilitiesSendToDB(facilitiesRequest request) {
     try {
       request.setRequestDate(LocalDate.now());
-      system.update(request);
+      system.updateFacilitiesRequest(request);
       tableList.add(request);
     } catch (Exception e) {
       e.printStackTrace();

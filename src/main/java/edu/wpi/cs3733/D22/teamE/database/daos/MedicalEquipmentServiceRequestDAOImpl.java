@@ -64,55 +64,42 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
   }
 
   @Override
-  public void update(medicalEquipmentRequest request) { // TODO: CHANGE INTO A PREPARED STATEMENT
+  public void update(medicalEquipmentRequest request) {
     medicalRequests.add(request);
-
-    try {
-      String query =
-          "INSERT INTO MED_EQUIP_REQ VALUES ('"
-              + request.getServiceRequestID()
-              + "','"
-              + request.getDeliveryDate()
-              + "','"
-              + request.getRequestDate()
-              + "',"
-              + request.getIsUrgent()
-              + ",'"
-              + request.getEquipment()
-              + "',"
-              + request.getEquipmentQuantity()
-              + ",'"
-              + request.getStaffAssignee()
-              + "','"
-              + request.getRoomID()
-              + "','"
-              + request.getFloorID()
-              + "','"
-              + request.getRequestStatus()
-              + "','"
-              + request.getOtherNotes()
-              + "')";
-      PreparedStatement statement = connection.prepareStatement(query);
-      statement.executeUpdate();
-    } catch (SQLException e) {
-      System.out.println(
-          "Add Medical Equipment Request failed!"); // TODO: Come up with a better catch block
-      e.printStackTrace();
-    }
   }
 
-  public void delete(medicalEquipmentRequest request) {
+  public void delete(medicalEquipmentRequest request) { // TODO: Remove from DB table as well
     medicalRequests.remove(request);
+  }
 
-    String query = "DELETE FROM MED_EQUIP_REQ WHERE MED_EQUIPMENTID = (?)";
-    PreparedStatement statement;
+  public void addMedEquipReq(medicalEquipmentRequest request) throws SQLException {
+    medicalRequests.add(request);
 
-    try {
-      statement = connection.prepareStatement(query);
-      statement.setString(1, request.getServiceRequestID());
-      statement.executeUpdate();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    String query =
+        "INSERT INTO MED_EQUIP_REQ VALUES ('"
+            + request.getServiceRequestID()
+            + "','"
+            + request.getDeliveryDate()
+            + "','"
+            + request.getRequestDate()
+            + "',"
+            + request.getIsUrgent()
+            + ",'"
+            + request.getEquipment()
+            + "',"
+            + request.getEquipmentQuantity()
+            + ",'"
+            + request.getStaffAssignee()
+            + "','"
+            + request.getRoomID()
+            + "','"
+            + request.getFloorID()
+            + "','"
+            + request.getRequestStatus()
+            + "','"
+            + request.getOtherNotes()
+            + "')";
+    PreparedStatement statement = connection.prepareStatement(query);
+    statement.executeUpdate();
   }
 }

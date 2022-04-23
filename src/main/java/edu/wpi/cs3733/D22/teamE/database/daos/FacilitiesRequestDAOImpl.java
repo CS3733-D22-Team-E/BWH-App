@@ -96,7 +96,7 @@ public class FacilitiesRequestDAOImpl implements DAO<facilitiesRequest> {
               + "','"
               + facilitiesRequest.getRoomID()
               + "','"
-              + facilitiesRequest.isUrgent()
+              + facilitiesRequest.getIsUrgent()
               + "','"
               + facilitiesRequest.getStaffAssignee()
               + "','"

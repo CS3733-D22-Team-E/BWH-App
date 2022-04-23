@@ -1,12 +1,12 @@
 package edu.wpi.cs3733.D22.teamE.database;
 
+import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
-import edu.wpi.cs3733.D22.teamE.entity.*;
+import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import edu.wpi.cs3733.D22.teamE.entity.labRequest;
+import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -195,11 +195,11 @@ public class CSVManager {
 
   public static void saveServiceRequestCSV(String fileName) throws IOException, SQLException {
     String format = serviceRequestFormat;
-    DAO<serviceRequest> dao = new ServiceRequestDAOImpl();
+    DAO<RequestInterface> dao = new ServiceRequestDAOImpl();
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (serviceRequest d : dao.getAll()) {
+    for (RequestInterface d : dao.getAll()) {
       String csvLine =
           ""
               + d.getServiceRequestID()
@@ -212,7 +212,7 @@ public class CSVManager {
               + ','
               + d.getRequestDate()
               + ','
-              + d.isUrgent()
+              + d.getIsUrgent()
               + "\n";
       // change nothing
       FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
@@ -306,13 +306,10 @@ public class CSVManager {
     count = count + 1; // commas is number of results minus one
     String[] csvData = ColumnsCSV.split(","); // for query later
     BufferedReader in;
-    try {
-      String filePath = CSVFilePath;
-      in = new BufferedReader(new FileReader(CSVFilePath + fileName));
-    } catch (IOException e) {
-      System.err.println("ERROR: " + e.getMessage());
-      return false; // shouldnt do anything if there's nothing to load
-    }
+    // String filePath = CSVFilePath;
+    InputStream is = Main.class.getResourceAsStream("CsvFiles/" + fileName);
+    in = new BufferedReader(new InputStreamReader(is));
+    // in = new BufferedReader(new FileReader(CSVFilePath + fileName));
     String line;
     in.readLine();
     String[] data;

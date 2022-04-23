@@ -1,8 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import edu.wpi.cs3733.D22.teamE.PopUp;
-import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
-import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
+import edu.wpi.cs3733.D22.teamE.database.daos.LanguageRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.languageInterpreterRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -41,18 +40,17 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   @FXML TableColumn<languageInterpreterRequest, LocalDate> tableDeliveryDate;
   @FXML TableColumn<languageInterpreterRequest, LocalDate> tableOtherNotes;
 
-  DAOSystem system;
+  LanguageRequestDAOImpl languageRequestDAO;
   ObservableList<languageInterpreterRequest> tableList;
 
-  public languageInterpreterRequestController() {
-    system = DAOSystemSingleton.INSTANCE.getSystem();
-  }
+  public languageInterpreterRequestController() {}
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     try {
       super.initialize(location, resources);
       languageOptions.getItems().addAll("English", "Spanish", "Russian", "Mandarin Chinese");
+      languageRequestDAO = new LanguageRequestDAOImpl();
       populateLanguageRequestTable();
 
     } catch (Exception e) {
@@ -86,7 +84,7 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   }
 
   protected ObservableList<languageInterpreterRequest> populateLanguageRequestList() {
-    List<languageInterpreterRequest> requests = system.getAllLanguageRequests();
+    List<languageInterpreterRequest> requests = languageRequestDAO.getAll();
     tableList = FXCollections.observableArrayList();
     for (languageInterpreterRequest request : requests) {
       tableList.add(request);
@@ -120,7 +118,7 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
 
   private void langSendToDB(languageInterpreterRequest request) throws SQLException {
     try {
-      system.update(request);
+      languageRequestDAO.update(request);
       tableList.add(request);
     } catch (Exception e) {
       e.printStackTrace();
