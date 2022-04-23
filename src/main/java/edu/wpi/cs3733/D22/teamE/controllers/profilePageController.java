@@ -50,7 +50,7 @@ public class profilePageController extends containsSideMenu implements Initializ
       db = new DAOSystem();
       account = AccountsManager.getInstance().getAccount();
       employee = AccountsManager.getInstance().getEmployee();
-      URL url = Main.class.getResource("view/icons/prof.png");
+      URL url = Main.class.getResource("view/icons/profilepic.png");
       assert url != null;
       InputStream is = url.openStream();
       Image image = new Image(is);
