@@ -6,18 +6,18 @@
 .titleText {
     -fx-text-fill: #212121;
     -fx-font-weight: bold;
-    -fx-font-size: 20;
+    -fx-font-size: 25;
+}
+
+.bodyText {
+    -fx-text-fill: #212121;
+    -fx-font-weight: normal;
+    -fx-font-size: 15;
 }
 
 .button {
     -fx-background-color: #e1e1e1;
     -fx-text-fill: #212121;
-}
-
-.bodyText {
-    -fx-text-fill: black;
-    -fx-font-weight: normal;
-    -fx-font-size: 15;
 }
 
 .background {
@@ -26,37 +26,38 @@
 
 /* Header */
 .header {
-    -fx-background-color: #00bfff;
+    -fx-background-color: #2E716D;
 }
 
 .headerButton {
-    -fx-background-color: #00bfff;
-    -fx-text-fill: #212121;
+    -fx-background-color: #2E716D;
+    -fx-text-fill: #204F87;
 }
 
 .headerSelectedButton {
-    -fx-background-color: #00bfff;
+    -fx-background-color: #368C87;
+    -fx-text-fill: #ffffff;
 }
 
 .headerText {
     -fx-font-size: 20;
     -fx-font-family: Arial;
     -fx-font-weight: bold;
-    -fx-text-fill: #212121;
+    -fx-text-fill: #ffffff;
 }
 
 /* Sidebar */
 .sidebarBackground {
-    -fx-background-color: #00bfff;
+    -fx-background-color: #368C87;
 }
 
 .sidebarButton {
-    -fx-background-color: #00bfff;
+    -fx-background-color: #368C87;
     -fx-text-fill: white;
 }
 
 .sidebarSelectedButton {
-    -fx-background-color: #ff00ff;
+    -fx-background-color: #53C2BC;
 }
 
 /* Page Background */
@@ -69,29 +70,36 @@
 
 .container {
     -fx-background-color: #f0f8ff;
-    -fx-border-color: #00bfff;
+    -fx-border-color: #9B9B9B;
     -fx-border-width: 2;
 }
 
 .containerButton {
-    -fx-background-color: #00bfff;
+    -fx-background-color: #DFDFDF;
     -fx-text-fill: white;
 }
 
 .containerButtonSelected {
-    -fx-background-color: #00bfff;
+    -fx-background-color: #C4C4C4;
     -fx-text-fill: white;
 }
 
 /* Service Request */
 
 .submitButton {
-    -fx-background-color: #00bfff;
+    -fx-background-color: #2E716D;
     -fx-text-fill: white;
 }
 
 .inputField {
     -fx-background-color: #e1e1e1;
+    -fx-text-fill: #212121;
+}
+
+.inputLabel {
+    -fx-text-fill: #212121;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
 }
 
 /* Profile */
