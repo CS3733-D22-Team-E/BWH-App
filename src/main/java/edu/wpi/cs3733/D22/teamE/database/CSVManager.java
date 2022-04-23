@@ -417,7 +417,12 @@ public class CSVManager {
       } else {
         if (filename.equals("TransportExt.csv")) {
           if (file.length() != 0) {
-            CallAPI.getInstance().getExternalTransportAPI().importExternalTransportsFromCSV(file);
+            try {
+              CallAPI.getInstance().getExternalTransportAPI().importExternalTransportsFromCSV(file);
+            } catch (NullPointerException e) {
+              e.printStackTrace();
+              System.out.println(e.getCause() + " : " + e.getMessage());
+            }
           }
         }
       }
