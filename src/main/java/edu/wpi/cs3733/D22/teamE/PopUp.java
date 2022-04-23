@@ -4,8 +4,8 @@ import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
 import edu.wpi.cs3733.D22.teamE.controllers.statusPageController;
+import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.entity.requestPageFactory;
-import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
 import java.lang.reflect.InvocationTargetException;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -32,7 +32,7 @@ public class PopUp {
   }
 
   public static void createReq(
-      serviceRequest request, Window owner, boolean editable, Object controller) {
+      RequestInterface request, Window owner, boolean editable, Object controller) {
     JFXAlert reqPage = new JFXAlert(owner);
     reqPage.initModality(Modality.APPLICATION_MODAL);
     reqPage.setOverlayClose(false);

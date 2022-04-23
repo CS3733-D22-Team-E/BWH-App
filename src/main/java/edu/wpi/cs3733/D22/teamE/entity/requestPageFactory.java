@@ -31,16 +31,16 @@ public class requestPageFactory {
 
   public static Node getAsPage(Object targetRequest, Object returnObject, Object displayObject)
       throws InvocationTargetException, IllegalAccessException {
-    if ((targetRequest instanceof serviceRequest)) {
-      if (returnObject == null) return getAsPage((serviceRequest) targetRequest);
+    if ((targetRequest instanceof RequestInterface)) {
+      if (returnObject == null) return getAsPage((RequestInterface) targetRequest);
       else if (returnObject instanceof JFXButton && displayObject instanceof JFXAlert)
         return getAsPage(
-            (serviceRequest) targetRequest, (JFXButton) returnObject, (JFXAlert) displayObject);
+            (RequestInterface) targetRequest, (JFXButton) returnObject, (JFXAlert) displayObject);
       else throw new RuntimeException("Invalid Return Type");
     } else throw new RuntimeException("Not a Valid Request");
   }
 
-  private static Node getAsPage(serviceRequest req)
+  private static Node getAsPage(RequestInterface req)
       throws InvocationTargetException, IllegalAccessException {
     VBox box = new VBox();
     box.setSpacing(2);
@@ -71,7 +71,7 @@ public class requestPageFactory {
     return p;
   }
 
-  private static Node getAsPage(serviceRequest req, JFXButton button, JFXAlert alert)
+  private static Node getAsPage(RequestInterface req, JFXButton button, JFXAlert alert)
       throws InvocationTargetException, IllegalAccessException {
     VBox box = new VBox();
     box.setSpacing(2);

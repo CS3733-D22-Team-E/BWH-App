@@ -3,7 +3,7 @@ package edu.wpi.cs3733.D22.teamE.database;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 
 public class ServiceRequestFactory {
-  public serviceRequest getServiceRequest(String serviceRequestType) {
+  public RequestInterface getServiceRequest(String serviceRequestType) {
     if (serviceRequestType == null) return null;
     if (serviceRequestType.equalsIgnoreCase("MED_EQUIP_REQ")) return new medicalEquipmentRequest();
     else if (serviceRequestType.equalsIgnoreCase("LAB_REQUEST")) return new labRequest();
