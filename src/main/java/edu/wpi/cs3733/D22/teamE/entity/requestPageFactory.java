@@ -1,13 +1,12 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
-import com.jfoenix.controls.JFXAlert;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Insets;
@@ -75,9 +74,9 @@ public class requestPageFactory {
       throws InvocationTargetException, IllegalAccessException {
     VBox box = new VBox();
     box.setSpacing(2);
-    List<String> defVal = new ArrayList<>();
+    List<Object> defVal = new ArrayList<>();
     List<Method> returnMethods = new ArrayList<>();
-    List<JFXTextField> returnFields = new ArrayList<>();
+    List<Node> returnFields = new ArrayList<>();
     for (Method m : req.getClass().getMethods()) {
       if (m.getName().startsWith("get") && m.getParameterTypes().length == 0) {
         if (!m.getName().contains("Class")
@@ -94,13 +93,31 @@ public class requestPageFactory {
             HBox innerBox = new HBox();
             Label l = new Label(label + " : ");
             innerBox.getChildren().add(l);
-            JFXTextField textField = new JFXTextField();
-            textField.setText(content);
-            innerBox.getChildren().add(textField);
-            box.getChildren().add(innerBox);
-            returnMethods.add(req.getClass().getMethod("set" + label, String.class));
-            defVal.add(content);
-            returnFields.add(textField);
+            if (r instanceof String) {
+              defVal.add(r);
+              JFXTextField textField = new JFXTextField();
+              textField.setText(content);
+              innerBox.getChildren().add(textField);
+              box.getChildren().add(innerBox);
+              returnMethods.add(req.getClass().getMethod("set" + label, String.class));
+              returnFields.add(textField);
+            } else if (r instanceof LocalDate) {
+              defVal.add(r);
+              JFXDatePicker datePicker = new JFXDatePicker();
+              datePicker.setValue((LocalDate) r);
+              innerBox.getChildren().add(datePicker);
+              box.getChildren().add(innerBox);
+              returnMethods.add(req.getClass().getMethod("set" + label, LocalDate.class));
+              returnFields.add(datePicker);
+            } else {
+              defVal.add(content);
+              JFXTextField textField = new JFXTextField();
+              textField.setText(content);
+              innerBox.getChildren().add(textField);
+              box.getChildren().add(innerBox);
+              returnMethods.add(req.getClass().getMethod("set" + label, String.class));
+              returnFields.add(textField);
+            }
           } catch (NoSuchMethodException e) {
             e.printStackTrace();
           }
@@ -113,11 +130,21 @@ public class requestPageFactory {
             Method returnMethod = returnMethods.get(i);
             try {
               System.out.println(returnMethod.getName());
-              final Object r = returnMethod.invoke(req, returnFields.get(i).getText());
+              Node returnNode = returnFields.get(i);
+              if (returnNode instanceof JFXTextField) {
+                final Object r = returnMethod.invoke(req, ((JFXTextField) returnNode).getText());
+              } else if (returnNode instanceof JFXDatePicker) {
+                final Object r = returnMethod.invoke(req, ((JFXDatePicker) returnNode).getValue());
+              }
             } catch (IllegalAccessException | InvocationTargetException e) {
               Throwable cause = e.getCause();
               PopUp.createWarning(cause.getMessage(), alert.getOwner());
-              returnFields.get(i).setText(defVal.get(i));
+              Node returnNode = returnFields.get(i);
+              if (returnNode instanceof JFXTextField) {
+                ((JFXTextField) returnNode).setText((String) defVal.get(i));
+              } else if (returnNode instanceof JFXDatePicker) {
+                ((JFXDatePicker) returnNode).setValue((LocalDate) defVal.get(i));
+              }
             }
           }
           db.updateServiceRequest(req);
