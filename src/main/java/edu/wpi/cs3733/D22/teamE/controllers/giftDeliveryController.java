@@ -45,7 +45,6 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   GiftRequestDAOImpl giftRequestDAO;
   ObservableList<giftDeliveryRequest> tableList;
 
-
   DAOSystem system;
 
   /** Constructor */
