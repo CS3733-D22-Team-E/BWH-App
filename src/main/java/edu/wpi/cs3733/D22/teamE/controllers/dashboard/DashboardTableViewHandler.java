@@ -1,8 +1,8 @@
 package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
-import edu.wpi.cs3733.D22.teamE.database.Equipment;
-import edu.wpi.cs3733.D22.teamE.database.Location;
-import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
+import edu.wpi.cs3733.D22.teamE.entity.Equipment;
+import edu.wpi.cs3733.D22.teamE.entity.Location;
+import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;

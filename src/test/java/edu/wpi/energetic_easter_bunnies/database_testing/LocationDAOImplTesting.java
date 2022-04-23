@@ -3,7 +3,7 @@ package edu.wpi.energetic_easter_bunnies.database_testing;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import edu.wpi.cs3733.D22.teamE.database.Location;
+import edu.wpi.cs3733.D22.teamE.entity.Location;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import java.sql.SQLException;

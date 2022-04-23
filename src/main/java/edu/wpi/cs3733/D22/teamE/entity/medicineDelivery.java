@@ -1,4 +1,4 @@
-package edu.wpi.cs3733.D22.teamE.database;
+package edu.wpi.cs3733.D22.teamE.entity;
 
 import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
 import java.time.LocalDate;
