@@ -2,9 +2,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
-import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.daos.ServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.*;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
@@ -45,9 +43,7 @@ public class mapPageController extends containsSideMenu implements Initializable
   FXMLLoader loader = new FXMLLoader();
   Parent root;
   @FXML MenuBar menuBar;
-  LocationDAOImpl db;
-  MedicalEquipmentDAOImpl medEq;
-  ServiceRequestDAOImpl servReq;
+  DAOSystem database;
   List<Location> locations;
   List<Location> filteredLocations;
   List<MedicalEquipment> medEqList;
@@ -126,12 +122,10 @@ public class mapPageController extends containsSideMenu implements Initializable
     mapImage.setScaleY(zoomSlider.getValue());
 
     try {
-      db = new LocationDAOImpl();
-      medEq = new MedicalEquipmentDAOImpl();
-      servReq = new ServiceRequestDAOImpl();
-      medEqList = medEq.getAll();
-      servReqList = servReq.getAll();
-      locations = db.getAll();
+      database = new DAOSystem();
+      medEqList = database.getAllMedEquip();
+      servReqList = database.getAllServiceRequests();
+      locations = database.getAllLocations();
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -682,7 +676,7 @@ public class mapPageController extends containsSideMenu implements Initializable
   @FXML // Handle navigating to the map editor
   public void mapEditorButton(ActionEvent event) throws IOException {
     // Set editor mode to true
-    if (editMode != "false") {
+    if (!Objects.equals(editMode, "false")) {
       // Set editor mode to false
       setEditMode("false");
 
@@ -777,8 +771,7 @@ public class mapPageController extends containsSideMenu implements Initializable
       // Update the location in the db with the new coordinates
       if (viewMode == "Tower Locations") {
         // Get location by coordinates
-        for (int i = 0; i < filteredLocations.size(); i++) {
-          Location location = filteredLocations.get(i);
+        for (Location location : filteredLocations) {
           if (location.getXCoord() == selectedLoc[0] && location.getYCoord() == selectedLoc[1]) {
             db.updateCoord(location, newX, newY);
           }
@@ -803,8 +796,7 @@ public class mapPageController extends containsSideMenu implements Initializable
     // Remove the currently selected location from the db
 
     // Get location by coordinates
-    for (int i = 0; i < filteredLocations.size(); i++) {
-      Location location = filteredLocations.get(i);
+    for (Location location : filteredLocations) {
       if (location.getXCoord() == selectedLoc[0] && location.getYCoord() == selectedLoc[1]) {
         db.delete(location);
       }
@@ -862,7 +854,7 @@ public class mapPageController extends containsSideMenu implements Initializable
 
       System.out.println(viewMode);
 
-      if (viewMode == "Tower Locations") {
+      if (Objects.equals(viewMode, "Tower Locations")) {
         for (Location location : locations) {
 
           // If the user has selected a dot on the map
@@ -876,7 +868,7 @@ public class mapPageController extends containsSideMenu implements Initializable
           }
         }
         displayTowerLocations();
-      } else if (viewMode == "Medical Equipment") {
+      } else if (Objects.equals(viewMode, "Medical Equipment")) {
         for (MedicalEquipment medEquip : filteredMedEqList) {
           // If the user has selected a dot on the map
           if ((medEquip.getXCoord() * scaleFactor >= mouseX - locationPadding
@@ -889,7 +881,7 @@ public class mapPageController extends containsSideMenu implements Initializable
           }
         }
         displayMedEquipLocations();
-      } else if (viewMode == "Service Requests") {
+      } else if (Objects.equals(viewMode, "Service Requests")) {
         for (RequestInterface servReq : filteredServReqList) {
           // If the user has selected a dot on the map
           if ((servReq.getXCoord() * scaleFactor >= mouseX - locationPadding
@@ -912,7 +904,7 @@ public class mapPageController extends containsSideMenu implements Initializable
       changePosition.setText("Change Position");
 
       // Re-render location dots
-      if (viewMode == "Tower Locations") {
+      if (Objects.equals(viewMode, "Tower Locations")) {
         filterTowerLocations();
         // Filter out the old location dot
         filteredLocations =
@@ -930,7 +922,7 @@ public class mapPageController extends containsSideMenu implements Initializable
         System.out.println(filteredLocations.size());
         // Display Tower Locations
         displayTowerLocations();
-      } else if (viewMode == "Medical Equipment") {
+      } else if (Objects.equals(viewMode, "Medical Equipment")) {
         // Filter out the old location dot
         filteredMedEqList =
             filteredMedEqList.stream()
@@ -942,7 +934,7 @@ public class mapPageController extends containsSideMenu implements Initializable
 
         // Display Medical Equipment
         displayMedEquipLocations();
-      } else if (viewMode == "Service Requests") {
+      } else if (Objects.equals(viewMode, "Service Requests")) {
         // Filter out the old location dot
         filteredServReqList =
             filteredServReqList.stream()
