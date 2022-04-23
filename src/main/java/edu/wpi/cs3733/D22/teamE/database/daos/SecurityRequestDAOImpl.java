@@ -95,7 +95,7 @@ public class SecurityRequestDAOImpl implements DAO<securityRequest> {
               + "','"
               + securityRequest.getFloorID()
               + "','"
-              + securityRequest.isUrgent()
+              + securityRequest.getIsUrgent()
               + "','"
               + securityRequest.getStaffAssignee()
               + "','"
