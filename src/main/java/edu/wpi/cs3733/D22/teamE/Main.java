@@ -2,8 +2,6 @@ package edu.wpi.cs3733.D22.teamE;
 
 // import edu.wpi.cs3733.D22.teamE.database.DBConnection;
 
-import edu.wpi.cs3733.D22.teamE.database.DBCreation;
-
 public class Main {
 
   // public static void closeConnection() {
@@ -21,7 +19,6 @@ public class Main {
     //    Thread thread =
     //        new Thread(
     //            () -> {
-    DBCreation.createTables();
     App.launch(App.class, args);
     //            });
     //    thread.start();

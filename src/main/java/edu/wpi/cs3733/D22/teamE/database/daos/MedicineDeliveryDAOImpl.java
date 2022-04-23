@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
+import edu.wpi.cs3733.D22.teamE.entity.medicineDelivery;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,8 +117,18 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
   @Override
   public void delete(
       medicineDelivery
-          item) { // TODO: Figure out what to do with Request in DB after its marked as done
-    medicineRequests.remove(item);
+          request) { // TODO: Figure out what to do with Request in DB after its marked as done
+    medicineRequests.remove(request);
+
+    String query = "DELETE FROM MEDICINEREQUEST WHERE MEDICINE_REQ_ID = (?)";
+    PreparedStatement statement;
+    try {
+      statement = connection.prepareStatement(query);
+      statement.setString(1, request.getServiceRequestID());
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   public boolean[] getRepeatingDays(String reocurringDays) { // converting string to booleans
