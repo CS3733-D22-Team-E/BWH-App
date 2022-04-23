@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.SVGPath?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="70.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXHamburger fx:id="burger" prefHeight="70.0" prefWidth="68.0" />
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="219.0" spacing="10.0">
+               <children>
+                  <SVGPath fx:id="bwhLogo" content="M40,60 C42,48 44,30 25,32" />
+                  <Label text="Brigham and Women's Hospital" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="282.0">
+               <children>
+                  <JFXButton fx:id="homeButton" onAction="#homeButton" prefHeight="82.0" prefWidth="89.0" text="Home" />
+                  <JFXButton fx:id="aboutUsButton" onAction="#aboutUsButton" prefHeight="100.0" prefWidth="104.0" text="About Us" />
+                  <JFXButton fx:id="helpButton" onAction="#helpButton" prefHeight="100.0" prefWidth="104.0" text="Help" />
+               </children>
+            </HBox>
+            <StackPane prefHeight="82.0" prefWidth="87.0">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/default_profile_pic.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton fx:id="profileButton" onAction="#profileButton" prefHeight="61.0" prefWidth="62.0" text=" " />
+               </children>
+            </StackPane>
+         </children>
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+      </HBox>
+   </top>
+   <left>
+      <JFXDrawer fx:id="drawer" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>
