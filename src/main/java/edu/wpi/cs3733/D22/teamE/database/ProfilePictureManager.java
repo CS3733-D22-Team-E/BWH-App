@@ -25,7 +25,7 @@ public class ProfilePictureManager {
     ImageIO.write(
         bImage2,
         "jpeg",
-        new File("src/main/resources/edu/wpi/cs3733/D22/teamE/view/images/employees/staff.jpeg"));
+        new File("src/main/resources/edu/wpi/cs3733/D22/teamE/view/images/employees/wong.jpeg"));
   }
 
   public static boolean getPersonalPicture(Employee employee) throws SQLException, IOException {
