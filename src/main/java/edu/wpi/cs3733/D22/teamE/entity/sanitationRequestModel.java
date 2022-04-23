@@ -35,7 +35,7 @@ public class sanitationRequestModel extends serviceRequestModel {
         r.getStaffAssignee(),
         String.valueOf(LocalDate.now()),
         "null",
-        r.isUrgent(),
+        r.getIsUrgent(),
         r.getOtherNotes(),
         r);
     sizeString = new SimpleStringProperty(r.getSizeOfCleaning().toString());

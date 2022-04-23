@@ -144,7 +144,7 @@
                                           </VBox>
                                           <VBox prefHeight="42.0" prefWidth="197.0">
                                              <children>
-                                                <Label text="Filter by Date (mm/dd/yy)" />
+                                                <Label text="Filter by Date (yyyy-mm-dd)" />
                                                 <TextField fx:id="filterFieldDate" prefWidth="-1.0" />
                                              </children>
                                              <padding>
@@ -161,6 +161,9 @@
                                           <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1080.0" vbarPolicy="NEVER">
                                              <content>
                                                 <TableView fx:id="requestTable" editable="true">
+                                                   <placeholder>
+                                                      <Label text="There currently are no active service requests." />
+                                                   </placeholder>
                                                    <columns>
                                                       <TableColumn fx:id="idColumn" prefWidth="92.0" text="ID" />
                                                       <TableColumn fx:id="typeColumn" prefWidth="184.0" text="Type" />

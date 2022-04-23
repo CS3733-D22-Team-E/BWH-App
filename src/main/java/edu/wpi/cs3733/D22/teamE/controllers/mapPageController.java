@@ -6,8 +6,9 @@ import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.ServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
-import edu.wpi.cs3733.D22.teamE.pageControlFacade;
+import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,8 +45,8 @@ public class mapPageController extends containsSideMenu implements Initializable
   List<Location> filteredLocations;
   List<MedicalEquipment> medEqList;
   List<MedicalEquipment> filteredMedEqList;
-  List<serviceRequest> servReqList;
-  List<serviceRequest> filteredServReqList;
+  List<RequestInterface> servReqList;
+  List<RequestInterface> filteredServReqList;
 
   int zoomIncrement = 50;
   String viewMode = "Tower Locations";
@@ -390,7 +391,7 @@ public class mapPageController extends containsSideMenu implements Initializable
     double scaleFactor = imageX / coordinateX;
 
     // Display an icon for each item in the filtered list
-    for (serviceRequest e : filteredServReqList) {
+    for (RequestInterface e : filteredServReqList) {
       Image image =
           new Image(
               new FileInputStream(
@@ -484,7 +485,7 @@ public class mapPageController extends containsSideMenu implements Initializable
     // Starter code to implement showing all service requests on the map
     String floor = floorDropdown.getValue().toString();
     ServiceRequestDAOImpl serviceRequestDAO = new ServiceRequestDAOImpl();
-    serviceRequestDAO.getCoords();
+    // serviceRequestDAO.getCoords();
 
     // Filter service request list to only show the current floor
     filteredServReqList =
@@ -557,6 +558,6 @@ public class mapPageController extends containsSideMenu implements Initializable
   public void mapEditorButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mapBox.getScene().getWindow();
 
-    pageControlFacade.loadPage("mapEditor.fxml", thisStage);
+    pageControl.loadPage("mapEditor.fxml", thisStage);
   }
 }

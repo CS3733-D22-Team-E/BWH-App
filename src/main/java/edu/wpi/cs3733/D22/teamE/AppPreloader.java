@@ -49,7 +49,7 @@ public class AppPreloader implements SharedScene {
     spinnerClasses2.add("sixth-spinner");
     spinnerClasses.add("materialDesign-red");
     spinnerClasses2.add("seventh-spinner");
-    preloaderParent = (Parent) pageControlFacade.getPageRoot("loadingPage.fxml", this);
+    preloaderParent = (Parent) pageControl.getPageRoot("loadingPage.fxml", this);
     spinnerBox.setAlignment(Pos.CENTER);
     assert preloaderParent != null;
     spinnerBox
@@ -104,7 +104,7 @@ public class AppPreloader implements SharedScene {
             t.stop();
             Stage thisStage = (Stage) topGroup.getScene().getWindow();
             thisStage.setResizable(true);
-            pageControlFacade.loadPage("loginPage.fxml", thisStage);
+            pageControl.loadPage("loginPage.fxml", thisStage);
           } catch (InterruptedException e) {
             e.printStackTrace();
           }

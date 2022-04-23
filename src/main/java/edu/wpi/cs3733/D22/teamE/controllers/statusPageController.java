@@ -33,7 +33,7 @@ public class statusPageController extends containsSideMenu {
   @FXML TableColumn<serviceRequestModel, String> statusColumn;
   @FXML TableColumn<serviceRequestModel, String> assignedColumn;
   @FXML TableColumn<serviceRequestModel, String> dateColumn;
-  @FXML TableColumn<serviceRequestModel, serviceRequest> buttonColumn;
+  @FXML TableColumn<serviceRequestModel, RequestInterface> buttonColumn;
   DAOSystem db;
 
   /** Constructor */
@@ -193,20 +193,24 @@ public class statusPageController extends containsSideMenu {
    * @return an ObservableList of serviceRequestModels
    */
   protected ObservableList<serviceRequestModel> populateList() {
-    List<serviceRequest> list = db.getAllServiceRequests();
+    List<RequestInterface> list = db.getAllServiceRequests();
     ObservableList<serviceRequestModel> tableList = FXCollections.observableArrayList();
-    for (serviceRequest r : list) {
-      tableList.add(
-          new serviceRequestModel(
-              r.getServiceRequestID(),
-              r.getRequestStatus(),
-              r.getRequestType().toString(),
-              r.getStaffAssignee(),
-              r.getRequestDate().toString(),
-              ((r.getDeliveryDate() == null) ? "" : r.getDeliveryDate().toString()),
-              r.getIsUrgent(),
-              r.getOtherNotes(),
-              r));
+    ArrayList<String> usedIDS = new ArrayList<>();
+    for (RequestInterface r : list) {
+      if (!usedIDS.contains(r.getServiceRequestID())) {
+        usedIDS.add(r.getServiceRequestID());
+        tableList.add(
+            new serviceRequestModel(
+                r.getServiceRequestID(),
+                r.getRequestStatus(),
+                r.getRequestType().toString(),
+                r.getStaffAssignee(),
+                r.getRequestDate().toString(),
+                ((r.getDeliveryDate() == null) ? "" : r.getDeliveryDate().toString()),
+                r.getIsUrgent(),
+                r.getOtherNotes(),
+                r));
+      }
     }
     return tableList;
   }
@@ -216,7 +220,7 @@ public class statusPageController extends containsSideMenu {
     ArrayList<serviceRequestModel> p =
         new ArrayList<>(requestTable.getSelectionModel().getSelectedItems());
     for (serviceRequestModel req : p) {
-      serviceRequest r = db.getServiceRequest(req.getID());
+      RequestInterface r = db.getServiceRequest(req.getID());
       db.deleteServiceRequest(r);
     }
     genTable();

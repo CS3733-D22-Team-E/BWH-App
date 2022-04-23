@@ -4,20 +4,20 @@ import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
-import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
 import java.sql.SQLException;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 
-public class CustomJFXButtonTableCell<S> extends TableCell<S, serviceRequest> {
+public class CustomJFXButtonTableCell<S> extends TableCell<S, RequestInterface> {
   JFXButton button = new JFXButton();
   DAOSystem db;
   Object controller;
 
   public static <S>
-      Callback<TableColumn<S, serviceRequest>, TableCell<S, serviceRequest>> forTableColumn(
+      Callback<TableColumn<S, RequestInterface>, TableCell<S, RequestInterface>> forTableColumn(
           Object controller) {
     return list -> new CustomJFXButtonTableCell<>(controller);
   }
@@ -34,7 +34,7 @@ public class CustomJFXButtonTableCell<S> extends TableCell<S, serviceRequest> {
   }
 
   @Override
-  protected void updateItem(serviceRequest item, boolean empty) {
+  protected void updateItem(RequestInterface item, boolean empty) {
     super.updateItem(item, empty);
     button.setOnAction(
         event -> {
@@ -42,7 +42,6 @@ public class CustomJFXButtonTableCell<S> extends TableCell<S, serviceRequest> {
               AccountsManager.getInstance().getAccount().getAuthorityLevel() >= Account.adminPerm;
           System.out.println(edit);
           PopUp.createReq(item, button.getScene().getWindow(), edit, controller);
-          db.updateServiceRequest(item);
         });
     if (empty || item == null) {
       setText(null);

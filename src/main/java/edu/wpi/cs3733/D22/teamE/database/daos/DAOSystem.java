@@ -1,10 +1,10 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
+import edu.wpi.cs3733.D22.teamE.APIDatabase.dao.FloralRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.*;
 import edu.wpi.cs3733.D22.teamE.database.Employee;
-import edu.wpi.cs3733.D22.teamE.database.Location;
-import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
-import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
 import edu.wpi.cs3733.D22.teamE.entity.*;
+import edu.wpi.cs3733.D22.teamE.entity.FloralServiceRequest;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import java.sql.SQLException;
 import java.util.List;
@@ -23,8 +23,10 @@ public class DAOSystem {
   private final ServiceRequestDAOImpl serviceRequestDAO;
   private final FacilitiesRequestDAOImpl facilitiesRequestDAO;
   private final GiftRequestDAOImpl giftRequestDAO;
+  private final FloralRequestDAOImpl floralRequestDAO;
 
   public DAOSystem() throws SQLException {
+    floralRequestDAO = new FloralRequestDAOImpl();
     accountDAO = new AccountDAOImpl();
     employeeDAO = new EmployeeDAOImpl();
     labRequestDAO = new LabRequestDAOImpl();
@@ -184,19 +186,37 @@ public class DAOSystem {
     medicineDeliveryDAO.delete(medicineDelivery);
   }
 
-  public List<serviceRequest> getAllServiceRequests() {
-    return serviceRequestDAO.getAll();
+  public List<RequestInterface> getAllServiceRequests() {
+    List<RequestInterface> l = serviceRequestDAO.getAll();
+    // now handle API service requests
+    List<FloralServiceRequest> floralL = this.getAllFloralRequests();
+    for (FloralServiceRequest r : floralL) {
+      FloralRequestAdapter convertedReq = new FloralRequestAdapter(r);
+      if (!l.contains(convertedReq)) l.add(convertedReq);
+    }
+    return l;
   }
 
-  public serviceRequest getServiceRequest(String id) {
+  public List<FloralServiceRequest> getAllFloralRequests() {
+    return floralRequestDAO.getAll();
+    // return new ArrayList<FloralServiceRequest>();
+  }
+
+  public RequestInterface getServiceRequest(String id) {
     return serviceRequestDAO.get(id);
   }
 
-  public void updateServiceRequest(serviceRequest request) {
-    serviceRequestDAO.update(request);
+  public void updateServiceRequest(RequestInterface request) {
+    if (request.getRequestType().equals(serviceRequest.Type.SERVICEREQUEST)) {
+      if (request instanceof FloralRequestAdapter) {
+        FloralServiceRequest newReq = ((FloralRequestAdapter) request).getRequest();
+        floralRequestDAO.delete(floralRequestDAO.get(newReq.getServiceRequestID()));
+        floralRequestDAO.update(newReq);
+      }
+    } else serviceRequestDAO.update((serviceRequest) request);
   }
 
-  public void deleteServiceRequest(serviceRequest request) {
+  public void deleteServiceRequest(RequestInterface request) {
     serviceRequestDAO.delete(request);
   }
 

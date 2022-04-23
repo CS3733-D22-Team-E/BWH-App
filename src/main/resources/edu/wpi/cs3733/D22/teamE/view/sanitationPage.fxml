@@ -218,6 +218,9 @@
                   <VBox HBox.hgrow="ALWAYS">
                      <children>
                               <TableView fx:id="table" VBox.vgrow="ALWAYS">
+                                  <placeholder>
+                                      <Label text="There currently are no active service requests."/>
+                                  </placeholder>
                                   <columns>
                                       <TableColumn fx:id="id" prefWidth="75.0" text="Request ID" />
                                       <TableColumn fx:id="status" prefWidth="65.0" text="Status" />
