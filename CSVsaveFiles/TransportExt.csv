@@ -1,3 +1,2 @@
 requestID,status,issuerID,handlerID,patientID,transportDestination,departureDate,transportMethod
-REQ1663046247,PROCESSING,NEW,NEW,NEW,NEW,2022-04-29,AMBULANCE
-REQ1858551951,PROCESSING,hgf,fghj,fgh,gfh,2022-04-22,PLANE
+REQ409388278,PROCESSING,hgfd,bfdv,hdgfj,gfd,2022-04-29,AMBULANCE

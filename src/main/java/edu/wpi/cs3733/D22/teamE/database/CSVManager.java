@@ -6,12 +6,17 @@ import edu.wpi.cs3733.D22.teamE.database.daos.*;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import java.io.*;
+import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 /** uses format from Iteration 1 final ERD Diagram */
 public class CSVManager {
@@ -383,5 +388,41 @@ public class CSVManager {
     ; // true means append=true
 
     return file;
+  }
+
+  private static void convertFromResource(InputStream stream, File target) throws IOException {
+    byte[] buffer = stream.readAllBytes();
+    OutputStream outStream = new FileOutputStream(target);
+    outStream.write(buffer);
+
+    IOUtils.closeQuietly(outStream);
+  }
+
+  public static void generateFile(String filename) {
+    Path tempDirectory = null;
+    File file = null;
+    try {
+      tempDirectory = Paths.get("CSVsaveFiles");
+      if (Files.notExists(tempDirectory)) {
+        Files.createDirectory(tempDirectory);
+      }
+      file = new File("CSVsaveFiles/" + filename);
+      if (file.createNewFile()) {
+        URL u = Main.class.getResource("CsvFiles/" + filename);
+        if (u != null) {
+          InputStream is = Main.class.getResourceAsStream("CsvFiles/" + filename);
+          assert is != null;
+          convertFromResource(is, file);
+        }
+      } else {
+        if (filename.equals("TransportExt.csv")) {
+          if (file.length() != 0) {
+            CallAPI.getInstance().getExternalTransportAPI().importExternalTransportsFromCSV(file);
+          }
+        }
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

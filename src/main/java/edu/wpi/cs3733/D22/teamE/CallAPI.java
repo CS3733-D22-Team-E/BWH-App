@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamE;
 
 import edu.wpi.cs3733.D22.teamE.database.CSVManager;
 import edu.wpi.cs3733.D22.teamZ.api.API;
-import java.io.File;
 import javax.xml.rpc.ServiceException;
 
 public class CallAPI {
@@ -28,8 +27,6 @@ public class CallAPI {
   public API getExternalTransportAPI() {
     if (transportAPISingleton == null) {
       transportAPISingleton = new API();
-      transportAPISingleton.importExternalTransportsFromCSV(
-          new File("CSVsaveFiles/TransportExt.csv"));
     }
 
     return transportAPISingleton;

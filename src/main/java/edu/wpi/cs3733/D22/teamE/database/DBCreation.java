@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamE.database;
 
 import static edu.wpi.cs3733.D22.teamE.RSAEncryption.generatePasswordHASH;
 
+import edu.wpi.cs3733.D22.teamE.CallAPI;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -306,6 +307,7 @@ public class DBCreation {
 
   public static void createTables() {
     try {
+      CallAPI.getInstance().getExternalTransportAPI();
       edu.wpi.cs3733.D22.teamE.APIDatabase.DBCreation.createFloralRequestTable();
       createTowerLocationTable();
       createEmployeesTable();
