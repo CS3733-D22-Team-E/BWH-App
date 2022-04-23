@@ -141,7 +141,7 @@ public class facilitiesRequestController extends serviceRequestPageController
   private void facilitiesSendToDB(facilitiesRequest request) {
     try {
       request.setRequestDate(LocalDate.now());
-      system.updateFacilitiesRequest(request);
+      system.update(request);
       tableList.add(request);
     } catch (Exception e) {
       e.printStackTrace();

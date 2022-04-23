@@ -94,7 +94,7 @@ public class sanitationServiceController extends serviceRequestPageController {
 
   private void populateList() {
     tableList = FXCollections.observableArrayList();
-    List<sanitationRequest> l = system.getAllSanReq();
+    List<sanitationRequest> l = system.getAllSanitationRequests();
     for (sanitationRequest r : l) {
       tableList.add(new sanitationRequestModel(r));
     }
@@ -179,10 +179,10 @@ public class sanitationServiceController extends serviceRequestPageController {
     try {
       request.setDeliveryDate(LocalDate.now());
       request.setRequestDate(LocalDate.now());
-      system.addSanReq(request);
+      system.update(request);
       populateSanReqTable();
       // tableList.add(new sanitationRequestModel(request));
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
