@@ -28,7 +28,7 @@ public class DBCreation {
     CSVManager.loadLocationCSV("TowerLocations.csv");
   }
 
-  public static void createEmployeesTable() throws SQLException {
+  public static void createEmployeesTable() throws SQLException, IOException {
     String query =
         "create table EMPLOYEES\n"
             + "(\n"
@@ -42,16 +42,7 @@ public class DBCreation {
             + "\n";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    query =
-        "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES "
-            + "('admin', 'admin' , 'FDEPT00101', 'admin', TRUE, 3)";
-    statement = connection.prepareStatement(query);
-    statement.executeUpdate();
-    query =
-        "INSERT INTO EMPLOYEES (EMPLOYEEID, NAME , LOCATIONID, POSITION, AVAILABLE, SALARY) VALUES "
-            + "('staff', 'staff' , 'FDEPT00101', 'staff', TRUE, 1)";
-    statement = connection.prepareStatement(query);
-    statement.executeUpdate();
+    CSVManager.loadEmployeesCSV("Employees.csv");
   }
 
   public static void createEquipmentTable() throws SQLException, IOException {
@@ -69,6 +60,7 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
+    CSVManager.loadEquipmentCSV("MedEquip.csv");
   }
 
   public static void createLabRequestTable() throws SQLException, IOException {
@@ -105,7 +97,7 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    // CSVManager.loadMedEquipReqCSV("MedEquipRequest.csv");
+    CSVManager.loadMedEquipReqCSV("MedEquipRequest.csv");
   }
 
   public static void createServiceRequestTable() throws SQLException {
@@ -314,6 +306,7 @@ public class DBCreation {
 
   public static void createTables() {
     try {
+      edu.wpi.cs3733.D22.teamE.APIDatabase.DBCreation.createFloralRequestTable();
       createTowerLocationTable();
       createEmployeesTable();
       createEquipmentTable();

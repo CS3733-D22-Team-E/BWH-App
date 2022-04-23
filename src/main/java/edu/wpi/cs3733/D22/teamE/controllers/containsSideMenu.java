@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.events.JFXDrawerEvent;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
-import edu.wpi.cs3733.D22.teamE.pageControlFacade;
+import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.EventHandler;
@@ -28,7 +28,7 @@ public class containsSideMenu implements Initializable {
     // scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     // scrollPane.setFitToWidth(true);
     HamburgerSlideCloseTransition transition = new HamburgerSlideCloseTransition(burger);
-    box = pageControlFacade.getPageRoot("sidePanel.fxml");
+    box = pageControl.getPageRoot("sidePanel.fxml");
     System.out.println(box);
     drawer.setSidePane(box);
     drawer.setOnDrawerClosed(

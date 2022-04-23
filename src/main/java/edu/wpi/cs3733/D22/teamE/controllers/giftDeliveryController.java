@@ -45,8 +45,6 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   GiftRequestDAOImpl giftRequestDAO;
   ObservableList<giftDeliveryRequest> tableList;
 
-  giftDeliveryRequest request = new giftDeliveryRequest(); // object to store inputted page data
-
   DAOSystem system;
 
   /** Constructor */
@@ -113,6 +111,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   @Override
   public void submitButton(ActionEvent event) throws SQLException {
     try {
+      giftDeliveryRequest request = new giftDeliveryRequest(); // object to store inputted page data
       request.setGift(giftOptionType.getValue());
       request.setPatientName(patientName.getText());
       request.setFloorID(floor.getValue());
@@ -124,7 +123,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
       request.setOtherNotes(notes.getText());
       request.setIsUrgent(isUrgent.isSelected());
 
-      giftSendToDB();
+      giftSendToDB(request);
 
     } catch (NullPointerException e) {
       System.out.println("Error : Some Value is NULL");
@@ -133,7 +132,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
     }
   }
 
-  private void giftSendToDB() {
+  private void giftSendToDB(giftDeliveryRequest request) {
     try {
       request.setRequestDate(LocalDate.now());
       system.updateGiftDelivery(request);
