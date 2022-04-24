@@ -25,6 +25,18 @@
     -fx-background-color: #e1e1e1;
 }
 
+.textColor {
+    -fx-text-fill: #212121;
+}
+
+.darkColor {
+    -fx-background-color: #2E716D;
+}
+
+.lightColor {
+    -fx-background-color: #368C87;
+}
+
 /* Header */
 .header {
     -fx-background-color: #2E716D;
