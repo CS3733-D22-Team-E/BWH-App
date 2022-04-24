@@ -17,7 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class aboutPageController extends containsSideMenu {
+public class aboutPageController extends HeaderController {
 
   public aboutPageController() throws FileNotFoundException {}
 

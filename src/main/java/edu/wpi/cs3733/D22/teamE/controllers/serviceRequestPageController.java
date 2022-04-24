@@ -25,7 +25,7 @@ import javafx.scene.control.*;
  * Is an abstract class meant to be the super class for each service request page. Inherits from
  * contains sideMenu
  */
-public abstract class serviceRequestPageController extends containsSideMenu {
+public abstract class serviceRequestPageController extends HeaderController {
 
   @FXML TextField notes;
   @FXML JFXButton submitButton;
