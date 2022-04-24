@@ -1,7 +1,12 @@
 /* Generic CSS */
 .rounded {
     -fx-border-radius: 20;
-    -fx-background-radius: 20;
+    -fx-background-radius: 25;
+}
+
+.lessRounded {
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
 }
 
 .titleText {
@@ -22,7 +27,7 @@
 }
 
 .background {
-    -fx-background-color: #e1e1e1;
+    -fx-background-color: #EEEEEE;
 }
 
 .textColor {
@@ -30,11 +35,34 @@
 }
 
 .darkColor {
-    -fx-background-color: #2E716D;
+    -fx-background-color:   #188E87;
 }
 
 .lightColor {
-    -fx-background-color: #368C87;
+    -fx-background-color:  #30B6AE;
+}
+
+.darkBorder{
+    -fx-border-color: #188E87;
+}
+.lightBorder{
+    -fx-border-color: #30B6AE;
+}
+.thinBorder{
+    -fx-border-width: 3;
+}
+.thinnerBorder{
+    -fx-border-width: 1;
+}
+.dropShadow{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+.bold {
+    -fx-font-weight: bold;
+}
+
+.largeFont{
+
 }
 
 /* Header */
@@ -83,9 +111,9 @@
 /* Page Container */
 
 .container {
-    -fx-background-color: #f0f8ff;
-    -fx-border-color: #9B9B9B;
-    -fx-border-width: 2;
+    -fx-background-color:  #FFFFFF;
+    -fx-border-color:  #666666;
+    -fx-border-width: 3;
     -fx-border-radius: 20;
 
 }
@@ -106,6 +134,12 @@
     -fx-background-color: #2E716D;
     -fx-text-fill: white;
 }
+.tableView{
+    -fx-background-color: #2E716D;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
 
 .inputField {
     -fx-background-color: #e1e1e1;
@@ -117,6 +151,13 @@
     -fx-font-weight: bold;
     -fx-font-size: 14;
 }
+
+.graphicsLabel{
+    -fx-text-fill: #2E716D;
+    -fx-font-weight: bold;
+    -fx-font-size: 24;
+}
+
 
 /* Profile */
 .profile {
