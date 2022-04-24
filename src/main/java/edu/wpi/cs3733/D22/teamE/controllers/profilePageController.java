@@ -28,7 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
-public class profilePageController extends containsSideMenu implements Initializable {
+public class profilePageController extends HeaderController implements Initializable {
 
   public Circle photoCirc;
   public Label nameLabel;

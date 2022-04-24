@@ -13,8 +13,6 @@ public interface pageButtons {
 
   void aboutButton(ActionEvent event) throws IOException;
 
-  void profButton(ActionEvent event) throws IOException;
-
   void helpButton(ActionEvent event) throws IOException;
 
   void dashboardButton(ActionEvent event) throws IOException;
