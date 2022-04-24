@@ -32,7 +32,7 @@
                   <Insets left="30.0" top="50.0" />
                </VBox.margin>
             </Label>
-            <Label prefHeight="20.0" prefWidth="167.0" styleClass="bodyText" text="Need a BWH account?">
+            <Label prefHeight="20.0" prefWidth="167.0" styleClass="bodyText">
                <VBox.margin>
                   <Insets left="30.0" top="15.0" />
                </VBox.margin></Label>
