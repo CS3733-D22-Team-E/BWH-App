@@ -38,9 +38,9 @@ public class DBCreation {
             + "    LOCATIONID VARCHAR(35) not null references TOWERLOCATIONS (NODEID),\n"
             + "    POSITION   VARCHAR(25) not null,\n"
             + "    AVAILABLE  BOOLEAN     not null,\n"
-            + "    SALARY     DOUBLE      not null\n"
-            + ")\n"
-            + "\n";
+            + "    SALARY     DOUBLE      not null,\n"
+            + "    PROFILEPIC BLOB  \n"
+            + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
     CSVManager.loadEmployeesCSV("Employees.csv");
