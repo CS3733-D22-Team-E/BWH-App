@@ -59,7 +59,7 @@
     <children>
       <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" VBox.vgrow="ALWAYS">
          <children>
-            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" spacing="20.0" style="-fx-background-color: #EEEEEE;">
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" spacing="20.0" styleClass="gradient">
                <children>
                   <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
