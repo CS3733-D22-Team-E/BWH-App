@@ -56,6 +56,46 @@ public class LabRequestDAOImpl implements DAO<labRequest> {
    */
   @Override
   public List<labRequest> getAll() {
+    List<labRequest> labRequests = new ArrayList<>();
+
+    try {
+      String query = "SELECT * FROM LAB_REQUEST ORDER BY LAB_REQUESTID DESC";
+      PreparedStatement statement = connection.prepareStatement(query);
+      ResultSet rs = statement.executeQuery();
+      // int numID = 0; //TODO: Assign Medical Requests an ID value
+      while (rs.next()) {
+        String labReqID = rs.getString("LAB_REQUESTID");
+        String labRedType = rs.getString("LAB_REQUEST_TYPE");
+        String timeFrame = rs.getString("TIMEFRAME");
+        String staffAssignee = rs.getString("STAFFASSIGNEE");
+        String locNodeID = rs.getString("LOCATIONID");
+        String requestStatus = rs.getString("REQUESTSTATUS");
+        String otherNotes = rs.getString("OTHERNOTES");
+        String floorID = "";
+        java.sql.Date deliveryDate = Date.valueOf(LocalDate.now());
+        java.sql.Date requestDate = Date.valueOf(LocalDate.now());
+        boolean isUrgent = false;
+
+        labRequest LabRequest =
+            new labRequest(
+                labReqID,
+                labRedType,
+                timeFrame,
+                floorID,
+                locNodeID,
+                isUrgent,
+                staffAssignee,
+                requestStatus,
+                otherNotes,
+                requestDate.toLocalDate(),
+                deliveryDate.toLocalDate());
+        labRequests.add(LabRequest);
+      }
+      rs.close();
+    } catch (SQLException e) {
+      System.out.println("Get All Failed!");
+      e.printStackTrace();
+    }
     return labRequests;
   }
 
