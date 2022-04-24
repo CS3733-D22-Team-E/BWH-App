@@ -27,6 +27,7 @@ public class labRequestController extends serviceRequestPageController {
 
   @FXML JFXComboBox<String> labRequestType;
   @FXML JFXComboBox<String> timeFrameComboBox;
+  @FXML CheckBox isUrgent;
 
   @FXML TableView<labRequest> requestsTable;
 
@@ -108,6 +109,7 @@ public class labRequestController extends serviceRequestPageController {
       labReq.setOtherNotes(notes.getText());
       labReq.setRequestStatus(requestStatus.getText());
       labReq.setStaffAssignee(staffAssignee.getText());
+      labReq.setIsUrgent(isUrgent.isSelected());
       labSendToDB(labReq);
 
     } catch (RuntimeException error) {
@@ -130,5 +132,6 @@ public class labRequestController extends serviceRequestPageController {
     requestStatus.clear();
     staffAssignee.clear();
     notes.clear();
+    isUrgent.setSelected(false);
   }
 }
