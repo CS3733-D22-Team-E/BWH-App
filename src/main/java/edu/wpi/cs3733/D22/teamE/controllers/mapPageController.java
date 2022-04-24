@@ -34,7 +34,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class mapPageController extends containsSideMenu implements Initializable {
+public class mapPageController extends HeaderController implements Initializable {
   FXMLLoader loader = new FXMLLoader();
   Parent root;
   @FXML MenuBar menuBar;

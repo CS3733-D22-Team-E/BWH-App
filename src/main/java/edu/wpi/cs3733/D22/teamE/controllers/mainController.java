@@ -208,7 +208,6 @@ public class mainController implements pageButtons {
     }
   }
 
-  @Override
   public void profButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
