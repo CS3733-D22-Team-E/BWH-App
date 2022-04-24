@@ -163,6 +163,7 @@
     -fx-background-color: linear-gradient(to bottom right, #70A8dc, #CDABD9);
     -fx-opacity: 0.96;
 }
+
 /* Profile */
 .profile {
     -fx-border-radius: 100%;
