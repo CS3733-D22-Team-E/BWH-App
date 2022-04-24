@@ -20,13 +20,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -40,10 +37,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 public class mapPageController extends containsSideMenu implements Initializable {
-  FXMLLoader loader = new FXMLLoader();
-  Parent root;
-  @FXML MenuBar menuBar;
-  DAOSystem database;
+
   List<Location> locations;
   List<Location> filteredLocations;
   List<MedicalEquipment> medEqList;
@@ -121,32 +115,23 @@ public class mapPageController extends containsSideMenu implements Initializable
     mapImage.setScaleX(zoomSlider.getValue());
     mapImage.setScaleY(zoomSlider.getValue());
 
-    try {
-      database = new DAOSystem();
-      medEqList = database.getAllMedEquip();
-      servReqList = database.getAllServiceRequests();
-      locations = database.getAllLocations();
-
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    medEqList = DAOSystemSingleton.INSTANCE.getSystem().getAllMedEquip();
+    servReqList = DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests();
+    locations = DAOSystemSingleton.INSTANCE.getSystem().getAllLocations();
 
     // Set initial viewMode
     try {
       setViewMode("Medical Equipment");
-    } catch (SQLException e) {
-      e.printStackTrace();
-    } catch (FileNotFoundException e) {
+    } catch (SQLException | FileNotFoundException e) {
       e.printStackTrace();
     }
   }
 
   // Re-fetch data from database after location update
-  private void fetchDB() throws SQLException, FileNotFoundException {
-    database = new DAOSystem();
-    medEqList = database.getAllMedEquip();
-    servReqList = database.getAllServiceRequests();
-    locations = database.getAllLocations();
+  private void fetchDB() throws FileNotFoundException, SQLException {
+    medEqList = DAOSystemSingleton.INSTANCE.getSystem().getAllMedEquip();
+    servReqList = DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests();
+    locations = DAOSystemSingleton.INSTANCE.getSystem().getAllLocations();
 
     setViewMode(viewMode);
   }
@@ -737,7 +722,7 @@ public class mapPageController extends containsSideMenu implements Initializable
             addLongName.getText().toString(),
             addShortName.getText().toString(),
             numID);
-    database.updateLocation(location);
+    DAOSystemSingleton.INSTANCE.getSystem().updateLocation(location);
 
     // Fetch and switch and to update pane
     fetchDB();
@@ -771,7 +756,7 @@ public class mapPageController extends containsSideMenu implements Initializable
         // Get location by coordinates
         for (Location location : filteredLocations) {
           if (location.getXCoord() == selectedLoc[0] && location.getYCoord() == selectedLoc[1]) {
-            database.updateCoord(location, newX, newY);
+            DAOSystemSingleton.INSTANCE.getSystem().updateCoord(location, newX, newY);
           }
         }
       } else if (viewMode == "Service Requests") {
@@ -796,7 +781,7 @@ public class mapPageController extends containsSideMenu implements Initializable
     // Get location by coordinates
     for (Location location : filteredLocations) {
       if (location.getXCoord() == selectedLoc[0] && location.getYCoord() == selectedLoc[1]) {
-        database.deleteLocation(location);
+        DAOSystemSingleton.INSTANCE.getSystem().deleteLocation(location);
       }
     }
     fetchDB();

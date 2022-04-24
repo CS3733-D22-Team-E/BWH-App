@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.FileInputStream;
@@ -17,9 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -31,11 +29,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class mapEditorController implements Initializable {
-
-  FXMLLoader loader = new FXMLLoader();
-  Parent root;
-  @FXML MenuBar menuBar;
-  LocationDAOImpl db;
 
   @FXML ComboBox<String> floor;
   @FXML JFXButton BigAddLocation;
@@ -81,17 +74,10 @@ public class mapEditorController implements Initializable {
     floor.setItems(floors);
     addNodeType.setItems(nodes);
     floor.setValue("1");
-
-    try {
-      db = new LocationDAOImpl();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
   }
 
   private void fetchDB() throws SQLException, FileNotFoundException {
-    db = new LocationDAOImpl();
-    List<Location> locationList = db.getAll();
+    List<Location> locationList = DAOSystemSingleton.INSTANCE.getSystem().getAllLocations();
     displayFloorLocations(locationList);
   }
 
@@ -115,7 +101,7 @@ public class mapEditorController implements Initializable {
   @FXML
   public void smallAddLocationButton(ActionEvent event) throws SQLException, FileNotFoundException {
 
-    List<Location> locationList = db.getAll();
+    List<Location> locationList = DAOSystemSingleton.INSTANCE.getSystem().getAllLocations();
 
     // Get node type count
     List<Location> filteredLocations =
@@ -149,7 +135,7 @@ public class mapEditorController implements Initializable {
             addLongName.getText().toString(),
             addShortName.getText().toString(),
             numID);
-    db.update(location);
+    DAOSystemSingleton.INSTANCE.getSystem().updateLocation(location);
 
     // Fetch and switch and to update pane
     fetchDB();
@@ -166,7 +152,9 @@ public class mapEditorController implements Initializable {
             && selectedLoc.getXCoord() <= (mouseX + locationPadding) / scaleFactor)
         && (selectedLoc.getYCoord() >= (mouseY - locationPadding) / scaleFactor
             && selectedLoc.getYCoord() <= (mouseY + locationPadding) / scaleFactor)) {
-      db.updateCoord(selectedLoc, selectedLoc.getXCoord(), selectedLoc.getYCoord());
+      DAOSystemSingleton.INSTANCE
+          .getSystem()
+          .updateCoord(selectedLoc, selectedLoc.getXCoord(), selectedLoc.getYCoord());
     } else {
 
       // Get a whole number from the scaled up mouseX and mouseY
@@ -174,7 +162,7 @@ public class mapEditorController implements Initializable {
       int newY = Math.toIntExact(Math.round(mouseY / scaleFactor));
 
       // Update the location in the db with the new coordinates
-      db.updateCoord(selectedLoc, newX, newY);
+      DAOSystemSingleton.INSTANCE.getSystem().updateCoord(selectedLoc, newX, newY);
 
       // Fetch the updates from the db
       fetchDB();
@@ -188,7 +176,7 @@ public class mapEditorController implements Initializable {
     // Reset delete text
     deleteText.setText("Click on the location you would like to delete");
     // Remove the currently selected location from the db
-    db.delete(selectedLoc);
+    DAOSystemSingleton.INSTANCE.getSystem().deleteLocation(selectedLoc);
     fetchDB();
   }
 
@@ -382,7 +370,7 @@ public class mapEditorController implements Initializable {
 
     // Only render existing dots if the delete or update functions are selected
     if (Objects.equals(editMode, "delete") || Objects.equals(editMode, "update")) {
-      List<Location> locationList = db.getAll();
+      List<Location> locationList = DAOSystemSingleton.INSTANCE.getSystem().getAllLocations();
       displayFloorLocations(locationList);
     }
   }
@@ -400,7 +388,7 @@ public class mapEditorController implements Initializable {
 
     // Only render existing dots if the delete or update functions are selected
     if (Objects.equals(pane, "delete") || Objects.equals(pane, "update")) {
-      List<Location> locationList = db.getAll();
+      List<Location> locationList = DAOSystemSingleton.INSTANCE.getSystem().getAllLocations();
 
       displayFloorLocations(locationList);
     }
@@ -437,7 +425,7 @@ public class mapEditorController implements Initializable {
     mouseX = (int) event.getX();
     mouseY = (int) event.getY();
 
-    List<Location> locations = db.getAll();
+    List<Location> locations = DAOSystemSingleton.INSTANCE.getSystem().getAllLocations();
 
     // Handle moving the location dot on the map
     if (Objects.equals(editMode, "changePosition")) {
