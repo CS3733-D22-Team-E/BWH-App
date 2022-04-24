@@ -1,6 +1,7 @@
 /* Generic CSS */
 .rounded {
     -fx-border-radius: 20;
+    -fx-background-radius: 20;
 }
 
 .titleText {
@@ -72,6 +73,7 @@
     -fx-background-color: #f0f8ff;
     -fx-border-color: #9B9B9B;
     -fx-border-width: 2;
+    -fx-border-radius: 20;
 }
 
 .containerButton {

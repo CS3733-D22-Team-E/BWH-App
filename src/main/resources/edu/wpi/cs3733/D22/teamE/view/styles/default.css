@@ -19,15 +19,6 @@
     -fx-background-position: center center;              /* optional, center the image */
 }
 
-#main-box {
-  -fx-background-color: rgba(255, 255, 255, 1);
-  -fx-background-radius: 10px;
-  -fx-padding: 10px;
-}
-#main-page {
-  -fx-background-color: rgb(255, 255, 255);
-  -fx-padding: 10px;
-}
 .serviceButton {
   -fx-background-color: rgba(200, 200, 200, 0.9);
   -fx-background-radius: 8px;
@@ -36,12 +27,6 @@
 .commonButton {
   -fx-background-color: rgba(200, 200, 200, 0.9);
   -fx-background-radius: 8px;
-}
-
-.header {
-  -fx-background-color: #3b36d0;
-  -fx-border-color: black;
-  -fx-opacity: 0.95;
 }
 
 .title{
@@ -62,7 +47,6 @@
 
 .table-column {
   -fx-pref-height: 49;
-  -fx-background-color: transparent;
   -fx-alignment: center;
   -fx-border-width: 0.4;
 }
