@@ -35,6 +35,33 @@ public class EmployeeDAOImpl implements DAO<Employee> {
 
   @Override
   public List<Employee> getAll() {
+    employees = new ArrayList<>();
+
+    try {
+      String query = "SELECT * FROM EMPLOYEES ORDER BY SALARY DESC";
+      PreparedStatement statement = connection.prepareStatement(query);
+      ResultSet rs = statement.executeQuery();
+      int numID = 0;
+      while (rs.next()) {
+        String employeeID = rs.getString("EMPLOYEEID");
+        String name = rs.getString("NAME");
+        String locationID = rs.getString("LOCATIONID");
+        String position = rs.getString("POSITION");
+        boolean available = rs.getBoolean("AVAILABLE");
+        double salary = rs.getDouble("SALARY");
+
+        Employee employee =
+            new Employee(employeeID, name, position, salary, locationID, available, numID);
+
+        employees.add(employee);
+        numID++;
+      }
+      rs.close();
+    } catch (SQLException e) {
+      System.out.println("Get All Failed!");
+      e.printStackTrace();
+    }
+
     return employees;
   }
 
