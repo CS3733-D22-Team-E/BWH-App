@@ -1,17 +1,26 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamE.pageButtons;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class sideMenuController implements pageButtons {
 
-  @FXML StackPane root;
+  // TODO: do we need this?
+  @FXML VBox root;
+  @FXML JFXButton profileButton;
+
+  @FXML
+  public void profileButton(ActionEvent event) {
+    profileButton.getStyleClass().clear();
+    profileButton.getStyleClass().add(".sidebarSelectedButton");
+  }
 
   @FXML
   public void medicineDeliveryButton(ActionEvent event) throws IOException {

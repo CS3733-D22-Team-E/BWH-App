@@ -1,9 +1,8 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
+import com.jfoenix.controls.JFXToggleNode;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import com.jfoenix.controls.JFXToggleNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,12 +31,7 @@ public class HeaderController extends containsSideMenu {
     helpButton.setToggleGroup(headerPageButtons);
     homeButton.setSelected(true);
     selectedPageButton = homeButton;
-
-
-
   }
-
-
 
   @FXML
   public void homeButton(ActionEvent event) {}
