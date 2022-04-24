@@ -143,12 +143,10 @@ public class mapPageController extends containsSideMenu implements Initializable
 
   // Re-fetch data from database after location update
   private void fetchDB() throws SQLException, FileNotFoundException {
-    db = new LocationDAOImpl();
-    medEq = new MedicalEquipmentDAOImpl();
-    servReq = new ServiceRequestDAOImpl();
-    medEqList = medEq.getAll();
-    servReqList = servReq.getAll();
-    locations = db.getAll();
+    database = new DAOSystem();
+    medEqList = database.getAllMedEquip();
+    servReqList = database.getAllServiceRequests();
+    locations = database.getAllLocations();
 
     setViewMode(viewMode);
   }
@@ -739,7 +737,7 @@ public class mapPageController extends containsSideMenu implements Initializable
             addLongName.getText().toString(),
             addShortName.getText().toString(),
             numID);
-    db.update(location);
+    database.updateLocation(location);
 
     // Fetch and switch and to update pane
     fetchDB();
@@ -773,7 +771,7 @@ public class mapPageController extends containsSideMenu implements Initializable
         // Get location by coordinates
         for (Location location : filteredLocations) {
           if (location.getXCoord() == selectedLoc[0] && location.getYCoord() == selectedLoc[1]) {
-            db.updateCoord(location, newX, newY);
+            database.updateCoord(location, newX, newY);
           }
         }
       } else if (viewMode == "Service Requests") {
@@ -798,7 +796,7 @@ public class mapPageController extends containsSideMenu implements Initializable
     // Get location by coordinates
     for (Location location : filteredLocations) {
       if (location.getXCoord() == selectedLoc[0] && location.getYCoord() == selectedLoc[1]) {
-        db.delete(location);
+        database.deleteLocation(location);
       }
     }
     fetchDB();
