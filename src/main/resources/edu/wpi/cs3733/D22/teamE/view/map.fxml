@@ -24,7 +24,7 @@
     <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" />
       <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="-Infinity" />
     <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="0.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
@@ -40,7 +40,7 @@
             <JFXButton fx:id="legendOpenButton" buttonType="RAISED" layoutX="362.0" layoutY="10.0" prefHeight="25.0" prefWidth="100.0" ripplerFill="RED" style="-fx-background-color: #dbd5d5;" text="Legend" />
          </children>
       </HBox>
-      <ScrollPane fx:id="scroller" fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" pannable="true" prefHeight="468.0" prefViewportHeight="100.0" prefViewportWidth="100.0" prefWidth="468.0" vbarPolicy="ALWAYS" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+      <ScrollPane fx:id="scroller" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="468.0" prefViewportHeight="100.0" prefViewportWidth="100.0" prefWidth="468.0" vbarPolicy="NEVER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <content>
             <StackPane fx:id="canvasPane">
                <children>
@@ -48,7 +48,7 @@
                      <children>
                         <StackPane fx:id="mapBox">
                            <children>
-                              <ImageView fx:id="mapImage" fitHeight="935.0" fitWidth="935.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="mapImage" fitHeight="2000.0" fitWidth="2000.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@images/maps/01_thefirstfloor.png" />
                                  </image>
@@ -63,17 +63,24 @@
          <GridPane.margin>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
          </GridPane.margin>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
       </ScrollPane>
-      <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-         <children>
-            <JFXButton fx:id="zoomUp" onAction="#zoomUp" text="+" VBox.vgrow="NEVER" />
-            <JFXSlider fx:id="zoomSlider" blockIncrement="0.01" majorTickUnit="0.1" max="2.0" min="1.0" minorTickCount="10" onMouseClicked="#changeZoom" onMouseDragged="#changeZoom" orientation="VERTICAL" prefHeight="362.0" prefWidth="45.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.5" VBox.vgrow="ALWAYS" />
-            <JFXButton fx:id="zoomDown" onAction="#zoomDown" text="-" VBox.vgrow="NEVER" />
-         </children>
+      <Group GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
-      </VBox>
+         <children>
+            <VBox alignment="CENTER" minWidth="0.0" prefWidth="0.0" spacing="10.0" visible="false">
+               <children>
+                  <JFXButton fx:id="zoomUp" onAction="#zoomUp" text="+" VBox.vgrow="NEVER" />
+                  <JFXSlider fx:id="zoomSlider" blockIncrement="0.01" majorTickUnit="0.1" max="2.0" min="0.5" minorTickCount="10" onMouseClicked="#changeZoom" onMouseDragged="#changeZoom" orientation="VERTICAL" prefHeight="362.0" prefWidth="45.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" VBox.vgrow="ALWAYS" />
+                  <JFXButton fx:id="zoomDown" onAction="#zoomDown" text="-" VBox.vgrow="NEVER" />
+               </children>
+            </VBox>
+         </children>
+      </Group>
       <Group GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
          <children>
             <VBox fx:id="towerLocationsLegend" alignment="CENTER" layoutX="7.0" spacing="10.0" visible="false">
