@@ -9,7 +9,7 @@ public class Texting {
   public static final String AUTH_TOKEN = "0bb060eaa1fec2901389a120f849e1f3";
 
   public static void sendSMS(String phoneNumber, String sms) {
-    if (!phoneNumber.startsWith("+1")) phoneNumber+="+1";
+    if (!phoneNumber.startsWith("+1")) phoneNumber += "+1";
     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     Message message =
         Message.creator(
