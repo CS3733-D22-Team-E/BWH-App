@@ -22,9 +22,6 @@ import org.apache.commons.io.IOUtils;
 public class CSVManager {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
 
-  // ends with a slash (used with path+filename)
-  public static String CSVFilePath = "src/main/resources/edu/wpi/cs3733/D22/teamE/CsvFiles/";
-
   private static final String locationFormat =
       "NODEID, XCOORD, YCOORD, FLOOR, BUILDING, NODETYPE, LONGNAME, SHORTNAME";
   private static final String medEquipFormat =
@@ -73,7 +70,9 @@ public class CSVManager {
               + d.getShortName()
               + "\n";
       // change nothing
-      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
     }
   }
 
@@ -103,7 +102,9 @@ public class CSVManager {
               + equip.getEquipmentType()
               + "\n";
       // change nothing
-      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
     }
   }
 
@@ -139,7 +140,9 @@ public class CSVManager {
               + mesr.getOtherNotes()
               + "\n";
       // change nothing
-      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
     }
   }
 
@@ -167,8 +170,9 @@ public class CSVManager {
               + labRequest.getOtherNotes()
               + "\n";
       // change nothing
-      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
-    }
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }    }
   }
 
   public static void saveEmployeeCSV(String fileName) throws IOException, SQLException {
@@ -193,7 +197,9 @@ public class CSVManager {
               + employee.getSalary()
               + "\n";
       // change nothing
-      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
     }
   }
 
@@ -225,7 +231,9 @@ public class CSVManager {
               + d.getIsUrgent()
               + "\n";
       // change nothing
-      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
     }
   }
 
@@ -253,7 +261,9 @@ public class CSVManager {
               + d.getPosition()
               + "\n";
       // change nothing
-      FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
     }
   }
 
@@ -308,24 +318,38 @@ public class CSVManager {
    */
   public static boolean loadCSVGeneral(String fileName, String tableName, String ColumnsCSV)
       throws SQLException, IOException {
-    int IDindex0 = 0;
+    int IDindex0 = 0;//by default 0 (ID element, first), change where implemented w/ helper caller function
     int count = 0;
+
     for (int i = 0; i < ColumnsCSV.length(); i++) {
-      if (ColumnsCSV.charAt(i) == ',') count++;
-    } // counts # of commas
-    count = count + 1; // commas is number of results minus one
+      if (ColumnsCSV.charAt(i) == ',') count++; // count Commas
+    }
+    count = count + 1; // results = #commas + 1
     String[] csvData = ColumnsCSV.split(","); // for query later
+
+    //check if a save file is in CSVsaveFiles, if so, read from that
     BufferedReader in;
-    // String filePath = CSVFilePath;
-    InputStream is = Main.class.getResourceAsStream("CsvFiles/" + fileName);
-    in = new BufferedReader(new InputStreamReader(is));
-    // in = new BufferedReader(new FileReader(CSVFilePath + fileName));
+    File file = new File("CSVsaveFiles/" + fileName);
+    if (file.exists()) // load from save file
+    {
+      in = new BufferedReader(new FileReader(file));
+    }
+    else //if not in saveFiles, read from default resource folder
+    {
+      InputStream is = Main.class.getResourceAsStream("CsvFiles/" + fileName);
+      if (is == null) {
+        System.err.println("Cannot Retrieve CSV resource '"+fileName+"'. You may have spelled the filename wrong. ");
+        return false; // spelled wrong probably
+      }
+      in = new BufferedReader(new InputStreamReader(is));
+    }
+    //using BufferedReader readLine() to read from files
     String line;
-    in.readLine();
-    String[] data;
+    in.readLine();//to skip over format
+    String[] lineArrayCSV;
     while ((line = in.readLine()) != null) {
-      data = line.split(",");
-      String Identification = data[IDindex0];
+      lineArrayCSV = line.split(",");
+      String Identification = lineArrayCSV[IDindex0];
       PreparedStatement statement;
       try {
         // check if nodeID is already in the database
@@ -341,10 +365,10 @@ public class CSVManager {
         statement = connection.prepareStatement(query);
         ResultSet rs = statement.executeQuery();
         if (rs.next()) { // true if exists, false if does not exist
-          continue;
+          continue; // to next line of the csv
         }
       } catch (SQLException sqlException) {
-        System.err.println("Database access error" + sqlException);
+        System.err.println("Database access error: " + sqlException);
         return false;
       }
       String questionMarks = "";
@@ -355,7 +379,7 @@ public class CSVManager {
       statement = connection.prepareStatement(insertQuery);
 
       for (int i = 0; i < count; i++) { // sets the question marks in the query
-        statement.setObject(i + 1, data[i]);
+        statement.setObject(i + 1, lineArrayCSV[i]);
       }
       statement.executeUpdate(); // runs the query
     }
@@ -365,11 +389,12 @@ public class CSVManager {
   }
 
   /**
-   * full helper - does a lot of ugly stuff be hind the scenes
+   * full helper - makes sure Strings are in the right format,
+   * and sets up a file (File object) for writing in csv, which it returns
    *
    * @param fileName
    * @param format
-   * @return
+   * @return File ready to write to csv
    * @throws IOException
    */
   private static File fullSaveHelper(String fileName, String format) throws IOException {
@@ -379,26 +404,70 @@ public class CSVManager {
     }
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
 
-    File tempFile = new File(fileName);
-    boolean exists = tempFile.exists();
-    if (exists) tempFile.delete(); // this makes append=true work
-
-    File file = new File("./CSVsaveFiles/" + fileName);
-    FileUtils.writeStringToFile(file, format, (Charset) null, true);
+    File file = new File("CSVsaveFiles/" + fileName);
+    if(!file.exists()) {
+      System.err.println("file should have already been created. " +
+              "Resource line may not have been added to the App class init() method");
+      file.createNewFile();//fine
+    }
+    if (!doesFileContainLine(file, format)) { //only looks for first line or no lines
+      FileUtils.writeStringToFile(file, format, (Charset) null, true);
+    }
     ; // true means append=true
 
     return file;
   }
 
-  private static void convertFromResource(InputStream stream, File target) throws IOException {
-    byte[] buffer = stream.readAllBytes();
+  /**
+   *  Checks an entire file to see if a line is included (character for chracter).
+   *  Slow for every call, I know, but very useful for file management
+   *
+   * @param file
+   * @param line
+   * @return if the file contains the line
+   * @throws IOException
+   */
+  private static boolean doesFileContainLine(File file, String line) throws IOException {
+    String fileName = file.getName();
+    BufferedReader in = new BufferedReader(new FileReader(file));
+    in.readLine();
+    String curLine;
+    while ((curLine = in.readLine()) != null) {
+      if (curLine.equals(line)) {
+        in.close();
+        return true;
+      }
+    }
+    in.close();
+    return false;
+  }
+
+  /**
+   * Helper function - Writes an InputStream to a File
+   *
+   * @param stream
+   * @param target
+   * @throws IOException
+   */
+  private static void writeInputStreamToFile(InputStream stream, File target) throws IOException {
+
     OutputStream outStream = new FileOutputStream(target);
+
+    byte[] buffer = stream.readAllBytes();
     outStream.write(buffer);
 
     IOUtils.closeQuietly(outStream);
   }
 
-  public static void generateFile(String filename) {
+  /**
+   * IF a save file does not exist, creates one [filename] and
+   * pulls data from app csv resources folder with the same [filename]
+   *
+   * Assures there WILL be a save file on running program
+   *
+   * @param filename
+   */
+  public static void generateNewSaveFileFromResources(String filename) {
     Path tempDirectory = null;
     File file = null;
     try {
@@ -406,15 +475,16 @@ public class CSVManager {
       if (Files.notExists(tempDirectory)) {
         Files.createDirectory(tempDirectory);
       }
+      //if no pre-existing save file, load a sample one from resources
       file = new File("CSVsaveFiles/" + filename);
-      if (file.createNewFile()) {
+      if (file.createNewFile()) { // if file was created
         URL u = Main.class.getResource("CsvFiles/" + filename);
         if (u != null) {
           InputStream is = Main.class.getResourceAsStream("CsvFiles/" + filename);
           assert is != null;
-          convertFromResource(is, file);
+          writeInputStreamToFile(is, file);
         }
-      } else {
+      } else { // if file already there, do nothing besides special case
         if (filename.equals("TransportExt.csv")) {
           if (file.length() != 0) {
             try {
