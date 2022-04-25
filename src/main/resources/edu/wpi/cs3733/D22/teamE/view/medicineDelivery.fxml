@@ -59,7 +59,7 @@
     <children>
       <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" minWidth="700.0" VBox.vgrow="ALWAYS">
          <children>
-            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" spacing="20.0" style="-fx-background-color: #EEEEEE;" StackPane.alignment="CENTER">
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" spacing="20.0" styleClass="gradient" StackPane.alignment="CENTER">
                <children>
                   <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
@@ -136,16 +136,16 @@
                                     <HBox alignment="CENTER_LEFT" maxHeight="10.0" spacing="5.0" VBox.vgrow="ALWAYS">
                                        <children>
                                               <CheckBox id="sun" fx:id="sun" mnemonicParsing="false" text="Sun" HBox.hgrow="ALWAYS" />
-                                              <CheckBox id="sat" fx:id="sat" mnemonicParsing="false" text="Sat" HBox.hgrow="ALWAYS" />
-                                              <CheckBox id="fri" fx:id="fri" mnemonicParsing="false" text="Fri" HBox.hgrow="ALWAYS" />
-                                              <CheckBox id="thurs" fx:id="thurs" mnemonicParsing="false" text="Thurs" HBox.hgrow="ALWAYS" />
+                                              <CheckBox id="mon" fx:id="mon" mnemonicParsing="false" text="Mon" HBox.hgrow="ALWAYS" />
+                                              <CheckBox id="tues" fx:id="tues" mnemonicParsing="false" text="Tues" HBox.hgrow="ALWAYS" />
+                                              <CheckBox id="wed" fx:id="wed" mnemonicParsing="false" text="Wed" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                              <CheckBox id="wed" fx:id="wed" mnemonicParsing="false" text="Wed" HBox.hgrow="ALWAYS" />
-                                              <CheckBox id="tues" fx:id="tues" mnemonicParsing="false" text="Tues" HBox.hgrow="ALWAYS" />
-                                              <CheckBox id="mon" fx:id="mon" mnemonicParsing="false" text="Mon" HBox.hgrow="ALWAYS" />
+                                              <CheckBox id="thurs" fx:id="thurs" mnemonicParsing="false" text="Thurs" HBox.hgrow="ALWAYS" />
+                                              <CheckBox id="fri" fx:id="fri" mnemonicParsing="false" text="Fri" HBox.hgrow="ALWAYS" />
+                                              <CheckBox id="sat" fx:id="sat" mnemonicParsing="false" text="Sat" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
                                  </children>

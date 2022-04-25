@@ -115,6 +115,7 @@
     -fx-border-color:  #666666;
     -fx-border-width: 3;
     -fx-border-radius: 20;
+    -fx-background-radius: 25;
 
 }
 
