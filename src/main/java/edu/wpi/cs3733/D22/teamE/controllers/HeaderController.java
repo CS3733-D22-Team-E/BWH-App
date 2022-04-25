@@ -18,7 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 
-public class HeaderController {
+public class HeaderController extends BasePageController {
 
   @FXML JFXToggleNode homeButton;
   @FXML JFXToggleNode aboutUsButton;

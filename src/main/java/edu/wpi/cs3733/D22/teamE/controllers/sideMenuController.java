@@ -5,13 +5,9 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class sideMenuController extends HeaderController {
-
-  // TODO: do we need this?
-  @FXML VBox root;
+public class sideMenuController extends BasePageController {
 
   @FXML
   public void dashboardButton(ActionEvent event) throws IOException {

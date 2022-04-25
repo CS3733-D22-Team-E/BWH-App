@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.sideMenuController">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
          <children>
             <HBox>
                <children>
-                  <JFXButton fx:id="dashboardButton" onAction="#dashboardButton" styleClass="sidebarButton" text=" ">
+                  <JFXButton fx:id="dashboardButton" styleClass="sidebarButton" text=" ">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="5.0">
                            <children>
@@ -32,7 +32,7 @@
             </HBox>
             <HBox>
                <children>
-                  <JFXButton fx:id="Submit Service Request" onAction="#submitServiceRequestButton" styleClass="sidebarButton" text=" ">
+                  <JFXButton fx:id="Submit Service Request" styleClass="sidebarButton" text=" ">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="5.0">
                            <children>
@@ -50,7 +50,7 @@
             </HBox>
             <HBox>
                <children>
-                  <JFXButton fx:id="Status Page" onAction="#statusButton" styleClass="sidebarButton" text=" ">
+                  <JFXButton fx:id="Status Page" styleClass="sidebarButton" text=" ">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="5.0">
                            <children>
@@ -68,7 +68,7 @@
             </HBox>
             <HBox>
                <children>
-                  <JFXButton fx:id="Map" onAction="#mapButton" styleClass="sidebarButton" text=" ">
+                  <JFXButton fx:id="Map" styleClass="sidebarButton" text=" ">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="5.0">
                            <children>
@@ -86,7 +86,7 @@
             </HBox>
             <HBox>
                <children>
-                  <JFXButton fx:id="profileButton" onAction="#profileButton" styleClass="sidebarButton" text=" ">
+                  <JFXButton fx:id="profileButton"  styleClass="sidebarButton" text=" ">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="5.0">
                            <children>
@@ -104,7 +104,7 @@
             </HBox>
             <HBox>
                <children>
-                  <JFXButton fx:id="aboutButton" onAction="#aboutButton" styleClass="sidebarButton" text=" ">
+                  <JFXButton fx:id="aboutButton" styleClass="sidebarButton" text=" ">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="5.0">
                            <children>
@@ -122,7 +122,7 @@
             </HBox>
             <HBox>
                <children>
-                  <JFXButton fx:id="helpButton" onAction="#helpButton" styleClass="sidebarButton" text=" ">
+                  <JFXButton fx:id="helpButton" styleClass="sidebarButton" text=" ">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="5.0">
                            <children>
@@ -140,7 +140,7 @@
             </HBox>
             <HBox>
                <children>
-                  <JFXButton fx:id="logoutButton" onAction="#logoutButton" styleClass="sidebarButton" text=" ">
+                  <JFXButton fx:id="logoutButton" styleClass="sidebarButton" text=" ">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="5.0">
                            <children>
@@ -158,7 +158,7 @@
             </HBox>
             <HBox>
                <children>
-                  <JFXButton fx:id="Exit" onAction="#exitButton" styleClass="sidebarButton" text=" ">
+                  <JFXButton fx:id="Exit" styleClass="sidebarButton" text=" ">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="5.0">
                            <children>
