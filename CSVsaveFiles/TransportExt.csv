@@ -1,0 +1,2 @@
+requestID,status,issuerID,handlerID,patientID,transportDestination,departureDate,transportMethod
+REQ409388278,PROCESSING,hgfd,bfdv,hdgfj,gfd,2022-04-29,AMBULANCE

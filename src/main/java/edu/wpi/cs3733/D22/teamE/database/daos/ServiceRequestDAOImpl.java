@@ -1,8 +1,8 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
 import edu.wpi.cs3733.D22.teamE.entity.*;
+import edu.wpi.cs3733.D22.teamE.entity.medicineDelivery;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ public class ServiceRequestDAOImpl implements DAO<RequestInterface> {
   DAO<sanitationRequest> sanitationRequestDAO = new SanitationRequestDAOImpl();
   DAO<giftDeliveryRequest> giftDeliveryRequestDAO = new GiftRequestDAOImpl();
   DAO<securityRequest> securityRequestDAO = new SecurityRequestDAOImpl();
+  DAO<facilitiesRequest> facilitiesRequestDAO = new FacilitiesRequestDAOImpl();
 
   public ServiceRequestDAOImpl() throws SQLException {
     serviceRequests = new ArrayList<>();
@@ -31,6 +32,7 @@ public class ServiceRequestDAOImpl implements DAO<RequestInterface> {
     serviceRequests.addAll(sanitationRequestDAO.getAll());
     serviceRequests.addAll(giftDeliveryRequestDAO.getAll());
     serviceRequests.addAll(securityRequestDAO.getAll());
+    serviceRequests.addAll(facilitiesRequestDAO.getAll());
   }
 
   @Override
@@ -77,6 +79,9 @@ public class ServiceRequestDAOImpl implements DAO<RequestInterface> {
       case LAB_REQUEST:
         labRequestDAO.update((labRequest) request);
         break;
+      case FACILITIES_REQ:
+        facilitiesRequestDAO.update((facilitiesRequest) request);
+        break;
       case MED_DELIV_REQ:
         medicineDeliveryDAO.update((medicineDelivery) request);
         break;
@@ -117,6 +122,9 @@ public class ServiceRequestDAOImpl implements DAO<RequestInterface> {
     switch (request.getRequestType()) {
       case LAB_REQUEST:
         labRequestDAO.delete((labRequest) request);
+        break;
+      case FACILITIES_REQ:
+        facilitiesRequestDAO.delete((facilitiesRequest) request);
         break;
       case MED_DELIV_REQ:
         medicineDeliveryDAO.delete((medicineDelivery) request);

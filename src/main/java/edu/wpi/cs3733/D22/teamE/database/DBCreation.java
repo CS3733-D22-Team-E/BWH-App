@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamE.database;
 
 import static edu.wpi.cs3733.D22.teamE.RSAEncryption.generatePasswordHASH;
 
+import edu.wpi.cs3733.D22.teamE.CallAPI;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,9 +38,9 @@ public class DBCreation {
             + "    LOCATIONID VARCHAR(35) not null references TOWERLOCATIONS (NODEID),\n"
             + "    POSITION   VARCHAR(25) not null,\n"
             + "    AVAILABLE  BOOLEAN     not null,\n"
-            + "    SALARY     DOUBLE      not null\n"
-            + ")\n"
-            + "\n";
+            + "    SALARY     DOUBLE      not null,\n"
+            + "    PROFILEPIC BLOB  \n"
+            + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
     CSVManager.loadEmployeesCSV("Employees.csv");
@@ -306,6 +307,7 @@ public class DBCreation {
 
   public static void createTables() {
     try {
+      CallAPI.getInstance().getExternalTransportAPI();
       edu.wpi.cs3733.D22.teamE.APIDatabase.DBCreation.createFloralRequestTable();
       createTowerLocationTable();
       createEmployeesTable();

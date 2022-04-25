@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamE;
 
+import java.io.File;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -72,6 +73,9 @@ public class pageControl {
   }
 
   public static void exitApp() {
+    CallAPI.getInstance()
+        .getExternalTransportAPI()
+        .exportExternalTransportsToCSV(new File("CSVsaveFiles/TransportExt.csv"));
     System.exit(0);
   }
 }

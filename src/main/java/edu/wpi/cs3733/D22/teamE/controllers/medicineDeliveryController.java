@@ -2,18 +2,24 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
-import edu.wpi.cs3733.D22.teamE.database.daos.MedicineDeliveryDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
+import edu.wpi.cs3733.D22.teamE.entity.medicineDelivery;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 /**
  * Controller Class for the Medicine Delivery Service Request. Inherits from the
@@ -50,9 +56,10 @@ public class medicineDeliveryController extends serviceRequestPageController
   @FXML TableColumn<medicineDelivery, String> tableProgress;
   @FXML TableColumn<medicineDelivery, String> tableNotes;
 
-  MedicineDeliveryDAOImpl medicineDeliveryDB;
+  // MedicineDeliveryDAOImpl medicineDeliveryDB;
 
   ObservableList<medicineDelivery> tableList;
+  DAOSystem system;
 
   /** Creating the ObservableList of medicines and units for the drop downs. */
   ObservableList<String> medicines =
@@ -62,7 +69,9 @@ public class medicineDeliveryController extends serviceRequestPageController
   ObservableList<String> units = FXCollections.observableArrayList("mg", "g", "mL");
 
   /** Constructor */
-  public medicineDeliveryController() {}
+  public medicineDeliveryController() {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+  }
 
   /**
    * Initializes the drops downs with the respective observable lists and the table columns with the
@@ -76,12 +85,7 @@ public class medicineDeliveryController extends serviceRequestPageController
     super.initialize(location, resources);
     medicine.setItems(medicines);
     unit.setItems(units);
-    try {
-      medicineDeliveryDB = new MedicineDeliveryDAOImpl();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    //  populateMedicineTable();
+    populateMedicineTable();
   }
 
   /**
@@ -181,11 +185,10 @@ public class medicineDeliveryController extends serviceRequestPageController
   }
 
   private void medicineSendToDB(medicineDelivery medicineDelivery) throws SQLException {
-    medicineDeliveryDB.update(medicineDelivery);
+    system.update(medicineDelivery);
     tableList.add(medicineDelivery);
   }
 
-  /*
   private void populateMedicineTable() {
     ObservableList<medicineDelivery> medicineRequests = populateMedicineDeliveriesList();
     tableFloor.setCellValueFactory(new PropertyValueFactory<medicineDelivery, String>("floorID"));
@@ -220,13 +223,11 @@ public class medicineDeliveryController extends serviceRequestPageController
   }
 
   private ObservableList<medicineDelivery> populateMedicineDeliveriesList() {
-    List<medicineDelivery> list = medicineDeliveryDB.getAll();
+    List<medicineDelivery> list = system.getAllMedicineRequests();
     tableList = FXCollections.observableArrayList();
     for (medicineDelivery m : list) {
       tableList.add(m);
     }
     return tableList;
   }
-
-   */
 }

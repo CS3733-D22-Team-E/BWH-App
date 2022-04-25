@@ -1,18 +1,22 @@
 package edu.wpi.cs3733.D22.teamE.database;
 
+import edu.wpi.cs3733.D22.teamE.CallAPI;
 import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
-import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
+import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
-import edu.wpi.cs3733.D22.teamE.entity.labRequest;
-import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
 import java.io.*;
+import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 /** uses format from Iteration 1 final ERD Diagram */
 public class CSVManager {
@@ -191,6 +195,12 @@ public class CSVManager {
       // change nothing
       FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
     }
+  }
+
+  public static void saveExternalTransportCSV() {
+    CallAPI.getInstance()
+        .getExternalTransportAPI()
+        .exportExternalTransportsToCSV(new File("CSVsaveFiles/TransportExt.csv"));
   }
 
   public static void saveServiceRequestCSV(String fileName) throws IOException, SQLException {
@@ -378,5 +388,46 @@ public class CSVManager {
     ; // true means append=true
 
     return file;
+  }
+
+  private static void convertFromResource(InputStream stream, File target) throws IOException {
+    byte[] buffer = stream.readAllBytes();
+    OutputStream outStream = new FileOutputStream(target);
+    outStream.write(buffer);
+
+    IOUtils.closeQuietly(outStream);
+  }
+
+  public static void generateFile(String filename) {
+    Path tempDirectory = null;
+    File file = null;
+    try {
+      tempDirectory = Paths.get("CSVsaveFiles");
+      if (Files.notExists(tempDirectory)) {
+        Files.createDirectory(tempDirectory);
+      }
+      file = new File("CSVsaveFiles/" + filename);
+      if (file.createNewFile()) {
+        URL u = Main.class.getResource("CsvFiles/" + filename);
+        if (u != null) {
+          InputStream is = Main.class.getResourceAsStream("CsvFiles/" + filename);
+          assert is != null;
+          convertFromResource(is, file);
+        }
+      } else {
+        if (filename.equals("TransportExt.csv")) {
+          if (file.length() != 0) {
+            try {
+              CallAPI.getInstance().getExternalTransportAPI().importExternalTransportsFromCSV(file);
+            } catch (NullPointerException e) {
+              e.printStackTrace();
+              System.out.println(e.getCause() + " : " + e.getMessage());
+            }
+          }
+        }
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
