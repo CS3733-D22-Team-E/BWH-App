@@ -3,14 +3,14 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
+import edu.wpi.cs3733.D22.teamE.Main;
+import edu.wpi.cs3733.D22.teamE.customUI.customImageView;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -22,6 +22,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -133,25 +134,22 @@ public class mapPageController implements Initializable {
     floorDropdown.setItems(floors);
     floorDropdown.setValue("1");
     locationTypeDropdown.setItems(locationTypes);
-    locationTypeDropdown.setValue("Medical Equipment");
+    locationTypeDropdown.setValue("Tower Locations");
 
     // Set the image size to the default slider value
-    zoomHandler(zoomSlider.getValue());
-
-    medEqList = DAOSystemSingleton.INSTANCE.getSystem().getAllMedEquip();
-    servReqList = DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests();
-    locations = DAOSystemSingleton.INSTANCE.getSystem().getAllLocations();
+    // zoomHandler(zoomSlider.getValue());
 
     // Set initial viewMode
     try {
-      setViewMode("Medical Equipment");
+      viewMode = "Tower Locations";
+      fetchDB();
     } catch (SQLException | FileNotFoundException e) {
       e.printStackTrace();
     }
   }
 
   // Re-fetch data from database after location update
-  private void fetchDB() throws FileNotFoundException, SQLException {
+  private void fetchDB() throws SQLException, FileNotFoundException {
     medEqList = DAOSystemSingleton.INSTANCE.getSystem().getAllMedEquip();
     servReqList = DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests();
     locations = DAOSystemSingleton.INSTANCE.getSystem().getAllLocations();
@@ -170,49 +168,46 @@ public class mapPageController implements Initializable {
       case "2":
         mapImage.setImage(
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/images/maps/02_thesecondfloor.png")));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/images/maps/02_thesecondfloor.png"))));
         break;
-      case "3":
+      case "3": //
         mapImage.setImage(
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/images/maps/03_thethirdfloor.png")));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/images/maps/03_thethirdfloor.png"))));
         break;
-      case "4":
+      case "4": //
         mapImage.setImage(
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/images/maps/04_thefourthfloor.png")));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/images/maps/04_thefourthfloor.png"))));
         break;
-      case "5":
+      case "5": //
         mapImage.setImage(
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/images/maps/05_thefifthfloor.png")));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/images/maps/05_thefifthfloor.png"))));
         break;
-      case "L1":
+      case "L1": //
         mapImage.setImage(
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/images/maps/00_thelowerlevel1.png")));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/images/maps/00_thelowerlevel1.png"))));
         break;
-      case "L2":
+      case "L2": //
         mapImage.setImage(
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/images/maps/00_thelowerlevel2.png")));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/images/maps/00_thelowerlevel2.png"))));
         break;
-      default:
+      default: //
         mapImage.setImage(
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/images/maps/01_thefirstfloor.png")));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/images/maps/01_thefirstfloor.png"))));
         break;
     }
-
-    filterMedicalEquipment();
-    filterServiceRequests();
 
     // Display the currently selected viewMode
     setViewMode(viewMode);
@@ -231,7 +226,7 @@ public class mapPageController implements Initializable {
         serviceRequestLegend.setVisible(false);
     */
     // Enable edit button
-    mapEditorButton.setDisable(false);
+    // mapEditorButton.setDisable(false);
 
     if (view.equals("Tower Locations")) {
       // Filter and display the tower locations
@@ -318,16 +313,19 @@ public class mapPageController implements Initializable {
     double imageX = mapImage.getFitWidth();
     double coordinateX = 935;
     double scaleFactor = imageX / coordinateX;
+    System.out.println(scaleFactor);
 
     // Display an icon for each item in the filtered list
     for (Location l : filteredLocations) {
 
-      double prefWidth = ((int) nodeToIcon(l.getNodeType()).getWidth() / 6) * scaleFactor;
-      double prefHeight = ((int) nodeToIcon(l.getNodeType()).getWidth() / 6) * scaleFactor;
+      Image image = nodeToIcon(l.getNodeType());
 
-      ImageView i = new ImageView(nodeToIcon(l.getNodeType()));
-      i.setFitWidth(prefWidth);
-      i.setFitHeight(prefHeight);
+      double prefWidth = (image.getWidth() / 6.0) * scaleFactor;
+      double prefHeight = (image.getWidth() / 6.0) * scaleFactor;
+
+      customImageView i = new customImageView(image, l);
+      i.setFitWidth(prefWidth * 0.75);
+      i.setFitHeight(prefHeight * 0.75);
       i.setX(l.getXCoord() * scaleFactor - (prefWidth / 2));
       i.setY(l.getYCoord() * scaleFactor - (prefHeight / 2));
 
@@ -624,18 +622,25 @@ public class mapPageController implements Initializable {
 
   @FXML // Handle zoom scroll bar
   public void changeZoom(MouseEvent event) throws SQLException, FileNotFoundException {
-    zoomHandler(zoomSlider.getValue());
+    // zoomHandler(zoomSlider.getValue());
   }
 
-  private void zoomHandler(double zoomValue) {
-    System.out.println("Changing zoom");
+  @FXML Group group;
 
-    mapBox.setScaleX(zoomValue);
-    mapBox.setScaleY(zoomValue);
+  private void zoomHandler(double zoomValue) {
+    // System.out.println("Changing zoom");
+
+    // zoomValue /= 10;
+
+    // group.setScaleX(group.getScaleX() * zoomValue);
+    //  group.setScaleY(group.getScaleY() * zoomValue);
+
+    mapBox.setScaleX(mapBox.getScaleX() * zoomValue);
+    mapBox.setScaleY(mapBox.getScaleY() * zoomValue);
 
     for (Node child : mapBox.getChildren()) {
-      child.setScaleX(zoomValue);
-      child.setScaleY(zoomValue);
+      child.setScaleX(child.getScaleX() * zoomValue);
+      child.setScaleY(child.getScaleY() * zoomValue);
     }
   }
 
@@ -664,13 +669,11 @@ public class mapPageController implements Initializable {
     event.consume();
     if (event.getDeltaY() == 0) return;
 
-    double deltaZoom =
-        (event.getDeltaY() > 0) ? zoomSlider.getValue() + 0.1 : zoomSlider.getValue() - 0.1;
+    final double SCALE_DELTA = 1.1;
 
-    if (deltaZoom > zoomSlider.getMax()) deltaZoom = zoomSlider.getMax();
-    if (deltaZoom < zoomSlider.getMin()) deltaZoom = zoomSlider.getMin();
+    double deltaZoom = (event.getDeltaY() > 0) ? SCALE_DELTA : 1 / SCALE_DELTA;
 
-    zoomSlider.setValue(deltaZoom);
+    // zoomSlider.setValue(deltaZoom);
     zoomHandler(deltaZoom);
   }
 
