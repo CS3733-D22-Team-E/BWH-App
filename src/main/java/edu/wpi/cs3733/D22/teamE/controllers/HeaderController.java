@@ -11,8 +11,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.SVGPath;
-import javafx.stage.Stage;
 
 public class HeaderController {
 
@@ -28,9 +28,11 @@ public class HeaderController {
   // Node box;
   Node box;
   JFXDrawer drawer;
+  BorderPane root;
 
-  public HeaderController(JFXDrawer drawer) {
+  public HeaderController(JFXDrawer drawer, BorderPane root) {
     this.drawer = drawer;
+    this.root = root;
   }
 
   public HeaderController() {}
@@ -86,26 +88,22 @@ public class HeaderController {
 
   @FXML
   public void homeButton(ActionEvent event) {
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControl.loadPage("defaultPage.fxml", thisStage);
+    root.setCenter(pageControl.getPageRoot("defaultPage.fxml"));
   }
 
   @FXML
   public void aboutUsButton(ActionEvent event) {
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControl.loadPage("aboutPage.fxml", thisStage);
+    root.setCenter(pageControl.getPageRoot("aboutPage.fxml"));
   }
 
   @FXML
   public void helpButton(ActionEvent event) {
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControl.loadPage("helpPage.fxml", thisStage);
+    root.setCenter(pageControl.getPageRoot("helpPage.fxml"));
   }
 
   @FXML
   public void profileButton(ActionEvent event) {
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControl.loadPage("helpPage.fxml", thisStage);
+    root.setCenter(pageControl.getPageRoot("profilePage.fxml"));
   }
 
   @FXML

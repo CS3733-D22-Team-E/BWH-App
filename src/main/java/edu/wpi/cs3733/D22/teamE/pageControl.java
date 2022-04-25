@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -62,6 +63,10 @@ public class pageControl {
       e.printStackTrace();
       return null;
     }
+  }
+
+  public static void loadCenter(String url, BorderPane root) {
+    root.setCenter(getPageRoot(url));
   }
 
   public static void exitApp() {

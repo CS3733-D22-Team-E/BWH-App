@@ -32,7 +32,7 @@ public class BasePageController implements Initializable {
     root.setCenter(pageControl.getPageRoot("medicineDelivery.fxml"));
     sideMenuController sideMenu = new sideMenuController(root);
     Parent sideMenuView = (Parent) pageControl.getPageRoot("sidePanel.fxml", sideMenu);
-    HeaderController headerController = new HeaderController(drawer);
+    HeaderController headerController = new HeaderController(drawer, root);
     Parent headerView = (Parent) pageControl.getPageRoot("Header.fxml", headerController);
     root.setTop(headerView);
     drawer.setSidePane(sideMenuView);

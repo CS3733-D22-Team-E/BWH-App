@@ -7,32 +7,32 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.SVGPath?>
 
-<BorderPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="background" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <HBox spacing="10.0" BorderPane.alignment="CENTER">
+<HBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="header" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
          <children>
             <JFXHamburger fx:id="burger" onMouseClicked="#openD" prefHeight="70.0" prefWidth="68.0" />
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <SVGPath fx:id="bwhLogo" content="M40,60 C42,48 44,30 25,32" />
+            <ImageView fitHeight="49.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/Logo.png" />
+               </image>
+            </ImageView>
                   <Label styleClass="headerText" text="Brigham and Women's Hospital" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="70.0" styleClass="header">
                <children>
-                  <JFXToggleNode fx:id="homeButton" prefHeight="82.0" prefWidth="89.0" styleClass="headerButton" text="Home" />
-                  <JFXToggleNode fx:id="aboutUsButton" prefHeight="100.0" prefWidth="104.0" styleClass="headerButton" text="About Us" />
-                  <JFXToggleNode fx:id="helpButton" prefHeight="100.0" prefWidth="104.0" styleClass="headerButton" text="Help" />
+                  <JFXToggleNode fx:id="homeButton" onAction="#homeButton" prefHeight="82.0" prefWidth="89.0" styleClass="headerButton" text="Home" />
+                  <JFXToggleNode fx:id="aboutUsButton" onAction="#aboutUsButton" prefHeight="100.0" prefWidth="104.0" styleClass="headerButton" text="About Us" />
+                  <JFXToggleNode fx:id="helpButton" onAction="#helpButton" prefHeight="100.0" prefWidth="104.0" styleClass="headerButton" text="Help" />
                </children>
             </HBox>
             <StackPane>
                <children>
-                  <JFXButton fx:id="profileButton" prefHeight="67.0" prefWidth="72.0" text=" " />
+                  <JFXButton fx:id="profileButton" onAction="#profileButton" prefHeight="67.0" prefWidth="72.0" styleClass="header" text=" " />
                   <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" styleClass="profile">
                      <image>
                         <Image url="@icons/default_profile_pic.png" />
@@ -44,6 +44,4 @@
          <padding>
             <Insets left="5.0" right="5.0" />
          </padding>
-      </HBox>
-   </top>
-</BorderPane>
+</HBox>
