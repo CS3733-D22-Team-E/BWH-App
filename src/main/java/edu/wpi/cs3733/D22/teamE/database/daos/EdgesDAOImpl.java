@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
-import edu.wpi.cs3733.D22.teamE.database.DBConnect;
+import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
 import edu.wpi.cs3733.D22.teamE.pathfinding.Edge;
 import edu.wpi.cs3733.D22.teamE.pathfinding.Node;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class EdgesDAOImpl implements DAO<Edge> {
   List<Edge> edges;
-  Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+  Connection connection = AccountsManager.getInstance().getConnection();
 
   public EdgesDAOImpl() throws SQLException {
     edges = new ArrayList<Edge>();

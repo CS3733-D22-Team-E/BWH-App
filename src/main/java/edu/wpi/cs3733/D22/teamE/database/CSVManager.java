@@ -20,7 +20,7 @@ import org.apache.commons.io.IOUtils;
 
 /** uses format from Iteration 1 final ERD Diagram */
 public class CSVManager {
-  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+  static Connection connection = AccountsManager.getInstance().getConnection();
 
   // ends with a slash (used with path+filename)
   public static String CSVFilePath = "src/main/resources/edu/wpi/cs3733/D22/teamE/CsvFiles/";

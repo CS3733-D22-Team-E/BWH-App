@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
-import edu.wpi.cs3733.D22.teamE.database.DBConnect;
+import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -68,7 +68,7 @@ public class MedicalEquipment extends Equipment {
   }
 
   public int getXCoord() throws SQLException {
-    Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+    Connection connection = AccountsManager.getInstance().getConnection();
     String locationID = getCurrentLocation();
     int result = -1;
 
@@ -83,7 +83,7 @@ public class MedicalEquipment extends Equipment {
   }
 
   public int getYCoord() throws SQLException {
-    Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+    Connection connection = AccountsManager.getInstance().getConnection();
     String locationID = getCurrentLocation();
     int result = -1;
 
@@ -98,7 +98,7 @@ public class MedicalEquipment extends Equipment {
   }
 
   public String getFloor() throws SQLException {
-    Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+    Connection connection = AccountsManager.getInstance().getConnection();
     String locationID = getCurrentLocation();
     String result = "";
 

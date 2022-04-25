@@ -2,12 +2,14 @@ package edu.wpi.cs3733.D22.teamE.database;
 
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
+import java.sql.Connection;
 import java.util.Random;
 
 public class AccountsManager {
   private Account account;
   private Employee employee;
   private static AccountsManager AM_instance = null;
+  Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
 
   private AccountsManager() {}
 
@@ -35,5 +37,13 @@ public class AccountsManager {
 
   public static String generateRandom8DigitID() {
     return String.format("%8d", new Random().nextInt((int) Math.pow(10, 8)));
+  }
+
+  public Connection getConnection() {
+    return connection;
+  }
+
+  public void setConnection(DBConnect dbConnect) {
+    connection = dbConnect.getConnection();
   }
 }
