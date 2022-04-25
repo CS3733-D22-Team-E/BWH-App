@@ -5,6 +5,7 @@ import static edu.wpi.cs3733.D22.teamE.RSAEncryption.validatePassword;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
+import edu.wpi.cs3733.D22.teamE.Texting;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
@@ -29,6 +30,8 @@ public class loginPageController implements Initializable {
   private @FXML JFXTextField usernameField;
 
   private @FXML JFXPasswordField passwordField;
+
+  // private @FXML JFXTextField twoFactAuthField; //maybe on the login page
 
   @FXML Label invalidWarning;
 
@@ -96,6 +99,12 @@ public class loginPageController implements Initializable {
     //      System.out.println("Access Denied.");
     //      return false;
     //    }
+    return false;
+  }
+
+  private boolean verifyUser2FA(String phoneNumber) {
+    //String codeMessage = "default";
+    //Texting.sendSMS(phoneNumber, codeMessage);
     return false;
   }
 

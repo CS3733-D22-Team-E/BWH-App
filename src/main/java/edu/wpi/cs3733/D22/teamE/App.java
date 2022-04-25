@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamE;
 
-import static edu.wpi.cs3733.D22.teamE.database.CSVManager.generateFile;
+import static edu.wpi.cs3733.D22.teamE.database.CSVManager.generateNewSaveFileFromResources;
 
 import edu.wpi.cs3733.D22.teamE.controllers.*;
 import edu.wpi.cs3733.D22.teamE.database.DBCreation;
@@ -26,11 +26,18 @@ public class App extends Application implements SharedScene {
   public void init() throws InterruptedException {
     log.info("Starting Up");
     ArrayList<String> fileNames = new ArrayList<>();
-    fileNames.add("TransportExt.csv");
+    fileNames.add("AllEdges.csv");
+    fileNames.add("Employees.csv");
+    fileNames.add("MedEquip.csv");
+    fileNames.add("MedEquipRequest.csv");
     fileNames.add("TowerLocations.csv");
+    fileNames.add("TransportExt.csv");
+
+
+
     DBCreation.createTables();
     for (String s : fileNames) {
-      generateFile(s);
+      generateNewSaveFileFromResources(s);
     }
     DAOSystemSingleton.INSTANCE.getSystem();
     FXMLLoader loader = new FXMLLoader();
