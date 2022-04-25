@@ -1,11 +1,11 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
+import com.jfoenix.controls.JFXTextField;
 import edu.wpi.cs3733.D22.teamE.customUI.CustomJFXButtonTableCell;
 import edu.wpi.cs3733.D22.teamE.customUI.CustomTextFieldTableCell;
-import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.*;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -21,12 +22,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * This is the controller class for the Status Page. It inherits from the containsSideMenu class to
  * give the side menu functionality.
  */
-public class statusPageController extends HeaderController {
-  @FXML TextField filterFieldDate;
-  @FXML TextField filterFieldID;
-  @FXML TextField filterFieldType;
-  @FXML TextField filterFieldStatus;
-  @FXML TextField filterFieldAssign;
+public class statusPageController extends HeaderController implements Initializable {
+  @FXML JFXTextField filterFieldDate;
+  @FXML JFXTextField filterFieldID;
+  @FXML JFXTextField filterFieldType;
+  @FXML JFXTextField filterFieldStatus;
+  @FXML JFXTextField filterFieldAssign;
   @FXML TableView<serviceRequestModel> requestTable;
   @FXML TableColumn<serviceRequestModel, String> idColumn;
   @FXML TableColumn<serviceRequestModel, String> typeColumn;
@@ -34,11 +35,12 @@ public class statusPageController extends HeaderController {
   @FXML TableColumn<serviceRequestModel, String> assignedColumn;
   @FXML TableColumn<serviceRequestModel, String> dateColumn;
   @FXML TableColumn<serviceRequestModel, RequestInterface> buttonColumn;
-  DAOSystem db;
+  ObservableList<serviceRequestModel> requestList;
 
   /** Constructor */
   public statusPageController() {
     super();
+    genTable();
   }
 
   /**
@@ -49,17 +51,6 @@ public class statusPageController extends HeaderController {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    super.initialize(url, rb);
-    try {
-      db = new DAOSystem();
-      genTable();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void genTable() {
-    ObservableList<serviceRequestModel> requestList = populateList();
     requestTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     FilteredList<serviceRequestModel> filteredData = new FilteredList<>(requestList, p -> true);
     filterFieldID
@@ -145,12 +136,11 @@ public class statusPageController extends HeaderController {
                     return requestModel.getRequestDate().toLowerCase().contains(lowerCaseFilter);
                   });
             });
-    idColumn.setCellValueFactory(new PropertyValueFactory<serviceRequestModel, String>("ID"));
-    typeColumn.setCellValueFactory(new PropertyValueFactory<serviceRequestModel, String>("Type"));
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    typeColumn.setCellValueFactory(new PropertyValueFactory<>("Type"));
     typeColumn.setCellFactory(CustomTextFieldTableCell.forTableColumn());
     typeColumn.setEditable(false);
-    statusColumn.setCellValueFactory(
-        new PropertyValueFactory<serviceRequestModel, String>("Status"));
+    statusColumn.setCellValueFactory(new PropertyValueFactory<>("Status"));
     // statusColumn.setCellFactory(CustomTextFieldTableCell.forTableColumn());
     /*statusColumn.setOnEditCommit(
     new EventHandler<TableColumn.CellEditEvent<serviceRequestModel, String>>() {
@@ -164,8 +154,7 @@ public class statusPageController extends HeaderController {
         genTable();
       }
     });*/
-    assignedColumn.setCellValueFactory(
-        new PropertyValueFactory<serviceRequestModel, String>("Assignee"));
+    assignedColumn.setCellValueFactory(new PropertyValueFactory<>("Assignee"));
     // assignedColumn.setCellFactory(CustomTextFieldTableCell.forTableColumn());
     // assignedColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     /*assignedColumn.setOnEditCommit(
@@ -180,11 +169,14 @@ public class statusPageController extends HeaderController {
         genTable();
       }
     });*/
-    dateColumn.setCellValueFactory(
-        new PropertyValueFactory<serviceRequestModel, String>("requestDate"));
+    dateColumn.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
     buttonColumn.setCellValueFactory(new PropertyValueFactory<>("request"));
     buttonColumn.setCellFactory(CustomJFXButtonTableCell.forTableColumn(this));
     requestTable.setItems(filteredData);
+  }
+
+  public void genTable() {
+    requestList = populateList();
   }
 
   /**
@@ -193,7 +185,7 @@ public class statusPageController extends HeaderController {
    * @return an ObservableList of serviceRequestModels
    */
   protected ObservableList<serviceRequestModel> populateList() {
-    List<RequestInterface> list = db.getAllServiceRequests();
+    List<RequestInterface> list = DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests();
     ObservableList<serviceRequestModel> tableList = FXCollections.observableArrayList();
     ArrayList<String> usedIDS = new ArrayList<>();
     for (RequestInterface r : list) {
@@ -220,10 +212,9 @@ public class statusPageController extends HeaderController {
     ArrayList<serviceRequestModel> p =
         new ArrayList<>(requestTable.getSelectionModel().getSelectedItems());
     for (serviceRequestModel req : p) {
-      RequestInterface r = db.getServiceRequest(req.getID());
-      db.deleteServiceRequest(r);
+      RequestInterface r = DAOSystemSingleton.INSTANCE.getSystem().getServiceRequest(req.getID());
+      DAOSystemSingleton.INSTANCE.getSystem().deleteServiceRequest(r);
     }
-    genTable();
   }
 
   // todo : add open request(s) here
