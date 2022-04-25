@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
@@ -24,19 +25,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
-public class mapPageController extends containsSideMenu implements Initializable {
+public class mapPageController implements Initializable {
 
   List<Location> locations;
   List<Location> filteredLocations;
@@ -62,16 +64,17 @@ public class mapPageController extends containsSideMenu implements Initializable
   @FXML Button zoomUp;
   @FXML Button zoomDown;
   @FXML JFXSlider zoomSlider;
-  @FXML AnchorPane towerLocationsLegend;
-  @FXML AnchorPane medicalEquipmentLegend;
-  @FXML AnchorPane serviceRequestLegend;
+  @FXML VBox towerLocationsLegend;
+  @FXML VBox medicalEquipmentLegend;
+  @FXML VBox serviceRequestLegend;
+  @FXML ScrollPane scroller;
 
   // Map editor components
   @FXML Button mapEditorButton;
   @FXML Pane editorModeContainer;
-  @FXML Pane addLocationPane;
-  @FXML Pane updateLocationPane;
-  @FXML Pane deleteLocationPane;
+  @FXML VBox addLocationPane;
+  @FXML VBox updateLocationPane;
+  @FXML VBox deleteLocationPane;
   // Update location components
   @FXML Button changePosition;
   @FXML Button smallUpdateLocation;
@@ -83,6 +86,11 @@ public class mapPageController extends containsSideMenu implements Initializable
   // Delete location components
   @FXML Text deleteText;
   @FXML Button smallDeleteLocation;
+  @FXML StackPane canvasPane;
+
+  @FXML JFXButton legendOpenButton;
+
+  private boolean openLegend = false;
 
   ObservableList<String> floors =
       FXCollections.observableArrayList("L1", "L2", "1", "2", "3", "4", "5");
@@ -98,9 +106,27 @@ public class mapPageController extends containsSideMenu implements Initializable
     int i = 3;
   }
 
+  private void legendLogic() {
+    towerLocationsLegend.setVisible(
+        (viewMode.equals("Tower Locations")) && !towerLocationsLegend.isVisible() && openLegend);
+    medicalEquipmentLegend.setVisible(
+        (viewMode.equals("Medical Equipment"))
+            && !medicalEquipmentLegend.isVisible()
+            && openLegend);
+    serviceRequestLegend.setVisible(
+        (viewMode.equals("Service Requests")) && !serviceRequestLegend.isVisible() && openLegend);
+  }
+
   @Override // Initialize the map page
   public void initialize(URL url, ResourceBundle rb) {
-    super.initialize(url, rb);
+
+    scroller.addEventFilter(ScrollEvent.ANY, this::mouseScrollZoom);
+
+    legendOpenButton.setOnAction(
+        event -> {
+          openLegend = !openLegend;
+          legendLogic();
+        });
 
     // Add items to dropdown
     addNodeType.setItems(nodes);
@@ -110,10 +136,7 @@ public class mapPageController extends containsSideMenu implements Initializable
     locationTypeDropdown.setValue("Medical Equipment");
 
     // Set the image size to the default slider value
-    mapBox.setScaleX(zoomSlider.getValue());
-    mapBox.setScaleY(zoomSlider.getValue());
-    mapImage.setScaleX(zoomSlider.getValue());
-    mapImage.setScaleY(zoomSlider.getValue());
+    zoomHandler(zoomSlider.getValue());
 
     medEqList = DAOSystemSingleton.INSTANCE.getSystem().getAllMedEquip();
     servReqList = DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests();
@@ -203,10 +226,10 @@ public class mapPageController extends containsSideMenu implements Initializable
     mapBox.getChildren().add(mapImage);
 
     // Hide all legends
-    towerLocationsLegend.setVisible(false);
-    medicalEquipmentLegend.setVisible(false);
-    serviceRequestLegend.setVisible(false);
-
+    /*  towerLocationsLegend.setVisible(false);
+        medicalEquipmentLegend.setVisible(false);
+        serviceRequestLegend.setVisible(false);
+    */
     // Enable edit button
     mapEditorButton.setDisable(false);
 
@@ -215,21 +238,21 @@ public class mapPageController extends containsSideMenu implements Initializable
       filterTowerLocations();
       displayTowerLocations();
       // Set the legend to visible
-      towerLocationsLegend.setVisible(true);
+      // towerLocationsLegend.setVisible(true);
     } else if (view.equals("Medical Equipment")) {
       // Filter and display medical equipment
       filterMedicalEquipment();
       displayMedEquipLocations();
 
       // Set the legend to visible
-      medicalEquipmentLegend.setVisible(true);
+      // medicalEquipmentLegend.setVisible(true);
     } else if (view.equals("Service Requests")) {
       // Filter and display service requests
       filterServiceRequests();
       displayServiceRequestLocations();
 
       // Set the legend to visible
-      serviceRequestLegend.setVisible(true);
+      // serviceRequestLegend.setVisible(true);
     } else if (view.equals("All")) {
       // Filter and display all locations
       filterTowerLocations();
@@ -239,7 +262,7 @@ public class mapPageController extends containsSideMenu implements Initializable
       displayServiceRequestLocations();
       displayMedEquipLocations();
 
-      towerLocationsLegend.setVisible(true);
+      // towerLocationsLegend.setVisible(true);
 
       // Disable map editor button and hide map editor functions
       mapEditorButton.setDisable(true);
@@ -287,6 +310,9 @@ public class mapPageController extends containsSideMenu implements Initializable
   // Display location on the map
   private void displayTowerLocations() throws FileNotFoundException, SQLException {
 
+    mapBox.getChildren().clear();
+    mapBox.getChildren().add(mapImage);
+
     floorLocationsPane = new Pane();
 
     double imageX = mapImage.getFitWidth();
@@ -314,6 +340,7 @@ public class mapPageController extends containsSideMenu implements Initializable
       floorLocationsPane.getChildren().add(i);
     }
     mapBox.getChildren().add(floorLocationsPane);
+    zoomHandler(zoomSlider.getValue());
   }
 
   // Display medical equipment on the map
@@ -634,13 +661,17 @@ public class mapPageController extends containsSideMenu implements Initializable
 
   @FXML
   public void mouseScrollZoom(ScrollEvent event) {
-    double deltaZoom = zoomSlider.getValue() + event.getDeltaY();
+    event.consume();
+    if (event.getDeltaY() == 0) return;
 
-    if (event.getDeltaY() > 0 && deltaZoom <= zoomSlider.getMax()) {
-      zoomHandler(deltaZoom);
-    } else if (event.getDeltaY() < 0 && deltaZoom >= zoomSlider.getMin()) {
-      zoomHandler(deltaZoom);
-    }
+    double deltaZoom =
+        (event.getDeltaY() > 0) ? zoomSlider.getValue() + 0.1 : zoomSlider.getValue() - 0.1;
+
+    if (deltaZoom > zoomSlider.getMax()) deltaZoom = zoomSlider.getMax();
+    if (deltaZoom < zoomSlider.getMin()) deltaZoom = zoomSlider.getMin();
+
+    zoomSlider.setValue(deltaZoom);
+    zoomHandler(deltaZoom);
   }
 
   @FXML // Handle floor selection
@@ -654,6 +685,7 @@ public class mapPageController extends containsSideMenu implements Initializable
     String locationType = locationTypeDropdown.getValue().toString();
 
     setViewMode(locationType);
+    legendLogic();
   }
 
   @FXML // Handle navigating to the map editor
