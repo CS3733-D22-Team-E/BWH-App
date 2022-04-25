@@ -12,7 +12,7 @@ import javafx.scene.layout.BorderPane;
 
 public class BasePageController implements Initializable {
 
-  @FXML BorderPane root;
+  @FXML BorderPane rootBorderPane;
   @FXML JFXDrawer drawer;
 
   @FXML
@@ -29,12 +29,12 @@ public class BasePageController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    root.setCenter(pageControl.getPageRoot("medicineDelivery.fxml"));
-    sideMenuController sideMenu = new sideMenuController(root);
+    rootBorderPane.setCenter(pageControl.getPageRoot("medicineDelivery.fxml"));
+    sideMenuController sideMenu = new sideMenuController(rootBorderPane);
     Parent sideMenuView = (Parent) pageControl.getPageRoot("sidePanel.fxml", sideMenu);
-    HeaderController headerController = new HeaderController(drawer, root);
+    HeaderController headerController = new HeaderController(drawer, rootBorderPane);
     Parent headerView = (Parent) pageControl.getPageRoot("Header.fxml", headerController);
-    root.setTop(headerView);
+    rootBorderPane.setTop(headerView);
     drawer.setSidePane(sideMenuView);
     drawer.close();
     drawer.setDisable(true);

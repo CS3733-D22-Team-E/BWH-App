@@ -3,7 +3,7 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.BasePageController">
+<BorderPane fx:id="rootBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.BasePageController">
    <left>
       <JFXDrawer fx:id="drawer" minWidth="0.0" onDrawerClosing="#closeDrawer" onDrawerOpening="#openDrawer" prefWidth="0.0" BorderPane.alignment="CENTER" />
    </left>

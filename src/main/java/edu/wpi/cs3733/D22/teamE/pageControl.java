@@ -65,8 +65,10 @@ public class pageControl {
     }
   }
 
-  public static void loadCenter(String url, BorderPane root) {
-    root.setCenter(getPageRoot(url));
+  public static void loadCenter(String url, Stage stage) {
+    Parent root = stage.getScene().getRoot();
+    BorderPane basePage = (BorderPane) root.lookup("#rootBorderPane");
+    basePage.setCenter(getPageRoot(url));
   }
 
   public static void exitApp() {

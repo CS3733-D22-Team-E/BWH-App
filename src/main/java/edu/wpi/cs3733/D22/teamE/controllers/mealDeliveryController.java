@@ -33,7 +33,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML CheckBox isUrgent;
   @FXML TextField staffAssignee;
   @FXML TextField requestStatus;
-  @FXML TextArea otherNotesTxt;
+  @FXML TextField otherNotesTxt;
   @FXML TableView<mealDeliveryRequest> mealDeliveryTable;
 
   @FXML TableColumn<mealDeliveryRequest, String> tableEntree;
