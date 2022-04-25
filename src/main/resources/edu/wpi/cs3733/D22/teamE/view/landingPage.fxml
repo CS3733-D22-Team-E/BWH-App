@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="600.0" prefWidth="960.0" styleClass="loginPane" stylesheets="@styles/Login_page.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="mainPane" prefHeight="600.0" prefWidth="960.0" styleClass="loginPane" stylesheets="@styles/Login_page.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.landingPageController">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="480.0">
          <children>
@@ -74,7 +74,7 @@
                   <Insets left="80.0" top="-30.0" />
                </VBox.margin>
             </Label>
-            <JFXButton prefHeight="63.0" prefWidth="221.0" text="Get Started">
+            <JFXButton onAction="#getStarted" prefHeight="63.0" prefWidth="221.0" text="Get Started">
                <styleClass>
                   <String fx:value="submitButton" />
                   <String fx:value="buttonText" />
