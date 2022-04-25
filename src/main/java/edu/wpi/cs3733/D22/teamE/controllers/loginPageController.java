@@ -5,7 +5,6 @@ import static edu.wpi.cs3733.D22.teamE.RSAEncryption.validatePassword;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
-import edu.wpi.cs3733.D22.teamE.Texting;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
@@ -103,8 +102,8 @@ public class loginPageController implements Initializable {
   }
 
   private boolean verifyUser2FA(String phoneNumber) {
-    //String codeMessage = "default";
-    //Texting.sendSMS(phoneNumber, codeMessage);
+    // String codeMessage = "default";
+    // Texting.sendSMS(phoneNumber, codeMessage);
     return false;
   }
 

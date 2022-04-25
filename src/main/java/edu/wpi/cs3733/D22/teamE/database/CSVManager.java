@@ -15,12 +15,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 /** uses format from Iteration 1 final ERD Diagram */
 public class CSVManager {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+
+  // TODO saveLocationFile vs TowerLocations
+  // TODO Resources not loading if file already there
 
   private static final String locationFormat =
       "NODEID, XCOORD, YCOORD, FLOOR, BUILDING, NODETYPE, LONGNAME, SHORTNAME";
@@ -172,7 +177,8 @@ public class CSVManager {
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
         FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
-      }    }
+      }
+    }
   }
 
   public static void saveEmployeeCSV(String fileName) throws IOException, SQLException {
@@ -318,7 +324,8 @@ public class CSVManager {
    */
   public static boolean loadCSVGeneral(String fileName, String tableName, String ColumnsCSV)
       throws SQLException, IOException {
-    int IDindex0 = 0;//by default 0 (ID element, first), change where implemented w/ helper caller function
+    int IDindex0 =
+        0; // by default 0 (ID element, first), change where implemented w/ helper caller function
     int count = 0;
 
     for (int i = 0; i < ColumnsCSV.length(); i++) {
@@ -327,25 +334,27 @@ public class CSVManager {
     count = count + 1; // results = #commas + 1
     String[] csvData = ColumnsCSV.split(","); // for query later
 
-    //check if a save file is in CSVsaveFiles, if so, read from that
+    // check if a save file is in CSVsaveFiles, if so, read from that
     BufferedReader in;
     File file = new File("CSVsaveFiles/" + fileName);
     if (file.exists()) // load from save file
     {
       in = new BufferedReader(new FileReader(file));
-    }
-    else //if not in saveFiles, read from default resource folder
+    } else // if not in saveFiles, read from default resource folder
     {
       InputStream is = Main.class.getResourceAsStream("CsvFiles/" + fileName);
       if (is == null) {
-        System.err.println("Cannot Retrieve CSV resource '"+fileName+"'. You may have spelled the filename wrong. ");
+        System.err.println(
+            "Cannot Retrieve CSV resource '"
+                + fileName
+                + "'. You may have spelled the filename wrong. ");
         return false; // spelled wrong probably
       }
       in = new BufferedReader(new InputStreamReader(is));
     }
-    //using BufferedReader readLine() to read from files
+    // using BufferedReader readLine() to read from files
     String line;
-    in.readLine();//to skip over format
+    in.readLine(); // to skip over format
     String[] lineArrayCSV;
     while ((line = in.readLine()) != null) {
       lineArrayCSV = line.split(",");
@@ -389,8 +398,8 @@ public class CSVManager {
   }
 
   /**
-   * full helper - makes sure Strings are in the right format,
-   * and sets up a file (File object) for writing in csv, which it returns
+   * full helper - makes sure Strings are in the right format, and sets up a file (File object) for
+   * writing in csv, which it returns
    *
    * @param fileName
    * @param format
@@ -405,12 +414,13 @@ public class CSVManager {
     if (!fileName.toLowerCase().endsWith(".csv")) fileName = "" + fileName + ".csv";
 
     File file = new File("CSVsaveFiles/" + fileName);
-    if(!file.exists()) {
-      System.err.println("file should have already been created. " +
-              "Resource line may not have been added to the App class init() method");
-      file.createNewFile();//fine
+    if (!file.exists()) {
+      System.err.println(
+          "file should have already been created. "
+              + "Resource line may not have been added to the App class init() method");
+      file.createNewFile(); // fine
     }
-    if (!doesFileContainLine(file, format)) { //only looks for first line or no lines
+    if (!doesFileContainLine(file, format)) { // only looks for first line or no lines
       FileUtils.writeStringToFile(file, format, (Charset) null, true);
     }
     ; // true means append=true
@@ -419,8 +429,8 @@ public class CSVManager {
   }
 
   /**
-   *  Checks an entire file to see if a line is included (character for chracter).
-   *  Slow for every call, I know, but very useful for file management
+   * Checks an entire file to see if a line is included (character for chracter). Slow for every
+   * call, I know, but very useful for file management
    *
    * @param file
    * @param line
@@ -428,11 +438,13 @@ public class CSVManager {
    * @throws IOException
    */
   private static boolean doesFileContainLine(File file, String line) throws IOException {
+    //string manipulation
+    line = line.toLowerCase().replace(" ","");
     String fileName = file.getName();
     BufferedReader in = new BufferedReader(new FileReader(file));
     in.readLine();
     String curLine;
-    while ((curLine = in.readLine()) != null) {
+    while ((curLine = in.readLine().toLowerCase().replace(" ","")) != null) {
       if (curLine.equals(line)) {
         in.close();
         return true;
@@ -460,10 +472,10 @@ public class CSVManager {
   }
 
   /**
-   * IF a save file does not exist, creates one [filename] and
-   * pulls data from app csv resources folder with the same [filename]
+   * IF a save file does not exist, creates one [filename] and pulls data from app csv resources
+   * folder with the same [filename]
    *
-   * Assures there WILL be a save file on running program
+   * <p>Assures there WILL be a save file on running program
    *
    * @param filename
    */
@@ -475,7 +487,7 @@ public class CSVManager {
       if (Files.notExists(tempDirectory)) {
         Files.createDirectory(tempDirectory);
       }
-      //if no pre-existing save file, load a sample one from resources
+      // if no pre-existing save file, load a sample one from resources
       file = new File("CSVsaveFiles/" + filename);
       if (file.createNewFile()) { // if file was created
         URL u = Main.class.getResource("CsvFiles/" + filename);

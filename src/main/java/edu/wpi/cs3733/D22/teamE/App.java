@@ -33,8 +33,6 @@ public class App extends Application implements SharedScene {
     fileNames.add("TowerLocations.csv");
     fileNames.add("TransportExt.csv");
 
-
-
     DBCreation.createTables();
     for (String s : fileNames) {
       generateNewSaveFileFromResources(s);
