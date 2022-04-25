@@ -40,7 +40,7 @@ public class loginPageController implements Initializable {
   public void submitLogin(ActionEvent event) {
     if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
 
-      pageControl.loadPage("defaultPage.fxml", (Stage) passwordField.getScene().getWindow());
+      pageControl.loadPage("BasePage.fxml", (Stage) passwordField.getScene().getWindow());
 
     } else {
       invalidWarning.setVisible(true);
