@@ -17,7 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class aboutPageController extends HeaderController {
+public class aboutPageController {
 
   public aboutPageController() throws FileNotFoundException {}
 

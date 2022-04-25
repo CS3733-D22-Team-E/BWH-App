@@ -25,7 +25,7 @@ import javafx.scene.control.*;
  * Is an abstract class meant to be the super class for each service request page. Inherits from
  * contains sideMenu
  */
-public abstract class serviceRequestPageController extends HeaderController {
+public abstract class serviceRequestPageController {
 
   @FXML TextField notes;
   @FXML JFXButton submitButton;
@@ -48,16 +48,9 @@ public abstract class serviceRequestPageController extends HeaderController {
   HashMap<String, String> roomNameToRoomID;
   HashMap<String, String> roomIDToRoomName;
 
-  serviceRequestPageController() {
-    super();
-  }
+  serviceRequestPageController() {}
 
-  /**
-   * Calls the initialize function for containsSideMenu and then populates the location combo boxes.
-   */
-  @Override
   public void initialize(URL url, ResourceBundle rb) {
-    super.initialize(url, rb);
     try {
       populateLocationComboBoxes();
     } catch (SQLException e) {

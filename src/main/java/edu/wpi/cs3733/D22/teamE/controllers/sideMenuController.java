@@ -5,9 +5,16 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class sideMenuController extends BasePageController {
+public class sideMenuController {
+
+  private BorderPane root;
+
+  public sideMenuController(BorderPane root) {
+    this.root = root;
+  }
 
   @FXML
   public void dashboardButton(ActionEvent event) throws IOException {

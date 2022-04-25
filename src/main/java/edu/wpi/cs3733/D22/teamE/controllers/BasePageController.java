@@ -29,10 +29,10 @@ public class BasePageController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    root.setCenter(pageControl.getPageRoot("defaultPage.fxml"));
-    sideMenuController sideMenu = new sideMenuController();
+    root.setCenter(pageControl.getPageRoot("medicineDelivery.fxml"));
+    sideMenuController sideMenu = new sideMenuController(root);
     Parent sideMenuView = (Parent) pageControl.getPageRoot("sidePanel.fxml", sideMenu);
-    HeaderController headerController = new HeaderController();
+    HeaderController headerController = new HeaderController(drawer);
     Parent headerView = (Parent) pageControl.getPageRoot("Header.fxml", headerController);
     root.setTop(headerView);
     drawer.setSidePane(sideMenuView);
