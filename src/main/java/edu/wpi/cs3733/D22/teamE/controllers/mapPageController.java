@@ -28,13 +28,16 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class mapPageController extends HeaderController implements Initializable {
+public class mapPageController implements Initializable {
   FXMLLoader loader = new FXMLLoader();
   Parent root;
   @FXML MenuBar menuBar;
@@ -52,6 +55,7 @@ public class mapPageController extends HeaderController implements Initializable
   String viewMode = "Tower Locations";
 
   @FXML AnchorPane mapBox;
+  @FXML StackPane mapOuter;
   @FXML ImageView mapImage;
   @FXML ComboBox floorDropdown;
   @FXML ComboBox locationTypeDropdown;
@@ -59,9 +63,10 @@ public class mapPageController extends HeaderController implements Initializable
   @FXML Button zoomUp;
   @FXML Button zoomDown;
   @FXML JFXSlider zoomSlider;
-  @FXML AnchorPane towerLocationsLegend;
-  @FXML AnchorPane medicalEquipmentLegend;
-  @FXML AnchorPane serviceRequestLegend;
+  @FXML VBox towerLocationsLegend;
+  @FXML VBox medEquipLocationsLegend;
+  @FXML VBox serviceLocationsLegend;
+  @FXML ScrollPane scroll;
 
   ObservableList<String> floors =
       FXCollections.observableArrayList("L1", "L2", "1", "2", "3", "4", "5");
@@ -75,13 +80,27 @@ public class mapPageController extends HeaderController implements Initializable
 
   @Override // Initialize the map page
   public void initialize(URL url, ResourceBundle rb) {
-    super.initialize(url, rb);
+    // super.initialize(url, rb);
 
     // Add items to dropdown
     floorDropdown.setItems(floors);
     floorDropdown.setValue("1");
     locationTypeDropdown.setItems(locationTypes);
     locationTypeDropdown.setValue("Medical Equipment");
+
+    /*scroll
+        .widthProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              mapOuter.setMaxWidth(newVal.doubleValue());
+            });
+
+    scroll
+        .heightProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              mapOuter.setMaxHeight(newVal.doubleValue());
+            });*/
 
     // Set the image size to the default slider value
     mapBox.setPrefHeight(zoomSlider.getValue());
@@ -179,8 +198,8 @@ public class mapPageController extends HeaderController implements Initializable
 
     // Hide all legends
     towerLocationsLegend.setVisible(false);
-    medicalEquipmentLegend.setVisible(false);
-    serviceRequestLegend.setVisible(false);
+    medEquipLocationsLegend.setVisible(false);
+    serviceLocationsLegend.setVisible(false);
 
     if (view.equals("Tower Locations")) {
       // Filter and display the tower locations
@@ -194,14 +213,14 @@ public class mapPageController extends HeaderController implements Initializable
       displayMedEquipLocations();
 
       // Set the legend to visible
-      medicalEquipmentLegend.setVisible(true);
+      medEquipLocationsLegend.setVisible(true);
     } else if (view.equals("Service Requests")) {
       // Filter and display service requests
       filterServiceRequests();
       displayServiceRequestLocations();
 
       // Set the legend to visible
-      serviceRequestLegend.setVisible(true);
+      serviceLocationsLegend.setVisible(true);
     } else if (view.equals("All")) {
       // Filter and display all locations
       filterTowerLocations();
