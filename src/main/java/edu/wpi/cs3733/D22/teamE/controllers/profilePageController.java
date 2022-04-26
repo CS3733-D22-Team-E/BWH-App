@@ -42,7 +42,7 @@ import javafx.util.Duration;
 
 public class profilePageController implements Initializable {
 
-  @FXML Circle photoCirc; 
+  @FXML Circle photoCirc;
   @FXML Label nameLabel;
   @FXML Label statusLabel;
   @FXML Label idLabel;
