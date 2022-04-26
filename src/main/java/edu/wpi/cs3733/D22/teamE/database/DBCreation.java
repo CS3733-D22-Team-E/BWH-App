@@ -318,14 +318,16 @@ public class DBCreation {
 
   public static void createTables() {
     try {
+      //HAVE ALL LOAD (EXCEPT FLORAL REQUEST)
       CallAPI.getInstance().getExternalTransportAPI();
       edu.wpi.cs3733.D22.teamE.APIDatabase.DBCreation.createFloralRequestTable();
-      createTowerLocationTable();
-      createEmployeesTable();
-      createEquipmentTable();
-      createLabRequestTable();
-      createMedEquipReqTable();
-      createServiceRequestTable();
+      createTowerLocationTable();//
+      createEmployeesTable();//
+      createEquipmentTable();//
+      createLabRequestTable();//
+      createMedEquipReqTable();//
+      createServiceRequestTable();//
+
       createMedicineRequestTable();
       createSanitationRequestTable();
       createMealRequestTable();
@@ -333,7 +335,9 @@ public class DBCreation {
       createFacilitiesRequestTable();
       createSecurityRequestTable();
       createGiftDeliveryRequestTable();
-      createAccountsTable();
+
+      createAccountsTable();//
+
       createEdgesTable();
     } catch (SQLException | IOException e) {
       e.printStackTrace();
