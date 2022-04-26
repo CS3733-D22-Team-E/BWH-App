@@ -8,18 +8,13 @@ import edu.wpi.cs3733.D22.teamE.entity.medicineDelivery;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 /**
  * Controller Class for the Medicine Delivery Service Request. Inherits from the
@@ -42,7 +37,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   @FXML CheckBox sat;
   @FXML CheckBox sun;
   @FXML Button resetButton;
-  @FXML TableView<medicineDelivery> medicineTable;
+  /*@FXML TableView<medicineDelivery> medicineTable;
 
   @FXML TableColumn<medicineDelivery, String> tableFloor;
   @FXML TableColumn<medicineDelivery, String> tableRoom;
@@ -58,7 +53,7 @@ public class medicineDeliveryController extends serviceRequestPageController
 
   // MedicineDeliveryDAOImpl medicineDeliveryDB;
 
-  ObservableList<medicineDelivery> tableList;
+  ObservableList<medicineDelivery> tableList;*/
   DAOSystem system;
 
   /** Creating the ObservableList of medicines and units for the drop downs. */
@@ -85,7 +80,7 @@ public class medicineDeliveryController extends serviceRequestPageController
     super.initialize(location, resources);
     medicine.setItems(medicines);
     unit.setItems(units);
-    populateMedicineTable();
+    // populateMedicineTable();
   }
 
   /**
@@ -182,15 +177,34 @@ public class medicineDeliveryController extends serviceRequestPageController
     notes.clear();
     staffAssignee.clear();
     requestStatus.clear();
+    room.setVisible(false);
   }
 
   private void medicineSendToDB(medicineDelivery medicineDelivery) throws SQLException {
     system.update(medicineDelivery);
-    tableList.add(medicineDelivery);
+    // tableList.add(medicineDelivery);
+    floor.getSelectionModel().clearSelection();
+    room.getSelectionModel().clearSelection();
+    medicine.getSelectionModel().clearSelection();
+    amount.clear();
+    unit.getSelectionModel().clearSelection();
+    date.getEditor().clear();
+    time.clear();
+    mon.setSelected(false);
+    tues.setSelected(false);
+    wed.setSelected(false);
+    thurs.setSelected(false);
+    fri.setSelected(false);
+    sat.setSelected(false);
+    sun.setSelected(false);
+    notes.clear();
+    staffAssignee.clear();
+    requestStatus.clear();
+    room.setVisible(false);
   }
 
   private void populateMedicineTable() {
-    ObservableList<medicineDelivery> medicineRequests = populateMedicineDeliveriesList();
+    /*ObservableList<medicineDelivery> medicineRequests = populateMedicineDeliveriesList();
     tableFloor.setCellValueFactory(new PropertyValueFactory<medicineDelivery, String>("floorID"));
     tableRoom.setCellValueFactory(
         new Callback<
@@ -219,15 +233,15 @@ public class medicineDeliveryController extends serviceRequestPageController
     tableNotes.setCellValueFactory(
         new PropertyValueFactory<medicineDelivery, String>("otherNotes"));
 
-    medicineTable.setItems(medicineRequests);
+    medicineTable.setItems(medicineRequests);*/
   }
 
-  private ObservableList<medicineDelivery> populateMedicineDeliveriesList() {
+  /*private ObservableList<medicineDelivery> populateMedicineDeliveriesList() {
     List<medicineDelivery> list = system.getAllMedicineRequests();
     tableList = FXCollections.observableArrayList();
     for (medicineDelivery m : list) {
       tableList.add(m);
     }
     return tableList;
-  }
+  }*/
 }
