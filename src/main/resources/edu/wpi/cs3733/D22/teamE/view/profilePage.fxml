@@ -33,12 +33,13 @@
 -->
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -50,7 +51,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.profilePageController">
+<VBox stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.profilePageController">
    <children>
       <StackPane prefHeight="710.0" prefWidth="1080.0">
          <children>
@@ -113,17 +114,17 @@
                                     <String fx:value="bold" />
                                  </styleClass>
                               </Label>
-                              <Label fx:id="posLabel" prefHeight="20.0" prefWidth="106.0" text="PosLabel here" GridPane.columnIndex="1">
+                              <Label fx:id="nameLabel" prefHeight="20.0" prefWidth="106.0" text="nameLabel" GridPane.columnIndex="1">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="salLabel" text="salLabel here" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Label fx:id="statusLabel" text="statusLabel" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="reqNumLabel" text="Test Profile" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <Label fx:id="idLabel" text="idLabel" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -135,16 +136,16 @@
                         </GridPane>
                      </children>
                   </VBox>
-                  <VBox maxWidth="600.0" minWidth="600.0" prefHeight="650.0" prefWidth="698.0">
+                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="600.0" spacing="50.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox maxHeight="302.0" maxWidth="500.0" minHeight="250.0" minWidth="500.0" prefHeight="302.0" prefWidth="500.0">
+                        <VBox alignment="CENTER" maxHeight="302.0" maxWidth="500.0" minHeight="250.0" minWidth="500.0" prefHeight="302.0" prefWidth="500.0" spacing="5.0" VBox.vgrow="ALWAYS">
                            <styleClass>
                               <String fx:value="rounded" />
                               <String fx:value="container" />
                               <String fx:value="dropShadow" />
                            </styleClass>
                            <children>
-                              <Label text="My Service Requests">
+                              <Label text="My Service Requests" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -156,30 +157,39 @@
                                     <Insets />
                                  </opaqueInsets>
                                  <VBox.margin>
-                                    <Insets left="118.0" top="5.0" />
+                                    <Insets top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <JFXListView fx:id="reqList" maxHeight="300.0" maxWidth="400.0" minHeight="200.0" minWidth="200.0" prefHeight="489.0" prefWidth="380.0" styleClass="rounded_08">
+                              <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                <columns>
+                                  <TableColumn fx:id="floor" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Floor" />
+                                  <TableColumn fx:id="name" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Name" />
+                                    <TableColumn fx:id="requestType" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Request Type" />
+                                    <TableColumn fx:id="status" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Status" />
+                                </columns>
                                  <VBox.margin>
-                                    <Insets bottom="20.0" left="45.0" top="20.0" />
+                                    <Insets />
                                  </VBox.margin>
-                              </JFXListView>
+                              </TableView>
                            </children>
                            <VBox.margin>
-                              <Insets left="50.0" top="55.0" />
+                              <Insets />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+                           </padding>
                         </VBox>
-                        <VBox maxHeight="206.0" maxWidth="500.0" minHeight="150.0" minWidth="500.0" prefHeight="206.0" prefWidth="500.0">
+                        <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" spacing="5.0" VBox.vgrow="ALWAYS">
                            <styleClass>
                               <String fx:value="dropShadow" />
                               <String fx:value="container" />
                               <String fx:value="rounded" />
                            </styleClass>
                            <VBox.margin>
-                              <Insets left="50.0" top="50.0" />
+                              <Insets />
                            </VBox.margin>
                            <children>
-                              <Label text="Setting">
+                              <Label text="My System Preferences" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -191,43 +201,83 @@
                                     <Insets />
                                  </opaqueInsets>
                                  <VBox.margin>
-                                    <Insets left="198.0" top="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </Label>
-                              <GridPane maxHeight="102.0" maxWidth="300.0" minWidth="20.0" prefHeight="102.0" prefWidth="300.0">
+                              <GridPane hgap="20.0" vgap="20.0" VBox.vgrow="ALWAYS">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.20001220703125" minWidth="10.0" prefWidth="90.79998779296875" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.20001220703125" minWidth="10.0" prefWidth="209.20001220703125" />
+                                  <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" />
+                                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                  <RowConstraints maxHeight="28.799999999999997" minHeight="10.0" prefHeight="16.79996337890625" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="42.400000000000006" minHeight="0.0" prefHeight="41.599951171875006" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="19.60001220703125" minHeight="0.0" prefHeight="0.800048828125" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+                                  <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="Database: ">
-                                       <styleClass>
-                                          <String fx:value="bodyText" />
-                                          <String fx:value="bold" />
-                                       </styleClass>
-                                    </Label>
-                                    <ComboBox prefHeight="26.0" prefWidth="206.0" GridPane.columnIndex="1" />
-                                    <JFXButton fx:id="resetPassword" onAction="#resetPassword" prefHeight="31.0" prefWidth="208.0" text="Change Password" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <styleClass>
-                                          <String fx:value="bold" />
-                                          <String fx:value="bodyText" />
-                                          <String fx:value="submitButton" />
-                                       </styleClass>
-                                    </JFXButton>
-                                    <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="2" />
+                                    <JFXComboBox fx:id="database" promptText="Select Database" styleClass="inputField" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                    <JFXComboBox fx:id="colorScheme" promptText="Select Color Scheme" styleClass="inputField" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                    <Label styleClass="inputLabel" text="Database:" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                    <Label styleClass="inputLabel" text="Color Scheme:" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                                  </children>
                                  <VBox.margin>
-                                    <Insets left="100.0" top="10.0" />
+                                    <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
                                  </VBox.margin>
                               </GridPane>
+                              <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #EEEEEE; -fx-border-color: #C4C4C4;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Change Password" VBox.vgrow="ALWAYS">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <GridPane hgap="20.0" vgap="20.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" />
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="New Password" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Confirm Password" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="newPassword" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                          <TextField fx:id="confirmPassword" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                       </children>
+                                    </GridPane>
+                                    <JFXButton styleClass="submitButton" text="Change Password">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                                 <styleClass>
+                                    <String fx:value="darkBorder" />
+                                    <String fx:value="thinBorder" />
+                                    <String fx:value="lessRounded" />
+                                 </styleClass>
+                              </VBox>
                            </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
                         </VBox>
                      </children>
+                     <padding>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </padding>
                   </VBox>
                </children>
             </HBox>
