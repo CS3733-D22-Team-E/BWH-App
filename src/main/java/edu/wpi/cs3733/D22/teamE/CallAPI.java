@@ -2,11 +2,15 @@ package edu.wpi.cs3733.D22.teamE;
 
 import edu.wpi.cs3733.D22.teamE.database.CSVManager;
 import edu.wpi.cs3733.D22.teamZ.api.API;
+import edu.wpi.teamname.App;
+
 import javax.xml.rpc.ServiceException;
 
 public class CallAPI {
   private static CallAPI singleton;
   private static API transportAPISingleton;
+  private static App robotAPISingleton;
+
 
   private CallAPI() {}
 
@@ -48,4 +52,12 @@ public class CallAPI {
       e.printStackTrace();
     }
   }
+
+  public App getSoftEngRobotAPI() {
+    if (robotAPISingleton == null) {
+      robotAPISingleton = new App();
+    }
+    return robotAPISingleton;
+  }
+
 }
