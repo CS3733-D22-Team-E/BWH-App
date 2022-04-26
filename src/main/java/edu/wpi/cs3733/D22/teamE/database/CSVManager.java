@@ -764,7 +764,6 @@ public class CSVManager {
               + "Resource line may not have been added to the App class init() method");
       generateNewSaveFileFromResources(fileName); // should exist now
     }
-
     if (!doesFileContainLine(file, format)) { // only looks for first line or no lines
       FileUtils.writeStringToFile(file, format, (Charset) null, false);
     }

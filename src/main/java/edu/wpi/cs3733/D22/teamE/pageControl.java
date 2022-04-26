@@ -1,13 +1,19 @@
 package edu.wpi.cs3733.D22.teamE;
 
+import static edu.wpi.cs3733.D22.teamE.database.CSVManager.saveAllCSVs;
+
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+
+import edu.wpi.cs3733.D22.teamE.database.CSVManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import edu.wpi.cs3733.D22.teamE.database.CSVManager.*;
 
 public class pageControl {
 
@@ -65,10 +71,31 @@ public class pageControl {
     }
   }
 
-  public static void exitApp() {
+  public static void exitApp() throws SQLException, IOException {
+    saveAllCSVs();
+
     CallAPI.getInstance()
         .getExternalTransportAPI()
         .exportExternalTransportsToCSV(new File("CSVsaveFiles/TransportExt.csv"));
     System.exit(0);
+  }
+
+  private static void saveAllCSVs() throws SQLException, IOException {
+    CSVManager.saveLocationCSV("TowerLocations.csv");
+    CSVManager.saveEmployeeCSV("Employees.csv");
+    CSVManager.saveMedEquipCSV("MedEquip.csv");
+    CSVManager.saveLabRequestCSV("LabRequests.csv");
+    CSVManager.saveMedEquipRequestCSV("MedEquipRequests.csv");
+    CSVManager.saveServiceRequestCSV("ServiceRequests.csv");
+    CSVManager.saveMedicineRequestCSV("MedicineRequests.csv");
+    CSVManager.saveSanitationRequestCSV("SanitationRequests.csv");
+    CSVManager.saveMealDeliveryCSV("MealRequests.csv");
+    CSVManager.saveLanguageInterpreterRequestCSV("LangInterpRequests.csv");
+    CSVManager.saveFacilitiesRequestCSV("FacilitiesRequests.csv");
+    CSVManager.saveSecurityRequestCSV("SecurityRequests.csv");
+    CSVManager.saveGiftDeliveryRequestCSV("GiftRequests.csv");
+    CSVManager.saveAccountCSV("Accounts.csv");
+
+    //CSVManager.saveEdgesCSV();
   }
 }
