@@ -345,7 +345,7 @@ public class CSVManager {
                       + d.getRequestDate()
                       + ','
                       + d.getDeliveryDate()
-                      + ','
+                      + ',' //todo
                       + d.getPasswordHash()
                       + ','
                       + d.getFirstName()
