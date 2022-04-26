@@ -40,8 +40,7 @@ public class CSVManager {
       "REQUESTID, STATUS, TYPE, ASSIGNEE, REQUEST_DATE, DELIVERY_DATE, ISURGENT";
   private static final String accountFormat =
       "ACCOUNTID, EMPLOYEEID, AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION, PHONENUMBER";
-  private static final String edgesFormat =
-      "EDGEID, START_NODE, END_NODE";
+  private static final String edgesFormat = "EDGEID, START_NODE, END_NODE";
   private static final String medicineRequestFormat =
       "MEDICINE_REQ_ID, REQUEST_ID, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, DELIVERYLOCATIONID, FLOOR, MEDICINETYPE, MEDICINEQUANTITY, MEDICINEUNIT, REOCCURINGDAYS, OTHERNOTES, DELIVERYTIME";
   private static final String sanitationRequestFormat =
@@ -57,21 +56,65 @@ public class CSVManager {
   private static final String giftDeliveryRequestFormat =
       "GIFT_REQ_ID, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, PATIENTNAME, GIFTTYPE, OTHERNOTES";
 
-  public static String getDefaultLocationFilename() { return "TowerLocations.csv"; }
-  public static String getDefaultEquipmentFilename() { return "MedEquip.csv"; }
-  public static String getDefaultEmployeesFilename() { return "Employees.csv"; }
-  public static String getDefaultLabRequestFilename() { return "LabRequests.csv"; }
-  public static String getDefaultMedEquipRequestFilename() { return "MedEquipRequest.csv"; }
-  public static String getDefaultServiceRequestFilename() { return "ServiceRequests.csv"; }
-  public static String getDefaultMedicineRequestFilename() { return "MedicineRequests.csv"; }
-  public static String getDefaultSanitationRequestFilename() { return "SanitationRequests.csv"; }
-  public static String getDefaultMealRequestFilename() { return "MealRequests.csv"; }
-  public static String getDefaultLangInterpRequestFilename() { return "LanguageRequests.csv"; }
-  public static String getDefaultFacilitiesRequestFilename() { return "FacilitiesRequests.csv"; }
-  public static String getDefaultSecurityRequestFilename() { return "SecurityRequests.csv"; }
-  public static String getDefaultGiftRequestFilename() { return "GiftRequests.csv"; }
-  public static String getDefaultAccountsFilename() { return "Accounts.csv"; }
-  public static String getDefaultEdgesFilename() { return "AllEdges.csv"; }
+  public static String getDefaultLocationFilename() {
+    return "TowerLocations.csv";
+  }
+
+  public static String getDefaultEquipmentFilename() {
+    return "MedEquip.csv";
+  }
+
+  public static String getDefaultEmployeesFilename() {
+    return "Employees.csv";
+  }
+
+  public static String getDefaultLabRequestFilename() {
+    return "LabRequests.csv";
+  }
+
+  public static String getDefaultMedEquipRequestFilename() {
+    return "MedEquipRequest.csv";
+  }
+
+  public static String getDefaultServiceRequestFilename() {
+    return "ServiceRequests.csv";
+  }
+
+  public static String getDefaultMedicineRequestFilename() {
+    return "MedicineRequests.csv";
+  }
+
+  public static String getDefaultSanitationRequestFilename() {
+    return "SanitationRequests.csv";
+  }
+
+  public static String getDefaultMealRequestFilename() {
+    return "MealRequests.csv";
+  }
+
+  public static String getDefaultLangInterpRequestFilename() {
+    return "LanguageRequests.csv";
+  }
+
+  public static String getDefaultFacilitiesRequestFilename() {
+    return "FacilitiesRequests.csv";
+  }
+
+  public static String getDefaultSecurityRequestFilename() {
+    return "SecurityRequests.csv";
+  }
+
+  public static String getDefaultGiftRequestFilename() {
+    return "GiftRequests.csv";
+  }
+
+  public static String getDefaultAccountsFilename() {
+    return "Accounts.csv";
+  }
+
+  public static String getDefaultEdgesFilename() {
+    return "AllEdges.csv";
+  }
 
   /*
       SAVING CSV FILES FROM THE DATABASE
@@ -782,20 +825,23 @@ public class CSVManager {
    * @throws IOException
    */
   private static boolean doesFileContainLine(File file, String line) throws IOException {
-    // string manipulation
-    line = line.toLowerCase().replace(" ", "");
-    String fileName = file.getName();
-    BufferedReader in = new BufferedReader(new FileReader(file));
-    in.readLine();
-    String curLine;
-    while ((curLine = in.readLine()) != null) {
-      curLine = curLine.toLowerCase().replace(" ", "");
-      if (curLine.equals(line)) {
-        in.close();
-        return true;
+    try {
+      // string manipulation
+      line = line.toLowerCase().replace(" ", "");
+      String fileName = file.getName();
+      BufferedReader in = new BufferedReader(new FileReader(file));
+      in.readLine();
+      String curLine;
+      while ((curLine = in.readLine()) != null) {
+        curLine = curLine.toLowerCase().replace(" ", "");
+        if (curLine.equals(line)) {
+          in.close();
+          return true;
+        }
       }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
     }
-    in.close();
     return false;
   }
 
