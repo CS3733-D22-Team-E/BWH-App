@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleNode?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -28,7 +28,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="fifthFloorButton" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 5" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <JFXToggleNode fx:id="fifthFloorButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 5" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -38,8 +38,8 @@
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
                            </styleClass>
-                        </JFXButton>
-                        <JFXButton fx:id="fourthFloorButton" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 4" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        </JFXToggleNode>
+                        <JFXToggleNode fx:id="fourthFloorButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 4" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -48,8 +48,8 @@
                               <String fx:value="darkBorder" />
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
-                           </styleClass></JFXButton>
-                        <JFXButton fx:id="thirdFloorButton" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 3" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           </styleClass></JFXToggleNode>
+                        <JFXToggleNode fx:id="thirdFloorButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 3" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -58,8 +58,8 @@
                               <String fx:value="darkBorder" />
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
-                           </styleClass></JFXButton>
-                        <JFXButton fx:id="secondFloorButton" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 2" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           </styleClass></JFXToggleNode>
+                        <JFXToggleNode fx:id="secondFloorButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 2" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -69,8 +69,8 @@
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
                            </styleClass>
-                        </JFXButton>
-                        <JFXButton fx:id="firstFloorButton" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 1" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        </JFXToggleNode>
+                        <JFXToggleNode fx:id="firstFloorButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 1" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -79,8 +79,8 @@
                               <String fx:value="darkBorder" />
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
-                           </styleClass></JFXButton>
-                        <JFXButton fx:id="ll1Button" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LL1" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           </styleClass></JFXToggleNode>
+                        <JFXToggleNode fx:id="ll1Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LL1" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -89,8 +89,8 @@
                               <String fx:value="darkBorder" />
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
-                           </styleClass></JFXButton>
-                        <JFXButton fx:id="ll2Button" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LL2" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           </styleClass></JFXToggleNode>
+                        <JFXToggleNode fx:id="ll2Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LL2" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -99,7 +99,7 @@
                               <String fx:value="darkBorder" />
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
-                           </styleClass></JFXButton>
+                           </styleClass></JFXToggleNode>
                      </children>
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -247,7 +247,7 @@
                                     </Label>
                                     <VBox alignment="CENTER" style="-fx-background-color: #1FAAA2;" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label text="0" textFill="WHITE">
+                                          <Label text="0" textFill="WHITE" fx:id="xRayClean">
                                              <font>
                                                 <Font name="System Bold" size="36.0" />
                                              </font>
@@ -259,7 +259,7 @@
                                           </Label>
                                           <VBox alignment="CENTER" style="-fx-background-color: #1B9991;" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Label text="0" textFill="WHITE">
+                                                <Label text="0" textFill="WHITE" fx:id="xRayInUse">
                                                    <font>
                                                       <Font name="System Bold" size="36.0" />
                                                    </font>
@@ -271,7 +271,7 @@
                                                 </Label>
                                                 <VBox alignment="CENTER">
                                                    <children>
-                                                      <Label text="0" textFill="WHITE">
+                                                      <Label text="0" textFill="WHITE" fx:id="xRayDirty">
                                                          <font>
                                                             <Font name="System Bold" size="36.0" />
                                                          </font>
@@ -324,7 +324,7 @@
                                     </Label>
                                     <VBox alignment="CENTER" style="-fx-background-color: #1FAAA2;" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label text="0" textFill="WHITE">
+                                          <Label fx:id="bedClean" text="0" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="36.0" />
                                              </font>
@@ -336,7 +336,7 @@
                                           </Label>
                                           <VBox alignment="CENTER" style="-fx-background-color: #1B9991;" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Label text="0" textFill="WHITE">
+                                                <Label fx:id="bedInUse" text="0" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="36.0" />
                                                    </font>
@@ -348,7 +348,7 @@
                                                 </Label>
                                                 <VBox alignment="CENTER">
                                                    <children>
-                                                      <Label text="0" textFill="WHITE">
+                                                      <Label fx:id="bedDirty" text="0" textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="36.0" />
                                                          </font>
@@ -401,7 +401,7 @@
                                     </Label>
                                     <VBox alignment="CENTER" style="-fx-background-color: #1FAAA2;" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label text="0" textFill="WHITE">
+                                          <Label fx:id="reclinerClean" text="0" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="36.0" />
                                              </font>
@@ -413,7 +413,7 @@
                                           </Label>
                                           <VBox alignment="CENTER" style="-fx-background-color: #1B9991;" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Label text="0" textFill="WHITE">
+                                                <Label fx:id="reclinerInUse" text="0" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="36.0" />
                                                    </font>
@@ -425,7 +425,7 @@
                                                 </Label>
                                                 <VBox alignment="CENTER">
                                                    <children>
-                                                      <Label text="0" textFill="WHITE">
+                                                      <Label fx:id="reclinerDirty" text="0" textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="36.0" />
                                                          </font>
@@ -471,14 +471,14 @@
                               </VBox>
                               <VBox alignment="CENTER" minWidth="40.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label alignment="CENTER" text="Fusion Pump" textFill="WHITE">
+                                    <Label alignment="CENTER" text="Infusion Pump" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
                                     </Label>
                                     <VBox alignment="CENTER" style="-fx-background-color: #1FAAA2;" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label text="0" textFill="WHITE">
+                                          <Label fx:id="infusionPumpClean" text="0" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="36.0" />
                                              </font>
@@ -490,7 +490,7 @@
                                           </Label>
                                           <VBox alignment="CENTER" style="-fx-background-color: #1B9991;" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Label text="0" textFill="WHITE">
+                                                <Label fx:id="infusionPumpInUse" text="0" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="36.0" />
                                                    </font>
@@ -502,7 +502,7 @@
                                                 </Label>
                                                 <VBox alignment="CENTER">
                                                    <children>
-                                                      <Label text="0" textFill="WHITE">
+                                                      <Label fx:id="infusionPumpDirty" text="0" textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="36.0" />
                                                          </font>

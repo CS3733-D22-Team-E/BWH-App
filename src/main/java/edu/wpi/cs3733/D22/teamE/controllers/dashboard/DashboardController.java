@@ -1,11 +1,21 @@
 package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
-import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXToggleNode;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
+import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -16,19 +26,108 @@ public class DashboardController implements Initializable {
   @FXML ImageView profileButton;
   @FXML ImageView submitRequestButton;
 
-  @FXML JFXButton ll2Button;
-  @FXML JFXButton ll1Button;
-  @FXML JFXButton firstFloorButton;
-  @FXML JFXButton secondFloorButton;
-  @FXML JFXButton thirdFloorButton;
-  @FXML JFXButton fourthFloorButton;
-  @FXML JFXButton fifthFloorButton;
+  @FXML JFXToggleNode ll2Button;
+  @FXML JFXToggleNode ll1Button;
+  @FXML JFXToggleNode firstFloorButton;
+  @FXML JFXToggleNode secondFloorButton;
+  @FXML JFXToggleNode thirdFloorButton;
+  @FXML JFXToggleNode fourthFloorButton;
+  @FXML JFXToggleNode fifthFloorButton;
+  ToggleGroup floorButtons;
+  JFXToggleNode currentFloor;
+  String currentFloorString;
+
+  @FXML Label xRayClean;
+  @FXML Label xRayInUse;
+  @FXML Label xRayDirty;
+
+  @FXML Label bedClean;
+  @FXML Label bedInUse;
+  @FXML Label bedDirty;
+
+  @FXML Label reclinerClean;
+  @FXML Label reclinerInUse;
+  @FXML Label reclinerDirty;
+
+  @FXML Label infusionPumpClean;
+  @FXML Label infusionPumpInUse;
+  @FXML Label infusionPumpDirty;
+
+  DAOSystem database;
+  ArrayList<MedicalEquipment> currentEquipment;
+  ArrayList<RequestInterface> currentServiceRequests;
+  DashboardEquipmentHandler dashboardEquipmentHandler;
+  DashboardServiceRequestHandler dashboardServiceRequestHandler;
 
   public DashboardController() {}
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+    try {
+      database = new DAOSystem();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    currentFloorString = "All";
+    floorButtonsHandler();
+
+    currentEquipment = (ArrayList<MedicalEquipment>) database.getAllMedicalEquipments();
+    currentServiceRequests = (ArrayList<RequestInterface>) database.getAllServiceRequests();
+
+    dashboardEquipmentHandler = new DashboardEquipmentHandler(this);
+    dashboardServiceRequestHandler = new DashboardServiceRequestHandler(this);
+
+    dashboardEquipmentHandler.updateEquipmentReports();
+    dashboardServiceRequestHandler.updateServiceRequestTable();
+
     quickAccessButtonHandler();
+  }
+
+  private void floorButtonsHandler() {
+    floorButtons = new ToggleGroup();
+    ll2Button.setToggleGroup(floorButtons);
+    ll1Button.setToggleGroup(floorButtons);
+    firstFloorButton.setToggleGroup(floorButtons);
+    secondFloorButton.setToggleGroup(floorButtons);
+    thirdFloorButton.setToggleGroup(floorButtons);
+    fourthFloorButton.setToggleGroup(floorButtons);
+    fifthFloorButton.setToggleGroup(floorButtons);
+    currentFloor = (JFXToggleNode) floorButtons.getSelectedToggle();
+
+    floorButtons
+        .selectedToggleProperty()
+        .addListener(
+            new ChangeListener<Toggle>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends Toggle> observableValue, Toggle oldVal, Toggle newVal) {
+                currentFloor = (JFXToggleNode) newVal;
+                updateFloorString(newVal);
+                dashboardEquipmentHandler.updateEquipmentReports();
+                dashboardServiceRequestHandler.updateServiceRequestTable();
+              }
+            });
+  }
+
+  private void updateFloorString(Toggle newVal) {
+    if (ll2Button.equals(newVal)) {
+      currentFloorString = "L2";
+    } else if (ll1Button.equals(newVal)) {
+      currentFloorString = "L1";
+    } else if (firstFloorButton.equals(newVal)) {
+      currentFloorString = "1";
+    } else if (secondFloorButton.equals(newVal)) {
+      currentFloorString = "2";
+    } else if (thirdFloorButton.equals(newVal)) {
+      currentFloorString = "3";
+    } else if (fourthFloorButton.equals(newVal)) {
+      currentFloorString = "4";
+    } else if (fifthFloorButton.equals(newVal)) {
+      currentFloorString = "5";
+    } else {
+      currentFloorString = "All";
+    }
   }
 
   private void quickAccessButtonHandler() {
