@@ -95,7 +95,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label prefHeight="22.0" prefWidth="146.0" text="Employee Status:" GridPane.rowIndex="1">
+                              <Label prefHeight="22.0" prefWidth="146.0" text="Position:" GridPane.rowIndex="1">
                                  <styleClass>
                                     <String fx:value="bodyText" />
                                     <String fx:value="bold" />
@@ -250,8 +250,8 @@
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="newPassword" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                                          <TextField fx:id="confirmPassword" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                          <TextField fx:id="newPassword" promptText="New Password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                          <TextField fx:id="confirmPassword" promptText="Confirm Password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                                        </children>
                                     </GridPane>
                                     <JFXButton fx:id="changePassword" styleClass="submitButton" text="Change Password">
