@@ -40,7 +40,7 @@ public class CSVManager {
   private static final String serviceRequestFormat =
       "REQUESTID, STATUS, TYPE, ASSIGNEE, REQUEST_DATE, DELIVERY_DATE, ISURGENT";
   private static final String accountFormat =
-      "ACCOUNTID, EMPLOYEEID, AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION";
+      "ACCOUNTID, EMPLOYEEID, AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION, PHONENUMBER";
   private static final String edgesFormat =
        "EDGEID, START_NODE, END_NODE";
   private static final String medicineRequestFormat =
@@ -64,11 +64,10 @@ public class CSVManager {
 
   public static void saveLocationCSV(String fileName) throws IOException, SQLException {
     String format = locationFormat;
-    DAO<Location> dao = new LocationDAOImpl();
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (Location d : dao.getAll()) {
+    for (Location d : DAOSystemSingleton.INSTANCE.getSystem().getAllLocations()) {
       String csvLine =
           ""
               + d.getNodeID()
@@ -96,11 +95,10 @@ public class CSVManager {
 
   public static void saveMedEquipCSV(String fileName) throws IOException, SQLException {
     String format = medEquipFormat;
-    DAO<MedicalEquipment> equipDAO = new MedicalEquipmentDAOImpl();
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (MedicalEquipment equip : equipDAO.getAll()) {
+    for (MedicalEquipment equip : DAOSystemSingleton.INSTANCE.getSystem().getAllMedicalEquipments()) {
       String csvLine =
           ""
               + equip.getEquipmentID()
@@ -128,11 +126,10 @@ public class CSVManager {
 
   public static void saveMedEquipRequestCSV(String fileName) throws IOException, SQLException {
     String format = medEquipRequestFormat;
-    DAO<medicalEquipmentRequest> MESRDAO = new MedicalEquipmentServiceRequestDAOImpl();
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (medicalEquipmentRequest mesr : MESRDAO.getAll()) {
+    for (medicalEquipmentRequest mesr : DAOSystemSingleton.INSTANCE.getSystem().getAllMedicalEquipmentRequests()) {
       String csvLine =
           ""
               + mesr.getServiceRequestID()
@@ -166,11 +163,10 @@ public class CSVManager {
 
   public static void saveLabRequestCSV(String fileName) throws IOException, SQLException {
     String format = labRequestFormat;
-    DAO<labRequest> labRequestDAO = new LabRequestDAOImpl();
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (labRequest labRequest : labRequestDAO.getAll()) {
+    for (labRequest labRequest : DAOSystemSingleton.INSTANCE.getSystem().getAllLabRequests()) {
       String csvLine =
           ""
               + labRequest.getServiceRequestID()
@@ -196,11 +192,10 @@ public class CSVManager {
 
   public static void saveEmployeeCSV(String fileName) throws IOException, SQLException {
     String format = employeeFormat;
-    DAO<Employee> employeeDAO = new EmployeeDAOImpl();
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (Employee employee : employeeDAO.getAll()) {
+    for (Employee employee : DAOSystemSingleton.INSTANCE.getSystem().getAllEmployee()) {
       String csvLine =
           ""
               + employee.getEmployeeID()
@@ -230,11 +225,10 @@ public class CSVManager {
 
   public static void saveServiceRequestCSV(String fileName) throws IOException, SQLException {
     String format = serviceRequestFormat;
-    DAO<RequestInterface> dao = new ServiceRequestDAOImpl();
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (RequestInterface d : dao.getAll()) {
+    for (RequestInterface d : DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests()) {
       String csvLine =
           ""
               + d.getServiceRequestID()
@@ -258,11 +252,10 @@ public class CSVManager {
 
   public static void saveAccountCSV(String fileName) throws IOException, SQLException {
     String format = accountFormat;
-    DAO<Account> dao = new AccountDAOImpl();
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (Account d : dao.getAll()) {
+    for (Account d : DAOSystemSingleton.INSTANCE.getSystem().getAllAccounts()) {
       String csvLine =
           ""
               + d.getAccountID()
@@ -278,6 +271,8 @@ public class CSVManager {
               + d.getLastName()
               + ','
               + d.getPosition()
+              + ','
+              + d.getPhoneNumber()
               + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
@@ -285,8 +280,6 @@ public class CSVManager {
       }
     }
   }
-
-  ///
 
   public static void saveMedicineRequestCSV(String fileName) throws IOException, SQLException {
     String format = medicineRequestFormat;
@@ -331,9 +324,8 @@ public class CSVManager {
     }
   }
 
-
   public static void saveSanitationRequestCSV(String fileName) throws IOException, SQLException {
-    String format = accountFormat;
+    String format = sanitationRequestFormat;
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
@@ -345,14 +337,22 @@ public class CSVManager {
                       + d.getRequestDate()
                       + ','
                       + d.getDeliveryDate()
-                      + ',' //todo
-                      + d.getPasswordHash()
                       + ','
-                      + d.getFirstName()
+                      + d.getRequestStatus()
                       + ','
-                      + d.getLastName()
+                      + d.getStaffAssignee()
                       + ','
-                      + d.getPosition()
+                      + d.getIsUrgent()
+                      + ','
+                      + d.getRoomID()
+                      + ','
+                      + d.getFloorID()
+                      + ','
+                      + d.getSizeOfCleaning()
+                      + ','
+                      + d.getBiohazardOnSite()
+                      + ','
+                      + d.getOtherNotes()
                       + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
@@ -362,27 +362,38 @@ public class CSVManager {
   }
 
   public static void saveMealDeliveryCSV(String fileName) throws IOException, SQLException {
-    String format = accountFormat;
-    DAO<Account> dao = new AccountDAOImpl();
+    String format = mealDeliveryRequestFormat;
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (Account d : dao.getAll()) {
+    for (mealDeliveryRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllMealRequests()) {
       String csvLine =
               ""
-                      + d.getAccountID()
+                      + d.getServiceRequestID()
                       + ','
-                      + d.getEmployeeID()
+                      + d.getRequestDate()
                       + ','
-                      + d.getAuthorityLevel()
+                      + d.getDeliveryDate()
                       + ','
-                      + d.getPasswordHash()
+                      + d.getRequestStatus()
                       + ','
-                      + d.getFirstName()
+                      + d.getStaffAssignee()
                       + ','
-                      + d.getLastName()
+                      + d.getIsUrgent()
                       + ','
-                      + d.getPosition()
+                      + d.getRoomID()
+                      + ','
+                      + d.getFloorID()
+                      + ','
+                      + d.getEntreeType()
+                      + ','
+                      + d.getBeverageType()
+                      + ','
+                      + d.getDessertType()
+                      + ','
+                      + d.getDeliveryTime()
+                      + ','
+                      + d.getOtherNotes()
                       + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
@@ -392,27 +403,32 @@ public class CSVManager {
   }
 
   public static void saveLanguageInterpreterRequestCSV(String fileName) throws IOException, SQLException {
-    String format = accountFormat;
-    DAO<Account> dao = new AccountDAOImpl();
+    String format = languageInterpreterRequestFormat;
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (Account d : dao.getAll()) {
+    for (languageInterpreterRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllLanguageRequests()) {
       String csvLine =
               ""
-                      + d.getAccountID()
+                      + d.getServiceRequestID()
                       + ','
-                      + d.getEmployeeID()
+                      + d.getRequestDate()
                       + ','
-                      + d.getAuthorityLevel()
+                      + d.getDeliveryDate()
                       + ','
-                      + d.getPasswordHash()
+                      + d.getRequestStatus()
                       + ','
-                      + d.getFirstName()
+                      + d.getStaffAssignee()
                       + ','
-                      + d.getLastName()
+                      + d.getIsUrgent()
                       + ','
-                      + d.getPosition()
+                      + d.getRoomID()
+                      + ','
+                      + d.getFloorID()
+                      + ','
+                      + d.getLanguage()
+                      + ','
+                      + d.getOtherNotes()
                       + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
@@ -422,27 +438,34 @@ public class CSVManager {
   }
 
   public static void saveFacilitiesRequestCSV(String fileName) throws IOException, SQLException {
-    String format = accountFormat;
-    DAO<Account> dao = new AccountDAOImpl();
+    String format = facilitiesRequestFormat;
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (Account d : dao.getAll()) {
+    for (facilitiesRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllFacilitiesRequests()) {
       String csvLine =
               ""
-                      + d.getAccountID()
+                      + d.getServiceRequestID()
                       + ','
-                      + d.getEmployeeID()
+                      + d.getFacilitiesReqType()
                       + ','
-                      + d.getAuthorityLevel()
+                      + d.getTimeFrame()
                       + ','
-                      + d.getPasswordHash()
+                      + d.getFloorID()
                       + ','
-                      + d.getFirstName()
+                      + d.getRoomID()
                       + ','
-                      + d.getLastName()
+                      + d.getIsUrgent()
                       + ','
-                      + d.getPosition()
+                      + d.getStaffAssignee()
+                      + ','
+                      + d.getRequestStatus()
+                      + ','
+                      + d.getRequestDate()
+                      + ','
+                      + d.getDeliveryDate()
+                      + ','
+                      + d.getOtherNotes()
                       + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
@@ -452,27 +475,35 @@ public class CSVManager {
   }
 
   public static void saveSecurityRequestCSV(String fileName) throws IOException, SQLException {
-    String format = accountFormat;
-    DAO<Account> dao = new AccountDAOImpl();
+    String format = securityRequestFormat;
+
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (Account d : dao.getAll()) {
+    for (securityRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllSecurityRequests()) {
       String csvLine =
               ""
-                      + d.getAccountID()
+                      + d.getServiceRequestID()
                       + ','
-                      + d.getEmployeeID()
+                      + d.getSecurityRequestType()
                       + ','
-                      + d.getAuthorityLevel()
+                      + d.getTimeFrame()
                       + ','
-                      + d.getPasswordHash()
+                      + d.getRoomID()
                       + ','
-                      + d.getFirstName()
+                      + d.getFloorID()
                       + ','
-                      + d.getLastName()
+                      + d.getIsUrgent()
                       + ','
-                      + d.getPosition()
+                      + d.getStaffAssignee()
+                      + ','
+                      + d.getRequestStatus()
+                      + ','
+                      + d.getRequestDate()
+                      + ','
+                      + d.getDeliveryDate()
+                      + ','
+                      + d.getOtherNotes()
                       + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
@@ -482,27 +513,34 @@ public class CSVManager {
   }
 
   public static void saveGiftDeliveryRequestCSV(String fileName) throws IOException, SQLException {
-    String format = accountFormat;
-    DAO<Account> dao = new AccountDAOImpl();
+    String format = giftDeliveryRequestFormat;
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (Account d : dao.getAll()) {
+    for (giftDeliveryRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllGiftRequests()) {
       String csvLine =
               ""
-                      + d.getAccountID()
+                      + d.getServiceRequestID()
                       + ','
-                      + d.getEmployeeID()
+                      + d.getRequestDate()
                       + ','
-                      + d.getAuthorityLevel()
+                      + d.getDeliveryDate()
                       + ','
-                      + d.getPasswordHash()
+                      + d.getRequestStatus()
                       + ','
-                      + d.getFirstName()
+                      + d.getStaffAssignee()
                       + ','
-                      + d.getLastName()
+                      + d.getIsUrgent()
                       + ','
-                      + d.getPosition()
+                      + d.getRoomID()
+                      + ','
+                      + d.getFloorID()
+                      + ','
+                      + d.getPatientName()
+                      + ','
+                      + d.getGift()
+                      + ','
+                      + d.getOtherNotes()
                       + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
@@ -511,35 +549,26 @@ public class CSVManager {
     }
   }
 
-  public static void saveEdgesCSV(String fileName) throws IOException, SQLException {
-    String format = accountFormat;
-    DAO<Account> dao = new AccountDAOImpl();
+  /*public static void saveEdgesCSV(String fileName) throws IOException, SQLException {
+    String format = edgesFormat;
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (Account d : dao.getAll()) {
+    for (Account d : DAOSystemSingleton.INSTANCE.getSystem().getAllEdges()?) {
       String csvLine =
               ""
-                      + d.getAccountID()
+                      + d.getEdgeID()
                       + ','
-                      + d.getEmployeeID()
+                      + d.getStartNode()
                       + ','
-                      + d.getAuthorityLevel()
-                      + ','
-                      + d.getPasswordHash()
-                      + ','
-                      + d.getFirstName()
-                      + ','
-                      + d.getLastName()
-                      + ','
-                      + d.getPosition()
+                      + d.getEndNode()
                       + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
         FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
       }
     }
-  }
+  }*/
 
 
   /*
@@ -576,6 +605,34 @@ public class CSVManager {
 
   public static boolean loadEdgesCSV(String fileName) throws SQLException, IOException {
     return loadCSVGeneral(fileName, "EDGES", edgesFormat);
+  }
+
+  public static boolean loadMedicineRequestCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "MEDICINEREQUEST", medicineRequestFormat);
+  }
+
+  public static boolean loadSanitationRequestCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "SANITATIONREQUEST", sanitationRequestFormat);
+  }
+
+  public static boolean loadMealRequestCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "MEALDELIVERYREQUEST", mealDeliveryRequestFormat);
+  }
+
+  public static boolean loadLanguageRequestCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "LANGUAGEREQUEST", languageInterpreterRequestFormat);
+  }
+
+  public static boolean loadFacilitiesRequestCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "FACILITIESREQUEST", facilitiesRequestFormat);
+  }
+
+  public static boolean loadSecurityRequestCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "SECURITYREQUEST", securityRequestFormat);
+  }
+
+  public static boolean loadGiftDeliveryCSV(String fileName) throws SQLException, IOException {
+    return loadCSVGeneral(fileName, "GIFTREQUEST", giftDeliveryRequestFormat);
   }
 
   /*
@@ -713,7 +770,8 @@ public class CSVManager {
     BufferedReader in = new BufferedReader(new FileReader(file));
     in.readLine();
     String curLine;
-    while ((curLine = in.readLine().toLowerCase().replace(" ","")) != null) {
+    while ((curLine = in.readLine()) != null) {
+      curLine = curLine.toLowerCase().replace(" ","");
       if (curLine.equals(line)) {
         in.close();
         return true;
