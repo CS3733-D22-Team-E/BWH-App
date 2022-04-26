@@ -33,11 +33,11 @@ public class AccountDAOImpl implements DAO<Account> {
       if (authorityLevel < Account.adminPerm) {
         account =
             new staffAccount(
-                accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position, phoneNumber);
+                accountID, employeeID, passwordHash, firstName, lastName, position, phoneNumber);
       } else {
         account =
             new adminAccount(
-                accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position, phoneNumber);
+                accountID, employeeID, passwordHash, firstName, lastName, position, phoneNumber);
       }
 
       accounts.add(account);
@@ -66,28 +66,15 @@ public class AccountDAOImpl implements DAO<Account> {
         String position = rs.getString("POSITION");
         String phoneNumber = rs.getString("PHONENUMBER");
 
-
         Account account = null;
         if (authorityLevel < Account.adminPerm) {
           account =
               new staffAccount(
-                  accountID,
-                  employeeID,
-                  passwordHash,
-                  firstName,
-                  lastName,
-                  position,
-                  phoneNumber);
+                  accountID, employeeID, passwordHash, firstName, lastName, position, phoneNumber);
         } else {
           account =
               new adminAccount(
-                  accountID,
-                  employeeID,
-                  passwordHash,
-                  firstName,
-                  lastName,
-                  position,
-                  phoneNumber);
+                  accountID, employeeID, passwordHash, firstName, lastName, position, phoneNumber);
         }
 
         accounts.add(account);
