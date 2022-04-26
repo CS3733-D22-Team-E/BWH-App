@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.PopUp;
@@ -29,10 +30,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -42,11 +42,19 @@ import javafx.util.Duration;
 
 public class profilePageController implements Initializable {
 
-  public Circle photoCirc;
-  public Label nameLabel;
-  public Label posLabel;
-  public Label salLabel;
-  public Label reqNumLabel;
+  @FXML ImageView profilePic;
+  @FXML Label nameLabel;
+  @FXML Label statusLabel;
+  @FXML Label idLabel;
+  @FXML JFXComboBox database;
+  @FXML JFXComboBox colorScheme;
+  @FXML TextField newPassword;
+  @FXML TextField confirmPassword;
+  @FXML TableColumn floor;
+  @FXML TableColumn status;
+  @FXML TableColumn room;
+  @FXML TableColumn requestType;
+
   private Account account;
   private Employee employee;
   private DAOSystem db;

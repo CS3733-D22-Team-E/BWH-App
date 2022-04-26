@@ -72,7 +72,7 @@
                               <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="70.0" minWidth="70.0" styleClass=".requestIcon" HBox.hgrow="ALWAYS">
                                  <children>
                                     <Circle fx:id="photoCirc" fill="TRANSPARENT" radius="80.0" stroke="BLACK" strokeType="INSIDE" />
-                                    <ImageView fitHeight="150.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="profilePic" fitHeight="150.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@icons/prof.png" />
                                        </image>
@@ -163,7 +163,7 @@
                               <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                 <columns>
                                   <TableColumn fx:id="floor" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Floor" />
-                                  <TableColumn fx:id="name" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Name" />
+                                  <TableColumn fx:id="room" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Room" />
                                     <TableColumn fx:id="requestType" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Request Type" />
                                     <TableColumn fx:id="status" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Status" />
                                 </columns>
@@ -254,7 +254,7 @@
                                           <TextField fx:id="confirmPassword" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                                        </children>
                                     </GridPane>
-                                    <JFXButton styleClass="submitButton" text="Change Password">
+                                    <JFXButton fx:id="changePassword" styleClass="submitButton" text="Change Password">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
