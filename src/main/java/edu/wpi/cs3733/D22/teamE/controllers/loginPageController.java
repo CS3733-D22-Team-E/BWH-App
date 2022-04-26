@@ -30,6 +30,8 @@ public class loginPageController implements Initializable {
 
   private @FXML JFXPasswordField passwordField;
 
+  // private @FXML JFXTextField twoFactAuthField; //maybe on the login page
+
   @FXML Label invalidWarning;
 
   private String validRFID = "9352CD1B";
@@ -96,6 +98,12 @@ public class loginPageController implements Initializable {
     //      System.out.println("Access Denied.");
     //      return false;
     //    }
+    return false;
+  }
+
+  private boolean verifyUser2FA(String phoneNumber) {
+    // String codeMessage = "default";
+    // Texting.sendSMS(phoneNumber, codeMessage);
     return false;
   }
 
