@@ -40,7 +40,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class profilePageController extends HeaderController implements Initializable {
+public class profilePageController implements Initializable {
 
   public Circle photoCirc;
   public Label nameLabel;
@@ -57,7 +57,6 @@ public class profilePageController extends HeaderController implements Initializ
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
     try {
       db = new DAOSystem();
       account = AccountsManager.getInstance().getAccount();

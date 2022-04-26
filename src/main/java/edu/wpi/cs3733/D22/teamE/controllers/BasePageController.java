@@ -7,8 +7,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 public class BasePageController implements Initializable {
 
@@ -23,7 +23,7 @@ public class BasePageController implements Initializable {
 
   @FXML
   public void openDrawer(JFXDrawerEvent jfxDrawerEvent) {
-    drawer.setMinWidth(100);
+    drawer.setMinWidth(drawer.getDefaultDrawerSize());
     drawer.setDisable(false);
   }
 
