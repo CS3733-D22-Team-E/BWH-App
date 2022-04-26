@@ -4,15 +4,17 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
 import edu.wpi.cs3733.D22.teamE.Main;
-import edu.wpi.cs3733.D22.teamE.customUI.customImageView;
+import edu.wpi.cs3733.D22.teamE.PopUp;
+import edu.wpi.cs3733.D22.teamE.customUI.EntityView;
+import edu.wpi.cs3733.D22.teamE.customUI.LocationView;
+import edu.wpi.cs3733.D22.teamE.customUI.NodeImageView;
+import edu.wpi.cs3733.D22.teamE.customUI.customImageViewTesting;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
-import edu.wpi.cs3733.D22.teamE.entity.Location;
-import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
-import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
-import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
+import edu.wpi.cs3733.D22.teamE.entity.*;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -30,23 +32,25 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException;
 
 public class mapPageController implements Initializable {
-
   List<Location> locations;
   List<Location> filteredLocations;
-  List<MedicalEquipment> medEqList;
-  List<MedicalEquipment> filteredMedEqList;
-  List<RequestInterface> servReqList;
-  List<RequestInterface> filteredServReqList;
+
+  List<EntityInterface> entityInterfaceList;
+
+  List<NodeImageView> nodeViews;
+
+  NodeImageView nodeSelected;
 
   double zoomIncrement = 0.1;
   String viewMode = "Tower Locations";
@@ -57,9 +61,9 @@ public class mapPageController implements Initializable {
 
   @FXML StackPane mapBox;
   @FXML ImageView mapImage;
-  Pane floorLocationsPane;
-  Pane floorEquipmentPane;
-  Pane floorServiceRequestPane;
+  Pane floorLocationsPane = new Pane();
+  Pane floorEquipmentPane = new Pane();
+  Pane floorServiceRequestPane = new Pane();
   @FXML ComboBox floorDropdown;
   @FXML ComboBox locationTypeDropdown;
   @FXML Button zoomUp;
@@ -72,13 +76,12 @@ public class mapPageController implements Initializable {
 
   // Map editor components
   @FXML Button mapEditorButton;
-  @FXML Pane editorModeContainer;
+  @FXML HBox editorModeContainer;
+  @FXML VBox editorParent;
   @FXML VBox addLocationPane;
-  @FXML VBox updateLocationPane;
   @FXML VBox deleteLocationPane;
   // Update location components
   @FXML Button changePosition;
-  @FXML Button smallUpdateLocation;
   // Add tower location components
   @FXML TextField addShortName;
   @FXML TextField addLongName;
@@ -123,10 +126,18 @@ public class mapPageController implements Initializable {
 
     scroller.addEventFilter(ScrollEvent.ANY, this::mouseScrollZoom);
 
+    scroller.addEventFilter(
+        MouseEvent.ANY,
+        event -> {
+          scroller.setPannable(!event.getButton().equals(MouseButton.PRIMARY));
+        });
+
     legendOpenButton.setOnAction(
         event -> {
           openLegend = !openLegend;
           legendLogic();
+          if (openLegend) legendOpenButton.setText("Close Legend");
+          else legendOpenButton.setText("Open Legend");
         });
 
     // Add items to dropdown
@@ -146,13 +157,16 @@ public class mapPageController implements Initializable {
     } catch (SQLException | FileNotFoundException e) {
       e.printStackTrace();
     }
+
+    setZoom(1.21);
   }
 
   // Re-fetch data from database after location update
-  private void fetchDB() throws SQLException, FileNotFoundException {
-    medEqList = DAOSystemSingleton.INSTANCE.getSystem().getAllMedEquip();
-    servReqList = DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests();
+  public void fetchDB() throws SQLException, FileNotFoundException {
     locations = DAOSystemSingleton.INSTANCE.getSystem().getAllLocations();
+    entityInterfaceList = new ArrayList<>();
+    entityInterfaceList.addAll(DAOSystemSingleton.INSTANCE.getSystem().getAllMedEquip());
+    entityInterfaceList.addAll(DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests());
 
     setViewMode(viewMode);
   }
@@ -163,6 +177,9 @@ public class mapPageController implements Initializable {
     // Clears the medical Equipment Icons
     mapBox.getChildren().clear();
     mapBox.getChildren().add(mapImage);
+    floorEquipmentPane.getChildren().clear();
+    floorLocationsPane.getChildren().clear();
+    floorServiceRequestPane.getChildren().clear();
 
     switch (floor) {
       case "2":
@@ -219,6 +236,8 @@ public class mapPageController implements Initializable {
     // Clear all icons
     mapBox.getChildren().clear();
     mapBox.getChildren().add(mapImage);
+    viewMode = view;
+    // legendLogic();
 
     // Hide all legends
     /*  towerLocationsLegend.setVisible(false);
@@ -228,44 +247,42 @@ public class mapPageController implements Initializable {
     // Enable edit button
     // mapEditorButton.setDisable(false);
 
-    if (view.equals("Tower Locations")) {
-      // Filter and display the tower locations
-      filterTowerLocations();
-      displayTowerLocations();
-      // Set the legend to visible
-      // towerLocationsLegend.setVisible(true);
-    } else if (view.equals("Medical Equipment")) {
-      // Filter and display medical equipment
-      filterMedicalEquipment();
-      displayMedEquipLocations();
+    switch (view) {
+      case "Tower Locations":
+        // Filter and display the tower locations
+        filterTowerLocations();
+        displayTowerLocations();
+        // Set the legend to visible
+        // towerLocationsLegend.setVisible(true);
+        break;
+      case "Medical Equipment":
+        // Filter and display medical equipment
+        displayMedEquipLocations();
 
-      // Set the legend to visible
-      // medicalEquipmentLegend.setVisible(true);
-    } else if (view.equals("Service Requests")) {
-      // Filter and display service requests
-      filterServiceRequests();
-      displayServiceRequestLocations();
+        // Set the legend to visible
+        // medicalEquipmentLegend.setVisible(true);
+        break;
+      case "Service Requests":
+        // Filter and display service requests
+        displayServiceRequestLocations();
 
-      // Set the legend to visible
-      // serviceRequestLegend.setVisible(true);
-    } else if (view.equals("All")) {
-      // Filter and display all locations
-      filterTowerLocations();
-      filterServiceRequests();
-      filterMedicalEquipment();
-      displayTowerLocations();
-      displayServiceRequestLocations();
-      displayMedEquipLocations();
+        // Set the legend to visible
+        // serviceRequestLegend.setVisible(true);
+        break;
+      case "All":
+        // Filter and display all locations
+        filterTowerLocations();
+        displayTowerLocations();
+        displayServiceRequestLocations();
+        displayMedEquipLocations();
 
-      // towerLocationsLegend.setVisible(true);
-
-      // Disable map editor button and hide map editor functions
-      mapEditorButton.setDisable(true);
-      setEditMode("false");
+        // Disable map editor button and hide map editor functions
+        mapEditorButton.setDisable(true);
+        setEditMode("false");
+        break;
     }
 
     // Set the view mode
-    viewMode = view;
   }
 
   // Set which map editor is visible
@@ -274,28 +291,27 @@ public class mapPageController implements Initializable {
     // Hide all editors
     editorModeContainer.setVisible(false);
     addLocationPane.setVisible(false);
-    updateLocationPane.setVisible(false);
     deleteLocationPane.setVisible(false);
 
     // Reset selected location
     selectedLoc = null;
 
-    if (view.equals("add")) {
-      // Clear all icons
-      mapBox.getChildren().clear();
-      mapBox.getChildren().add(mapImage);
+    switch (view) {
+      case "add":
+        // Clear all icons
+        // mapBox.getChildren().clear();
+        // mapBox.getChildren().add(mapImage);
 
-      // Set the add editor to visible
-      addLocationPane.setVisible(true);
-      editorModeContainer.setVisible(true);
-    } else if (view.equals("update") || view.equals("changePosition")) {
-      // Set the update editor to visible
-      updateLocationPane.setVisible(true);
-      editorModeContainer.setVisible(true);
-    } else if (view.equals("delete")) {
-      // Set the delete editor to visible
-      deleteLocationPane.setVisible(true);
-      editorModeContainer.setVisible(true);
+        // Set the add editor to visible
+        addLocationPane.setVisible(true);
+        editorModeContainer.setVisible(true);
+        break;
+      case "delete":
+        // Set the delete editor to visible
+        deleteLocationPane.setVisible(true);
+        editorModeContainer.setVisible(true);
+        smallDeleteLocation.setDisable(false);
+        break;
     }
 
     // Set the view mode
@@ -305,104 +321,186 @@ public class mapPageController implements Initializable {
   // Display location on the map
   private void displayTowerLocations() throws FileNotFoundException, SQLException {
 
-    mapBox.getChildren().clear();
-    mapBox.getChildren().add(mapImage);
+    floorLocationsPane.getChildren().clear();
 
-    floorLocationsPane = new Pane();
+    nodeViews = new ArrayList<>();
 
     double imageX = mapImage.getFitWidth();
     double coordinateX = 935;
     double scaleFactor = imageX / coordinateX;
-    System.out.println(scaleFactor);
 
     // Display an icon for each item in the filtered list
     for (Location l : filteredLocations) {
 
       Image image = nodeToIcon(l.getNodeType());
 
-      double prefWidth = (image.getWidth() / 6.0) * scaleFactor;
-      double prefHeight = (image.getWidth() / 6.0) * scaleFactor;
+      double prefWidth = (image.getWidth() / 12.0) * scaleFactor;
+      double prefHeight = (image.getHeight() / 12.0) * scaleFactor;
 
-      customImageView i = new customImageView(image, l);
-      i.setFitWidth(prefWidth * 0.75);
-      i.setFitHeight(prefHeight * 0.75);
-      i.setX(l.getXCoord() * scaleFactor - (prefWidth / 2));
-      i.setY(l.getYCoord() * scaleFactor - (prefHeight / 2));
+      double widthOffset = (prefWidth / 2);
+      double heightOffset = (prefHeight / 2);
+      // prefWidth *= 0.5;
+      // prefHeight *= 0.5;
 
-      // Highlight the selected location
-      if (selectedLoc != null) {
-        if (selectedLoc[0] == l.getXCoord() && selectedLoc[1] == l.getYCoord()) {
-          i.getStyleClass().add("selectedLocationDot");
-        }
-      }
+      LocationView i = new LocationView(image, l);
+      i.setFitWidth(prefWidth);
+      i.setFitHeight(prefHeight);
+      double x = l.getXCoord() * (scaleFactor) - widthOffset;
+      double y = l.getYCoord() * (scaleFactor) - heightOffset;
+      i.setX(x);
+      i.setStartX(x);
+      i.setY(y);
+
+      i.setStartY(y);
+      i.setModifier(scaleFactor);
+      i.setWidthOffset(widthOffset);
+      i.setHeightOffset(heightOffset);
+      nodeViews.add(i);
+      i.attach(this);
+
       floorLocationsPane.getChildren().add(i);
     }
+    floorLocationsPane.setScaleX(mapBox.getScaleX());
+    floorLocationsPane.setScaleY(mapBox.getScaleY());
     mapBox.getChildren().add(floorLocationsPane);
-    zoomHandler(zoomSlider.getValue());
   }
 
-  // Display medical equipment on the map
-  private void displayMedEquipLocations() throws FileNotFoundException, SQLException {
+  private Image equipGetImage(String type) {
+    Image image =
+        new Image(
+            Objects.requireNonNull(
+                Main.class.getResourceAsStream("view/icons/medicalEquipment/location.png")));
 
-    floorEquipmentPane = new Pane();
+    // Apply the correct icon based on the equipment type
+    switch (type) {
+      case "RECLINER":
+        image =
+            new Image(
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/medicalEquipment/recliner.png")));
+        break;
+      case "BED":
+        image =
+            new Image(
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/medicalEquipment/bed.png")));
+        break;
+      case "INFUSION PUMP":
+        image =
+            new Image(
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/medicalEquipment/infusion.png")));
+        break;
+      case "XRAY":
+        image =
+            new Image(
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/medicalEquipment/xray.png")));
+        break;
+    }
+
+    return image;
+  }
+
+  ArrayList<customImageViewTesting> staticLocations = new ArrayList<>();
+
+  private void displayStaticLocations(Pane pane) throws FileNotFoundException {
+    staticLocations.clear();
+
+    nodeViews = new ArrayList<>();
 
     double imageX = mapImage.getFitWidth();
     double coordinateX = 935;
     double scaleFactor = imageX / coordinateX;
 
     // Display an icon for each item in the filtered list
-    for (MedicalEquipment e : filteredMedEqList) {
+    for (Location l : filteredLocations) {
 
-      Image image =
-          new Image(
-              new FileInputStream(
-                  "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/medicalEquipment/location.png"));
+      Image image = nodeToIcon(l.getNodeType());
 
-      // Apply the correct icon based on the equipment type
-      switch (e.getEquipmentType()) {
-        case "RECLINER":
-          image =
-              new Image(
-                  new FileInputStream(
-                      "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/medicalEquipment/recliner.png"));
-          break;
-        case "BED":
-          image =
-              new Image(
-                  new FileInputStream(
-                      "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/medicalEquipment/bed.png"));
-          break;
-        case "INFUSION PUMP":
-          image =
-              new Image(
-                  new FileInputStream(
-                      "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/medicalEquipment/infusion.png"));
-          break;
-        case "XRAY":
-          image =
-              new Image(
-                  new FileInputStream(
-                      "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/medicalEquipment/xray.png"));
-          break;
-      }
-      double prefWidth = ((int) image.getWidth() / 6) * scaleFactor;
-      double prefHeight = ((int) image.getWidth() / 6) * scaleFactor;
+      double prefWidth = (image.getWidth() / 12.0) * scaleFactor;
+      double prefHeight = (image.getHeight() / 12.0) * scaleFactor;
 
-      ImageView i = new ImageView(image);
+      double widthOffset = (prefWidth / 2);
+      double heightOffset = (prefHeight / 2);
+      // prefWidth *= 0.5;
+      // prefHeight *= 0.5;
+
+      customImageViewTesting i = new customImageViewTesting(image, l);
       i.setFitWidth(prefWidth);
       i.setFitHeight(prefHeight);
-      i.setX(e.getXCoord() * scaleFactor - (prefWidth / 2));
-      i.setY(e.getYCoord() * scaleFactor - (prefHeight / 2));
+      double x = l.getXCoord() * (scaleFactor) - widthOffset;
+      double y = l.getYCoord() * (scaleFactor) - heightOffset;
+      i.setX(x);
+      i.setY(y);
 
-      // Highlight the selected location
-      if (selectedLoc != null) {
-        if (e.getXCoord() == selectedLoc[0] && e.getYCoord() == selectedLoc[1]) {
-          i.getStyleClass().add("selectedLocationDot");
+      pane.getChildren().add(i);
+      staticLocations.add(i);
+    }
+  }
+
+  // Display medical equipment on the map
+  private void displayMedEquipLocations() throws FileNotFoundException, SQLException {
+
+    floorEquipmentPane.getChildren().clear();
+
+    if (!viewMode.equals("All")) displayStaticLocations(floorEquipmentPane);
+
+    double imageX = mapImage.getFitWidth();
+    double coordinateX = 935;
+    double scaleFactor = imageX / coordinateX;
+
+    // Display an icon for each item in the filtered list
+    for (EntityInterface et : entityInterfaceList) {
+      if (et instanceof MedicalEquipment) {
+        if (et.getFloorID().equals(floorDropdown.getValue().toString())) {
+
+          MedicalEquipment e = (MedicalEquipment) et;
+
+          Image image = equipGetImage(e.getEquipmentType());
+
+          double prefWidth = (image.getWidth() / 12.0) * scaleFactor;
+          double prefHeight = (image.getHeight() / 12.0) * scaleFactor;
+
+          double widthOffset = (prefWidth / 2);
+          double heightOffset = (prefHeight / 2);
+          // prefWidth *= 0.5;
+          // prefHeight *= 0.5;
+
+          customImageViewTesting myLoc = null;
+          for (customImageViewTesting loc : staticLocations) {
+            if (loc.getL().getNodeID().equals(et.getRoomID())) myLoc = loc;
+          }
+
+          EntityView i = new EntityView(image, et, myLoc);
+          i.setFitWidth(prefWidth);
+          i.setFitHeight(prefHeight);
+          double x = et.getLocation().getXCoord() * (scaleFactor) - widthOffset;
+          double y = et.getLocation().getYCoord() * (scaleFactor) - heightOffset;
+          i.setX(x);
+          i.setStartX(x);
+          i.setY(y);
+
+          i.setStartY(y);
+          i.setModifier(scaleFactor);
+          i.setWidthOffset(widthOffset);
+          i.setHeightOffset(heightOffset);
+          nodeViews.add(i);
+          i.attach(this);
+
+          // Highlight the selected location
+          if (selectedLoc != null) {
+            if (e.getXCoord() == selectedLoc[0] && e.getYCoord() == selectedLoc[1]) {
+              i.getStyleClass().add("selectedLocationDot");
+            }
+          }
+
+          floorEquipmentPane.getChildren().add(i);
         }
       }
-
-      floorEquipmentPane.getChildren().add(i);
     }
+    floorEquipmentPane.setScaleX(mapBox.getScaleX());
+    floorEquipmentPane.setScaleY(mapBox.getScaleY());
     mapBox.getChildren().add(floorEquipmentPane);
   }
 
@@ -416,60 +514,71 @@ public class mapPageController implements Initializable {
     double scaleFactor = imageX / coordinateX;
 
     // Display an icon for each item in the filtered list
-    for (RequestInterface e : filteredServReqList) {
-      Image image =
-          new Image(
-              new FileInputStream(
-                  "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/location.png"));
+    for (EntityInterface et : entityInterfaceList) {
+      if (et instanceof RequestInterface) {
+        if (filteredLocations.contains(et.getLocation())) {
+          RequestInterface e = (RequestInterface) et;
 
-      if (e.getRequestType() == serviceRequest.Type.MED_DELIV_REQ) {
-        image =
-            new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/medicine.png"));
-      } else if (e.getRequestType() == serviceRequest.Type.LAB_REQUEST) {
-        image =
-            new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/labs.png"));
-      } else if (e.getRequestType() == serviceRequest.Type.MED_EQUIP_REQ) {
-        image =
-            new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/equipment.png"));
-      } else if (e.getRequestType() == serviceRequest.Type.MEAL_DELIV_REQ) {
-        image =
-            new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/meal.png"));
-      } else if (e.getRequestType() == serviceRequest.Type.SANITATION_REQ) {
-        image =
-            new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/sanitation.png"));
-      } else if (e.getRequestType() == serviceRequest.Type.LANG_INTERP_REQ) {
-        image =
-            new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/language.png"));
-      }
-      double prefWidth = ((int) image.getWidth() / 6) * scaleFactor;
-      double prefHeight = ((int) image.getHeight() / 6) * scaleFactor;
+          Image image =
+              new Image(
+                  new FileInputStream(
+                      "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/location.png"));
 
-      ImageView i = new ImageView(image);
-      i.setFitWidth(prefWidth);
-      i.setFitHeight(prefHeight);
-      i.setX(e.getXCoord() * scaleFactor - (prefWidth / 2));
-      i.setY(e.getYCoord() * scaleFactor - (prefHeight / 2));
+          if (e.getRequestType() == serviceRequest.Type.MED_DELIV_REQ) {
+            image =
+                new Image(
+                    new FileInputStream(
+                        "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/medicine.png"));
+          } else if (e.getRequestType() == serviceRequest.Type.LAB_REQUEST) {
+            image =
+                new Image(
+                    new FileInputStream(
+                        "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/labs.png"));
+          } else if (e.getRequestType() == serviceRequest.Type.MED_EQUIP_REQ) {
+            image =
+                new Image(
+                    new FileInputStream(
+                        "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/equipment.png"));
+          } else if (e.getRequestType() == serviceRequest.Type.MEAL_DELIV_REQ) {
+            image =
+                new Image(
+                    new FileInputStream(
+                        "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/meal.png"));
+          } else if (e.getRequestType() == serviceRequest.Type.SANITATION_REQ) {
+            image =
+                new Image(
+                    new FileInputStream(
+                        "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/sanitation.png"));
+          } else if (e.getRequestType() == serviceRequest.Type.LANG_INTERP_REQ) {
+            image =
+                new Image(
+                    new FileInputStream(
+                        "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/language.png"));
+          }
+          double prefWidth = ((int) image.getWidth() / 6.0) * scaleFactor;
+          double prefHeight = ((int) image.getHeight() / 6.0) * scaleFactor;
 
-      // Highlight the selected location
-      if (selectedLoc != null) {
-        if (e.getXCoord() == selectedLoc[0] && e.getYCoord() == selectedLoc[1]) {
-          i.getStyleClass().add("selectedLocationDot");
+          prefWidth *= 0.5;
+          prefHeight *= 0.5;
+
+          customImageViewTesting i = new customImageViewTesting(image, et.getLocation());
+          i.setFitWidth(prefWidth);
+          i.setFitHeight(prefHeight);
+          double x = e.getXCoord() * scaleFactor - (prefWidth / 1.75);
+          double y = e.getYCoord() * scaleFactor - (prefHeight / 1.75);
+          i.setX(x);
+          i.setY(y);
+
+          // Highlight the selected location
+          if (selectedLoc != null) {
+            if (e.getXCoord() == selectedLoc[0] && e.getYCoord() == selectedLoc[1]) {
+              i.getStyleClass().add("selectedLocationDot");
+            }
+          }
+
+          floorEquipmentPane.getChildren().add(i);
         }
       }
-
-      floorEquipmentPane.getChildren().add(i);
     }
     mapBox.getChildren().add(floorEquipmentPane);
   }
@@ -486,47 +595,13 @@ public class mapPageController implements Initializable {
             .collect(Collectors.toList());
   }
 
-  // Filter medical equipment by floor
-  public void filterMedicalEquipment() {
-    // Get the current floor
-    String floor = floorDropdown.getValue().toString();
-
-    // Filter medical equipment list to only show the current floor
-    filteredMedEqList =
-        medEqList.stream()
-            .filter(
-                medicalEquipment ->
-                    Objects.equals(medicalEquipment.getLocation().getFloor(), floor))
-            .collect(Collectors.toList());
-  }
-
-  // Filter service requests by floor
-  public void filterServiceRequests() throws SQLException {
-    // Starter code to implement showing all service requests on the map
-    String floor = floorDropdown.getValue().toString();
-    ServiceRequestDAOImpl serviceRequestDAO = new ServiceRequestDAOImpl();
-    // serviceRequestDAO.getCoords();
-
-    // Filter service request list to only show the current floor
-    filteredServReqList =
-        serviceRequestDAO.getAll().stream()
-            .filter(
-                serviceRequest -> {
-                  if (Objects.equals(serviceRequest.getFloorID(), floor)) {
-                    return true;
-                  }
-                  return false;
-                })
-            .collect(Collectors.toList());
-  }
-
   // Convert tower locations nodeType to an icon
   private Image nodeToIcon(String nodeType) throws FileNotFoundException {
 
     Image image =
         new Image(
-            new FileInputStream(
-                "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/location.png"));
+            Objects.requireNonNull(
+                Main.class.getResourceAsStream("view/icons/towerLocations/location.png")));
 
     // If the node type is null, return the default location icon
     if (nodeType == null) {
@@ -538,80 +613,75 @@ public class mapPageController implements Initializable {
       case "ELEV":
         image =
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/elev.png"));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/towerLocations/elev.png")));
         break;
       case "STAI":
         image =
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/stai.png"));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/towerLocations/stai.png")));
         break;
       case "REST":
-        image =
-            new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/rest.png"));
-        break;
       case "BATH":
         image =
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/rest.png"));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/towerLocations/rest.png")));
         break;
       case "STOR":
         image =
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/stor.png"));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/towerLocations/stor.png")));
         break;
       case "DEPT":
         image =
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/dept.png"));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/towerLocations/dept.png")));
         break;
       case "HALL":
         image =
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/hall.png"));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/towerLocations/hall.png")));
         break;
       case "DIRT":
         image =
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/dirt.png"));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/towerLocations/dirt.png")));
         break;
       case "EXIT":
         image =
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/exit.png"));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/towerLocations/exit.png")));
         break;
       case "LABS":
         image =
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/labs.png"));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/towerLocations/labs.png")));
         break;
       case "PATI":
         image =
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/pati.png"));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/towerLocations/pati.png")));
         break;
       case "RETL":
         image =
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/retl.png"));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/towerLocations/retl.png")));
         break;
       case "SERV":
         image =
             new Image(
-                new FileInputStream(
-                    "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/towerLocations/serv.png"));
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream("view/icons/towerLocations/serv.png")));
         break;
       default:
         break;
@@ -635,12 +705,25 @@ public class mapPageController implements Initializable {
     // group.setScaleX(group.getScaleX() * zoomValue);
     //  group.setScaleY(group.getScaleY() * zoomValue);
 
-    mapBox.setScaleX(mapBox.getScaleX() * zoomValue);
-    mapBox.setScaleY(mapBox.getScaleY() * zoomValue);
+    if (mapBox.getScaleX() * zoomValue >= 1.2 && mapBox.getScaleX() * zoomValue <= 2) {
+
+      mapBox.setScaleX(mapBox.getScaleX() * zoomValue);
+      mapBox.setScaleY(mapBox.getScaleY() * zoomValue);
+
+      for (Node child : mapBox.getChildren()) {
+        child.setScaleX(child.getScaleX() * zoomValue);
+        child.setScaleY(child.getScaleY() * zoomValue);
+      }
+    }
+  }
+
+  private void setZoom(double zoom) {
+    mapBox.setScaleX(zoom);
+    mapBox.setScaleY(zoom);
 
     for (Node child : mapBox.getChildren()) {
-      child.setScaleX(child.getScaleX() * zoomValue);
-      child.setScaleY(child.getScaleY() * zoomValue);
+      child.setScaleX(zoom);
+      child.setScaleY(zoom);
     }
   }
 
@@ -700,29 +783,26 @@ public class mapPageController implements Initializable {
 
       // Hide map edit mode container
       editorModeContainer.setVisible(false);
+      editorParent.setVisible(false);
 
       // Change the button text
-      mapEditorButton.setText("Exit Map Editor");
+      mapEditorButton.setText("Open Editor");
     } else {
       // Set editor mode to update
-      setEditMode("update");
+      setEditMode("add");
 
       // Show map edit mode container
       editorModeContainer.setVisible(true);
+      editorParent.setVisible(true);
 
       // Change the button text
-      mapEditorButton.setText("Map Editor");
+      mapEditorButton.setText("Close Editor");
     }
   }
 
   @FXML // Change edit mode to add
   public void addLocation(ActionEvent event) {
     setEditMode("add");
-  }
-
-  @FXML // Change edit mode to update
-  public void updateLocation(ActionEvent event) {
-    setEditMode("update");
   }
 
   @FXML // Change edit mode to delete
@@ -733,75 +813,55 @@ public class mapPageController implements Initializable {
   @FXML // Handle adding a new tower location
   public void smallAddLocationButton(ActionEvent event) throws SQLException, FileNotFoundException {
 
-    double imageX = mapImage.getFitWidth();
-    double coordinateX = 935;
-    double scaleFactor = imageX / coordinateX;
+    try {
 
-    int nodeTypeCount = filteredLocations.size() + 1;
+      double imageX = mapImage.getFitWidth();
+      double coordinateX = 935;
+      double scaleFactor = imageX / coordinateX;
 
-    String nodeID =
-        "e"
-            + addNodeType.getValue()
-            + ("000" + nodeTypeCount).substring(Integer.toString(nodeTypeCount).length())
-            + ("00" + floorDropdown.getValue())
-                .substring(floorDropdown.getValue().toString().length());
-    int numID = 0;
-    Location location =
-        new Location(
-            nodeID,
-            Math.toIntExact(Math.round(mouseX / scaleFactor)),
-            Math.toIntExact(Math.round(mouseY / scaleFactor)),
-            floorDropdown.getValue().toString(),
-            "Tower",
-            addNodeType.getValue().toString(),
-            addLongName.getText().toString(),
-            addShortName.getText().toString(),
-            numID);
-    DAOSystemSingleton.INSTANCE.getSystem().updateLocation(location);
+      int nodeTypeCount = filteredLocations.size() + 1;
 
-    // Fetch and switch and to update pane
-    fetchDB();
-    setEditMode("update");
-  }
+      if (addLongName.getText().isEmpty() || addLongName.getText().isBlank())
+        throw new NullPointerException("Long Name");
+      if (addShortName.getText().isEmpty() || addShortName.getText().isBlank())
+        throw new NullPointerException("Short Name");
+      if (addNodeType.getValue() == null) throw new NullPointerException("Node Type");
 
-  @FXML // Handle updating a location
-  public void smallUpdateLocationButton(ActionEvent event)
-      throws SQLException, FileNotFoundException {
+      String nodeID =
+          "e"
+              + addNodeType.getValue()
+              + ("000" + nodeTypeCount).substring(Integer.toString(nodeTypeCount).length())
+              + ("00" + floorDropdown.getValue())
+                  .substring(floorDropdown.getValue().toString().length());
+      Location location =
+          new Location(
+              nodeID,
+              935 / 2,
+              935 / 2,
+              floorDropdown.getValue().toString(),
+              "Tower",
+              addNodeType.getValue().toString(),
+              addLongName.getText(),
+              addShortName.getText(),
+              locations.size());
+      DAOSystemSingleton.INSTANCE.getSystem().updateLocation(location);
 
-    double imageX = mapImage.getFitWidth();
-    double coordinateX = 935;
-    double scaleFactor = imageX / coordinateX;
-
-    double locationPadding = 22 * scaleFactor;
-
-    // Check if the location has been moved
-    if ((selectedLoc[0] >= (mouseX - locationPadding) / scaleFactor
-            && selectedLoc[0] <= (mouseX + locationPadding) / scaleFactor)
-        && (selectedLoc[1] >= (mouseY - locationPadding) / scaleFactor
-            && selectedLoc[1] <= (mouseY + locationPadding) / scaleFactor)) {
-      // Location has not been moved
-    } else {
-
-      // Get a whole number from the scaled up mouseX and mouseY
-      int newX = Math.toIntExact(Math.round(mouseX / scaleFactor));
-      int newY = Math.toIntExact(Math.round(mouseY / scaleFactor));
-
-      // Update the location in the db with the new coordinates
-      if (viewMode == "Tower Locations") {
-        // Get location by coordinates
-        for (Location location : filteredLocations) {
-          if (location.getXCoord() == selectedLoc[0] && location.getYCoord() == selectedLoc[1]) {
-            DAOSystemSingleton.INSTANCE.getSystem().updateCoord(location, newX, newY);
-          }
-        }
-      } else if (viewMode == "Service Requests") {
-        // Update service request location
-      } else if (viewMode == "Medical Equipment") {
-        // Update medical equipment location
-      }
-
-      // Fetch the updates from the db
+      // Fetch and switch and to update pane
       fetchDB();
+    } catch (NullPointerException e) {
+      PopUp.createWarning(
+          "A value was not filled : " + e.getMessage(),
+          ((Node) event.getSource()).getScene().getWindow());
+    } catch (DerbySQLIntegrityConstraintViolationException er) {
+      PopUp.createWarning(
+          er.getCause()
+              + " : "
+              + er.getMessage()
+              + " for "
+              + er.getConstraintName()
+              + " in "
+              + er.getTableName(),
+          ((Node) event.getSource()).getScene().getWindow());
     }
   }
 
@@ -814,15 +874,21 @@ public class mapPageController implements Initializable {
     // Remove the currently selected location from the db
 
     // Get location by coordinates
-    for (Location location : filteredLocations) {
-      if (location.getXCoord() == selectedLoc[0] && location.getYCoord() == selectedLoc[1]) {
-        DAOSystemSingleton.INSTANCE.getSystem().deleteLocation(location);
+    ArrayList<NodeImageView> deleted = new ArrayList<>();
+    for (NodeImageView node : nodeViews) {
+      if (node.isClicked()) {
+        node.deleteFromDB();
+        deleted.add(node);
       }
+    }
+
+    for (NodeImageView node : deleted) {
+      nodeViews.remove(node);
     }
     fetchDB();
   }
 
-  @FXML // Handle clicking on the map
+  /*@FXML // Handle clicking on the map
   public void mapClick(MouseEvent event) throws IOException, SQLException {
 
     // Clear all icons
@@ -991,7 +1057,7 @@ public class mapPageController implements Initializable {
       // Change edit mode back to update
       setEditMode("update");
     }
-  }
+  }*/
 
   @FXML
   public void changePositionButton(ActionEvent event) throws IOException {
@@ -1002,6 +1068,18 @@ public class mapPageController implements Initializable {
     } else {
       changePosition.setText("Cancel");
       setEditMode("changePosition");
+    }
+  }
+
+  public void selectNode(NodeImageView node) {
+    if (node != null) {
+      this.nodeSelected = node;
+    }
+  }
+
+  public <T> void updateNode(NodeImageView<T> NodeImageView) {
+    if (NodeImageView.isClicked()) {
+      selectNode(NodeImageView);
     }
   }
 }

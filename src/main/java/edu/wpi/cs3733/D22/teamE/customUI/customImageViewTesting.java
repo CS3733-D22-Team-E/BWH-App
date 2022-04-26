@@ -9,11 +9,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 
-public class customImageView extends ImageView {
+public class customImageViewTesting extends ImageView {
 
   private Location l;
 
-  public customImageView(Image i, Location l) {
+  public customImageViewTesting(Image i, Location l) {
     super(i);
     this.l = l;
 
@@ -48,5 +48,13 @@ public class customImageView extends ImageView {
 
     this.setOnMouseEntered(hoverListener);
     this.setOnMouseExited(hoverListener);
+  }
+
+  public Location getL() {
+    return l;
+  }
+
+  public void setL(Location l) {
+    this.l = l;
   }
 }

@@ -118,6 +118,10 @@ public class DAOSystem {
     return locationDAO.get(x, y);
   }
 
+  public Location getClosestLocation(int x, int y, String floor) {
+    return locationDAO.getClosest(x, y, floor);
+  }
+
   public void updateLocation(Location location) {
     locationDAO.update(location);
   }
@@ -305,5 +309,10 @@ public class DAOSystem {
 
   public void deleteGiftDelivery(giftDeliveryRequest request) {
     giftRequestDAO.delete(request);
+  }
+
+  public void updateEntity(EntityInterface node) {
+    if (node instanceof MedicalEquipment) updateMedEquip((MedicalEquipment) node);
+    else if (node instanceof RequestInterface) updateServiceRequest((RequestInterface) node);
   }
 }

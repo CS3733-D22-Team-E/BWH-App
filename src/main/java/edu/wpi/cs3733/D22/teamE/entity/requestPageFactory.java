@@ -30,16 +30,16 @@ public class requestPageFactory {
 
   public static Node getAsPage(Object targetRequest, Object returnObject, Object displayObject)
       throws InvocationTargetException, IllegalAccessException {
-    if ((targetRequest instanceof RequestInterface)) {
-      if (returnObject == null) return getAsPage((RequestInterface) targetRequest);
+    if ((targetRequest instanceof EntityInterface)) {
+      if (returnObject == null) return getAsPage((EntityInterface) targetRequest);
       else if (returnObject instanceof JFXButton && displayObject instanceof JFXAlert)
         return getAsPage(
-            (RequestInterface) targetRequest, (JFXButton) returnObject, (JFXAlert) displayObject);
+            (EntityInterface) targetRequest, (JFXButton) returnObject, (JFXAlert) displayObject);
       else throw new RuntimeException("Invalid Return Type");
     } else throw new RuntimeException("Not a Valid Request");
   }
 
-  private static Node getAsPage(RequestInterface req)
+  private static Node getAsPage(EntityInterface req)
       throws InvocationTargetException, IllegalAccessException {
     VBox box = new VBox();
     box.setSpacing(2);
@@ -49,6 +49,8 @@ public class requestPageFactory {
             && !m.getName().contains("RequestType")
             && !m.getName().contains("Coord")
             && !m.getName().contains("ServiceRequestID")
+            && !m.getName().contains("Location")
+            && !m.getName().contains("NumID")
             && !m.getReturnType().isInstance(new FloralServiceRequest())) {
           final Object r = m.invoke(req);
           String label = m.getName();
@@ -71,7 +73,7 @@ public class requestPageFactory {
     return p;
   }
 
-  private static Node getAsPage(RequestInterface req, JFXButton button, JFXAlert alert)
+  private static Node getAsPage(EntityInterface req, JFXButton button, JFXAlert alert)
       throws InvocationTargetException, IllegalAccessException {
     VBox box = new VBox();
     box.setSpacing(2);
@@ -84,6 +86,8 @@ public class requestPageFactory {
             && !m.getName().contains("RequestType")
             && !m.getName().contains("Coord")
             && !m.getName().contains("ServiceRequestID")
+            && !m.getName().contains("Location")
+            && !m.getName().contains("NumID")
             && !m.getReturnType().isInstance(new FloralServiceRequest())) {
           final Object r = m.invoke(req);
           String label = m.getName();
@@ -149,7 +153,8 @@ public class requestPageFactory {
               }
             }
           }
-          db.updateServiceRequest(req);
+          if (req instanceof RequestInterface) db.updateServiceRequest((RequestInterface) req);
+          else if (req instanceof MedicalEquipment) db.updateMedEquip((MedicalEquipment) req);
         });
     ScrollPane p = new ScrollPane();
     p.setFitToWidth(true);

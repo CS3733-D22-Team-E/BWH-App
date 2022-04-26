@@ -90,6 +90,7 @@ public class LocationDAOImpl implements DAO<Location> {
    * @return the location requested
    */
   public Location getLocationWithNumID(int numID) {
+    if (numID >= locations.size()) return null;
     return locations.get(numID);
   }
 
@@ -100,30 +101,39 @@ public class LocationDAOImpl implements DAO<Location> {
    */
   @Override
   public void update(Location location) {
-    locations.add(location);
-    try {
-      String query =
-          "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
-              + location.getNodeID()
-              + "',"
-              + location.getXCoord()
-              + ","
-              + location.getYCoord()
-              + ",'"
-              + location.getFloor()
-              + "','"
-              + location.getBuilding()
-              + "','"
-              + location.getNodeType()
-              + "','"
-              + location.getLongName()
-              + "','"
-              + location.getShortName()
-              + "')"; // Insert into database; does not check if the nodeID already exists
-      PreparedStatement statement = connection.prepareStatement(query);
-      statement.executeUpdate();
-    } catch (SQLException e) {
-      e.printStackTrace();
+    /* System.out.println("Yo");
+    if (getLocationWithNumID(location.getNumID()) != null) {
+      locations.remove(location);
+      delete(location);
+    }*/
+    if (getLocationWithNumID(location.getNumID()) == null) {
+      locations.add(location);
+      try {
+        String query =
+            "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
+                + location.getNodeID()
+                + "',"
+                + location.getXCoord()
+                + ","
+                + location.getYCoord()
+                + ",'"
+                + location.getFloor()
+                + "','"
+                + location.getBuilding()
+                + "','"
+                + location.getNodeType()
+                + "','"
+                + location.getLongName()
+                + "','"
+                + location.getShortName()
+                + "')"; // Insert into database; does not check if the nodeID already exists
+        PreparedStatement statement = connection.prepareStatement(query);
+        System.out.println(statement.executeUpdate());
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    } else {
+
     }
   }
 
@@ -202,5 +212,29 @@ public class LocationDAOImpl implements DAO<Location> {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+  }
+
+  private double getDist(int x1, int y1, int x2, int y2) {
+
+    double xdist = Math.pow((x2 - x1), 2);
+    double ydist = Math.pow((y2 - y1), 2);
+
+    return Math.sqrt(xdist + ydist);
+  }
+
+  public Location getClosest(int x, int y, String floor) {
+    Location closest = getLocationWithNumID(0);
+
+    double minDist = getDist(x, y, closest.getXCoord(), closest.getYCoord());
+
+    for (Location l : locations) {
+      if (l.getFloor().equals(floor)) {
+        double distFrom = getDist(x, y, l.getXCoord(), l.getYCoord());
+
+        if (distFrom < minDist) closest = l;
+      }
+    }
+
+    return closest;
   }
 }

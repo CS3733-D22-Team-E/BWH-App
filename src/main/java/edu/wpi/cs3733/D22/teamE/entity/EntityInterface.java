@@ -8,6 +8,10 @@ public interface EntityInterface {
 
   Location getLocation();
 
+  String getRoomID();
+
+  String getFloorID();
+
   void setLocation(String NodeID) throws NullPointerException;
 
   void setLocation(Location location) throws NullPointerException;

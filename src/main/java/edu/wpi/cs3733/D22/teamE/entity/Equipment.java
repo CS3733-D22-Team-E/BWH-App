@@ -59,9 +59,20 @@ public abstract class Equipment implements EntityInterface {
     }
   }
 
+  public String getRoomID() {
+    return getLocation().getNodeID();
+  }
+
+  public String getFloorID() {
+    return getLocation().getFloor();
+  }
+
   @Override
   public void setLocation(Location location) throws NullPointerException {
-    this.currentLocation = location.getNodeID();
+    String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
+    if (myLoc.equals(currentLocation)) currentLocation = location.getNodeID();
+    if (myLoc.equals(cleanLocation)) cleanLocation = location.getNodeID();
+    if (myLoc.equals(storageLocation)) storageLocation = location.getNodeID();
   }
 
   @Override
@@ -117,6 +128,6 @@ public abstract class Equipment implements EntityInterface {
 
   @Override
   public double getYCoord() {
-    return 0;
+    return this.getLocation().getYCoord();
   }
 }
