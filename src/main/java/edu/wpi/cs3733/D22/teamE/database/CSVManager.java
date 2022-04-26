@@ -383,11 +383,10 @@ public class CSVManager {
     boolean exists = tempFile.exists();
     if (exists) tempFile.delete(); // this makes append=true work
 
-    if (!doesFileContainLine(file, format)) { // only looks for first line or no lines
-      FileUtils.writeStringToFile(
-          file, format, (Charset) null, false); // false enables overwriting if there is no format
-    }
-    
+    File file = new File("./CSVsaveFiles/" + fileName);
+    FileUtils.writeStringToFile(file, format, (Charset) null, true);
+    ; // true means append=true
+
     return file;
   }
 
