@@ -41,9 +41,22 @@ public class CSVManager {
       "REQUESTID, STATUS, TYPE, ASSIGNEE, REQUEST_DATE, DELIVERY_DATE, ISURGENT";
   private static final String accountFormat =
       "ACCOUNTID, EMPLOYEEID, AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION";
+  private static final String edgesFormat =
+       "EDGEID, START_NODE, END_NODE";
+  private static final String medicineRequestFormat =
+          "MEDICINE_REQ_ID, REQUEST_ID, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, DELIVERYLOCATIONID, FLOOR, MEDICINETYPE, MEDICINEQUANTITY, MEDICINEUNIT, REOCCURINGDAYS, OTHERNOTES, DELIVERYTIME";
+  private static final String sanitationRequestFormat =
+          "SANITATION_REQ_ID, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, CLEANINGSIZE, ISBIOHAZARD, OTHERNOTES";
+  private static final String mealDeliveryRequestFormat =
+          "MEAL_REQ_ID, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, ENTREE, BEVERAGE, DESSERT, DELIVERYTIME, OTHERNOTES";
+  private static final String languageInterpreterRequestFormat =
+          "LAN_INTERP_REQ, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, LANGUAGE, OTHERNOTES";
   private static final String facilitiesRequestFormat =
-      "FACILITIESREQID, FACILITIESREQTYPE, TIMEFRAME, FLOORID, ROOMID, ISURGENT, STAFFASSIGNEE, REQUESTSTATUS, REQUESTDATE, DELIVERYDATE, OTHERNOTES";
-  private static final String edgesFormat = "EDGEID, START_NODE, END_NODE";
+          "FACILITIESREQID, FACILITIESREQTYPE, TIMEFRAME, FLOORID, ROOMID, ISURGENT, STAFFASSIGNEE, REQUESTSTATUS, REQUESTDATE, DELIVERYDATE, OTHERNOTES";
+  private static final String securityRequestFormat =
+          "SECURITY_REQUESTID, SECURITY_REQUEST_TYPE, TIMEFRAME, LOCATIONID, FLOORID, ISURGENT, STAFFASSISNEE, REQUESTSTATUS, REQUESTDATE, DELIVERYDATE, OTHERNOTES";
+  private static final String giftDeliveryRequestFormat =
+          "GIFT_REQ_ID, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, PATIENTNAME, GIFTTYPE, OTHERNOTES";
 
   /*
       SAVING CSV FILES FROM THE DATABASE
@@ -272,6 +285,262 @@ public class CSVManager {
       }
     }
   }
+
+  ///
+
+  public static void saveMedicineRequestCSV(String fileName) throws IOException, SQLException {
+    String format = medicineRequestFormat;
+    // nothing to change here
+    File out = fullSaveHelper(fileName, format);
+    // change with the proper format in first line of function
+    for (medicineDelivery d : DAOSystemSingleton.INSTANCE.getSystem().getAllMedicineRequests()) {
+      String csvLine =
+              ""
+                      + d.getServiceRequestID()
+                      + ','
+                      + d.getRequestDate()
+                      + ','
+                      + d.getDeliveryDate()
+                      + ','
+                      + d.getRequestStatus()
+                      + ','
+                      + d.getStaffAssignee()
+                      + ','
+                      + d.getIsUrgent()
+                      + ','
+                      + d.getRoomID()
+                      + ','
+                      + d.getFloorID()
+                      + ','
+                      + d.getMedicine()
+                      + ','
+                      + d.getAmount()
+                      + ','
+                      + d.getUnit()
+                      + ','
+                      + d.getReocurringDays()
+                      + ','
+                      + d.getOtherNotes()
+                      + ','
+                      + d.getDeliveryTime()
+                      + "\n";
+      // change nothing
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
+    }
+  }
+
+
+  public static void saveSanitationRequestCSV(String fileName) throws IOException, SQLException {
+    String format = accountFormat;
+    // nothing to change here
+    File out = fullSaveHelper(fileName, format);
+    // change with the proper format in first line of function
+    for (sanitationRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllSanitationRequests()) {
+      String csvLine =
+              ""
+                      + d.getServiceRequestID()
+                      + ','
+                      + d.getRequestDate()
+                      + ','
+                      + d.getDeliveryDate()
+                      + ','
+                      + d.getPasswordHash()
+                      + ','
+                      + d.getFirstName()
+                      + ','
+                      + d.getLastName()
+                      + ','
+                      + d.getPosition()
+                      + "\n";
+      // change nothing
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
+    }
+  }
+
+  public static void saveMealDeliveryCSV(String fileName) throws IOException, SQLException {
+    String format = accountFormat;
+    DAO<Account> dao = new AccountDAOImpl();
+    // nothing to change here
+    File out = fullSaveHelper(fileName, format);
+    // change with the proper format in first line of function
+    for (Account d : dao.getAll()) {
+      String csvLine =
+              ""
+                      + d.getAccountID()
+                      + ','
+                      + d.getEmployeeID()
+                      + ','
+                      + d.getAuthorityLevel()
+                      + ','
+                      + d.getPasswordHash()
+                      + ','
+                      + d.getFirstName()
+                      + ','
+                      + d.getLastName()
+                      + ','
+                      + d.getPosition()
+                      + "\n";
+      // change nothing
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
+    }
+  }
+
+  public static void saveLanguageInterpreterRequestCSV(String fileName) throws IOException, SQLException {
+    String format = accountFormat;
+    DAO<Account> dao = new AccountDAOImpl();
+    // nothing to change here
+    File out = fullSaveHelper(fileName, format);
+    // change with the proper format in first line of function
+    for (Account d : dao.getAll()) {
+      String csvLine =
+              ""
+                      + d.getAccountID()
+                      + ','
+                      + d.getEmployeeID()
+                      + ','
+                      + d.getAuthorityLevel()
+                      + ','
+                      + d.getPasswordHash()
+                      + ','
+                      + d.getFirstName()
+                      + ','
+                      + d.getLastName()
+                      + ','
+                      + d.getPosition()
+                      + "\n";
+      // change nothing
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
+    }
+  }
+
+  public static void saveFacilitiesRequestCSV(String fileName) throws IOException, SQLException {
+    String format = accountFormat;
+    DAO<Account> dao = new AccountDAOImpl();
+    // nothing to change here
+    File out = fullSaveHelper(fileName, format);
+    // change with the proper format in first line of function
+    for (Account d : dao.getAll()) {
+      String csvLine =
+              ""
+                      + d.getAccountID()
+                      + ','
+                      + d.getEmployeeID()
+                      + ','
+                      + d.getAuthorityLevel()
+                      + ','
+                      + d.getPasswordHash()
+                      + ','
+                      + d.getFirstName()
+                      + ','
+                      + d.getLastName()
+                      + ','
+                      + d.getPosition()
+                      + "\n";
+      // change nothing
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
+    }
+  }
+
+  public static void saveSecurityRequestCSV(String fileName) throws IOException, SQLException {
+    String format = accountFormat;
+    DAO<Account> dao = new AccountDAOImpl();
+    // nothing to change here
+    File out = fullSaveHelper(fileName, format);
+    // change with the proper format in first line of function
+    for (Account d : dao.getAll()) {
+      String csvLine =
+              ""
+                      + d.getAccountID()
+                      + ','
+                      + d.getEmployeeID()
+                      + ','
+                      + d.getAuthorityLevel()
+                      + ','
+                      + d.getPasswordHash()
+                      + ','
+                      + d.getFirstName()
+                      + ','
+                      + d.getLastName()
+                      + ','
+                      + d.getPosition()
+                      + "\n";
+      // change nothing
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
+    }
+  }
+
+  public static void saveGiftDeliveryRequestCSV(String fileName) throws IOException, SQLException {
+    String format = accountFormat;
+    DAO<Account> dao = new AccountDAOImpl();
+    // nothing to change here
+    File out = fullSaveHelper(fileName, format);
+    // change with the proper format in first line of function
+    for (Account d : dao.getAll()) {
+      String csvLine =
+              ""
+                      + d.getAccountID()
+                      + ','
+                      + d.getEmployeeID()
+                      + ','
+                      + d.getAuthorityLevel()
+                      + ','
+                      + d.getPasswordHash()
+                      + ','
+                      + d.getFirstName()
+                      + ','
+                      + d.getLastName()
+                      + ','
+                      + d.getPosition()
+                      + "\n";
+      // change nothing
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
+    }
+  }
+
+  public static void saveEdgesCSV(String fileName) throws IOException, SQLException {
+    String format = accountFormat;
+    DAO<Account> dao = new AccountDAOImpl();
+    // nothing to change here
+    File out = fullSaveHelper(fileName, format);
+    // change with the proper format in first line of function
+    for (Account d : dao.getAll()) {
+      String csvLine =
+              ""
+                      + d.getAccountID()
+                      + ','
+                      + d.getEmployeeID()
+                      + ','
+                      + d.getAuthorityLevel()
+                      + ','
+                      + d.getPasswordHash()
+                      + ','
+                      + d.getFirstName()
+                      + ','
+                      + d.getLastName()
+                      + ','
+                      + d.getPosition()
+                      + "\n";
+      // change nothing
+      if (!doesFileContainLine(out, csvLine)) {
+        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      }
+    }
+  }
+
 
   /*
       LOADING CSV FILES INTO THE DATABASE
