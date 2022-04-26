@@ -4,13 +4,13 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.cs3733.D22.teamE.pageControl;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.SVGPath;
 
@@ -21,7 +21,7 @@ public class HeaderController {
   @FXML JFXToggleNode helpButton;
   @FXML Button profileButton;
   @FXML SVGPath bwhLogo;
-  ToggleGroup headerPageButtons;
+  // ToggleGroup headerPageButtons;
   JFXToggleNode selectedPageButton;
 
   @FXML public JFXHamburger burger;
@@ -39,12 +39,14 @@ public class HeaderController {
 
   public void initialize(URL location, ResourceBundle resources) {
 
+    /*
     headerPageButtons = new ToggleGroup();
     homeButton.setToggleGroup(headerPageButtons);
     aboutUsButton.setToggleGroup(headerPageButtons);
     helpButton.setToggleGroup(headerPageButtons);
     homeButton.setSelected(true);
     selectedPageButton = homeButton;
+     */
 
     /*
     assert (burger != null);
@@ -84,11 +86,26 @@ public class HeaderController {
           }
         });
      */
+
+  }
+
+  @FXML
+  public void homeButtonSelected(MouseEvent e) {
+    homeButton.getStyleClass().clear();
+    homeButton.getStyleClass().add("headerSelectedButton");
+  }
+
+  @FXML
+  public void homeButtonUnselected(MouseEvent e) {
+    homeButton.getStyleClass().clear();
+    homeButton.getStyleClass().add("headerButton");
   }
 
   @FXML
   public void homeButton(ActionEvent event) {
-    root.setCenter(pageControl.getPageRoot("defaultPage.fxml"));
+    homeButton.getStyleClass().clear();
+    homeButton.getStyleClass().add("headerSelectedButton");
+    root.setCenter(pageControl.getPageRoot("homePage.fxml"));
   }
 
   @FXML

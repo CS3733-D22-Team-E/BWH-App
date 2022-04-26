@@ -7,8 +7,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class BasePageController implements Initializable {
 
@@ -29,13 +29,9 @@ public class BasePageController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    rootBorderPane.setCenter(pageControl.getPageRoot("medicineDelivery.fxml"));
-    sideMenuController sideMenu = new sideMenuController(rootBorderPane);
-    Parent sideMenuView = (Parent) pageControl.getPageRoot("sidePanel.fxml", sideMenu);
-    HeaderController headerController = new HeaderController(drawer, rootBorderPane);
-    Parent headerView = (Parent) pageControl.getPageRoot("Header.fxml", headerController);
-    rootBorderPane.setTop(headerView);
-    drawer.setSidePane(sideMenuView);
+    rootBorderPane.setCenter(pageControl.getPageRoot("homePage.fxml"));
+    pageControl.loadTop("Header.fxml", (Stage) rootBorderPane.getScene().getWindow());
+    drawer.setSidePane(pageControl.getPageRoot("sidePanel.fxml"));
     drawer.close();
     drawer.setDisable(true);
     drawer.setMinWidth(0);

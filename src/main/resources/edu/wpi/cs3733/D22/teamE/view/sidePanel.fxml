@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox styleClass="sidebarBackground" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox styleClass="sidebarBackground" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.sideMenuController">
          <children>
             <HBox>
                <children>
@@ -21,7 +21,151 @@
                                     <Image url="@icons/default_profile_pic.png" />
                                  </image>
                               </ImageView>
+                              <Label styleClass="sidebarButton" text="Dashboard" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <JFXButton fx:id="submitServiceRequestButton" styleClass="sidebarButton" text=" ">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="32.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/default_profile_pic.png" />
+                                 </image>
+                              </ImageView>
+                              <Label styleClass="sidebarButton" text="Submit Service Request" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <JFXButton fx:id="statusPageButton" styleClass="sidebarButton" text=" ">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="32.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/default_profile_pic.png" />
+                                 </image>
+                              </ImageView>
+                              <Label styleClass="sidebarButton" text="Status Page" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <JFXButton fx:id="mapButton" styleClass="sidebarButton" text=" ">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="32.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/default_profile_pic.png" />
+                                 </image>
+                              </ImageView>
+                              <Label styleClass="sidebarButton" text="Map" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <JFXButton fx:id="profileButton" styleClass="sidebarButton" text=" ">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="32.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/default_profile_pic.png" />
+                                 </image>
+                              </ImageView>
                               <Label styleClass="sidebarButton" text="Profile" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <JFXButton fx:id="aboutButton" styleClass="sidebarButton" text=" ">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="32.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/default_profile_pic.png" />
+                                 </image>
+                              </ImageView>
+                              <Label styleClass="sidebarButton" text="About" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <JFXButton fx:id="helpButton" styleClass="sidebarButton" text=" ">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="32.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/default_profile_pic.png" />
+                                 </image>
+                              </ImageView>
+                              <Label styleClass="sidebarButton" text="Help" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <JFXButton fx:id="logoutButton" styleClass="sidebarButton" text=" ">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="32.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/default_profile_pic.png" />
+                                 </image>
+                              </ImageView>
+                              <Label styleClass="sidebarButton" text="Logout" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <JFXButton fx:id="exitButton" styleClass="sidebarButton" text=" ">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="32.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/default_profile_pic.png" />
+                                 </image>
+                              </ImageView>
+                              <Label styleClass="sidebarButton" text="Exit" />
                            </children>
                         </HBox>
                      </graphic>
