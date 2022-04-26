@@ -34,13 +34,11 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -48,95 +46,65 @@
 
 <VBox id="default-background" alignment="CENTER" maxHeight="150.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="70.0" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.helpPageController">
    <children>
-      <HBox alignment="CENTER" maxHeight="150.0" maxWidth="1.7976931348623157E308" minHeight="70.0" minWidth="70.0" prefHeight="100.0" style="-fx-background-color: #f35959;" VBox.vgrow="ALWAYS">
-         <children>
-            <Label prefHeight="300.0" prefWidth="950.0" text="   Brigham and Women's Hospital" textFill="WHITE" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font name="Book Antiqua Bold" size="30.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER_RIGHT" prefHeight="95.0" prefWidth="83.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <JFXHamburger fx:id="burger" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="95.0" prefWidth="87.0" style="-fx-border-color: black;" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-         </children>
-      </HBox>
       <StackPane prefHeight="560.0" prefWidth="1080.0">
          <children>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" style="-fx-background-color: transparent;" />
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <center>
-                  <HBox alignment="TOP_CENTER" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="TOP_CENTER">
                      <children>
-                        <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="60.0" prefWidth="87.0" text="Help Page" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox>
                            <children>
-                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="60.0" prefWidth="87.0" text="Help Page" VBox.vgrow="ALWAYS">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <HBox>
+                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <Label text="Service Request Page" VBox.vgrow="ALWAYS">
-                                             <font>
-                                                <Font size="24.0" />
-                                             </font>
-                                          </Label>
-                                          <JFXButton fx:id="serviceHelp" onAction="#serviceHelp" text=" " VBox.vgrow="ALWAYS">
-                                             <graphic>
-                                                <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/serviceHelp.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </JFXButton>
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <Label text="Map Help Page" VBox.vgrow="ALWAYS">
-                                             <font>
-                                                <Font size="24.0" />
-                                             </font>
-                                          </Label>
-                                          <JFXButton fx:id="mapHelp" onAction="#mapHelp" text=" " VBox.vgrow="ALWAYS">
-                                             <graphic>
-                                                <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/mapHelp.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </JFXButton>
-                                       </children>
-                                    </VBox>
+                                    <JFXButton fx:id="serviceHelp" onAction="#serviceHelp" text=" " VBox.vgrow="ALWAYS">
+                                       <graphic>
+                                          <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/serviceHelp.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <Label text="Service Request Page" VBox.vgrow="ALWAYS">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
                                  </children>
-                              </HBox>
+                              </VBox>
+                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <JFXButton fx:id="mapHelp" onAction="#mapHelp" text=" " VBox.vgrow="ALWAYS">
+                                       <graphic>
+                                          <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/mapHelp.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <Label text="Map Help Page" VBox.vgrow="ALWAYS">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
                            </children>
-                           <effect>
-                              <Blend />
-                           </effect>
-                        </VBox>
+                        </HBox>
                      </children>
-                  </HBox>
-               </center>
-               <top>
-                  <HBox prefHeight="100.0" BorderPane.alignment="CENTER" />
-               </top>
-               <left>
-                  <HBox prefWidth="100.0" BorderPane.alignment="CENTER" />
-               </left>
-               <right>
-                  <HBox prefWidth="100.0" BorderPane.alignment="CENTER" />
-               </right>
-               <bottom>
-                  <HBox prefHeight="100.0" BorderPane.alignment="CENTER" />
-               </bottom>
-            </BorderPane>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </VBox>
+               </children>
+            </StackPane>
          </children>
       </StackPane>
    </children>
