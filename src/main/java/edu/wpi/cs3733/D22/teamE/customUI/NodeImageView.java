@@ -229,5 +229,8 @@ public class NodeImageView<T> extends ImageView {
     this.startY = y;
   }
 
-  public void deleteFromDB() {}
+  public void deleteFromDB() {
+    throw new RuntimeException(
+        String.format("Cannot Delete Node Of This Type : %s", node.toString()));
+  }
 }

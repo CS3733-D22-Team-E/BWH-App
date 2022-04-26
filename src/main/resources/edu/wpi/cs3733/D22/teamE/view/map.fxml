@@ -103,7 +103,7 @@
       </Group>
       <Group GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <VBox alignment="CENTER" layoutX="-5.0" layoutY="-1.0" spacing="10.0">
+            <VBox fx:id="sideParent" alignment="CENTER" layoutX="-5.0" layoutY="-1.0" spacing="10.0" visible="false">
                <children>
                   <VBox fx:id="editorParent" alignment="CENTER" visible="false">
                      <children>

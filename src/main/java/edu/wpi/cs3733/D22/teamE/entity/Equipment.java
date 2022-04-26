@@ -55,7 +55,10 @@ public abstract class Equipment implements EntityInterface {
   @Override
   public void setLocation(String NodeID) throws NullPointerException {
     if (DAOSystemSingleton.INSTANCE.getSystem().getLocation(NodeID) != null) {
-      this.currentLocation = NodeID;
+      String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
+      if (myLoc.equals(currentLocation)) currentLocation = NodeID;
+      if (myLoc.equals(cleanLocation)) cleanLocation = NodeID;
+      if (myLoc.equals(storageLocation)) storageLocation = NodeID;
     }
   }
 
@@ -79,7 +82,10 @@ public abstract class Equipment implements EntityInterface {
   public void setLocation(int xcoord, int ycoord) throws NullPointerException {
     Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(xcoord, ycoord);
     if (loc != null) {
-      this.currentLocation = loc.getNodeID();
+      String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
+      if (myLoc.equals(currentLocation)) currentLocation = loc.getNodeID();
+      if (myLoc.equals(cleanLocation)) cleanLocation = loc.getNodeID();
+      if (myLoc.equals(storageLocation)) storageLocation = loc.getNodeID();
     }
   }
 
@@ -129,5 +135,10 @@ public abstract class Equipment implements EntityInterface {
   @Override
   public double getYCoord() {
     return this.getLocation().getYCoord();
+  }
+
+  @Override
+  public String toString() {
+    return this.getEquipmentID();
   }
 }

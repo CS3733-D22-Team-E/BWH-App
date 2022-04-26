@@ -6,12 +6,13 @@ import edu.wpi.cs3733.D22.teamE.entity.*;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class EntityView extends NodeImageView<EntityInterface> {
 
-  protected customImageViewTesting myLoc;
+  protected ImageView myLoc;
 
-  public EntityView(Image i, EntityInterface node, customImageViewTesting myLoc) {
+  public EntityView(Image i, EntityInterface node, ImageView myLoc) {
     super(i, node);
 
     myLoc.setScaleX(this.getScaleX() * 1.2);
@@ -44,16 +45,16 @@ public class EntityView extends NodeImageView<EntityInterface> {
                   ((this.getStartY() - event.getY()) / getModifier()) + getHeightOffset();
               int newX = (int) (node.getXCoord() - deltaX);
               int newY = (int) (node.getYCoord() - deltaY);
-              newX = (int) event.getScreenX();
-              newY = (int) event.getScreenY();
-              System.out.println(newX + " : " + newY);
+              newX = (int) (event.getX() / getModifier());
+              newY = (int) (event.getY() / getModifier());
               Location l =
                   DAOSystemSingleton.INSTANCE
                       .getSystem()
                       .getClosestLocation(newX, newY, node.getFloorID());
-              System.out.println(l.getXCoord() + " : " + l.getYCoord() + " : " + l.getFloor());
+              System.out.println(newX + " : " + newY);
+              System.out.println(l.getXCoord() + " : " + l.getYCoord() + " : " + l.getShortName());
               node.setLocation(l);
-              System.out.println(node.getLocation());
+              // System.out.println(node.getLocation());
               DAOSystemSingleton.INSTANCE.getSystem().updateEntity(node);
               this.setClicked(false);
               controller.fetchDB();
@@ -63,14 +64,5 @@ public class EntityView extends NodeImageView<EntityInterface> {
             e.printStackTrace();
           }
         });
-  }
-
-  @Override
-  public void deleteFromDB() {
-    if (node instanceof Equipment) {
-      if (node instanceof MedicalEquipment)
-        DAOSystemSingleton.INSTANCE.getSystem().deleteMedEquip((MedicalEquipment) node);
-    } else if (node instanceof RequestInterface)
-      DAOSystemSingleton.INSTANCE.getSystem().deleteServiceRequest((RequestInterface) node);
   }
 }

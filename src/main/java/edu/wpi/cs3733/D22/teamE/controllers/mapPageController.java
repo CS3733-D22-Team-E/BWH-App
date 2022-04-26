@@ -94,7 +94,11 @@ public class mapPageController implements Initializable {
 
   @FXML JFXButton legendOpenButton;
 
+  @FXML VBox sideParent;
+
   private boolean openLegend = false;
+
+  protected String curFloor = "1";
 
   ObservableList<String> floors =
       FXCollections.observableArrayList("L1", "L2", "1", "2", "3", "4", "5");
@@ -119,6 +123,11 @@ public class mapPageController implements Initializable {
             && openLegend);
     serviceRequestLegend.setVisible(
         (viewMode.equals("Service Requests")) && !serviceRequestLegend.isVisible() && openLegend);
+    sideParent.setVisible(
+        towerLocationsLegend.isVisible()
+            || medicalEquipmentLegend.isVisible()
+            || serviceRequestLegend.isVisible()
+            || editorParent.isVisible());
   }
 
   @Override // Initialize the map page
@@ -180,6 +189,7 @@ public class mapPageController implements Initializable {
     floorEquipmentPane.getChildren().clear();
     floorLocationsPane.getChildren().clear();
     floorServiceRequestPane.getChildren().clear();
+    curFloor = floor;
 
     switch (floor) {
       case "2":
@@ -227,6 +237,7 @@ public class mapPageController implements Initializable {
     }
 
     // Display the currently selected viewMode
+    filterTowerLocations();
     setViewMode(viewMode);
   }
 
@@ -276,9 +287,6 @@ public class mapPageController implements Initializable {
         displayServiceRequestLocations();
         displayMedEquipLocations();
 
-        // Disable map editor button and hide map editor functions
-        mapEditorButton.setDisable(true);
-        setEditMode("false");
         break;
     }
 
@@ -310,7 +318,6 @@ public class mapPageController implements Initializable {
         // Set the delete editor to visible
         deleteLocationPane.setVisible(true);
         editorModeContainer.setVisible(true);
-        smallDeleteLocation.setDisable(false);
         break;
     }
 
@@ -453,7 +460,7 @@ public class mapPageController implements Initializable {
     // Display an icon for each item in the filtered list
     for (EntityInterface et : entityInterfaceList) {
       if (et instanceof MedicalEquipment) {
-        if (et.getFloorID().equals(floorDropdown.getValue().toString())) {
+        if (et.getFloorID().equals(curFloor)) {
 
           MedicalEquipment e = (MedicalEquipment) et;
 
@@ -467,11 +474,20 @@ public class mapPageController implements Initializable {
           // prefWidth *= 0.5;
           // prefHeight *= 0.5;
 
-          customImageViewTesting myLoc = null;
-          for (customImageViewTesting loc : staticLocations) {
-            if (loc.getL().getNodeID().equals(et.getRoomID())) myLoc = loc;
+          ImageView myLoc = null;
+          if (!viewMode.equals("All")) {
+            for (customImageViewTesting loc : staticLocations) {
+              if (loc.getL().getNodeID().equals(et.getRoomID())) myLoc = loc;
+            }
+          } else {
+            for (NodeImageView loc : nodeViews) {
+              if (loc.getNode() instanceof Location) {
+                if (((Location) loc.getNode()).getNodeID().equals(et.getRoomID())) myLoc = loc;
+              }
+            }
           }
 
+          assert myLoc != null;
           EntityView i = new EntityView(image, et, myLoc);
           i.setFitWidth(prefWidth);
           i.setFitHeight(prefHeight);
@@ -504,10 +520,53 @@ public class mapPageController implements Initializable {
     mapBox.getChildren().add(floorEquipmentPane);
   }
 
+  private Image reqGetImage(String type) {
+    Image image =
+        new Image(
+            Objects.requireNonNull(
+                Main.class.getResourceAsStream("view/icons/serviceRequests/location.png")));
+
+    if (type.equals(serviceRequest.Type.MED_DELIV_REQ.toString())) {
+      image =
+          new Image(
+              Objects.requireNonNull(
+                  Main.class.getResourceAsStream("view/icons/serviceRequests/medicine.png")));
+    } else if (type.equals(serviceRequest.Type.LAB_REQUEST.toString())) {
+      image =
+          new Image(
+              Objects.requireNonNull(
+                  Main.class.getResourceAsStream("view/icons/serviceRequests/labs.png")));
+    } else if (type.equals(serviceRequest.Type.MED_EQUIP_REQ.toString())) {
+      image =
+          new Image(
+              Objects.requireNonNull(
+                  Main.class.getResourceAsStream("view/icons/serviceRequests/equipment.png")));
+    } else if (type.equals(serviceRequest.Type.MEAL_DELIV_REQ.toString())) {
+      image =
+          new Image(
+              Objects.requireNonNull(
+                  Main.class.getResourceAsStream("view/icons/serviceRequests/meal.png")));
+    } else if (type.equals(serviceRequest.Type.SANITATION_REQ.toString())) {
+      image =
+          new Image(
+              Objects.requireNonNull(
+                  Main.class.getResourceAsStream("view/icons/serviceRequests/sanitation.png")));
+    } else if (type.equals(serviceRequest.Type.LANG_INTERP_REQ.toString())) {
+      image =
+          new Image(
+              Objects.requireNonNull(
+                  Main.class.getResourceAsStream("view/icons/serviceRequests/language.png")));
+    }
+
+    return image;
+  }
+
   // Display service request locations
   private void displayServiceRequestLocations() throws FileNotFoundException {
 
-    floorServiceRequestPane = new Pane();
+    floorServiceRequestPane.getChildren().clear();
+
+    if (!viewMode.equals("All")) displayStaticLocations(floorServiceRequestPane);
 
     double imageX = mapImage.getFitWidth();
     double coordinateX = 935;
@@ -517,70 +576,62 @@ public class mapPageController implements Initializable {
     for (EntityInterface et : entityInterfaceList) {
       if (et instanceof RequestInterface) {
         if (filteredLocations.contains(et.getLocation())) {
-          RequestInterface e = (RequestInterface) et;
+          if (et.getFloorID().equals(curFloor)) {
+            RequestInterface e = (RequestInterface) et;
 
-          Image image =
-              new Image(
-                  new FileInputStream(
-                      "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/location.png"));
+            Image image = reqGetImage(e.getRequestType().toString());
 
-          if (e.getRequestType() == serviceRequest.Type.MED_DELIV_REQ) {
-            image =
-                new Image(
-                    new FileInputStream(
-                        "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/medicine.png"));
-          } else if (e.getRequestType() == serviceRequest.Type.LAB_REQUEST) {
-            image =
-                new Image(
-                    new FileInputStream(
-                        "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/labs.png"));
-          } else if (e.getRequestType() == serviceRequest.Type.MED_EQUIP_REQ) {
-            image =
-                new Image(
-                    new FileInputStream(
-                        "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/equipment.png"));
-          } else if (e.getRequestType() == serviceRequest.Type.MEAL_DELIV_REQ) {
-            image =
-                new Image(
-                    new FileInputStream(
-                        "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/meal.png"));
-          } else if (e.getRequestType() == serviceRequest.Type.SANITATION_REQ) {
-            image =
-                new Image(
-                    new FileInputStream(
-                        "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/sanitation.png"));
-          } else if (e.getRequestType() == serviceRequest.Type.LANG_INTERP_REQ) {
-            image =
-                new Image(
-                    new FileInputStream(
-                        "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/serviceRequests/language.png"));
-          }
-          double prefWidth = ((int) image.getWidth() / 6.0) * scaleFactor;
-          double prefHeight = ((int) image.getHeight() / 6.0) * scaleFactor;
+            double prefWidth = (image.getWidth() / 12.0) * scaleFactor;
+            double prefHeight = (image.getHeight() / 12.0) * scaleFactor;
 
-          prefWidth *= 0.5;
-          prefHeight *= 0.5;
+            double widthOffset = (prefWidth / 2);
+            double heightOffset = (prefHeight / 2);
 
-          customImageViewTesting i = new customImageViewTesting(image, et.getLocation());
-          i.setFitWidth(prefWidth);
-          i.setFitHeight(prefHeight);
-          double x = e.getXCoord() * scaleFactor - (prefWidth / 1.75);
-          double y = e.getYCoord() * scaleFactor - (prefHeight / 1.75);
-          i.setX(x);
-          i.setY(y);
-
-          // Highlight the selected location
-          if (selectedLoc != null) {
-            if (e.getXCoord() == selectedLoc[0] && e.getYCoord() == selectedLoc[1]) {
-              i.getStyleClass().add("selectedLocationDot");
+            ImageView myLoc = null;
+            if (!viewMode.equals("All")) {
+              for (customImageViewTesting loc : staticLocations) {
+                if (loc.getL().getNodeID().equals(et.getRoomID())) myLoc = loc;
+              }
+            } else {
+              for (NodeImageView loc : nodeViews) {
+                if (loc.getNode() instanceof Location) {
+                  if (((Location) loc.getNode()).getNodeID().equals(et.getRoomID())) myLoc = loc;
+                }
+              }
             }
-          }
 
-          floorEquipmentPane.getChildren().add(i);
+            assert myLoc != null;
+            EntityView i = new EntityView(image, et, myLoc);
+            i.setFitWidth(prefWidth);
+            i.setFitHeight(prefHeight);
+            double x = et.getLocation().getXCoord() * (scaleFactor) - widthOffset;
+            double y = et.getLocation().getYCoord() * (scaleFactor) - heightOffset;
+            i.setX(x);
+            i.setStartX(x);
+            i.setY(y);
+
+            i.setStartY(y);
+            i.setModifier(scaleFactor);
+            i.setWidthOffset(widthOffset);
+            i.setHeightOffset(heightOffset);
+            nodeViews.add(i);
+            i.attach(this);
+
+            // Highlight the selected location
+            if (selectedLoc != null) {
+              if (e.getXCoord() == selectedLoc[0] && e.getYCoord() == selectedLoc[1]) {
+                i.getStyleClass().add("selectedLocationDot");
+              }
+            }
+
+            floorServiceRequestPane.getChildren().add(i);
+          }
         }
       }
     }
-    mapBox.getChildren().add(floorEquipmentPane);
+    floorServiceRequestPane.setScaleX(mapBox.getScaleX());
+    floorServiceRequestPane.setScaleY(mapBox.getScaleY());
+    mapBox.getChildren().add(floorServiceRequestPane);
   }
 
   // Filter tower locations by floor
@@ -784,6 +835,7 @@ public class mapPageController implements Initializable {
       // Hide map edit mode container
       editorModeContainer.setVisible(false);
       editorParent.setVisible(false);
+      if (!openLegend) sideParent.setVisible(false);
 
       // Change the button text
       mapEditorButton.setText("Open Editor");
@@ -794,6 +846,7 @@ public class mapPageController implements Initializable {
       // Show map edit mode container
       editorModeContainer.setVisible(true);
       editorParent.setVisible(true);
+      sideParent.setVisible(true);
 
       // Change the button text
       mapEditorButton.setText("Close Editor");
@@ -876,9 +929,13 @@ public class mapPageController implements Initializable {
     // Get location by coordinates
     ArrayList<NodeImageView> deleted = new ArrayList<>();
     for (NodeImageView node : nodeViews) {
-      if (node.isClicked()) {
-        node.deleteFromDB();
-        deleted.add(node);
+      try {
+        if (node.isClicked()) {
+          node.deleteFromDB();
+          deleted.add(node);
+        }
+      } catch (Exception e) {
+        PopUp.createWarning(e.getMessage(), ((Node) event.getSource()).getScene().getWindow());
       }
     }
 

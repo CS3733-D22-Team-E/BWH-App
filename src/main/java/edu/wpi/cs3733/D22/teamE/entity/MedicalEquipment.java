@@ -60,4 +60,9 @@ public class MedicalEquipment extends Equipment {
   public void setEquipmentType(String equipmentType) {
     this.equipmentType = equipmentType;
   }
+
+  @Override
+  public String toString() {
+    return this.getEquipmentType() + " : " + super.toString();
+  }
 }

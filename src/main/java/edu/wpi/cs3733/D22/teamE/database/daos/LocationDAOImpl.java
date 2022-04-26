@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
+import edu.wpi.cs3733.D22.teamE.entity.EntityInterface;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
 import java.sql.*;
 import java.util.ArrayList;
@@ -202,6 +203,13 @@ public class LocationDAOImpl implements DAO<Location> {
   public void delete(Location location) {
 
     // Deleting the location from the array list
+    ArrayList<EntityInterface> entities = new ArrayList<>();
+    entities.addAll(DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests());
+    entities.addAll(DAOSystemSingleton.INSTANCE.getSystem().getAllMedEquip());
+    for (EntityInterface e : entities) {
+      if (e.getLocation().equals(location))
+        throw new RuntimeException("Cannot Delete Tower Location With Active Equipment or Request");
+    }
     locations.remove(location);
 
     // Remove location in the db
@@ -226,15 +234,22 @@ public class LocationDAOImpl implements DAO<Location> {
     Location closest = getLocationWithNumID(0);
 
     double minDist = getDist(x, y, closest.getXCoord(), closest.getYCoord());
+    System.out.println(getDist(x, y, closest.getXCoord(), closest.getYCoord()));
 
-    for (Location l : locations) {
+    for (Location l : getAll()) {
       if (l.getFloor().equals(floor)) {
+        System.out.println("Checking : " + l.getShortName());
         double distFrom = getDist(x, y, l.getXCoord(), l.getYCoord());
 
-        if (distFrom < minDist) closest = l;
+        if (l.getShortName().equals("Hallway F00801")) System.out.println(distFrom);
+        if (distFrom < minDist) {
+          minDist = distFrom;
+          closest = l;
+        }
       }
     }
 
+    System.out.println(getDist(x, y, closest.getXCoord(), closest.getYCoord()));
     return closest;
   }
 }

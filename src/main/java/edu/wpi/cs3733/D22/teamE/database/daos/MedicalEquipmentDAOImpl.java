@@ -62,10 +62,15 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
 
   @Override
   public void update(MedicalEquipment equipment) {
+    try {
+      get(equipment.getEquipmentID());
+      delete(equipment);
+    } catch (NullPointerException e) {
+      e.printStackTrace();
+    }
     equipmentList.add(equipment);
     try {
-      String query =
-              "INSERT INTO EQUIPMENT VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      String query = "INSERT INTO EQUIPMENT VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, equipment.getEquipmentID());
       statement.setString(2, equipment.getMed_equipmentID());
@@ -85,8 +90,17 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
 
   @Override
   public void delete(MedicalEquipment equipment) {
-    equipmentList.remove(equipment);
-    notifyObservers();
+    try {
+      get(equipment.getEquipmentID());
+      String query =
+          "DELETE FROM EQUIPMENT WHERE EQUIPMENTID = ('" + equipment.getEquipmentID() + "')";
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.executeUpdate();
+      equipmentList.remove(equipment);
+      notifyObservers();
+    } catch (NullPointerException | SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   public List<MedicalEquipment> getMedicalEquipments(
