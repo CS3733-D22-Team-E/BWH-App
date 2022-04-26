@@ -273,7 +273,7 @@ public class DBCreation {
             + "    LASTNAME       VARCHAR(35),          \n"
             + "    POSITION       VARCHAR(35),           \n"
             + "    PHONENUMBER       VARCHAR(35)           \n"
-                + ")";
+            + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
     System.out.println(generatePasswordHASH("admin"));
@@ -308,26 +308,24 @@ public class DBCreation {
 
   public static void createTables() {
     try {
-      //HAVE ALL LOAD (EXCEPT FLORAL REQUEST)
-      CallAPI.getInstance().getExternalTransportAPI();
+      // HAVE ALL LOAD (EXCEPT FLORAL REQUEST)
+      CallAPI.getInstance().getExternalTransportAPI(); //
       edu.wpi.cs3733.D22.teamE.APIDatabase.DBCreation.createFloralRequestTable();
-      createTowerLocationTable();//
-      createEmployeesTable();//
-      createEquipmentTable();//
-      createLabRequestTable();//
-      createMedEquipReqTable();//
-      createServiceRequestTable();//
-
-      createMedicineRequestTable();
-      createSanitationRequestTable();
-      createMealRequestTable();
-      createLanguageInterpreterRequestTable();
-      createFacilitiesRequestTable();
-      createSecurityRequestTable();
-      createGiftDeliveryRequestTable();
-
-      createAccountsTable();//
-      createEdgesTable();//
+      createTowerLocationTable(); //
+      createEmployeesTable(); //
+      createEquipmentTable(); //
+      createLabRequestTable(); //
+      createMedEquipReqTable(); //
+      createServiceRequestTable(); //
+      createMedicineRequestTable(); //
+      createSanitationRequestTable(); //
+      createMealRequestTable(); //
+      createLanguageInterpreterRequestTable(); //
+      createFacilitiesRequestTable(); //
+      createSecurityRequestTable(); //
+      createGiftDeliveryRequestTable(); //
+      createAccountsTable(); //
+      createEdgesTable(); //
     } catch (SQLException | IOException e) {
       e.printStackTrace();
     }

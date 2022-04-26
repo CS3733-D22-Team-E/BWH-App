@@ -29,9 +29,20 @@ public class App extends Application implements SharedScene {
     fileNames.add("AllEdges.csv");
     fileNames.add("Employees.csv");
     fileNames.add("MedEquip.csv");
-    fileNames.add("MedEquipRequest.csv");
+    fileNames.add("MedEquipRequests.csv");
     fileNames.add("TowerLocations.csv");
     fileNames.add("TransportExt.csv");
+    fileNames.add("LabRequests.csv");
+    fileNames.add("ServiceRequests.csv");
+    fileNames.add("MedicineRequests.csv");
+    fileNames.add("SanitationRequests.csv");
+    fileNames.add("MealRequests.csv");
+    fileNames.add("LangInterpRequests.csv");
+    fileNames.add("FacilitiesRequests.csv");
+    fileNames.add("SecurityRequests.csv");
+    fileNames.add("GiftRequests.csv");
+    fileNames.add("Requests.csv");
+    fileNames.add("Accounts.csv");
 
     DBCreation.createTables();
     for (String s : fileNames) {

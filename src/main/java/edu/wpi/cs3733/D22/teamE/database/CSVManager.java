@@ -15,8 +15,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Locale;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -41,22 +39,21 @@ public class CSVManager {
       "REQUESTID, STATUS, TYPE, ASSIGNEE, REQUEST_DATE, DELIVERY_DATE, ISURGENT";
   private static final String accountFormat =
       "ACCOUNTID, EMPLOYEEID, AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION, PHONENUMBER";
-  private static final String edgesFormat =
-       "EDGEID, START_NODE, END_NODE";
+  private static final String edgesFormat = "EDGEID, START_NODE, END_NODE";
   private static final String medicineRequestFormat =
-          "MEDICINE_REQ_ID, REQUEST_ID, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, DELIVERYLOCATIONID, FLOOR, MEDICINETYPE, MEDICINEQUANTITY, MEDICINEUNIT, REOCCURINGDAYS, OTHERNOTES, DELIVERYTIME";
+      "MEDICINE_REQ_ID, REQUEST_ID, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, DELIVERYLOCATIONID, FLOOR, MEDICINETYPE, MEDICINEQUANTITY, MEDICINEUNIT, REOCCURINGDAYS, OTHERNOTES, DELIVERYTIME";
   private static final String sanitationRequestFormat =
-          "SANITATION_REQ_ID, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, CLEANINGSIZE, ISBIOHAZARD, OTHERNOTES";
+      "SANITATION_REQ_ID, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, CLEANINGSIZE, ISBIOHAZARD, OTHERNOTES";
   private static final String mealDeliveryRequestFormat =
-          "MEAL_REQ_ID, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, ENTREE, BEVERAGE, DESSERT, DELIVERYTIME, OTHERNOTES";
+      "MEAL_REQ_ID, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, ENTREE, BEVERAGE, DESSERT, DELIVERYTIME, OTHERNOTES";
   private static final String languageInterpreterRequestFormat =
-          "LAN_INTERP_REQ, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, LANGUAGE, OTHERNOTES";
+      "LAN_INTERP_REQ, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, LANGUAGE, OTHERNOTES";
   private static final String facilitiesRequestFormat =
-          "FACILITIESREQID, FACILITIESREQTYPE, TIMEFRAME, FLOORID, ROOMID, ISURGENT, STAFFASSIGNEE, REQUESTSTATUS, REQUESTDATE, DELIVERYDATE, OTHERNOTES";
+      "FACILITIESREQID, FACILITIESREQTYPE, TIMEFRAME, FLOORID, ROOMID, ISURGENT, STAFFASSIGNEE, REQUESTSTATUS, REQUESTDATE, DELIVERYDATE, OTHERNOTES";
   private static final String securityRequestFormat =
-          "SECURITY_REQUESTID, SECURITY_REQUEST_TYPE, TIMEFRAME, LOCATIONID, FLOORID, ISURGENT, STAFFASSISNEE, REQUESTSTATUS, REQUESTDATE, DELIVERYDATE, OTHERNOTES";
+      "SECURITY_REQUESTID, SECURITY_REQUEST_TYPE, TIMEFRAME, LOCATIONID, FLOORID, ISURGENT, STAFFASSISNEE, REQUESTSTATUS, REQUESTDATE, DELIVERYDATE, OTHERNOTES";
   private static final String giftDeliveryRequestFormat =
-          "GIFT_REQ_ID, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, PATIENTNAME, GIFTTYPE, OTHERNOTES";
+      "GIFT_REQ_ID, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, PATIENTNAME, GIFTTYPE, OTHERNOTES";
 
   /*
       SAVING CSV FILES FROM THE DATABASE
@@ -98,7 +95,8 @@ public class CSVManager {
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (MedicalEquipment equip : DAOSystemSingleton.INSTANCE.getSystem().getAllMedicalEquipments()) {
+    for (MedicalEquipment equip :
+        DAOSystemSingleton.INSTANCE.getSystem().getAllMedicalEquipments()) {
       String csvLine =
           ""
               + equip.getEquipmentID()
@@ -129,7 +127,8 @@ public class CSVManager {
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (medicalEquipmentRequest mesr : DAOSystemSingleton.INSTANCE.getSystem().getAllMedicalEquipmentRequests()) {
+    for (medicalEquipmentRequest mesr :
+        DAOSystemSingleton.INSTANCE.getSystem().getAllMedicalEquipmentRequests()) {
       String csvLine =
           ""
               + mesr.getServiceRequestID()
@@ -288,35 +287,35 @@ public class CSVManager {
     // change with the proper format in first line of function
     for (medicineDelivery d : DAOSystemSingleton.INSTANCE.getSystem().getAllMedicineRequests()) {
       String csvLine =
-              ""
-                      + d.getServiceRequestID()
-                      + ','
-                      + d.getRequestDate()
-                      + ','
-                      + d.getDeliveryDate()
-                      + ','
-                      + d.getRequestStatus()
-                      + ','
-                      + d.getStaffAssignee()
-                      + ','
-                      + d.getIsUrgent()
-                      + ','
-                      + d.getRoomID()
-                      + ','
-                      + d.getFloorID()
-                      + ','
-                      + d.getMedicine()
-                      + ','
-                      + d.getAmount()
-                      + ','
-                      + d.getUnit()
-                      + ','
-                      + d.getReocurringDays()
-                      + ','
-                      + d.getOtherNotes()
-                      + ','
-                      + d.getDeliveryTime()
-                      + "\n";
+          ""
+              + d.getServiceRequestID()
+              + ','
+              + d.getRequestDate()
+              + ','
+              + d.getDeliveryDate()
+              + ','
+              + d.getRequestStatus()
+              + ','
+              + d.getStaffAssignee()
+              + ','
+              + d.getIsUrgent()
+              + ','
+              + d.getRoomID()
+              + ','
+              + d.getFloorID()
+              + ','
+              + d.getMedicine()
+              + ','
+              + d.getAmount()
+              + ','
+              + d.getUnit()
+              + ','
+              + d.getReocurringDays()
+              + ','
+              + d.getOtherNotes()
+              + ','
+              + d.getDeliveryTime()
+              + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
         FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
@@ -331,29 +330,29 @@ public class CSVManager {
     // change with the proper format in first line of function
     for (sanitationRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllSanitationRequests()) {
       String csvLine =
-              ""
-                      + d.getServiceRequestID()
-                      + ','
-                      + d.getRequestDate()
-                      + ','
-                      + d.getDeliveryDate()
-                      + ','
-                      + d.getRequestStatus()
-                      + ','
-                      + d.getStaffAssignee()
-                      + ','
-                      + d.getIsUrgent()
-                      + ','
-                      + d.getRoomID()
-                      + ','
-                      + d.getFloorID()
-                      + ','
-                      + d.getSizeOfCleaning()
-                      + ','
-                      + d.getBiohazardOnSite()
-                      + ','
-                      + d.getOtherNotes()
-                      + "\n";
+          ""
+              + d.getServiceRequestID()
+              + ','
+              + d.getRequestDate()
+              + ','
+              + d.getDeliveryDate()
+              + ','
+              + d.getRequestStatus()
+              + ','
+              + d.getStaffAssignee()
+              + ','
+              + d.getIsUrgent()
+              + ','
+              + d.getRoomID()
+              + ','
+              + d.getFloorID()
+              + ','
+              + d.getSizeOfCleaning()
+              + ','
+              + d.getBiohazardOnSite()
+              + ','
+              + d.getOtherNotes()
+              + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
         FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
@@ -368,33 +367,33 @@ public class CSVManager {
     // change with the proper format in first line of function
     for (mealDeliveryRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllMealRequests()) {
       String csvLine =
-              ""
-                      + d.getServiceRequestID()
-                      + ','
-                      + d.getRequestDate()
-                      + ','
-                      + d.getDeliveryDate()
-                      + ','
-                      + d.getRequestStatus()
-                      + ','
-                      + d.getStaffAssignee()
-                      + ','
-                      + d.getIsUrgent()
-                      + ','
-                      + d.getRoomID()
-                      + ','
-                      + d.getFloorID()
-                      + ','
-                      + d.getEntreeType()
-                      + ','
-                      + d.getBeverageType()
-                      + ','
-                      + d.getDessertType()
-                      + ','
-                      + d.getDeliveryTime()
-                      + ','
-                      + d.getOtherNotes()
-                      + "\n";
+          ""
+              + d.getServiceRequestID()
+              + ','
+              + d.getRequestDate()
+              + ','
+              + d.getDeliveryDate()
+              + ','
+              + d.getRequestStatus()
+              + ','
+              + d.getStaffAssignee()
+              + ','
+              + d.getIsUrgent()
+              + ','
+              + d.getRoomID()
+              + ','
+              + d.getFloorID()
+              + ','
+              + d.getEntreeType()
+              + ','
+              + d.getBeverageType()
+              + ','
+              + d.getDessertType()
+              + ','
+              + d.getDeliveryTime()
+              + ','
+              + d.getOtherNotes()
+              + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
         FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
@@ -402,34 +401,36 @@ public class CSVManager {
     }
   }
 
-  public static void saveLanguageInterpreterRequestCSV(String fileName) throws IOException, SQLException {
+  public static void saveLanguageInterpreterRequestCSV(String fileName)
+      throws IOException, SQLException {
     String format = languageInterpreterRequestFormat;
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (languageInterpreterRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllLanguageRequests()) {
+    for (languageInterpreterRequest d :
+        DAOSystemSingleton.INSTANCE.getSystem().getAllLanguageRequests()) {
       String csvLine =
-              ""
-                      + d.getServiceRequestID()
-                      + ','
-                      + d.getRequestDate()
-                      + ','
-                      + d.getDeliveryDate()
-                      + ','
-                      + d.getRequestStatus()
-                      + ','
-                      + d.getStaffAssignee()
-                      + ','
-                      + d.getIsUrgent()
-                      + ','
-                      + d.getRoomID()
-                      + ','
-                      + d.getFloorID()
-                      + ','
-                      + d.getLanguage()
-                      + ','
-                      + d.getOtherNotes()
-                      + "\n";
+          ""
+              + d.getServiceRequestID()
+              + ','
+              + d.getRequestDate()
+              + ','
+              + d.getDeliveryDate()
+              + ','
+              + d.getRequestStatus()
+              + ','
+              + d.getStaffAssignee()
+              + ','
+              + d.getIsUrgent()
+              + ','
+              + d.getRoomID()
+              + ','
+              + d.getFloorID()
+              + ','
+              + d.getLanguage()
+              + ','
+              + d.getOtherNotes()
+              + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
         FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
@@ -444,29 +445,29 @@ public class CSVManager {
     // change with the proper format in first line of function
     for (facilitiesRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllFacilitiesRequests()) {
       String csvLine =
-              ""
-                      + d.getServiceRequestID()
-                      + ','
-                      + d.getFacilitiesReqType()
-                      + ','
-                      + d.getTimeFrame()
-                      + ','
-                      + d.getFloorID()
-                      + ','
-                      + d.getRoomID()
-                      + ','
-                      + d.getIsUrgent()
-                      + ','
-                      + d.getStaffAssignee()
-                      + ','
-                      + d.getRequestStatus()
-                      + ','
-                      + d.getRequestDate()
-                      + ','
-                      + d.getDeliveryDate()
-                      + ','
-                      + d.getOtherNotes()
-                      + "\n";
+          ""
+              + d.getServiceRequestID()
+              + ','
+              + d.getFacilitiesReqType()
+              + ','
+              + d.getTimeFrame()
+              + ','
+              + d.getFloorID()
+              + ','
+              + d.getRoomID()
+              + ','
+              + d.getIsUrgent()
+              + ','
+              + d.getStaffAssignee()
+              + ','
+              + d.getRequestStatus()
+              + ','
+              + d.getRequestDate()
+              + ','
+              + d.getDeliveryDate()
+              + ','
+              + d.getOtherNotes()
+              + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
         FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
@@ -482,29 +483,29 @@ public class CSVManager {
     // change with the proper format in first line of function
     for (securityRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllSecurityRequests()) {
       String csvLine =
-              ""
-                      + d.getServiceRequestID()
-                      + ','
-                      + d.getSecurityRequestType()
-                      + ','
-                      + d.getTimeFrame()
-                      + ','
-                      + d.getRoomID()
-                      + ','
-                      + d.getFloorID()
-                      + ','
-                      + d.getIsUrgent()
-                      + ','
-                      + d.getStaffAssignee()
-                      + ','
-                      + d.getRequestStatus()
-                      + ','
-                      + d.getRequestDate()
-                      + ','
-                      + d.getDeliveryDate()
-                      + ','
-                      + d.getOtherNotes()
-                      + "\n";
+          ""
+              + d.getServiceRequestID()
+              + ','
+              + d.getSecurityRequestType()
+              + ','
+              + d.getTimeFrame()
+              + ','
+              + d.getRoomID()
+              + ','
+              + d.getFloorID()
+              + ','
+              + d.getIsUrgent()
+              + ','
+              + d.getStaffAssignee()
+              + ','
+              + d.getRequestStatus()
+              + ','
+              + d.getRequestDate()
+              + ','
+              + d.getDeliveryDate()
+              + ','
+              + d.getOtherNotes()
+              + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
         FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
@@ -519,29 +520,29 @@ public class CSVManager {
     // change with the proper format in first line of function
     for (giftDeliveryRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllGiftRequests()) {
       String csvLine =
-              ""
-                      + d.getServiceRequestID()
-                      + ','
-                      + d.getRequestDate()
-                      + ','
-                      + d.getDeliveryDate()
-                      + ','
-                      + d.getRequestStatus()
-                      + ','
-                      + d.getStaffAssignee()
-                      + ','
-                      + d.getIsUrgent()
-                      + ','
-                      + d.getRoomID()
-                      + ','
-                      + d.getFloorID()
-                      + ','
-                      + d.getPatientName()
-                      + ','
-                      + d.getGift()
-                      + ','
-                      + d.getOtherNotes()
-                      + "\n";
+          ""
+              + d.getServiceRequestID()
+              + ','
+              + d.getRequestDate()
+              + ','
+              + d.getDeliveryDate()
+              + ','
+              + d.getRequestStatus()
+              + ','
+              + d.getStaffAssignee()
+              + ','
+              + d.getIsUrgent()
+              + ','
+              + d.getRoomID()
+              + ','
+              + d.getFloorID()
+              + ','
+              + d.getPatientName()
+              + ','
+              + d.getGift()
+              + ','
+              + d.getOtherNotes()
+              + "\n";
       // change nothing
       if (!doesFileContainLine(out, csvLine)) {
         FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
@@ -569,7 +570,6 @@ public class CSVManager {
       }
     }
   }*/
-
 
   /*
       LOADING CSV FILES INTO THE DATABASE
@@ -764,14 +764,14 @@ public class CSVManager {
    * @throws IOException
    */
   private static boolean doesFileContainLine(File file, String line) throws IOException {
-    //string manipulation
-    line = line.toLowerCase().replace(" ","");
+    // string manipulation
+    line = line.toLowerCase().replace(" ", "");
     String fileName = file.getName();
     BufferedReader in = new BufferedReader(new FileReader(file));
     in.readLine();
     String curLine;
     while ((curLine = in.readLine()) != null) {
-      curLine = curLine.toLowerCase().replace(" ","");
+      curLine = curLine.toLowerCase().replace(" ", "");
       if (curLine.equals(line)) {
         in.close();
         return true;
@@ -822,7 +822,7 @@ public class CSVManager {
           InputStream is = Main.class.getResourceAsStream("CsvFiles/" + filename);
           assert is != null;
           writeInputStreamToFile(is, file);
-        }
+        } // if no resource file then do nothing
       } else { // if file already there, do nothing besides special case
         if (filename.equals("TransportExt.csv")) {
           if (file.length() != 0) {

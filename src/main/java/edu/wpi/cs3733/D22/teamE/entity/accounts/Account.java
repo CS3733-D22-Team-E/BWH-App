@@ -9,7 +9,6 @@ public abstract class Account {
   private final int staffAuthorityLevel = 1;
   private final int adminAuthorityLevel = 2;
 
-
   private String accountID; // staff assignee
   private String employeeID; // if empty
   private int authorityLevel; // 0 basic user, 1 staff, 2... admin
@@ -58,7 +57,7 @@ public abstract class Account {
     this.firstName = "defaultFirstName";
     this.lastName = "defaultLastName";
     this.position = "defaultPosition";
-    this.phoneNumber = "6178936605";//Jeremy
+    this.phoneNumber = "6178936605"; // Jeremy
   }
 
   /**
@@ -105,5 +104,7 @@ public abstract class Account {
     passwordHash = newPasswordHash;
   }
 
-  public String getPhoneNumber() { return phoneNumber; }
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
 }
