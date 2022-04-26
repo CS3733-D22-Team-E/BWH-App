@@ -47,51 +47,51 @@ public class aboutPageController {
 
   @FXML
   public void joeyPopUp(MouseEvent event) {
-    PopUp.aboutPopup(joeyBio, ((Node) event.getSource()).getScene().getWindow(), "Joey");
+    PopUp.aboutPopUp(joeyBio, ((Node) event.getSource()).getScene().getWindow(), "Joey");
   }
 
   @FXML
   public void colinPopUp(MouseEvent event) {
-    PopUp.aboutPopup(colinBio, ((Node) event.getSource()).getScene().getWindow(), "Colin");
+    PopUp.aboutPopUp(colinBio, ((Node) event.getSource()).getScene().getWindow(), "Colin");
   }
 
   @FXML
   public void ericPopUp(MouseEvent event) {
-    PopUp.aboutPopup(ericBio, ((Node) event.getSource()).getScene().getWindow(), "Eric");
+    PopUp.aboutPopUp(ericBio, ((Node) event.getSource()).getScene().getWindow(), "Eric");
   }
 
   @FXML
   public void jeremyPopUp(MouseEvent event) {
-    PopUp.aboutPopup(jeremyBio, ((Node) event.getSource()).getScene().getWindow(), "Jeremy");
+    PopUp.aboutPopUp(jeremyBio, ((Node) event.getSource()).getScene().getWindow(), "Jeremy");
   }
 
   @FXML
   public void shenPopUp(MouseEvent event) {
-    PopUp.aboutPopup(shenBio, ((Node) event.getSource()).getScene().getWindow(), "Shen");
+    PopUp.aboutPopUp(shenBio, ((Node) event.getSource()).getScene().getWindow(), "Shen");
   }
 
   @FXML
   public void timPopUp(MouseEvent event) {
-    PopUp.aboutPopup(timBio, ((Node) event.getSource()).getScene().getWindow(), "Tim");
+    PopUp.aboutPopUp(timBio, ((Node) event.getSource()).getScene().getWindow(), "Tim");
   }
 
   @FXML
   public void danielPopUp(MouseEvent event) {
-    PopUp.aboutPopup(danielBio, ((Node) event.getSource()).getScene().getWindow(), "Daniel");
+    PopUp.aboutPopUp(danielBio, ((Node) event.getSource()).getScene().getWindow(), "Daniel");
   }
 
   @FXML
   public void hannahPopUp(MouseEvent event) {
-    PopUp.aboutPopup(hannahBio, ((Node) event.getSource()).getScene().getWindow(), "Hannah");
+    PopUp.aboutPopUp(hannahBio, ((Node) event.getSource()).getScene().getWindow(), "Hannah");
   }
 
   @FXML
   public void philPopUp(MouseEvent event) {
-    PopUp.aboutPopup(philBio, ((Node) event.getSource()).getScene().getWindow(), "Phil");
+    PopUp.aboutPopUp(philBio, ((Node) event.getSource()).getScene().getWindow(), "Phil");
   }
 
   @FXML
   public void sizhePopUp(MouseEvent event) {
-    PopUp.aboutPopup(sizheBio, ((Node) event.getSource()).getScene().getWindow(), "Sizhe");
+    PopUp.aboutPopUp(sizheBio, ((Node) event.getSource()).getScene().getWindow(), "Sizhe");
   }
 }
