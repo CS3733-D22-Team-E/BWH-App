@@ -1,22 +1,22 @@
 package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
+import com.jfoenix.controls.JFXBadge;
 import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class DashboardController implements Initializable {
@@ -37,6 +37,14 @@ public class DashboardController implements Initializable {
   JFXToggleNode currentFloor;
   String currentFloorString;
 
+  @FXML TableView<RequestInterface> serviceRequestTable;
+  @FXML TableColumn<RequestInterface, String> tableDate;
+  @FXML TableColumn<RequestInterface, String> tableFloor;
+  @FXML TableColumn<RequestInterface, String> tableRoom;
+  @FXML TableColumn<RequestInterface, String> tableRequestType;
+  @FXML TableColumn<RequestInterface, String> tableStaffAssignee;
+  @FXML TableColumn<RequestInterface, String> tableProgress;
+
   @FXML Label xRayClean;
   @FXML Label xRayInUse;
   @FXML Label xRayDirty;
@@ -53,6 +61,12 @@ public class DashboardController implements Initializable {
   @FXML Label infusionPumpInUse;
   @FXML Label infusionPumpDirty;
 
+  @FXML VBox bedBox;
+  @FXML JFXBadge bedAlertBadge;
+
+  @FXML VBox infusionPumpBox;
+  @FXML JFXBadge infusionPumpAlertBadge;
+
   DAOSystem database;
   ArrayList<MedicalEquipment> currentEquipment;
   ArrayList<RequestInterface> currentServiceRequests;
@@ -63,11 +77,11 @@ public class DashboardController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    try {
-      database = new DAOSystem();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+
+    bedAlertBadge = new JFXBadge();
+    // bedBox.getChildren().add(bedAlertBadge);
+
+    database = DAOSystemSingleton.INSTANCE.getSystem();
 
     currentFloorString = "All";
     floorButtonsHandler();

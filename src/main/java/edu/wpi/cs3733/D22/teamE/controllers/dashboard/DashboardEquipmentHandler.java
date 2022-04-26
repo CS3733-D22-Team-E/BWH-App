@@ -27,8 +27,29 @@ public class DashboardEquipmentHandler extends DashboardHandler {
   }
 
   public void updateEquipmentReports() {
+    bedAlertHandler();
     filterEquipment();
     setEquipmentCounts();
+    infusionPumpAlertHandler();
+  }
+
+  private void bedAlertHandler() {
+    ArrayList<MedicalEquipment> dirtyLocBeds = new ArrayList<>();
+    for (MedicalEquipment curEq : allEquipmentList) {
+      if (curEq.getEquipmentType().equals("BED")) {
+        if (subject.getLocation(curEq.getCurrentLocation()).getNodeType().equals("DIRT")) {
+          dirtyLocBeds.add(curEq);
+        }
+      }
+    }
+    if (dirtyLocBeds.size() >= 6) {
+      createBedAlert();
+    }
+    System.out.println("Beds in dirty locations: " + dirtyLocBeds);
+  }
+
+  private void createBedAlert() {
+    System.out.println("BEEP BEEP!! DIRTY BED ALERT!!!");
   }
 
   private void filterEquipment() {
@@ -85,4 +106,6 @@ public class DashboardEquipmentHandler extends DashboardHandler {
       }
     }
   }
+
+  private void infusionPumpAlertHandler() {}
 }
