@@ -5,10 +5,6 @@ public abstract class Account {
   public static int staffPerm = 1;
   public static int adminPerm = 2;
 
-  private final int basicUserAuthorityLevel = 0;
-  private final int staffAuthorityLevel = 1;
-  private final int adminAuthorityLevel = 2;
-
   private String accountID; // staff assignee
   private String employeeID; // if empty
   private int authorityLevel; // 0 basic user, 1 staff, 2... admin
@@ -16,7 +12,6 @@ public abstract class Account {
   private String firstName;
   private String lastName;
   private String position;
-  private String phoneNumber;
   /**
    * realistically used to load in from a CSV of accounts
    *
@@ -27,7 +22,6 @@ public abstract class Account {
    * @param firstName
    * @param lastName
    * @param position
-   * @param phoneNumber
    */
   public Account(
       String accountID,
@@ -36,8 +30,7 @@ public abstract class Account {
       String passwordHash,
       String firstName,
       String lastName,
-      String position,
-      String phoneNumber) {
+      String position) {
     this.accountID = accountID; // AccountsManager.generateRandom8DigitID();;
     this.employeeID = employeeID;
     this.authorityLevel = authorityLevel;
@@ -45,7 +38,6 @@ public abstract class Account {
     this.firstName = firstName;
     this.lastName = lastName;
     this.position = position;
-    this.phoneNumber = phoneNumber;
   }
 
   /** generally for testing purposes */
@@ -57,7 +49,6 @@ public abstract class Account {
     this.firstName = "defaultFirstName";
     this.lastName = "defaultLastName";
     this.position = "defaultPosition";
-    this.phoneNumber = "6178936605"; // Jeremy
   }
 
   /**
@@ -102,9 +93,5 @@ public abstract class Account {
 
   public void setPasswordHash(String newPasswordHash) {
     passwordHash = newPasswordHash;
-  }
-
-  public String getPhoneNumber() {
-    return phoneNumber;
   }
 }
