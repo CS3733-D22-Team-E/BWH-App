@@ -1,7 +1,10 @@
 package edu.wpi.cs3733.D22.teamE;
 
+import static edu.wpi.cs3733.D22.teamE.database.CSVManager.saveAllCSVs;
+
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -65,7 +68,9 @@ public class pageControl {
     }
   }
 
-  public static void exitApp() {
+  public static void exitApp() throws SQLException, IOException {
+    saveAllCSVs();
+
     CallAPI.getInstance()
         .getExternalTransportAPI()
         .exportExternalTransportsToCSV(new File("CSVsaveFiles/TransportExt.csv"));

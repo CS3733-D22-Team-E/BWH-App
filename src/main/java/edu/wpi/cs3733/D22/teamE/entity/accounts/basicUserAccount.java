@@ -1,8 +1,8 @@
 package edu.wpi.cs3733.D22.teamE.entity.accounts;
 
-public class staffAccount extends Account {
+public class basicUserAccount extends Account {
 
-  public staffAccount(
+  public basicUserAccount(
       String accountID,
       String employeeID,
       String passwordHash,
@@ -10,11 +10,11 @@ public class staffAccount extends Account {
       String lastName,
       String position,
       String phoneNumber) {
-    super(accountID, employeeID, 1, passwordHash, firstName, lastName, position, phoneNumber);
+    super(accountID, employeeID, 0, passwordHash, firstName, lastName, position, phoneNumber);
   }
 
-  public staffAccount() {
+  public basicUserAccount() {
     super();
-    this.setAuthorityLevel(1); // admin
+    this.setAuthorityLevel(0); // admin
   }
 }
