@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import edu.wpi.cs3733.D22.teamE.pageButtons;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.IOException;
-import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -43,7 +42,7 @@ public class sideMenuController implements pageButtons {
   }
 
   @FXML
-  public void exitButton(ActionEvent event) throws IOException, SQLException {
+  public void exitButton(ActionEvent event) throws IOException {
     pageControl.exitApp();
   }
 

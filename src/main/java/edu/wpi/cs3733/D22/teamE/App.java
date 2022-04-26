@@ -1,12 +1,12 @@
 package edu.wpi.cs3733.D22.teamE;
 
-import static edu.wpi.cs3733.D22.teamE.database.CSVManager.generateNewSaves;
-import static edu.wpi.cs3733.D22.teamE.database.CSVManager.saveAllCSVs;
+import static edu.wpi.cs3733.D22.teamE.database.CSVManager.generateFile;
 
 import edu.wpi.cs3733.D22.teamE.controllers.*;
+import edu.wpi.cs3733.D22.teamE.database.DBCreation;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -25,15 +25,13 @@ public class App extends Application implements SharedScene {
   @Override
   public void init() throws InterruptedException {
     log.info("Starting Up");
-
-    generateNewSaves(); // from CSV manager
-    try {
-      saveAllCSVs();
-    } catch (IOException | SQLException e) {
-      // do nothing ig, just to handle
-      System.err.println("saveAllCSVs Error: " + e);
+    ArrayList<String> fileNames = new ArrayList<>();
+    fileNames.add("TransportExt.csv");
+    fileNames.add("TowerLocations.csv");
+    DBCreation.createTables();
+    for (String s : fileNames) {
+      generateFile(s);
     }
-
     DAOSystemSingleton.INSTANCE.getSystem();
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("view/loadingSplash.fxml"));

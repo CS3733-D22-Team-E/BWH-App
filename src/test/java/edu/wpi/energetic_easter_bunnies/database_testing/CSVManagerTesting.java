@@ -14,34 +14,33 @@ public class CSVManagerTesting {
   @Test
   public void testLoadLocationFile() throws SQLException, IOException {
     DBCreation.createTables();
-    assertTrue(CSVManager.loadLocationCSV(CSVManager.getDefaultLocationFilename()));
+    assertTrue(CSVManager.loadLocationCSV("TowerLocations.csv"));
   }
 
   @Test
   public void testSaveLocationFile() throws SQLException, IOException {
     DBCreation.createTables();
-    String filename = CSVManager.getDefaultLocationFilename(); // generalize
-    // CSVManager.saveLocationCSV(filename);
-    CSVManager.saveAllCSVs();
+    String filename = "saveLocationFile.csv";
+    CSVManager.saveLocationCSV(filename);
 
-    assertTrue(new File("CSVsaveFiles/" + filename).exists());
+    assertTrue(new File("./CSVsaveFiles/" + filename).exists());
   }
 
   @Test
   public void testLoadEmployeesFile() throws SQLException, IOException {
     DBCreation.createTables();
-    assertTrue(CSVManager.loadEmployeesCSV(CSVManager.getDefaultEmployeesFilename()));
+    assertTrue(CSVManager.loadEmployeesCSV("Employees.csv"));
   }
 
   @Test
   public void testLoadEquipmentFile() throws SQLException, IOException {
     DBCreation.createTables();
-    assertTrue(CSVManager.loadEquipmentCSV(CSVManager.getDefaultEquipmentFilename()));
+    assertTrue(CSVManager.loadEquipmentCSV("MedEquip.csv"));
   }
 
   @Test
   public void testLoadMedEquipRequestFile() throws SQLException, IOException {
     DBCreation.createTables();
-    assertTrue(CSVManager.loadMedEquipReqCSV(CSVManager.getDefaultMedEquipRequestFilename()));
+    assertTrue(CSVManager.loadMedEquipReqCSV("MedEquipRequest.csv"));
   }
 }
