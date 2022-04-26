@@ -53,6 +53,51 @@ public class MealDeliveryRequestDAOImpl implements DAO<mealDeliveryRequest> {
 
   @Override
   public List<mealDeliveryRequest> getAll() {
+    mealDeliveryRequests = new ArrayList<>();
+
+    try {
+      String query = "SELECT * FROM MEALDELIVERYREQUEST ORDER BY MEAL_REQ_ID DESC";
+      PreparedStatement statement = connection.prepareStatement(query);
+      ResultSet rs = statement.executeQuery();
+
+      while (rs.next()) {
+        String medicineReqID = rs.getString("MEAL_REQ_ID");
+        String otherNotes = rs.getString("OTHERNOTES");
+        String floorID = rs.getString("FLOOR");
+        String roomID = rs.getString("ROOMID");
+        boolean isUrgent = rs.getBoolean("ISURGENT");
+        String status = rs.getString("STATUS");
+        String staffAssignee = rs.getString("ASSIGNEE");
+        java.sql.Date requestDate = rs.getDate("REQUEST_DATE");
+        java.sql.Date deliveryDate = rs.getDate("DELIVERY_DATE");
+        String entree = rs.getString("ENTREE");
+        String beverage = rs.getString("BEVERAGE");
+        String dessert = rs.getString("DESSERT");
+        String deliveryTime = rs.getString("DELIVERYTIME");
+
+        mealDeliveryRequest request =
+            new mealDeliveryRequest(
+                medicineReqID,
+                otherNotes,
+                floorID,
+                roomID,
+                isUrgent,
+                status,
+                staffAssignee,
+                requestDate.toLocalDate(),
+                deliveryDate.toLocalDate(),
+                entree,
+                beverage,
+                dessert,
+                deliveryTime);
+        mealDeliveryRequests.add(request);
+      }
+      rs.close();
+    } catch (SQLException e) {
+      System.out.println("Get All Failed!");
+      e.printStackTrace();
+    }
+
     return mealDeliveryRequests;
   }
 
@@ -95,7 +140,17 @@ public class MealDeliveryRequestDAOImpl implements DAO<mealDeliveryRequest> {
   }
 
   @Override
-  public void delete(mealDeliveryRequest item) {
-    mealDeliveryRequests.remove(item);
+  public void delete(mealDeliveryRequest request) {
+    mealDeliveryRequests.remove(request);
+
+    String query = "DELETE FROM MEALDELIVERYREQUEST WHERE MEAL_REQ_ID = (?)";
+    PreparedStatement statement;
+    try {
+      statement = connection.prepareStatement(query);
+      statement.setString(1, request.getServiceRequestID());
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }

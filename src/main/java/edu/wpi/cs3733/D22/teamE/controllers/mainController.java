@@ -16,10 +16,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class mainController implements pageButtons {
+  public TilePane buttonTilePane;
   @FXML VBox mainPane;
 
   @FXML Button sanitationButton;
@@ -232,10 +234,14 @@ public class mainController implements pageButtons {
 
   @FXML
   public void apiButton(ActionEvent event) {
-    CallAPI.getInstance().openAPI();
+    CallAPI.getInstance().openFloralAPI();
   }
 
   public static String getDatabaseMode() {
     return databaseMode;
+  }
+
+  public void extTransportButton(ActionEvent event) {
+    CallAPI.getInstance().openExternalTransportAPI();
   }
 }

@@ -77,12 +77,13 @@
 
 .headerButton {
     -fx-background-color: #2E716D;
-    -fx-text-fill: #204F87;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15;
 }
 
 .headerSelectedButton {
-    -fx-background-color: #368C87;
-    -fx-text-fill: #ffffff;
+    -fx-background-color: #ff00ff;
+    -fx-text-fill: #204F87;
 }
 
 .headerText {

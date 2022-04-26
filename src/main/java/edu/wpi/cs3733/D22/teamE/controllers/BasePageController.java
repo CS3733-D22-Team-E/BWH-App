@@ -23,13 +23,13 @@ public class BasePageController implements Initializable {
 
   @FXML
   public void openDrawer(JFXDrawerEvent jfxDrawerEvent) {
-    drawer.setMinWidth(100);
+    drawer.setMinWidth(150);
     drawer.setDisable(false);
   }
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    rootBorderPane.setCenter(pageControl.getPageRoot("medicineDelivery.fxml"));
+    rootBorderPane.setCenter(pageControl.getPageRoot("homePage.fxml"));
     sideMenuController sideMenu = new sideMenuController(rootBorderPane);
     Parent sideMenuView = (Parent) pageControl.getPageRoot("sidePanel.fxml", sideMenu);
     HeaderController headerController = new HeaderController(drawer, rootBorderPane);

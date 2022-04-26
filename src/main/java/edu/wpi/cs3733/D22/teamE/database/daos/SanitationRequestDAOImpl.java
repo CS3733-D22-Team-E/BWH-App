@@ -49,6 +49,47 @@ public class SanitationRequestDAOImpl implements DAO<sanitationRequest> {
 
   @Override
   public List<sanitationRequest> getAll() {
+    sanitationRequests = new ArrayList<>();
+
+    try {
+      String query = "SELECT * FROM SANITATIONREQUEST ORDER BY SANITATION_REQ_ID DESC";
+      PreparedStatement statement = connection.prepareStatement(query);
+      ResultSet rs = statement.executeQuery();
+
+      while (rs.next()) {
+        String sanitationReqID = rs.getString("SANITATION_REQ_ID");
+        java.sql.Date requestDate = rs.getDate("REQUEST_DATE");
+        java.sql.Date deliveryDate = rs.getDate("DELIVERY_DATE");
+        String status = rs.getString("STATUS");
+        String staffAssignee = rs.getString("ASSIGNEE");
+        boolean isUrgent = rs.getBoolean("ISURGENT");
+        String roomID = rs.getString("ROOMID");
+        String floorID = rs.getString("FLOOR");
+        String sizeType = rs.getString("CLEANINGSIZE");
+        String biohazardType = rs.getString("ISBIOHAZARD");
+        String otherNotes = rs.getString("OTHERNOTES");
+
+        sanitationRequest request =
+            new sanitationRequest(
+                sanitationReqID,
+                otherNotes,
+                floorID,
+                roomID,
+                isUrgent,
+                status,
+                staffAssignee,
+                requestDate.toLocalDate(),
+                deliveryDate.toLocalDate(),
+                sanitationRequest.Size.valueOf(sizeType),
+                sanitationRequest.Biohazard.valueOf(biohazardType));
+        sanitationRequests.add(request);
+      }
+      rs.close();
+    } catch (SQLException e) {
+      System.out.println("Get All Failed!");
+      e.printStackTrace();
+    }
+
     return sanitationRequests;
   }
 

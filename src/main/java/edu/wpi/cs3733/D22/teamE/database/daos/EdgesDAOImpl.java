@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-import edu.wpi.cs3733.D22.teamE.database.Location;
+import edu.wpi.cs3733.D22.teamE.entity.Location;
 import edu.wpi.cs3733.D22.teamE.pathfinding.Edge;
 import edu.wpi.cs3733.D22.teamE.pathfinding.Node;
 import java.sql.Connection;

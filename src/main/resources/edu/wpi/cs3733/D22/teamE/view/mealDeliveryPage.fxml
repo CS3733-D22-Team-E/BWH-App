@@ -110,8 +110,8 @@
                                           <HBox alignment="BOTTOM_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                              <children>
                                                 <JFXComboBox fx:id="entreeDropDown" promptText="Select Entree" styleClass="inputField" HBox.hgrow="ALWAYS" />
-                                                <JFXComboBox fx:id="selectBeverage" promptText="Select Beverage" styleClass="inputField" />
-                                                <JFXComboBox fx:id="selectDessert" promptText="Select Dessert" styleClass="inputField" />
+                                                <JFXComboBox fx:id="beverageDropDown" promptText="Select Beverage" styleClass="inputField" />
+                                                <JFXComboBox fx:id="dessertDropDown" promptText="Select Dessert" styleClass="inputField" />
                                              </children>
                                           </HBox>
                                           <VBox alignment="CENTER_LEFT" minHeight="50.0" spacing="5.0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">

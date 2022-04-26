@@ -2,11 +2,10 @@ package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.cs3733.D22.teamE.controllers.containsSideMenu;
-import edu.wpi.cs3733.D22.teamE.database.Equipment;
-import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
+import edu.wpi.cs3733.D22.teamE.entity.Equipment;
+import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.net.URL;
 import java.sql.SQLException;
@@ -22,7 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-public class DashboardController extends containsSideMenu implements Initializable {
+public class DashboardController implements Initializable {
 
   @FXML private VBox baseComponent;
 
@@ -77,7 +76,6 @@ public class DashboardController extends containsSideMenu implements Initializab
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    super.initialize(url, rb);
 
     try {
       equipmentDAO = new MedicalEquipmentDAOImpl();

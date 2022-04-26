@@ -104,8 +104,8 @@
                               </HBox>
                               <HBox alignment="BOTTOM_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <children>
-                                    <JFXComboBox fx:id="equipmentQuantity" promptText="Select Quantity" styleClass="inputField" HBox.hgrow="ALWAYS" />
                                     <JFXComboBox fx:id="equipmentType" promptText="Select Equipment" styleClass="inputField" />
+                                    <JFXComboBox fx:id="equipmentQuantity" promptText="Select Quantity" styleClass="inputField" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                               <VBox alignment="CENTER_LEFT" minHeight="50.0" spacing="5.0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">

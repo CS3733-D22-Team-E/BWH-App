@@ -60,6 +60,17 @@
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
                            </styleClass></JFXButton>
+                        <JFXButton buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 2" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="rounded" />
+                              <String fx:value="darkBorder" />
+                              <String fx:value="lightColor" />
+                              <String fx:value="thinBorder" />
+                           </styleClass>
+                        </JFXButton>
                         <JFXButton buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 1" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="18.0" />
