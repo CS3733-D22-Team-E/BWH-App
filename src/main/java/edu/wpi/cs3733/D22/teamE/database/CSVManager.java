@@ -40,7 +40,8 @@ public class CSVManager {
       "REQUESTID, STATUS, TYPE, ASSIGNEE, REQUEST_DATE, DELIVERY_DATE, ISURGENT";
   private static final String accountFormat =
       "ACCOUNTID, EMPLOYEEID, AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION, PHONENUMBER";
-  private static final String edgesFormat = "EDGEID, START_NODE, END_NODE";
+  private static final String edgesFormat =
+      "EDGEID, START_NODE, END_NODE";
   private static final String medicineRequestFormat =
       "MEDICINE_REQ_ID, REQUEST_ID, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, DELIVERYLOCATIONID, FLOOR, MEDICINETYPE, MEDICINEQUANTITY, MEDICINEUNIT, REOCCURINGDAYS, OTHERNOTES, DELIVERYTIME";
   private static final String sanitationRequestFormat =
@@ -55,6 +56,22 @@ public class CSVManager {
       "SECURITY_REQUESTID, SECURITY_REQUEST_TYPE, TIMEFRAME, LOCATIONID, FLOORID, ISURGENT, STAFFASSISNEE, REQUESTSTATUS, REQUESTDATE, DELIVERYDATE, OTHERNOTES";
   private static final String giftDeliveryRequestFormat =
       "GIFT_REQ_ID, REQUEST_DATE, DELIVERY_DATE, STATUS, ASSIGNEE, ISURGENT, ROOMID, FLOOR, PATIENTNAME, GIFTTYPE, OTHERNOTES";
+
+  public static String getDefaultLocationFilename() { return "TowerLocations.csv"; }
+  public static String getDefaultEquipmentFilename() { return "MedEquip.csv"; }
+  public static String getDefaultEmployeesFilename() { return "Employees.csv"; }
+  public static String getDefaultLabRequestFilename() { return "LabRequests.csv"; }
+  public static String getDefaultMedEquipRequestFilename() { return "MedEquipRequest.csv"; }
+  public static String getDefaultServiceRequestFilename() { return "ServiceRequests.csv"; }
+  public static String getDefaultMedicineRequestFilename() { return "MedicineRequests.csv"; }
+  public static String getDefaultSanitationRequestFilename() { return "SanitationRequests.csv"; }
+  public static String getDefaultMealRequestFilename() { return "MealRequests.csv"; }
+  public static String getDefaultLangInterpRequestFilename() { return "LanguageRequests.csv"; }
+  public static String getDefaultFacilitiesRequestFilename() { return "FacilitiesRequests.csv"; }
+  public static String getDefaultSecurityRequestFilename() { return "SecurityRequests.csv"; }
+  public static String getDefaultGiftRequestFilename() { return "GiftRequests.csv"; }
+  public static String getDefaultAccountsFilename() { return "Accounts.csv"; }
+  public static String getDefaultEdgesFilename() { return "AllEdges.csv"; }
 
   /*
       SAVING CSV FILES FROM THE DATABASE
@@ -845,23 +862,23 @@ public class CSVManager {
   /** Generates new save files for each specific resource file name */
   public static void generateNewSaves() {
     ArrayList<String> fileNames = new ArrayList<>();
-    fileNames.add("AllEdges.csv");
-    fileNames.add("Employees.csv");
-    fileNames.add("MedEquip.csv");
-    fileNames.add("MedEquipRequest.csv");
-    fileNames.add("TowerLocations.csv");
+    fileNames.add(CSVManager.getDefaultEdgesFilename());
+    fileNames.add(CSVManager.getDefaultEmployeesFilename());
+    fileNames.add(CSVManager.getDefaultEquipmentFilename());
+    fileNames.add(CSVManager.getDefaultMedEquipRequestFilename());
+    fileNames.add(CSVManager.getDefaultLocationFilename());
     fileNames.add("TransportExt.csv");
-    fileNames.add("LabRequests.csv");
-    fileNames.add("ServiceRequests.csv");
-    fileNames.add("MedicineRequests.csv");
-    fileNames.add("SanitationRequests.csv");
-    fileNames.add("MealRequests.csv");
-    fileNames.add("LangInterpRequests.csv");
-    fileNames.add("FacilitiesRequests.csv");
-    fileNames.add("SecurityRequests.csv");
-    fileNames.add("GiftRequests.csv");
+    fileNames.add(CSVManager.getDefaultLabRequestFilename());
+    fileNames.add(CSVManager.getDefaultServiceRequestFilename());
+    fileNames.add(CSVManager.getDefaultMedicineRequestFilename());
+    fileNames.add(CSVManager.getDefaultSanitationRequestFilename());
+    fileNames.add(CSVManager.getDefaultMealRequestFilename());
+    fileNames.add(CSVManager.getDefaultLangInterpRequestFilename());
+    fileNames.add(CSVManager.getDefaultFacilitiesRequestFilename());
+    fileNames.add(CSVManager.getDefaultSecurityRequestFilename());
+    fileNames.add(CSVManager.getDefaultGiftRequestFilename());
     // fileNames.add("Requests.csv");
-    fileNames.add("Accounts.csv");
+    fileNames.add(CSVManager.getDefaultAccountsFilename());
 
     DBCreation.createTables();
     for (String s : fileNames) {
@@ -876,20 +893,20 @@ public class CSVManager {
    * @throws IOException
    */
   public static void saveAllCSVs() throws SQLException, IOException {
-    CSVManager.saveLocationCSV("TowerLocations.csv");
-    CSVManager.saveEmployeeCSV("Employees.csv");
-    CSVManager.saveMedEquipCSV("MedEquip.csv");
-    CSVManager.saveLabRequestCSV("LabRequests.csv");
-    CSVManager.saveMedEquipRequestCSV("MedEquipRequests.csv");
-    CSVManager.saveServiceRequestCSV("ServiceRequests.csv");
-    CSVManager.saveMedicineRequestCSV("MedicineRequests.csv");
-    CSVManager.saveSanitationRequestCSV("SanitationRequests.csv");
-    CSVManager.saveMealDeliveryCSV("MealRequests.csv");
-    CSVManager.saveLanguageInterpreterRequestCSV("LangInterpRequests.csv");
-    CSVManager.saveFacilitiesRequestCSV("FacilitiesRequests.csv");
-    CSVManager.saveSecurityRequestCSV("SecurityRequests.csv");
-    CSVManager.saveGiftDeliveryRequestCSV("GiftRequests.csv");
-    CSVManager.saveAccountCSV("Accounts.csv");
+    CSVManager.saveLocationCSV(CSVManager.getDefaultLocationFilename());
+    CSVManager.saveEmployeeCSV(CSVManager.getDefaultEmployeesFilename());
+    CSVManager.saveMedEquipCSV(CSVManager.getDefaultEquipmentFilename());
+    CSVManager.saveLabRequestCSV(CSVManager.getDefaultLabRequestFilename());
+    CSVManager.saveMedEquipRequestCSV(CSVManager.getDefaultMedEquipRequestFilename());
+    CSVManager.saveServiceRequestCSV(CSVManager.getDefaultServiceRequestFilename());
+    CSVManager.saveMedicineRequestCSV(CSVManager.getDefaultMedicineRequestFilename());
+    CSVManager.saveSanitationRequestCSV(CSVManager.getDefaultSanitationRequestFilename());
+    CSVManager.saveMealDeliveryCSV(CSVManager.getDefaultMealRequestFilename());
+    CSVManager.saveLanguageInterpreterRequestCSV(CSVManager.getDefaultLangInterpRequestFilename());
+    CSVManager.saveFacilitiesRequestCSV(CSVManager.getDefaultFacilitiesRequestFilename());
+    CSVManager.saveSecurityRequestCSV(CSVManager.getDefaultSecurityRequestFilename());
+    CSVManager.saveGiftDeliveryRequestCSV(CSVManager.getDefaultGiftRequestFilename());
+    CSVManager.saveAccountCSV(CSVManager.getDefaultAccountsFilename());
 
     // CSVManager.saveEdgesCSV();
   }
