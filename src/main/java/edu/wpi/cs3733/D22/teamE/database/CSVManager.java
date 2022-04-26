@@ -809,7 +809,7 @@ public class CSVManager {
     }
 
     if (!doesFileContainLine(file, format)) { // only looks for first line or no lines
-      FileUtils.writeStringToFile(file, format, (Charset) null, false);
+      FileUtils.writeStringToFile(file, format, (Charset) null, false); //false enables overwriting if there is no format
     }
     ; // true means append=true
 
