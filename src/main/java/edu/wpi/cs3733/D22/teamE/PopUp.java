@@ -67,4 +67,17 @@ public class PopUp {
     /* JFXPopup popup = new JFXPopup(new Label(message));
     popup.show(owner, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT);*/
   }
+
+  public static void aboutPopup(String bio, Window owner, String employee) {
+    JFXAlert alert = new JFXAlert(owner);
+    alert.initModality(Modality.APPLICATION_MODAL);
+    alert.setOverlayClose(false);
+    JFXDialogLayout layout = new JFXDialogLayout();
+    layout.setHeading(new Label("About " + employee));
+    layout.setBody(new Label(bio));
+    //    alert.setOnAction(event -> alert.hideWithAnimation());
+    //    layout.setActions(closeButton);
+    alert.setContent(layout);
+    alert.showAndWait();
+  }
 }

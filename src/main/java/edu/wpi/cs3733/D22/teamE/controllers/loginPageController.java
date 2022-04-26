@@ -39,8 +39,8 @@ public class loginPageController implements Initializable {
   @FXML
   public void submitLogin(ActionEvent event) {
     if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
-
-      pageControl.loadPage("homePage.fxml", (Stage) passwordField.getScene().getWindow());
+      // needs to be put back to homePage
+      pageControl.loadPage("aboutPage.fxml", (Stage) passwordField.getScene().getWindow());
 
     } else {
       invalidWarning.setVisible(true);
