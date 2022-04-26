@@ -1,12 +1,12 @@
 package edu.wpi.cs3733.D22.teamE;
 
-import static edu.wpi.cs3733.D22.teamE.database.CSVManager.generateNewSaveFileFromResources;
+import static edu.wpi.cs3733.D22.teamE.database.CSVManager.generateNewSaves;
+import static edu.wpi.cs3733.D22.teamE.database.CSVManager.saveAllCSVs;
 
 import edu.wpi.cs3733.D22.teamE.controllers.*;
-import edu.wpi.cs3733.D22.teamE.database.DBCreation;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -25,29 +25,15 @@ public class App extends Application implements SharedScene {
   @Override
   public void init() throws InterruptedException {
     log.info("Starting Up");
-    ArrayList<String> fileNames = new ArrayList<>();
-    fileNames.add("AllEdges.csv");
-    fileNames.add("Employees.csv");
-    fileNames.add("MedEquip.csv");
-    fileNames.add("MedEquipRequests.csv");
-    fileNames.add("TowerLocations.csv");
-    fileNames.add("TransportExt.csv");
-    fileNames.add("LabRequests.csv");
-    fileNames.add("ServiceRequests.csv");
-    fileNames.add("MedicineRequests.csv");
-    fileNames.add("SanitationRequests.csv");
-    fileNames.add("MealRequests.csv");
-    fileNames.add("LangInterpRequests.csv");
-    fileNames.add("FacilitiesRequests.csv");
-    fileNames.add("SecurityRequests.csv");
-    fileNames.add("GiftRequests.csv");
-    fileNames.add("Requests.csv");
-    fileNames.add("Accounts.csv");
 
-    DBCreation.createTables();
-    for (String s : fileNames) {
-      generateNewSaveFileFromResources(s);
+    generateNewSaves(); // from CSV manager
+    try {
+      saveAllCSVs();
+    } catch (IOException | SQLException e) {
+      // do nothing ig, just to handle
+      System.err.println("saveAllCSVs Error: " + e);
     }
+
     DAOSystemSingleton.INSTANCE.getSystem();
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("view/loadingSplash.fxml"));

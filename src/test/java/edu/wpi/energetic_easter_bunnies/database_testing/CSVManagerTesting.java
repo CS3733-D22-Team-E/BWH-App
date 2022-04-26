@@ -20,10 +20,11 @@ public class CSVManagerTesting {
   @Test
   public void testSaveLocationFile() throws SQLException, IOException {
     DBCreation.createTables();
-    String filename = "saveLocationFile.csv";
-    CSVManager.saveLocationCSV(filename);
+    String filename = "TowerLocations.csv"; // generalize
+    // CSVManager.saveLocationCSV(filename);
+    CSVManager.saveAllCSVs();
 
-    assertTrue(new File("./CSVsaveFiles/" + filename).exists());
+    assertTrue(new File("CSVsaveFiles/" + filename).exists());
   }
 
   @Test

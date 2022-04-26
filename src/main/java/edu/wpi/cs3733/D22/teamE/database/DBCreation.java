@@ -78,6 +78,7 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
+    CSVManager.loadLabRequestCSV("LabRequests.csv");
   }
 
   public static void createMedEquipReqTable() throws SQLException, IOException {
@@ -101,7 +102,7 @@ public class DBCreation {
     CSVManager.loadMedEquipReqCSV("MedEquipRequest.csv");
   }
 
-  public static void createServiceRequestTable() throws SQLException {
+  public static void createServiceRequestTable() throws SQLException, IOException {
     String query =
         "create table SERVICEREQUEST\n"
             + "(\n"
@@ -115,9 +116,10 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
+    CSVManager.loadServiceRequestCSV("ServiceRequests.csv");
   }
 
-  public static void createMedicineRequestTable() throws SQLException {
+  public static void createMedicineRequestTable() throws SQLException, IOException {
     String query =
         "create table MEDICINEREQUEST\n"
             + "(\n"
@@ -138,9 +140,10 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
+    CSVManager.loadMedicineRequestCSV("MedicineRequests.csv");
   }
 
-  public static void createSanitationRequestTable() throws SQLException {
+  public static void createSanitationRequestTable() throws SQLException, IOException {
     String query =
         "create table SANITATIONREQUEST\n"
             + "(\n"
@@ -158,9 +161,10 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
+    CSVManager.loadSanitationRequestCSV("SanitationRequests.csv");
   }
 
-  public static void createMealRequestTable() throws SQLException {
+  public static void createMealRequestTable() throws SQLException, IOException {
     String query =
         "create table MEALDELIVERYREQUEST\n"
             + "(\n"
@@ -180,9 +184,10 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
+    CSVManager.loadMealRequestCSV("MealRequests.csv");
   }
 
-  public static void createLanguageInterpreterRequestTable() throws SQLException {
+  public static void createLanguageInterpreterRequestTable() throws SQLException, IOException {
     String query =
         "create table LANGUAGEREQUEST\n"
             + "(\n"
@@ -199,6 +204,7 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
+    CSVManager.loadLanguageRequestCSV("LangInterpRequests.csv");
   }
 
   public static void createFacilitiesRequestTable() throws SQLException, IOException {
@@ -219,9 +225,10 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
+    CSVManager.loadFacilitiesRequestCSV("FacilitiesRequests.csv");
   }
 
-  public static void createSecurityRequestTable() throws SQLException {
+  public static void createSecurityRequestTable() throws SQLException, IOException {
     String query =
         "create table SECURITYREQUEST\n"
             + "(\n"
@@ -239,6 +246,7 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
+    CSVManager.loadSecurityRequestCSV("SecurityRequests.csv");
   }
 
   public static void createGiftDeliveryRequestTable() throws SQLException {

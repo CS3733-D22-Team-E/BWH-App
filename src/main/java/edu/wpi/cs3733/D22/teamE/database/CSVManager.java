@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -744,8 +745,9 @@ public class CSVManager {
       System.err.println(
           "file should have already been created. "
               + "Resource line may not have been added to the App class init() method");
-      file.createNewFile(); // fine
+      generateNewSaveFileFromResources(fileName); // should exist now
     }
+
     if (!doesFileContainLine(file, format)) { // only looks for first line or no lines
       FileUtils.writeStringToFile(file, format, (Charset) null, true);
     }
@@ -838,5 +840,57 @@ public class CSVManager {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  /** Generates new save files for each specific resource file name */
+  public static void generateNewSaves() {
+    ArrayList<String> fileNames = new ArrayList<>();
+    fileNames.add("AllEdges.csv");
+    fileNames.add("Employees.csv");
+    fileNames.add("MedEquip.csv");
+    fileNames.add("MedEquipRequest.csv");
+    fileNames.add("TowerLocations.csv");
+    fileNames.add("TransportExt.csv");
+    fileNames.add("LabRequests.csv");
+    fileNames.add("ServiceRequests.csv");
+    fileNames.add("MedicineRequests.csv");
+    fileNames.add("SanitationRequests.csv");
+    fileNames.add("MealRequests.csv");
+    fileNames.add("LangInterpRequests.csv");
+    fileNames.add("FacilitiesRequests.csv");
+    fileNames.add("SecurityRequests.csv");
+    fileNames.add("GiftRequests.csv");
+    // fileNames.add("Requests.csv");
+    fileNames.add("Accounts.csv");
+
+    DBCreation.createTables();
+    for (String s : fileNames) {
+      generateNewSaveFileFromResources(s);
+    }
+  }
+
+  /**
+   * runs the saveCSV method of every entity type
+   *
+   * @throws SQLException
+   * @throws IOException
+   */
+  public static void saveAllCSVs() throws SQLException, IOException {
+    CSVManager.saveLocationCSV("TowerLocations.csv");
+    CSVManager.saveEmployeeCSV("Employees.csv");
+    CSVManager.saveMedEquipCSV("MedEquip.csv");
+    CSVManager.saveLabRequestCSV("LabRequests.csv");
+    CSVManager.saveMedEquipRequestCSV("MedEquipRequests.csv");
+    CSVManager.saveServiceRequestCSV("ServiceRequests.csv");
+    CSVManager.saveMedicineRequestCSV("MedicineRequests.csv");
+    CSVManager.saveSanitationRequestCSV("SanitationRequests.csv");
+    CSVManager.saveMealDeliveryCSV("MealRequests.csv");
+    CSVManager.saveLanguageInterpreterRequestCSV("LangInterpRequests.csv");
+    CSVManager.saveFacilitiesRequestCSV("FacilitiesRequests.csv");
+    CSVManager.saveSecurityRequestCSV("SecurityRequests.csv");
+    CSVManager.saveGiftDeliveryRequestCSV("GiftRequests.csv");
+    CSVManager.saveAccountCSV("Accounts.csv");
+
+    // CSVManager.saveEdgesCSV();
   }
 }
