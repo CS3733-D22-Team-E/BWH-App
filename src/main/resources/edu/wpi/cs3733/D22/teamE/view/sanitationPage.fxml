@@ -87,6 +87,7 @@
                               <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
                            </columnConstraints>
                            <rowConstraints>
+                              <RowConstraints />
                               <RowConstraints valignment="BOTTOM" vgrow="ALWAYS" />
                               <RowConstraints valignment="TOP" vgrow="ALWAYS" />
                               <RowConstraints valignment="BOTTOM" vgrow="ALWAYS" />
@@ -98,67 +99,62 @@
                               <RowConstraints valignment="TOP" vgrow="ALWAYS" />
                            </rowConstraints>
                            <children>
-                              <Label styleClass="inputLabel" text="Location:" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+                              <Label styleClass="inputLabel" text="Location:" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label styleClass="inputLabel" text="Size:" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+                              <Label styleClass="inputLabel" text="Size:" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label styleClass="inputLabel" text="Urgency:" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+                              <Label styleClass="inputLabel" text="Urgency:" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label styleClass="inputLabel" text="Addtional Notes:" textAlignment="RIGHT" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+                              <Label styleClass="inputLabel" text="Addtional Notes:" textAlignment="RIGHT" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="notes" promptText="Please write additional notes here" styleClass="inputField" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                              <Label styleClass="inputLabel" text="Staff Assignee:" textAlignment="RIGHT" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+                              <TextField fx:id="notes" alignment="TOP_LEFT" promptText="Please write additional notes here" styleClass="inputField" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                              <Label styleClass="inputLabel" text="Staff Assignee:" textAlignment="RIGHT" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="staffAssignee" promptText="Employee" styleClass="inputField" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
-                              <VBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                              <VBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <children>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="10.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                                    <HBox spacing="5.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                                          <HBox maxHeight="10.0" spacing="5.0">
                                              <children>
-                                                          <RadioButton fx:id="Urgent" mnemonicParsing="false" text="Urgent">
-                                                              <toggleGroup>
-                                                                  <ToggleGroup fx:id="urgencyGroup" />
-                                                              </toggleGroup>
-                                                          </RadioButton>
-                                                          <RadioButton fx:id="notUrgent" mnemonicParsing="false" selected="true" text="Not Urgent" toggleGroup="$urgencyGroup" />
+                                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                                                   <children>
+                                                                <RadioButton fx:id="Urgent" mnemonicParsing="false" text="Urgent">
+                                                                    <toggleGroup>
+                                                                        <ToggleGroup fx:id="urgencyGroup" />
+                                                                    </toggleGroup>
+                                                                </RadioButton>
+                                                                <RadioButton fx:id="notUrgent" mnemonicParsing="false" selected="true" text="Not Urgent" toggleGroup="$urgencyGroup" />
+                                                   </children>
+                                                </VBox>
                                              </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS" />
+                                          </HBox>
+                                       </children></HBox>
                                  </children>
                               </VBox>
-                              <HBox alignment="BOTTOM_LEFT" spacing="5.0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                              <HBox spacing="5.0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <children>
                                     <JFXComboBox fx:id="floor" promptText="Select Floor" styleClass="inputField" HBox.hgrow="ALWAYS" />
                                     <JFXComboBox fx:id="room" promptText="Select Room" styleClass="inputField" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
-                              <HBox alignment="BOTTOM_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                              <HBox alignment="BOTTOM_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <children>
-                                    <JFXComboBox fx:id="medicine" promptText="Select Medicine" styleClass="inputField" HBox.hgrow="ALWAYS" />
-                                    <JFXComboBox fx:id="unit" promptText="Unit" styleClass="inputField" HBox.hgrow="ALWAYS" />
-                                 </children>
-                              </HBox>
-                              <VBox alignment="CENTER_LEFT" minHeight="50.0" spacing="5.0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                                 <children>
-                                    <HBox spacing="5.0" VBox.vgrow="ALWAYS">
+                                    <HBox spacing="5.0">
                                        <children>
                                                     <RadioButton fx:id="bioYes" mnemonicParsing="false" text="Yes">
                                              <toggleGroup>
@@ -169,13 +165,18 @@
                                        </children>
                                     </HBox>
                                  </children>
+                              </HBox>
+                              <VBox minHeight="50.0" spacing="5.0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                 <children>
+                                    <TextField fx:id="staffAssignee" promptText="Employee" styleClass="inputField" />
+                                 </children>
                               </VBox>
-                              <Label styleClass="inputLabel" text="Biohazard On Site:" textAlignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                              <Label styleClass="inputLabel" text="Biohazard On Site:" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <HBox prefHeight="51.0" prefWidth="222.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <HBox prefHeight="51.0" prefWidth="222.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
                                     <HBox alignment="CENTER_LEFT" spacing="5.0">
                                        <children>

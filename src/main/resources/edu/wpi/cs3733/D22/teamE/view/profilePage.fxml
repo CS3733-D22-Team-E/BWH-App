@@ -33,178 +33,205 @@
 -->
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXListView?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="650.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.profilePageController">
+<VBox prefHeight="650.0" prefWidth="1080.0" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.profilePageController">
    <children>
-      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" style="-fx-background-color: #f35959;" VBox.vgrow="NEVER">
+      <StackPane prefHeight="710.0" prefWidth="1080.0">
          <children>
-            <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="890.0" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER" styleClass="gradient">
                <children>
-                  <Label alignment="CENTER" text="Brigham and Women's Hospital" textFill="WHITE">
-                     <font>
-                        <Font name="Book Antiqua Bold" size="30.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" text="Profile Page" textFill="WHITE">
-                     <font>
-                        <Font name="Book Antiqua Bold" size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" />
-                     </VBox.margin>
-                  </Label>
-               </children>
-               <HBox.margin>
-                  <Insets left="70.0" />
-               </HBox.margin>
-            </VBox>
-            <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="120.0" style="-fx-border-color: black;">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-               <children>
-                  <JFXHamburger fx:id="burger" layoutX="45.0" layoutY="35.0" />
-               </children>
-            </Pane>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
-         <children>
-            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-               <children>
-                  <StackPane VBox.vgrow="ALWAYS">
+                  <VBox maxHeight="562.0" maxWidth="400.0" minHeight="500.0" minWidth="400.0" prefHeight="562.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+                     <styleClass>
+                        <String fx:value="rounded" />
+                        <String fx:value="container" />
+                        <String fx:value="dropShadow" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets left="100.0" top="20.0" />
+                     </HBox.margin>
                      <children>
-                        <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="560.0" prefWidth="1080.0">
-                           <items>
-                              <VBox alignment="CENTER">
+                        <HBox alignment="CENTER" prefHeight="231.0" prefWidth="517.0">
+                           <children>
+                              <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="70.0" minWidth="70.0" styleClass=".requestIcon" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <GridPane vgap="20.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                             <children>
-                                                <VBox alignment="CENTER" spacing="10.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
-                                                   <children>
-                                                      <HBox alignment="CENTER" VBox.vgrow="NEVER">
-                                                         <children>
-                                                            <Circle fx:id="photoCirc" fill="TRANSPARENT" radius="80.0" stroke="BLACK" strokeType="INSIDE" />
-                                                         </children>
-                                                      </HBox>
-                                                      <HBox alignment="CENTER" VBox.vgrow="NEVER">
-                                                         <children>
-                                                            <Label fx:id="nameLabel" alignment="CENTER" text="Test Profile">
-                                                               <font>
-                                                                  <Font size="24.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
-                                                </VBox>
-                                                <VBox spacing="40.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
-                                                   <children>
-                                                      <HBox spacing="10.0">
-                                                         <children>
-                                                            <Label text="Position :">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="posLabel" text="Test Profile">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                      </HBox>
-                                                      <HBox spacing="10.0">
-                                                         <children>
-                                                            <Label text="Salary :">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="salLabel" text="Test Profile">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                      </HBox>
-                                                      <HBox spacing="10.0">
-                                                         <children>
-                                                            <Label text="Number of Active Requests :">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="reqNumLabel" text="Test Profile">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                      </HBox>
-                                                      <JFXButton fx:id="resetPassword" alignment="CENTER" buttonType="RAISED" onAction="#resetPassword" prefHeight="43.0" prefWidth="127.0" ripplerFill="RED" style="-fx-background-color: lightgrey;" text="Reset Password" VBox.vgrow="NEVER" />
-                                                   </children>
-                                                   <GridPane.margin>
-                                                      <Insets top="40.0" />
-                                                   </GridPane.margin>
-                                                </VBox>
-                                             </children>
-                                          </GridPane>
-                                       </children>
-                                    </HBox>
+                                    <Circle fx:id="photoCirc" fill="TRANSPARENT" radius="80.0" stroke="BLACK" strokeType="INSIDE" />
+                                    <ImageView fitHeight="150.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/prof.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
-                              </VBox>
-                              <VBox alignment="CENTER">
-                                 <children>
-                                    <HBox alignment="CENTER" VBox.vgrow="NEVER">
-                                       <children>
-                                          <Pane HBox.hgrow="NEVER">
-                                             <children>
-                                                <JFXListView fx:id="reqList" layoutY="48.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="300.0" />
-                                                <Label text="My Service Requests">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </Pane>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </items>
-                        </SplitPane>
-                        <JFXDrawer fx:id="drawer" direction="RIGHT" />
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <GridPane prefHeight="131.0" prefWidth="285.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.4" minWidth="10.0" prefWidth="139.4" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.5999755859375" minWidth="10.0" prefWidth="153.80000000000004" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="38.4" minHeight="0.0" prefHeight="25.599983596801756" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="60.8" minHeight="10.0" prefHeight="35.20001640319824" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label prefHeight="22.0" prefWidth="146.0" text="Employee Status:" GridPane.rowIndex="1">
+                                 <styleClass>
+                                    <String fx:value="bodyText" />
+                                    <String fx:value="bold" />
+                                 </styleClass>
+                              </Label>
+                              <Label text="Employee ID:" GridPane.rowIndex="2">
+                                 <styleClass>
+                                    <String fx:value="bodyText" />
+                                    <String fx:value="bodyText" />
+                                    <String fx:value="bold" />
+                                 </styleClass>
+                              </Label>
+                              <Label text="Name:">
+                                 <styleClass>
+                                    <String fx:value="bodyText" />
+                                    <String fx:value="bold" />
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="posLabel" prefHeight="20.0" prefWidth="106.0" text="PosLabel here" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="salLabel" text="salLabel here" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="reqNumLabel" text="Test Profile" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="60.0" right="40.0" top="20.0" />
+                           </VBox.margin>
+                        </GridPane>
                      </children>
-                  </StackPane>
+                  </VBox>
+                  <VBox maxWidth="600.0" minWidth="600.0" prefHeight="650.0" prefWidth="698.0">
+                     <children>
+                        <VBox maxHeight="302.0" maxWidth="500.0" minHeight="250.0" minWidth="500.0" prefHeight="302.0" prefWidth="500.0">
+                           <styleClass>
+                              <String fx:value="rounded" />
+                              <String fx:value="container" />
+                              <String fx:value="dropShadow" />
+                           </styleClass>
+                           <children>
+                              <Label text="My Service Requests">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="bold" />
+                                    <String fx:value="titleText" />
+                                 </styleClass>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets left="118.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXListView fx:id="reqList" maxHeight="300.0" maxWidth="400.0" minHeight="200.0" minWidth="200.0" prefHeight="489.0" prefWidth="380.0" styleClass="rounded_08">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" left="45.0" top="20.0" />
+                                 </VBox.margin>
+                              </JFXListView>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="50.0" top="55.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox maxHeight="206.0" maxWidth="500.0" minHeight="150.0" minWidth="500.0" prefHeight="206.0" prefWidth="500.0">
+                           <styleClass>
+                              <String fx:value="dropShadow" />
+                              <String fx:value="container" />
+                              <String fx:value="rounded" />
+                           </styleClass>
+                           <VBox.margin>
+                              <Insets left="50.0" top="50.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label text="Setting">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="bold" />
+                                    <String fx:value="titleText" />
+                                 </styleClass>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets left="198.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <GridPane maxHeight="102.0" maxWidth="300.0" minWidth="20.0" prefHeight="102.0" prefWidth="300.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.20001220703125" minWidth="10.0" prefWidth="90.79998779296875" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.20001220703125" minWidth="10.0" prefWidth="209.20001220703125" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="28.799999999999997" minHeight="10.0" prefHeight="16.79996337890625" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="42.400000000000006" minHeight="0.0" prefHeight="41.599951171875006" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="19.60001220703125" minHeight="0.0" prefHeight="0.800048828125" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Database: ">
+                                       <styleClass>
+                                          <String fx:value="bodyText" />
+                                          <String fx:value="bold" />
+                                       </styleClass>
+                                    </Label>
+                                    <ComboBox prefHeight="26.0" prefWidth="206.0" GridPane.columnIndex="1" />
+                                    <JFXButton fx:id="resetPassword" onAction="#resetPassword" prefHeight="31.0" prefWidth="208.0" text="Change Password" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <styleClass>
+                                          <String fx:value="bold" />
+                                          <String fx:value="bodyText" />
+                                          <String fx:value="submitButton" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="2" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="100.0" top="10.0" />
+                                 </VBox.margin>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
          </children>
-      </HBox>
+      </StackPane>
    </children>
 </VBox>

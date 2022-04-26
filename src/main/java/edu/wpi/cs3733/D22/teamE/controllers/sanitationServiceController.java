@@ -1,29 +1,26 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import edu.wpi.cs3733.D22.teamE.PopUp;
-import edu.wpi.cs3733.D22.teamE.customUI.CustomTextFieldTableCell;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.sanitationRequest;
-import edu.wpi.cs3733.D22.teamE.entity.sanitationRequestModel;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * Controller Class for the Sanitation Service Request. Inherits from the serviceRequestController
  * super class.
  */
-public class sanitationServiceController extends serviceRequestPageController {
+public class sanitationServiceController extends serviceRequestPageController
+    implements Initializable {
 
-  @FXML TableColumn<sanitationRequestModel, String> floorCol;
+  /*@FXML TableColumn<sanitationRequestModel, String> floorCol;
   @FXML TableColumn<sanitationRequestModel, String> roomCol;
   @FXML TableColumn<sanitationRequestModel, String> size;
   @FXML TableColumn<sanitationRequestModel, String> bio;
@@ -31,7 +28,7 @@ public class sanitationServiceController extends serviceRequestPageController {
   @FXML TableColumn<sanitationRequestModel, String> status;
   @FXML TableColumn<sanitationRequestModel, String> assign;
   @FXML TableColumn<sanitationRequestModel, String> urgent;
-  @FXML TableView<sanitationRequestModel> table;
+  @FXML TableView<sanitationRequestModel> table;*/
   @FXML RadioButton mediumSelect;
   @FXML RadioButton heavySelect;
   @FXML RadioButton lightSelect;
@@ -48,14 +45,10 @@ public class sanitationServiceController extends serviceRequestPageController {
 
   /** Constructor */
   public sanitationServiceController() {
-    try {
-      system = new DAOSystem();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    system = DAOSystemSingleton.INSTANCE.getSystem();
   }
 
-  ObservableList<sanitationRequestModel> tableList = FXCollections.observableArrayList();
+  // ObservableList<sanitationRequestModel> tableList = FXCollections.observableArrayList();
 
   /**
    * Initializes the super class.
@@ -66,10 +59,10 @@ public class sanitationServiceController extends serviceRequestPageController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    populateSanReqTable();
+    // populateSanReqTable();
   }
 
-  private void populateSanReqTable() {
+  /*private void populateSanReqTable() {
     populateList();
 
     floorCol.setCellValueFactory(new PropertyValueFactory<>("floorID"));
@@ -90,15 +83,15 @@ public class sanitationServiceController extends serviceRequestPageController {
     bio.setCellFactory(CustomTextFieldTableCell.forTableColumn());
 
     table.setItems(tableList);
-  }
+  }*/
 
-  private void populateList() {
-    tableList = FXCollections.observableArrayList();
-    List<sanitationRequest> l = system.getAllSanReq();
+  /*private void populateList() {
+    //tableList = FXCollections.observableArrayList();
+    List<sanitationRequest> l = system.getAllSanitationRequests();
     for (sanitationRequest r : l) {
-      tableList.add(new sanitationRequestModel(r));
+      //tableList.add(new sanitationRequestModel(r));
     }
-  }
+  }*/
 
   /**
    * Takes the inputs from the buttons, drop downs, text fields etc. and stores that data in the
@@ -179,10 +172,18 @@ public class sanitationServiceController extends serviceRequestPageController {
     try {
       request.setDeliveryDate(LocalDate.now());
       request.setRequestDate(LocalDate.now());
-      system.addSanReq(request);
-      populateSanReqTable();
+      system.update(request);
+      floor.getSelectionModel().clearSelection();
+      room.getSelectionModel().clearSelection();
+      sizeGroup.selectToggle(lightSelect);
+      biohazardGroup.selectToggle(bioNo);
+      urgencyGroup.selectToggle(notUrgent);
+      notes.clear();
+      staffAssignee.clear();
+      room.setVisible(false);
+      // populateSanReqTable();
       // tableList.add(new sanitationRequestModel(request));
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

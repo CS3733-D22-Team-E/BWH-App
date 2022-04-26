@@ -30,8 +30,12 @@ public class BasePageController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     rootBorderPane.setCenter(pageControl.getPageRoot("homePage.fxml"));
-    pageControl.loadTop("Header.fxml", (Stage) rootBorderPane.getScene().getWindow());
-    drawer.setSidePane(pageControl.getPageRoot("sidePanel.fxml"));
+    sideMenuController sideMenu = new sideMenuController(rootBorderPane);
+    Parent sideMenuView = (Parent) pageControl.getPageRoot("sidePanel.fxml", sideMenu);
+    HeaderController headerController = new HeaderController(drawer, rootBorderPane);
+    Parent headerView = (Parent) pageControl.getPageRoot("Header.fxml", headerController);
+    rootBorderPane.setTop(headerView);
+    drawer.setSidePane(sideMenuView);
     drawer.close();
     drawer.setDisable(true);
     drawer.setMinWidth(0);

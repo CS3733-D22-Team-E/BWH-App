@@ -2,31 +2,25 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
-import edu.wpi.cs3733.D22.teamE.database.daos.SecurityRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.securityRequest;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
-public class securityRequestController extends serviceRequestPageController {
+public class securityRequestController extends serviceRequestPageController
+    implements Initializable {
 
   @FXML JFXComboBox<String> securityRequestType;
   @FXML JFXComboBox<String> timeFrameComboBox;
   @FXML TextField notes;
-  @FXML TableView<securityRequest> requestsTable;
+  /*@FXML TableView<securityRequest> requestsTable;
 
   @FXML TableColumn<securityRequest, String> tableSecurityRequestType;
   @FXML TableColumn<securityRequest, String> tableStaffAssignee;
@@ -35,13 +29,16 @@ public class securityRequestController extends serviceRequestPageController {
   @FXML TableColumn<securityRequest, String> tableRequestStatus;
   @FXML TableColumn<securityRequest, String> tableOtherNotes;
 
-  ObservableList<securityRequest> tableList;
+  ObservableList<securityRequest> tableList;*/
 
-  SecurityRequestDAOImpl securityRequestDB;
+  // SecurityRequestDAOImpl securityRequestDB;
+  DAOSystem system;
   securityRequest securityReq = new securityRequest();
 
   /** Constructor */
-  public securityRequestController() {}
+  public securityRequestController() {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+  }
 
   /**
    * Initializes the combo boxes and populates the request table
@@ -57,16 +54,14 @@ public class securityRequestController extends serviceRequestPageController {
           .getItems()
           .addAll("Aid", "Secure", "Danger", "Other: detail in other notes");
       timeFrameComboBox.getItems().addAll("ASAP", "<1 hour", "<1 day");
-
-      securityRequestDB = new SecurityRequestDAOImpl();
-      populateSecurityRequestTable();
-    } catch (SQLException e) {
+      // populateSecurityRequestTable();
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
   private void populateSecurityRequestTable() {
-    ObservableList<securityRequest> securityRequests = populateSecurityRequestList();
+    /*ObservableList<securityRequest> securityRequests = populateSecurityRequestList();
     tableSecurityRequestType.setCellValueFactory(new PropertyValueFactory<>("securityRequestType"));
     tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
     tableLocNodeID.setCellValueFactory(
@@ -83,17 +78,17 @@ public class securityRequestController extends serviceRequestPageController {
     tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
     tableOtherNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
 
-    requestsTable.setItems(securityRequests);
+    requestsTable.setItems(securityRequests);*/
   }
 
-  protected ObservableList<securityRequest> populateSecurityRequestList() {
-    List<securityRequest> list = securityRequestDB.getAll();
+  /*protected ObservableList<securityRequest> populateSecurityRequestList() {
+    List<securityRequest> list = system.getAllSecurityRequests();
     tableList = FXCollections.observableArrayList();
     for (securityRequest l : list) {
       tableList.add(l);
     }
     return tableList;
-  }
+  }*/
 
   @Override
   public void submitButton(ActionEvent event) throws SQLException {
@@ -117,8 +112,16 @@ public class securityRequestController extends serviceRequestPageController {
 
   private void securitySendToDB(securityRequest securityReq) {
     try {
-      securityRequestDB.update(securityReq);
-      tableList.add(securityReq);
+      system.update(securityReq);
+      floor.getSelectionModel().clearSelection();
+      room.getSelectionModel().clearSelection();
+      securityRequestType.getSelectionModel().clearSelection();
+      timeFrameComboBox.getSelectionModel().clearSelection();
+      requestStatus.clear();
+      staffAssignee.clear();
+      notes.clear();
+      room.setVisible(false);
+      // tableList.add(securityReq);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -133,5 +136,6 @@ public class securityRequestController extends serviceRequestPageController {
     requestStatus.clear();
     staffAssignee.clear();
     notes.clear();
+    room.setVisible(false);
   }
 }

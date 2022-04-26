@@ -59,7 +59,7 @@ public class passwordSettingPageController {
       try {
         Account account = AccountsManager.getInstance().getAccount();
         account.setPasswordHash(RSAEncryption.generatePasswordHASH(r.getNewPassword()));
-        db.updateAccount(account);
+        db.update(account);
       } catch (Exception e) {
         e.printStackTrace();
         PopUp.createWarning(
