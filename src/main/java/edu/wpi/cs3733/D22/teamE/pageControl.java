@@ -2,18 +2,17 @@ package edu.wpi.cs3733.D22.teamE;
 
 import static edu.wpi.cs3733.D22.teamE.database.CSVManager.saveAllCSVs;
 
+import edu.wpi.cs3733.D22.teamE.database.CSVManager;
+import edu.wpi.cs3733.D22.teamE.database.CSVManager.*;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-
-import edu.wpi.cs3733.D22.teamE.database.CSVManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import edu.wpi.cs3733.D22.teamE.database.CSVManager.*;
 
 public class pageControl {
 
@@ -96,6 +95,6 @@ public class pageControl {
     CSVManager.saveGiftDeliveryRequestCSV("GiftRequests.csv");
     CSVManager.saveAccountCSV("Accounts.csv");
 
-    //CSVManager.saveEdgesCSV();
+    // CSVManager.saveEdgesCSV();
   }
 }
