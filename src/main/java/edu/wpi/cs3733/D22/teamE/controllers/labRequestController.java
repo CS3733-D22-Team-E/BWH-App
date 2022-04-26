@@ -51,6 +51,7 @@ public class labRequestController extends serviceRequestPageController implement
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    setInfographicsCount("LAB_REQUEST");
     try {
       // populateLocationComboBoxes();
       labRequestType.getItems().addAll("Blood Sample", "Urine Sample", "X-Ray", "CAT Scan", "MRI");
@@ -107,6 +108,7 @@ public class labRequestController extends serviceRequestPageController implement
       labReq.setStaffAssignee(staffAssignee.getText());
       labReq.setIsUrgent(isUrgent.isSelected());
       labSendToDB(labReq);
+      setInfographicsCount("LAB_REQUEST");
 
     } catch (RuntimeException error) {
       System.out.println("Error : Some Value is NULL");

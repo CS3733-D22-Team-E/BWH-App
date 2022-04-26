@@ -78,6 +78,7 @@ public class medicineDeliveryController extends serviceRequestPageController
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    setInfographicsCount("MED_DELIV_REQ");
     medicine.setItems(medicines);
     unit.setItems(units);
     // populateMedicineTable();
@@ -117,6 +118,7 @@ public class medicineDeliveryController extends serviceRequestPageController
       medicineDeliveryRequest.setRequestStatus(requestStatus.getText());
 
       medicineSendToDB(medicineDeliveryRequest);
+      setInfographicsCount("MED_DELIV_REQ");
 
     }
     //    catch (NullPointerException error) {
