@@ -9,14 +9,14 @@ import javafx.scene.control.Toggle;
 public abstract class DashboardHandler {
 
   MedicalEquipmentDAOImpl medicalEquipmentDAO;
-  DashboardController dashboardController;
+  OldDashboardController dashboardController;
 
   public abstract void update();
 
   public abstract void initialize();
 
   public DashboardHandler(
-      MedicalEquipmentDAOImpl medicalEquipmentDAO, DashboardController dashboardController) {
+      MedicalEquipmentDAOImpl medicalEquipmentDAO, OldDashboardController dashboardController) {
     this.medicalEquipmentDAO = medicalEquipmentDAO;
     this.dashboardController = dashboardController;
     this.medicalEquipmentDAO.attach(this);

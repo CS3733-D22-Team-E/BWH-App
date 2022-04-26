@@ -24,7 +24,7 @@ public class DashboardAlertHandler extends DashboardHandler {
   MedicalEquipmentServiceRequestDAOImpl medEqServiceReqDB;
 
   public DashboardAlertHandler(
-      MedicalEquipmentDAOImpl medicalEquipmentDAO, DashboardController dashboardController) {
+      MedicalEquipmentDAOImpl medicalEquipmentDAO, OldDashboardController dashboardController) {
     super(medicalEquipmentDAO, dashboardController);
     this.allEquipment = (ArrayList<MedicalEquipment>) this.medicalEquipmentDAO.getAll();
     initialize();

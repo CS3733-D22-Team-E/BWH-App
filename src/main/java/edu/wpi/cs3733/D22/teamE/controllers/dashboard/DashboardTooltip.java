@@ -12,7 +12,7 @@ public class DashboardTooltip extends DashboardHandler {
   ArrayList<MedicalEquipment> allEquipment;
 
   public DashboardTooltip(
-      MedicalEquipmentDAOImpl medicalEquipmentDAO, DashboardController dashboardController) {
+      MedicalEquipmentDAOImpl medicalEquipmentDAO, OldDashboardController dashboardController) {
     super(medicalEquipmentDAO, dashboardController);
     this.allEquipment = (ArrayList<MedicalEquipment>) this.medicalEquipmentDAO.getAll();
   }

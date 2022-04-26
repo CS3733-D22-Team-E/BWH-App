@@ -20,7 +20,7 @@ public class DashboardTableViewHandler extends DashboardHandler {
   ArrayList<MedicalEquipment> allEquipment;
 
   public DashboardTableViewHandler(
-      MedicalEquipmentDAOImpl medicalEquipmentDAO, DashboardController dashboardController) {
+      MedicalEquipmentDAOImpl medicalEquipmentDAO, OldDashboardController dashboardController) {
     super(medicalEquipmentDAO, dashboardController);
     this.allEquipment = (ArrayList<MedicalEquipment>) this.medicalEquipmentDAO.getAll();
   }
