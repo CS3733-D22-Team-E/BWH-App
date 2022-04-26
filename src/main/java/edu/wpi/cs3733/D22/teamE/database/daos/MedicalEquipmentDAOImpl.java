@@ -63,6 +63,23 @@ public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
   @Override
   public void update(MedicalEquipment equipment) {
     equipmentList.add(equipment);
+    try {
+      String query =
+              "INSERT INTO EQUIPMENT VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.setString(1, equipment.getEquipmentID());
+      statement.setString(2, equipment.getMed_equipmentID());
+      statement.setBoolean(3, equipment.isInUse());
+      statement.setBoolean(4, equipment.isClean());
+      statement.setString(5, equipment.getCleanLocation());
+      statement.setString(6, equipment.getStorageLocation());
+      statement.setString(7, equipment.getCurrentLocation());
+      statement.setString(8, equipment.getEquipmentType());
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println("Add equipment failed!"); // TODO: Come up with a better catch block
+    }
     notifyObservers();
   }
 
