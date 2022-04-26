@@ -5,12 +5,12 @@ public class adminAccount extends Account {
   public adminAccount(
       String accountID,
       String employeeID,
+      int authorityLevel,
       String passwordHash,
       String firstName,
       String lastName,
-      String position,
-      String phoneNumber) {
-    super(accountID, employeeID, 2, passwordHash, firstName, lastName, position, phoneNumber);
+      String position) {
+    super(accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position);
   }
 
   public adminAccount() {

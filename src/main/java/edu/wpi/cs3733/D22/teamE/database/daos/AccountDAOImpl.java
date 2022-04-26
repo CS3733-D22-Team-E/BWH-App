@@ -27,17 +27,16 @@ public class AccountDAOImpl implements DAO<Account> {
       String firstName = rs.getString("FIRSTNAME");
       String lastName = rs.getString("LASTNAME");
       String position = rs.getString("POSITION");
-      String phoneNumber = rs.getString("PHONENUMBER");
 
       Account account = null;
       if (authorityLevel < Account.adminPerm) {
         account =
             new staffAccount(
-                accountID, employeeID, passwordHash, firstName, lastName, position, phoneNumber);
+                accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position);
       } else {
         account =
             new adminAccount(
-                accountID, employeeID, passwordHash, firstName, lastName, position, phoneNumber);
+                accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position);
       }
 
       accounts.add(account);
@@ -64,17 +63,28 @@ public class AccountDAOImpl implements DAO<Account> {
         String firstName = rs.getString("FIRSTNAME");
         String lastName = rs.getString("LASTNAME");
         String position = rs.getString("POSITION");
-        String phoneNumber = rs.getString("PHONENUMBER");
 
         Account account = null;
         if (authorityLevel < Account.adminPerm) {
           account =
               new staffAccount(
-                  accountID, employeeID, passwordHash, firstName, lastName, position, phoneNumber);
+                  accountID,
+                  employeeID,
+                  authorityLevel,
+                  passwordHash,
+                  firstName,
+                  lastName,
+                  position);
         } else {
           account =
               new adminAccount(
-                  accountID, employeeID, passwordHash, firstName, lastName, position, phoneNumber);
+                  accountID,
+                  employeeID,
+                  authorityLevel,
+                  passwordHash,
+                  firstName,
+                  lastName,
+                  position);
         }
 
         accounts.add(account);
@@ -104,7 +114,7 @@ public class AccountDAOImpl implements DAO<Account> {
     accounts.add(account);
     try {
       String query =
-          "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION, PHONENUMBER) VALUES ('"
+          "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES ('"
               + account.getAccountID()
               + "','"
               + account.getEmployeeID()
@@ -118,8 +128,6 @@ public class AccountDAOImpl implements DAO<Account> {
               + account.getLastName()
               + "','"
               + account.getPosition()
-              + "','"
-              + account.getPhoneNumber()
               + "')"; // Insert into database; does not check if the employeeID already exists
       PreparedStatement statement = connection.prepareStatement(query);
       statement.executeUpdate();

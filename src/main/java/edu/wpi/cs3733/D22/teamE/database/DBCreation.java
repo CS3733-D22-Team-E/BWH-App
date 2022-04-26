@@ -26,7 +26,7 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadLocationCSV(CSVManager.getDefaultLocationFilename());
+    CSVManager.loadLocationCSV("TowerLocations.csv");
   }
 
   public static void createEmployeesTable() throws SQLException, IOException {
@@ -43,7 +43,7 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadEmployeesCSV(CSVManager.getDefaultEmployeesFilename());
+    CSVManager.loadEmployeesCSV("Employees.csv");
   }
 
   public static void createEquipmentTable() throws SQLException, IOException {
@@ -61,7 +61,7 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadEquipmentCSV(CSVManager.getDefaultEquipmentFilename());
+    CSVManager.loadEquipmentCSV("MedEquip.csv");
   }
 
   public static void createLabRequestTable() throws SQLException, IOException {
@@ -78,7 +78,6 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadLabRequestCSV(CSVManager.getDefaultLabRequestFilename());
   }
 
   public static void createMedEquipReqTable() throws SQLException, IOException {
@@ -99,10 +98,10 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadMedEquipReqCSV(CSVManager.getDefaultMedEquipRequestFilename());
+    CSVManager.loadMedEquipReqCSV("MedEquipRequest.csv");
   }
 
-  public static void createServiceRequestTable() throws SQLException, IOException {
+  public static void createServiceRequestTable() throws SQLException {
     String query =
         "create table SERVICEREQUEST\n"
             + "(\n"
@@ -116,10 +115,9 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadServiceRequestCSV(CSVManager.getDefaultServiceRequestFilename());
   }
 
-  public static void createMedicineRequestTable() throws SQLException, IOException {
+  public static void createMedicineRequestTable() throws SQLException {
     String query =
         "create table MEDICINEREQUEST\n"
             + "(\n"
@@ -140,10 +138,9 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadMedicineRequestCSV(CSVManager.getDefaultMedicineRequestFilename());
   }
 
-  public static void createSanitationRequestTable() throws SQLException, IOException {
+  public static void createSanitationRequestTable() throws SQLException {
     String query =
         "create table SANITATIONREQUEST\n"
             + "(\n"
@@ -161,10 +158,9 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadSanitationRequestCSV(CSVManager.getDefaultSanitationRequestFilename());
   }
 
-  public static void createMealRequestTable() throws SQLException, IOException {
+  public static void createMealRequestTable() throws SQLException {
     String query =
         "create table MEALDELIVERYREQUEST\n"
             + "(\n"
@@ -184,10 +180,9 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadMealRequestCSV(CSVManager.getDefaultMealRequestFilename());
   }
 
-  public static void createLanguageInterpreterRequestTable() throws SQLException, IOException {
+  public static void createLanguageInterpreterRequestTable() throws SQLException {
     String query =
         "create table LANGUAGEREQUEST\n"
             + "(\n"
@@ -204,7 +199,6 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadLanguageRequestCSV(CSVManager.getDefaultLangInterpRequestFilename());
   }
 
   public static void createFacilitiesRequestTable() throws SQLException, IOException {
@@ -225,10 +219,9 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadFacilitiesRequestCSV(CSVManager.getDefaultFacilitiesRequestFilename());
   }
 
-  public static void createSecurityRequestTable() throws SQLException, IOException {
+  public static void createSecurityRequestTable() throws SQLException {
     String query =
         "create table SECURITYREQUEST\n"
             + "(\n"
@@ -246,10 +239,9 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadSecurityRequestCSV(CSVManager.getDefaultSecurityRequestFilename());
   }
 
-  public static void createGiftDeliveryRequestTable() throws SQLException, IOException {
+  public static void createGiftDeliveryRequestTable() throws SQLException {
     String query =
         "create table GIFTREQUEST\n"
             + "(\n"
@@ -267,10 +259,9 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadGiftDeliveryCSV(CSVManager.getDefaultGiftRequestFilename());
   }
 
-  public static void createAccountsTable() throws SQLException, IOException {
+  public static void createAccountsTable() throws SQLException {
     String query =
         "create table ACCOUNTS\n"
             + "(\n"
@@ -280,27 +271,25 @@ public class DBCreation {
             + "    PASSWORDHASH   VARCHAR(500) not null,\n"
             + "    FIRSTNAME      VARCHAR(35)  not null,\n"
             + "    LASTNAME       VARCHAR(35),          \n"
-            + "    POSITION       VARCHAR(35),           \n"
-            + "    PHONENUMBER       VARCHAR(35)           \n"
+            + "    POSITION       VARCHAR(35)           \n"
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
     System.out.println(generatePasswordHASH("admin"));
     query =
-        "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION, PHONENUMBER) VALUES "
+        "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES "
             + "('admin', 'admin' , 3, '"
             + generatePasswordHASH("admin")
-            + "', 'admin', 'admin', 'admin', '0000000000')";
+            + "', 'admin', 'admin', 'admin')";
     statement = connection.prepareStatement(query);
     statement.executeUpdate();
     query =
-        "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION, PHONENUMBER) VALUES "
+        "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES "
             + "('staff', 'staff' , 1, '"
             + generatePasswordHASH("staff")
-            + "', 'staff', 'staff', 'staff', '0000000000')";
+            + "', 'staff', 'staff', 'staff')";
     statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadAccountCSV(CSVManager.getDefaultAccountsFilename());
   }
 
   public static void createEdgesTable() throws SQLException, IOException {
@@ -313,29 +302,28 @@ public class DBCreation {
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
-    CSVManager.loadEdgesCSV(CSVManager.getDefaultEdgesFilename());
+    CSVManager.loadEdgesCSV("AllEdges.csv");
   }
 
   public static void createTables() {
     try {
-      // HAVE ALL LOAD (EXCEPT FLORAL REQUEST)
-      CallAPI.getInstance().getExternalTransportAPI(); //
+      CallAPI.getInstance().getExternalTransportAPI();
       edu.wpi.cs3733.D22.teamE.APIDatabase.DBCreation.createFloralRequestTable();
-      createTowerLocationTable(); //
-      createEmployeesTable(); //
-      createEquipmentTable(); //
-      createLabRequestTable(); //
-      createMedEquipReqTable(); //
-      createServiceRequestTable(); //
-      createMedicineRequestTable(); //
-      createSanitationRequestTable(); //
-      createMealRequestTable(); //
-      createLanguageInterpreterRequestTable(); //
-      createFacilitiesRequestTable(); //
-      createSecurityRequestTable(); //
-      createGiftDeliveryRequestTable(); //
-      createAccountsTable(); //
-      createEdgesTable(); //
+      createTowerLocationTable();
+      createEmployeesTable();
+      createEquipmentTable();
+      createLabRequestTable();
+      createMedEquipReqTable();
+      createServiceRequestTable();
+      createMedicineRequestTable();
+      createSanitationRequestTable();
+      createMealRequestTable();
+      createLanguageInterpreterRequestTable();
+      createFacilitiesRequestTable();
+      createSecurityRequestTable();
+      createGiftDeliveryRequestTable();
+      createAccountsTable();
+      createEdgesTable();
     } catch (SQLException | IOException e) {
       e.printStackTrace();
     }

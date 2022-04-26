@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamE;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import javafx.event.ActionEvent;
 
 public interface pageButtons {
@@ -15,7 +14,7 @@ public interface pageButtons {
 
   void medicineDeliveryButton(ActionEvent event) throws IOException;
 
-  void exitButton(ActionEvent event) throws IOException, SQLException;
+  void exitButton(ActionEvent event) throws IOException;
 
   void sanitationButton(ActionEvent event) throws IOException;
 

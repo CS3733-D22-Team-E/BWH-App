@@ -7,7 +7,7 @@ import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.adminAccount;
 import org.junit.jupiter.api.Test;
 
-public class AccountsTesting extends DBCreation {
+public class AccountsManagerTesting extends DBCreation {
 
   @Test
   public void testAccountCreation() {
