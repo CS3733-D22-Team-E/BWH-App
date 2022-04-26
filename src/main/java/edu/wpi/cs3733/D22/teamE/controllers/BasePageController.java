@@ -23,7 +23,7 @@ public class BasePageController implements Initializable {
 
   @FXML
   public void openDrawer(JFXDrawerEvent jfxDrawerEvent) {
-    drawer.setMinWidth(drawer.getDefaultDrawerSize());
+    drawer.setMinWidth(150);
     drawer.setDisable(false);
   }
 
