@@ -28,7 +28,7 @@ public class pageControl {
       p.getChildren().add(root);
 
       stage.getScene().setRoot(p);
-      stage.sizeToScene();
+      // stage.sizeToScene();
       return true;
     } catch (IOException e) {
       e.printStackTrace();
@@ -93,7 +93,7 @@ public class pageControl {
     // centerBase.getStylesheets().clear();
     // centerBase.getStylesheets().add(darkModeURL);
     basePage.setCenter(centerBase);
-    basePage.getScene().getWindow().sizeToScene();
+    // basePage.getScene().getWindow().sizeToScene();
     // basePage.getScene().getRoot().getStylesheets().clear();
   }
 

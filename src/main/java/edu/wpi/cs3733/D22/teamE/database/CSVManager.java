@@ -126,27 +126,29 @@ public class CSVManager {
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
     for (Location d : DAOSystemSingleton.INSTANCE.getSystem().getAllLocations()) {
-      String csvLine =
-          ""
-              + d.getNodeID()
-              + ','
-              + d.getXCoord()
-              + ','
-              + d.getYCoord()
-              + ','
-              + d.getFloor()
-              + ','
-              + d.getBuilding()
-              + ','
-              + d.getNodeType()
-              + ','
-              + d.getLongName()
-              + ','
-              + d.getShortName()
-              + "\n";
-      // change nothing
-      if (!doesFileContainLine(out, csvLine)) {
-        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      if (d != null) {
+        String csvLine =
+            ""
+                + d.getNodeID()
+                + ','
+                + d.getXCoord()
+                + ','
+                + d.getYCoord()
+                + ','
+                + d.getFloor()
+                + ','
+                + d.getBuilding()
+                + ','
+                + d.getNodeType()
+                + ','
+                + d.getLongName()
+                + ','
+                + d.getShortName()
+                + "\n";
+        // change nothing
+        if (!doesFileContainLine(out, csvLine)) {
+          FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+        }
       }
     }
   }
