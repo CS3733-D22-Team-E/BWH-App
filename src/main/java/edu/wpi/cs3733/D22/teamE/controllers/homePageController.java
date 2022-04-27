@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
+import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
+import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +22,8 @@ public class homePageController implements Initializable {
   @FXML VBox statusPane;
   @FXML VBox mapPane;
   @FXML VBox employeeDatabasePane;
+
+  private Account currentAccount;
 
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -74,5 +78,19 @@ public class homePageController implements Initializable {
             pageControl.loadCenter("employeePage.fxml", (Stage) mainPane.getScene().getWindow());
           }
         });
+
+    currentAccount = AccountsManager.getInstance().getAccount();
+    if (currentAccount.getAuthorityLevel() < 2) {
+      employeeDatabasePane.setVisible(false);
+      employeeDatabasePane.setOnMouseClicked(
+          new EventHandler<javafx.scene.input.MouseEvent>() {
+            @Override
+            public void handle(javafx.scene.input.MouseEvent mouseEvent) {
+
+              // pageControl.loadCenter("employeePage.fxml", (Stage)
+              // mainPane.getScene().getWindow());
+            }
+          });
+    }
   }
 }

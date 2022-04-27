@@ -138,7 +138,7 @@ public class aboutPageController implements Initializable {
             PopUp.aboutPopUp(jeremyBio, mainPane.getScene().getWindow(), "Jeremy");
           }
         });
-        
+
     shenPopUp.setOnMouseClicked(
         new EventHandler<MouseEvent>() {
           @Override

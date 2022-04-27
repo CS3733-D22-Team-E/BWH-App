@@ -4,22 +4,12 @@ public class staffAccount extends Account {
   public staffAccount(
       String accountID,
       String employeeID,
-      int authorityLevel,
       String passwordHash,
       String firstName,
       String lastName,
       String position,
       String phoneNumber) {
-    super(
-        accountID,
-        employeeID,
-        authorityLevel,
-        passwordHash,
-        firstName,
-        lastName,
-        position,
-        phoneNumber);
-    this.setAuthorityLevel(1);
+    super(accountID, employeeID, 1, passwordHash, firstName, lastName, position, phoneNumber);
   }
 
   public staffAccount() {
