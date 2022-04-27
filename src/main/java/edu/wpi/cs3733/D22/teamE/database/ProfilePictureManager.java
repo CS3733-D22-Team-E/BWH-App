@@ -38,7 +38,7 @@ public class ProfilePictureManager {
 
   public static ByteArrayInputStream getPersonalPicture(Employee employee)
       throws SQLException, IOException {
-    Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+    Connection connection = AccountsManager.getInstance().getConnection();
     Statement s = connection.createStatement();
     ResultSet rs =
         s.executeQuery(
@@ -56,7 +56,7 @@ public class ProfilePictureManager {
   }
 
   public static void savePersonalPicture(Employee employee, byte[] byteArr) throws SQLException {
-    Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+    Connection connection = AccountsManager.getInstance().getConnection();
     String sql =
         "UPDATE EMPLOYEES SET PROFILEPIC = (?) where EMPLOYEEID = '"
             + employee.getEmployeeID()

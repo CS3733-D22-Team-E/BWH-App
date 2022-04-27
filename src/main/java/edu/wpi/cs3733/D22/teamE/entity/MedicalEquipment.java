@@ -1,8 +1,15 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
+import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class MedicalEquipment extends Equipment {
   private String med_equipmentID;
   private String equipmentType;
+
   /*
     public static void main(String[] args) throws SQLException {
       MedicalEquipment equip =
@@ -59,6 +66,21 @@ public class MedicalEquipment extends Equipment {
 
   public void setEquipmentType(String equipmentType) {
     this.equipmentType = equipmentType;
+  }
+
+  public String getFloor() throws SQLException {
+    Connection connection = AccountsManager.getInstance().getConnection();
+    String locationID = getCurrentLocation();
+    String result = "";
+
+    Statement statement = connection.createStatement();
+    String query = "SELECT FLOOR FROM TOWERLOCATIONS WHERE NODEID = '" + locationID + "'";
+    ResultSet rs = statement.executeQuery(query);
+
+    if (rs.next()) {
+      result = rs.getString("FLOOR");
+    }
+    return result;
   }
 
   @Override

@@ -1,13 +1,13 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
-import edu.wpi.cs3733.D22.teamE.database.DBConnect;
+import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.entity.giftDeliveryRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GiftRequestDAOImpl implements DAO<giftDeliveryRequest> {
-  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+  static Connection connection = AccountsManager.getInstance().getConnection();
   List<giftDeliveryRequest> giftRequests;
 
   public GiftRequestDAOImpl() throws SQLException {

@@ -21,7 +21,7 @@ import org.apache.commons.io.IOUtils;
 
 /** uses format from Iteration 1 final ERD Diagram */
 public class CSVManager {
-  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+  static Connection connection = AccountsManager.getInstance().getConnection();
 
   // TODO saveLocationFile vs TowerLocations
   // TODO Resources not loading if file already there

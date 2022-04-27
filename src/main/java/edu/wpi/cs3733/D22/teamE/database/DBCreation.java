@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DBCreation {
-  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+  static Connection connection = AccountsManager.getInstance().getConnection();
 
   public static void createTowerLocationTable() throws SQLException, IOException {
     String query =
