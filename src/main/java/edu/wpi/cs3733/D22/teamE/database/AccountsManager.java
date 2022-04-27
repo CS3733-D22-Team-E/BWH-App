@@ -32,8 +32,4 @@ public class AccountsManager {
   public void setEmployee(Employee employee) {
     this.employee = employee;
   }
-
-  public static String generateRandom8DigitID() {
-    return String.format("%8d", new Random().nextInt((int) Math.pow(10, 8)));
-  }
 }

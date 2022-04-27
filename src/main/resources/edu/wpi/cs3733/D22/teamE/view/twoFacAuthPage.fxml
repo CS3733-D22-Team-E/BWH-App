@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox id="default-background" prefHeight="600.0" prefWidth="960.0" stylesheets="@styles/Login_page.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.twoFacAuthPageController">
+   <children>
+      <VBox prefHeight="542.0" prefWidth="478.0" styleClass="loginPane">
+         <children>
+            <ImageView fitHeight="51.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" x="10.0" y="10.0">
+               <image>
+                  <Image url="@icons/Logo.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="30.0" top="20.0" />
+               </VBox.margin>
+            </ImageView>
+            <Label styleClass="headerText" text="2FA">
+               <font>
+                  <Font size="38.0" />
+               </font>
+               <effect>
+                  <Blend />
+               </effect>
+               <VBox.margin>
+                  <Insets left="30.0" top="50.0" />
+               </VBox.margin>
+            </Label>
+            <Label prefHeight="20.0" prefWidth="167.0" styleClass="bodyText">
+               <VBox.margin>
+                  <Insets left="30.0" top="15.0" />
+               </VBox.margin></Label>
+            <Label styleClass="inputLabel" text="Auth Code: ">
+               <VBox.margin>
+                  <Insets left="30.0" top="20.0" />
+               </VBox.margin></Label>
+            <JFXTextField fx:id="authenticationField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="365.0" styleClass="inputField">
+               <VBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </VBox.margin></JFXTextField>
+            <Label fx:id="invalidWarning" layoutX="100.0" layoutY="1000.0" text="Invalid Username or Password!" textFill="RED">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="120.0" top="40.0" />
+               </VBox.margin>
+            </Label>
+            <JFXButton fx:id="twoFAButton" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#twoFAButton" prefHeight="40.0" prefWidth="365.0" text="Log In">
+               <styleClass>
+                  <String fx:value="buttonText" />
+                  <String fx:value="headerSelectedButton" />
+               </styleClass>
+               <VBox.margin>
+                  <Insets left="30.0" top="20.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+      </VBox>
+   </children>
+</HBox>
