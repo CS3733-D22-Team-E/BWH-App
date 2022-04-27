@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamE.entity;
 import com.jfoenix.controls.*;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
+import edu.wpi.cs3733.D22.teamE_api.entity.FloralServiceRequest;
 import edu.wpi.cs3733.D22.teamZ.api.entity.ExternalTransportRequest;
 import edu.wpi.cs3733.D22.teamZ.api.entity.RequestStatus;
 import edu.wpi.cs3733.D22.teamZ.api.entity.TransportMethod;
