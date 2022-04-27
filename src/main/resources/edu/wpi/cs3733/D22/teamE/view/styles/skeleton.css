@@ -183,4 +183,8 @@
 .profile {
     -fx-border-radius: 100%;
 }
-
+.default-background {
+    -fx-background-image: url("../images/hospital.JPG");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
