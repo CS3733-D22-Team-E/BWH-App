@@ -51,6 +51,7 @@ public class DashboardEquipmentHandler extends DashboardHandler {
   }
 
   private void bedAlertHandler() {
+
     ArrayList<MedicalEquipment> dirtyLocBeds = new ArrayList<>();
     for (MedicalEquipment curEq : allEquipmentList) {
       if (curEq.getEquipmentType().equals("BED")) {
@@ -59,6 +60,7 @@ public class DashboardEquipmentHandler extends DashboardHandler {
         }
       }
     }
+    System.out.println("Beds in dirty locations: " + dirtyLocBeds.size());
     if (dirtyLocBeds.size() >= 6) {
       createBedAlert(dirtyLocBeds);
       dashboardController.bedBox.setStyle("-fx-background-color: red");
@@ -74,7 +76,7 @@ public class DashboardEquipmentHandler extends DashboardHandler {
   private void createBedAlert(ArrayList<MedicalEquipment> dirtyLocBeds) {
 
     medicalEquipmentRequest cleaningRequest = new medicalEquipmentRequest();
-    cleaningRequest.setFloorID(dashboardController.currentFloorString);
+    cleaningRequest.setFloorID("1");
     cleaningRequest.setRoomID("eSTOR001L1");
     cleaningRequest.setEquipment("Bed");
     cleaningRequest.setStaffAssignee("Pending");
@@ -220,6 +222,10 @@ public class DashboardEquipmentHandler extends DashboardHandler {
                 + " dirty equipment storage locations on this floor "
                 + "that have at least 10 infusion pumps in them!";
         cleanInfusionPumps(dirtyEquipmentToBeCleaned);
+      }
+      if (dashboardController.currentFloorString.equals("1")) {
+        System.out.println(cleanLocsOnFloor.keySet());
+        System.out.println(dirtyLocsOnFloor.keySet());
       }
       dashboardController.infusionPumpBoxTooltip.setText(infusionPumpBoxTooltipText);
       dashboardController.infusionPumpBoxTooltip.setOpacity(1);
