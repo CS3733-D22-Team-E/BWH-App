@@ -236,18 +236,16 @@ public class profilePageController implements Initializable {
   public void changeMode(ActionEvent event) throws FileNotFoundException {
     if (isLightMode) {
       themeControl.setDarkMode(mainPane);
-      javafx.scene.image.Image newImg =
-          new javafx.scene.image.Image(
-              new FileInputStream(
-                  "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/ic-light.png"));
+      Image newImg =
+          new Image(
+              Objects.requireNonNull(Main.class.getResourceAsStream("view/icons/ic-light.png")));
       imgMode.setImage(newImg);
       isLightMode = false;
     } else {
       themeControl.setLightMode(mainPane);
-      javafx.scene.image.Image newImg =
-          new javafx.scene.image.Image(
-              new FileInputStream(
-                  "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/ic-dark.png"));
+      Image newImg =
+          new Image(
+              Objects.requireNonNull(Main.class.getResourceAsStream("view/icons/ic-dark.png")));
       imgMode.setImage(newImg);
       isLightMode = true;
     }
