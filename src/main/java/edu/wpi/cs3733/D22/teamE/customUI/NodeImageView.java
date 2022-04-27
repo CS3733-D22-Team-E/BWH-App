@@ -30,22 +30,17 @@ public class NodeImageView<T> extends ImageView {
 
   protected String name = "";
 
-  protected final EventHandler<MouseEvent> hoverListener =
+  protected EventHandler<MouseEvent> hoverListener =
       event -> {
         String content = String.format("{ %.2f : %.2f }", this.getX(), this.getY());
         if (content == null) return;
         if (content.isBlank() || content.isEmpty()) return;
-        Label popupContent1 = new Label(content);
+        Label popupContent1 = new Label(content + "\n" + name);
         popupContent1.setStyle(
-            "-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 1px; -fx-padding: 5px; -fx-text-fill: black;");
-
-        Label popupContent2 = new Label(name);
-        popupContent2.setStyle(
             "-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 1px; -fx-padding: 5px; -fx-text-fill: black;");
 
         VBox popupContent = new VBox();
         popupContent.getChildren().add(popupContent1);
-        popupContent.getChildren().add(popupContent2);
         popup.getContent().clear();
         popup.getContent().addAll(popupContent);
 
@@ -93,7 +88,7 @@ public class NodeImageView<T> extends ImageView {
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent event) {
-            drag = true;
+            if (event.getButton().equals(MouseButton.SECONDARY)) drag = true;
           }
         });
     this.addEventFilter(
@@ -101,7 +96,7 @@ public class NodeImageView<T> extends ImageView {
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent event) {
-            drag = false;
+            if (event.getButton().equals(MouseButton.SECONDARY)) drag = false;
           }
         });
 
@@ -121,12 +116,12 @@ public class NodeImageView<T> extends ImageView {
 
     this.setOnMouseClicked(
         event -> {
-          this.setClicked(!isClicked());
+          if (event.getButton().equals(MouseButton.SECONDARY)) this.setClicked(!isClicked());
         });
 
     this.setOnMouseDragged(
         event -> {
-          if (event.getButton().equals(MouseButton.PRIMARY) && drag) {
+          if (event.getButton().equals(MouseButton.SECONDARY) && drag) {
             this.setCursor(Cursor.CLOSED_HAND);
             this.setX(event.getX() - widthOffset);
             this.setY(event.getY() - heightOffset);

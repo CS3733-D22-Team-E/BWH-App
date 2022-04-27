@@ -101,12 +101,19 @@ public class requestPageFactory {
             innerBox.getChildren().add(l);
             if (r instanceof String) {
               defVal.add(r);
-              JFXTextField textField = new JFXTextField();
-              textField.setText(content);
-              innerBox.getChildren().add(textField);
-              box.getChildren().add(innerBox);
-              returnMethods.add(req.getClass().getMethod("set" + label, String.class));
-              returnFields.add(textField);
+              if (req instanceof Equipment) {
+                Label la = new Label();
+                la.setText(content);
+                innerBox.getChildren().add(la);
+                box.getChildren().add(innerBox);
+              } else {
+                JFXTextField textField = new JFXTextField();
+                textField.setText(content);
+                innerBox.getChildren().add(textField);
+                box.getChildren().add(innerBox);
+                returnMethods.add(req.getClass().getMethod("set" + label, String.class));
+                returnFields.add(textField);
+              }
             } else if (r instanceof LocalDate) {
               defVal.add(r);
               JFXDatePicker datePicker = new JFXDatePicker();

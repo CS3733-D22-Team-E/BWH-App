@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXSlider;
 import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.customUI.EntityView;
@@ -22,12 +21,13 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -40,6 +40,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Popup;
 import org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException;
 
 public class mapPageController implements Initializable {
@@ -66,30 +67,28 @@ public class mapPageController implements Initializable {
   Pane floorServiceRequestPane = new Pane();
   @FXML ComboBox floorDropdown;
   @FXML ComboBox locationTypeDropdown;
-  @FXML Button zoomUp;
-  @FXML Button zoomDown;
-  @FXML JFXSlider zoomSlider;
   @FXML VBox towerLocationsLegend;
   @FXML VBox medicalEquipmentLegend;
   @FXML VBox serviceRequestLegend;
   @FXML ScrollPane scroller;
 
+  @FXML HBox helpIcon;
+
   // Map editor components
-  @FXML Button mapEditorButton;
+  @FXML JFXButton mapEditorButton;
   @FXML HBox editorModeContainer;
   @FXML VBox editorParent;
   @FXML VBox addLocationPane;
   @FXML VBox deleteLocationPane;
   // Update location components
-  @FXML Button changePosition;
   // Add tower location components
   @FXML TextField addShortName;
   @FXML TextField addLongName;
   @FXML JFXComboBox addNodeType;
-  @FXML Button smallAddLocation;
+  @FXML JFXButton smallAddLocation;
   // Delete location components
   @FXML Text deleteText;
-  @FXML Button smallDeleteLocation;
+  @FXML JFXButton smallDeleteLocation;
   @FXML StackPane canvasPane;
 
   @FXML JFXButton legendOpenButton;
@@ -107,8 +106,7 @@ public class mapPageController implements Initializable {
           "PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF",
           "EXIT", "RETL", "SERV");
   ObservableList<String> locationTypes =
-      FXCollections.observableArrayList(
-          "Tower Locations", "Medical Equipment", "Service Requests", "All");
+      FXCollections.observableArrayList("Tower Locations", "Medical Equipment", "Service Requests");
 
   public mapPageController() throws SQLException {
     int i = 3;
@@ -138,7 +136,7 @@ public class mapPageController implements Initializable {
     scroller.addEventFilter(
         MouseEvent.ANY,
         event -> {
-          scroller.setPannable(!event.getButton().equals(MouseButton.PRIMARY));
+          scroller.setPannable(!event.getButton().equals(MouseButton.SECONDARY));
         });
 
     legendOpenButton.setOnAction(
@@ -167,7 +165,42 @@ public class mapPageController implements Initializable {
       e.printStackTrace();
     }
 
-    setZoom(1.21);
+    final Popup popup = new Popup();
+    popup.setAutoHide(true);
+
+    final EventHandler<MouseEvent> hoverListener =
+        event -> {
+          Label popupContent1 =
+              new Label(
+                  "\uD835\uDC02\uD835\uDC28\uD835\uDC27\uD835\uDC2D\uD835\uDC2B\uD835\uDC28\uD835\uDC25\uD835\uDC2C\n"
+                      + "Drag with M1 to move around the Map\n"
+                      + "Zoom with Scroll Wheel\n"
+                      + "Interact with Nodes on the map with M2\n"
+                      + "Click on Location Nodes, then go to editor, and select the Delete Locations button to delete them\n"
+                      + "Add Location Nodes with the add section of the map editor menu, you will find added Nodes in the center of the Map\n"
+                      + "Drag Nodes to update their location\n"
+                      + "Shift-Click(M2) on Entity Nodes such as Medical Equipment or Service Requests to open their info pages\n"
+                      + "Entity Nodes may only be placed on Location Nodes, whereas Location Nodes may be placed freely\n"
+                      + "Entity Nodes will snap to the nearest Location Node to ensure this\n");
+          popupContent1.setStyle(
+              "-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 1px; -fx-padding: 5px; -fx-text-fill: black;");
+
+          VBox popupContent = new VBox();
+          popupContent.getChildren().add(popupContent1);
+          popup.getContent().clear();
+          popup.getContent().addAll(popupContent);
+
+          if (event.getEventType() == MouseEvent.MOUSE_EXITED) {
+            popup.hide();
+          } else if (event.getEventType() == MouseEvent.MOUSE_ENTERED) {
+            popup.show(helpIcon, event.getScreenX() + 10, event.getScreenY());
+          }
+        };
+
+    this.helpIcon.setOnMouseEntered(hoverListener);
+    this.helpIcon.setOnMouseExited(hoverListener);
+
+    setZoom(1.3);
   }
 
   // Re-fetch data from database after location update
@@ -279,14 +312,6 @@ public class mapPageController implements Initializable {
 
         // Set the legend to visible
         // serviceRequestLegend.setVisible(true);
-        break;
-      case "All":
-        // Filter and display all locations
-        filterTowerLocations();
-        displayTowerLocations();
-        displayServiceRequestLocations();
-        displayMedEquipLocations();
-
         break;
     }
 
@@ -451,7 +476,7 @@ public class mapPageController implements Initializable {
 
     floorEquipmentPane.getChildren().clear();
 
-    if (!viewMode.equals("All")) displayStaticLocations(floorEquipmentPane);
+    displayStaticLocations(floorEquipmentPane);
 
     double imageX = mapImage.getFitWidth();
     double coordinateX = 935;
@@ -475,16 +500,8 @@ public class mapPageController implements Initializable {
           // prefHeight *= 0.5;
 
           ImageView myLoc = null;
-          if (!viewMode.equals("All")) {
-            for (customImageViewTesting loc : staticLocations) {
-              if (loc.getL().getNodeID().equals(et.getRoomID())) myLoc = loc;
-            }
-          } else {
-            for (NodeImageView loc : nodeViews) {
-              if (loc.getNode() instanceof Location) {
-                if (((Location) loc.getNode()).getNodeID().equals(et.getRoomID())) myLoc = loc;
-              }
-            }
+          for (customImageViewTesting loc : staticLocations) {
+            if (loc.getL().getNodeID().equals(et.getRoomID())) myLoc = loc;
           }
 
           assert myLoc != null;
@@ -566,7 +583,7 @@ public class mapPageController implements Initializable {
 
     floorServiceRequestPane.getChildren().clear();
 
-    if (!viewMode.equals("All")) displayStaticLocations(floorServiceRequestPane);
+    displayStaticLocations(floorServiceRequestPane);
 
     double imageX = mapImage.getFitWidth();
     double coordinateX = 935;
@@ -588,16 +605,8 @@ public class mapPageController implements Initializable {
             double heightOffset = (prefHeight / 2);
 
             ImageView myLoc = null;
-            if (!viewMode.equals("All")) {
-              for (customImageViewTesting loc : staticLocations) {
-                if (loc.getL().getNodeID().equals(et.getRoomID())) myLoc = loc;
-              }
-            } else {
-              for (NodeImageView loc : nodeViews) {
-                if (loc.getNode() instanceof Location) {
-                  if (((Location) loc.getNode()).getNodeID().equals(et.getRoomID())) myLoc = loc;
-                }
-              }
+            for (customImageViewTesting loc : staticLocations) {
+              if (loc.getL().getNodeID().equals(et.getRoomID())) myLoc = loc;
             }
 
             assert myLoc != null;
@@ -741,11 +750,6 @@ public class mapPageController implements Initializable {
     return image;
   }
 
-  @FXML // Handle zoom scroll bar
-  public void changeZoom(MouseEvent event) throws SQLException, FileNotFoundException {
-    // zoomHandler(zoomSlider.getValue());
-  }
-
   @FXML Group group;
 
   private void zoomHandler(double zoomValue) {
@@ -756,7 +760,7 @@ public class mapPageController implements Initializable {
     // group.setScaleX(group.getScaleX() * zoomValue);
     //  group.setScaleY(group.getScaleY() * zoomValue);
 
-    if (mapBox.getScaleX() * zoomValue >= 1.2 && mapBox.getScaleX() * zoomValue <= 2) {
+    if (mapBox.getScaleX() * zoomValue >= 1.3) {
 
       mapBox.setScaleX(mapBox.getScaleX() * zoomValue);
       mapBox.setScaleY(mapBox.getScaleY() * zoomValue);
@@ -775,26 +779,6 @@ public class mapPageController implements Initializable {
     for (Node child : mapBox.getChildren()) {
       child.setScaleX(zoom);
       child.setScaleY(zoom);
-    }
-  }
-
-  @FXML // Handle zoom + button
-  public void zoomUp(ActionEvent event) throws SQLException, FileNotFoundException {
-    double incrementedZoom = zoomSlider.getValue() + zoomIncrement;
-
-    if (incrementedZoom <= zoomSlider.getMax()) {
-      zoomHandler(incrementedZoom);
-      zoomSlider.setValue(incrementedZoom);
-    }
-  }
-
-  @FXML // Handle zoom - button
-  public void zoomDown(ActionEvent event) {
-    double decrementedZoom = zoomSlider.getValue() - zoomIncrement;
-
-    if (decrementedZoom >= zoomSlider.getMin()) {
-      zoomHandler(decrementedZoom);
-      zoomSlider.setValue(decrementedZoom);
     }
   }
 
@@ -1115,18 +1099,6 @@ public class mapPageController implements Initializable {
       setEditMode("update");
     }
   }*/
-
-  @FXML
-  public void changePositionButton(ActionEvent event) throws IOException {
-
-    if (changePosition.getText().equals("Cancel")) {
-      changePosition.setText("Change Position");
-      setEditMode("update");
-    } else {
-      changePosition.setText("Cancel");
-      setEditMode("changePosition");
-    }
-  }
 
   public void selectNode(NodeImageView node) {
     if (node != null) {
