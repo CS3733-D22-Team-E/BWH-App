@@ -7,8 +7,20 @@ import org.junit.jupiter.api.Test;
 public class MainControllerTesting {
 
   @Test
-  public void testAPIButton() {
+  public void testFloralAPIButton() {
     mainController mainController = new mainController();
     mainController.apiButton(new ActionEvent());
+  }
+
+  @Test
+  public void testExternalTransportButton() {
+    mainController mainController = new mainController();
+    mainController.extTransportButton(new ActionEvent());
+  }
+
+  @Test
+  public void testSanitationButton() {
+    mainController mainController = new mainController();
+    mainController.setSanitationButton(new ActionEvent());
   }
 }
