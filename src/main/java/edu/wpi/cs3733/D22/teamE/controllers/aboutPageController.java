@@ -6,19 +6,33 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
-public class aboutPageController {
+public class aboutPageController implements Initializable {
 
   public aboutPageController() throws FileNotFoundException {}
 
+  @FXML VBox mainPane;
+
   @FXML Hyperlink wilsonWong;
-  @FXML Pane joeyPane;
+  @FXML VBox joeyPopUp;
+  @FXML VBox colinPopUp;
+  @FXML VBox ericPopUp;
+  @FXML VBox jeremyPopUp;
+  @FXML VBox shenPopUp;
+  @FXML VBox timPopUp;
+  @FXML VBox danielPopUp;
+  @FXML VBox hannahPopUp;
+  @FXML VBox philPopUp;
+  @FXML VBox sizhePopUp;
 
   private String joeyBio =
       "Joey Rozman was our Lead Software Engineer. Joey is also a very active member in Tau Kappa Epsilon, power-lifts in his free time, and loves baking.";
@@ -46,54 +60,139 @@ public class aboutPageController {
     Desktop.getDesktop().browse(new URI("http://wilsonwong.org/"));
   }
 
-  @FXML
-  public void joeyPopUp(MouseEvent event) {
-    PopUp.aboutPopUp(joeyBio, ((Node) event.getSource()).getScene().getWindow(), "Joey");
-  }
+  //  @FXML
+  //  public void joeyPopUp(MouseEvent event) {
+  //    PopUp.aboutPopUp(joeyBio, ((Node) event.getSource()).getScene().getWindow(), "Joey");
+  //  }
+  //
+  //  @FXML
+  //  public void colinPopUp(MouseEvent event) {
+  //    PopUp.aboutPopUp(colinBio, ((Node) event.getSource()).getScene().getWindow(), "Colin");
+  //  }
+  //
+  //  @FXML
+  //  public void ericPopUp(MouseEvent event) {
+  //    PopUp.aboutPopUp(ericBio, ((Node) event.getSource()).getScene().getWindow(), "Eric");
+  //  }
+  //
+  //  @FXML
+  //  public void jeremyPopUp(MouseEvent event) {
+  //    PopUp.aboutPopUp(jeremyBio, ((Node) event.getSource()).getScene().getWindow(), "Jeremy");
+  //  }
+  //
+  //  @FXML
+  //  public void shenPopUp(MouseEvent event) {
+  //    PopUp.aboutPopUp(shenBio, ((Node) event.getSource()).getScene().getWindow(), "Shen");
+  //  }
+  //
+  //  @FXML
+  //  public void timPopUp(MouseEvent event) {
+  //    PopUp.aboutPopUp(timBio, ((Node) event.getSource()).getScene().getWindow(), "Tim");
+  //    // PopUp.hoverListener(event, timBio);
+  //  }
+  //
+  //  @FXML
+  //  public void danielPopUp(MouseEvent event) {
+  //    PopUp.aboutPopUp(danielBio, ((Node) event.getSource()).getScene().getWindow(), "Daniel");
+  //  }
+  //
+  //  @FXML
+  //  public void hannahPopUp(MouseEvent event) {
+  //    PopUp.aboutPopUp(hannahBio, ((Node) event.getSource()).getScene().getWindow(), "Hannah");
+  //  }
+  //
+  //  @FXML
+  //  public void philPopUp(MouseEvent event) {
+  //    PopUp.aboutPopUp(philBio, ((Node) event.getSource()).getScene().getWindow(), "Phil");
+  //  }
+  //
+  //  @FXML
+  //  public void sizhePopUp(MouseEvent event) {
+  //    PopUp.aboutPopUp(sizheBio, ((Node) event.getSource()).getScene().getWindow(), "Sizhe");
+  //  }
 
-  @FXML
-  public void colinPopUp(MouseEvent event) {
-    PopUp.aboutPopUp(colinBio, ((Node) event.getSource()).getScene().getWindow(), "Colin");
-  }
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {
+    joeyPopUp.setOnMouseClicked(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(javafx.scene.input.MouseEvent mouseEvent) {
 
-  @FXML
-  public void ericPopUp(MouseEvent event) {
-    PopUp.aboutPopUp(ericBio, ((Node) event.getSource()).getScene().getWindow(), "Eric");
-  }
+            PopUp.aboutPopUp(joeyBio, mainPane.getScene().getWindow(), "Joey");
+          }
+        });
 
-  @FXML
-  public void jeremyPopUp(MouseEvent event) {
-    PopUp.aboutPopUp(jeremyBio, ((Node) event.getSource()).getScene().getWindow(), "Jeremy");
-  }
+    ericPopUp.setOnMouseClicked(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(javafx.scene.input.MouseEvent mouseEvent) {
 
-  @FXML
-  public void shenPopUp(MouseEvent event) {
-    PopUp.aboutPopUp(shenBio, ((Node) event.getSource()).getScene().getWindow(), "Shen");
-  }
+            PopUp.aboutPopUp(ericBio, mainPane.getScene().getWindow(), "Eric");
+          }
+        });
+    jeremyPopUp.setOnMouseClicked(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(javafx.scene.input.MouseEvent mouseEvent) {
 
-  @FXML
-  public void timPopUp(MouseEvent event) {
-    PopUp.aboutPopUp(timBio, ((Node) event.getSource()).getScene().getWindow(), "Tim");
-    // PopUp.hoverListener(event, timBio);
-  }
+            PopUp.aboutPopUp(jeremyBio, mainPane.getScene().getWindow(), "Jeremy");
+          }
+        });
+    shenPopUp.setOnMouseClicked(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(javafx.scene.input.MouseEvent mouseEvent) {
 
-  @FXML
-  public void danielPopUp(MouseEvent event) {
-    PopUp.aboutPopUp(danielBio, ((Node) event.getSource()).getScene().getWindow(), "Daniel");
-  }
+            PopUp.aboutPopUp(shenBio, mainPane.getScene().getWindow(), "Shen");
+          }
+        });
+    timPopUp.setOnMouseClicked(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(javafx.scene.input.MouseEvent mouseEvent) {
 
-  @FXML
-  public void hannahPopUp(MouseEvent event) {
-    PopUp.aboutPopUp(hannahBio, ((Node) event.getSource()).getScene().getWindow(), "Hannah");
-  }
+            PopUp.aboutPopUp(timBio, mainPane.getScene().getWindow(), "Tim");
+          }
+        });
+    danielPopUp.setOnMouseClicked(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(javafx.scene.input.MouseEvent mouseEvent) {
 
-  @FXML
-  public void philPopUp(MouseEvent event) {
-    PopUp.aboutPopUp(philBio, ((Node) event.getSource()).getScene().getWindow(), "Phil");
-  }
+            PopUp.aboutPopUp(danielBio, mainPane.getScene().getWindow(), "Daniel");
+          }
+        });
+    hannahPopUp.setOnMouseClicked(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(javafx.scene.input.MouseEvent mouseEvent) {
 
-  @FXML
-  public void sizhePopUp(MouseEvent event) {
-    PopUp.aboutPopUp(sizheBio, ((Node) event.getSource()).getScene().getWindow(), "Sizhe");
+            PopUp.aboutPopUp(hannahBio, mainPane.getScene().getWindow(), "Hannah");
+          }
+        });
+    philPopUp.setOnMouseClicked(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(javafx.scene.input.MouseEvent mouseEvent) {
+
+            PopUp.aboutPopUp(philBio, mainPane.getScene().getWindow(), "Phil");
+          }
+        });
+    sizhePopUp.setOnMouseClicked(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(javafx.scene.input.MouseEvent mouseEvent) {
+
+            PopUp.aboutPopUp(sizheBio, mainPane.getScene().getWindow(), "Sizhe");
+          }
+        });
+    colinPopUp.setOnMouseClicked(
+            new EventHandler<MouseEvent>() {
+              @Override
+              public void handle(javafx.scene.input.MouseEvent mouseEvent) {
+
+                PopUp.aboutPopUp(colinBio, mainPane.getScene().getWindow(), "Colin");
+              }
+            });
   }
 }
