@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class pageControl {
+  public static boolean isLightMode = true;
 
   public static boolean loadPage(String url, Stage stage) {
     try {
@@ -49,7 +50,7 @@ public class pageControl {
     }
   }
 
-  public static Node getPageRoot(String url) {
+  public static Parent getPageRoot(String url) {
     try {
       FXMLLoader loader = new FXMLLoader();
       loader.setLocation(Main.class.getResource("view/" + url));
@@ -60,7 +61,7 @@ public class pageControl {
     }
   }
 
-  public static Node getPageRoot(String url, Object controller) {
+  public static Parent getPageRoot(String url, Object controller) {
     try {
       FXMLLoader loader = new FXMLLoader();
       loader.setLocation(Main.class.getResource("view/" + url));
@@ -75,13 +76,23 @@ public class pageControl {
   public static void loadTop(String url, Stage stage) {
     Parent root = stage.getScene().getRoot();
     BorderPane basePage = (BorderPane) root.lookup("#rootBorderPane");
+    Node centerBase = getPageRoot(url);
     basePage.setTop(getPageRoot(url));
   }
 
   public static void loadCenter(String url, Stage stage) {
     Parent root = stage.getScene().getRoot();
     BorderPane basePage = (BorderPane) root.lookup("#rootBorderPane");
-    basePage.setCenter(getPageRoot(url));
+    Parent centerBase = getPageRoot(url);
+    if (isLightMode) {
+      themeControl.setLightMode(centerBase);
+    } else {
+      themeControl.setDarkMode(centerBase);
+    }
+    // centerBase.getStylesheets().clear();
+    // centerBase.getStylesheets().add(darkModeURL);
+    basePage.setCenter(centerBase);
+    basePage.getScene().getRoot().getStylesheets().clear();
   }
 
   public static void loadLeft(String url, Stage stage) {
