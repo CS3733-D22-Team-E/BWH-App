@@ -1,11 +1,5 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
-import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 public class MedicalEquipment extends Equipment {
   private String med_equipmentID;
   private String equipmentType;
@@ -67,48 +61,8 @@ public class MedicalEquipment extends Equipment {
     this.equipmentType = equipmentType;
   }
 
-  public int getXCoord() throws SQLException {
-    Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
-    String locationID = getCurrentLocation();
-    int result = -1;
-
-    Statement statement = connection.createStatement();
-    String query = "SELECT XCOORD FROM TOWERLOCATIONS WHERE NODEID = '" + locationID + "'";
-    ResultSet rs = statement.executeQuery(query);
-
-    if (rs.next()) {
-      result = rs.getInt("XCOORD");
-    }
-    return result;
-  }
-
-  public int getYCoord() throws SQLException {
-    Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
-    String locationID = getCurrentLocation();
-    int result = -1;
-
-    Statement statement = connection.createStatement();
-    String query = "SELECT YCOORD FROM TOWERLOCATIONS WHERE NODEID = '" + locationID + "'";
-    ResultSet rs = statement.executeQuery(query);
-
-    if (rs.next()) {
-      result = rs.getInt("YCOORD");
-    }
-    return result;
-  }
-
-  public String getFloor() throws SQLException {
-    Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
-    String locationID = getCurrentLocation();
-    String result = "";
-
-    Statement statement = connection.createStatement();
-    String query = "SELECT FLOOR FROM TOWERLOCATIONS WHERE NODEID = '" + locationID + "'";
-    ResultSet rs = statement.executeQuery(query);
-
-    if (rs.next()) {
-      result = rs.getString("FLOOR");
-    }
-    return result;
+  @Override
+  public String toString() {
+    return this.getEquipmentType() + " : " + super.toString();
   }
 }

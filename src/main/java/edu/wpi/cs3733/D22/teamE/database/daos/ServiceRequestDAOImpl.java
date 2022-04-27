@@ -37,7 +37,19 @@ public class ServiceRequestDAOImpl implements DAO<RequestInterface> {
 
   @Override
   public List<RequestInterface> getAll() {
-    return serviceRequests;
+    List<RequestInterface> requests = new ArrayList<>();
+
+    requests.addAll(medicalEquipmentServiceRequestDAO.getAll());
+    requests.addAll(labRequestDAO.getAll());
+    requests.addAll(languageInterpreterRequestDAO.getAll());
+    requests.addAll(mealDeliveryRequestDAO.getAll());
+    requests.addAll(medicineDeliveryDAO.getAll());
+    requests.addAll(sanitationRequestDAO.getAll());
+    requests.addAll(giftDeliveryRequestDAO.getAll());
+    requests.addAll(securityRequestDAO.getAll());
+    requests.addAll(facilitiesRequestDAO.getAll());
+
+    return requests;
   }
 
   public void printAll() {

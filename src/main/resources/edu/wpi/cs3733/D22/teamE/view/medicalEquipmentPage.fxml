@@ -339,9 +339,9 @@
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <VBox fx:id="requests1" alignment="CENTER" VBox.vgrow="ALWAYS">
+                                    <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label fx:id="request1" text="0" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                          <Label fx:id="requests1" text="0" textFill="WHITE" VBox.vgrow="ALWAYS">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -379,7 +379,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label fx:id="request2" text="0" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                          <Label fx:id="requests2" text="0" textFill="WHITE" VBox.vgrow="ALWAYS">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -417,7 +417,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label fx:id="request3" text="0" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                          <Label fx:id="requests3" text="0" textFill="WHITE" VBox.vgrow="ALWAYS">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -455,7 +455,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label fx:id="request4" text="0" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                          <Label fx:id="requests4" text="0" textFill="WHITE" VBox.vgrow="ALWAYS">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -493,7 +493,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label fx:id="request5" text="0" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                          <Label fx:id="requests5" text="0" textFill="WHITE" VBox.vgrow="ALWAYS">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
