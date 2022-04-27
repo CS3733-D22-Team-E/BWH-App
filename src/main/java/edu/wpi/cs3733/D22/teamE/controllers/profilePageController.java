@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -91,6 +92,12 @@ public class profilePageController implements Initializable {
       nameLabel.setText(account.getFirstName() + " " + account.getLastName());
       statusLabel.setText(account.getPosition());
       idLabel.setText(employee.getEmployeeID());
+      database.getItems().addAll("Embeded", "Client");
+      EventHandler<Event> databaseChange = e -> changeDBConnection(e);
+      database.setOnAction(databaseChange);
+      colorScheme.getSelectionModel().selectFirst();
+      colorScheme.getItems().addAll("Bright", "Dark");
+
       int count = 0;
       List<RequestInterface> l = db.getAllServiceRequests();
       ArrayList<RequestInterface> myReq = new ArrayList<>();
@@ -194,4 +201,10 @@ public class profilePageController implements Initializable {
   public void leave(MouseEvent e) {
     ((Node) e.getSource()).getScene().setCursor(Cursor.DEFAULT);
   }
+
+  public void changeDBConnection(Event e) {
+    System.out.println("Test");
+  }
+
+  public void changeColorScheme(Event e) {}
 }
