@@ -1,7 +1,13 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.*;
+import edu.wpi.cs3733.D22.teamE.Main;
+import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
+import edu.wpi.cs3733.D22.teamE.database.ProfilePictureManager;
+import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import edu.wpi.cs3733.D22.teamE.pageControl;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -12,6 +18,7 @@ import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -56,6 +63,24 @@ public class HeaderController implements Initializable {
     aboutUsButton.setToggleGroup(headerPageButtons);
     helpButton.setToggleGroup(headerPageButtons);
     selectedPageButton = homeButton;
+
+    Employee currentEmployee = AccountsManager.getInstance().getEmployee();
+    Image image;
+    try {
+      InputStream is = ProfilePictureManager.getPersonalPicture(currentEmployee);
+      image = new Image(is);
+    } catch (Exception e) {
+      URL url = Main.class.getResource("view/icons/profilepic.png");
+      assert url != null;
+      InputStream is = null;
+      try {
+        is = url.openStream();
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+      image = new Image(is);
+    }
+    profilePicture.setImage(image);
 
     bwhLogoAndLabel.setOnMouseClicked(
         new EventHandler<javafx.scene.input.MouseEvent>() {
@@ -184,12 +209,11 @@ public class HeaderController implements Initializable {
           }
         });
 
-    // TODO: what to call for logging out?
     profileMenuLogout.setOnAction(
         new EventHandler<ActionEvent>() {
           @Override
           public void handle(ActionEvent event) {
-            pageControl.loadCenter("profilePage.fxml", (Stage) root.getScene().getWindow());
+            pageControl.loadPage("loginPage.fxml", (Stage) root.getScene().getWindow());
             profileMenu.hide();
           }
         });
