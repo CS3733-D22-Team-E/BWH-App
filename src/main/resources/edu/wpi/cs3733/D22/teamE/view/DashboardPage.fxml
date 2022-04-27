@@ -23,7 +23,7 @@
                <children>
                   <VBox alignment="CENTER" minWidth="200.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label text="Side View">
+                        <Label styleClass="textColor" text="Side View">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
@@ -37,6 +37,7 @@
                               <String fx:value="darkBorder" />
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
+                              <String fx:value="textColor_white" />
                            </styleClass>
                         </JFXToggleNode>
                         <JFXToggleNode fx:id="fourthFloorButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 4" textFill="WHITE" VBox.vgrow="ALWAYS">
@@ -48,6 +49,7 @@
                               <String fx:value="darkBorder" />
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
+                              <String fx:value="textColor_white" />
                            </styleClass></JFXToggleNode>
                         <JFXToggleNode fx:id="thirdFloorButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 3" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
@@ -58,6 +60,7 @@
                               <String fx:value="darkBorder" />
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
+                              <String fx:value="textColor_white" />
                            </styleClass></JFXToggleNode>
                         <JFXToggleNode fx:id="secondFloorButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 2" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
@@ -68,6 +71,7 @@
                               <String fx:value="darkBorder" />
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
+                              <String fx:value="textColor_white" />
                            </styleClass>
                         </JFXToggleNode>
                         <JFXToggleNode fx:id="firstFloorButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Level 1" textFill="WHITE" VBox.vgrow="ALWAYS">
@@ -79,6 +83,7 @@
                               <String fx:value="darkBorder" />
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
+                              <String fx:value="textColor_white" />
                            </styleClass></JFXToggleNode>
                         <JFXToggleNode fx:id="ll1Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LL1" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
@@ -89,6 +94,7 @@
                               <String fx:value="darkBorder" />
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
+                              <String fx:value="textColor_white" />
                            </styleClass></JFXToggleNode>
                         <JFXToggleNode fx:id="ll2Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LL2" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
@@ -99,6 +105,7 @@
                               <String fx:value="darkBorder" />
                               <String fx:value="lightColor" />
                               <String fx:value="thinBorder" />
+                              <String fx:value="textColor_white" />
                            </styleClass></JFXToggleNode>
                      </children>
                      <HBox.margin>
@@ -118,7 +125,7 @@
                            <children>
                               <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label text="Service Requests">
+                                    <Label styleClass="textColor" text="Service Requests">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
@@ -157,7 +164,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                                  <children>
-                                    <Label text="Quick Access">
+                                    <Label styleClass="textColor" text="Quick Access">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
@@ -174,7 +181,7 @@
                                                       <Image url="@icons/mapHelp.png" />
                                                    </image>
                                                 </ImageView>
-                                                <Label text="Maps" HBox.hgrow="ALWAYS">
+                                                <Label styleClass="textColor" text="Maps" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="System Bold" size="18.0" />
                                                    </font>
@@ -190,7 +197,7 @@
                                                 <Image url="@icons/status.png" />
                                              </image>
                                           </ImageView>
-                                          <Label text="Request Status" HBox.hgrow="ALWAYS">
+                                          <Label styleClass="textColor" text="Request Status" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
@@ -204,7 +211,7 @@
                                                 <Image url="@icons/profile.png" />
                                              </image>
                                           </ImageView>
-                                          <Label text="My Profile" HBox.hgrow="ALWAYS">
+                                          <Label styleClass="textColor" text="My Profile" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
@@ -218,7 +225,7 @@
                                                 <Image url="@icons/serviceHelp.png" />
                                              </image>
                                           </ImageView>
-                                          <Label text="Submit Request" HBox.hgrow="ALWAYS">
+                                          <Label styleClass="textColor" text="Submit Request" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
@@ -240,43 +247,43 @@
                            <children>
                               <VBox alignment="CENTER" minWidth="40.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label alignment="CENTER" text="X-ray " textFill="WHITE">
+                                    <Label alignment="CENTER" styleClass="textColor_white" text="X-ray " textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
                                     </Label>
                                     <VBox alignment="CENTER" style="-fx-background-color: #1FAAA2;" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label text="0" textFill="WHITE" fx:id="xRayClean">
+                                          <Label styleClass="textColor_white" text="0" textFill="WHITE" fx:id="xRayClean">
                                              <font>
                                                 <Font name="System Bold" size="36.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="LL2requests" text="Clean" textFill="WHITE">
+                                          <Label fx:id="LL2requests" styleClass="textColor_white" text="Clean" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <VBox alignment="CENTER" style="-fx-background-color: #1B9991;" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Label text="0" textFill="WHITE" fx:id="xRayInUse">
+                                                <Label styleClass="textColor_white" text="0" textFill="WHITE" fx:id="xRayInUse">
                                                    <font>
                                                       <Font name="System Bold" size="36.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="in Use" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                                <Label styleClass="textColor_white" text="in Use" textFill="WHITE" VBox.vgrow="ALWAYS">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </Label>
                                                 <VBox alignment="CENTER">
                                                    <children>
-                                                      <Label text="0" textFill="WHITE" fx:id="xRayDirty">
+                                                      <Label styleClass="textColor_white" text="0" textFill="WHITE" fx:id="xRayDirty">
                                                          <font>
                                                             <Font name="System Bold" size="36.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label text="Dirty " textFill="WHITE">
+                                                      <Label styleClass="textColor_white" text="Dirty " textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -313,47 +320,48 @@
                                     <String fx:value="thinnerBorder" />
                                     <String fx:value="lessRounded" />
                                     <String fx:value="dropShadow" />
+                                    <String fx:value="textColor_white" />
                                  </styleClass>
                               </VBox>
                               <VBox fx:id="bedBox" alignment="CENTER" minWidth="40.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label alignment="CENTER" text="Bed" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                    <Label alignment="CENTER" styleClass="textColor_white" text="Bed" textFill="WHITE" VBox.vgrow="ALWAYS">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
                                     </Label>
                                     <VBox alignment="CENTER" style="-fx-background-color: #1FAAA2;" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label fx:id="bedClean" text="0" textFill="WHITE">
+                                          <Label fx:id="bedClean" styleClass="textColor_white" text="0" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="36.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="LL2requests1" text="Clean" textFill="WHITE">
+                                          <Label fx:id="LL2requests1" styleClass="textColor_white" text="Clean" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <VBox alignment="CENTER" style="-fx-background-color: #1B9991;" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Label fx:id="bedInUse" text="0" textFill="WHITE">
+                                                <Label fx:id="bedInUse" styleClass="textColor_white" text="0" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="36.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="in Use" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                                <Label styleClass="textColor_white" text="in Use" textFill="WHITE" VBox.vgrow="ALWAYS">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </Label>
                                                 <VBox alignment="CENTER">
                                                    <children>
-                                                      <Label fx:id="bedDirty" text="0" textFill="WHITE">
+                                                      <Label fx:id="bedDirty" styleClass="textColor_white" text="0" textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="36.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label text="Dirty " textFill="WHITE">
+                                                      <Label styleClass="textColor_white" text="Dirty " textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -390,47 +398,48 @@
                                     <String fx:value="thinnerBorder" />
                                     <String fx:value="lessRounded" />
                                     <String fx:value="dropShadow" />
+                                    <String fx:value="textColor_white" />
                                  </styleClass>
                               </VBox>
                               <VBox alignment="CENTER" minWidth="40.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label alignment="CENTER" text="Recliner" textFill="WHITE">
+                                    <Label alignment="CENTER" styleClass="textColor_white" text="Recliner" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
                                     </Label>
                                     <VBox alignment="CENTER" style="-fx-background-color: #1FAAA2;" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label fx:id="reclinerClean" text="0" textFill="WHITE">
+                                          <Label fx:id="reclinerClean" styleClass="textColor_white" text="0" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="36.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="LL2requests2" text="Clean" textFill="WHITE">
+                                          <Label fx:id="LL2requests2" styleClass="textColor_white" text="Clean" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <VBox alignment="CENTER" style="-fx-background-color: #1B9991;" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Label fx:id="reclinerInUse" text="0" textFill="WHITE">
+                                                <Label fx:id="reclinerInUse" styleClass="textColor_white" text="0" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="36.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="in Use" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                                <Label styleClass="textColor_white" text="in Use" textFill="WHITE" VBox.vgrow="ALWAYS">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </Label>
                                                 <VBox alignment="CENTER">
                                                    <children>
-                                                      <Label fx:id="reclinerDirty" text="0" textFill="WHITE">
+                                                      <Label fx:id="reclinerDirty" styleClass="textColor_white" text="0" textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="36.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label text="Dirty " textFill="WHITE">
+                                                      <Label styleClass="textColor_white" text="Dirty " textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -467,47 +476,48 @@
                                     <String fx:value="thinnerBorder" />
                                     <String fx:value="lessRounded" />
                                     <String fx:value="dropShadow" />
+                                    <String fx:value="textColor_white" />
                                  </styleClass>
                               </VBox>
                               <VBox fx:id="infusionPumpBox" alignment="CENTER" minWidth="40.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label alignment="CENTER" text="Infusion Pump" textFill="WHITE">
+                                    <Label alignment="CENTER" styleClass="textColor_white" text="Infusion Pump" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
                                     </Label>
                                     <VBox alignment="CENTER" style="-fx-background-color: #1FAAA2;" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label fx:id="infusionPumpClean" text="0" textFill="WHITE">
+                                          <Label fx:id="infusionPumpClean" styleClass="textColor_white" text="0" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="36.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="LL2requests3" text="Clean" textFill="WHITE">
+                                          <Label fx:id="LL2requests3" styleClass="textColor_white" text="Clean" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
                                           <VBox alignment="CENTER" style="-fx-background-color: #1B9991;" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Label fx:id="infusionPumpInUse" text="0" textFill="WHITE">
+                                                <Label fx:id="infusionPumpInUse" styleClass="textColor_white" text="0" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="36.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="in Use" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                                <Label styleClass="textColor_white" text="in Use" textFill="WHITE" VBox.vgrow="ALWAYS">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </Label>
                                                 <VBox alignment="CENTER">
                                                    <children>
-                                                      <Label fx:id="infusionPumpDirty" text="0" textFill="WHITE">
+                                                      <Label fx:id="infusionPumpDirty" styleClass="textColor_white" text="0" textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="36.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label text="Dirty " textFill="WHITE">
+                                                      <Label styleClass="textColor_white" text="Dirty " textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -544,6 +554,7 @@
                                     <String fx:value="thinnerBorder" />
                                     <String fx:value="lessRounded" />
                                     <String fx:value="dropShadow" />
+                                    <String fx:value="textColor_white" />
                                  </styleClass>
                               </VBox>
                            </children>

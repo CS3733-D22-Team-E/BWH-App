@@ -63,7 +63,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </StackPane>
-                  <Label text="Dashboard" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
+                  <Label styleClass="textColor" text="Dashboard" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -108,7 +108,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </StackPane>
-                  <Label text="My Profile" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
+                  <Label styleClass="textColor" text="My Profile" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -150,7 +150,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </StackPane>
-                  <Label text="Submit" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
+                  <Label styleClass="textColor" text="Submit" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -158,7 +158,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="Service Request" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                  <Label styleClass="textColor" text="Service Request" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -200,7 +200,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </StackPane>
-                  <Label text="Service Request" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
+                  <Label styleClass="textColor" text="Service Request" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -208,7 +208,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="Status" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
+                  <Label styleClass="textColor" text="Status" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -250,7 +250,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </StackPane>
-                  <Label text="Map " textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
+                  <Label styleClass="textColor" text="Map " textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -292,7 +292,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </StackPane>
-                  <Label text="Employee" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
+                  <Label styleClass="textColor" text="Employee" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -300,7 +300,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="Database" textOverrun="CENTER_ELLIPSIS">
+                  <Label styleClass="textColor" text="Database" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

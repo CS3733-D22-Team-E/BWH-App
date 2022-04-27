@@ -35,7 +35,11 @@
 }
 
 .textColor {
-    -fx-text-fill: #999999;
+    -fx-text-fill: #CCCCCC;
+}
+
+.textColor_white {
+    -fx-text-fill: #d2d2d2;
 }
 
 .darkColor {
@@ -127,7 +131,7 @@
 }
 
 .containerButton {
-    -fx-background-color: #999999;
+    -fx-background-color: #DFDFDF;
     -fx-text-fill: white;
 }
 
@@ -168,7 +172,7 @@
 
 /* Profile */
 .gradient{
-    -fx-background-color: linear-gradient(to bottom right, #100f5e, #af27d9);
+    -fx-background-color: linear-gradient(to bottom right, #020079, #993ab0);
     -fx-opacity: 0.96;
 }
 
