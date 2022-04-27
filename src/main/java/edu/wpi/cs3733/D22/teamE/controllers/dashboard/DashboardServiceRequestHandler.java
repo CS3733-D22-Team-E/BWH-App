@@ -29,6 +29,7 @@ public class DashboardServiceRequestHandler {
 
   protected void updateServiceRequestTable() {
     filterRequests();
+    // TODO: uncomment this out once the null roomID error from the transport service request is fixed
     // displayRequests();
   }
 
