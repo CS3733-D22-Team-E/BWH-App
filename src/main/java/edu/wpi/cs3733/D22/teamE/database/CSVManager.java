@@ -929,6 +929,8 @@ public class CSVManager {
     fileNames.add(CSVManager.getDefaultAccountsFilename());
 
     DBCreation.createTables();
+    DBCreation.createClientTables();
+
     for (String s : fileNames) {
       generateNewSaveFileFromResources(s);
     }

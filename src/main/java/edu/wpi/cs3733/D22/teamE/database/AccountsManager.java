@@ -15,7 +15,6 @@ public class AccountsManager {
 
   public static AccountsManager getInstance() {
     if (AM_instance == null) AM_instance = new AccountsManager();
-
     return AM_instance;
   }
 
