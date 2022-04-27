@@ -45,7 +45,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="default-background" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" styleClass="gradient" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.aboutPageController">
+<VBox id="default-background" fx:id="mainPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" spacing="20.0" styleClass="gradient" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.aboutPageController">
    <children>
       <Label text="Meet the team" textFill="WHITE" VBox.vgrow="ALWAYS">
          <font>
@@ -67,9 +67,9 @@
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox fx:id="ericPopUp" alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#ericPopUp" VBox.vgrow="ALWAYS">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/eric.png" />
                            </image>
@@ -88,9 +88,9 @@
                         <String fx:value="dropShadow" />
                      </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox fx:id="joeyPopUp" alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#joeyPopUp" VBox.vgrow="ALWAYS">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/mobil_joey.png" />
                            </image>
@@ -109,9 +109,9 @@
                         <String fx:value="dropShadow" />
                      </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox fx:id="philPopUp" alignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#philPopUp" VBox.vgrow="ALWAYS">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/phil.png" />
                            </image>
@@ -130,9 +130,9 @@
                         <String fx:value="dropShadow" />
                      </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox fx:id="hannahPopUp" alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#hannahPopUp" VBox.vgrow="ALWAYS">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/hannah.png" />
                            </image>
@@ -151,9 +151,9 @@
                         <String fx:value="dropShadow" />
                      </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox fx:id="shenPopUp" alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#shenPopUp" VBox.vgrow="ALWAYS">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/shen.png" />
                            </image>
@@ -172,9 +172,9 @@
                         <String fx:value="dropShadow" />
                      </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox fx:id="sizhePopUp" alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#sizhePopUp" VBox.vgrow="ALWAYS">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/frank.png" />
                            </image>
@@ -193,9 +193,9 @@
                         <String fx:value="dropShadow" />
                      </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox fx:id="colinPopUp" alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#colinPopUp" VBox.vgrow="ALWAYS">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/colin.png" />
                            </image>
@@ -213,9 +213,9 @@
                         <String fx:value="container" />
                         <String fx:value="dropShadow" />
                      </styleClass></VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox fx:id="danielPopUp" alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#danielPopUp" VBox.vgrow="ALWAYS">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/daniel.png" />
                            </image>
@@ -234,9 +234,9 @@
                         <String fx:value="dropShadow" />
                      </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox fx:id="jeremyPopUp" alignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130" fitWidth="130" onMouseEntered="#jeremyPopUp" VBox.vgrow="ALWAYS">
+                        <ImageView fitHeight="130" fitWidth="130" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/jeremy.png" />
                            </image>
@@ -255,9 +255,9 @@
                         <String fx:value="dropShadow" />
                      </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox fx:id="timPopUp" alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#timPopUp" VBox.vgrow="ALWAYS">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/tim.png" />
                            </image>
