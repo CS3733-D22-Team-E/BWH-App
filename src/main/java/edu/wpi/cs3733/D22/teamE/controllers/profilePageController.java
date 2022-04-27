@@ -32,7 +32,6 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -90,8 +89,8 @@ public class profilePageController implements Initializable {
       Tooltip.install(photoCirc, t);
       photoCirc.setFill(new ImagePattern(image));
       nameLabel.setText(account.getFirstName() + " " + account.getLastName());
-      posLabel.setText(account.getPosition());
-      salLabel.setText(String.valueOf(employee.getSalary()));
+      statusLabel.setText(account.getPosition());
+      idLabel.setText(employee.getEmployeeID());
       int count = 0;
       List<RequestInterface> l = db.getAllServiceRequests();
       ArrayList<RequestInterface> myReq = new ArrayList<>();
@@ -108,7 +107,6 @@ public class profilePageController implements Initializable {
       }
       reqList.setItems(data);
       reqList.setCellFactory(ServiceRequestButtonListCell.forListView(this));
-      reqNumLabel.setText(String.valueOf(count));
 
     } catch (IOException | SQLException e) {
       e.printStackTrace();

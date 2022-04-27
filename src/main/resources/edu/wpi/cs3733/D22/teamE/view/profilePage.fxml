@@ -72,11 +72,6 @@
                               <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="70.0" minWidth="70.0" styleClass=".requestIcon" HBox.hgrow="ALWAYS">
                                  <children>
                                     <Circle fx:id="photoCirc" fill="TRANSPARENT" radius="80.0" stroke="BLACK" strokeType="INSIDE" />
-                                    <ImageView fx:id="profilePic" fitHeight="150.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@icons/prof.png" />
-                                       </image>
-                                    </ImageView>
                                  </children>
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
