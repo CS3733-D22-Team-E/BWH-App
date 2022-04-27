@@ -21,7 +21,7 @@ import org.apache.commons.io.IOUtils;
 
 /** uses format from Iteration 1 final ERD Diagram */
 public class CSVManager {
-  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+  static Connection connection = AccountsManager.getInstance().getConnection();
 
   // TODO saveLocationFile vs TowerLocations
   // TODO Resources not loading if file already there
@@ -126,27 +126,29 @@ public class CSVManager {
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
     for (Location d : DAOSystemSingleton.INSTANCE.getSystem().getAllLocations()) {
-      String csvLine =
-          ""
-              + d.getNodeID()
-              + ','
-              + d.getXCoord()
-              + ','
-              + d.getYCoord()
-              + ','
-              + d.getFloor()
-              + ','
-              + d.getBuilding()
-              + ','
-              + d.getNodeType()
-              + ','
-              + d.getLongName()
-              + ','
-              + d.getShortName()
-              + "\n";
-      // change nothing
-      if (!doesFileContainLine(out, csvLine)) {
-        FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+      if (d != null) {
+        String csvLine =
+            ""
+                + d.getNodeID()
+                + ','
+                + d.getXCoord()
+                + ','
+                + d.getYCoord()
+                + ','
+                + d.getFloor()
+                + ','
+                + d.getBuilding()
+                + ','
+                + d.getNodeType()
+                + ','
+                + d.getLongName()
+                + ','
+                + d.getShortName()
+                + "\n";
+        // change nothing
+        if (!doesFileContainLine(out, csvLine)) {
+          FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
+        }
       }
     }
   }
@@ -839,8 +841,9 @@ public class CSVManager {
           return true;
         }
       }
-    } catch (FileNotFoundException e) {
+    } catch (IOException e) {
       e.printStackTrace();
+      return false;
     }
     return false;
   }

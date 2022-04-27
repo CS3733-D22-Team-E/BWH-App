@@ -13,29 +13,26 @@ import javafx.util.Callback;
 public class DashboardServiceRequestHandler {
 
   DashboardController dashboardController;
-  DAOSystem subject;
+  DAOSystem system;
   ArrayList<RequestInterface> allRequestList;
   ArrayList<RequestInterface> currentRequestList;
 
   public DashboardServiceRequestHandler(DashboardController dashboardController) {
     this.dashboardController = dashboardController;
-    this.subject = dashboardController.database;
-    allRequestList = (ArrayList<RequestInterface>) subject.getAllServiceRequests();
+    this.system = dashboardController.database;
+    allRequestList = (ArrayList<RequestInterface>) system.getAllServiceRequests();
   }
 
   public void update() {
-    allRequestList = (ArrayList<RequestInterface>) subject.getAllServiceRequests();
+    allRequestList = (ArrayList<RequestInterface>) system.getAllServiceRequests();
   }
 
   protected void updateServiceRequestTable() {
     filterRequests();
-    // TODO: uncomment this out once the null roomID error from the transport service request is
-    // fixed
-    // displayRequests();
+    displayRequests();
   }
 
   private void filterRequests() {
-    System.out.println("Current requests: " + currentRequestList);
     currentRequestList = new ArrayList<>();
     if (!dashboardController.currentFloorString.equals("All")) {
       for (RequestInterface curReq : allRequestList) {
@@ -78,10 +75,11 @@ public class DashboardServiceRequestHandler {
           public ObservableValue<String> call(
               TableColumn.CellDataFeatures<RequestInterface, String> param) {
             RequestInterface curRequest = param.getValue();
-            System.out.println("Current request: " + curRequest);
-            System.out.println("Current room ID: " + curRequest.getRoomID());
-            return new SimpleStringProperty(
-                subject.getLocation(curRequest.getRoomID()).getShortName());
+            String shortNameString = "";
+            if (!curRequest.getRoomID().equals("null")) {
+              shortNameString = system.getLocation(curRequest.getRoomID()).getShortName();
+            }
+            return new SimpleStringProperty(shortNameString);
           }
         });
     dashboardController.tableRequestType.setCellValueFactory(

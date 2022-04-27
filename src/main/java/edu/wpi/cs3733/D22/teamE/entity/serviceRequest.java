@@ -44,12 +44,12 @@ public class serviceRequest implements RequestInterface {
   }
 
   @Override
-  public double getXCoord() {
+  public int getXCoord() {
     return getLocation().getXCoord();
   }
 
   @Override
-  public double getYCoord() {
+  public int getYCoord() {
     return getLocation().getYCoord();
   }
 

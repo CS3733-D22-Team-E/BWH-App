@@ -119,12 +119,12 @@ public abstract class Equipment implements EntityInterface {
   public abstract void use();
 
   @Override
-  public double getXCoord() {
+  public int getXCoord() {
     return this.getLocation().getXCoord();
   }
 
   @Override
-  public double getYCoord() {
+  public int getYCoord() {
     return this.getLocation().getYCoord();
   }
 

@@ -1,14 +1,14 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.controllers.dashboard.DashboardHandler;
-import edu.wpi.cs3733.D22.teamE.database.DBConnect;
+import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalEquipmentDAOImpl implements DAO<MedicalEquipment> {
-  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+  static Connection connection = AccountsManager.getInstance().getConnection();
   List<MedicalEquipment> equipmentList;
   ArrayList<DashboardHandler> observers;
 

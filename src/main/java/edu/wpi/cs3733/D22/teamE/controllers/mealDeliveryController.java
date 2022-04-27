@@ -160,6 +160,9 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       mealSendToDB(mealDeliveryRequest);
 
       setInfographicsCount("MEAL_DELIV_REQ");
+      PopUp.submissionConfirmation(
+          "Your meal delivery service request has been submitted.",
+          submitButton.getScene().getWindow());
 
     } catch (NullPointerException | SQLException error) {
       System.out.println("Error : Some Value is NULL");

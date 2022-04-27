@@ -168,12 +168,12 @@ public class ExternalTransportAdapter implements RequestInterface {
   public void setLocation(int xcoord, int ycoord) throws NullPointerException {}
 
   @Override
-  public double getXCoord() {
+  public int getXCoord() {
     return 0;
   }
 
   @Override
-  public double getYCoord() {
+  public int getYCoord() {
     return 0;
   }
 

@@ -109,6 +109,8 @@ public class labRequestController extends serviceRequestPageController implement
       labReq.setIsUrgent(isUrgent.isSelected());
       labSendToDB(labReq);
       setInfographicsCount("LAB_REQUEST");
+      PopUp.submissionConfirmation(
+          "Your lab service request has been submitted.", submitButton.getScene().getWindow());
 
     } catch (RuntimeException error) {
       System.out.println("Error : Some Value is NULL");

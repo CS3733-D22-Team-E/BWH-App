@@ -7,15 +7,16 @@ import edu.wpi.cs3733.D22.teamE.controllers.*;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,7 +48,14 @@ public class App extends Application implements SharedScene {
 
   @Override
   public void start(Stage stage) throws Exception {
-    stage.initStyle(StageStyle.UNIFIED);
+    // stage.initStyle(StageStyle.UNIFIED);
+    stage
+        .getIcons()
+        .add(
+            new Image(
+                Objects.requireNonNull(
+                    Main.class.getResourceAsStream(
+                        "view/icons/Brigham_and_Womens_Hospital_logo.png"))));
     AppPreloader p = new AppPreloader();
     stage.setResizable(false);
     stage.setScene(p.createPreloaderScene(root));
