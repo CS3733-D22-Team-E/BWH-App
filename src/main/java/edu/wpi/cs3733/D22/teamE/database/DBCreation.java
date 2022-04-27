@@ -72,6 +72,7 @@ public class DBCreation {
             + "    LAB_REQUEST_TYPE VARCHAR(35) not null,\n"
             + "    STAFFASSIGNEE    VARCHAR(35) not null references EMPLOYEES(EMPLOYEEID),\n"
             + "    LOCATIONID       VARCHAR(35) not null references TOWERLOCATIONS (NODEID),\n"
+            + "    FLOOR           VARCHAR(31)  not null,\n"
             + "    TIMEFRAME        VARCHAR(35) not null,\n"
             + "    REQUESTSTATUS    VARCHAR(35) not null,\n"
             + "    OTHERNOTES       VARCHAR(35) not null\n"

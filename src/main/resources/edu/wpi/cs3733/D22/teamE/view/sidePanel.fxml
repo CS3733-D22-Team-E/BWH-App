@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="5.0" styleClass="sidebarBackground" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="214.0" spacing="5.0" styleClass="sidebarBackground" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
          <children>
-      <VBox alignment="CENTER_LEFT" spacing="5.0">
+      <VBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
          <children>
-                  <HBox fx:id="dashboardBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton">
+                  <HBox fx:id="dashboardBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -21,7 +21,7 @@
                   <Label styleClass="sidebarButton" text="Dashboard" />
                </children>
                   </HBox>
-            <HBox fx:id="submitServiceRequestBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton">
+            <HBox fx:id="submitServiceRequestBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -31,7 +31,7 @@
                   <Label styleClass="sidebarButton" text="Service Request" />
                </children>
             </HBox>
-            <HBox fx:id="statusPageBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton">
+            <HBox fx:id="statusPageBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -41,7 +41,7 @@
                   <Label styleClass="sidebarButton" text="Status Page" />
                </children>
             </HBox>
-            <HBox fx:id="mapBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton">
+            <HBox fx:id="mapBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -51,7 +51,7 @@
                   <Label styleClass="sidebarButton" text="Map" />
                </children>
             </HBox>
-            <HBox fx:id="profileBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton">
+            <HBox fx:id="profileBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -61,7 +61,7 @@
                   <Label styleClass="sidebarButton" text="Profile" />
                </children>
             </HBox>
-            <HBox fx:id="aboutBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton">
+            <HBox fx:id="aboutBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -71,7 +71,7 @@
                   <Label styleClass="sidebarButton" text="About" />
                </children>
             </HBox>
-            <HBox fx:id="helpBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton">
+            <HBox fx:id="helpBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -84,9 +84,10 @@
          </children>
       </VBox>
       <VBox fx:id="bufferVBox" />
-      <VBox alignment="BOTTOM_LEFT" prefWidth="123.0" spacing="5.0">
+      <VBox VBox.vgrow="ALWAYS" />
+      <VBox alignment="BOTTOM_LEFT" spacing="5.0">
          <children>
-            <HBox fx:id="logoutBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton">
+            <HBox fx:id="logoutBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -96,7 +97,7 @@
                   <Label styleClass="sidebarButton" text="Logout" />
                </children>
             </HBox>
-            <HBox fx:id="exitBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton">
+            <HBox fx:id="exitBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>

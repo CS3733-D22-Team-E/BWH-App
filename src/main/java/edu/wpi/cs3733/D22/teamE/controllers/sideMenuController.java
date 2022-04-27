@@ -61,6 +61,7 @@ public class sideMenuController implements Initializable {
         mouseEvent -> {
           if (sideMenuBox.equals(logoutBox)) {
             // TODO: fill will logout procedure
+            pageControl.loadPage("loginPage.fxml", (Stage) root.getScene().getWindow());
           } else if (sideMenuBox.equals(exitBox)) {
             pageControl.exitApp();
           } else {

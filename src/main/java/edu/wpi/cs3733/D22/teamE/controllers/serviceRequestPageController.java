@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
@@ -44,13 +46,27 @@ public abstract class serviceRequestPageController {
   @FXML TableColumn<serviceRequest, String> tableStaffAssignee;
   @FXML TableColumn<serviceRequest, String> tableOtherNotes;
 
+  @FXML Label notStarted;
+  @FXML Label processing;
+  @FXML Label LL2requests;
+  @FXML Label LL1requests;
+  @FXML Label requests1;
+  @FXML Label requests2;
+  @FXML Label requests3;
+  @FXML Label requests4;
+  @FXML Label requests5;
+
   LocationDAOImpl locationDB;
   HashMap<String, String> roomNameToRoomID;
   HashMap<String, String> roomIDToRoomName;
 
+  DAOSystem system;
+
   serviceRequestPageController() {}
 
   public void initialize(URL url, ResourceBundle rb) {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+
     try {
       populateLocationComboBoxes();
     } catch (SQLException e) {
@@ -160,4 +176,63 @@ public abstract class serviceRequestPageController {
    */
   @FXML
   public abstract void submitButton(ActionEvent event) throws SQLException;
+
+  public void setInfographicsCount(String requestType) {
+    List<RequestInterface> requests = system.getAllServiceRequests();
+
+    int notStartedCount = 0;
+    int processingCount = 0;
+    int requestsLL2Count = 0;
+    int requestsLL1Count = 0;
+    int requests1Count = 0;
+    int requests2Count = 0;
+    int requests3Count = 0;
+    int requests4Count = 0;
+    int requests5Count = 0;
+
+    for (RequestInterface request : requests) {
+      if (request.getRequestType().toString().equals(requestType)) {
+        if (request.getRequestStatus().equals("To Do")) {
+          notStartedCount++;
+        } else if (request.getRequestStatus().equals("Processing")) {
+          processingCount++;
+        }
+
+        switch (request.getFloorID()) {
+          case "L2":
+            requestsLL2Count++;
+            break;
+          case "L1":
+            requestsLL1Count++;
+            break;
+          case "1":
+            requests1Count++;
+            break;
+          case "2":
+            requests2Count++;
+            break;
+          case "3":
+            requests3Count++;
+            break;
+          case "4":
+            requests4Count++;
+            break;
+          case "5":
+            requests5Count++;
+            break;
+        }
+      }
+    }
+
+    notStarted.setText(Integer.toString(notStartedCount));
+    processing.setText(Integer.toString(processingCount));
+
+    LL2requests.setText(Integer.toString(requestsLL2Count));
+    LL1requests.setText(Integer.toString(requestsLL1Count));
+    requests1.setText(Integer.toString(requests1Count));
+    requests2.setText(Integer.toString(requests2Count));
+    requests3.setText(Integer.toString(requests3Count));
+    requests4.setText(Integer.toString(requests4Count));
+    requests5.setText(Integer.toString(requests5Count));
+  }
 }

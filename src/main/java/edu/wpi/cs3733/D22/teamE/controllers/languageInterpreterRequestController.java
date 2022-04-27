@@ -45,6 +45,7 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   public void initialize(URL location, ResourceBundle resources) {
     try {
       super.initialize(location, resources);
+      setInfographicsCount("LANG_INTERP_REQ");
       languageOptions.getItems().addAll("English", "Spanish", "Russian", "Mandarin Chinese");
       populateLanguageRequestTable();
 
@@ -102,6 +103,7 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
       request.setDeliveryDate(endDate.getValue());
 
       langSendToDB(request);
+      setInfographicsCount("LANG_INTERP_REQ");
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
