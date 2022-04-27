@@ -53,6 +53,7 @@ public class profilePageController implements Initializable {
   @FXML Label nameLabel;
   @FXML Label statusLabel;
   @FXML Label idLabel;
+  @FXML Label phoneNumber;
   @FXML JFXComboBox database;
   // @FXML JFXComboBox colorScheme;
   @FXML TextField newPassword;
@@ -100,6 +101,7 @@ public class profilePageController implements Initializable {
       nameLabel.setText(account.getFirstName() + " " + account.getLastName());
       statusLabel.setText(account.getPosition());
       idLabel.setText(employee.getEmployeeID());
+      phoneNumber.setText(account.getPhoneNumber());
       database.getItems().addAll("Embeded", "Client");
       EventHandler<Event> databaseChange = e -> changeDBConnection(e);
       database.setOnAction(databaseChange);

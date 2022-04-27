@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.shape.Circle?>
 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="214.0" spacing="5.0" styleClass="sidebarBackground" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
          <children>
       <VBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
@@ -53,11 +54,7 @@
             </HBox>
             <HBox fx:id="profileBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
                <children>
-                  <ImageView fx:id="profilePicture" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/sidebar/profile-white.png" />
-                     </image>
-                  </ImageView>
+                  <Circle fx:id="profilePicture" fill="TRANSPARENT" radius="18.0" pickOnBounds="true" stroke="darkslategray" strokeType="INSIDE"> </Circle>
                   <Label styleClass="sidebarButton" text="Profile" />
                </children>
             </HBox>

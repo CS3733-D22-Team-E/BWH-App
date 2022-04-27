@@ -14,11 +14,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class sideMenuController implements Initializable {
@@ -35,7 +36,7 @@ public class sideMenuController implements Initializable {
   @FXML VBox bufferVBox;
   @FXML HBox logoutBox;
   @FXML HBox exitBox;
-  @FXML ImageView profilePicture;
+  @FXML Circle profilePicture;
 
   public sideMenuController(BorderPane root) {
     this.root = root;
@@ -43,7 +44,7 @@ public class sideMenuController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resourceBundle) {
-
+    ProfilePictureManager.sidePanel = this;
     VBox.setVgrow(bufferVBox, Priority.ALWAYS);
 
     sideMenuButtonHandler(dashboardBox, "DashboardPage.fxml");
@@ -56,23 +57,7 @@ public class sideMenuController implements Initializable {
     sideMenuButtonHandler(logoutBox, "loginPage.fxml");
     sideMenuButtonHandler(exitBox, "");
 
-    Employee currentEmployee = AccountsManager.getInstance().getEmployee();
-    Image image;
-    try {
-      InputStream is = ProfilePictureManager.getPersonalPicture(currentEmployee);
-      image = new Image(is);
-    } catch (Exception e) {
-      URL url = Main.class.getResource("view/icons/profilepic.png");
-      assert url != null;
-      InputStream is = null;
-      try {
-        is = url.openStream();
-      } catch (IOException ex) {
-        ex.printStackTrace();
-      }
-      image = new Image(is);
-    }
-    profilePicture.setImage(image);
+    resetProfilePicture();
   }
 
   private void sideMenuButtonHandler(HBox sideMenuBox, String url) {
@@ -91,6 +76,26 @@ public class sideMenuController implements Initializable {
             pageControl.loadCenter(url, (Stage) root.getScene().getWindow());
           }
         });
+  }
+
+  public void resetProfilePicture() {
+    Employee currentEmployee = AccountsManager.getInstance().getEmployee();
+    Image image;
+    try {
+      InputStream is = ProfilePictureManager.getPersonalPicture(currentEmployee);
+      image = new Image(is);
+    } catch (Exception e) {
+      URL url = Main.class.getResource("view/icons/profilepic.png");
+      assert url != null;
+      InputStream is = null;
+      try {
+        is = url.openStream();
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+      image = new Image(is);
+    }
+    profilePicture.setFill(new ImagePattern(image));
   }
 
   private void highlightSideMenuButtonHandler(HBox sideMenuBox) {
