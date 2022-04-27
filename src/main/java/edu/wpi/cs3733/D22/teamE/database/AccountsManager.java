@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamE.database;
 
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
-import java.util.Random;
 
 public class AccountsManager {
   private Account account;

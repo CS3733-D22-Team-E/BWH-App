@@ -98,12 +98,8 @@ public class DashboardEquipmentHandler extends DashboardHandler {
     currentEquipmentList = new ArrayList<>();
     if (!dashboardController.currentFloorString.equals("All")) {
       for (MedicalEquipment curEquip : allEquipmentList) {
-        try {
-          if (curEquip.getFloor().equals(dashboardController.currentFloorString)) {
-            currentEquipmentList.add(curEquip);
-          }
-        } catch (SQLException e) {
-          e.printStackTrace();
+        if (curEquip.getFloorID().equals(dashboardController.currentFloorString)) {
+          currentEquipmentList.add(curEquip);
         }
       }
     } else {

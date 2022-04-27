@@ -272,23 +272,24 @@ public class DBCreation {
             + "    PASSWORDHASH   VARCHAR(500) not null,\n"
             + "    FIRSTNAME      VARCHAR(35)  not null,\n"
             + "    LASTNAME       VARCHAR(35),          \n"
-            + "    POSITION       VARCHAR(35)           \n"
+            + "    POSITION       VARCHAR(35),          \n"
+            + "    PHONENUMBER    VARCHAR(35)           \n"
             + ")";
     PreparedStatement statement = connection.prepareStatement(query);
     statement.executeUpdate();
     System.out.println(generatePasswordHASH("admin"));
     query =
-        "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES "
+        "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION, PHONENUMBER) VALUES "
             + "('admin', 'admin' , 3, '"
             + generatePasswordHASH("admin")
-            + "', 'admin', 'admin', 'admin')";
+            + "', 'admin', 'admin', 'admin', '+10000000000')";
     statement = connection.prepareStatement(query);
     statement.executeUpdate();
     query =
-        "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES "
+        "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION, PHONENUMBER) VALUES "
             + "('staff', 'staff' , 1, '"
             + generatePasswordHASH("staff")
-            + "', 'staff', 'staff', 'staff')";
+            + "', 'staff', 'staff', 'staff', '+10000000000')";
     statement = connection.prepareStatement(query);
     statement.executeUpdate();
   }

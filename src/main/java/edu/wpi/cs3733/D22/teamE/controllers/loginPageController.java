@@ -31,7 +31,6 @@ public class loginPageController implements Initializable {
 
   private final boolean enableTwoFactorAuthentication = true;
 
-
   private @FXML JFXTextField usernameField;
 
   private @FXML JFXPasswordField passwordField;
@@ -47,12 +46,14 @@ public class loginPageController implements Initializable {
   @FXML
   public void submitLogin(ActionEvent event) {
     if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
+      Account account = db.getAccount(getUsername());
+      AccountsManager.getInstance().setAccount(account);
       if (enableTwoFactorAuthentication) {
-        Account account = db.getAccount(getUsername());
         TwoFAcode = generateRandom5DigitID();
         Texting.sendSMS(
-                account.getPhoneNumber(), //"+16178936605", // "+19788317440", //account.getPhoneNumber(),
-                "Your Brigham & Womens Hospital authentication code is: " + TwoFAcode);
+            account
+                .getPhoneNumber(), // "+16178936605", // "+19788317440", //account.getPhoneNumber(),
+            "Your Brigham & Womens Hospital authentication code is: " + TwoFAcode);
 
         pageControl.loadPage("twoFacAuthPage.fxml", (Stage) passwordField.getScene().getWindow());
       } else {
