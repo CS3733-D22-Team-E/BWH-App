@@ -28,7 +28,8 @@ public class aboutPageController {
       "Eric Zhou was our Assistant-Lead Back-End Engineer. Eric was very pleased when Joey misunderstood a Slack message to mean that we were meeting at a gas station off campus.  He also supports identity theft.";
   private String jeremyBio =
       "Jeremy Bornstein was a Full-Time Back-End Engineer.  I guess you could say he was BORN to do this.  Jeremy also loves baking.";
-  private String shenBio = "Shen Fang was a Full-Time Back-End Engineer. Shen is also an accomplished and award winning actor and singer from WPI's theatre and music departments, respectively";
+  private String shenBio =
+      "Shen Fang was a Full-Time Back-End Engineer. Shen is also an accomplished and award winning actor and singer from WPI's theatre and music departments, respectively";
   private String timBio =
       "Tim Connors was a Full-Time Front-End Engineer. Tim spear-headed our efforts for connecting the front and back end.";
   private String danielBio =
@@ -73,7 +74,7 @@ public class aboutPageController {
   @FXML
   public void timPopUp(MouseEvent event) {
     PopUp.aboutPopUp(timBio, ((Node) event.getSource()).getScene().getWindow(), "Tim");
-    //PopUp.hoverListener(event, timBio);
+    // PopUp.hoverListener(event, timBio);
   }
 
   @FXML
