@@ -3,9 +3,11 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -20,8 +22,8 @@ public class employeePageController implements Initializable {
   @FXML TextField salary;
   @FXML TextField Username;
   @FXML TextField Password;
-  @FXML TextField submitButton;
-  @FXML TextField resetButton;
+  @FXML JFXButton submitButton;
+  @FXML JFXButton resetButton;
 
 
   @FXML TableColumn tableEmployeeName;
@@ -29,7 +31,8 @@ public class employeePageController implements Initializable {
   @FXML TableColumn tableSalary;
   @FXML TableColumn tableUsername;
 
-  DAOSystem system;
+
+    DAOSystem system;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,7 +40,11 @@ public class employeePageController implements Initializable {
 
     system.getAllEmployee();
     
-    Employee employee = new Employee()
+    Employee employee = new Employee(firstName.getText()+lastName.getText(),firstName.getText()+" "+lastName.getText(),position.getText(),Double.parseDouble(salary.getText()),"FDEPT00201",true,0);
+
+  }
+
+  public void submitButton(ActionEvent event){
 
   }
 }
