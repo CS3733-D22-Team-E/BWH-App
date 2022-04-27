@@ -187,12 +187,12 @@ public class aboutPageController implements Initializable {
           }
         });
     colinPopUp.setOnMouseClicked(
-            new EventHandler<MouseEvent>() {
-              @Override
-              public void handle(javafx.scene.input.MouseEvent mouseEvent) {
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(javafx.scene.input.MouseEvent mouseEvent) {
 
-                PopUp.aboutPopUp(colinBio, mainPane.getScene().getWindow(), "Colin");
-              }
-            });
+            PopUp.aboutPopUp(colinBio, mainPane.getScene().getWindow(), "Colin");
+          }
+        });
   }
 }

@@ -9,12 +9,17 @@ import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.adminAccount;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.staffAccount;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class employeePageController implements Initializable {
 
@@ -23,22 +28,26 @@ public class employeePageController implements Initializable {
   @FXML TextField position;
   @FXML TextField employeeStatus;
   @FXML TextField salary;
+  @FXML TextField phoneNumber;
+
   @FXML TextField Username;
   @FXML TextField Password;
   @FXML JFXButton submitButton;
   @FXML JFXButton resetButton;
 
-  @FXML TableColumn tableEmployeeName;
-  @FXML TableColumn tablePosition;
-  @FXML TableColumn tableSalary;
-  @FXML TableColumn tableUsername;
+  @FXML TableView<Employee> employeeTable;
+  @FXML TableColumn<Employee, String> tableEmployeeName;
+  @FXML TableColumn<Employee, String> tablePosition;
+  @FXML TableColumn<Employee, Double> tableSalary;
+  @FXML TableColumn<Employee, String> tableUsername;
 
   DAOSystem system;
+  ObservableList<Employee> tableList;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     system = DAOSystemSingleton.INSTANCE.getSystem();
-    system.getAllEmployee();
+    populateEmployeeTable();
   }
 
   public void submitButton(ActionEvent event) {
@@ -90,5 +99,23 @@ public class employeePageController implements Initializable {
     Username.clear();
     Password.clear();
     salary.clear();
+  }
+
+  private void populateEmployeeTable() {
+    ObservableList<Employee> employees = populateEmployeeList();
+    tableEmployeeName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    tablePosition.setCellValueFactory(new PropertyValueFactory<>("position"));
+    tableSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+    tableUsername.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
+    employeeTable.setItems(employees);
+  }
+
+  protected ObservableList<Employee> populateEmployeeList() {
+    List<Employee> list = system.getAllEmployee();
+    tableList = FXCollections.observableArrayList();
+    for (Employee l : list) {
+      tableList.add(l);
+    }
+    return tableList;
   }
 }
