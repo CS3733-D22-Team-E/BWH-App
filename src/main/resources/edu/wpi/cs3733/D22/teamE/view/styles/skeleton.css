@@ -81,9 +81,11 @@
     -fx-font-size: 15;
 }
 
+
 .headerSelectedButton {
-    -fx-background-color: #30B6AE;
-    -fx-text-fill: #204F87;
+    -fx-background-color: #1e4b47;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15;
 }
 
 .headerText {
