@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -46,32 +47,7 @@
 
 <VBox id="default-background" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" styleClass="gradient" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.aboutPageController">
    <children>
-      <VBox styleClass="container" VBox.vgrow="ALWAYS">
-         <children>
-            <Label prefHeight="39.0" prefWidth="192.0" text="   About our App" VBox.vgrow="ALWAYS">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <StackPane>
-               <children>
-                  <Label prefHeight="71.0" prefWidth="976.0" text="This app is the culmination what students have learned from Wilson Wong's CS3733, a class from WPI's Computer Science Department that teaches students about Software Engineering through agile methodologies.   This app was developed by the team The Energetic Easter Bunnies, along with help from their Team Coach Sam Laird.  The team would like to give a special thanks to Brigham and Women's Hospital, especially Andrew Shinn, for their time and input." wrapText="true" StackPane.alignment="CENTER">
-                     <StackPane.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
-                     </StackPane.margin></Label>
-                  <Hyperlink fx:id="wilsonWong" onAction="#wilsonWongLink" text="Wilson Wong">
-                     <StackPane.margin>
-                        <Insets right="260.0" top="-44.0" />
-                     </StackPane.margin>
-                  </Hyperlink>
-               </children>
-            </StackPane>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </VBox>
-      <Label text="         Meet the team" textFill="WHITE" VBox.vgrow="ALWAYS">
+      <Label text="Meet the team" textFill="WHITE" VBox.vgrow="ALWAYS">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -91,7 +67,7 @@
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#ericPopUp" VBox.vgrow="ALWAYS">
                            <image>
@@ -107,8 +83,12 @@
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="dropShadow" />
+                     </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" styleClass="container" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#joeyPopUp" VBox.vgrow="ALWAYS">
                            <image>
@@ -124,8 +104,12 @@
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="dropShadow" />
+                     </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#philPopUp" VBox.vgrow="ALWAYS">
                            <image>
@@ -141,8 +125,12 @@
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="dropShadow" />
+                     </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#hannahPopUp" VBox.vgrow="ALWAYS">
                            <image>
@@ -158,8 +146,12 @@
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="dropShadow" />
+                     </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#shenPopUp" VBox.vgrow="ALWAYS">
                            <image>
@@ -175,8 +167,12 @@
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="dropShadow" />
+                     </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#sizhePopUp" VBox.vgrow="ALWAYS">
                            <image>
@@ -192,8 +188,12 @@
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="dropShadow" />
+                     </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#colinPopUp" VBox.vgrow="ALWAYS">
                            <image>
@@ -208,8 +208,12 @@
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding></VBox>
-                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     </padding>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="dropShadow" />
+                     </styleClass></VBox>
+                  <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#danielPopUp" VBox.vgrow="ALWAYS">
                            <image>
@@ -225,8 +229,12 @@
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="dropShadow" />
+                     </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <ImageView fitHeight="130" fitWidth="130" onMouseEntered="#jeremyPopUp" VBox.vgrow="ALWAYS">
                            <image>
@@ -242,8 +250,12 @@
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="dropShadow" />
+                     </styleClass>
                   </VBox>
-                  <VBox alignment="CENTER" styleClass="container" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#timPopUp" VBox.vgrow="ALWAYS">
                            <image>
@@ -259,9 +271,38 @@
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="dropShadow" />
+                     </styleClass>
                   </VBox>
                </children>
             </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER" styleClass="container" VBox.vgrow="ALWAYS">
+         <children>
+            <Label prefHeight="39.0" prefWidth="192.0" text="   About our App" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <StackPane>
+               <children>
+                  <Label prefHeight="71.0" prefWidth="976.0" text="This app is the culmination what students have learned from Wilson Wong's CS3733, a class from WPI's Computer Science Department that teaches students about Software Engineering through agile methodologies.   This app was developed by the team The Energetic Easter Bunnies, along with help from their Team Coach Sam Laird.  The team would like to give a special thanks to Brigham and Women's Hospital, especially Andrew Shinn, for their time and input." wrapText="true" StackPane.alignment="CENTER">
+                     <StackPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </StackPane.margin></Label>
+                  <Hyperlink fx:id="wilsonWong" onAction="#wilsonWongLink" text="Wilson Wong">
+                     <StackPane.margin>
+                        <Insets right="260.0" top="-44.0" />
+                     </StackPane.margin>
+                  </Hyperlink>
+               </children>
+            </StackPane>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
