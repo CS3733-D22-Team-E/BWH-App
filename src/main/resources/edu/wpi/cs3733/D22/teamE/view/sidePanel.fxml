@@ -28,7 +28,7 @@
                         <Image url="@icons/default_profile_pic.png" />
                      </image>
                   </ImageView>
-                  <Label styleClass="sidebarButton" text="Service Request" />
+                  <Label styleClass="sidebarButton" text="Service Requests" />
                </children>
             </HBox>
             <HBox fx:id="statusPageBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">

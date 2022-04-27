@@ -9,6 +9,7 @@ import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
+import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 /**
  * Is an abstract class meant to be the super class for each service request page. Inherits from
@@ -55,6 +57,8 @@ public abstract class serviceRequestPageController {
   @FXML Label requests3;
   @FXML Label requests4;
   @FXML Label requests5;
+
+  @FXML JFXButton tableViewButton;
 
   LocationDAOImpl locationDB;
   HashMap<String, String> roomNameToRoomID;
@@ -149,29 +153,9 @@ public abstract class serviceRequestPageController {
             });
   }
 
-  protected void populateRequestReports(String serviceRequestType) {
-    switch (serviceRequestType) {
-      case "Medical Equipment":
-        break;
-      case "Meal":
-        break;
-      case "Medicine":
-        break;
-      case "Floral":
-        break;
-      case "Lab":
-        break;
-      case "Language Interpreter":
-        break;
-      case "Facilities":
-        break;
-      case "Gift":
-        break;
-      case "Sanitation":
-        break;
-      case "Security":
-        break;
-    }
+  @FXML
+  public void displayTableView(ActionEvent event) {
+    pageControl.loadCenter("statusPage.fxml", (Stage) tableViewButton.getScene().getWindow());
   }
 
   /** Sends the respective data to the respective data base. */
