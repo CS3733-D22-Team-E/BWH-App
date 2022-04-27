@@ -17,6 +17,7 @@ public abstract class Account {
   private String lastName;
   private String position;
   private String phoneNumber;
+
   /**
    * realistically used to load in from a CSV of accounts
    *
@@ -105,6 +106,6 @@ public abstract class Account {
   }
 
   public String getPhoneNumber() {
-    return phoneNumber;
+    return this.phoneNumber;
   }
 }

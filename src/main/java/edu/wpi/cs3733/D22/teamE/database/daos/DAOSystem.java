@@ -80,7 +80,23 @@ public class DAOSystem {
     return locationDAO.getAll();
   }
 
-  public List<mealDeliveryRequest> getAllMealRequests() {
+  public Location getLocation(int x, int y) {
+    return locationDAO.get(x, y);
+  }
+
+  public Location getClosestLocation(int x, int y, String floor) {
+    return locationDAO.getClosest(x, y, floor);
+  }
+
+  public void updateLocation(Location location) {
+    locationDAO.update(location);
+  }
+
+  public void deleteLocation(Location location) {
+    locationDAO.delete(location);
+  }
+
+  public List<mealDeliveryRequest> getAllMealDelivReq() {
     return mealDeliveryRequestDAO.getAll();
   }
 
@@ -341,5 +357,18 @@ public class DAOSystem {
   public void updateCurrentLocation(MedicalEquipment equipment, int newXCoord, int newYCoord)
       throws SQLException {
     medicalEquipmentDAO.updateCurrentLocation(equipment, newXCoord, newYCoord);
+  }
+
+  public void deleteGiftDelivery(giftDeliveryRequest request) {
+    giftRequestDAO.delete(request);
+  }
+
+  public void update(EntityInterface node) {
+    if (node instanceof MedicalEquipment) update((MedicalEquipment) node);
+    else if (node instanceof RequestInterface) update((RequestInterface) node);
+  }
+
+  public List<MedicalEquipment> getAllMedEquip() {
+    return medicalEquipmentDAO.getAll();
   }
 }

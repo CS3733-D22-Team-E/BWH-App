@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
+import edu.wpi.cs3733.D22.teamE.entity.EntityInterface;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
 import java.sql.*;
 import java.util.ArrayList;
@@ -98,12 +99,29 @@ public class LocationDAOImpl implements DAO<Location> {
   }
 
   /**
+   * Gets location with a given X and Y coordinate
+   *
+   * @param xCoord the X coordinate to be searched
+   * @param yCoord the Y coordinate to be searched
+   * @return location requested
+   */
+  public Location get(int xCoord, int yCoord) {
+    for (Location location : locations) {
+      if ((location.getXCoord() == xCoord) && (location.getYCoord() == yCoord)) {
+        return location;
+      }
+    }
+    throw new NullPointerException();
+  }
+
+  /**
    * Gets a location with given numID in the arrayList
    *
    * @param numID - The numerical id of the location node
    * @return the location requested
    */
   public Location getLocationWithNumID(int numID) {
+    if (numID >= locations.size()) return null;
     return locations.get(numID);
   }
 
@@ -114,30 +132,39 @@ public class LocationDAOImpl implements DAO<Location> {
    */
   @Override
   public void update(Location location) {
-    locations.add(location);
-    try {
-      String query =
-          "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
-              + location.getNodeID()
-              + "',"
-              + location.getXcoord()
-              + ","
-              + location.getYcoord()
-              + ",'"
-              + location.getFloor()
-              + "','"
-              + location.getBuilding()
-              + "','"
-              + location.getNodeType()
-              + "','"
-              + location.getLongName()
-              + "','"
-              + location.getShortName()
-              + "')"; // Insert into database; does not check if the nodeID already exists
-      PreparedStatement statement = connection.prepareStatement(query);
-      statement.executeUpdate();
-    } catch (SQLException e) {
-      e.printStackTrace();
+    /* System.out.println("Yo");
+    if (getLocationWithNumID(location.getNumID()) != null) {
+      locations.remove(location);
+      delete(location);
+    }*/
+    if (getLocationWithNumID(location.getNumID()) == null) {
+      locations.add(location);
+      try {
+        String query =
+            "INSERT INTO TOWERLOCATIONS (nodeID, xCoord, yCoord, floor, building, nodetype, longname, shortname) VALUES ('"
+                + location.getNodeID()
+                + "',"
+                + location.getXCoord()
+                + ","
+                + location.getYCoord()
+                + ",'"
+                + location.getFloor()
+                + "','"
+                + location.getBuilding()
+                + "','"
+                + location.getNodeType()
+                + "','"
+                + location.getLongName()
+                + "','"
+                + location.getShortName()
+                + "')"; // Insert into database; does not check if the nodeID already exists
+        PreparedStatement statement = connection.prepareStatement(query);
+        System.out.println(statement.executeUpdate());
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    } else {
+
     }
   }
 
@@ -206,6 +233,13 @@ public class LocationDAOImpl implements DAO<Location> {
   public void delete(Location location) {
 
     // Deleting the location from the array list
+    ArrayList<EntityInterface> entities = new ArrayList<>();
+    entities.addAll(DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests());
+    entities.addAll(DAOSystemSingleton.INSTANCE.getSystem().getAllMedEquip());
+    for (EntityInterface e : entities) {
+      if (e.getLocation().equals(location))
+        throw new RuntimeException("Cannot Delete Tower Location With Active Equipment or Request");
+    }
     locations.remove(location);
 
     // Remove location in the db
@@ -216,5 +250,36 @@ public class LocationDAOImpl implements DAO<Location> {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+  }
+
+  private double getDist(int x1, int y1, int x2, int y2) {
+
+    double xdist = Math.pow((x2 - x1), 2);
+    double ydist = Math.pow((y2 - y1), 2);
+
+    return Math.sqrt(xdist + ydist);
+  }
+
+  public Location getClosest(int x, int y, String floor) {
+    Location closest = getLocationWithNumID(0);
+
+    double minDist = getDist(x, y, closest.getXCoord(), closest.getYCoord());
+    System.out.println(getDist(x, y, closest.getXCoord(), closest.getYCoord()));
+
+    for (Location l : getAll()) {
+      if (l.getFloor().equals(floor)) {
+        System.out.println("Checking : " + l.getShortName());
+        double distFrom = getDist(x, y, l.getXCoord(), l.getYCoord());
+
+        if (l.getShortName().equals("Hallway F00801")) System.out.println(distFrom);
+        if (distFrom < minDist) {
+          minDist = distFrom;
+          closest = l;
+        }
+      }
+    }
+
+    System.out.println(getDist(x, y, closest.getXCoord(), closest.getYCoord()));
+    return closest;
   }
 }

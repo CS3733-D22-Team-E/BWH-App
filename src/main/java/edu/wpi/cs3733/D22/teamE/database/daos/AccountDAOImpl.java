@@ -12,6 +12,8 @@ public class AccountDAOImpl implements DAO<Account> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<Account> accounts;
 
+  public String phoneNumber;
+
   public AccountDAOImpl() throws SQLException {
     accounts = new ArrayList<Account>();
     String query = "SELECT * FROM ACCOUNTS ORDER BY ACCOUNTID DESC";
@@ -100,7 +102,11 @@ public class AccountDAOImpl implements DAO<Account> {
 
   @Override
   public void update(Account account) {
-    delete(account);
+    try {
+      delete(account);
+    } catch (NullPointerException err) {
+      System.out.println("Not Found");
+    }
     accounts.add(account);
     try {
       String query =

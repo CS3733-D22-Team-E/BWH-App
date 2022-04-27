@@ -104,7 +104,7 @@ public class AppPreloader implements SharedScene {
             t.stop();
             Stage thisStage = (Stage) topGroup.getScene().getWindow();
             thisStage.setResizable(true);
-            pageControl.loadPage("loginPage.fxml", thisStage);
+            pageControl.loadPage("landingPage.fxml", thisStage);
           } catch (InterruptedException e) {
             e.printStackTrace();
           }

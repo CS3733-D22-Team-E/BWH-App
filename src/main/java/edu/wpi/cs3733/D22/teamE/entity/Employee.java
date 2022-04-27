@@ -8,6 +8,7 @@ public class Employee {
   private String location;
   private boolean available;
   private int numID;
+  private Employee employee;
 
   public Employee() {
     this.employeeID = "";
@@ -17,6 +18,7 @@ public class Employee {
     this.location = "";
     this.available = false;
     this.numID = 0;
+    this.employee = this;
   }
 
   public Employee(
@@ -34,6 +36,7 @@ public class Employee {
     this.location = location;
     this.available = available;
     this.numID = numID;
+    this.employee = this;
   }
 
   public String getEmployeeID() {
@@ -86,5 +89,9 @@ public class Employee {
 
   public boolean getAvailable() {
     return available;
+  }
+
+  public Employee getEmployee() {
+    return employee;
   }
 }

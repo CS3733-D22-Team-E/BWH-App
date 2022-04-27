@@ -7,36 +7,31 @@ import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.labRequest;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 /**
  * This is the controller class for the Lab Request service page. It inherits from the
  * serviceRequestController super class.
  */
-public class labRequestController extends serviceRequestPageController {
+public class labRequestController extends serviceRequestPageController implements Initializable {
 
   @FXML JFXComboBox<String> labRequestType;
   @FXML JFXComboBox<String> timeFrameComboBox;
+  @FXML CheckBox isUrgent;
 
-  @FXML TableView<labRequest> requestsTable;
+  // @FXML TableView<labRequest> requestsTable;
 
-  @FXML TableColumn<labRequest, String> tableLabRequestType;
+  /*@FXML TableColumn<labRequest, String> tableLabRequestType;
   @FXML TableColumn<labRequest, String> tableStaffAssignee;
   @FXML TableColumn<labRequest, String> tableLocNodeID;
   @FXML TableColumn<labRequest, String> tableTimeFrame;
   @FXML TableColumn<labRequest, String> tableRequestStatus;
   @FXML TableColumn<labRequest, String> tableOtherNotes;
-  ObservableList<labRequest> tableList;
+  ObservableList<labRequest> tableList;*/
 
   // LocationDAOImpl locationDB;
   // LabRequestDAOImpl labRequestDB;
@@ -55,11 +50,13 @@ public class labRequestController extends serviceRequestPageController {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
+    setInfographicsCount("LAB_REQUEST");
     try {
-      super.initialize(location, resources);
+      // populateLocationComboBoxes();
       labRequestType.getItems().addAll("Blood Sample", "Urine Sample", "X-Ray", "CAT Scan", "MRI");
       timeFrameComboBox.getItems().addAll("ASAP", "<1 day", "<1 week");
-      populateLabRequestTable();
+      // populateLabRequestTable();
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -67,7 +64,7 @@ public class labRequestController extends serviceRequestPageController {
   }
 
   private void populateLabRequestTable() {
-    ObservableList<labRequest> labRequests = populateLabRequestList();
+    /*ObservableList<labRequest> labRequests = populateLabRequestList();
     tableLabRequestType.setCellValueFactory(
         new PropertyValueFactory<labRequest, String>("labRequestType"));
     tableStaffAssignee.setCellValueFactory(
@@ -86,17 +83,17 @@ public class labRequestController extends serviceRequestPageController {
         new PropertyValueFactory<labRequest, String>("requestStatus"));
     tableOtherNotes.setCellValueFactory(new PropertyValueFactory<labRequest, String>("otherNotes"));
 
-    requestsTable.setItems(labRequests);
+    requestsTable.setItems(labRequests);*/
   }
 
-  protected ObservableList<labRequest> populateLabRequestList() {
+  /*protected ObservableList<labRequest> populateLabRequestList() {
     List<labRequest> list = system.getAllLabRequests();
     tableList = FXCollections.observableArrayList();
     for (labRequest l : list) {
       tableList.add(l);
     }
     return tableList;
-  }
+  }*/
 
   @Override
   public void submitButton(ActionEvent event) throws SQLException {
@@ -109,7 +106,9 @@ public class labRequestController extends serviceRequestPageController {
       labReq.setOtherNotes(notes.getText());
       labReq.setRequestStatus(requestStatus.getText());
       labReq.setStaffAssignee(staffAssignee.getText());
+      labReq.setIsUrgent(isUrgent.isSelected());
       labSendToDB(labReq);
+      setInfographicsCount("LAB_REQUEST");
 
     } catch (RuntimeException error) {
       System.out.println("Error : Some Value is NULL");
@@ -119,7 +118,16 @@ public class labRequestController extends serviceRequestPageController {
 
   private void labSendToDB(labRequest labReq) throws SQLException {
     system.update(labReq);
-    tableList.add(labReq);
+    floor.getSelectionModel().clearSelection();
+    room.getSelectionModel().clearSelection();
+    labRequestType.getSelectionModel().clearSelection();
+    timeFrameComboBox.getSelectionModel().clearSelection();
+    requestStatus.clear();
+    staffAssignee.clear();
+    notes.clear();
+    isUrgent.setSelected(false);
+    room.setVisible(false);
+    // tableList.add(labReq);
   }
 
   @FXML
@@ -131,5 +139,7 @@ public class labRequestController extends serviceRequestPageController {
     requestStatus.clear();
     staffAssignee.clear();
     notes.clear();
+    isUrgent.setSelected(false);
+    room.setVisible(false);
   }
 }

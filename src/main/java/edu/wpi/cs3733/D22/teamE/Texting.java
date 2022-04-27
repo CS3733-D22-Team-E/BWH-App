@@ -6,7 +6,8 @@ import com.twilio.rest.api.v2010.account.Message;
 public class Texting {
   // Find your Account Sid and Token at twilio.com/console
   public static final String ACCOUNT_SID = "ACad7285cd2fdbd178b10b88f3c336b90d";
-  public static final String AUTH_TOKEN = "0bb060eaa1fec2901389a120f849e1f3";
+  public static final String AUTH_TOKEN =
+      "655417373ed32489bb442e5970cfadd9"; // "0bb060eaa1fec2901389a120f849e1f3";
 
   public static void sendSMS(String phoneNumber, String sms) {
     if (!phoneNumber.startsWith("+1")) phoneNumber += "+1";
