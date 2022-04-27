@@ -9,8 +9,9 @@ public class adminAccount extends Account {
       String passwordHash,
       String firstName,
       String lastName,
-      String position) {
-    super(accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position);
+      String position,
+      String phoneNum) {
+    super(accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position, phoneNum);
   }
 
   public adminAccount() {
