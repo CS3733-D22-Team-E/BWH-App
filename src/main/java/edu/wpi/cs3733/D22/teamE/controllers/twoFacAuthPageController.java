@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
@@ -64,18 +65,8 @@ public class twoFacAuthPageController implements Initializable {
     return false;
   }
 
-  private boolean verifyUser2FA(String code) {
-
-  }
-
-  public static String generateRandom5DigitID() {
-    return String.format("%5d", new Random().nextInt((int) Math.pow(10, 5)));
-  }
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    String messageCode = generateRandom5DigitID();
-    Texting.sendSMS("Your Brigham & Womens Hospital authentication code is: " + messageCode);
 
     RequiredFieldValidator validator = new RequiredFieldValidator();
     validator.setMessage("Input Required");
