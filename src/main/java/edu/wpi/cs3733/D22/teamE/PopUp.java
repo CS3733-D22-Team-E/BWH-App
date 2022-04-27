@@ -4,12 +4,14 @@ import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXListView;
+import edu.wpi.cs3733.D22.teamE.controllers.employeePageController;
 import edu.wpi.cs3733.D22.teamE.controllers.statusPageController;
 import edu.wpi.cs3733.D22.teamE.customUI.ServiceRequestButtonListCell;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
+import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import edu.wpi.cs3733.D22.teamE.entity.EntityInterface;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
-import edu.wpi.cs3733.D22.teamE.entity.requestPageFactory;
+import edu.wpi.cs3733.D22.teamE.entity.PageFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,37 @@ public class PopUp {
     popup.show(owner, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT);*/
   }
 
+  public static void createEmployee(Employee e, Window owner, employeePageController controller) {
+    JFXAlert empPage = new JFXAlert(owner);
+    empPage.initModality(Modality.APPLICATION_MODAL);
+    empPage.setOverlayClose(false);
+    JFXDialogLayout layout = new JFXDialogLayout();
+    layout.setHeading(new Label("Employee"));
+    try {
+      layout.setMaxHeight((2 * owner.getHeight()) / 3.0);
+      JFXButton updateButton = new JFXButton("Update");
+      JFXButton closeButton = new JFXButton("Close");
+      updateButton.setStyle("-fx-background-color: lightgrey");
+      closeButton.setStyle("-fx-background-color: lightgrey");
+      closeButton.setOnAction(
+          event -> {
+            empPage.hideWithAnimation();
+            if (controller != null) controller.populateEmployeeTable();
+          });
+      Parent r = (Parent) PageFactory.getAsPage(e, updateButton, empPage);
+      layout.setBody(r);
+      HBox b = new HBox();
+      b.setSpacing(10);
+      // b.getChildren().add(updateButton);
+      b.getChildren().add(closeButton);
+      layout.setActions(b);
+      empPage.setContent(layout);
+      empPage.showAndWait();
+    } catch (InvocationTargetException | IllegalAccessException err) {
+      err.printStackTrace();
+    }
+  }
+
   public static void createReq(
       EntityInterface request, Window owner, boolean editable, Object controller) {
     JFXAlert reqPage = new JFXAlert(owner);
@@ -64,7 +97,7 @@ public class PopUp {
               if (controller instanceof statusPageController)
                 ((statusPageController) controller).genTable();
             });
-        Parent r = (Parent) requestPageFactory.getAsPage(request, updateButton, reqPage);
+        Parent r = (Parent) PageFactory.getAsPage(request, updateButton, reqPage);
         layout.setBody(r);
         HBox b = new HBox();
         b.setSpacing(10);
@@ -82,7 +115,7 @@ public class PopUp {
               if (controller instanceof statusPageController)
                 ((statusPageController) controller).genTable();
             });
-        Parent r = (Parent) requestPageFactory.getAsPage(request, null, reqPage);
+        Parent r = (Parent) PageFactory.getAsPage(request, null, reqPage);
         layout.setBody(r);
         HBox b = new HBox();
         b.setSpacing(10);

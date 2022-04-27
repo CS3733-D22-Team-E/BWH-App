@@ -29,7 +29,7 @@ import javax.crypto.IllegalBlockSizeException;
 
 public class loginPageController implements Initializable {
 
-  private final boolean enableTwoFactorAuthentication = true;
+  private final boolean enableTwoFactorAuthentication = false;
 
   private @FXML JFXTextField usernameField;
 

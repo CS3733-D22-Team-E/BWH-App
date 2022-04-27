@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamE.RSAEncryption;
+import edu.wpi.cs3733.D22.teamE.customUI.CustomEmployeeJFXButtonTableCell;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
@@ -9,6 +10,7 @@ import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.adminAccount;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.staffAccount;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -16,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -40,6 +43,7 @@ public class employeePageController implements Initializable {
   @FXML TableColumn<Employee, String> tablePosition;
   @FXML TableColumn<Employee, Double> tableSalary;
   @FXML TableColumn<Employee, String> tableUsername;
+  @FXML TableColumn<Employee, Employee> tableEmployeeButton;
 
   DAOSystem system;
   ObservableList<Employee> tableList;
@@ -86,6 +90,7 @@ public class employeePageController implements Initializable {
       }
       system.update(employee);
       system.update(account);
+      populateEmployeeTable();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -102,21 +107,31 @@ public class employeePageController implements Initializable {
     phoneNumber.clear();
   }
 
-  private void populateEmployeeTable() {
+  public void populateEmployeeTable() {
     ObservableList<Employee> employees = populateEmployeeList();
+    employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     tableEmployeeName.setCellValueFactory(new PropertyValueFactory<>("name"));
     tablePosition.setCellValueFactory(new PropertyValueFactory<>("position"));
     tableSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
     tableUsername.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
+    tableEmployeeButton.setCellValueFactory(new PropertyValueFactory<>("employee"));
+    tableEmployeeButton.setCellFactory(CustomEmployeeJFXButtonTableCell.forTableColumn(this));
     employeeTable.setItems(employees);
   }
 
   protected ObservableList<Employee> populateEmployeeList() {
-    List<Employee> list = system.getAllEmployee();
-    tableList = FXCollections.observableArrayList();
-    for (Employee l : list) {
-      tableList.add(l);
-    }
+    List<Employee> list = DAOSystemSingleton.INSTANCE.getSystem().getAllEmployee();
+    ObservableList<Employee> tableList = FXCollections.observableArrayList();
+    tableList.addAll(list);
     return tableList;
+  }
+
+  @FXML
+  public void deleteSelected(ActionEvent event) {
+    ArrayList<Employee> p = new ArrayList<>(employeeTable.getSelectionModel().getSelectedItems());
+    for (Employee e : p) {
+      DAOSystemSingleton.INSTANCE.getSystem().delete(e);
+    }
+    populateEmployeeTable();
   }
 }

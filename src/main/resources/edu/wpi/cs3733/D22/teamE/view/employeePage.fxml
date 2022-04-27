@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" styleClass="gradient" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.employeePageController">
+<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" styleClass="gradient" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.employeePageController">
    <children>
       <VBox alignment="CENTER" styleClass="container" HBox.hgrow="ALWAYS">
          <children>
@@ -119,8 +120,8 @@
                   <TextField fx:id="position" promptText="Position" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                   <TextField fx:id="employeeStatus" promptText="Admin, Staff, etc. " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                   <TextField fx:id="salary" promptText="Salary" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                  <TextField fx:id="username" promptText="Username" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                  <TextField fx:id="password" promptText="Password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                  <TextField fx:id="Username" promptText="Username" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                  <TextField fx:id="Password" promptText="Password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                   <Label text="Phone Number:" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="14.0" />
@@ -134,8 +135,8 @@
             </GridPane>
             <HBox alignment="CENTER" spacing="5.0" VBox.vgrow="ALWAYS">
                <children>
-                  <JFXButton fx:id="submitButton" onAction="#submitButton" styleClass="submitButton" text="Submit" />
-                  <JFXButton fx:id="resetButton" onAction="#resetButton" styleClass="resetButton" text="Reset" />
+                  <JFXButton fx:id="submitButton" buttonType="RAISED" onAction="#submitButton" styleClass="submitButton" text="Submit" HBox.hgrow="ALWAYS" />
+                  <JFXButton fx:id="resetButton" buttonType="RAISED" onAction="#resetButton" styleClass="resetButton" text="Reset" HBox.hgrow="ALWAYS" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -149,14 +150,14 @@
             <Insets bottom="20.0" left="20.0" right="20.0" />
          </padding>
       </VBox>
-      <VBox alignment="CENTER" styleClass="container" HBox.hgrow="ALWAYS">
+      <VBox alignment="CENTER" spacing="10.0" styleClass="container" HBox.hgrow="ALWAYS">
          <children>
             <Label text="All Employees" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <ScrollPane VBox.vgrow="ALWAYS">
+            <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
                <content>
                   <TableView fx:id="employeeTable">
                     <columns>
@@ -165,10 +166,21 @@
                         <TableColumn fx:id="tablePosition" minWidth="100.0" prefWidth="-1.0" text="Position" />
                         <TableColumn fx:id="tableSalary" minWidth="100.0" prefWidth="-1.0" text="Salary" />
                         <TableColumn fx:id="tableUsername" minWidth="100.0" prefWidth="-1.0" text="Username" />
+                        <TableColumn fx:id="tableEmployeeButton" minWidth="100.0" prefWidth="-1.0" text="Employee" />
                     </columns>
                   </TableView>
                </content>
             </ScrollPane>
+            <JFXButton buttonType="RAISED" disable="true" onAction="#deleteSelected" ripplerFill="RED" style="-fx-text-fill: black;" text="Delete Employees" visible="false">
+               <padding>
+                  <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="rounded" />
+                  <String fx:value="containerButton" />
+               </styleClass>
+            </JFXButton>
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />

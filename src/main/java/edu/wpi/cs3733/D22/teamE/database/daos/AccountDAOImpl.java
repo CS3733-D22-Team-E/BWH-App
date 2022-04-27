@@ -102,7 +102,11 @@ public class AccountDAOImpl implements DAO<Account> {
 
   @Override
   public void update(Account account) {
-    delete(account);
+    try {
+      delete(account);
+    } catch (NullPointerException err) {
+      System.out.println("Not Found");
+    }
     accounts.add(account);
     try {
       String query =

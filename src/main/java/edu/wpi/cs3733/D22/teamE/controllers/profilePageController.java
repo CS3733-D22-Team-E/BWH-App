@@ -108,11 +108,12 @@ public class profilePageController implements Initializable {
       for (EntityInterface e : l) {
         if (e instanceof RequestInterface) {
           RequestInterface r = (RequestInterface) e;
-          count++;
           if (Objects.equals(employee.getEmployeeID(), "admin")) {
             data.add(r);
+            count++;
           } else if (Objects.equals(employee.getEmployeeID(), r.getStaffAssignee())) {
             data.add(r);
+            count++;
           }
         }
       }
