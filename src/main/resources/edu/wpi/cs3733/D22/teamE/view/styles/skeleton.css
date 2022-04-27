@@ -170,6 +170,9 @@
     -fx-font-size: 24;
 }
 
+
+
+
 /* Profile */
 .gradient{
     -fx-background-color: linear-gradient(to bottom right, #70A8dc, #CDABD9);
@@ -180,3 +183,4 @@
 .profile {
     -fx-border-radius: 100%;
 }
+
