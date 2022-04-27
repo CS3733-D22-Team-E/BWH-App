@@ -28,6 +28,7 @@ public class pageControl {
       p.getChildren().add(root);
 
       stage.getScene().setRoot(p);
+      stage.sizeToScene();
       return true;
     } catch (IOException e) {
       e.printStackTrace();
@@ -92,7 +93,8 @@ public class pageControl {
     // centerBase.getStylesheets().clear();
     // centerBase.getStylesheets().add(darkModeURL);
     basePage.setCenter(centerBase);
-    basePage.getScene().getRoot().getStylesheets().clear();
+    basePage.getScene().getWindow().sizeToScene();
+    // basePage.getScene().getRoot().getStylesheets().clear();
   }
 
   public static void loadLeft(String url, Stage stage) {
