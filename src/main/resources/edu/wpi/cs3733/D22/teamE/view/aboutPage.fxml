@@ -44,162 +44,231 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="default-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="gradient" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.aboutPageController">
+<VBox id="default-background" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" styleClass="gradient" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.aboutPageController">
    <children>
       <VBox styleClass="container" VBox.vgrow="ALWAYS">
          <children>
-            <Label prefHeight="39.0" prefWidth="192.0" text="   About our App">
+            <Label prefHeight="39.0" prefWidth="192.0" text="   About our App" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
             <StackPane>
                <children>
-                  <Label prefHeight="69.0" prefWidth="976.0" text="This app is the culmination what students have learned from Wilson Wong's CS3733, a class from WPI's Computer Science Department that teaches students about Software Engineering through agile methodologies.   This app was developed by the team The Energetic Easter Bunnies, along with help from their Team Coach Sam Laird.  The team would like to give a special thanks to Brigham and Women's Hospital, especially Andrew Shinn, for their time and input." wrapText="true" />
+                  <Label prefHeight="71.0" prefWidth="976.0" text="This app is the culmination what students have learned from Wilson Wong's CS3733, a class from WPI's Computer Science Department that teaches students about Software Engineering through agile methodologies.   This app was developed by the team The Energetic Easter Bunnies, along with help from their Team Coach Sam Laird.  The team would like to give a special thanks to Brigham and Women's Hospital, especially Andrew Shinn, for their time and input." wrapText="true" StackPane.alignment="CENTER">
+                     <StackPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </StackPane.margin></Label>
                   <Hyperlink fx:id="wilsonWong" onAction="#wilsonWongLink" text="Wilson Wong">
                      <StackPane.margin>
-                        <Insets right="260.0" top="-34.0" />
+                        <Insets right="260.0" top="-44.0" />
                      </StackPane.margin>
                   </Hyperlink>
                </children>
             </StackPane>
          </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </VBox>
-      <VBox styleClass="container" VBox.vgrow="ALWAYS">
+      <Label text="         Meet the team" textFill="WHITE" VBox.vgrow="ALWAYS">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <VBox VBox.vgrow="ALWAYS">
          <children>
-            <Label prefHeight="39.0" prefWidth="192.0" text="         Meet the team!">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <GridPane prefHeight="359.0" prefWidth="1096.0" VBox.vgrow="ALWAYS">
+            <GridPane hgap="10.0" vgap="10.0" VBox.vgrow="ALWAYS">
               <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#ericPopUp">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#ericPopUp" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/eric.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
                         </ImageView>
-                        <Label text="Eric Zhou" />
-                        <Label prefHeight="17.0" prefWidth="130.0" text="Assitant Back-End Lead" />
+                        <Label styleClass="bold" text="Eric Zhou" VBox.vgrow="ALWAYS" />
+                        <Label styleClass="bold" text="Assitant Back-End Lead" VBox.vgrow="ALWAYS" />
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" styleClass="container" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#joeyPopUp">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#joeyPopUp" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/mobil_joey.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
                         </ImageView>
-                        <Label text="Joey Rozman" />
-                        <Label prefHeight="17.0" prefWidth="130.0" text="Lead Software Engineer" />
+                        <Label styleClass="bold" text="Joey Rozman" VBox.vgrow="ALWAYS" />
+                        <Label styleClass="bold" text="Lead Software Engineer" VBox.vgrow="ALWAYS" />
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#philPopUp">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#philPopUp" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/phil.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
                         </ImageView>
-                        <Label text="Phillip Brush" />
-                        <Label prefHeight="17.0" prefWidth="130.0" text="Documentation Analyst" />
+                        <Label styleClass="bold" text="Phillip Brush" VBox.vgrow="ALWAYS" />
+                        <Label styleClass="bold" text="Documentation Analyst" VBox.vgrow="ALWAYS" />
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#hannahPopUp">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#hannahPopUp" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/hannah.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
                         </ImageView>
-                        <Label text="Hannah Zink" />
-                        <Label prefHeight="17.0" prefWidth="90.0" text="Project Manager" />
+                        <Label styleClass="bold" text="Hannah Zink" VBox.vgrow="ALWAYS" />
+                        <Label styleClass="bold" text="Project Manager" VBox.vgrow="ALWAYS" />
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#shenPopUp">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#shenPopUp" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/shen.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
                         </ImageView>
-                        <Label text="Shen Fang" />
-                        <Label prefHeight="17.0" prefWidth="109.0" text="Back-End Developer" />
+                        <Label styleClass="bold" text="Shen Fang" VBox.vgrow="ALWAYS" />
+                        <Label styleClass="bold" text="Back-End Developer" VBox.vgrow="ALWAYS" />
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#sizhePopUp">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#sizhePopUp" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/frank.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
                         </ImageView>
-                        <Label text="Sizhe Li" />
-                        <Label prefHeight="17.0" prefWidth="90.0" text="Product Owner" />
+                        <Label styleClass="bold" text="Sizhe Li" VBox.vgrow="ALWAYS" />
+                        <Label styleClass="bold" text="Product Owner" VBox.vgrow="ALWAYS" />
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#colinPopUp" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/colin.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
                         </ImageView>
-                        <Label text="Colin Mettler" VBox.vgrow="ALWAYS" />
-                        <Label prefHeight="17.0" prefWidth="130.0" text="Assitant Front-End Lead" />
-                     </children></VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                        <Label styleClass="bold" text="Colin Mettler" VBox.vgrow="ALWAYS" />
+                        <Label styleClass="bold" text="Assitant Front-End Lead" VBox.vgrow="ALWAYS" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding></VBox>
+                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#danielPopUp">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#danielPopUp" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/daniel.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
                         </ImageView>
-                        <Label text="Daniel Stoiber" />
-                        <Label prefHeight="17.0" prefWidth="79.0" text="Scrum Master" />
+                        <Label styleClass="bold" text="Daniel Stoiber" VBox.vgrow="ALWAYS" />
+                        <Label styleClass="bold" text="Scrum Master" VBox.vgrow="ALWAYS" />
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" styleClass="container" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130" fitWidth="130" onMouseEntered="#jeremyPopUp">
+                        <ImageView fitHeight="130" fitWidth="130" onMouseEntered="#jeremyPopUp" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/jeremy.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
                         </ImageView>
-                        <Label text="Jeremy Bornstein" />
-                        <Label prefHeight="17.0" prefWidth="109.0" text="Back-End Developer" />
+                        <Label styleClass="bold" text="Jeremy Bornstein" VBox.vgrow="ALWAYS" />
+                        <Label styleClass="bold" text="Back-End Developer" VBox.vgrow="ALWAYS" />
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </VBox>
-                  <VBox alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" styleClass="container" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#timPopUp">
+                        <ImageView fitHeight="130.0" fitWidth="130.0" onMouseEntered="#timPopUp" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@images/tim.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
                         </ImageView>
-                        <Label text="Tim Connors" />
-                        <Label prefHeight="17.0" prefWidth="120.0" text="Front-End Developer" />
+                        <Label styleClass="bold" text="Tim Connors" VBox.vgrow="ALWAYS" />
+                        <Label styleClass="bold" text="Front-End Developer" VBox.vgrow="ALWAYS" />
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </VBox>
                </children>
             </GridPane>
          </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </VBox>
    </children>
    <padding>
-      <Insets right="20.0" top="20.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
 </VBox>
