@@ -115,6 +115,8 @@ public class giftDeliveryController extends serviceRequestPageController impleme
 
       giftSendToDB(request);
       setInfographicsCount("GIFT_REQUEST");
+      PopUp.submissionConfirmation(
+          "Your gift service request has been submitted.", submitButton.getScene().getWindow());
 
     } catch (NullPointerException e) {
       System.out.println("Error : Some Value is NULL");

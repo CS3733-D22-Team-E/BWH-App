@@ -73,10 +73,16 @@ public class DashboardController implements Initializable {
   DashboardEquipmentHandler dashboardEquipmentHandler;
   DashboardServiceRequestHandler dashboardServiceRequestHandler;
 
+  @FXML Tooltip bedBoxTooltip;
+  @FXML Tooltip infusionPumpBoxTooltip;
+
   public DashboardController() {}
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    bedBoxTooltip.setText("AHHHHH");
+    infusionPumpBoxTooltip.setText("AHHHHH");
 
     bedAlertBadge = new JFXBadge();
     // bedBox.getChildren().add(bedAlertBadge);

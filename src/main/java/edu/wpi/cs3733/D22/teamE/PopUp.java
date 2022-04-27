@@ -192,4 +192,18 @@ public class PopUp {
       popup.show(((Node) event.getSource()).getScene().getWindow());
     }
   }
+
+  public static void submissionConfirmation(String message, Window owner) {
+    JFXAlert alert = new JFXAlert(owner);
+    alert.initModality(Modality.APPLICATION_MODAL);
+    alert.setOverlayClose(false);
+    JFXDialogLayout layout = new JFXDialogLayout();
+    layout.setHeading(new Label("Request Submitted"));
+    layout.setBody(new Label(message));
+    JFXButton closeButton = new JFXButton("Understood");
+    closeButton.setOnAction(event -> alert.hideWithAnimation());
+    layout.setActions(closeButton);
+    alert.setContent(layout);
+    alert.showAndWait();
+  }
 }

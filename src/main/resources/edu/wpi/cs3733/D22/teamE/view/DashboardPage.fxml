@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -332,6 +333,9 @@
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
+                                       <tooltip>
+                                          <Tooltip fx:id="bedBoxTooltip" text="Empty Tooltip" />
+                                       </tooltip>
                                     </Label>
                                     <VBox alignment="CENTER" style="-fx-background-color: #1FAAA2;" VBox.vgrow="ALWAYS">
                                        <children>
@@ -488,6 +492,9 @@
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
+                                       <tooltip>
+                                          <Tooltip fx:id="infusionPumpBoxTooltip" text="Empty Tooltip" />
+                                       </tooltip>
                                     </Label>
                                     <VBox alignment="CENTER" style="-fx-background-color: #1FAAA2;" VBox.vgrow="ALWAYS">
                                        <children>

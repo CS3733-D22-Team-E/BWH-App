@@ -230,7 +230,7 @@
                                           <JFXComboBox fx:id="database" promptText="Select Database" styleClass="inputField" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                                           <Label styleClass="inputLabel" text="Database:" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                                           <Label styleClass="inputLabel" text="Color Scheme:" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                                          <JFXButton onAction="#changeMode" prefHeight="26.0" prefWidth="128.0" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <JFXButton onAction="#changeMode" prefHeight="26.0" prefWidth="128.0" styleClass="submitButton" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <graphic>
                                                 <ImageView fx:id="imgMode" fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -244,9 +244,9 @@
                                           <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
                                        </VBox.margin>
                                     </GridPane>
-                                    <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #EEEEEE; -fx-border-color: #C4C4C4;" VBox.vgrow="ALWAYS">
+                                    <VBox alignment="CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label text="Change Password" VBox.vgrow="ALWAYS">
+                                          <Label styleClass="inputLabel" text="Change Password" VBox.vgrow="ALWAYS">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -261,12 +261,12 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <Label text="New Password" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                <Label styleClass="inputLabel" text="New Password" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="Confirm Password" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                <Label styleClass="inputLabel" text="Confirm Password" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -275,7 +275,7 @@
                                                 <TextField fx:id="confirmPassword" promptText="Confirm Password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                                              </children>
                                           </GridPane>
-                                          <JFXButton fx:id="changePassword" onAction="#changePassword" styleClass="submitButton" text="Change Password">
+                                          <JFXButton fx:id="changePassword" onAction="#changePassword" prefHeight="34.0" prefWidth="246.0" styleClass="submitButton" text="Change Password">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -286,8 +286,8 @@
                                        </padding>
                                        <styleClass>
                                           <String fx:value="darkBorder" />
-                                          <String fx:value="thinBorder" />
                                           <String fx:value="lessRounded" />
+                                          <String fx:value="container" />
                                        </styleClass>
                                     </VBox>
                                  </children>
