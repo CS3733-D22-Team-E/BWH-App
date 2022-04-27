@@ -31,7 +31,7 @@ public class DAOSystem {
   private final ServiceRequestDAOImpl serviceRequestDAO;
   private final API externalTransportAPI;
 
-  private List<DashboardHandler> observers;
+  private final List<DashboardHandler> observers; //for observer functionality
 
   public DAOSystem() throws SQLException {
     accountDAO = new AccountDAOImpl();
