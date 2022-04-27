@@ -6,14 +6,15 @@ import com.twilio.rest.api.v2010.account.Message;
 public class Texting {
   // Find your Account Sid and Token at twilio.com/console
   public static final String ACCOUNT_SID = "ACad7285cd2fdbd178b10b88f3c336b90d";
-  public static final String AUTH_TOKEN = "0bb060eaa1fec2901389a120f849e1f3";
+  public static final String AUTH_TOKEN =
+      "655417373ed32489bb442e5970cfadd9"; // "0bb060eaa1fec2901389a120f849e1f3";
 
-  public static void sendSMS(String sms) {
+  public static void sendSMS(String phoneNumber, String sms) {
     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     Message message =
         Message.creator(
-                new com.twilio.type.PhoneNumber("+19788317440"),
-                "MG1ac5310d1cb7fa5bd6b3cc678d597e01",
+                new com.twilio.type.PhoneNumber(phoneNumber), // "+16178936605"),//"+19788317440"),
+                "MG1ac5310d1cb7fa5bd6b3cc678d597e01", // "MG9752274e9e519418a7406176694466fa",
                 sms)
             .create();
 

@@ -5,6 +5,7 @@ import static edu.wpi.cs3733.D22.teamE.RSAEncryption.validatePassword;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
+import edu.wpi.cs3733.D22.teamE.Texting;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
@@ -15,6 +16,7 @@ import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,9 +28,15 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 
 public class loginPageController implements Initializable {
+
+  private final boolean enableTwoFactorAuthentication = true;
+
+
   private @FXML JFXTextField usernameField;
 
   private @FXML JFXPasswordField passwordField;
+
+  private static String TwoFAcode = "";
 
   @FXML Label invalidWarning;
 
@@ -39,12 +47,29 @@ public class loginPageController implements Initializable {
   @FXML
   public void submitLogin(ActionEvent event) {
     if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
-      // homePage
-      pageControl.loadPage("BasePage.fxml", (Stage) passwordField.getScene().getWindow());
+      if (enableTwoFactorAuthentication) {
+        Account account = db.getAccount(getUsername());
+        TwoFAcode = generateRandom5DigitID();
+        Texting.sendSMS(
+                account.getPhoneNumber(), //"+16178936605", // "+19788317440", //account.getPhoneNumber(),
+                "Your Brigham & Womens Hospital authentication code is: " + TwoFAcode);
 
+        pageControl.loadPage("twoFacAuthPage.fxml", (Stage) passwordField.getScene().getWindow());
+      } else {
+        pageControl.loadPage("BasePage.fxml", (Stage) passwordField.getScene().getWindow());
+      }
     } else {
       invalidWarning.setVisible(true);
     }
+  }
+
+  public static String generateRandom5DigitID() {
+    return String.format("%5d", new Random().nextInt((int) Math.pow(10, 5)));
+  }
+
+  public static boolean compareCodes(String enteredCode) {
+    if (TwoFAcode.equals("")) return false;
+    else return enteredCode.equals(TwoFAcode);
   }
 
   private String getPassword() {

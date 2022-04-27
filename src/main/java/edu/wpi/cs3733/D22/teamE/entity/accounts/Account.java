@@ -12,6 +12,8 @@ public abstract class Account {
   private String firstName;
   private String lastName;
   private String position;
+  private String phoneNumber;
+
   /**
    * realistically used to load in from a CSV of accounts
    *
@@ -22,6 +24,7 @@ public abstract class Account {
    * @param firstName
    * @param lastName
    * @param position
+   * @param phoneNumber
    */
   public Account(
       String accountID,
@@ -30,7 +33,8 @@ public abstract class Account {
       String passwordHash,
       String firstName,
       String lastName,
-      String position) {
+      String position,
+      String phoneNumber) {
     this.accountID = accountID; // AccountsManager.generateRandom8DigitID();;
     this.employeeID = employeeID;
     this.authorityLevel = authorityLevel;
@@ -38,6 +42,7 @@ public abstract class Account {
     this.firstName = firstName;
     this.lastName = lastName;
     this.position = position;
+    this.phoneNumber = phoneNumber;
   }
 
   /** generally for testing purposes */
@@ -49,6 +54,7 @@ public abstract class Account {
     this.firstName = "defaultFirstName";
     this.lastName = "defaultLastName";
     this.position = "defaultPosition";
+    this.phoneNumber = "0000000000";
   }
 
   /**
@@ -93,5 +99,9 @@ public abstract class Account {
 
   public void setPasswordHash(String newPasswordHash) {
     passwordHash = newPasswordHash;
+  }
+
+  public String getPhoneNumber() {
+    return this.phoneNumber;
   }
 }
