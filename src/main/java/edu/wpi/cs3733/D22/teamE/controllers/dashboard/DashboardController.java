@@ -1,203 +1,168 @@
 package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.cs3733.D22.teamE.controllers.containsSideMenu;
-import edu.wpi.cs3733.D22.teamE.database.Equipment;
-import edu.wpi.cs3733.D22.teamE.database.MedicalEquipment;
-import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
+import com.jfoenix.controls.JFXBadge;
+import com.jfoenix.controls.JFXToggleNode;
+import edu.wpi.cs3733.D22.teamE.PopUp;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
+import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
+import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-public class DashboardController extends containsSideMenu implements Initializable {
+public class DashboardController implements Initializable {
 
-  @FXML private VBox baseComponent;
+  @FXML ImageView mapButton;
+  @FXML ImageView requestStatusButton;
+  @FXML ImageView profileButton;
+  @FXML ImageView submitRequestButton;
 
-  @FXML JFXComboBox<String> selectFloor;
-  String currentFloor;
-  @FXML JFXComboBox<String> selectEquipmentType;
+  @FXML JFXToggleNode ll2Button;
+  @FXML JFXToggleNode ll1Button;
+  @FXML JFXToggleNode firstFloorButton;
+  @FXML JFXToggleNode secondFloorButton;
+  @FXML JFXToggleNode thirdFloorButton;
+  @FXML JFXToggleNode fourthFloorButton;
+  @FXML JFXToggleNode fifthFloorButton;
+  ToggleGroup floorButtons;
+  JFXToggleNode currentFloor;
+  String currentFloorString;
 
-  @FXML ToggleButton cleanFilter;
-  @FXML ToggleButton dirtyFilter;
-  @FXML ToggleButton inUseFilter;
-  @FXML ToggleButton allFilter;
-  ToggleGroup filters;
-  Toggle currentFilter;
+  @FXML TableView<RequestInterface> serviceRequestTable;
+  @FXML TableColumn<RequestInterface, String> tableDate;
+  @FXML TableColumn<RequestInterface, String> tableFloor;
+  @FXML TableColumn<RequestInterface, String> tableRoom;
+  @FXML TableColumn<RequestInterface, String> tableRequestType;
+  @FXML TableColumn<RequestInterface, String> tableStaffAssignee;
+  @FXML TableColumn<RequestInterface, String> tableProgress;
 
-  @FXML TableView<Equipment> floorEquipmentTable;
-  @FXML TableColumn<MedicalEquipment, String> tableEquipment;
-  @FXML TableColumn<MedicalEquipment, String> tableLocation;
+  @FXML Label xRayClean;
+  @FXML Label xRayInUse;
+  @FXML Label xRayDirty;
 
-  @FXML JFXButton mapEditorButton;
+  @FXML Label bedClean;
+  @FXML Label bedInUse;
+  @FXML Label bedDirty;
 
-  @FXML JFXButton ll2Floor;
-  @FXML Tooltip ll2FloorTooltip;
-  @FXML JFXButton ll1Floor;
-  @FXML Tooltip ll1FloorTooltip;
-  @FXML JFXButton firstFloor;
-  @FXML Tooltip firstFloorTooltip;
-  @FXML JFXButton secondFloor;
-  @FXML Tooltip secondFloorTooltip;
-  @FXML JFXButton thirdFloor;
-  @FXML Tooltip thirdFloorTooltip;
-  @FXML JFXButton fourthFloor;
-  @FXML Tooltip fourthFloorTooltip;
-  @FXML JFXButton fifthFloor;
-  @FXML Tooltip fifthFloorTooltip;
+  @FXML Label reclinerClean;
+  @FXML Label reclinerInUse;
+  @FXML Label reclinerDirty;
 
-  @FXML Circle bedAlertCircle;
-  @FXML Label bedAlertLabel;
-  @FXML Circle infusionPumpAlertCircle;
-  @FXML Label infusionPumpAlertLabel;
+  @FXML Label infusionPumpClean;
+  @FXML Label infusionPumpInUse;
+  @FXML Label infusionPumpDirty;
 
-  LocationDAOImpl locationDAO;
-  MedicalEquipmentDAOImpl equipmentDAO;
-  List<MedicalEquipment> allEquipment;
+  @FXML VBox bedBox;
+  @FXML JFXBadge bedAlertBadge;
 
-  String equipmentSelected;
-  String equipmentSelectedFilter;
-  String equipmentSelectedTooltipText;
+  @FXML VBox infusionPumpBox;
+  @FXML JFXBadge infusionPumpAlertBadge;
 
-  DashboardTableViewHandler tableViewHandler;
-  DashboardTooltip toolTipHandler;
-  DashboardAlertHandler alertHandler;
+  DAOSystem database;
+  ArrayList<MedicalEquipment> currentEquipment;
+  ArrayList<RequestInterface> currentServiceRequests;
+  DashboardEquipmentHandler dashboardEquipmentHandler;
+  DashboardServiceRequestHandler dashboardServiceRequestHandler;
+
+  public DashboardController() {}
 
   @Override
-  public void initialize(URL url, ResourceBundle rb) {
-    super.initialize(url, rb);
+  public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    try {
-      equipmentDAO = new MedicalEquipmentDAOImpl();
-      locationDAO = new LocationDAOImpl();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    bedAlertBadge = new JFXBadge();
+    // bedBox.getChildren().add(bedAlertBadge);
 
-    tableViewHandler = new DashboardTableViewHandler(equipmentDAO, this);
-    toolTipHandler = new DashboardTooltip(equipmentDAO, this);
-    alertHandler = new DashboardAlertHandler(equipmentDAO, this);
+    database = DAOSystemSingleton.INSTANCE.getSystem();
 
-    initializeFilters();
-    initializeFloorSelection();
-    initializeEquipmentSelection();
-    toolTipHandler.populateTooltips();
-    tableViewHandler.displayEquipmentTable(currentFilter, currentFloor, equipmentSelectedFilter);
+    currentFloorString = "All";
+    floorButtonsHandler();
+
+    currentEquipment = (ArrayList<MedicalEquipment>) database.getAllMedicalEquipments();
+    currentServiceRequests = (ArrayList<RequestInterface>) database.getAllServiceRequests();
+
+    dashboardEquipmentHandler = new DashboardEquipmentHandler(this);
+    dashboardServiceRequestHandler = new DashboardServiceRequestHandler(this);
+
+    dashboardEquipmentHandler.updateEquipmentReports();
+    dashboardServiceRequestHandler.updateServiceRequestTable();
+
+    quickAccessButtonHandler();
   }
 
-  private void initializeEquipmentSelection() {
-    selectEquipmentType
-        .getItems()
-        .addAll("All Equipment Types", "Beds", "Infusion Pumps", "Recliners", "X-ray Machines");
-    selectEquipmentType.getSelectionModel().select(0);
-    equipmentSelected = "All Equipment Types";
-    equipmentSelectedFilter = "";
-    equipmentSelectedTooltipText = "Equipment ";
+  private void floorButtonsHandler() {
+    floorButtons = new ToggleGroup();
+    ll2Button.setToggleGroup(floorButtons);
+    ll1Button.setToggleGroup(floorButtons);
+    firstFloorButton.setToggleGroup(floorButtons);
+    secondFloorButton.setToggleGroup(floorButtons);
+    thirdFloorButton.setToggleGroup(floorButtons);
+    fourthFloorButton.setToggleGroup(floorButtons);
+    fifthFloorButton.setToggleGroup(floorButtons);
+    currentFloor = (JFXToggleNode) floorButtons.getSelectedToggle();
 
-    selectEquipmentType
-        .getSelectionModel()
-        .selectedItemProperty()
-        .addListener(
-            new ChangeListener<String>() {
-              @Override
-              public void changed(
-                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                equipmentSelected = newValue;
-                generateEquipmentStrings();
-                tableViewHandler.displayEquipmentTable(
-                    currentFilter, currentFloor, equipmentSelectedFilter);
-                toolTipHandler.populateTooltips();
-              }
-            });
-  }
-
-  private void initializeFloorSelection() {
-    selectFloor.getItems().addAll("All Floors", "LL2", "LL1", "1", "2", "3", "4", "5");
-    selectFloor.getSelectionModel().select(0);
-    currentFloor = selectFloor.getSelectionModel().getSelectedItem();
-    selectFloor
-        .getSelectionModel()
-        .selectedItemProperty()
-        .addListener(
-            new ChangeListener<String>() {
-              @Override
-              public void changed(
-                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                currentFloor = newValue;
-                tableViewHandler.displayEquipmentTable(
-                    currentFilter, currentFloor, equipmentSelectedFilter);
-              }
-            });
-  }
-
-  private void initializeFilters() {
-    filters = new ToggleGroup();
-    cleanFilter.setToggleGroup(filters);
-    dirtyFilter.setToggleGroup(filters);
-    inUseFilter.setToggleGroup(filters);
-    allFilter.setToggleGroup(filters);
-    allFilter.setSelected(true);
-    currentFilter = allFilter;
-
-    filters
+    floorButtons
         .selectedToggleProperty()
         .addListener(
             new ChangeListener<Toggle>() {
               @Override
               public void changed(
-                  ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                currentFilter = newValue;
-                tableViewHandler.displayEquipmentTable(
-                    currentFilter, currentFloor, equipmentSelectedFilter);
+                  ObservableValue<? extends Toggle> observableValue, Toggle oldVal, Toggle newVal) {
+                currentFloor = (JFXToggleNode) newVal;
+                updateFloorString(newVal);
+                if (dashboardEquipmentHandler.updateEquipmentReports()) {
+                  bedAlertDisplay();
+                }
+                dashboardServiceRequestHandler.updateServiceRequestTable();
               }
             });
   }
 
-  private void generateEquipmentStrings() {
-    switch (equipmentSelected) {
-      case "All Equipment Types":
-        equipmentSelectedFilter = "";
-        equipmentSelectedTooltipText = "Equipment";
-        break;
-      case "Beds":
-        equipmentSelectedFilter = "BED";
-        equipmentSelectedTooltipText = "Beds";
-        break;
-      case "Infusion Pumps":
-        equipmentSelectedFilter = "INFUSION PUMP";
-        equipmentSelectedTooltipText = "Infusion Pumps";
-        break;
-      case "Recliners":
-        equipmentSelectedFilter = "RECLINER";
-        equipmentSelectedTooltipText = "Recliners";
-        break;
-      case "X-ray Machines":
-        equipmentSelectedFilter = "XRAY";
-        equipmentSelectedTooltipText = "X-ray Machines";
-        break;
-      default:
-        break;
+  private void bedAlertDisplay() {
+    PopUp.createWarning(
+        "There are too many beds in a dirty area!", bedDirty.getScene().getWindow());
+  }
+
+  private void updateFloorString(Toggle newVal) {
+    if (ll2Button.equals(newVal)) {
+      currentFloorString = "L2";
+    } else if (ll1Button.equals(newVal)) {
+      currentFloorString = "L1";
+    } else if (firstFloorButton.equals(newVal)) {
+      currentFloorString = "1";
+    } else if (secondFloorButton.equals(newVal)) {
+      currentFloorString = "2";
+    } else if (thirdFloorButton.equals(newVal)) {
+      currentFloorString = "3";
+    } else if (fourthFloorButton.equals(newVal)) {
+      currentFloorString = "4";
+    } else if (fifthFloorButton.equals(newVal)) {
+      currentFloorString = "5";
+    } else {
+      currentFloorString = "All";
     }
   }
 
-  // TODO: implement the floor view button
+  private void quickAccessButtonHandler() {
+    quickAccessButtonClickedHandler(mapButton, "map.fxml");
+    quickAccessButtonClickedHandler(requestStatusButton, "serviceRequestLanding.fxml");
+    quickAccessButtonClickedHandler(profileButton, "profilePage.fxml");
+    quickAccessButtonClickedHandler(submitRequestButton, "aboutPage.fxml");
+  }
 
-  @FXML
-  private void mapEditorButton(ActionEvent event) {
-    Stage thisStage = (Stage) baseComponent.getScene().getWindow();
-
-    pageControl.loadPage("map.fxml", thisStage);
+  private void quickAccessButtonClickedHandler(ImageView quickAccessButton, String url) {
+    quickAccessButton.setOnMouseClicked(
+        mouseEvent -> {
+          pageControl.loadCenter(url, (Stage) quickAccessButton.getScene().getWindow());
+        });
   }
 }

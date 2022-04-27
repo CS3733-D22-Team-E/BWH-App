@@ -1,16 +1,15 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-import edu.wpi.cs3733.D22.teamE.database.Location;
-import edu.wpi.cs3733.D22.teamE.database.medicineDelivery;
 import edu.wpi.cs3733.D22.teamE.entity.*;
+import edu.wpi.cs3733.D22.teamE.entity.medicineDelivery;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
+public class ServiceRequestDAOImpl implements DAO<RequestInterface> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
-  List<serviceRequest> serviceRequests;
+  List<RequestInterface> serviceRequests;
   DAO<medicalEquipmentRequest> medicalEquipmentServiceRequestDAO =
       new MedicalEquipmentServiceRequestDAOImpl();
   DAO<labRequest> labRequestDAO = new LabRequestDAOImpl();
@@ -20,6 +19,7 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
   DAO<sanitationRequest> sanitationRequestDAO = new SanitationRequestDAOImpl();
   DAO<giftDeliveryRequest> giftDeliveryRequestDAO = new GiftRequestDAOImpl();
   DAO<securityRequest> securityRequestDAO = new SecurityRequestDAOImpl();
+  DAO<facilitiesRequest> facilitiesRequestDAO = new FacilitiesRequestDAOImpl();
 
   public ServiceRequestDAOImpl() throws SQLException {
     serviceRequests = new ArrayList<>();
@@ -32,22 +32,35 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
     serviceRequests.addAll(sanitationRequestDAO.getAll());
     serviceRequests.addAll(giftDeliveryRequestDAO.getAll());
     serviceRequests.addAll(securityRequestDAO.getAll());
+    serviceRequests.addAll(facilitiesRequestDAO.getAll());
   }
 
   @Override
-  public List<serviceRequest> getAll() {
-    return serviceRequests;
+  public List<RequestInterface> getAll() {
+    List<RequestInterface> requests = new ArrayList<>();
+
+    requests.addAll(medicalEquipmentServiceRequestDAO.getAll());
+    requests.addAll(labRequestDAO.getAll());
+    requests.addAll(languageInterpreterRequestDAO.getAll());
+    requests.addAll(mealDeliveryRequestDAO.getAll());
+    requests.addAll(medicineDeliveryDAO.getAll());
+    requests.addAll(sanitationRequestDAO.getAll());
+    requests.addAll(giftDeliveryRequestDAO.getAll());
+    requests.addAll(securityRequestDAO.getAll());
+    requests.addAll(facilitiesRequestDAO.getAll());
+
+    return requests;
   }
 
   public void printAll() {
-    for (serviceRequest request : serviceRequests) {
+    for (RequestInterface request : serviceRequests) {
       System.out.println(request.getRequestType() + " : " + request.getServiceRequestID());
     }
   }
 
-  public void getCoords() throws SQLException {
+  /*public void getCoords() throws SQLException {
     DAO<Location> locationDAO = new LocationDAOImpl();
-    for (serviceRequest request : serviceRequests) {
+    for (RequestInterface request : serviceRequests) {
       try {
         Location location = locationDAO.get(request.getRoomID());
         request.setxCoord(location.getXcoord());
@@ -59,11 +72,11 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
         request.setyCoord(-1);
       }
     }
-  }
+  }*/
 
   @Override
-  public serviceRequest get(String id) {
-    for (serviceRequest request : serviceRequests) {
+  public RequestInterface get(String id) {
+    for (RequestInterface request : serviceRequests) {
       if (request.getServiceRequestID().equals(id)) return request;
     }
     System.out.println("Service Request with service request id " + id + " not found");
@@ -71,12 +84,15 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
   }
 
   @Override
-  public void update(serviceRequest request) {
+  public void update(RequestInterface request) {
     delete(request);
     serviceRequests.add(request);
     switch (request.getRequestType()) {
       case LAB_REQUEST:
         labRequestDAO.update((labRequest) request);
+        break;
+      case FACILITIES_REQ:
+        facilitiesRequestDAO.update((facilitiesRequest) request);
         break;
       case MED_DELIV_REQ:
         medicineDeliveryDAO.update((medicineDelivery) request);
@@ -104,9 +120,9 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
   }
 
   @Override
-  public void delete(serviceRequest request) {
+  public void delete(RequestInterface request) {
     boolean found = false;
-    for (serviceRequest r : serviceRequests) {
+    for (RequestInterface r : serviceRequests) {
       if (r.getServiceRequestID().equals(request.getServiceRequestID())) {
         found = true;
         break;
@@ -118,6 +134,9 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
     switch (request.getRequestType()) {
       case LAB_REQUEST:
         labRequestDAO.delete((labRequest) request);
+        break;
+      case FACILITIES_REQ:
+        facilitiesRequestDAO.delete((facilitiesRequest) request);
         break;
       case MED_DELIV_REQ:
         medicineDeliveryDAO.delete((medicineDelivery) request);
@@ -144,7 +163,7 @@ public class ServiceRequestDAOImpl implements DAO<serviceRequest> {
     }
   }
 
-  public void updateRoomLocation(serviceRequest request, int newXCoord, int newYCoord)
+  public void updateRoomLocation(RequestInterface request, int newXCoord, int newYCoord)
       throws SQLException {
     String query =
         "UPDATE TOWERLOCATIONS SET XCOORD = "

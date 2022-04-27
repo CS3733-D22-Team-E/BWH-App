@@ -3,9 +3,9 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import edu.wpi.cs3733.D22.teamE.customUI.CustomJFXButtonTableCell;
 import edu.wpi.cs3733.D22.teamE.customUI.CustomTextFieldTableCell;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.*;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -21,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * This is the controller class for the Status Page. It inherits from the containsSideMenu class to
  * give the side menu functionality.
  */
-public class statusPageController extends containsSideMenu {
+public class statusPageController implements Initializable {
   @FXML TextField filterFieldDate;
   @FXML TextField filterFieldID;
   @FXML TextField filterFieldType;
@@ -33,13 +34,11 @@ public class statusPageController extends containsSideMenu {
   @FXML TableColumn<serviceRequestModel, String> statusColumn;
   @FXML TableColumn<serviceRequestModel, String> assignedColumn;
   @FXML TableColumn<serviceRequestModel, String> dateColumn;
-  @FXML TableColumn<serviceRequestModel, serviceRequest> buttonColumn;
+  @FXML TableColumn<serviceRequestModel, RequestInterface> buttonColumn;
   DAOSystem db;
 
   /** Constructor */
-  public statusPageController() {
-    super();
-  }
+  public statusPageController() {}
 
   /**
    * Initialize the super class and the database object.
@@ -47,15 +46,8 @@ public class statusPageController extends containsSideMenu {
    * @param url unneeded here - inherited parameter
    * @param rb uneeded here - inherited parameter
    */
-  @Override
   public void initialize(URL url, ResourceBundle rb) {
-    super.initialize(url, rb);
-    try {
-      db = new DAOSystem();
-      genTable();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    genTable();
   }
 
   public void genTable() {
@@ -193,10 +185,10 @@ public class statusPageController extends containsSideMenu {
    * @return an ObservableList of serviceRequestModels
    */
   protected ObservableList<serviceRequestModel> populateList() {
-    List<serviceRequest> list = db.getAllServiceRequests();
+    List<RequestInterface> list = DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests();
     ObservableList<serviceRequestModel> tableList = FXCollections.observableArrayList();
     ArrayList<String> usedIDS = new ArrayList<>();
-    for (serviceRequest r : list) {
+    for (RequestInterface r : list) {
       if (!usedIDS.contains(r.getServiceRequestID())) {
         usedIDS.add(r.getServiceRequestID());
         tableList.add(
@@ -220,8 +212,8 @@ public class statusPageController extends containsSideMenu {
     ArrayList<serviceRequestModel> p =
         new ArrayList<>(requestTable.getSelectionModel().getSelectedItems());
     for (serviceRequestModel req : p) {
-      serviceRequest r = db.getServiceRequest(req.getID());
-      db.deleteServiceRequest(r);
+      RequestInterface r = DAOSystemSingleton.INSTANCE.getSystem().getServiceRequest(req.getID());
+      DAOSystemSingleton.INSTANCE.getSystem().delete(r);
     }
     genTable();
   }

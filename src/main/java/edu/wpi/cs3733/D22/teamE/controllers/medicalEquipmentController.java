@@ -3,9 +3,8 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.*;
-import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.*;
+import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
 import java.net.URL;
 import java.sql.SQLException;
@@ -14,24 +13,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
-public class medicalEquipmentController extends serviceRequestPageController {
+public class medicalEquipmentController extends serviceRequestPageController
+    implements Initializable {
 
   @FXML JFXComboBox<String> equipmentType;
   @FXML JFXComboBox<Integer> equipmentQuantity;
   @FXML DatePicker deliveryDate;
   @FXML CheckBox isUrgent;
-  @FXML TableView<medicalEquipmentRequest> medRequestTable;
+  /*@FXML TableView<medicalEquipmentRequest> medRequestTable;
 
   @FXML TableColumn<medicalEquipmentRequest, String> tableDeliveryDate;
   @FXML TableColumn<medicalEquipmentRequest, String> tableRequestDate;
@@ -42,15 +40,18 @@ public class medicalEquipmentController extends serviceRequestPageController {
   @FXML TableColumn<medicalEquipmentRequest, String> tableRoomID;
   @FXML TableColumn<medicalEquipmentRequest, String> tableFloorID;
   @FXML TableColumn<medicalEquipmentRequest, String> tableRequestStatus;
-  @FXML TableColumn<medicalEquipmentRequest, String> tableOtherNotes;
+  @FXML TableColumn<medicalEquipmentRequest, String> tableOtherNotes;*/
 
-  MedicalEquipmentServiceRequestDAOImpl medEquipmentServiceRequestDB;
-  MedicalEquipmentDAOImpl medEquipmentDB;
-  LocationDAOImpl locationDB;
+  // MedicalEquipmentServiceRequestDAOImpl medEquipmentServiceRequestDB;
+  // MedicalEquipmentDAOImpl medEquipmentDB;
+  // LocationDAOImpl locationDB;
+  DAOSystem system;
 
-  ObservableList<medicalEquipmentRequest> tableList;
+  // ObservableList<medicalEquipmentRequest> tableList;
 
-  public medicalEquipmentController() {}
+  public medicalEquipmentController() {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+  }
 
   /**
    * Initializes the page by populating the location combo boxes, equipment combo boxes, and the
@@ -59,13 +60,14 @@ public class medicalEquipmentController extends serviceRequestPageController {
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     super.initialize(url, rb);
+    setInfographicsCount("MED_EQUIP_REQ");
     try {
-      medEquipmentDB = new MedicalEquipmentDAOImpl();
+      // medEquipmentDB = new MedicalEquipmentDAOImpl();
       populateEquipComboBoxes();
 
-      medEquipmentServiceRequestDB = new MedicalEquipmentServiceRequestDAOImpl();
+      // medEquipmentServiceRequestDB = new MedicalEquipmentServiceRequestDAOImpl();
       populateMedEquipRequestTable();
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -81,7 +83,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
     equipmentQuantity.setVisible(false);
 
     ArrayList<MedicalEquipment> allEquipment =
-        (ArrayList<MedicalEquipment>) medEquipmentDB.getAll();
+        (ArrayList<MedicalEquipment>) system.getAllMedicalEquipments();
     ArrayList<String> equipmentNames = new ArrayList<String>();
     HashMap<String, Integer> equipNameToQuantity = new HashMap<>();
     for (MedicalEquipment e : allEquipment) {
@@ -121,7 +123,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
    * column to be the corresponding variable in medicalEquipmentRequest.
    */
   private void populateMedEquipRequestTable() {
-    ObservableList<medicalEquipmentRequest> medicalEquipmentRequests = populateMedEquipList();
+    /*ObservableList<medicalEquipmentRequest> medicalEquipmentRequests = populateMedEquipList();
     tableDeliveryDate.setCellValueFactory(
         new PropertyValueFactory<medicalEquipmentRequest, String>("deliveryDate"));
     tableRequestDate.setCellValueFactory(
@@ -152,7 +154,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
     tableOtherNotes.setCellValueFactory(
         new PropertyValueFactory<medicalEquipmentRequest, String>("otherNotes"));
 
-    medRequestTable.setItems(medicalEquipmentRequests);
+    medRequestTable.setItems(medicalEquipmentRequests);*/
   }
 
   /**
@@ -160,15 +162,15 @@ public class medicalEquipmentController extends serviceRequestPageController {
    *
    * @return list of medicalEquipmentRequest objects in the database
    */
-  protected ObservableList<medicalEquipmentRequest> populateMedEquipList() {
-    List<medicalEquipmentRequest> list = medEquipmentServiceRequestDB.getAll();
+  /*protected ObservableList<medicalEquipmentRequest> populateMedEquipList() {
+    List<medicalEquipmentRequest> list = system.getAllMedicalEquipmentRequests();
     // TODO: FXCollections.observableArrayList(list) ???
     tableList = FXCollections.observableArrayList();
     for (medicalEquipmentRequest m : list) {
       tableList.add(m);
     }
     return tableList;
-  }
+  }*/
 
   @FXML
   public void submitButton(ActionEvent event) throws SQLException {
@@ -185,6 +187,7 @@ public class medicalEquipmentController extends serviceRequestPageController {
       medicalEquipmentRequest.setIsUrgent(isUrgent.isSelected());
       medicalEquipmentRequest.setOtherNotes(notes.getText());
       medSendToDB(medicalEquipmentRequest);
+      setInfographicsCount("MED_EQUIP_REQ");
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
@@ -204,20 +207,32 @@ public class medicalEquipmentController extends serviceRequestPageController {
     requestStatus.clear();
     staffAssignee.clear();
     notes.clear();
+    room.setVisible(false);
   }
 
   private void medSendToDB(medicalEquipmentRequest medEquipmentRequest) throws SQLException {
-    medEquipmentServiceRequestDB.addMedEquipReq(medEquipmentRequest);
-    tableList.add(medEquipmentRequest);
+    system.addMedEquipReq(
+        medEquipmentRequest); // TODO FIX MEDEQUIPREQ UPDATE TO REPLACE THIS!!!!!!!!
+    // tableList.add(medEquipmentRequest);
     List<MedicalEquipment> equipmentUsed =
-        medEquipmentDB.getMedicalEquipments(
+        system.getMedicalEquipments(
             medEquipmentRequest.getEquipment(),
             medEquipmentRequest.getEquipmentQuantity(),
             medEquipmentRequest.getRoomID(),
             medEquipmentRequest.getServiceRequestID());
 
     if (medEquipmentRequest.getRequestStatus().equals("Done")) {
-      medEquipmentDB.sendToCleaning(equipmentUsed);
+      system.sendToCleaning(equipmentUsed);
     }
+    floor.getSelectionModel().clearSelection();
+    room.getSelectionModel().clearSelection();
+    equipmentType.getSelectionModel().clearSelection();
+    equipmentQuantity.getSelectionModel().clearSelection();
+    deliveryDate.getEditor().clear();
+    isUrgent.setSelected(false);
+    requestStatus.clear();
+    staffAssignee.clear();
+    notes.clear();
+    room.setVisible(false);
   }
 }

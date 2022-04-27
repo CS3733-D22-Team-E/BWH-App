@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.pathfinding;
 
-import edu.wpi.cs3733.D22.teamE.database.Location;
+import edu.wpi.cs3733.D22.teamE.entity.Location;
 import java.util.ArrayList;
 import java.util.List;
 

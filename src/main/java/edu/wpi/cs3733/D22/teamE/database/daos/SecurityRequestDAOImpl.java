@@ -55,6 +55,47 @@ public class SecurityRequestDAOImpl implements DAO<securityRequest> {
    */
   @Override
   public List<securityRequest> getAll() {
+    securityRequests = new ArrayList<>();
+
+    try {
+      String query = "SELECT * FROM SECURITYREQUEST ORDER BY SECURITY_REQUESTID DESC";
+      PreparedStatement statement = connection.prepareStatement(query);
+      ResultSet rs = statement.executeQuery();
+
+      while (rs.next()) {
+        String securityReqID = rs.getString("SECURITY_REQUESTID");
+        String securityReqType = rs.getString("SECURITY_REQUEST_TYPE");
+        String timeFrame = rs.getString("TIMEFRAME");
+        String staffAssignee = rs.getString("STAFFASSIGNEE");
+        String locNodeID = rs.getString("LOCATIONID");
+        String requestStatus = rs.getString("REQUESTSTATUS");
+        String otherNotes = rs.getString("OTHERNOTES");
+        String floorID = rs.getString("FLOORID");
+        java.sql.Date deliveryDate = Date.valueOf(LocalDate.now());
+        java.sql.Date requestDate = Date.valueOf(LocalDate.now());
+        boolean isUrgent = rs.getBoolean("ISURGENT");
+
+        securityRequest securityReq =
+            new securityRequest(
+                securityReqID,
+                securityReqType,
+                timeFrame,
+                floorID,
+                locNodeID,
+                isUrgent,
+                staffAssignee,
+                requestStatus,
+                otherNotes,
+                requestDate.toLocalDate(),
+                deliveryDate.toLocalDate());
+        securityRequests.add(securityReq);
+      }
+      rs.close();
+    } catch (SQLException e) {
+      System.out.println("Get All Failed!");
+      e.printStackTrace();
+    }
+
     return securityRequests;
   }
 
@@ -95,7 +136,7 @@ public class SecurityRequestDAOImpl implements DAO<securityRequest> {
               + "','"
               + securityRequest.getFloorID()
               + "','"
-              + securityRequest.isUrgent()
+              + securityRequest.getIsUrgent()
               + "','"
               + securityRequest.getStaffAssignee()
               + "','"

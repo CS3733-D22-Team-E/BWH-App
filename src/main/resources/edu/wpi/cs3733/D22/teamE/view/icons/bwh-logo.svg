@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="183.742" height="263.406" viewBox="0 0 183.742 263.406">
+  <g id="bwh-logo" transform="translate(0 -28.7)">
+    <g id="Group_53" transform="translate(0 28.7)">
+      <path id="Path_92" d="M24.413,44.1H0v79.664H24.413Z" transform="translate(0 54.838)" fill="#fff"/>
+      <path id="Path_93" d="M8.2,44.1v79.664H33.256V44.1Z" transform="translate(44.481 54.838)" fill="#fff"/>
+      <path id="Path_94" d="M16.5,44.1v79.664H40.913V44.1Z" transform="translate(89.505 54.838)" fill="#fff"/>
+      <path id="Path_95" d="M0,60.686H183.742V38.2H0Z" transform="translate(0 22.833)" fill="#fff"/>
+      <path id="Path_96" d="M91.871,28.7,0,58.9V82.666L91.871,51.828l91.871,30.838V58.9Z" transform="translate(0 -28.7)" fill="#fff"/>
+      <path id="Path_97" d="M183.742,56.2c-.642,1.285-9.637,16.7-68.1,16.7H68.1C7.709,73.546,1.285,81.256,0,81.9v23.128c1.285-.642,7.709-8.352,68.1-8.994h47.542c58.463,0,67.458-15.419,68.1-16.7Z" transform="translate(0 120.475)" fill="#fff"/>
+      <path id="Path_98" d="M183.742,62.1c-.642,1.285-9.637,16.7-68.1,16.7H68.1C7.709,79.446,1.285,87.156,0,87.8v23.128c1.285-.642,7.709-8.352,68.1-8.994h47.542c58.463,0,67.458-15.419,68.1-16.7Z" transform="translate(0 152.48)" fill="#fff"/>
+      <path id="Path_99" d="M24.7,44.1v75.81c19.916-4.5,24.413-11.564,24.413-12.849V44.1Z" transform="translate(133.986 54.838)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

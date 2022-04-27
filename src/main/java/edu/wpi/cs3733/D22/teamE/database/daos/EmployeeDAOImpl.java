@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-import edu.wpi.cs3733.D22.teamE.database.Employee;
+import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,33 @@ public class EmployeeDAOImpl implements DAO<Employee> {
 
   @Override
   public List<Employee> getAll() {
+    employees = new ArrayList<>();
+
+    try {
+      String query = "SELECT * FROM EMPLOYEES ORDER BY SALARY DESC";
+      PreparedStatement statement = connection.prepareStatement(query);
+      ResultSet rs = statement.executeQuery();
+      int numID = 0;
+      while (rs.next()) {
+        String employeeID = rs.getString("EMPLOYEEID");
+        String name = rs.getString("NAME");
+        String locationID = rs.getString("LOCATIONID");
+        String position = rs.getString("POSITION");
+        boolean available = rs.getBoolean("AVAILABLE");
+        double salary = rs.getDouble("SALARY");
+
+        Employee employee =
+            new Employee(employeeID, name, position, salary, locationID, available, numID);
+
+        employees.add(employee);
+        numID++;
+      }
+      rs.close();
+    } catch (SQLException e) {
+      System.out.println("Get All Failed!");
+      e.printStackTrace();
+    }
+
     return employees;
   }
 
@@ -49,6 +76,11 @@ public class EmployeeDAOImpl implements DAO<Employee> {
 
   @Override
   public void update(Employee employee) {
+    try {
+      delete(employee);
+    } catch (NullPointerException e) {
+      System.out.println("Not Found");
+    }
     employees.add(employee);
     try {
       String query =
@@ -74,6 +106,11 @@ public class EmployeeDAOImpl implements DAO<Employee> {
 
   @Override
   public void delete(Employee employee) {
+    try {
+      get(employee.getEmployeeID());
+    } catch (NullPointerException e) {
+      throw new NullPointerException(e.getMessage());
+    }
     employees.remove(employee);
     try {
       String query =

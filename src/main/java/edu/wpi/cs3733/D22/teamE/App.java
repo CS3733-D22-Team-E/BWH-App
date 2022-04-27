@@ -1,10 +1,11 @@
 package edu.wpi.cs3733.D22.teamE;
 
+import static edu.wpi.cs3733.D22.teamE.database.CSVManager.generateNewSaves;
+import static edu.wpi.cs3733.D22.teamE.database.CSVManager.saveAllCSVs;
+
 import edu.wpi.cs3733.D22.teamE.controllers.*;
-import edu.wpi.cs3733.D22.teamE.database.DBConnect;
-import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -14,25 +15,27 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class App extends Application implements SharedScene {
-  DAOSystem db;
-  Connection connection;
-  Stage s;
   Parent root;
 
   @Override
   public void init() throws InterruptedException {
     log.info("Starting Up");
-    connection = DBConnect.getClientInstance().getConnection();
+
+    generateNewSaves(); // from CSV manager
     try {
-      db = new DAOSystem();
-    } catch (SQLException e) {
-      e.printStackTrace();
+      saveAllCSVs();
+    } catch (IOException | SQLException e) {
+      // do nothing ig, just to handle
+      System.err.println("saveAllCSVs Error: " + e);
     }
+
+    DAOSystemSingleton.INSTANCE.getSystem();
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("view/loadingSplash.fxml"));
     try {
@@ -44,6 +47,7 @@ public class App extends Application implements SharedScene {
 
   @Override
   public void start(Stage stage) throws Exception {
+    stage.initStyle(StageStyle.UNIFIED);
     AppPreloader p = new AppPreloader();
     stage.setResizable(false);
     stage.setScene(p.createPreloaderScene(root));

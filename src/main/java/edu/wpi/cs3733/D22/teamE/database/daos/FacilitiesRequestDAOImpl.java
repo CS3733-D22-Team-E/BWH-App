@@ -56,6 +56,47 @@ public class FacilitiesRequestDAOImpl implements DAO<facilitiesRequest> {
    */
   @Override
   public List<facilitiesRequest> getAll() {
+    facilitiesRequests = new ArrayList<>();
+
+    try {
+      String query = "SELECT * FROM FACILITIESREQUEST ORDER BY FACILITIESREQID DESC";
+      PreparedStatement statement = connection.prepareStatement(query);
+      ResultSet rs = statement.executeQuery();
+      while (rs.next()) {
+        String ReqID = rs.getString("FACILITIESREQID");
+        String ReqType = rs.getString("FACILITIESREQTYPE");
+        String timeFrame = rs.getString("TIMEFRAME");
+        String floorID = rs.getString("FLOORID");
+        String roomID = rs.getString("ROOMID");
+        boolean isUrgent = rs.getBoolean("ISURGENT");
+        String staffAssignee = rs.getString("STAFFASSIGNEE");
+        String requestStatus = rs.getString("REQUESTSTATUS");
+        String otherNotes = rs.getString("OTHERNOTES");
+
+        java.sql.Date deliveryDate = Date.valueOf(LocalDate.now());
+        java.sql.Date requestDate = Date.valueOf(LocalDate.now());
+
+        facilitiesRequest facilitiesRequest =
+            new facilitiesRequest(
+                ReqID,
+                ReqType,
+                timeFrame,
+                floorID,
+                roomID,
+                isUrgent,
+                staffAssignee,
+                requestStatus,
+                otherNotes,
+                requestDate.toLocalDate(),
+                deliveryDate.toLocalDate());
+        facilitiesRequests.add(facilitiesRequest);
+      }
+      rs.close();
+    } catch (SQLException e) {
+      System.out.println("Get All Failed!");
+      e.printStackTrace();
+    }
+
     return facilitiesRequests;
   }
 
@@ -96,7 +137,7 @@ public class FacilitiesRequestDAOImpl implements DAO<facilitiesRequest> {
               + "','"
               + facilitiesRequest.getRoomID()
               + "','"
-              + facilitiesRequest.isUrgent()
+              + facilitiesRequest.getIsUrgent()
               + "','"
               + facilitiesRequest.getStaffAssignee()
               + "','"

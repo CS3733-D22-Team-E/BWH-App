@@ -3,23 +3,16 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
-import edu.wpi.cs3733.D22.teamE.database.daos.GiftRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.giftDeliveryRequest;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 /**
  * This is the controller class for the gift delivery service request. Inherits from the
@@ -31,43 +24,39 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   @FXML CheckBox isUrgent;
   @FXML TextField patientName;
   @FXML TextField notes;
-  @FXML TableView<giftDeliveryRequest> requestsTable;
 
-  @FXML TableColumn<giftDeliveryRequest, String> tableGiftType;
+  // @FXML TableView<giftDeliveryRequest> requestsTable;
+
+  /*@FXML TableColumn<giftDeliveryRequest, String> tableGiftType;
   @FXML TableColumn<giftDeliveryRequest, String> tablePatientName;
   @FXML TableColumn<giftDeliveryRequest, String> tableLocNodeID;
   @FXML TableColumn<giftDeliveryRequest, String> tableStaffAssignee;
   @FXML TableColumn<giftDeliveryRequest, LocalDate> tableDeliveryDate;
   @FXML TableColumn<giftDeliveryRequest, String> tableRequestStatus;
   @FXML TableColumn<giftDeliveryRequest, String> tableGreetingCard;
-  @FXML TableColumn<giftDeliveryRequest, Boolean> tableIsUrgent;
+  @FXML TableColumn<giftDeliveryRequest, Boolean> tableIsUrgent;*/
 
-  GiftRequestDAOImpl giftRequestDAO;
-  ObservableList<giftDeliveryRequest> tableList;
-
+  // GiftRequestDAOImpl giftRequestDAO;
+  // ObservableList<giftDeliveryRequest> tableList;
 
   DAOSystem system;
 
   /** Constructor */
   public giftDeliveryController() {
-    try {
-      system = new DAOSystem();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    system = DAOSystemSingleton.INSTANCE.getSystem();
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     try {
-      giftRequestDAO = new GiftRequestDAOImpl();
-      populateLocationComboBoxes();
-      populateGiftReqTable();
+      // populateLocationComboBoxes();
+      // populateGiftReqTable();
       giftOptionType
           .getItems()
           .addAll("Board Game", "Book", "Get Well Card", "Movie", "Teddy Bear");
-    } catch (SQLException e) {
+      setInfographicsCount("GIFT_REQUEST");
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -77,17 +66,17 @@ public class giftDeliveryController extends serviceRequestPageController impleme
    *
    * @return list of giftDeliveryRequest objects in the database
    */
-  protected ObservableList<giftDeliveryRequest> populateGiftRequestsList() {
-    List<giftDeliveryRequest> requests = giftRequestDAO.getAll();
+  /*protected ObservableList<giftDeliveryRequest> populateGiftRequestsList() {
+    List<giftDeliveryRequest> requests = system.getAllGiftRequests();
     tableList = FXCollections.observableArrayList();
     for (giftDeliveryRequest request : requests) {
       tableList.add(request);
     }
     return tableList;
-  }
+  }*/
 
   private void populateGiftReqTable() {
-    ObservableList<giftDeliveryRequest> giftDeliveryRequests = populateGiftRequestsList();
+    /*ObservableList<giftDeliveryRequest> giftDeliveryRequests = populateGiftRequestsList();
     tableGiftType.setCellValueFactory(new PropertyValueFactory<>("gift"));
     tablePatientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
     tableLocNodeID.setCellValueFactory(
@@ -106,7 +95,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
     tableGreetingCard.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
     tableIsUrgent.setCellValueFactory(new PropertyValueFactory<>("isUrgent"));
 
-    requestsTable.setItems(giftDeliveryRequests);
+    requestsTable.setItems(giftDeliveryRequests);*/
   }
 
   @Override
@@ -125,6 +114,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
       request.setIsUrgent(isUrgent.isSelected());
 
       giftSendToDB(request);
+      setInfographicsCount("GIFT_REQUEST");
 
     } catch (NullPointerException e) {
       System.out.println("Error : Some Value is NULL");
@@ -136,8 +126,18 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   private void giftSendToDB(giftDeliveryRequest request) {
     try {
       request.setRequestDate(LocalDate.now());
-      system.updateGiftDelivery(request);
-      tableList.add(request);
+      system.update(request);
+      floor.getSelectionModel().clearSelection();
+      room.getSelectionModel().clearSelection();
+      giftOptionType.getSelectionModel().clearSelection();
+      isUrgent.setSelected(false);
+      deliveryDate.getEditor().clear();
+      requestStatus.clear();
+      staffAssignee.clear();
+      patientName.clear();
+      notes.clear();
+      room.setVisible(false);
+      // tableList.add(request);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -159,5 +159,6 @@ public class giftDeliveryController extends serviceRequestPageController impleme
     staffAssignee.clear();
     patientName.clear();
     notes.clear();
+    room.setVisible(false);
   }
 }

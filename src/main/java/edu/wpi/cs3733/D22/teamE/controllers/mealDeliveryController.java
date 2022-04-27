@@ -2,23 +2,19 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamE.PopUp;
-import edu.wpi.cs3733.D22.teamE.database.daos.MealDeliveryRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.mealDeliveryRequest;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 /**
  * This is the controller class for the meal delivery service request. Inherits from the
@@ -33,8 +29,8 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML CheckBox isUrgent;
   @FXML TextField staffAssignee;
   @FXML TextField requestStatus;
-  @FXML TextArea otherNotesTxt;
-  @FXML TableView<mealDeliveryRequest> mealDeliveryTable;
+  @FXML TextField otherNotesTxt;
+  /*@FXML TableView<mealDeliveryRequest> mealDeliveryTable;
 
   @FXML TableColumn<mealDeliveryRequest, String> tableEntree;
   @FXML TableColumn<mealDeliveryRequest, String> tableBeverage;
@@ -48,11 +44,15 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML TableColumn<mealDeliveryRequest, String> tableRequestStatus;
   @FXML TableColumn<mealDeliveryRequest, Boolean> tableUrgent;
   @FXML TableColumn<mealDeliveryRequest, String> tableOtherNotes;
-  MealDeliveryRequestDAOImpl mealRequestDB;
-  ObservableList<mealDeliveryRequest> tableList;
+
+  // MealDeliveryRequestDAOImpl mealRequestDB;
+  ObservableList<mealDeliveryRequest> tableList;*/
+  DAOSystem system;
 
   /** Constructor */
-  public mealDeliveryController() {}
+  public mealDeliveryController() {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+  }
 
   /** Creating the ObservableLists for the pages' drop down. */
   ObservableList<String> meals =
@@ -75,19 +75,19 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    setInfographicsCount("MEAL_DELIV_REQ");
     entreeDropDown.setItems(meals);
     beverageDropDown.setItems(beverages);
     dessertDropDown.setItems(desserts);
-    try {
-      mealRequestDB = new MealDeliveryRequestDAOImpl();
+    /*try {
       populateMealRequestTable();
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
-    }
+    }*/
   }
 
-  protected ObservableList<mealDeliveryRequest> populateMealReqList() {
-    List<mealDeliveryRequest> list = mealRequestDB.getAll();
+  /*protected ObservableList<mealDeliveryRequest> populateMealReqList() {
+    List<mealDeliveryRequest> list = system.getAllMealRequests();
     tableList = FXCollections.observableArrayList();
     for (mealDeliveryRequest mR : list) {
       tableList.add(mR);
@@ -131,7 +131,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
         new PropertyValueFactory<mealDeliveryRequest, String>("otherNotes"));
 
     mealDeliveryTable.setItems(mealDeliveryRequest);
-  }
+  }*/
 
   /**
    * Takes the inputs from the buttons, drop downs, text fields etc. and stores that data in the
@@ -159,6 +159,8 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       mealDeliveryRequest.setRequestStatus(requestStatus.getText());
       mealSendToDB(mealDeliveryRequest);
 
+      setInfographicsCount("MEAL_DELIV_REQ");
+
     } catch (NullPointerException | SQLException error) {
       System.out.println("Error : Some Value is NULL");
       PopUp.createWarning(
@@ -167,8 +169,20 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   }
 
   private void mealSendToDB(mealDeliveryRequest meal) throws SQLException {
-    mealRequestDB.update(meal);
-    tableList.add(meal);
+    system.update(meal);
+    entreeDropDown.getSelectionModel().clearSelection();
+    beverageDropDown.getSelectionModel().clearSelection();
+    dessertDropDown.getSelectionModel().clearSelection();
+    dateTime.getEditor().clear();
+    isUrgent.setSelected(false);
+    staffAssignee.clear();
+    requestStatus.clear();
+    timeTxt.clear();
+    otherNotesTxt.clear();
+    floor.getSelectionModel().clearSelection();
+    room.getSelectionModel().clearSelection();
+    room.setVisible(false);
+    // tableList.add(meal);
   }
 
   /**
@@ -189,5 +203,6 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     otherNotesTxt.clear();
     floor.getSelectionModel().clearSelection();
     room.getSelectionModel().clearSelection();
+    room.setVisible(false);
   }
 }

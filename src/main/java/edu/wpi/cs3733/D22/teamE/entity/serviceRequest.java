@@ -1,10 +1,57 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Random;
 
-public class serviceRequest {
+public class serviceRequest implements RequestInterface {
+
+  @Override
+  public int getNumID() {
+    return 0;
+  }
+
+  @Override
+  public void setNumID(int num) {}
+
+  @Override
+  public Location getLocation() {
+    return DAOSystemSingleton.INSTANCE.getSystem().getLocation(roomID);
+  }
+
+  @Override
+  public void setLocation(String NodeID) throws NullPointerException {
+    Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(NodeID);
+    if (loc != null) {
+      setRoomID(loc.getNodeID());
+      setFloorID(loc.getFloor());
+    }
+  }
+
+  @Override
+  public void setLocation(Location location) throws NullPointerException {
+    setRoomID(location.getNodeID());
+    setFloorID(location.getFloor());
+  }
+
+  @Override
+  public void setLocation(int xcoord, int ycoord) throws NullPointerException {
+    Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(xcoord, ycoord);
+    if (loc != null) {
+      setRoomID(loc.getNodeID());
+      setFloorID(loc.getFloor());
+    }
+  }
+
+  @Override
+  public double getXCoord() {
+    return getLocation().getXCoord();
+  }
+
+  @Override
+  public double getYCoord() {
+    return getLocation().getYCoord();
+  }
 
   public enum Type {
     SANITATION_REQ {
@@ -119,7 +166,7 @@ public class serviceRequest {
   }
 
   public serviceRequest(String serviceRequestType) {
-    this.serviceRequestID = generateRandomID(6);
+    this.serviceRequestID = RequestInterface.generateRandomID(6);
     this.requestType = Type.valueOf(serviceRequestType);
     this.otherNotes = "";
     this.floorID = "";
@@ -138,7 +185,7 @@ public class serviceRequest {
   }
 
   public String getFloorID() {
-    return floorID;
+    return getLocation().getFloor();
   }
 
   public void setFloorID(String floorID) {
@@ -199,18 +246,6 @@ public class serviceRequest {
     this.staffAssignee = staffAssignee;
   }
 
-  public static String generateRandomID(int length) {
-    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    StringBuilder result = new StringBuilder();
-    Random random = new Random();
-
-    for (int i = 0; i < length; i++) {
-      char randChar = alphabet.charAt(random.nextInt(alphabet.length()));
-      result.append(randChar);
-    }
-    return result.toString();
-  }
-
   public LocalDate getRequestDate() {
     return requestDate;
   }
@@ -241,34 +276,6 @@ public class serviceRequest {
     } catch (DateTimeParseException e) {
       throw new RuntimeException("Date must be formatted as yyyy-mm-dd");
     }
-  }
-
-  public boolean isUrgent() {
-    return isUrgent;
-  }
-
-  public int getxCoord() {
-    return xCoord;
-  }
-
-  public void setxCoord(int xCoord) {
-    this.xCoord = xCoord;
-  }
-
-  public void setxCoord(String xCoord) {
-    this.yCoord = Integer.parseInt(xCoord);
-  }
-
-  public int getyCoord() {
-    return yCoord;
-  }
-
-  public void setyCoord(int yCoord) {
-    this.yCoord = yCoord;
-  }
-
-  public void setyCoord(String yCoord) {
-    this.yCoord = Integer.parseInt(yCoord);
   }
 
   @Override
