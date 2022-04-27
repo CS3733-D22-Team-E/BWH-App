@@ -249,7 +249,7 @@
                                           <TextField fx:id="confirmPassword" promptText="Confirm Password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                                        </children>
                                     </GridPane>
-                                    <JFXButton fx:id="changePassword" styleClass="submitButton" text="Change Password">
+                                    <JFXButton fx:id="changePassword" styleClass="submitButton" onAction="#changePassword" text="Change Password">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
