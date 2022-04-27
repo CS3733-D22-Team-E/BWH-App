@@ -1,10 +1,13 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamE.customUI.CustomJFXButtonTableCell;
 import edu.wpi.cs3733.D22.teamE.customUI.CustomTextFieldTableCell;
+import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.*;
+import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,7 @@ public class statusPageController implements Initializable {
   @FXML TextField filterFieldType;
   @FXML TextField filterFieldStatus;
   @FXML TextField filterFieldAssign;
+  @FXML JFXButton deleteReqButton;
   @FXML TableView<serviceRequestModel> requestTable;
   @FXML TableColumn<serviceRequestModel, String> idColumn;
   @FXML TableColumn<serviceRequestModel, String> typeColumn;
@@ -48,6 +52,13 @@ public class statusPageController implements Initializable {
    */
   public void initialize(URL url, ResourceBundle rb) {
     genTable();
+    boolean admin =
+        (AccountsManager.getInstance().getAccount().getAuthorityLevel() >= Account.adminPerm);
+
+    if (!admin) {
+      deleteReqButton.setDisable(true);
+      deleteReqButton.setVisible(false);
+    }
   }
 
   public void genTable() {
