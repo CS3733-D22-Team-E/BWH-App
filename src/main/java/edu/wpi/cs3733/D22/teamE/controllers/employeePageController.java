@@ -68,21 +68,21 @@ public class employeePageController implements Initializable {
             new staffAccount(
                 Username.getText(),
                 employee.getEmployeeID(),
-                1,
                 RSAEncryption.generatePasswordHASH(Password.getText()),
                 firstName.getText(),
                 lastName.getText(),
-                position.getText());
+                position.getText(),
+                phoneNumber.getText());
       } else {
         account =
             new adminAccount(
                 Username.getText(),
                 employee.getEmployeeID(),
-                3,
                 RSAEncryption.generatePasswordHASH(Password.getText()),
                 firstName.getText(),
                 lastName.getText(),
-                position.getText());
+                position.getText(),
+                phoneNumber.getText());
       }
       system.update(employee);
       system.update(account);
@@ -99,6 +99,7 @@ public class employeePageController implements Initializable {
     Username.clear();
     Password.clear();
     salary.clear();
+    phoneNumber.clear();
   }
 
   private void populateEmployeeTable() {
