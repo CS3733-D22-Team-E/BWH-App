@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 
-public class DashboardServiceRequestHandler {
+public class DashboardServiceRequestHandler extends DashboardHandler {
 
   DashboardController dashboardController;
   DAOSystem system;
@@ -25,6 +25,12 @@ public class DashboardServiceRequestHandler {
 
   public void update() {
     allRequestList = (ArrayList<RequestInterface>) system.getAllServiceRequests();
+    updateServiceRequestTable();
+  }
+
+  @Override
+  public void setSubject(DAOSystem subject) {
+    subject.attach(this);
   }
 
   protected void updateServiceRequestTable() {

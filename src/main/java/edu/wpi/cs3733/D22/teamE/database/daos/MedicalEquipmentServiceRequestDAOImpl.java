@@ -95,7 +95,8 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
 
   @Override
   public medicalEquipmentRequest get(String id) {
-    for (medicalEquipmentRequest request : medicalRequests) {
+    List<medicalEquipmentRequest> requests = getAll();
+    for (medicalEquipmentRequest request : requests) {
       if (request.getServiceRequestID().equals(id)) return request;
     }
 

@@ -329,7 +329,7 @@
                               </VBox>
                               <VBox fx:id="bedBox" alignment="CENTER" minWidth="40.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label alignment="CENTER" styleClass="textColor_white" text="Bed" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                    <Label fx:id="bedBoxLabel" alignment="CENTER" styleClass="textColor_white" text="Bed" textFill="WHITE" VBox.vgrow="ALWAYS">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
@@ -488,7 +488,7 @@
                               </VBox>
                               <VBox fx:id="infusionPumpBox" alignment="CENTER" minWidth="40.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label alignment="CENTER" styleClass="textColor_white" text="Infusion Pump" textFill="WHITE">
+                                    <Label fx:id="infusionPumpBoxLabel" alignment="CENTER" styleClass="textColor_white" text="Infusion Pump" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>

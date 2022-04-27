@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class DashboardController implements Initializable {
 
@@ -67,6 +68,9 @@ public class DashboardController implements Initializable {
   @FXML VBox infusionPumpBox;
   @FXML JFXBadge infusionPumpAlertBadge;
 
+  @FXML Label bedBoxLabel;
+  @FXML Label infusionPumpBoxLabel;
+
   DAOSystem database;
   ArrayList<MedicalEquipment> currentEquipment;
   ArrayList<RequestInterface> currentServiceRequests;
@@ -81,8 +85,8 @@ public class DashboardController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    bedBoxTooltip.setText("AHHHHH");
-    infusionPumpBoxTooltip.setText("AHHHHH");
+    initializeTooltip(bedBoxTooltip, bedBoxLabel);
+    initializeTooltip(infusionPumpBoxTooltip, infusionPumpBoxLabel);
 
     bedAlertBadge = new JFXBadge();
     // bedBox.getChildren().add(bedAlertBadge);
@@ -97,10 +101,20 @@ public class DashboardController implements Initializable {
     dashboardEquipmentHandler = new DashboardEquipmentHandler(this);
     dashboardServiceRequestHandler = new DashboardServiceRequestHandler(this);
 
+    dashboardEquipmentHandler.setSubject(database);
+    dashboardServiceRequestHandler.setSubject(database);
+
     dashboardEquipmentHandler.updateEquipmentReports();
     dashboardServiceRequestHandler.updateServiceRequestTable();
 
     quickAccessButtonHandler();
+  }
+
+  private void initializeTooltip(Tooltip tooltip, Label parentLabel) {
+    tooltip.maxWidth(150);
+    tooltip.setText("No Alerts");
+    tooltip.setStyle("-fx-font-size: 12");
+    tooltip.setShowDelay(Duration.seconds(.2));
   }
 
   private void floorButtonsHandler() {

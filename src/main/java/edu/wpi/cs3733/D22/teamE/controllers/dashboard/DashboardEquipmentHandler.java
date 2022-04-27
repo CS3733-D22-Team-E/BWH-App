@@ -33,6 +33,11 @@ public class DashboardEquipmentHandler extends DashboardHandler {
     updateEquipmentReports();
   }
 
+  @Override
+  public void setSubject(DAOSystem subject) {
+    subject.attach(this);
+  }
+
   public void updateEquipmentReports() {
     dashboardController.bedBoxTooltip.setOpacity(0);
     dashboardController.infusionPumpBoxTooltip.setOpacity(0);
@@ -54,7 +59,6 @@ public class DashboardEquipmentHandler extends DashboardHandler {
         }
       }
     }
-    System.out.println("Dirty location beds: " + dirtyLocBeds);
     if (dirtyLocBeds.size() >= 6) {
       createBedAlert(dirtyLocBeds);
       dashboardController.bedBox.setStyle("-fx-background-color: red");
