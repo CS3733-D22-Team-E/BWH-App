@@ -1,15 +1,20 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
+import edu.wpi.cs3733.D22.teamE.Main;
+import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
+import edu.wpi.cs3733.D22.teamE.database.ProfilePictureManager;
+import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -30,25 +35,44 @@ public class sideMenuController implements Initializable {
   @FXML VBox bufferVBox;
   @FXML HBox logoutBox;
   @FXML HBox exitBox;
+  @FXML ImageView profilePicture;
 
   public sideMenuController(BorderPane root) {
     this.root = root;
   }
 
   @Override
-  public void initialize(URL url, ResourceBundle resourceBundle) {
+  public void initialize(URL location, ResourceBundle resourceBundle) {
 
     VBox.setVgrow(bufferVBox, Priority.ALWAYS);
 
     sideMenuButtonHandler(dashboardBox, "DashboardPage.fxml");
-    sideMenuButtonHandler(submitServiceRequestBox, "DashboardPage.fxml");
+    sideMenuButtonHandler(submitServiceRequestBox, "serviceRequestLanding.fxml");
     sideMenuButtonHandler(statusPageBox, "statusPage.fxml");
     sideMenuButtonHandler(mapBox, "map.fxml");
     sideMenuButtonHandler(profileBox, "profilePage.fxml");
     sideMenuButtonHandler(aboutBox, "aboutPage.fxml");
     sideMenuButtonHandler(helpBox, "helpPage.fxml");
-    sideMenuButtonHandler(logoutBox, "");
+    sideMenuButtonHandler(logoutBox, "loginPage.fxml");
     sideMenuButtonHandler(exitBox, "");
+
+    Employee currentEmployee = AccountsManager.getInstance().getEmployee();
+    Image image;
+    try {
+      InputStream is = ProfilePictureManager.getPersonalPicture(currentEmployee);
+      image = new Image(is);
+    } catch (Exception e) {
+      URL url = Main.class.getResource("view/icons/profilepic.png");
+      assert url != null;
+      InputStream is = null;
+      try {
+        is = url.openStream();
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+      image = new Image(is);
+    }
+    profilePicture.setImage(image);
   }
 
   private void sideMenuButtonHandler(HBox sideMenuBox, String url) {
@@ -60,8 +84,7 @@ public class sideMenuController implements Initializable {
     sideMenuBox.setOnMouseClicked(
         mouseEvent -> {
           if (sideMenuBox.equals(logoutBox)) {
-            // TODO: fill will logout procedure
-            pageControl.loadPage("loginPage.fxml", (Stage) root.getScene().getWindow());
+            pageControl.loadPage(url, (Stage) root.getScene().getWindow());
           } else if (sideMenuBox.equals(exitBox)) {
             pageControl.exitApp();
           } else {
@@ -91,60 +114,5 @@ public class sideMenuController implements Initializable {
           boxText.getStyleClass().add("sidebarButton");
           root.getScene().setCursor(Cursor.DEFAULT);
         });
-  }
-
-  @FXML
-  public void dashboardButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControl.loadPage("DashboardPage.fxml", thisStage);
-  }
-
-  @FXML
-  public void submitServiceRequestButton(ActionEvent event) throws IOException {
-
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControl.loadPage("medicineDelivery.fxml", thisStage);
-  }
-
-  @FXML
-  public void statusButton(ActionEvent event) throws IOException {
-
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControl.loadPage("statusPage.fxml", thisStage);
-  }
-
-  @FXML
-  public void mapButton(ActionEvent event) throws IOException {
-
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControl.loadPage("map.fxml", thisStage);
-  }
-
-  @FXML
-  public void profileButton(ActionEvent event) {
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControl.loadPage("profilePage.fxml", thisStage);
-  }
-
-  @FXML
-  public void aboutButton(ActionEvent event) throws IOException {
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControl.loadPage("aboutPage.fxml", thisStage);
-  }
-
-  @FXML
-  public void helpButton(ActionEvent event) {
-    Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    pageControl.loadPage("helpPage.fxml", thisStage);
-  }
-
-  @FXML
-  public void logoutButton(ActionEvent event) throws IOException {
-    pageControl.exitApp();
-  }
-
-  @FXML
-  public void exitButton(ActionEvent event) throws IOException {
-    pageControl.exitApp();
   }
 }

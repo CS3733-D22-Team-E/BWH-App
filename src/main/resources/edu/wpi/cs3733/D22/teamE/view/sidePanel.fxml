@@ -28,7 +28,7 @@
                         <Image url="@icons/default_profile_pic.png" />
                      </image>
                   </ImageView>
-                  <Label styleClass="sidebarButton" text="Service Request" />
+                  <Label styleClass="sidebarButton" text="Service Requests" />
                </children>
             </HBox>
             <HBox fx:id="statusPageBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
@@ -53,7 +53,7 @@
             </HBox>
             <HBox fx:id="profileBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
                <children>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="profilePicture" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/default_profile_pic.png" />
                      </image>
