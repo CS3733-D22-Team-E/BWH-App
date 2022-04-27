@@ -38,6 +38,10 @@
     -fx-text-fill: #212121;
 }
 
+.textColor_white {
+    -fx-text-fill: #ffffff;
+}
+
 .darkColor {
     -fx-background-color:   #188E87;
 }
