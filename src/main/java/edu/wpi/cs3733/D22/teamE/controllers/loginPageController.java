@@ -41,8 +41,9 @@ public class loginPageController implements Initializable {
   @FXML
   public void submitLogin(ActionEvent event) {
     if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
+      Account account = db.getAccount(getUsername());
       String messageCode = generateRandom5DigitID();
-      Texting.sendSMS("","Your Brigham & Womens Hospital authentication code is: " + messageCode);
+      Texting.sendSMS(account.getPhoneNumber(),"Your Brigham & Womens Hospital authentication code is: " + messageCode);
 
       pageControl.loadPage("twoFacAuthPage.fxml", (Stage) passwordField.getScene().getWindow());
 
