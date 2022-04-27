@@ -29,13 +29,10 @@ public class DashboardServiceRequestHandler {
 
   protected void updateServiceRequestTable() {
     filterRequests();
-    // TODO: uncomment this out once the null roomID error from the transport service request is
-    // fixed
-    // displayRequests();
+    displayRequests();
   }
 
   private void filterRequests() {
-    System.out.println("Current requests: " + currentRequestList);
     currentRequestList = new ArrayList<>();
     if (!dashboardController.currentFloorString.equals("All")) {
       for (RequestInterface curReq : allRequestList) {
@@ -78,10 +75,11 @@ public class DashboardServiceRequestHandler {
           public ObservableValue<String> call(
               TableColumn.CellDataFeatures<RequestInterface, String> param) {
             RequestInterface curRequest = param.getValue();
-            System.out.println("Current request: " + curRequest);
-            System.out.println("Current room ID: " + curRequest.getRoomID());
-            return new SimpleStringProperty(
-                subject.getLocation(curRequest.getRoomID()).getShortName());
+            String shortNameString = "";
+            if (!curRequest.getRoomID().equals("null")) {
+              shortNameString = subject.getLocation(curRequest.getRoomID()).getShortName();
+            }
+            return new SimpleStringProperty(shortNameString);
           }
         });
     dashboardController.tableRequestType.setCellValueFactory(

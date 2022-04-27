@@ -48,7 +48,7 @@ public abstract class Equipment implements EntityInterface {
 
   @Override
   public Location getLocation() {
-    String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
+    String myLoc = currentLocation;
     return DAOSystemSingleton.INSTANCE.getSystem().getLocation(myLoc);
   }
 

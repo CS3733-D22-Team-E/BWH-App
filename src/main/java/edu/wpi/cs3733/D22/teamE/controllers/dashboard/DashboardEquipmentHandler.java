@@ -1,6 +1,5 @@
 package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
-import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
@@ -20,7 +19,6 @@ public class DashboardEquipmentHandler extends DashboardHandler {
   Integer inUse;
   Integer dirty;
   boolean bedAlreadySent;
-  boolean bedAlert;
 
   public DashboardEquipmentHandler(DashboardController dashboardController) {
     this.dashboardController = dashboardController;
@@ -33,14 +31,13 @@ public class DashboardEquipmentHandler extends DashboardHandler {
     updateEquipmentReports();
   }
 
-  public boolean updateEquipmentReports() {
-    bedAlert = false;
-    bedAlertHandler();
+  public void updateEquipmentReports() {
+    dashboardController.bedBox.setStyle(null);
+    dashboardController.infusionPumpBox.setStyle(null);
     filterEquipment();
     setEquipmentCounts();
-    for (MedicalEquipment curEq : currentEquipmentList) {}
     infusionPumpAlertHandler();
-    return bedAlert;
+    bedAlertHandler();
   }
 
   private void bedAlertHandler() {
@@ -52,9 +49,10 @@ public class DashboardEquipmentHandler extends DashboardHandler {
         }
       }
     }
+    System.out.println("Dirty location beds: " + dirtyLocBeds);
     if (dirtyLocBeds.size() >= 6) {
       createBedAlert(dirtyLocBeds);
-      bedAlert = true;
+      dashboardController.bedBox.setStyle("-fx-background-color: red");
     }
   }
 
@@ -195,19 +193,15 @@ public class DashboardEquipmentHandler extends DashboardHandler {
 
     if (cleanLocAlerts + dirtyLocAlerts > 0) {
       displayDirtyFusionPumpAlert(cleanLocAlerts + dirtyLocAlerts, dirtyEquipmentToBeCleaned);
+      if (dirtyEquipmentToBeCleaned.size() > 0) {
+        cleanInfusionPumps(dirtyEquipmentToBeCleaned);
+      }
     }
   }
 
   private void displayDirtyFusionPumpAlert(
       Integer alertNumber, ArrayList<MedicalEquipment> dirtyEquipmentToBeCleaned) {
-    if (dirtyEquipmentToBeCleaned.size() > 0) {
-      PopUp.createWarning(
-          "There are "
-              + alertNumber
-              + " infusion pump alerts on this floor that need your attention!",
-          dashboardController.bedDirty.getScene().getWindow());
-      cleanInfusionPumps(dirtyEquipmentToBeCleaned);
-    }
+    dashboardController.infusionPumpBox.setStyle("-fx-background-color: red");
   }
 
   private void cleanInfusionPumps(ArrayList<MedicalEquipment> dirtyEquipmentToBeCleaned) {
