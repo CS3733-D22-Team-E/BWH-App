@@ -1,6 +1,5 @@
 package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
-import com.jfoenix.controls.JFXTooltip;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
@@ -35,6 +34,9 @@ public class DashboardEquipmentHandler extends DashboardHandler {
   }
 
   public void updateEquipmentReports() {
+    dashboardController.bedBoxTooltip.setOpacity(0);
+    dashboardController.infusionPumpBoxTooltip.setOpacity(0);
+
     dashboardController.bedBox.setStyle(null);
     dashboardController.infusionPumpBox.setStyle(null);
     filterEquipment();
@@ -56,7 +58,12 @@ public class DashboardEquipmentHandler extends DashboardHandler {
     if (dirtyLocBeds.size() >= 6) {
       createBedAlert(dirtyLocBeds);
       dashboardController.bedBox.setStyle("-fx-background-color: red");
-      dashboardController.bedBoxToolTip = new JFXTooltip();
+      dashboardController.bedBoxTooltip.setText(
+          "There are "
+              + dirtyLocBeds.size()
+              + " beds "
+              + "in the hospital that need to be moved to the OR Park!");
+      dashboardController.bedBoxTooltip.setOpacity(1);
     }
   }
 
@@ -197,9 +204,21 @@ public class DashboardEquipmentHandler extends DashboardHandler {
 
     if (cleanLocAlerts + dirtyLocAlerts > 0) {
       displayDirtyFusionPumpAlert(cleanLocAlerts + dirtyLocAlerts, dirtyEquipmentToBeCleaned);
+      String infusionPumpBoxTooltipText = "";
+      if (cleanLocAlerts > 0) {
+        infusionPumpBoxTooltipText +=
+            "The clean storage location on this floor" + " has fewer than 5 infusion pumps in it! ";
+      }
       if (dirtyEquipmentToBeCleaned.size() > 0) {
+        infusionPumpBoxTooltipText +=
+            "There are "
+                + dirtyLocAlerts
+                + " dirty equipment storage locations on this floor "
+                + "that have at least 10 infusion pumps in them!";
         cleanInfusionPumps(dirtyEquipmentToBeCleaned);
       }
+      dashboardController.infusionPumpBoxTooltip.setText(infusionPumpBoxTooltipText);
+      dashboardController.infusionPumpBoxTooltip.setOpacity(1);
     }
   }
 

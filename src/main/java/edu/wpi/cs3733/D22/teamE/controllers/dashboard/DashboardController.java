@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
 import com.jfoenix.controls.JFXBadge;
 import com.jfoenix.controls.JFXToggleNode;
-import com.jfoenix.controls.JFXTooltip;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
@@ -74,13 +73,16 @@ public class DashboardController implements Initializable {
   DashboardEquipmentHandler dashboardEquipmentHandler;
   DashboardServiceRequestHandler dashboardServiceRequestHandler;
 
-  JFXTooltip bedBoxToolTip;
-  JFXTooltip infusionPumpBoxTooltip;
+  @FXML Tooltip bedBoxTooltip;
+  @FXML Tooltip infusionPumpBoxTooltip;
 
   public DashboardController() {}
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    bedBoxTooltip.setText("AHHHHH");
+    infusionPumpBoxTooltip.setText("AHHHHH");
 
     bedAlertBadge = new JFXBadge();
     // bedBox.getChildren().add(bedAlertBadge);
