@@ -24,7 +24,8 @@ public class giftDeliveryController extends serviceRequestPageController impleme
   @FXML CheckBox isUrgent;
   @FXML TextField patientName;
   @FXML TextField notes;
-  @FXML TableView<giftDeliveryRequest> requestsTable;
+
+  // @FXML TableView<giftDeliveryRequest> requestsTable;
 
   /*@FXML TableColumn<giftDeliveryRequest, String> tableGiftType;
   @FXML TableColumn<giftDeliveryRequest, String> tablePatientName;
@@ -50,10 +51,11 @@ public class giftDeliveryController extends serviceRequestPageController impleme
     super.initialize(location, resources);
     try {
       // populateLocationComboBoxes();
-      populateGiftReqTable();
+      // populateGiftReqTable();
       giftOptionType
           .getItems()
           .addAll("Board Game", "Book", "Get Well Card", "Movie", "Teddy Bear");
+      setInfographicsCount("GIFT_REQUEST");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -112,6 +114,7 @@ public class giftDeliveryController extends serviceRequestPageController impleme
       request.setIsUrgent(isUrgent.isSelected());
 
       giftSendToDB(request);
+      setInfographicsCount("GIFT_REQUEST");
 
     } catch (NullPointerException e) {
       System.out.println("Error : Some Value is NULL");

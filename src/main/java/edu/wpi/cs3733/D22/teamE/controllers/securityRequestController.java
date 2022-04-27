@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
 public class securityRequestController extends serviceRequestPageController
@@ -20,6 +21,7 @@ public class securityRequestController extends serviceRequestPageController
   @FXML JFXComboBox<String> securityRequestType;
   @FXML JFXComboBox<String> timeFrameComboBox;
   @FXML TextField notes;
+  @FXML CheckBox isUrgent;
   /*@FXML TableView<securityRequest> requestsTable;
 
   @FXML TableColumn<securityRequest, String> tableSecurityRequestType;
@@ -33,7 +35,7 @@ public class securityRequestController extends serviceRequestPageController
 
   // SecurityRequestDAOImpl securityRequestDB;
   DAOSystem system;
-  securityRequest securityReq = new securityRequest();
+  // securityRequest securityReq = new securityRequest();
 
   /** Constructor */
   public securityRequestController() {
@@ -54,6 +56,7 @@ public class securityRequestController extends serviceRequestPageController
           .getItems()
           .addAll("Aid", "Secure", "Danger", "Other: detail in other notes");
       timeFrameComboBox.getItems().addAll("ASAP", "<1 hour", "<1 day");
+      setInfographicsCount("SECURITY_REQ");
       // populateSecurityRequestTable();
     } catch (Exception e) {
       e.printStackTrace();
@@ -92,35 +95,40 @@ public class securityRequestController extends serviceRequestPageController
 
   @Override
   public void submitButton(ActionEvent event) throws SQLException {
+    try {
+      securitySendToDB();
+      setInfographicsCount("SECURITY_REQ");
+
+      floor.getSelectionModel().clearSelection();
+      room.getSelectionModel().clearSelection();
+      securityRequestType.getSelectionModel().clearSelection();
+      timeFrameComboBox.getSelectionModel().clearSelection();
+      requestStatus.clear();
+      isUrgent.setSelected(false);
+      staffAssignee.clear();
+      notes.clear();
+      room.setVisible(false);
+    } catch (RuntimeException error) {
+      System.out.println("Error : Some Value is NULL");
+      error.printStackTrace();
+      PopUp.createWarning("Warning : A required value was not filled", null);
+    }
+  }
+
+  private void securitySendToDB() {
+    securityRequest securityReq = new securityRequest();
     securityReq.setSecurityRequestType(securityRequestType.getValue());
     securityReq.setTimeFrame(timeFrameComboBox.getValue());
     securityReq.setRoomID(roomNameToRoomID.get(room.getValue()));
     securityReq.setFloorID(floor.getValue());
-    securityReq.setIsUrgent(true); // TODO: Potentially have a field in page to select this
+    securityReq.setIsUrgent(isUrgent.isSelected());
     securityReq.setStaffAssignee(staffAssignee.getText());
     securityReq.setRequestStatus(requestStatus.getText());
     securityReq.setRequestDate(LocalDate.now());
     securityReq.setDeliveryDate(LocalDate.now());
     securityReq.setOtherNotes(notes.getText());
     try {
-      securitySendToDB(securityReq);
-    } catch (RuntimeException error) {
-      System.out.println("Error : Some Value is NULL");
-      PopUp.createWarning("Warning : A required value was not filled", null);
-    }
-  }
-
-  private void securitySendToDB(securityRequest securityReq) {
-    try {
       system.update(securityReq);
-      floor.getSelectionModel().clearSelection();
-      room.getSelectionModel().clearSelection();
-      securityRequestType.getSelectionModel().clearSelection();
-      timeFrameComboBox.getSelectionModel().clearSelection();
-      requestStatus.clear();
-      staffAssignee.clear();
-      notes.clear();
-      room.setVisible(false);
       // tableList.add(securityReq);
     } catch (Exception e) {
       e.printStackTrace();
@@ -134,6 +142,7 @@ public class securityRequestController extends serviceRequestPageController
     securityRequestType.getSelectionModel().clearSelection();
     timeFrameComboBox.getSelectionModel().clearSelection();
     requestStatus.clear();
+    isUrgent.setSelected(false);
     staffAssignee.clear();
     notes.clear();
     room.setVisible(false);

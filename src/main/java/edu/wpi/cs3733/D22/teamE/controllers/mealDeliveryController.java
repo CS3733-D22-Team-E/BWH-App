@@ -75,6 +75,7 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    setInfographicsCount("MEAL_DELIV_REQ");
     entreeDropDown.setItems(meals);
     beverageDropDown.setItems(beverages);
     dessertDropDown.setItems(desserts);
@@ -157,6 +158,8 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       mealDeliveryRequest.setStaffAssignee(staffAssignee.getText());
       mealDeliveryRequest.setRequestStatus(requestStatus.getText());
       mealSendToDB(mealDeliveryRequest);
+
+      setInfographicsCount("MEAL_DELIV_REQ");
 
     } catch (NullPointerException | SQLException error) {
       System.out.println("Error : Some Value is NULL");
