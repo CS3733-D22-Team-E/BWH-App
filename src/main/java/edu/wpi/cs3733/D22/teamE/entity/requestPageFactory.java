@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamE.entity;
 import com.jfoenix.controls.*;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamZ.api.entity.ExternalTransportRequest;
 import edu.wpi.cs3733.D22.teamZ.api.entity.RequestStatus;
 import edu.wpi.cs3733.D22.teamZ.api.entity.TransportMethod;
@@ -102,46 +103,27 @@ public class requestPageFactory {
                         "",
                         "",
                         LocalDate.now(),
-                        TransportMethod.PATIENTCAR))) {
-          if (req instanceof ExternalTransportAdapter
-              && (m.getName().contains("RequestDate") || m.getName().contains("DeliveryDate"))) {
-
-          } else {
+                        TransportMethod.PATIENTCAR))
+            && !(req instanceof ExternalTransportAdapter
+                && (m.getName().contains("RequestDate") || m.getName().contains("DeliveryDate")))) {
+          try {
             final Object r = m.invoke(req);
             String label = m.getName();
             String content = r.toString();
             label = label.trim();
             label = label.replace("get", "");
-            try {
-              content = content.trim();
-              HBox innerBox = new HBox();
-              Label l = new Label(label + " : ");
-              innerBox.getChildren().add(l);
-              if (r instanceof String) {
-                defVal.add(r);
-                JFXTextField textField = new JFXTextField();
-                textField.setText(content);
-                innerBox.getChildren().add(textField);
-                box.getChildren().add(innerBox);
-                returnMethods.add(req.getClass().getMethod("set" + label, String.class));
-                returnFields.add(textField);
-              } else if (r instanceof LocalDate) {
-                defVal.add(r);
-                JFXDatePicker datePicker = new JFXDatePicker();
-                datePicker.setValue((LocalDate) r);
-                innerBox.getChildren().add(datePicker);
-                box.getChildren().add(innerBox);
-                returnMethods.add(req.getClass().getMethod("set" + label, LocalDate.class));
-                returnFields.add(datePicker);
-              } else {
-                defVal.add(content);
-                JFXTextField textField = new JFXTextField();
-                textField.setText(content);
-                innerBox.getChildren().add(textField);
-                box.getChildren().add(innerBox);
-                returnMethods.add(req.getClass().getMethod("set" + label, String.class));
-                returnFields.add(textField);
-              }
+            content = content.trim();
+            HBox innerBox = new HBox();
+            Label l = new Label(label + " : ");
+            innerBox.getChildren().add(l);
+            if (r instanceof String) {
+              defVal.add(r);
+              JFXTextField textField = new JFXTextField();
+              textField.setText(content);
+              innerBox.getChildren().add(textField);
+              box.getChildren().add(innerBox);
+              returnMethods.add(req.getClass().getMethod("set" + label, String.class));
+              returnFields.add(textField);
             } else if (r instanceof LocalDate) {
               defVal.add(r);
               JFXDatePicker datePicker = new JFXDatePicker();
@@ -158,9 +140,9 @@ public class requestPageFactory {
               box.getChildren().add(innerBox);
               returnMethods.add(req.getClass().getMethod("set" + label, String.class));
               returnFields.add(textField);
-            } catch (NoSuchMethodException e) {
-              e.printStackTrace();
             }
+          } catch (NoSuchMethodException e) {
+            e.printStackTrace();
           }
         } else System.out.println(m.getName());
       }
@@ -188,8 +170,10 @@ public class requestPageFactory {
               }
             }
           }
-          if (req instanceof RequestInterface) db.updateServiceRequest((RequestInterface) req);
-          else if (req instanceof MedicalEquipment) db.updateMedEquip((MedicalEquipment) req);
+          if (req instanceof RequestInterface)
+            DAOSystemSingleton.INSTANCE.getSystem().update((RequestInterface) req);
+          else if (req instanceof MedicalEquipment)
+            DAOSystemSingleton.INSTANCE.getSystem().update((MedicalEquipment) req);
         });
     ScrollPane p = new ScrollPane();
     p.setFitToWidth(true);

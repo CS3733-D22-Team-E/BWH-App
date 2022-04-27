@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.APIDatabase.dao.FloralRequestDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.*;
 import edu.wpi.cs3733.D22.teamE.CallAPI;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
@@ -79,10 +78,6 @@ public class DAOSystem {
 
   public List<Location> getAllLocations() {
     return locationDAO.getAll();
-  }
-
-  public Location getLocation(String id) {
-    return locationDAO.get(id);
   }
 
   public Location getLocation(int x, int y) {
@@ -368,8 +363,12 @@ public class DAOSystem {
     giftRequestDAO.delete(request);
   }
 
-  public void updateEntity(EntityInterface node) {
-    if (node instanceof MedicalEquipment) updateMedEquip((MedicalEquipment) node);
-    else if (node instanceof RequestInterface) updateServiceRequest((RequestInterface) node);
+  public void update(EntityInterface node) {
+    if (node instanceof MedicalEquipment) update((MedicalEquipment) node);
+    else if (node instanceof RequestInterface) update((RequestInterface) node);
+  }
+
+  public List<MedicalEquipment> getAllMedEquip() {
+    return medicalEquipmentDAO.getAll();
   }
 }

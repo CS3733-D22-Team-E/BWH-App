@@ -134,7 +134,7 @@ public class EntityView extends NodeImageView<EntityInterface> {
               System.out.println(l.getXCoord() + " : " + l.getYCoord() + " : " + l.getShortName());
               node.setLocation(l);
               // System.out.println(node.getLocation());
-              DAOSystemSingleton.INSTANCE.getSystem().updateEntity(node);
+              DAOSystemSingleton.INSTANCE.getSystem().update(node);
               this.setClicked(false);
               controller.fetchDB();
               drag = false;

@@ -10,17 +10,11 @@ import edu.wpi.cs3733.D22.teamE.customUI.NodeImageView;
 import edu.wpi.cs3733.D22.teamE.customUI.customImageViewTesting;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
 import edu.wpi.cs3733.D22.teamE.entity.*;
-import java.io.*;
-import com.jfoenix.controls.JFXSlider;
-import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
-import edu.wpi.cs3733.D22.teamE.database.daos.ServiceRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
 import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
-import edu.wpi.cs3733.D22.teamE.pageControl;
-import java.io.FileInputStream;
+import java.io.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -38,10 +32,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -56,12 +47,6 @@ import javafx.stage.Popup;
 import org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException;
 
 public class mapPageController extends HeaderController implements Initializable {
-  FXMLLoader loader = new FXMLLoader();
-  Parent root;
-  @FXML MenuBar menuBar;
-  LocationDAOImpl db;
-  MedicalEquipmentDAOImpl medEq;
-  ServiceRequestDAOImpl servReq;
   List<Location> locations;
   List<Location> filteredLocations;
 
@@ -148,6 +133,7 @@ public class mapPageController extends HeaderController implements Initializable
 
   @Override // Initialize the map page
   public void initialize(URL url, ResourceBundle rb) {
+    // super.initialize(url, rb);
 
     scroller.addEventFilter(ScrollEvent.ANY, this::mouseScrollZoom);
 
@@ -227,6 +213,13 @@ public class mapPageController extends HeaderController implements Initializable
     entityInterfaceList = new ArrayList<>();
     entityInterfaceList.addAll(DAOSystemSingleton.INSTANCE.getSystem().getAllMedEquip());
     entityInterfaceList.addAll(DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests());
+
+    ArrayList<EntityInterface> invalid = new ArrayList<>();
+    for (EntityInterface e : entityInterfaceList) {
+      if (e.getLocation() == null) invalid.add(e);
+    }
+
+    for (EntityInterface e : invalid) entityInterfaceList.remove(e);
 
     setViewMode(viewMode);
   }

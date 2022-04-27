@@ -23,12 +23,13 @@ public class aboutPageController {
   private String joeyBio =
       "Joey Rozman was our Lead Software Engineer. Joey is also a very active member in Tau Kappa Epsilon, power-lifts in his free time, and loves baking.";
   private String colinBio =
-      "Colin Mettler was our Assistant-Lead Front-End Engineer. In his free time, he plays for WPI's CS:GO team, relishes his days as a lacrosse player, and throws rocks at Phil. ";
+      "Colin Mettler was our Assistant-Lead Front-End Engineer. In his free time, he plays for WPI's CS:GO team, relishes his days as a lacrosse player.";
   private String ericBio =
       "Eric Zhou was our Assistant-Lead Back-End Engineer. Eric was very pleased when Joey misunderstood a Slack message to mean that we were meeting at a gas station off campus.  He also supports identity theft.";
   private String jeremyBio =
       "Jeremy Bornstein was a Full-Time Back-End Engineer.  I guess you could say he was BORN to do this.  Jeremy also loves baking.";
-  private String shenBio = "Shen Fang was a Full-Time Back-End Engineer. Shen is also an accomplished and award winning actor and singer from WPI's theatre and music departments, respectively";
+  private String shenBio =
+      "Shen Fang was a Full-Time Back-End Engineer. Shen is also an accomplished and award winning actor and singer from WPI's theatre and music departments, respectively";
   private String timBio =
       "Tim Connors was a Full-Time Front-End Engineer. Tim spear-headed our efforts for connecting the front and back end.";
   private String danielBio =
@@ -38,7 +39,7 @@ public class aboutPageController {
   private String philBio =
       "Phillip Brush was our Documentation Analyst. Phil was the other RBE major on the team, and was technically overloading during this team.  It's a miracle he survived.";
   private String sizheBio =
-      "Sizhe Li was our Product Owner. Sizhe's main contribution was brining power strips of unknown origins to our meetings, since WPI tech suites only have one or so outlets.";
+      "Sizhe Li was our Product Owner. Sizhe's main contribution was bringing power strips of unknown origins to our meetings, since WPI tech suites only have one or so outlets.";
 
   @FXML
   public void wilsonWongLink(ActionEvent event) throws URISyntaxException, IOException {
@@ -73,7 +74,7 @@ public class aboutPageController {
   @FXML
   public void timPopUp(MouseEvent event) {
     PopUp.aboutPopUp(timBio, ((Node) event.getSource()).getScene().getWindow(), "Tim");
-    //PopUp.hoverListener(event, timBio);
+    // PopUp.hoverListener(event, timBio);
   }
 
   @FXML
