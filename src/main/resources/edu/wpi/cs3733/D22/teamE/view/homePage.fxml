@@ -43,7 +43,7 @@
                <children>
                   <StackPane minHeight="110.0" minWidth="110.0" prefHeight="110.0" prefWidth="110.0" styleClass="card-background" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="116.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/dashboard.png" />
                            </image>
@@ -55,9 +55,6 @@
                      <padding>
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
-                     <effect>
-                        <Glow />
-                     </effect>
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -84,9 +81,9 @@
             </VBox>
             <VBox fx:id="myProfilePane" alignment="CENTER" minHeight="150.0" minWidth="150.0" prefHeight="184.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <StackPane minHeight="110.0" minWidth="110.0" prefHeight="110.0" prefWidth="110.0" styleClass="card-background" VBox.vgrow="ALWAYS">
+                  <StackPane minHeight="120.0" minWidth="140.0" prefHeight="120.0" prefWidth="140.0" styleClass="card-background" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="139.0" fitWidth="325.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/profileperson.png" />
                            </image>
@@ -101,9 +98,6 @@
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
-                     <effect>
-                        <Glow />
-                     </effect>
                   </StackPane>
                   <Label styleClass="textColor" text="My Profile" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
@@ -124,9 +118,9 @@
             </VBox>
             <VBox fx:id="submitRequestPane" alignment="CENTER" minHeight="150.0" minWidth="150.0" prefHeight="184.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <StackPane minHeight="110.0" minWidth="110.0" prefHeight="110.0" prefWidth="110.0" styleClass="card-background" VBox.vgrow="ALWAYS">
+                  <StackPane minHeight="120.0" minWidth="110.0" prefHeight="110.0" prefWidth="140.0" styleClass="card-background" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="114.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/serviceHelp.png" />
                            </image>
@@ -141,9 +135,6 @@
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
-                     <effect>
-                        <Glow />
-                     </effect>
                   </StackPane>
                   <Label styleClass="textColor" text="Submit" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
@@ -172,9 +163,9 @@
             </VBox>
             <VBox fx:id="statusPane" alignment="CENTER" minHeight="150.0" minWidth="150.0" prefHeight="184.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <StackPane minHeight="110.0" minWidth="110.0" prefHeight="110.0" prefWidth="110.0" styleClass="card-background" VBox.vgrow="ALWAYS">
+                  <StackPane minHeight="120.0" minWidth="140.0" prefHeight="110.0" prefWidth="140.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="117.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/progress.png" />
                            </image>
@@ -189,9 +180,10 @@
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
-                     <effect>
-                        <Glow />
-                     </effect>
+                     <styleClass>
+                        <String fx:value="card-background" />
+                        <String fx:value="rounded" />
+                     </styleClass>
                   </StackPane>
                   <Label styleClass="textColor" text="Service Request" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
@@ -218,11 +210,11 @@
                   <String fx:value="dropShadow" />
                </styleClass>
             </VBox>
-            <VBox fx:id="mapPane" alignment="CENTER" minHeight="150.0" minWidth="150.0" prefHeight="184.0" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <VBox fx:id="mapPane" alignment="CENTER" minHeight="150.0" minWidth="150.0" prefHeight="163.0" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <StackPane minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" styleClass="card-background" VBox.vgrow="ALWAYS">
+                  <StackPane minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="138.0" styleClass="card-background" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="123.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/mapHelp.png" />
                            </image>
@@ -234,9 +226,6 @@
                      <padding>
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
-                     <effect>
-                        <Glow />
-                     </effect>
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -262,7 +251,7 @@
                <children>
                   <StackPane minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" styleClass="card-background" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true">
+                        <ImageView fitHeight="114.0" fitWidth="110.0" pickOnBounds="true">
                            <image>
                               <Image url="@icons/profile.png" />
                            </image>
@@ -274,9 +263,6 @@
                      <padding>
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
-                     <effect>
-                        <Glow />
-                     </effect>
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
