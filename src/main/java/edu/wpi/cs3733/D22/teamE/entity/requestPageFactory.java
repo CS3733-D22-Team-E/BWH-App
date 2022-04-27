@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamE.entity;
 import com.jfoenix.controls.*;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamZ.api.entity.ExternalTransportRequest;
 import edu.wpi.cs3733.D22.teamZ.api.entity.RequestStatus;
 import edu.wpi.cs3733.D22.teamZ.api.entity.TransportMethod;
@@ -33,16 +34,16 @@ public class requestPageFactory {
 
   public static Node getAsPage(Object targetRequest, Object returnObject, Object displayObject)
       throws InvocationTargetException, IllegalAccessException {
-    if ((targetRequest instanceof RequestInterface)) {
-      if (returnObject == null) return getAsPage((RequestInterface) targetRequest);
+    if ((targetRequest instanceof EntityInterface)) {
+      if (returnObject == null) return getAsPage((EntityInterface) targetRequest);
       else if (returnObject instanceof JFXButton && displayObject instanceof JFXAlert)
         return getAsPage(
-            (RequestInterface) targetRequest, (JFXButton) returnObject, (JFXAlert) displayObject);
+            (EntityInterface) targetRequest, (JFXButton) returnObject, (JFXAlert) displayObject);
       else throw new RuntimeException("Invalid Return Type");
     } else throw new RuntimeException("Not a Valid Request");
   }
 
-  private static Node getAsPage(RequestInterface req)
+  private static Node getAsPage(EntityInterface req)
       throws InvocationTargetException, IllegalAccessException {
     VBox box = new VBox();
     box.setSpacing(2);
@@ -52,6 +53,8 @@ public class requestPageFactory {
             && !m.getName().contains("RequestType")
             && !m.getName().contains("Coord")
             && !m.getName().contains("ServiceRequestID")
+            && !m.getName().contains("Location")
+            && !m.getName().contains("NumID")
             && !m.getReturnType().isInstance(new FloralServiceRequest())) {
           final Object r = m.invoke(req);
           String label = m.getName();
@@ -74,7 +77,7 @@ public class requestPageFactory {
     return p;
   }
 
-  private static Node getAsPage(RequestInterface req, JFXButton button, JFXAlert alert)
+  private static Node getAsPage(EntityInterface req, JFXButton button, JFXAlert alert)
       throws InvocationTargetException, IllegalAccessException {
     VBox box = new VBox();
     box.setSpacing(2);
@@ -87,6 +90,8 @@ public class requestPageFactory {
             && !m.getName().contains("RequestType")
             && !m.getName().contains("Coord")
             && !m.getName().contains("ServiceRequestID")
+            && !m.getName().contains("Location")
+            && !m.getName().contains("NumID")
             && !m.getReturnType().isInstance(new FloralServiceRequest())
             && !m.getReturnType()
                 .isInstance(
@@ -98,49 +103,46 @@ public class requestPageFactory {
                         "",
                         "",
                         LocalDate.now(),
-                        TransportMethod.PATIENTCAR))) {
-          if (req instanceof ExternalTransportAdapter
-              && (m.getName().contains("RequestDate") || m.getName().contains("DeliveryDate"))) {
-
-          } else {
+                        TransportMethod.PATIENTCAR))
+            && !(req instanceof ExternalTransportAdapter
+                && (m.getName().contains("RequestDate") || m.getName().contains("DeliveryDate")))) {
+          try {
             final Object r = m.invoke(req);
             String label = m.getName();
             String content = r.toString();
             label = label.trim();
             label = label.replace("get", "");
-            try {
-              content = content.trim();
-              HBox innerBox = new HBox();
-              Label l = new Label(label + " : ");
-              innerBox.getChildren().add(l);
-              if (r instanceof String) {
-                defVal.add(r);
-                JFXTextField textField = new JFXTextField();
-                textField.setText(content);
-                innerBox.getChildren().add(textField);
-                box.getChildren().add(innerBox);
-                returnMethods.add(req.getClass().getMethod("set" + label, String.class));
-                returnFields.add(textField);
-              } else if (r instanceof LocalDate) {
-                defVal.add(r);
-                JFXDatePicker datePicker = new JFXDatePicker();
-                datePicker.setValue((LocalDate) r);
-                innerBox.getChildren().add(datePicker);
-                box.getChildren().add(innerBox);
-                returnMethods.add(req.getClass().getMethod("set" + label, LocalDate.class));
-                returnFields.add(datePicker);
-              } else {
-                defVal.add(content);
-                JFXTextField textField = new JFXTextField();
-                textField.setText(content);
-                innerBox.getChildren().add(textField);
-                box.getChildren().add(innerBox);
-                returnMethods.add(req.getClass().getMethod("set" + label, String.class));
-                returnFields.add(textField);
-              }
-            } catch (NoSuchMethodException e) {
-              e.printStackTrace();
+            content = content.trim();
+            HBox innerBox = new HBox();
+            Label l = new Label(label + " : ");
+            innerBox.getChildren().add(l);
+            if (r instanceof String) {
+              defVal.add(r);
+              JFXTextField textField = new JFXTextField();
+              textField.setText(content);
+              innerBox.getChildren().add(textField);
+              box.getChildren().add(innerBox);
+              returnMethods.add(req.getClass().getMethod("set" + label, String.class));
+              returnFields.add(textField);
+            } else if (r instanceof LocalDate) {
+              defVal.add(r);
+              JFXDatePicker datePicker = new JFXDatePicker();
+              datePicker.setValue((LocalDate) r);
+              innerBox.getChildren().add(datePicker);
+              box.getChildren().add(innerBox);
+              returnMethods.add(req.getClass().getMethod("set" + label, LocalDate.class));
+              returnFields.add(datePicker);
+            } else {
+              defVal.add(content);
+              JFXTextField textField = new JFXTextField();
+              textField.setText(content);
+              innerBox.getChildren().add(textField);
+              box.getChildren().add(innerBox);
+              returnMethods.add(req.getClass().getMethod("set" + label, String.class));
+              returnFields.add(textField);
             }
+          } catch (NoSuchMethodException e) {
+            e.printStackTrace();
           }
         } else System.out.println(m.getName());
       }
@@ -168,7 +170,10 @@ public class requestPageFactory {
               }
             }
           }
-          db.update(req);
+          if (req instanceof RequestInterface)
+            DAOSystemSingleton.INSTANCE.getSystem().update((RequestInterface) req);
+          else if (req instanceof MedicalEquipment)
+            DAOSystemSingleton.INSTANCE.getSystem().update((MedicalEquipment) req);
         });
     ScrollPane p = new ScrollPane();
     p.setFitToWidth(true);

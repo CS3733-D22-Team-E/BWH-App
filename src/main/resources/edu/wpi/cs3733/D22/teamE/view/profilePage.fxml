@@ -40,8 +40,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -57,83 +55,101 @@
          <children>
             <HBox alignment="CENTER" styleClass="gradient">
                <children>
-                  <VBox maxHeight="562.0" maxWidth="400.0" minHeight="500.0" minWidth="400.0" prefHeight="562.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" HBox.hgrow="ALWAYS">
                      <styleClass>
                         <String fx:value="rounded" />
                         <String fx:value="container" />
                         <String fx:value="dropShadow" />
                      </styleClass>
                      <HBox.margin>
-                        <Insets left="100.0" top="20.0" />
+                        <Insets bottom="50.0" left="50.0" top="50.0" />
                      </HBox.margin>
                      <children>
-                        <HBox alignment="CENTER" prefHeight="231.0" prefWidth="517.0">
+                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="70.0" minWidth="70.0" styleClass=".requestIcon" HBox.hgrow="ALWAYS">
+                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="70.0" minWidth="70.0" styleClass=".requestIcon" HBox.hgrow="ALWAYS">
                                  <children>
                                     <Circle fx:id="photoCirc" fill="TRANSPARENT" radius="80.0" stroke="BLACK" strokeType="INSIDE" />
-                                    <ImageView fitHeight="150.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@icons/prof.png" />
-                                       </image>
-                                    </ImageView>
                                  </children>
                                  <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </StackPane>
                            </children>
                         </HBox>
-                        <GridPane prefHeight="131.0" prefWidth="285.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.4" minWidth="10.0" prefWidth="139.4" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.5999755859375" minWidth="10.0" prefWidth="153.80000000000004" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="38.4" minHeight="0.0" prefHeight="25.599983596801756" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="60.8" minHeight="10.0" prefHeight="35.20001640319824" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label prefHeight="22.0" prefWidth="146.0" text="Employee Status:" GridPane.rowIndex="1">
-                                 <styleClass>
-                                    <String fx:value="bodyText" />
-                                    <String fx:value="bold" />
-                                 </styleClass>
-                              </Label>
-                              <Label text="Employee ID:" GridPane.rowIndex="2">
-                                 <styleClass>
-                                    <String fx:value="bodyText" />
-                                    <String fx:value="bodyText" />
-                                    <String fx:value="bold" />
-                                 </styleClass>
-                              </Label>
-                              <Label text="Name:">
-                                 <styleClass>
-                                    <String fx:value="bodyText" />
-                                    <String fx:value="bold" />
-                                 </styleClass>
-                              </Label>
-                              <Label fx:id="nameLabel" prefHeight="20.0" prefWidth="106.0" text="nameLabel" GridPane.columnIndex="1">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="statusLabel" text="statusLabel" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="idLabel" text="idLabel" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
+                        <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS">
                            <VBox.margin>
-                              <Insets left="60.0" right="40.0" top="20.0" />
+                              <Insets left="60.0" right="40.0" />
                            </VBox.margin>
-                        </GridPane>
+                           <children>
+                              <GridPane hgap="10.0" vgap="10.0" VBox.vgrow="ALWAYS">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" />
+                                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" valignment="CENTER" vgrow="ALWAYS" />
+                                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+                                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" text="Position:" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                       <styleClass>
+                                          <String fx:value="bodyText" />
+                                          <String fx:value="bold" />
+                                       </styleClass>
+                                    </Label>
+                                    <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" text="Employee ID:" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                       <styleClass>
+                                          <String fx:value="bodyText" />
+                                          <String fx:value="bodyText" />
+                                          <String fx:value="bold" />
+                                       </styleClass>
+                                    </Label>
+                                    <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" text="Name:" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                       <styleClass>
+                                          <String fx:value="bodyText" />
+                                          <String fx:value="bold" />
+                                       </styleClass>
+                                    </Label>
+                                    <Label fx:id="nameLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" text="nameLabel" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="statusLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" text="statusLabel" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="idLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" text="idLabel" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="10.0" text="Phone Number:" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                       <styleClass>
+                                          <String fx:value="bodyText" />
+                                          <String fx:value="bodyText" />
+                                          <String fx:value="bold" />
+                                       </styleClass>
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="phoneNumber" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" text="phoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="60.0" left="10.0" right="10.0" />
+                                 </VBox.margin>
+                              </GridPane>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="600.0" spacing="50.0" HBox.hgrow="ALWAYS">
@@ -163,7 +179,7 @@
                               <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                 <columns>
                                   <TableColumn fx:id="floor" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Floor" />
-                                  <TableColumn fx:id="name" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Name" />
+                                  <TableColumn fx:id="room" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Room" />
                                     <TableColumn fx:id="requestType" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Request Type" />
                                     <TableColumn fx:id="status" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Status" />
                                 </columns>
@@ -250,11 +266,11 @@
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="newPassword" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                                          <TextField fx:id="confirmPassword" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                          <TextField fx:id="newPassword" promptText="New Password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                          <TextField fx:id="confirmPassword" promptText="Confirm Password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                                        </children>
                                     </GridPane>
-                                    <JFXButton styleClass="submitButton" text="Change Password">
+                                    <JFXButton fx:id="changePassword" onAction="#changePassword" styleClass="submitButton" text="Change Password">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>

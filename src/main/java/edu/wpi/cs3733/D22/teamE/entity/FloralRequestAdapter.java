@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import java.time.LocalDate;
 
 public class FloralRequestAdapter implements RequestInterface {
@@ -133,12 +134,49 @@ public class FloralRequestAdapter implements RequestInterface {
   }
 
   @Override
-  public double getxCoord() {
+  public int getNumID() {
     return 0;
   }
 
   @Override
-  public double getyCoord() {
-    return 0;
+  public void setNumID(int num) {}
+
+  @Override
+  public Location getLocation() {
+    return DAOSystemSingleton.INSTANCE.getSystem().getLocation(r.roomID);
+  }
+
+  @Override
+  public void setLocation(String NodeID) throws NullPointerException {
+    Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(NodeID);
+    if (loc != null) {
+      setRoomID(loc.getNodeID());
+      setFloorID(loc.getFloor());
+    }
+  }
+
+  @Override
+  public void setLocation(Location location) throws NullPointerException {
+    setRoomID(location.getNodeID());
+    setFloorID(location.getFloor());
+  }
+
+  @Override
+  public void setLocation(int xcoord, int ycoord) throws NullPointerException {
+    Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(xcoord, ycoord);
+    if (loc != null) {
+      setRoomID(loc.getNodeID());
+      setFloorID(loc.getFloor());
+    }
+  }
+
+  @Override
+  public double getXCoord() {
+    return getLocation().getXCoord();
+  }
+
+  @Override
+  public double getYCoord() {
+    return getLocation().getYCoord();
   }
 }

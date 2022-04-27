@@ -133,6 +133,19 @@ public class ExternalTransportAdapter implements RequestInterface {
   }
 
   @Override
+  public int getNumID() {
+    return 0;
+  }
+
+  @Override
+  public void setNumID(int num) {}
+
+  @Override
+  public Location getLocation() {
+    return null;
+  }
+
+  @Override
   public String getRoomID() {
     return "null";
   }
@@ -146,6 +159,25 @@ public class ExternalTransportAdapter implements RequestInterface {
   }
 
   @Override
+  public void setLocation(String NodeID) throws NullPointerException {}
+
+  @Override
+  public void setLocation(Location location) throws NullPointerException {}
+
+  @Override
+  public void setLocation(int xcoord, int ycoord) throws NullPointerException {}
+
+  @Override
+  public double getXCoord() {
+    return 0;
+  }
+
+  @Override
+  public double getYCoord() {
+    return 0;
+  }
+
+  @Override
   public void setFloorID(String floor) {}
 
   @Override
@@ -155,16 +187,6 @@ public class ExternalTransportAdapter implements RequestInterface {
 
   @Override
   public void setOtherNotes(String otherNotes) {}
-
-  @Override
-  public double getxCoord() {
-    return 0;
-  }
-
-  @Override
-  public double getyCoord() {
-    return 0;
-  }
 
   @Override
   public String toString() {

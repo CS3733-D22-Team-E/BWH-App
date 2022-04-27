@@ -60,6 +60,7 @@ public class medicalEquipmentController extends serviceRequestPageController
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     super.initialize(url, rb);
+    setInfographicsCount("MED_EQUIP_REQ");
     try {
       // medEquipmentDB = new MedicalEquipmentDAOImpl();
       populateEquipComboBoxes();
@@ -186,6 +187,7 @@ public class medicalEquipmentController extends serviceRequestPageController
       medicalEquipmentRequest.setIsUrgent(isUrgent.isSelected());
       medicalEquipmentRequest.setOtherNotes(notes.getText());
       medSendToDB(medicalEquipmentRequest);
+      setInfographicsCount("MED_EQUIP_REQ");
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");

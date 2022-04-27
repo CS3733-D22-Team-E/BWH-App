@@ -51,13 +51,14 @@ public class facilitiesRequestController extends serviceRequestPageController
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    setInfographicsCount("FACILITIES_REQ");
     try {
-      populateLocationComboBoxes();
+      // populateLocationComboBoxes();
       // populateFacilitiesReqTable();
       facilitiesOptionType
           .getItems()
           .addAll("Power Outage", "Maintenance", "Network Problem", "Other");
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -118,6 +119,7 @@ public class facilitiesRequestController extends serviceRequestPageController
       request.setTimeFrame(timeFrame.getText());
 
       facilitiesSendToDB(request);
+      setInfographicsCount("FACILITIES_REQ");
 
     } catch (NullPointerException e) {
       System.out.println("Error : Some Value is NULL");
@@ -137,6 +139,7 @@ public class facilitiesRequestController extends serviceRequestPageController
       isUrgent.setSelected(false);
       deliveryDate.getEditor().clear();
       staffAssignee.clear();
+      requestStatus.clear();
       notes.clear();
       room.setVisible(false);
       // tableList.add(request);

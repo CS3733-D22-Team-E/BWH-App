@@ -58,9 +58,9 @@ public class CSVManager {
           ""
               + d.getNodeID()
               + ','
-              + d.getXcoord()
+              + d.getXCoord()
               + ','
-              + d.getYcoord()
+              + d.getYCoord()
               + ','
               + d.getFloor()
               + ','
@@ -172,7 +172,7 @@ public class CSVManager {
   }
 
   public static void saveEmployeeCSV(String fileName) throws IOException, SQLException {
-    String format = employeeFormat;
+    /*String format = employeeFormat;
     DAO<Employee> employeeDAO = new EmployeeDAOImpl();
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
@@ -194,7 +194,7 @@ public class CSVManager {
               + "\n";
       // change nothing
       FileUtils.writeStringToFile(out, csvLine, (Charset) null, true);
-    }
+    }*/
   }
 
   public static void saveExternalTransportCSV() {

@@ -59,6 +59,7 @@ public class sanitationServiceController extends serviceRequestPageController
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    setInfographicsCount("SANITATION_REQ");
     // populateSanReqTable();
   }
 
@@ -145,7 +146,7 @@ public class sanitationServiceController extends serviceRequestPageController
         throw new NullPointerException();
       else request.setStaffAssignee(staffAssignee.getText());
 
-      request.setRequestStatus("To Do");
+      request.setRequestStatus(requestStatus.getText());
 
       if (floor.getValue() != null && room.getValue() != null) {
         request.setFloorID(floor.getValue());
@@ -157,6 +158,7 @@ public class sanitationServiceController extends serviceRequestPageController
 
       System.out.println(request);
       sanSendToDB(request);
+      setInfographicsCount("SANITATION_REQ");
       resetFields(new ActionEvent());
 
     } catch (RuntimeException error) {
@@ -180,6 +182,7 @@ public class sanitationServiceController extends serviceRequestPageController
       urgencyGroup.selectToggle(notUrgent);
       notes.clear();
       staffAssignee.clear();
+      requestStatus.clear();
       room.setVisible(false);
       // populateSanReqTable();
       // tableList.add(new sanitationRequestModel(request));
