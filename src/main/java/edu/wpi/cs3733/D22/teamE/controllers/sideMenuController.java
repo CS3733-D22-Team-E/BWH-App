@@ -4,7 +4,6 @@ import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

@@ -92,16 +92,20 @@ public class pageControl {
   public static void exitApp() {
     // TODO: uncomment this, was resulting in error
     /*
-  public static void exitApp() throws SQLException, IOException {
-    
+    public static void exitApp() throws SQLException, IOException {
 
-    
-     */
-    saveAllCSVs();
-    CallAPI.getInstance()
-        .getExternalTransportAPI()
-        .exportExternalTransportsToCSV(new File("CSVsaveFiles/TransportExt.csv"));
-    System.exit(0);
+
+
+       */
+    try {
+      saveAllCSVs();
+      CallAPI.getInstance()
+          .getExternalTransportAPI()
+          .exportExternalTransportsToCSV(new File("CSVsaveFiles/TransportExt.csv"));
+      System.exit(0);
+    } catch (SQLException | IOException e) {
+      e.printStackTrace();
+    }
   }
 
   private static void saveAllCSVs() throws SQLException, IOException {

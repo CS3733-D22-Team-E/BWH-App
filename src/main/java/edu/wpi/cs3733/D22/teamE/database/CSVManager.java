@@ -426,7 +426,7 @@ public class CSVManager {
     // nothing to change here
     File out = fullSaveHelper(fileName, format);
     // change with the proper format in first line of function
-    for (mealDeliveryRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllMealRequests()) {
+    for (mealDeliveryRequest d : DAOSystemSingleton.INSTANCE.getSystem().getAllMealDelivReq()) {
       String csvLine =
           ""
               + d.getServiceRequestID()
