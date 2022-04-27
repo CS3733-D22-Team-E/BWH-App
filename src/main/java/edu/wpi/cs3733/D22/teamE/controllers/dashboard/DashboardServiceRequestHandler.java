@@ -13,18 +13,18 @@ import javafx.util.Callback;
 public class DashboardServiceRequestHandler {
 
   DashboardController dashboardController;
-  DAOSystem subject;
+  DAOSystem system;
   ArrayList<RequestInterface> allRequestList;
   ArrayList<RequestInterface> currentRequestList;
 
   public DashboardServiceRequestHandler(DashboardController dashboardController) {
     this.dashboardController = dashboardController;
-    this.subject = dashboardController.database;
-    allRequestList = (ArrayList<RequestInterface>) subject.getAllServiceRequests();
+    this.system = dashboardController.database;
+    allRequestList = (ArrayList<RequestInterface>) system.getAllServiceRequests();
   }
 
   public void update() {
-    allRequestList = (ArrayList<RequestInterface>) subject.getAllServiceRequests();
+    allRequestList = (ArrayList<RequestInterface>) system.getAllServiceRequests();
   }
 
   protected void updateServiceRequestTable() {
@@ -77,7 +77,7 @@ public class DashboardServiceRequestHandler {
             RequestInterface curRequest = param.getValue();
             String shortNameString = "";
             if (!curRequest.getRoomID().equals("null")) {
-              shortNameString = subject.getLocation(curRequest.getRoomID()).getShortName();
+              shortNameString = system.getLocation(curRequest.getRoomID()).getShortName();
             }
             return new SimpleStringProperty(shortNameString);
           }

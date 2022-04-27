@@ -48,7 +48,7 @@ public class App extends Application implements SharedScene {
 
   @Override
   public void start(Stage stage) throws Exception {
-    //stage.initStyle(StageStyle.UNIFIED);
+    // stage.initStyle(StageStyle.UNIFIED);
     stage
         .getIcons()
         .add(
