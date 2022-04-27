@@ -47,7 +47,7 @@ public class sideMenuController implements Initializable {
     VBox.setVgrow(bufferVBox, Priority.ALWAYS);
 
     sideMenuButtonHandler(dashboardBox, "DashboardPage.fxml");
-    sideMenuButtonHandler(submitServiceRequestBox, "DashboardPage.fxml");
+    sideMenuButtonHandler(submitServiceRequestBox, "serviceRequestLanding.fxml");
     sideMenuButtonHandler(statusPageBox, "statusPage.fxml");
     sideMenuButtonHandler(mapBox, "map.fxml");
     sideMenuButtonHandler(profileBox, "profilePage.fxml");
