@@ -8,8 +8,17 @@ public class staffAccount extends Account {
       String passwordHash,
       String firstName,
       String lastName,
-      String position) {
-    super(accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position);
+      String position,
+      String phoneNumber) {
+    super(
+        accountID,
+        employeeID,
+        authorityLevel,
+        passwordHash,
+        firstName,
+        lastName,
+        position,
+        phoneNumber);
     this.setAuthorityLevel(1);
   }
 

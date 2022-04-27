@@ -101,6 +101,7 @@ public abstract class Account {
     passwordHash = newPasswordHash;
   }
 
-    public String getPhoneNumber() { return this.phoneNumber; }
-
+  public String getPhoneNumber() {
+    return this.phoneNumber;
+  }
 }

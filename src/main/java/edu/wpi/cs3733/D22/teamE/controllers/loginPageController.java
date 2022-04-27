@@ -32,6 +32,8 @@ public class loginPageController implements Initializable {
 
   private @FXML JFXPasswordField passwordField;
 
+  private static String TwoFAcode = "";
+
   @FXML Label invalidWarning;
 
   private String validRFID = "9352CD1B";
@@ -42,8 +44,10 @@ public class loginPageController implements Initializable {
   public void submitLogin(ActionEvent event) {
     if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
       Account account = db.getAccount(getUsername());
-      String messageCode = generateRandom5DigitID();
-      Texting.sendSMS(account.getPhoneNumber(),"Your Brigham & Womens Hospital authentication code is: " + messageCode);
+      TwoFAcode = generateRandom5DigitID();
+      Texting.sendSMS(
+          account.getPhoneNumber(), //"+16178936605", // "+19788317440", //account.getPhoneNumber(),
+          "Your Brigham & Womens Hospital authentication code is: " + TwoFAcode);
 
       pageControl.loadPage("twoFacAuthPage.fxml", (Stage) passwordField.getScene().getWindow());
 
@@ -54,6 +58,11 @@ public class loginPageController implements Initializable {
 
   public static String generateRandom5DigitID() {
     return String.format("%5d", new Random().nextInt((int) Math.pow(10, 5)));
+  }
+
+  public static boolean compareCodes(String enteredCode) {
+    if (TwoFAcode.equals("")) return false;
+    else return enteredCode.equals(TwoFAcode);
   }
 
   private String getPassword() {
