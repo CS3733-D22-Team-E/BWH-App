@@ -1,23 +1,16 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import edu.wpi.cs3733.D22.teamE.PopUp;
-import edu.wpi.cs3733.D22.teamE.database.daos.LanguageRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.languageInterpreterRequest;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 public class languageInterpreterRequestController extends serviceRequestPageController
     implements Initializable {
@@ -30,7 +23,7 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   @FXML DatePicker endDate;
   @FXML TextField notes;
 
-  @FXML TableView<languageInterpreterRequest> requestsTable;
+  /*@FXML TableView<languageInterpreterRequest> requestsTable;
 
   @FXML TableColumn<languageInterpreterRequest, String> tableLanguageType;
   @FXML TableColumn<languageInterpreterRequest, String> tableStaffAssignee;
@@ -38,19 +31,22 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   @FXML TableColumn<languageInterpreterRequest, String> tableLocNodeID;
   @FXML TableColumn<languageInterpreterRequest, String> tableRequestDate;
   @FXML TableColumn<languageInterpreterRequest, LocalDate> tableDeliveryDate;
-  @FXML TableColumn<languageInterpreterRequest, LocalDate> tableOtherNotes;
+  @FXML TableColumn<languageInterpreterRequest, LocalDate> tableOtherNotes;*/
 
-  LanguageRequestDAOImpl languageRequestDAO;
-  ObservableList<languageInterpreterRequest> tableList;
+  // LanguageRequestDAOImpl languageRequestDAO;
+  // ObservableList<languageInterpreterRequest> tableList;
+  DAOSystem system;
 
-  public languageInterpreterRequestController() {}
+  public languageInterpreterRequestController() {
+    system = DAOSystemSingleton.INSTANCE.getSystem();
+  }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     try {
       super.initialize(location, resources);
+      setInfographicsCount("LANG_INTERP_REQ");
       languageOptions.getItems().addAll("English", "Spanish", "Russian", "Mandarin Chinese");
-      languageRequestDAO = new LanguageRequestDAOImpl();
       populateLanguageRequestTable();
 
     } catch (Exception e) {
@@ -60,7 +56,7 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
   }
 
   private void populateLanguageRequestTable() {
-    ObservableList<languageInterpreterRequest> languageRequests = populateLanguageRequestList();
+    /*ObservableList<languageInterpreterRequest> languageRequests = populateLanguageRequestList();
 
     tableLanguageType.setCellValueFactory(new PropertyValueFactory<>("language"));
     tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
@@ -80,17 +76,17 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
     tableDeliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
     tableOtherNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
 
-    requestsTable.setItems(languageRequests);
+    requestsTable.setItems(languageRequests);*/
   }
 
-  protected ObservableList<languageInterpreterRequest> populateLanguageRequestList() {
-    List<languageInterpreterRequest> requests = languageRequestDAO.getAll();
+  /*protected ObservableList<languageInterpreterRequest> populateLanguageRequestList() {
+    List<languageInterpreterRequest> requests = system.getAllLanguageRequests();
     tableList = FXCollections.observableArrayList();
     for (languageInterpreterRequest request : requests) {
       tableList.add(request);
     }
     return tableList;
-  }
+  }*/
 
   @FXML
   public void submitButton(ActionEvent event) throws SQLException {
@@ -107,6 +103,7 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
       request.setDeliveryDate(endDate.getValue());
 
       langSendToDB(request);
+      setInfographicsCount("LANG_INTERP_REQ");
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
@@ -118,8 +115,18 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
 
   private void langSendToDB(languageInterpreterRequest request) throws SQLException {
     try {
-      languageRequestDAO.update(request);
-      tableList.add(request);
+      system.update(request);
+      floor.getSelectionModel().clearSelection();
+      room.getSelectionModel().clearSelection();
+      languageOptions.getSelectionModel().clearSelection();
+      isUrgent.setSelected(false);
+      requestStatus.clear();
+      staffAssignee.clear();
+      startDate.getEditor().clear();
+      endDate.getEditor().clear();
+      notes.clear();
+      room.setVisible(false);
+      // tableList.add(request);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -136,5 +143,6 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
     startDate.getEditor().clear();
     endDate.getEditor().clear();
     notes.clear();
+    room.setVisible(false);
   }
 }

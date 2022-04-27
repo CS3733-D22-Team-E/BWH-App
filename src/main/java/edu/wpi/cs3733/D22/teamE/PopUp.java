@@ -17,9 +17,12 @@ import java.util.Objects;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Parent;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Window;
 
 public class PopUp {
@@ -125,5 +128,35 @@ public class PopUp {
     layout.setActions(b);
     reqPage.setContent(layout);
     reqPage.showAndWait();
+  }
+
+  public static void aboutPopUp(String bio, Window owner, String employee) {
+    JFXAlert alert = new JFXAlert(owner);
+    alert.initModality(Modality.APPLICATION_MODAL);
+    alert.setOverlayClose(false);
+    JFXDialogLayout layout = new JFXDialogLayout();
+    layout.setHeading(new Label("About " + employee));
+    layout.setBody(new Label(bio));
+    JFXButton closeButton = new JFXButton("Exit");
+    closeButton.setOnAction(event -> alert.hideWithAnimation());
+    layout.setActions(closeButton);
+    alert.setContent(layout);
+    alert.showAndWait();
+  }
+
+  public static void hoverListener(MouseEvent event, String message) {
+    final Popup popup = new Popup();
+    final Label popupContent = new Label(message);
+    popupContent.setStyle(
+        "-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 1px; -fx-padding: 5px; -fx-text-fill: black;");
+
+    popup.getContent().clear();
+    popup.getContent().addAll(popupContent);
+
+    if (event.getEventType() == MouseEvent.MOUSE_EXITED) {
+      popup.hide();
+    } else if (event.getEventType() == MouseEvent.MOUSE_ENTERED) {
+      popup.show(((Node) event.getSource()).getScene().getWindow());
+    }
   }
 }

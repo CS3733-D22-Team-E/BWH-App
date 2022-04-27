@@ -49,6 +49,47 @@ public class GiftRequestDAOImpl implements DAO<giftDeliveryRequest> {
 
   @Override
   public List<giftDeliveryRequest> getAll() {
+    giftRequests = new ArrayList<>();
+
+    try {
+      String query = "SELECT * FROM GIFTREQUEST ORDER BY GIFT_REQ_ID DESC";
+      PreparedStatement statement = connection.prepareStatement(query);
+      ResultSet rs = statement.executeQuery();
+
+      while (rs.next()) {
+        String giftReqID = rs.getString("GIFT_REQ_ID");
+        java.sql.Date requestDate = rs.getDate("REQUEST_DATE");
+        java.sql.Date deliveryDate = rs.getDate("DELIVERY_DATE");
+        String status = rs.getString("STATUS");
+        String staffAssignee = rs.getString("ASSIGNEE");
+        boolean isUrgent = rs.getBoolean("ISURGENT");
+        String roomID = rs.getString("ROOMID");
+        String floorID = rs.getString("FLOOR");
+        String patientName = rs.getString("PATIENTNAME");
+        String giftType = rs.getString("GIFTTYPE");
+        String otherNotes = rs.getString("OTHERNOTES");
+
+        giftDeliveryRequest request =
+            new giftDeliveryRequest(
+                giftReqID,
+                otherNotes,
+                floorID,
+                roomID,
+                isUrgent,
+                status,
+                staffAssignee,
+                requestDate.toLocalDate(),
+                deliveryDate.toLocalDate(),
+                patientName,
+                giftType);
+        giftRequests.add(request);
+      }
+      rs.close();
+    } catch (SQLException e) {
+      System.out.println("Get All Failed!");
+      e.printStackTrace();
+    }
+
     return giftRequests;
   }
 

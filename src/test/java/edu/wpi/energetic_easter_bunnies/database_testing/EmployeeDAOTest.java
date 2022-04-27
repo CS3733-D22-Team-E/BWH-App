@@ -1,7 +1,6 @@
 package edu.wpi.energetic_easter_bunnies.database_testing;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
 import edu.wpi.cs3733.D22.teamE.database.daos.EmployeeDAOImpl;
@@ -11,19 +10,23 @@ import org.junit.jupiter.api.Test;
 
 public class EmployeeDAOTest {
   @Test
-  public void testAddLabRequest() throws SQLException {
+  public void testAddEmployee() throws SQLException {
     DAO<Employee> employeeDAO = new EmployeeDAOImpl();
     Employee Employee = new Employee("1", "1", "1", 100.0, "1", true, 1);
     employeeDAO.update(Employee);
-    assertTrue(employeeDAO.getAll().contains(Employee));
+    assertEquals(
+        employeeDAO.get(Employee.getEmployeeID()).getEmployeeID(), Employee.getEmployeeID());
+    // assertTrue(employeeDAO.getAll().contains(Employee));
   }
 
   @Test
-  public void testDeleteLabRequest() throws SQLException {
+  public void testEmployee() throws SQLException {
     DAO<Employee> employeeDAO = new EmployeeDAOImpl();
     Employee Employee = new Employee("1", "1", "1", 100.0, "1", true, 1);
     employeeDAO.update(Employee);
-    assertTrue(employeeDAO.getAll().contains(Employee));
+    assertEquals(
+        employeeDAO.get(Employee.getEmployeeID()).getEmployeeID(), Employee.getEmployeeID());
+    // assertTrue(employeeDAO.getAll().contains(Employee));
     employeeDAO.delete(Employee);
     assertFalse(employeeDAO.getAll().contains(Employee));
   }

@@ -11,6 +11,18 @@ import edu.wpi.cs3733.D22.teamE.customUI.customImageViewTesting;
 import edu.wpi.cs3733.D22.teamE.database.daos.*;
 import edu.wpi.cs3733.D22.teamE.entity.*;
 import java.io.*;
+import com.jfoenix.controls.JFXSlider;
+import edu.wpi.cs3733.D22.teamE.database.daos.LocationDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.MedicalEquipmentDAOImpl;
+import edu.wpi.cs3733.D22.teamE.database.daos.ServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.entity.Location;
+import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
+import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
+import edu.wpi.cs3733.D22.teamE.entity.serviceRequest;
+import edu.wpi.cs3733.D22.teamE.pageControl;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -43,7 +55,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException;
 
-public class mapPageController implements Initializable {
+public class mapPageController extends HeaderController implements Initializable {
+  FXMLLoader loader = new FXMLLoader();
+  Parent root;
+  @FXML MenuBar menuBar;
+  LocationDAOImpl db;
+  MedicalEquipmentDAOImpl medEq;
+  ServiceRequestDAOImpl servReq;
   List<Location> locations;
   List<Location> filteredLocations;
 

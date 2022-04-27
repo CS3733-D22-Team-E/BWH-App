@@ -21,7 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * This is the controller class for the Status Page. It inherits from the containsSideMenu class to
  * give the side menu functionality.
  */
-public class statusPageController extends containsSideMenu {
+public class statusPageController {
   @FXML TextField filterFieldDate;
   @FXML TextField filterFieldID;
   @FXML TextField filterFieldType;
@@ -37,9 +37,7 @@ public class statusPageController extends containsSideMenu {
   DAOSystem db;
 
   /** Constructor */
-  public statusPageController() {
-    super();
-  }
+  public statusPageController() {}
 
   /**
    * Initialize the super class and the database object.
@@ -47,9 +45,7 @@ public class statusPageController extends containsSideMenu {
    * @param url unneeded here - inherited parameter
    * @param rb uneeded here - inherited parameter
    */
-  @Override
   public void initialize(URL url, ResourceBundle rb) {
-    super.initialize(url, rb);
     try {
       db = new DAOSystem();
       genTable();
@@ -221,7 +217,7 @@ public class statusPageController extends containsSideMenu {
         new ArrayList<>(requestTable.getSelectionModel().getSelectedItems());
     for (serviceRequestModel req : p) {
       RequestInterface r = db.getServiceRequest(req.getID());
-      db.deleteServiceRequest(r);
+      db.delete(r);
     }
     genTable();
   }

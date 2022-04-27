@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -64,7 +65,31 @@ public class pageControl {
     }
   }
 
+  public static void loadTop(String url, Stage stage) {
+    Parent root = stage.getScene().getRoot();
+    BorderPane basePage = (BorderPane) root.lookup("#rootBorderPane");
+    basePage.setTop(getPageRoot(url));
+  }
+
+  public static void loadCenter(String url, Stage stage) {
+    Parent root = stage.getScene().getRoot();
+    BorderPane basePage = (BorderPane) root.lookup("#rootBorderPane");
+    basePage.setCenter(getPageRoot(url));
+  }
+
+  public static void loadLeft(String url, Stage stage) {
+    Parent root = stage.getScene().getRoot();
+    BorderPane basePage = (BorderPane) root.lookup("#rootBorderPane");
+    basePage.setLeft(getPageRoot(url));
+  }
+
   public static void exitApp() {
+    // TODO: uncomment this, was resulting in error
+    /*
+    CallAPI.getInstance()
+        .getExternalTransportAPI()
+        .exportExternalTransportsToCSV(new File("CSVsaveFiles/TransportExt.csv"));
+     */
     System.exit(0);
   }
 }

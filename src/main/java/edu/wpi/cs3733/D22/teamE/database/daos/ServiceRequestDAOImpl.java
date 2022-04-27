@@ -19,6 +19,7 @@ public class ServiceRequestDAOImpl implements DAO<RequestInterface> {
   DAO<sanitationRequest> sanitationRequestDAO = new SanitationRequestDAOImpl();
   DAO<giftDeliveryRequest> giftDeliveryRequestDAO = new GiftRequestDAOImpl();
   DAO<securityRequest> securityRequestDAO = new SecurityRequestDAOImpl();
+  DAO<facilitiesRequest> facilitiesRequestDAO = new FacilitiesRequestDAOImpl();
 
   public ServiceRequestDAOImpl() throws SQLException {
     serviceRequests = new ArrayList<>();
@@ -31,11 +32,24 @@ public class ServiceRequestDAOImpl implements DAO<RequestInterface> {
     serviceRequests.addAll(sanitationRequestDAO.getAll());
     serviceRequests.addAll(giftDeliveryRequestDAO.getAll());
     serviceRequests.addAll(securityRequestDAO.getAll());
+    serviceRequests.addAll(facilitiesRequestDAO.getAll());
   }
 
   @Override
   public List<RequestInterface> getAll() {
-    return serviceRequests;
+    List<RequestInterface> requests = new ArrayList<>();
+
+    requests.addAll(medicalEquipmentServiceRequestDAO.getAll());
+    requests.addAll(labRequestDAO.getAll());
+    requests.addAll(languageInterpreterRequestDAO.getAll());
+    requests.addAll(mealDeliveryRequestDAO.getAll());
+    requests.addAll(medicineDeliveryDAO.getAll());
+    requests.addAll(sanitationRequestDAO.getAll());
+    requests.addAll(giftDeliveryRequestDAO.getAll());
+    requests.addAll(securityRequestDAO.getAll());
+    requests.addAll(facilitiesRequestDAO.getAll());
+
+    return requests;
   }
 
   public void printAll() {
@@ -77,6 +91,9 @@ public class ServiceRequestDAOImpl implements DAO<RequestInterface> {
       case LAB_REQUEST:
         labRequestDAO.update((labRequest) request);
         break;
+      case FACILITIES_REQ:
+        facilitiesRequestDAO.update((facilitiesRequest) request);
+        break;
       case MED_DELIV_REQ:
         medicineDeliveryDAO.update((medicineDelivery) request);
         break;
@@ -117,6 +134,9 @@ public class ServiceRequestDAOImpl implements DAO<RequestInterface> {
     switch (request.getRequestType()) {
       case LAB_REQUEST:
         labRequestDAO.delete((labRequest) request);
+        break;
+      case FACILITIES_REQ:
+        facilitiesRequestDAO.delete((facilitiesRequest) request);
         break;
       case MED_DELIV_REQ:
         medicineDeliveryDAO.delete((medicineDelivery) request);

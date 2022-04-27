@@ -50,6 +50,36 @@ public class LocationDAOImpl implements DAO<Location> {
    */
   @Override
   public List<Location> getAll() {
+    locations = new ArrayList<>();
+
+    try {
+      String query = "SELECT * FROM TOWERLOCATIONS ORDER BY FLOOR DESC";
+      PreparedStatement statement = connection.prepareStatement(query);
+      ResultSet rs = statement.executeQuery();
+      int numID = 0;
+      while (rs.next()) {
+        String nodeID = rs.getString("nodeID");
+        int xcoord = rs.getInt("xcoord");
+        int ycoord = rs.getInt("ycoord");
+        String floor = rs.getString("floor");
+        String building = rs.getString("building");
+        String nodeType = rs.getString("nodeType");
+        String longName = rs.getString("longName");
+        String shortName = rs.getString("shortName");
+
+        Location location =
+            new Location(
+                nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, numID);
+
+        locations.add(location);
+        numID++;
+      }
+      rs.close();
+    } catch (SQLException e) {
+      System.out.println("Get All Failed!");
+      e.printStackTrace();
+    }
+
     return locations;
   }
 

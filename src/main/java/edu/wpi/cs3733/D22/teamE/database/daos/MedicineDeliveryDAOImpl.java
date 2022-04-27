@@ -69,6 +69,61 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
 
   @Override
   public List<medicineDelivery> getAll() {
+    medicineRequests = new ArrayList<>();
+
+    try {
+      String query = "SELECT * FROM MEDICINEREQUEST ORDER BY MEDICINE_REQ_ID DESC";
+      PreparedStatement statement = connection.prepareStatement(query);
+      ResultSet rs = statement.executeQuery();
+
+      while (rs.next()) {
+        String medicineReqID = rs.getString("MEDICINE_REQ_ID");
+        String otherNotes = rs.getString("OTHERNOTES");
+        String floorID = rs.getString("FLOOR");
+        String roomID = rs.getString("DELIVERYLOCATIONID");
+        Boolean isUrgent = rs.getBoolean("ISURGENT");
+        String status = rs.getString("STATUS");
+        String staffAssignee = rs.getString("ASSIGNEE");
+        java.sql.Date requestDate = rs.getDate("REQUEST_DATE");
+        java.sql.Date deliveryDate = rs.getDate("DELIVERY_DATE");
+        String medicine = rs.getString("MEDICINETYPE");
+        String medicineQuantity = rs.getString("MEDICINEQUANTITY");
+        String medicineUnit = rs.getString("MEDICINEUNIT");
+        String reocurringDays = rs.getString("REOCURRINGDAYS");
+        String deliveryTime = rs.getString("DELIVERYTIME");
+
+        boolean[] repeatDays = getRepeatingDays(reocurringDays);
+
+        medicineDelivery delivery =
+            new medicineDelivery(
+                medicineReqID,
+                otherNotes,
+                floorID,
+                roomID,
+                isUrgent,
+                status,
+                staffAssignee,
+                requestDate.toLocalDate(),
+                deliveryDate.toLocalDate(),
+                medicine,
+                medicineQuantity,
+                medicineUnit,
+                deliveryTime,
+                repeatDays[1],
+                repeatDays[2],
+                repeatDays[3],
+                repeatDays[4],
+                repeatDays[5],
+                repeatDays[6],
+                repeatDays[0]);
+        medicineRequests.add(delivery);
+      }
+      rs.close();
+    } catch (SQLException e) {
+      System.out.println("Get All Failed!");
+      e.printStackTrace();
+    }
+
     return medicineRequests;
   }
 
@@ -117,8 +172,18 @@ public class MedicineDeliveryDAOImpl implements DAO<medicineDelivery> {
   @Override
   public void delete(
       medicineDelivery
-          item) { // TODO: Figure out what to do with Request in DB after its marked as done
-    medicineRequests.remove(item);
+          request) { // TODO: Figure out what to do with Request in DB after its marked as done
+    medicineRequests.remove(request);
+
+    String query = "DELETE FROM MEDICINEREQUEST WHERE MEDICINE_REQ_ID = (?)";
+    PreparedStatement statement;
+    try {
+      statement = connection.prepareStatement(query);
+      statement.setString(1, request.getServiceRequestID());
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   public boolean[] getRepeatingDays(String reocurringDays) { // converting string to booleans
