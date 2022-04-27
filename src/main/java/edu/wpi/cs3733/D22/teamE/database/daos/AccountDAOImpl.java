@@ -12,6 +12,8 @@ public class AccountDAOImpl implements DAO<Account> {
   static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
   List<Account> accounts;
 
+  public String phoneNumber;
+
   public AccountDAOImpl() throws SQLException {
     accounts = new ArrayList<Account>();
     String query = "SELECT * FROM ACCOUNTS ORDER BY ACCOUNTID DESC";
@@ -27,16 +29,17 @@ public class AccountDAOImpl implements DAO<Account> {
       String firstName = rs.getString("FIRSTNAME");
       String lastName = rs.getString("LASTNAME");
       String position = rs.getString("POSITION");
+      String phoneNumber = rs.getString("PHONENUMBER");
 
       Account account = null;
       if (authorityLevel < Account.adminPerm) {
         account =
             new staffAccount(
-                accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position);
+                accountID, employeeID, passwordHash, firstName, lastName, position, phoneNumber);
       } else {
         account =
             new adminAccount(
-                accountID, employeeID, authorityLevel, passwordHash, firstName, lastName, position);
+                accountID, employeeID, passwordHash, firstName, lastName, position, phoneNumber);
       }
 
       accounts.add(account);
@@ -63,28 +66,17 @@ public class AccountDAOImpl implements DAO<Account> {
         String firstName = rs.getString("FIRSTNAME");
         String lastName = rs.getString("LASTNAME");
         String position = rs.getString("POSITION");
+        String phoneNumber = rs.getString("PHONENUMBER");
 
         Account account = null;
         if (authorityLevel < Account.adminPerm) {
           account =
               new staffAccount(
-                  accountID,
-                  employeeID,
-                  authorityLevel,
-                  passwordHash,
-                  firstName,
-                  lastName,
-                  position);
+                  accountID, employeeID, passwordHash, firstName, lastName, position, phoneNumber);
         } else {
           account =
               new adminAccount(
-                  accountID,
-                  employeeID,
-                  authorityLevel,
-                  passwordHash,
-                  firstName,
-                  lastName,
-                  position);
+                  accountID, employeeID, passwordHash, firstName, lastName, position, phoneNumber);
         }
 
         accounts.add(account);
@@ -110,11 +102,15 @@ public class AccountDAOImpl implements DAO<Account> {
 
   @Override
   public void update(Account account) {
-    delete(account);
+    try {
+      delete(account);
+    } catch (NullPointerException err) {
+      System.out.println("Not Found");
+    }
     accounts.add(account);
     try {
       String query =
-          "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION) VALUES ('"
+          "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION, PHONENUMBER) VALUES ('"
               + account.getAccountID()
               + "','"
               + account.getEmployeeID()
@@ -128,6 +124,8 @@ public class AccountDAOImpl implements DAO<Account> {
               + account.getLastName()
               + "','"
               + account.getPosition()
+              + "','"
+              + account.getPhoneNumber()
               + "')"; // Insert into database; does not check if the employeeID already exists
       PreparedStatement statement = connection.prepareStatement(query);
       statement.executeUpdate();
