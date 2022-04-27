@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
-import edu.wpi.cs3733.D22.teamE.database.DBConnect;
+import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.entity.EntityInterface;
 import edu.wpi.cs3733.D22.teamE.entity.Location;
 import java.sql.*;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LocationDAOImpl implements DAO<Location> {
-  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+  static Connection connection = AccountsManager.getInstance().getConnection();
   List<Location> locations;
 
   /**

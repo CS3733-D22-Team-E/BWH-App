@@ -3,11 +3,13 @@ package edu.wpi.cs3733.D22.teamE.database;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
+import java.sql.Connection;
 
 public class AccountsManager {
   private String accountID;
   private String employeeID;
   private static AccountsManager AM_instance = null;
+  Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
 
   private AccountsManager() {}
 
@@ -31,5 +33,13 @@ public class AccountsManager {
 
   public void setEmployee(Employee employee) {
     this.employeeID = employee.getEmployeeID();
+  }
+
+  public Connection getConnection() {
+    return connection;
+  }
+
+  public void setConnection(DBConnect dbConnect) {
+    connection = dbConnect.getConnection();
   }
 }
