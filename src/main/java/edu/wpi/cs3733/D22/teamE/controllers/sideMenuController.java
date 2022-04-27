@@ -86,7 +86,7 @@ public class sideMenuController implements Initializable {
           if (sideMenuBox.equals(logoutBox)) {
             pageControl.loadPage(url, (Stage) root.getScene().getWindow());
           } else if (sideMenuBox.equals(exitBox)) {
-            pageControl.exitApp();
+            pageControl.exitApp(exitBox.getScene().getWindow());
           } else {
             pageControl.loadCenter(url, (Stage) root.getScene().getWindow());
           }

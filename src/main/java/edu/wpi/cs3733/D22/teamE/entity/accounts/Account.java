@@ -5,6 +5,10 @@ public abstract class Account {
   public static int staffPerm = 1;
   public static int adminPerm = 2;
 
+  private final int basicUserAuthorityLevel = 0;
+  private final int staffAuthorityLevel = 1;
+  private final int adminAuthorityLevel = 2;
+
   private String accountID; // staff assignee
   private String employeeID; // if empty
   private int authorityLevel; // 0 basic user, 1 staff, 2... admin
@@ -54,7 +58,7 @@ public abstract class Account {
     this.firstName = "defaultFirstName";
     this.lastName = "defaultLastName";
     this.position = "defaultPosition";
-    this.phoneNumber = "0000000000";
+    this.phoneNumber = "6178936605"; // Jeremy
   }
 
   /**

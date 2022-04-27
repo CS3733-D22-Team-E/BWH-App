@@ -125,6 +125,12 @@ public class loginPageController implements Initializable {
     return false;
   }
 
+  private boolean verifyUser2FA(String phoneNumber) {
+    // String codeMessage = "default";
+    // Texting.sendSMS(phoneNumber, codeMessage);
+    return false;
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     RequiredFieldValidator validator = new RequiredFieldValidator();

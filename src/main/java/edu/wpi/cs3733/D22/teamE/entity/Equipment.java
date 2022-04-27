@@ -48,17 +48,14 @@ public abstract class Equipment implements EntityInterface {
 
   @Override
   public Location getLocation() {
-    String myLoc = currentLocation;
-    return DAOSystemSingleton.INSTANCE.getSystem().getLocation(myLoc);
+    // String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
+    return DAOSystemSingleton.INSTANCE.getSystem().getLocation(currentLocation);
   }
 
   @Override
   public void setLocation(String NodeID) throws NullPointerException {
     if (DAOSystemSingleton.INSTANCE.getSystem().getLocation(NodeID) != null) {
-      String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
-      if (myLoc.equals(currentLocation)) currentLocation = NodeID;
-      if (myLoc.equals(cleanLocation)) cleanLocation = NodeID;
-      if (myLoc.equals(storageLocation)) storageLocation = NodeID;
+      this.currentLocation = NodeID;
     }
   }
 
@@ -72,20 +69,14 @@ public abstract class Equipment implements EntityInterface {
 
   @Override
   public void setLocation(Location location) throws NullPointerException {
-    String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
-    if (myLoc.equals(currentLocation)) currentLocation = location.getNodeID();
-    if (myLoc.equals(cleanLocation)) cleanLocation = location.getNodeID();
-    if (myLoc.equals(storageLocation)) storageLocation = location.getNodeID();
+    this.currentLocation = location.getNodeID();
   }
 
   @Override
   public void setLocation(int xcoord, int ycoord) throws NullPointerException {
     Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(xcoord, ycoord);
     if (loc != null) {
-      String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
-      if (myLoc.equals(currentLocation)) currentLocation = loc.getNodeID();
-      if (myLoc.equals(cleanLocation)) cleanLocation = loc.getNodeID();
-      if (myLoc.equals(storageLocation)) storageLocation = loc.getNodeID();
+      this.currentLocation = loc.getNodeID();
     }
   }
 

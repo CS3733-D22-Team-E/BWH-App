@@ -10,11 +10,12 @@ public class Texting {
       "655417373ed32489bb442e5970cfadd9"; // "0bb060eaa1fec2901389a120f849e1f3";
 
   public static void sendSMS(String phoneNumber, String sms) {
+    if (!phoneNumber.startsWith("+1")) phoneNumber += "+1";
     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     Message message =
         Message.creator(
-                new com.twilio.type.PhoneNumber(phoneNumber), // "+16178936605"),//"+19788317440"),
-                "MG1ac5310d1cb7fa5bd6b3cc678d597e01", // "MG9752274e9e519418a7406176694466fa",
+                new com.twilio.type.PhoneNumber(phoneNumber),
+                "MG1ac5310d1cb7fa5bd6b3cc678d597e01",
                 sms)
             .create();
 

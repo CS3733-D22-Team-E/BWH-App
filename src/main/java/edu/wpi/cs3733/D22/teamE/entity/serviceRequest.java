@@ -185,7 +185,7 @@ public class serviceRequest implements RequestInterface {
   }
 
   public String getFloorID() {
-    return floorID;
+    return getLocation().getFloor();
   }
 
   public void setFloorID(String floorID) {
