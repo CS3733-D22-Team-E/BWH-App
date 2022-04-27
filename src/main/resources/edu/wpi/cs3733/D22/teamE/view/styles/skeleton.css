@@ -188,3 +188,9 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
 }
+
+.card-background {
+    -fx-background-image: url("../images/holographic3.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}

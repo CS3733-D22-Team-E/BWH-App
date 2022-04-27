@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainPane" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="default-background" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.homePageController">
+<VBox fx:id="mainPane" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="default-background" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.homePageController">
    <children>
       <Label alignment="TOP_CENTER" text="Welcome " textFill="WHITE" VBox.vgrow="ALWAYS">
          <font>
@@ -19,8 +24,8 @@
       <GridPane hgap="20.0" vgap="20.0" VBox.vgrow="ALWAYS">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="147.19998779296876" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="153.60001220703128" />
             <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
         </columnConstraints>
         <rowConstraints>
@@ -34,30 +39,28 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
          </padding>
          <children>
-            <VBox fx:id="dashboardPane" alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <VBox fx:id="dashboardPane" alignment="CENTER" minHeight="150.0" minWidth="150.0" prefHeight="184.0" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <StackPane VBox.vgrow="ALWAYS">
+                  <StackPane minHeight="110.0" minWidth="110.0" prefHeight="110.0" prefWidth="110.0" styleClass="card-background" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" styleClass="rounded">
-                           <StackPane.margin>
-                              <Insets left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                           <image>
-                              <Image url="@images/holographic3.jpg" />
-                           </image>
-                           <effect>
-                              <GaussianBlur />
-                           </effect>
-                        </ImageView>
                         <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/dashboard.png" />
                            </image>
+                           <effect>
+                              <Glow />
+                           </effect>
                         </ImageView>
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
+                     <effect>
+                        <Glow />
+                     </effect>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
                   </StackPane>
                   <Label styleClass="textColor" text="Dashboard" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
@@ -79,30 +82,28 @@
                   <String fx:value="dropShadow" />
                </styleClass>
             </VBox>
-            <VBox fx:id="myProfilePane" alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <VBox fx:id="myProfilePane" alignment="CENTER" minHeight="150.0" minWidth="150.0" prefHeight="184.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <StackPane VBox.vgrow="ALWAYS">
+                  <StackPane minHeight="110.0" minWidth="110.0" prefHeight="110.0" prefWidth="110.0" styleClass="card-background" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" styleClass="rounded">
-                           <StackPane.margin>
-                              <Insets left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                           <image>
-                              <Image url="@images/holographic3.jpg" />
-                           </image>
-                           <effect>
-                              <GaussianBlur />
-                           </effect>
-                        </ImageView>
                         <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/profileperson.png" />
                            </image>
+                           <effect>
+                              <Glow />
+                           </effect>
                         </ImageView>
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <effect>
+                        <Glow />
+                     </effect>
                   </StackPane>
                   <Label styleClass="textColor" text="My Profile" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
@@ -121,30 +122,28 @@
                   <String fx:value="dropShadow" />
                </styleClass>
             </VBox>
-            <VBox fx:id="submitRequestPane" alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <VBox fx:id="submitRequestPane" alignment="CENTER" minHeight="150.0" minWidth="150.0" prefHeight="184.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <StackPane VBox.vgrow="ALWAYS">
+                  <StackPane minHeight="110.0" minWidth="110.0" prefHeight="110.0" prefWidth="110.0" styleClass="card-background" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" styleClass="rounded">
-                           <StackPane.margin>
-                              <Insets left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                           <image>
-                              <Image url="@images/holographic3.jpg" />
-                           </image>
-                           <effect>
-                              <GaussianBlur />
-                           </effect>
-                        </ImageView>
                         <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/serviceHelp.png" />
                            </image>
+                           <effect>
+                              <Glow />
+                           </effect>
                         </ImageView>
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <effect>
+                        <Glow />
+                     </effect>
                   </StackPane>
                   <Label styleClass="textColor" text="Submit" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
@@ -171,30 +170,28 @@
                   <String fx:value="dropShadow" />
                </styleClass>
             </VBox>
-            <VBox fx:id="statusPane" alignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <VBox fx:id="statusPane" alignment="CENTER" minHeight="150.0" minWidth="150.0" prefHeight="184.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <StackPane VBox.vgrow="ALWAYS">
+                  <StackPane minHeight="110.0" minWidth="110.0" prefHeight="110.0" prefWidth="110.0" styleClass="card-background" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" styleClass="rounded">
-                           <StackPane.margin>
-                              <Insets left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                           <image>
-                              <Image url="@images/holographic3.jpg" />
-                           </image>
-                           <effect>
-                              <GaussianBlur />
-                           </effect>
-                        </ImageView>
                         <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/progress.png" />
                            </image>
+                           <effect>
+                              <Glow />
+                           </effect>
                         </ImageView>
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <effect>
+                        <Glow />
+                     </effect>
                   </StackPane>
                   <Label styleClass="textColor" text="Service Request" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
@@ -221,30 +218,28 @@
                   <String fx:value="dropShadow" />
                </styleClass>
             </VBox>
-            <VBox fx:id="mapPane" alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <VBox fx:id="mapPane" alignment="CENTER" minHeight="150.0" minWidth="150.0" prefHeight="184.0" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <StackPane VBox.vgrow="ALWAYS">
+                  <StackPane minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" styleClass="card-background" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" styleClass="rounded">
-                           <StackPane.margin>
-                              <Insets left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                           <image>
-                              <Image url="@images/holographic3.jpg" />
-                           </image>
-                           <effect>
-                              <GaussianBlur />
-                           </effect>
-                        </ImageView>
                         <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/mapHelp.png" />
                            </image>
+                           <effect>
+                              <Glow />
+                           </effect>
                         </ImageView>
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
+                     <effect>
+                        <Glow />
+                     </effect>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
                   </StackPane>
                   <Label styleClass="textColor" text="Map " textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
@@ -263,31 +258,28 @@
                   <String fx:value="dropShadow" />
                </styleClass>
             </VBox>
-            <VBox fx:id="employeeDatabasePane" alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <VBox fx:id="employeeDatabasePane" alignment="CENTER" minHeight="150.0" minWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                  <StackPane VBox.vgrow="ALWAYS">
+                  <StackPane minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" styleClass="card-background" VBox.vgrow="ALWAYS">
                      <children>
-                        <Group>
-                           <children>
-                              <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="9.999999612569809" layoutY="9.999999612569809" pickOnBounds="true" styleClass="rounded">
-                                 <image>
-                                    <Image url="@images/holographic3.jpg" />
-                                 </image>
-                                 <effect>
-                                    <GaussianBlur />
-                                 </effect>
-                              </ImageView>
-                              <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="24.399999231100082" layoutY="24.399999231100082" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@icons/profile.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Group>
+                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@icons/profile.png" />
+                           </image>
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </ImageView>
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </padding>
+                     <effect>
+                        <Glow />
+                     </effect>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
                   </StackPane>
                   <Label styleClass="textColor" text="Employee" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
                      <font>
