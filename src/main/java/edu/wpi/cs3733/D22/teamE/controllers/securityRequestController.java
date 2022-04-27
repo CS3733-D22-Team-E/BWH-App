@@ -8,26 +8,21 @@ import edu.wpi.cs3733.D22.teamE.entity.securityRequest;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
-public class securityRequestController extends serviceRequestPageController {
+public class securityRequestController extends serviceRequestPageController
+    implements Initializable {
 
   @FXML JFXComboBox<String> securityRequestType;
   @FXML JFXComboBox<String> timeFrameComboBox;
   @FXML TextField notes;
-  @FXML TableView<securityRequest> requestsTable;
+  @FXML CheckBox isUrgent;
+  /*@FXML TableView<securityRequest> requestsTable;
 
   @FXML TableColumn<securityRequest, String> tableSecurityRequestType;
   @FXML TableColumn<securityRequest, String> tableStaffAssignee;
@@ -36,11 +31,11 @@ public class securityRequestController extends serviceRequestPageController {
   @FXML TableColumn<securityRequest, String> tableRequestStatus;
   @FXML TableColumn<securityRequest, String> tableOtherNotes;
 
-  ObservableList<securityRequest> tableList;
+  ObservableList<securityRequest> tableList;*/
 
   // SecurityRequestDAOImpl securityRequestDB;
   DAOSystem system;
-  securityRequest securityReq = new securityRequest();
+  // securityRequest securityReq = new securityRequest();
 
   /** Constructor */
   public securityRequestController() {
@@ -61,14 +56,15 @@ public class securityRequestController extends serviceRequestPageController {
           .getItems()
           .addAll("Aid", "Secure", "Danger", "Other: detail in other notes");
       timeFrameComboBox.getItems().addAll("ASAP", "<1 hour", "<1 day");
-      populateSecurityRequestTable();
+      setInfographicsCount("SECURITY_REQ");
+      // populateSecurityRequestTable();
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
   private void populateSecurityRequestTable() {
-    ObservableList<securityRequest> securityRequests = populateSecurityRequestList();
+    /*ObservableList<securityRequest> securityRequests = populateSecurityRequestList();
     tableSecurityRequestType.setCellValueFactory(new PropertyValueFactory<>("securityRequestType"));
     tableStaffAssignee.setCellValueFactory(new PropertyValueFactory<>("staffAssignee"));
     tableLocNodeID.setCellValueFactory(
@@ -85,42 +81,55 @@ public class securityRequestController extends serviceRequestPageController {
     tableRequestStatus.setCellValueFactory(new PropertyValueFactory<>("requestStatus"));
     tableOtherNotes.setCellValueFactory(new PropertyValueFactory<>("otherNotes"));
 
-    requestsTable.setItems(securityRequests);
+    requestsTable.setItems(securityRequests);*/
   }
 
-  protected ObservableList<securityRequest> populateSecurityRequestList() {
+  /*protected ObservableList<securityRequest> populateSecurityRequestList() {
     List<securityRequest> list = system.getAllSecurityRequests();
     tableList = FXCollections.observableArrayList();
     for (securityRequest l : list) {
       tableList.add(l);
     }
     return tableList;
-  }
+  }*/
 
   @Override
   public void submitButton(ActionEvent event) throws SQLException {
+    try {
+      securitySendToDB();
+      setInfographicsCount("SECURITY_REQ");
+
+      floor.getSelectionModel().clearSelection();
+      room.getSelectionModel().clearSelection();
+      securityRequestType.getSelectionModel().clearSelection();
+      timeFrameComboBox.getSelectionModel().clearSelection();
+      requestStatus.clear();
+      isUrgent.setSelected(false);
+      staffAssignee.clear();
+      notes.clear();
+      room.setVisible(false);
+    } catch (RuntimeException error) {
+      System.out.println("Error : Some Value is NULL");
+      error.printStackTrace();
+      PopUp.createWarning("Warning : A required value was not filled", null);
+    }
+  }
+
+  private void securitySendToDB() {
+    securityRequest securityReq = new securityRequest();
     securityReq.setSecurityRequestType(securityRequestType.getValue());
     securityReq.setTimeFrame(timeFrameComboBox.getValue());
     securityReq.setRoomID(roomNameToRoomID.get(room.getValue()));
     securityReq.setFloorID(floor.getValue());
-    securityReq.setIsUrgent(true); // TODO: Potentially have a field in page to select this
+    securityReq.setIsUrgent(isUrgent.isSelected());
     securityReq.setStaffAssignee(staffAssignee.getText());
     securityReq.setRequestStatus(requestStatus.getText());
     securityReq.setRequestDate(LocalDate.now());
     securityReq.setDeliveryDate(LocalDate.now());
     securityReq.setOtherNotes(notes.getText());
     try {
-      securitySendToDB(securityReq);
-    } catch (RuntimeException error) {
-      System.out.println("Error : Some Value is NULL");
-      PopUp.createWarning("Warning : A required value was not filled", null);
-    }
-  }
-
-  private void securitySendToDB(securityRequest securityReq) {
-    try {
       system.update(securityReq);
-      tableList.add(securityReq);
+      // tableList.add(securityReq);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -133,7 +142,9 @@ public class securityRequestController extends serviceRequestPageController {
     securityRequestType.getSelectionModel().clearSelection();
     timeFrameComboBox.getSelectionModel().clearSelection();
     requestStatus.clear();
+    isUrgent.setSelected(false);
     staffAssignee.clear();
     notes.clear();
+    room.setVisible(false);
   }
 }

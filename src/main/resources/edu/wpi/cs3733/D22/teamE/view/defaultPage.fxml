@@ -48,7 +48,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="default-background" fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.mainController">
+<VBox id="default-background" fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@styles/default.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.mainController">
    <children>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="1080.0" styleClass="header" VBox.vgrow="ALWAYS">
          <children>
@@ -95,7 +95,7 @@
                               <Label layoutX="647.0" layoutY="10.0" text="Tim Connors" />
                            </children>
                         </HBox>
-                        <TilePane fx:id="buttonTilePane" hgap="50.0" prefColumns="3" prefHeight="381.0" prefRows="3" prefTileHeight="90.0" prefTileWidth="100.0" prefWidth="875.0" vgap="50.0">
+                        <TilePane hgap="50.0" prefColumns="3" prefHeight="381.0" prefRows="3" prefTileHeight="90.0" prefTileWidth="100.0" prefWidth="875.0" vgap="50.0">
                            <children>
                               <Pane>
                                  <children>
@@ -327,18 +327,18 @@
                                        </children>
                                     </Pane>
                                  </children></JFXTogglePane>
-                              <Pane layoutX="10.0" layoutY="10.0">
+                              <Pane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="sanitationButton1" alignment="CENTER" layoutX="2.0" layoutY="6.0" mnemonicParsing="false" onAction="#extTransportButton" styleClass="serviceButton">
+                                    <Button fx:id="headerButton" alignment="CENTER" mnemonicParsing="false" onAction="#headerButton" styleClass="serviceButton">
                                        <graphic>
                                           <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@icons/sanitizer.png" />
+                                                <Image url="@icons/security.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Label layoutX="-6.0" layoutY="85.0" text="External Transport" />
+                                    <Label layoutX="5.0" layoutY="76.0" prefHeight="17.0" prefWidth="85.0" text="Ahh header!!" textAlignment="CENTER" />
                                  </children>
                               </Pane>
                            </children>

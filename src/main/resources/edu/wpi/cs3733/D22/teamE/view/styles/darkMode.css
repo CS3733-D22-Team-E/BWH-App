@@ -1,68 +1,182 @@
-#default-background {
-    -fx-background-image: url("../images/hospital.JPG");
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
+/* Generic CSS */
+.rounded {
+    -fx-border-radius: 20;
+    -fx-background-radius: 25;
+}
+.rounded_08 {
+    -fx-border-radius: 18;
+    -fx-background-radius: 18;
 }
 
-#main-box {
-    -fx-background-color: #313030;
-    -fx-background-radius: 10px;
-    -fx-padding: 10px;
+.lessRounded {
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
 }
 
-#main-page {
-    -fx-background-color: #313030;
-    -fx-padding: 10px;
+.titleText {
+    -fx-text-fill: #cccccc;
+    -fx-font-weight: bold;
+    -fx-font-size: 25;
 }
 
-.label {
-    -fx-text-color: rgba(134, 134, 134, 0.9);
+.bodyText {
+    -fx-text-fill: #cccccc;
+    -fx-font-weight: normal;
+    -fx-font-size: 15;
 }
 
-.serviceButton {
-    -fx-background-color: rgba(200, 200, 200, 0.9);
-    -fx-background-radius: 8px;
-}
-.commonButton {
-    -fx-background-color: rgba(84, 84, 84, 0.9);
-    -fx-background-radius: 8px;
+.button {
+    -fx-background-color: #333333;
+    -fx-text-fill: #cccccc;
 }
 
+.background {
+    -fx-background-color: #333333;
+}
+
+.textColor {
+    -fx-text-fill: #CCCCCC;
+}
+
+.textColor_white {
+    -fx-text-fill: #d2d2d2;
+}
+
+.darkColor {
+    -fx-background-color: #0e4f4b;
+}
+
+.lightColor {
+    -fx-background-color:  #188E87;
+}
+
+.darkBorder{
+    -fx-border-color: #0e4f4b;
+}
+.lightBorder{
+    -fx-border-color: #188E87;
+}
+.thinBorder{
+    -fx-border-width: 3;
+}
+.thinnerBorder{
+    -fx-border-width: 1;
+}
+.dropShadow{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+.bold {
+    -fx-font-weight: bold;
+}
+
+.largeFont{
+
+}
+
+/* Header */
 .header {
-    -fx-background-color: #0c0c2f;
-    -fx-border-color: black;
-    -fx-opacity: 0.95;
+    -fx-background-color: #0e4f4b;
+
 }
 
-.round-border{
-    -fx-background-radius: 100;
+.headerButton {
+    -fx-background-color: #1f4d4a;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15;
 }
 
-.primary-color{
-    -fx-background-color: #FFFFFF;
+
+.headerSelectedButton {
+    -fx-background-color: #163634;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15;
 }
 
-.secondary-color{
-    -fx-background-color: rgba(66, 66, 66, 0.9);
+.headerText {
+    -fx-font-size: 20;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
 }
 
-.table-column {
-    -fx-pref-height: 49;
-    -fx-background-color: transparent;
-    -fx-alignment: center;
-    -fx-border-width: 0.4;
-}
-.inner-color{
-    -fx-text-inner-color: #ffffff;
+/* Sidebar */
+.sidebarBackground {
+    -fx-background-color: #255956;
 }
 
-.combo-box .cell{
-    -fx-text-fill: rgba(128, 128, 128, 0.9);
-    -fx-font: 12px "Arial";
+.sidebarButton {
+    -fx-background-color: #2f7773;
+    -fx-text-fill: white;
 }
-.my-list-cell {
-    -fx-text-fill: rgb(0, 0, 0);
-    -fx-font: 12px "Arial";
-    /* No alternate highlighting */
-    -fx-background-color: rgba(66, 66, 66, 0.9);
+
+.sidebarSelectedButton {
+    -fx-background-color: #46a19c;
+}
+
+/* Page Background */
+
+.pageBackgroundColor {
+    -fx-background-color: #aeb5bb;
+}
+
+/* Page Container */
+
+.container {
+    -fx-background-color: #666666;
+    -fx-border-color:  #333333;
+    -fx-border-width: 3;
+    -fx-border-radius: 20;
+    -fx-background-radius: 25;
+
+}
+
+.containerButton {
+    -fx-background-color: #DFDFDF;
+    -fx-text-fill: white;
+}
+
+.containerButtonSelected {
+    -fx-background-color: #C4C4C4;
+    -fx-text-fill: white;
+}
+
+/* Service Request */
+
+.submitButton {
+    -fx-background-color: #1f4d4a;
+    -fx-text-fill: white;
+}
+.tableView{
+    -fx-background-color: #1f4d4a;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+.inputField {
+    -fx-background-color: #e1e1e1;
+    -fx-text-fill: #212121;
+}
+
+.inputLabel {
+    -fx-text-fill: #212121;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+.graphicsLabel{
+    -fx-text-fill: #1f4d4a;
+    -fx-font-weight: bold;
+    -fx-font-size: 24;
+}
+
+/* Profile */
+.gradient{
+    -fx-background-color: linear-gradient(to bottom right, #020079, #993ab0);
+    -fx-opacity: 0.96;
+}
+
+/* Profile */
+.profile {
+    -fx-border-radius: 100%;
 }

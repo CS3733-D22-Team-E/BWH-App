@@ -1,13 +1,13 @@
 package edu.wpi.cs3733.D22.teamE.database;
 
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import java.sql.Connection;
-import java.util.Random;
 
 public class AccountsManager {
-  private Account account;
-  private Employee employee;
+  private String accountID;
+  private String employeeID;
   private static AccountsManager AM_instance = null;
   Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
 
@@ -20,23 +20,19 @@ public class AccountsManager {
   }
 
   public Account getAccount() {
-    return account;
+    return DAOSystemSingleton.INSTANCE.getSystem().getAccount(accountID);
   }
 
   public void setAccount(Account account) {
-    this.account = account;
+    this.accountID = account.getAccountID();
   }
 
   public Employee getEmployee() {
-    return employee;
+    return DAOSystemSingleton.INSTANCE.getSystem().getEmployee(employeeID);
   }
 
   public void setEmployee(Employee employee) {
-    this.employee = employee;
-  }
-
-  public static String generateRandom8DigitID() {
-    return String.format("%8d", new Random().nextInt((int) Math.pow(10, 8)));
+    this.employeeID = employee.getEmployeeID();
   }
 
   public Connection getConnection() {

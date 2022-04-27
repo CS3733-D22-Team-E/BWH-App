@@ -24,9 +24,9 @@ public class LabRequestDAOImpl implements DAO<labRequest> {
       String timeFrame = rs.getString("TIMEFRAME");
       String staffAssignee = rs.getString("STAFFASSIGNEE");
       String locNodeID = rs.getString("LOCATIONID");
+      String floorID = rs.getString("FLOOR");
       String requestStatus = rs.getString("REQUESTSTATUS");
       String otherNotes = rs.getString("OTHERNOTES");
-      String floorID = "";
       java.sql.Date deliveryDate = Date.valueOf(LocalDate.now());
       java.sql.Date requestDate = Date.valueOf(LocalDate.now());
       boolean isUrgent = false;
@@ -69,9 +69,9 @@ public class LabRequestDAOImpl implements DAO<labRequest> {
         String timeFrame = rs.getString("TIMEFRAME");
         String staffAssignee = rs.getString("STAFFASSIGNEE");
         String locNodeID = rs.getString("LOCATIONID");
+        String floorID = rs.getString("FLOOR");
         String requestStatus = rs.getString("REQUESTSTATUS");
         String otherNotes = rs.getString("OTHERNOTES");
-        String floorID = "";
         java.sql.Date deliveryDate = Date.valueOf(LocalDate.now());
         java.sql.Date requestDate = Date.valueOf(LocalDate.now());
         boolean isUrgent = false;
@@ -133,6 +133,8 @@ public class LabRequestDAOImpl implements DAO<labRequest> {
               + labRequest.getStaffAssignee()
               + "','"
               + labRequest.getRoomID()
+              + "','"
+              + labRequest.getFloorID()
               + "','"
               + labRequest.getTimeFrame()
               + "','"

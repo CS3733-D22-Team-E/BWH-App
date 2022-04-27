@@ -8,6 +8,7 @@ import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,6 +42,7 @@ public class mainController implements pageButtons {
   @FXML Button helpButton;
   @FXML JFXToggleButton databaseSwitchButton;
   @FXML Button apiButton;
+  @FXML Button headerButton;
 
   @FXML private Button btnMode;
   @FXML private ImageView imgMode;
@@ -91,70 +93,70 @@ public class mainController implements pageButtons {
   @FXML
   public void mealDeliveryButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
-    ;
 
-    pageControl.loadPage("mealDeliveryPage.fxml", thisStage); // TODO: Load exception at this line?
+    pageControl.loadCenter(
+        "mealDeliveryPage.fxml", thisStage); // TODO: Load exception at this line?
   }
 
   @FXML
   public void statusButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("statusPage.fxml", thisStage);
+    pageControl.loadCenter("serviceRequestLanding.fxml", thisStage);
   }
 
   @FXML
   public void languageButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("languagePage.fxml", thisStage);
+    pageControl.loadCenter("languagePage.fxml", thisStage);
   }
 
   @FXML
   public void medicalEquipmentButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("medicalEquipmentPage.fxml", thisStage);
+    pageControl.loadCenter("medicalEquipmentPage.fxml", thisStage);
   }
 
   @FXML
   public void medicineDeliveryButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("medicineDelivery.fxml", thisStage);
+    pageControl.loadCenter("medicineDelivery.fxml", thisStage);
   }
 
   @FXML
-  public void exitButton(ActionEvent event) throws IOException {
-    pageControl.exitApp();
+  public void exitButton(ActionEvent event) throws IOException, SQLException {
+    pageControl.exitApp(mainPane.getScene().getWindow());
   }
 
   @FXML
   public void sanitationButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("sanitationPage.fxml", thisStage);
+    pageControl.loadCenter("sanitationPage.fxml", thisStage);
   }
 
   @FXML
   public void labRequestButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("labRequestPage.fxml", thisStage);
+    pageControl.loadCenter("labRequestPage.fxml", thisStage);
   }
 
   @FXML
   public void giftRequestButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("giftPage.fxml", thisStage);
+    pageControl.loadCenter("giftPage.fxml", thisStage);
   }
 
   @FXML
   public void securityRequestButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("securityPage.fxml", thisStage);
+    pageControl.loadCenter("securityPage.fxml", thisStage);
   }
 
   @FXML
@@ -162,42 +164,42 @@ public class mainController implements pageButtons {
     // TODO: implement FXML for this page,add button to page
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("facilitiesPage.fxml", thisStage);
+    pageControl.loadCenter("facilitiesPage.fxml", thisStage);
   }
 
   @FXML
   public void mapButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("map.fxml", thisStage);
+    pageControl.loadCenter("map.fxml", thisStage);
   }
 
   @FXML
   public void aboutButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("aboutPage.fxml", thisStage);
+    pageControl.loadCenter("aboutPage.fxml", thisStage);
   }
 
   @FXML
   public void helpButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("helpPage.fxml", thisStage);
+    pageControl.loadCenter("helpPage.fxml", thisStage);
   }
 
   @FXML
   public void dashboardButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("DashboardPage.fxml", thisStage);
+    pageControl.loadCenter("DashboardPage.fxml", thisStage);
   }
 
   @FXML
   public void homeButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("defaultPage.fxml", thisStage);
+    pageControl.loadCenter("defaultPage.fxml", thisStage);
   }
 
   @FXML
@@ -209,11 +211,10 @@ public class mainController implements pageButtons {
     }
   }
 
-  @Override
   public void profButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadPage("profilePage.fxml", thisStage);
+    pageControl.loadCenter("profilePage.fxml", thisStage);
   }
 
   @FXML
@@ -223,6 +224,13 @@ public class mainController implements pageButtons {
     } else {
       databaseMode = "EMBEDDED_INSTANCE";
     }
+  }
+
+  @FXML
+  public void headerButton(ActionEvent event) throws IOException {
+    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+
+    pageControl.loadCenter("Header.fxml", thisStage);
   }
 
   @FXML

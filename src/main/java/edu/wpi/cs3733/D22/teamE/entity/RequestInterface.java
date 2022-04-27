@@ -3,7 +3,7 @@ package edu.wpi.cs3733.D22.teamE.entity;
 import java.time.LocalDate;
 import java.util.Random;
 
-public interface RequestInterface {
+public interface RequestInterface extends EntityInterface {
 
   public serviceRequest.Type getRequestType();
 
@@ -56,8 +56,4 @@ public interface RequestInterface {
     }
     return result.toString();
   }
-
-  double getxCoord();
-
-  double getyCoord();
 }

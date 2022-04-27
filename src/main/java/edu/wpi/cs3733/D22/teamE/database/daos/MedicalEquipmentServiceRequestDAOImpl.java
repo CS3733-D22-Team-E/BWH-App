@@ -106,7 +106,17 @@ public class MedicalEquipmentServiceRequestDAOImpl implements DAO<medicalEquipme
 
   @Override
   public void update(medicalEquipmentRequest request) {
-    medicalRequests.add(request);
+    try {
+      get(request.getServiceRequestID());
+      delete(request);
+    } catch (NullPointerException e) {
+      e.printStackTrace();
+    }
+    try {
+      addMedEquipReq(request);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override

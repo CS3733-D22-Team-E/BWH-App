@@ -76,6 +76,11 @@ public class EmployeeDAOImpl implements DAO<Employee> {
 
   @Override
   public void update(Employee employee) {
+    try {
+      delete(employee);
+    } catch (NullPointerException e) {
+      System.out.println("Not Found");
+    }
     employees.add(employee);
     try {
       String query =
@@ -101,6 +106,11 @@ public class EmployeeDAOImpl implements DAO<Employee> {
 
   @Override
   public void delete(Employee employee) {
+    try {
+      get(employee.getEmployeeID());
+    } catch (NullPointerException e) {
+      throw new NullPointerException(e.getMessage());
+    }
     employees.remove(employee);
     try {
       String query =
