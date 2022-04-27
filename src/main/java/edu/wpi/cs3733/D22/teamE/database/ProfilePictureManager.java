@@ -1,21 +1,16 @@
 package edu.wpi.cs3733.D22.teamE.database;
 
-import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.controllers.HeaderController;
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.sql.*;
-import javax.imageio.ImageIO;
 
 public class ProfilePictureManager {
 
   public static HeaderController header;
 
-  public static byte[] toByte(String employeeID) throws IOException {
+  /*public static byte[] toByte(String employeeID) throws IOException {
     BufferedImage image =
         ImageIO.read(Main.class.getResource("view/images/employees/" + employeeID + ".jpeg"));
     ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -34,7 +29,7 @@ public class ProfilePictureManager {
             "src/main/resources/edu/wpi/cs3733/D22/teamE/view/images/employees/"
                 + employeeID
                 + ".jpeg"));
-  }
+  }*/
 
   public static ByteArrayInputStream getPersonalPicture(Employee employee)
       throws SQLException, IOException {

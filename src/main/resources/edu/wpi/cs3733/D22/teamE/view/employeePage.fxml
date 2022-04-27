@@ -171,7 +171,7 @@
                   </TableView>
                </content>
             </ScrollPane>
-            <JFXButton buttonType="RAISED" disable="true" onAction="#deleteSelected" ripplerFill="RED" style="-fx-text-fill: black;" text="Delete Employees" visible="false">
+            <JFXButton fx:id="deletionButton" buttonType="RAISED" onAction="#deleteSelected" ripplerFill="RED" style="-fx-text-fill: black;" text="Delete Employees">
                <padding>
                   <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                </padding>
