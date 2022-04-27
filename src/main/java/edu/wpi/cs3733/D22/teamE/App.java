@@ -17,7 +17,6 @@ import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,7 +48,7 @@ public class App extends Application implements SharedScene {
 
   @Override
   public void start(Stage stage) throws Exception {
-    //stage.initStyle(StageStyle.UNIFIED);
+    // stage.initStyle(StageStyle.UNIFIED);
     stage
         .getIcons()
         .add(
