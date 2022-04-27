@@ -47,7 +47,7 @@ public class Location {
     return nodeID;
   }
 
-  public Integer getXcoord() {
+  public Integer getXCoord() {
     return xcoord;
   }
 
@@ -59,7 +59,7 @@ public class Location {
     ycoord = newYCoord;
   }
 
-  public Integer getYcoord() {
+  public Integer getYCoord() {
     return ycoord;
   }
 

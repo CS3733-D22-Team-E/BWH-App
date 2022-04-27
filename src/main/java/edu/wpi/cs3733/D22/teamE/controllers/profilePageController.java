@@ -9,7 +9,9 @@ import edu.wpi.cs3733.D22.teamE.customUI.ServiceRequestButtonListCell;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.ProfilePictureManager;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
+import edu.wpi.cs3733.D22.teamE.entity.EntityInterface;
 import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.entity.passwordSettingRequest;
@@ -59,7 +61,8 @@ public class profilePageController implements Initializable {
   private Account account;
   private Employee employee;
   private DAOSystem db;
-  public JFXListView<RequestInterface> reqList = new JFXListView<>();
+  public JFXListView<EntityInterface> reqList;
+  @FXML Button resetPassword;
   private URL url;
   private ResourceBundle rb;
 
@@ -99,17 +102,18 @@ public class profilePageController implements Initializable {
       colorScheme.getItems().addAll("Bright", "Dark");
 
       int count = 0;
-      List<RequestInterface> l = db.getAllServiceRequests();
-      ArrayList<RequestInterface> myReq = new ArrayList<>();
-      ObservableList<RequestInterface> data = FXCollections.observableArrayList();
-      for (RequestInterface r : l) {
-        count++;
-        if (Objects.equals(employee.getEmployeeID(), "admin")) {
-          myReq.add(r);
-          data.add(r);
-        } else if (Objects.equals(employee.getEmployeeID(), r.getStaffAssignee())) {
-          myReq.add(r);
-          data.add(r);
+      List<EntityInterface> l = new ArrayList<>();
+      l.addAll(DAOSystemSingleton.INSTANCE.getSystem().getAllServiceRequests());
+      ObservableList<EntityInterface> data = FXCollections.observableArrayList();
+      for (EntityInterface e : l) {
+        if (e instanceof RequestInterface) {
+          RequestInterface r = (RequestInterface) e;
+          count++;
+          if (Objects.equals(employee.getEmployeeID(), "admin")) {
+            data.add(r);
+          } else if (Objects.equals(employee.getEmployeeID(), r.getStaffAssignee())) {
+            data.add(r);
+          }
         }
       }
       reqList.setItems(data);

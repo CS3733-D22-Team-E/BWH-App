@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
-public abstract class Equipment {
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
+
+public abstract class Equipment implements EntityInterface {
   private final String equipmentID;
   private boolean isInUse;
   private boolean isClean;
@@ -34,12 +36,57 @@ public abstract class Equipment {
     return isInUse;
   }
 
+  @Override
   public int getNumID() {
     return numID;
   }
 
+  @Override
   public void setNumID(int numID) {
     this.numID = numID;
+  }
+
+  @Override
+  public Location getLocation() {
+    String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
+    return DAOSystemSingleton.INSTANCE.getSystem().getLocation(myLoc);
+  }
+
+  @Override
+  public void setLocation(String NodeID) throws NullPointerException {
+    if (DAOSystemSingleton.INSTANCE.getSystem().getLocation(NodeID) != null) {
+      String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
+      if (myLoc.equals(currentLocation)) currentLocation = NodeID;
+      if (myLoc.equals(cleanLocation)) cleanLocation = NodeID;
+      if (myLoc.equals(storageLocation)) storageLocation = NodeID;
+    }
+  }
+
+  public String getRoomID() {
+    return getLocation().getNodeID();
+  }
+
+  public String getFloorID() {
+    return getLocation().getFloor();
+  }
+
+  @Override
+  public void setLocation(Location location) throws NullPointerException {
+    String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
+    if (myLoc.equals(currentLocation)) currentLocation = location.getNodeID();
+    if (myLoc.equals(cleanLocation)) cleanLocation = location.getNodeID();
+    if (myLoc.equals(storageLocation)) storageLocation = location.getNodeID();
+  }
+
+  @Override
+  public void setLocation(int xcoord, int ycoord) throws NullPointerException {
+    Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(xcoord, ycoord);
+    if (loc != null) {
+      String myLoc = (isInUse) ? currentLocation : (isClean) ? cleanLocation : storageLocation;
+      if (myLoc.equals(currentLocation)) currentLocation = loc.getNodeID();
+      if (myLoc.equals(cleanLocation)) cleanLocation = loc.getNodeID();
+      if (myLoc.equals(storageLocation)) storageLocation = loc.getNodeID();
+    }
   }
 
   public void setisInUse(boolean inUse) {
@@ -79,4 +126,19 @@ public abstract class Equipment {
   }
 
   public abstract void use();
+
+  @Override
+  public double getXCoord() {
+    return this.getLocation().getXCoord();
+  }
+
+  @Override
+  public double getYCoord() {
+    return this.getLocation().getYCoord();
+  }
+
+  @Override
+  public String toString() {
+    return this.getEquipmentID();
+  }
 }

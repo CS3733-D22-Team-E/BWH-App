@@ -12,8 +12,8 @@ public class Astar {
   public Astar() {}
 
   public double heuristic(Node a, Node b) {
-    return abs(a.getLocation().getXcoord() - b.getLocation().getXcoord())
-        + abs(a.getLocation().getYcoord() - b.getLocation().getYcoord());
+    return abs(a.getLocation().getXCoord() - b.getLocation().getXCoord())
+        + abs(a.getLocation().getYCoord() - b.getLocation().getYCoord());
   }
 
   public ArrayList<Node> constructPath(Node n) {

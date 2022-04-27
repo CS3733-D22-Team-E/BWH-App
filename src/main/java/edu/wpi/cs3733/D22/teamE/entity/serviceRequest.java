@@ -1,9 +1,57 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class serviceRequest implements RequestInterface {
+
+  @Override
+  public int getNumID() {
+    return 0;
+  }
+
+  @Override
+  public void setNumID(int num) {}
+
+  @Override
+  public Location getLocation() {
+    return DAOSystemSingleton.INSTANCE.getSystem().getLocation(roomID);
+  }
+
+  @Override
+  public void setLocation(String NodeID) throws NullPointerException {
+    Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(NodeID);
+    if (loc != null) {
+      setRoomID(loc.getNodeID());
+      setFloorID(loc.getFloor());
+    }
+  }
+
+  @Override
+  public void setLocation(Location location) throws NullPointerException {
+    setRoomID(location.getNodeID());
+    setFloorID(location.getFloor());
+  }
+
+  @Override
+  public void setLocation(int xcoord, int ycoord) throws NullPointerException {
+    Location loc = DAOSystemSingleton.INSTANCE.getSystem().getLocation(xcoord, ycoord);
+    if (loc != null) {
+      setRoomID(loc.getNodeID());
+      setFloorID(loc.getFloor());
+    }
+  }
+
+  @Override
+  public double getXCoord() {
+    return getLocation().getXCoord();
+  }
+
+  @Override
+  public double getYCoord() {
+    return getLocation().getYCoord();
+  }
 
   public enum Type {
     SANITATION_REQ {
@@ -228,30 +276,6 @@ public class serviceRequest implements RequestInterface {
     } catch (DateTimeParseException e) {
       throw new RuntimeException("Date must be formatted as yyyy-mm-dd");
     }
-  }
-
-  public double getxCoord() {
-    return xCoord;
-  }
-
-  public void setxCoord(int xCoord) {
-    this.xCoord = xCoord;
-  }
-
-  public void setxCoord(String xCoord) {
-    this.yCoord = Integer.parseInt(xCoord);
-  }
-
-  public double getyCoord() {
-    return yCoord;
-  }
-
-  public void setyCoord(int yCoord) {
-    this.yCoord = yCoord;
-  }
-
-  public void setyCoord(String yCoord) {
-    this.yCoord = Integer.parseInt(yCoord);
   }
 
   @Override

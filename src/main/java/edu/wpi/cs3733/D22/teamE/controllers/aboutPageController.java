@@ -37,7 +37,7 @@ public class aboutPageController implements Initializable {
   private String joeyBio =
       "Joey Rozman was our Lead Software Engineer. Joey is also a very active member in Tau Kappa Epsilon, power-lifts in his free time, and loves baking.";
   private String colinBio =
-      "Colin Mettler was our Assistant-Lead Front-End Engineer. In his free time, he plays for WPI's CS:GO team, relishes his days as a lacrosse player, and throws rocks at Phil. ";
+      "Colin Mettler was our Assistant-Lead Front-End Engineer. In his free time, he plays for WPI's CS:GO team, relishes his days as a lacrosse player.";
   private String ericBio =
       "Eric Zhou was our Assistant-Lead Back-End Engineer. Eric was very pleased when Joey misunderstood a Slack message to mean that we were meeting at a gas station off campus.  He also supports identity theft.";
   private String jeremyBio =
@@ -53,7 +53,7 @@ public class aboutPageController implements Initializable {
   private String philBio =
       "Phillip Brush was our Documentation Analyst. Phil was the other RBE major on the team, and was technically overloading during this team.  It's a miracle he survived.";
   private String sizheBio =
-      "Sizhe Li was our Product Owner. Sizhe's main contribution was brining power strips of unknown origins to our meetings, since WPI tech suites only have one or so outlets.";
+      "Sizhe Li was our Product Owner. Sizhe's main contribution was bringing power strips of unknown origins to our meetings, since WPI tech suites only have one or so outlets.";
 
   @FXML
   public void wilsonWongLink(ActionEvent event) throws URISyntaxException, IOException {
@@ -138,6 +138,7 @@ public class aboutPageController implements Initializable {
             PopUp.aboutPopUp(jeremyBio, mainPane.getScene().getWindow(), "Jeremy");
           }
         });
+        
     shenPopUp.setOnMouseClicked(
         new EventHandler<MouseEvent>() {
           @Override
