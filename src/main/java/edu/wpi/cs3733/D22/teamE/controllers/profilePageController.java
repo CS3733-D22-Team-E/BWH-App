@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
+import static edu.wpi.cs3733.D22.teamE.pageControl.isLightMode;
+
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import edu.wpi.cs3733.D22.teamE.Main;
@@ -15,9 +17,8 @@ import edu.wpi.cs3733.D22.teamE.entity.EntityInterface;
 import edu.wpi.cs3733.D22.teamE.entity.RequestInterface;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.entity.passwordSettingRequest;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import edu.wpi.cs3733.D22.teamE.themeControl;
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.sql.SQLException;
@@ -36,7 +37,9 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -45,18 +48,20 @@ import javafx.util.Duration;
 
 public class profilePageController implements Initializable {
 
+  @FXML VBox mainPane;
   @FXML Circle photoCirc;
   @FXML Label nameLabel;
   @FXML Label statusLabel;
   @FXML Label idLabel;
   @FXML JFXComboBox database;
-  @FXML JFXComboBox colorScheme;
+  // @FXML JFXComboBox colorScheme;
   @FXML TextField newPassword;
   @FXML TextField confirmPassword;
   @FXML TableColumn floor;
   @FXML TableColumn status;
   @FXML TableColumn room;
   @FXML TableColumn requestType;
+  @FXML ImageView imgMode;
 
   private Account account;
   private Employee employee;
@@ -98,8 +103,8 @@ public class profilePageController implements Initializable {
       database.getItems().addAll("Embeded", "Client");
       EventHandler<Event> databaseChange = e -> changeDBConnection(e);
       database.setOnAction(databaseChange);
-      colorScheme.getSelectionModel().selectFirst();
-      colorScheme.getItems().addAll("Bright", "Dark");
+      // colorScheme.getSelectionModel().selectFirst();
+      // colorScheme.getItems().addAll("Bright", "Dark");
 
       int count = 0;
       List<EntityInterface> l = new ArrayList<>();
@@ -211,5 +216,40 @@ public class profilePageController implements Initializable {
     System.out.println("Test");
   }
 
-  public void changeColorScheme(Event e) {}
+  // public void changeColorScheme(Event e) {
+  // colorScheme
+  // colorScheme
+  //  .getSelectionModel()
+  //  .selectedItemProperty()
+  //  .addListener(
+  //      new ChangeListener<String>() {
+  //       @Override
+  //       public void changed(
+  //           ObservableValue<? extends String> observableValue,
+  //           String oldValue,
+  //           String newValue) {
+  //         if(newValue == "Dark"){}
+  //       }})
+  ;
+  // }
+
+  public void changeMode(ActionEvent event) throws FileNotFoundException {
+    if (isLightMode) {
+      themeControl.setDarkMode(mainPane);
+      javafx.scene.image.Image newImg =
+          new javafx.scene.image.Image(
+              new FileInputStream(
+                  "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/ic-light.png"));
+      imgMode.setImage(newImg);
+      isLightMode = false;
+    } else {
+      themeControl.setLightMode(mainPane);
+      javafx.scene.image.Image newImg =
+          new javafx.scene.image.Image(
+              new FileInputStream(
+                  "src/main/resources/edu/wpi/cs3733/D22/teamE/view/icons/ic-dark.png"));
+      imgMode.setImage(newImg);
+      isLightMode = true;
+    }
+  }
 }
