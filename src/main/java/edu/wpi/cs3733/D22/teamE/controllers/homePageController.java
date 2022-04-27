@@ -27,7 +27,7 @@ public class homePageController implements Initializable {
         new EventHandler<javafx.scene.input.MouseEvent>() {
           @Override
           public void handle(javafx.scene.input.MouseEvent mouseEvent) {
-
+            // DashboardPage.fxml
             pageControl.loadCenter("DashboardPage.fxml", (Stage) mainPane.getScene().getWindow());
           }
         });
@@ -45,7 +45,6 @@ public class homePageController implements Initializable {
         new EventHandler<javafx.scene.input.MouseEvent>() {
           @Override
           public void handle(javafx.scene.input.MouseEvent mouseEvent) {
-
             pageControl.loadCenter("defaultPage.fxml", (Stage) mainPane.getScene().getWindow());
           }
         });
