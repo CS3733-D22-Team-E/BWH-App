@@ -149,6 +149,31 @@ public abstract class serviceRequestPageController {
             });
   }
 
+  protected void populateRequestReports(String serviceRequestType) {
+    switch (serviceRequestType) {
+      case "Medical Equipment":
+        break;
+      case "Meal":
+        break;
+      case "Medicine":
+        break;
+      case "Floral":
+        break;
+      case "Lab":
+        break;
+      case "Language Interpreter":
+        break;
+      case "Facilities":
+        break;
+      case "Gift":
+        break;
+      case "Sanitation":
+        break;
+      case "Security":
+        break;
+    }
+  }
+
   /** Sends the respective data to the respective data base. */
   public boolean sendToDB(serviceRequest request) {
     // todo : implement DB communication

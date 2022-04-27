@@ -101,7 +101,7 @@ public class mainController implements pageButtons {
   public void statusButton(ActionEvent event) throws IOException {
     Stage thisStage = (Stage) mainPane.getScene().getWindow();
 
-    pageControl.loadCenter("statusPage.fxml", thisStage);
+    pageControl.loadCenter("serviceRequestLanding.fxml", thisStage);
   }
 
   @FXML
