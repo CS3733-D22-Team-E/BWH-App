@@ -8,6 +8,7 @@ import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -126,7 +127,7 @@ public class mainController implements pageButtons {
   }
 
   @FXML
-  public void exitButton(ActionEvent event) throws IOException {
+  public void exitButton(ActionEvent event) throws IOException, SQLException {
     pageControl.exitApp();
   }
 
