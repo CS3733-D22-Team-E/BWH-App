@@ -1,9 +1,14 @@
 package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
+import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.entity.Location;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
+import edu.wpi.cs3733.D22.teamE.entity.medicalEquipmentRequest;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DashboardEquipmentHandler extends DashboardHandler {
 
@@ -14,6 +19,8 @@ public class DashboardEquipmentHandler extends DashboardHandler {
   Integer clean;
   Integer inUse;
   Integer dirty;
+  boolean bedAlreadySent;
+  boolean bedAlert;
 
   public DashboardEquipmentHandler(DashboardController dashboardController) {
     this.dashboardController = dashboardController;
@@ -26,11 +33,14 @@ public class DashboardEquipmentHandler extends DashboardHandler {
     updateEquipmentReports();
   }
 
-  public void updateEquipmentReports() {
+  public boolean updateEquipmentReports() {
+    bedAlert = false;
     bedAlertHandler();
     filterEquipment();
     setEquipmentCounts();
+    for (MedicalEquipment curEq : currentEquipmentList) {}
     infusionPumpAlertHandler();
+    return bedAlert;
   }
 
   private void bedAlertHandler() {
@@ -43,13 +53,45 @@ public class DashboardEquipmentHandler extends DashboardHandler {
       }
     }
     if (dirtyLocBeds.size() >= 6) {
-      createBedAlert();
+      createBedAlert(dirtyLocBeds);
+      bedAlert = true;
     }
-    System.out.println("Beds in dirty locations: " + dirtyLocBeds);
   }
 
-  private void createBedAlert() {
-    System.out.println("BEEP BEEP!! DIRTY BED ALERT!!!");
+  private void createBedAlert(ArrayList<MedicalEquipment> dirtyLocBeds) {
+
+    medicalEquipmentRequest cleaningRequest = new medicalEquipmentRequest();
+    cleaningRequest.setFloorID(dashboardController.currentFloorString);
+    cleaningRequest.setRoomID("eSTOR001L1");
+    cleaningRequest.setEquipment("Bed");
+    cleaningRequest.setStaffAssignee("Pending");
+    cleaningRequest.setRequestStatus("To Do");
+    cleaningRequest.setDeliveryDate(LocalDate.now());
+    cleaningRequest.setRequestDate(LocalDate.now());
+    cleaningRequest.setIsUrgent(true);
+    cleaningRequest.setOtherNotes("Automated request");
+    cleaningRequest.setEquipmentQuantity(dirtyLocBeds.size());
+
+    ArrayList<medicalEquipmentRequest> curMedReqs =
+        (ArrayList<medicalEquipmentRequest>) subject.getAllMedicalEquipmentRequests();
+    bedAlreadySent = false;
+    for (medicalEquipmentRequest curMedReq : curMedReqs) {
+      if (curMedReq.getEquipment().equals(cleaningRequest.getEquipment())
+          && curMedReq.getEquipmentQuantity() == cleaningRequest.getEquipmentQuantity()
+          && curMedReq.getRoomID().equals(cleaningRequest.getRoomID())
+          && curMedReq.getOtherNotes().equals(cleaningRequest.getOtherNotes())) {
+        bedAlreadySent = true;
+        break;
+      }
+    }
+
+    if (!bedAlreadySent) {
+      try {
+        subject.addMedEquipReq(cleaningRequest);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   private void filterEquipment() {
@@ -107,5 +149,118 @@ public class DashboardEquipmentHandler extends DashboardHandler {
     }
   }
 
-  private void infusionPumpAlertHandler() {}
+  private void infusionPumpAlertHandler() {
+
+    Integer cleanLocAlerts = 0;
+    Integer dirtyLocAlerts = 0;
+    ArrayList<MedicalEquipment> dirtyEquipmentToBeCleaned = new ArrayList<>();
+
+    HashMap<Location, ArrayList<MedicalEquipment>> dirtyLocsOnFloor = new HashMap<>();
+    HashMap<Location, ArrayList<MedicalEquipment>> cleanLocsOnFloor = new HashMap<>();
+
+    for (Location curLoc : subject.getAllLocations()) {
+      if (curLoc.getFloor().equals(dashboardController.currentFloorString)) {
+        if (curLoc.getNodeType().equals("DIRT")) {
+          dirtyLocsOnFloor.put(curLoc, new ArrayList<MedicalEquipment>());
+        }
+        if (curLoc.getNodeType().equals("STOR")) {
+          cleanLocsOnFloor.put(curLoc, new ArrayList<MedicalEquipment>());
+        }
+      }
+    }
+
+    for (MedicalEquipment curEq : currentEquipmentList) {
+      if (curEq.getEquipmentType().equals("INFUSION PUMP")) {
+        Location curLoc = subject.getLocation(curEq.getCurrentLocation());
+        if (dirtyLocsOnFloor.containsKey(curLoc)) {
+          dirtyLocsOnFloor.get(curLoc).add(curEq);
+        } else if (cleanLocsOnFloor.containsKey(curLoc)) {
+          cleanLocsOnFloor.get(curLoc).add(curEq);
+        }
+      }
+    }
+
+    for (Location key : dirtyLocsOnFloor.keySet()) {
+      if (dirtyLocsOnFloor.get(key).size() >= 10) {
+        for (MedicalEquipment curEq : dirtyLocsOnFloor.get(key)) {
+          if (!curEq.isClean()) {
+            dirtyEquipmentToBeCleaned.add(curEq);
+          }
+        }
+        dirtyLocAlerts++;
+      }
+    }
+
+    for (Location key : cleanLocsOnFloor.keySet()) {
+      if (cleanLocsOnFloor.get(key).size() < 5) {
+        cleanLocAlerts++;
+      }
+    }
+
+    if (cleanLocAlerts + dirtyLocAlerts > 0) {
+      displayDirtyFusionPumpAlert(cleanLocAlerts + dirtyLocAlerts, dirtyEquipmentToBeCleaned);
+    }
+  }
+
+  private void displayDirtyFusionPumpAlert(
+      Integer alertNumber, ArrayList<MedicalEquipment> dirtyEquipmentToBeCleaned) {
+    if (dirtyEquipmentToBeCleaned.size() > 0) {
+      PopUp.createWarning(
+          "There are "
+              + alertNumber
+              + " infusion pump alerts on this floor that need your attention!",
+          dashboardController.bedDirty.getScene().getWindow());
+      cleanInfusionPumps(dirtyEquipmentToBeCleaned);
+    }
+  }
+
+  private void cleanInfusionPumps(ArrayList<MedicalEquipment> dirtyEquipmentToBeCleaned) {
+
+    // dirtyEquipmentToBeCleaned.removeIf(curEq -> !curEq.getMed_equipmentID().equals("null"));
+
+    medicalEquipmentRequest cleaningRequest = new medicalEquipmentRequest();
+    cleaningRequest.setFloorID(dashboardController.currentFloorString);
+    cleaningRequest.setRoomID("eSTOR00101");
+    cleaningRequest.setEquipment("Infusion Pump");
+    cleaningRequest.setStaffAssignee("Pending");
+    cleaningRequest.setRequestStatus("To Do");
+    cleaningRequest.setDeliveryDate(LocalDate.now());
+    cleaningRequest.setRequestDate(LocalDate.now());
+    cleaningRequest.setIsUrgent(true);
+    cleaningRequest.setOtherNotes("Automated request");
+    cleaningRequest.setEquipmentQuantity(dirtyEquipmentToBeCleaned.size());
+
+    ArrayList<medicalEquipmentRequest> curMedReqs =
+        (ArrayList<medicalEquipmentRequest>) subject.getAllMedicalEquipmentRequests();
+    boolean alreadySent = false;
+    for (medicalEquipmentRequest curMedReq : curMedReqs) {
+      if (curMedReq.getFloorID().equals(cleaningRequest.getFloorID())
+          && curMedReq.getEquipment().equals(cleaningRequest.getEquipment())
+          && curMedReq.getEquipmentQuantity() == cleaningRequest.getEquipmentQuantity()
+          && curMedReq.getRoomID().equals(cleaningRequest.getRoomID())
+          && curMedReq.getOtherNotes().equals(cleaningRequest.getOtherNotes())) {
+        alreadySent = true;
+        break;
+      }
+    }
+
+    if (!alreadySent) {
+      try {
+        subject.addMedEquipReq(cleaningRequest);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+      /*
+      try {
+        subject.getMedicalEquipments(
+            "INFUSION PUMP",
+            dirtyEquipmentToBeCleaned.size(),
+            "eSTOR00101",
+            cleaningRequest.getServiceRequestID());
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+       */
+    }
+  }
 }

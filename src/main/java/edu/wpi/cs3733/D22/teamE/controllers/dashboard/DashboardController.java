@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
 import com.jfoenix.controls.JFXBadge;
 import com.jfoenix.controls.JFXToggleNode;
+import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
@@ -118,10 +119,17 @@ public class DashboardController implements Initializable {
                   ObservableValue<? extends Toggle> observableValue, Toggle oldVal, Toggle newVal) {
                 currentFloor = (JFXToggleNode) newVal;
                 updateFloorString(newVal);
-                dashboardEquipmentHandler.updateEquipmentReports();
+                if (dashboardEquipmentHandler.updateEquipmentReports()) {
+                  bedAlertDisplay();
+                }
                 dashboardServiceRequestHandler.updateServiceRequestTable();
               }
             });
+  }
+
+  private void bedAlertDisplay() {
+    PopUp.createWarning(
+        "There are too many beds in a dirty area!", bedDirty.getScene().getWindow());
   }
 
   private void updateFloorString(Toggle newVal) {
