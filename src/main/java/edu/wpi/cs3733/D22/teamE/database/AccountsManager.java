@@ -1,11 +1,12 @@
 package edu.wpi.cs3733.D22.teamE.database;
 
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 
 public class AccountsManager {
-  private Account account;
-  private Employee employee;
+  private String accountID;
+  private String employeeID;
   private static AccountsManager AM_instance = null;
 
   private AccountsManager() {}
@@ -17,18 +18,18 @@ public class AccountsManager {
   }
 
   public Account getAccount() {
-    return account;
+    return DAOSystemSingleton.INSTANCE.getSystem().getAccount(accountID);
   }
 
   public void setAccount(Account account) {
-    this.account = account;
+    this.accountID = account.getAccountID();
   }
 
   public Employee getEmployee() {
-    return employee;
+    return DAOSystemSingleton.INSTANCE.getSystem().getEmployee(employeeID);
   }
 
   public void setEmployee(Employee employee) {
-    this.employee = employee;
+    this.employeeID = employee.getEmployeeID();
   }
 }

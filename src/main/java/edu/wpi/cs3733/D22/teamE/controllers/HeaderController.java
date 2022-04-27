@@ -19,10 +19,11 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 
@@ -32,7 +33,7 @@ public class HeaderController implements Initializable {
   @FXML JFXToggleNode aboutUsButton;
   @FXML JFXToggleNode helpButton;
   @FXML JFXButton profileButton;
-  @FXML ImageView profilePicture;
+  @FXML Circle profilePicture;
   @FXML SVGPath bwhLogo;
   @FXML HBox bwhLogoAndLabel;
 
@@ -64,23 +65,7 @@ public class HeaderController implements Initializable {
     helpButton.setToggleGroup(headerPageButtons);
     selectedPageButton = homeButton;
 
-    Employee currentEmployee = AccountsManager.getInstance().getEmployee();
-    Image image;
-    try {
-      InputStream is = ProfilePictureManager.getPersonalPicture(currentEmployee);
-      image = new Image(is);
-    } catch (Exception e) {
-      URL url = Main.class.getResource("view/icons/profilepic.png");
-      assert url != null;
-      InputStream is = null;
-      try {
-        is = url.openStream();
-      } catch (IOException ex) {
-        ex.printStackTrace();
-      }
-      image = new Image(is);
-    }
-    profilePicture.setImage(image);
+    updatePFP();
 
     bwhLogoAndLabel.setOnMouseClicked(
         new EventHandler<javafx.scene.input.MouseEvent>() {
@@ -145,6 +130,27 @@ public class HeaderController implements Initializable {
         });
      */
 
+    ProfilePictureManager.setHeaderReference(this);
+  }
+
+  public void updatePFP() {
+    Employee currentEmployee = AccountsManager.getInstance().getEmployee();
+    Image image;
+    try {
+      InputStream is = ProfilePictureManager.getPersonalPicture(currentEmployee);
+      image = new Image(is);
+    } catch (Exception e) {
+      URL url = Main.class.getResource("view/icons/profilepic.png");
+      assert url != null;
+      InputStream is = null;
+      try {
+        is = url.openStream();
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+      image = new Image(is);
+    }
+    profilePicture.setFill(new ImagePattern(image));
   }
 
   private void handleClickable(Node clickable) {
@@ -222,7 +228,7 @@ public class HeaderController implements Initializable {
         new EventHandler<ActionEvent>() {
           @Override
           public void handle(ActionEvent event) {
-            pageControl.exitApp();
+            pageControl.exitApp(profileButton.getScene().getWindow());
           }
         });
 

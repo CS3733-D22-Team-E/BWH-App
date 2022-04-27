@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 public class pageControl {
 
@@ -89,14 +90,7 @@ public class pageControl {
     basePage.setLeft(getPageRoot(url));
   }
 
-  public static void exitApp() {
-    // TODO: uncomment this, was resulting in error
-    /*
-    public static void exitApp() throws SQLException, IOException {
-
-
-
-       */
+  public static void exitApp(Window stage) {
     try {
       saveAllCSVs();
       CallAPI.getInstance()
@@ -105,6 +99,10 @@ public class pageControl {
       System.exit(0);
     } catch (SQLException | IOException e) {
       e.printStackTrace();
+      PopUp.createWarning(
+          String.format(
+              "There was an error saving to CSV : %s caused %s", e.getCause(), e.getMessage()),
+          stage);
     }
   }
 

@@ -603,49 +603,50 @@ public class mapPageController extends HeaderController implements Initializable
     // Display an icon for each item in the filtered list
     for (EntityInterface et : entityInterfaceList) {
       if (et instanceof RequestInterface) {
-        if (filteredLocations.contains(et.getLocation())) {
-          if (et.getFloorID().equals(curFloor)) {
-            RequestInterface e = (RequestInterface) et;
+        System.out.println(et.toString());
+        System.out.println(et.toString());
+        if (et.getFloorID().equals(curFloor)) {
+          System.out.println(et.toString());
+          RequestInterface e = (RequestInterface) et;
 
-            Image image = reqGetImage(e.getRequestType().toString());
+          Image image = reqGetImage(e.getRequestType().toString());
 
-            double prefWidth = (image.getWidth() / 12.0) * scaleFactor;
-            double prefHeight = (image.getHeight() / 12.0) * scaleFactor;
+          double prefWidth = (image.getWidth() / 12.0) * scaleFactor;
+          double prefHeight = (image.getHeight() / 12.0) * scaleFactor;
 
-            double widthOffset = (prefWidth / 2);
-            double heightOffset = (prefHeight / 2);
+          double widthOffset = (prefWidth / 2);
+          double heightOffset = (prefHeight / 2);
 
-            ImageView myLoc = null;
-            for (customImageViewTesting loc : staticLocations) {
-              if (loc.getL().getNodeID().equals(et.getRoomID())) myLoc = loc;
-            }
-
-            assert myLoc != null;
-            EntityView i = new EntityView(image, et, myLoc);
-            i.setFitWidth(prefWidth);
-            i.setFitHeight(prefHeight);
-            double x = et.getLocation().getXCoord() * (scaleFactor) - widthOffset;
-            double y = et.getLocation().getYCoord() * (scaleFactor) - heightOffset;
-            i.setX(x);
-            i.setStartX(x);
-            i.setY(y);
-
-            i.setStartY(y);
-            i.setModifier(scaleFactor);
-            i.setWidthOffset(widthOffset);
-            i.setHeightOffset(heightOffset);
-            nodeViews.add(i);
-            i.attach(this);
-
-            // Highlight the selected location
-            if (selectedLoc != null) {
-              if (e.getXCoord() == selectedLoc[0] && e.getYCoord() == selectedLoc[1]) {
-                i.getStyleClass().add("selectedLocationDot");
-              }
-            }
-
-            floorServiceRequestPane.getChildren().add(i);
+          ImageView myLoc = null;
+          for (customImageViewTesting loc : staticLocations) {
+            if (loc.getL().getNodeID().equals(et.getRoomID())) myLoc = loc;
           }
+
+          assert myLoc != null;
+          EntityView i = new EntityView(image, et, myLoc);
+          i.setFitWidth(prefWidth);
+          i.setFitHeight(prefHeight);
+          double x = et.getLocation().getXCoord() * (scaleFactor) - widthOffset;
+          double y = et.getLocation().getYCoord() * (scaleFactor) - heightOffset;
+          i.setX(x);
+          i.setStartX(x);
+          i.setY(y);
+
+          i.setStartY(y);
+          i.setModifier(scaleFactor);
+          i.setWidthOffset(widthOffset);
+          i.setHeightOffset(heightOffset);
+          nodeViews.add(i);
+          i.attach(this);
+
+          // Highlight the selected location
+          if (selectedLoc != null) {
+            if (e.getXCoord() == selectedLoc[0] && e.getYCoord() == selectedLoc[1]) {
+              i.getStyleClass().add("selectedLocationDot");
+            }
+          }
+
+          floorServiceRequestPane.getChildren().add(i);
         }
       }
     }

@@ -128,7 +128,7 @@ public class mainController implements pageButtons {
 
   @FXML
   public void exitButton(ActionEvent event) throws IOException, SQLException {
-    pageControl.exitApp();
+    pageControl.exitApp(mainPane.getScene().getWindow());
   }
 
   @FXML
