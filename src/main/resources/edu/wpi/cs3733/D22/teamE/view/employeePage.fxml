@@ -158,14 +158,13 @@
             </Label>
             <ScrollPane VBox.vgrow="ALWAYS">
                <content>
-                  <TableView>
+                  <TableView fx:id="employeeTable">
                     <columns>
                       <TableColumn fx:id="tableEmployeeName" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Employee Name" />
                       <TableColumn minWidth="0.0" prefWidth="0.0" text="Status" />
                         <TableColumn fx:id="tablePosition" minWidth="100.0" prefWidth="-1.0" text="Position" />
                         <TableColumn fx:id="tableSalary" minWidth="100.0" prefWidth="-1.0" text="Salary" />
                         <TableColumn fx:id="tableUsername" minWidth="100.0" prefWidth="-1.0" text="Username" />
-                        <TableColumn fx:id="phoneNumber" minWidth="100.0" prefWidth="-1.0" text="Phone Number" />
                     </columns>
                   </TableView>
                </content>
