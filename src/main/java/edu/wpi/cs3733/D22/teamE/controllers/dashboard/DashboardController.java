@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
 import com.jfoenix.controls.JFXBadge;
 import com.jfoenix.controls.JFXToggleNode;
+import com.jfoenix.controls.JFXTooltip;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
@@ -72,6 +73,9 @@ public class DashboardController implements Initializable {
   ArrayList<RequestInterface> currentServiceRequests;
   DashboardEquipmentHandler dashboardEquipmentHandler;
   DashboardServiceRequestHandler dashboardServiceRequestHandler;
+
+  JFXTooltip bedBoxToolTip;
+  JFXTooltip infusionPumpBoxTooltip;
 
   public DashboardController() {}
 

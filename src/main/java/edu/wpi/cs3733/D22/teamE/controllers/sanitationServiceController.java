@@ -159,6 +159,9 @@ public class sanitationServiceController extends serviceRequestPageController
       System.out.println(request);
       sanSendToDB(request);
       setInfographicsCount("SANITATION_REQ");
+      PopUp.submissionConfirmation(
+          "Your sanitation service request has been submitted.",
+          submitButton.getScene().getWindow());
       resetFields(new ActionEvent());
 
     } catch (RuntimeException error) {

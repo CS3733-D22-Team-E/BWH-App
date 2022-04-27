@@ -188,6 +188,9 @@ public class medicalEquipmentController extends serviceRequestPageController
       medicalEquipmentRequest.setOtherNotes(notes.getText());
       medSendToDB(medicalEquipmentRequest);
       setInfographicsCount("MED_EQUIP_REQ");
+      PopUp.submissionConfirmation(
+          "Your medical equipment service request has been submitted.",
+          submitButton.getScene().getWindow());
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");

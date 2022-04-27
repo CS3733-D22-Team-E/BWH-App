@@ -119,6 +119,9 @@ public class medicineDeliveryController extends serviceRequestPageController
 
       medicineSendToDB(medicineDeliveryRequest);
       setInfographicsCount("MED_DELIV_REQ");
+      PopUp.submissionConfirmation(
+          "Your medicine delivery service request has been submitted.",
+          submitButton.getScene().getWindow());
 
     }
     //    catch (NullPointerException error) {
