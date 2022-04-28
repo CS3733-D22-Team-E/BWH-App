@@ -5,10 +5,14 @@ import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -22,6 +26,7 @@ public class homePageController implements Initializable {
   @FXML VBox statusPane;
   @FXML VBox mapPane;
   @FXML VBox employeeDatabasePane;
+  @FXML StackPane dashboardRect;
 
   private Account currentAccount;
 
@@ -35,6 +40,20 @@ public class homePageController implements Initializable {
             pageControl.loadCenter("DashboardPage.fxml", (Stage) mainPane.getScene().getWindow());
           }
         });
+
+    dashboardPane
+        .scaleYProperty()
+        .addListener(
+            new ChangeListener<Number>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                double deltaY = t1.doubleValue();
+                for (Node n : dashboardPane.getChildren()) {
+                  n.setScaleY(deltaY);
+                }
+              }
+            });
 
     myProfilePane.setOnMouseClicked(
         new EventHandler<javafx.scene.input.MouseEvent>() {
