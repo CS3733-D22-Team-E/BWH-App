@@ -9,7 +9,7 @@ public class AccountsManager {
   private String accountID;
   private String employeeID;
   private static AccountsManager AM_instance = null;
-  Connection connection = DBConnect.CLIENT_INSTANCE.getConnection();
+  Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
 
   private AccountsManager() {}
 
