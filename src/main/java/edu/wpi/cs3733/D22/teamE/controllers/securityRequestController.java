@@ -98,6 +98,8 @@ public class securityRequestController extends serviceRequestPageController
     try {
       securitySendToDB();
       setInfographicsCount("SECURITY_REQ");
+      PopUp.submissionConfirmation(
+          "Your security service request has been submitted.", submitButton.getScene().getWindow());
 
       floor.getSelectionModel().clearSelection();
       room.getSelectionModel().clearSelection();

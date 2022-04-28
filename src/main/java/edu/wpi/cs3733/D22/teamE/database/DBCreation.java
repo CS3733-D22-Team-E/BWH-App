@@ -321,7 +321,7 @@ public class DBCreation {
     try {
       // HAVE ALL LOAD (EXCEPT FLORAL REQUEST)
       CallAPI.getInstance().getExternalTransportAPI();
-      edu.wpi.cs3733.D22.teamE.APIDatabase.DBCreation.createFloralRequestTable();
+      edu.wpi.cs3733.D22.teamE_api.APIDatabase.DBCreation.createFloralRequestTable();
       createTowerLocationTable(); //
       createEmployeesTable(); //
       createEquipmentTable(); //

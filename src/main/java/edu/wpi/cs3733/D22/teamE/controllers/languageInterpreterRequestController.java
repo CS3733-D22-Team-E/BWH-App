@@ -104,6 +104,9 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
 
       langSendToDB(request);
       setInfographicsCount("LANG_INTERP_REQ");
+      PopUp.submissionConfirmation(
+          "Your language interpreter service request has been submitted.",
+          submitButton.getScene().getWindow());
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");

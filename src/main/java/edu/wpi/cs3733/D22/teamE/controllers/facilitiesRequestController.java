@@ -120,6 +120,9 @@ public class facilitiesRequestController extends serviceRequestPageController
 
       facilitiesSendToDB(request);
       setInfographicsCount("FACILITIES_REQ");
+      PopUp.submissionConfirmation(
+          "Your facilities service request has been submitted.",
+          submitButton.getScene().getWindow());
 
     } catch (NullPointerException e) {
       System.out.println("Error : Some Value is NULL");

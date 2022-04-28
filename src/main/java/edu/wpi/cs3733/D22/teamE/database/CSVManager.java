@@ -841,8 +841,9 @@ public class CSVManager {
           return true;
         }
       }
-    } catch (FileNotFoundException e) {
+    } catch (IOException e) {
       e.printStackTrace();
+      return false;
     }
     return false;
   }

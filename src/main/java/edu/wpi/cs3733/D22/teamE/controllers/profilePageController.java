@@ -56,6 +56,7 @@ public class profilePageController implements Initializable {
   @FXML Label nameLabel;
   @FXML Label statusLabel;
   @FXML Label idLabel;
+  @FXML Label phoneNumber;
   @FXML JFXComboBox database;
   // @FXML JFXComboBox colorScheme;
   @FXML TextField newPassword;
@@ -120,6 +121,7 @@ public class profilePageController implements Initializable {
                     AccountsManager.getInstance().setConnection(DBConnect.CLIENT_INSTANCE);
                 }
               });
+      phoneNumber.setText(account.getPhoneNumber());
       // colorScheme.getSelectionModel().selectFirst();
       // colorScheme.getItems().addAll("Bright", "Dark");
 
@@ -229,9 +231,9 @@ public class profilePageController implements Initializable {
     ((Node) e.getSource()).getScene().setCursor(Cursor.DEFAULT);
   }
 
-  public void changeDBConnection(Event e) {
-    System.out.println("Test");
-  }
+  //public void changeDBConnection(Event e) {
+    //System.out.println("Test");
+  //}
 
   // public void changeColorScheme(Event e) {
   // colorScheme
