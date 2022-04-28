@@ -242,11 +242,11 @@
                            <font>
                               <Font name="System Italic" size="12.0" />
                            </font></Text>
-                        <Text fx:id="api1Author" strokeType="OUTSIDE" strokeWidth="0.0" text="Team []" textAlignment="CENTER" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                        <Text fx:id="api1Author" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Z" textAlignment="CENTER" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="5">
                            <font>
                               <Font name="System Italic" size="12.0" />
                            </font></Text>
-                        <Text fx:id="api2Author" strokeType="OUTSIDE" strokeWidth="0.0" text="Team []" textAlignment="CENTER" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                        <Text fx:id="api2Author" strokeType="OUTSIDE" strokeWidth="0.0" text="Team D" textAlignment="CENTER" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="5">
                            <font>
                               <Font name="System Italic" size="12.0" />
                            </font></Text>
