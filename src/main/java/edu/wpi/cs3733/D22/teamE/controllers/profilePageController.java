@@ -32,7 +32,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -231,9 +230,9 @@ public class profilePageController implements Initializable {
     ((Node) e.getSource()).getScene().setCursor(Cursor.DEFAULT);
   }
 
-  //public void changeDBConnection(Event e) {
-    //System.out.println("Test");
-  //}
+  // public void changeDBConnection(Event e) {
+  // System.out.println("Test");
+  // }
 
   // public void changeColorScheme(Event e) {
   // colorScheme

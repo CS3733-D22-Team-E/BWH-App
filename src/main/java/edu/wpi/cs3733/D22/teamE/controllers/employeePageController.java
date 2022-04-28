@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamE.RSAEncryption;
 import edu.wpi.cs3733.D22.teamE.customUI.CustomEmployeeJFXButtonTableCell;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
+import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
@@ -65,6 +66,13 @@ public class employeePageController implements Initializable {
   }
 
   public void submitButton(ActionEvent event) {
+    if (AccountsManager.getInstance().getConnection()
+        == DBConnect.EMBEDDED_INSTANCE.getConnection()) {
+      System.out.println("ea");
+    } else {
+      System.out.println("ca");
+    }
+
     try {
       Employee employee =
           new Employee(
@@ -101,6 +109,7 @@ public class employeePageController implements Initializable {
       system.update(employee);
       system.update(account);
       populateEmployeeTable();
+
     } catch (Exception e) {
       e.printStackTrace();
     }

@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
+import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import java.sql.*;
 import java.util.ArrayList;
@@ -76,6 +77,11 @@ public class EmployeeDAOImpl implements DAO<Employee> {
 
   @Override
   public void update(Employee employee) {
+    if (connection == DBConnect.EMBEDDED_INSTANCE.getConnection()) {
+      System.out.println("eb");
+    } else {
+      System.out.println("cb");
+    }
     try {
       delete(employee);
     } catch (NullPointerException e) {
