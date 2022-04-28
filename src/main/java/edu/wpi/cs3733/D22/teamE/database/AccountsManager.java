@@ -9,13 +9,12 @@ public class AccountsManager {
   private String accountID;
   private String employeeID;
   private static AccountsManager AM_instance = null;
-  Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+  Connection connection = DBConnect.CLIENT_INSTANCE.getConnection();
 
   private AccountsManager() {}
 
   public static AccountsManager getInstance() {
     if (AM_instance == null) AM_instance = new AccountsManager();
-
     return AM_instance;
   }
 
@@ -41,5 +40,10 @@ public class AccountsManager {
 
   public void setConnection(DBConnect dbConnect) {
     connection = dbConnect.getConnection();
+    if (connection == DBConnect.EMBEDDED_INSTANCE.getConnection()) {
+      System.out.println("e");
+    } else {
+      System.out.println("c");
+    }
   }
 }

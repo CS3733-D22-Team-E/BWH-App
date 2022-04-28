@@ -9,9 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DBCreation {
-  static Connection connection = AccountsManager.getInstance().getConnection();
+  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
 
   public static void createTowerLocationTable() throws SQLException, IOException {
+
+    System.out.println();
     String query =
         "create table TOWERLOCATIONS\n"
             + "(\n"
@@ -294,6 +296,12 @@ public class DBCreation {
             + "', 'admin', 'admin', 'admin', '0000000000')";
     statement = connection.prepareStatement(query);
     statement.executeUpdate();
+    if (connection == DBConnect.EMBEDDED_INSTANCE.getConnection()) {
+      System.out.println("e");
+
+    } else {
+      System.out.println("c");
+    }
     query =
         "INSERT INTO ACCOUNTS (ACCOUNTID, EMPLOYEEID , AUTHORITYLEVEL, PASSWORDHASH, FIRSTNAME, LASTNAME, POSITION, PHONENUMBER) VALUES "
             + "('staff', 'staff' , 1, '"
@@ -321,7 +329,6 @@ public class DBCreation {
     try {
       // HAVE ALL LOAD (EXCEPT FLORAL REQUEST)
       CallAPI.getInstance().getExternalTransportAPI();
-      edu.wpi.cs3733.D22.teamE_api.APIDatabase.DBCreation.createFloralRequestTable();
       createTowerLocationTable(); //
       createEmployeesTable(); //
       createEquipmentTable(); //
@@ -343,5 +350,10 @@ public class DBCreation {
     } catch (SQLException | IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public static void createClientTables() {
+    connection = DBConnect.CLIENT_INSTANCE.getConnection();
+    createTables();
   }
 }

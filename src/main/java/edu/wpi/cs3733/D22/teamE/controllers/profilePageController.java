@@ -8,7 +8,8 @@ import edu.wpi.cs3733.D22.teamE.Main;
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.RSAEncryption;
 import edu.wpi.cs3733.D22.teamE.customUI.ServiceRequestButtonListCell;
-import edu.wpi.cs3733.D22.teamE.database.*;
+import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
+import edu.wpi.cs3733.D22.teamE.database.DBConnect;
 import edu.wpi.cs3733.D22.teamE.database.ProfilePictureManager;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
@@ -26,10 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -101,10 +103,24 @@ public class profilePageController implements Initializable {
       nameLabel.setText(account.getFirstName() + " " + account.getLastName());
       statusLabel.setText(account.getPosition());
       idLabel.setText(employee.getEmployeeID());
+      database.getItems().addAll("Embedded", "Client");
+      database
+          .getSelectionModel()
+          .selectedItemProperty()
+          .addListener(
+              new ChangeListener<String>() {
+                @Override
+                public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue,
+                    String newValue) {
+                  if (newValue == "Embedded")
+                    AccountsManager.getInstance().setConnection(DBConnect.EMBEDDED_INSTANCE);
+                  if (newValue == "Client")
+                    AccountsManager.getInstance().setConnection(DBConnect.CLIENT_INSTANCE);
+                }
+              });
       phoneNumber.setText(account.getPhoneNumber());
-      database.getItems().addAll("Embeded", "Client");
-      EventHandler<Event> databaseChange = e -> changeDBConnection(e);
-      database.setOnAction(databaseChange);
       // colorScheme.getSelectionModel().selectFirst();
       // colorScheme.getItems().addAll("Bright", "Dark");
 
@@ -214,9 +230,9 @@ public class profilePageController implements Initializable {
     ((Node) e.getSource()).getScene().setCursor(Cursor.DEFAULT);
   }
 
-  public void changeDBConnection(Event e) {
-    System.out.println("Test");
-  }
+  // public void changeDBConnection(Event e) {
+  // System.out.println("Test");
+  // }
 
   // public void changeColorScheme(Event e) {
   // colorScheme
