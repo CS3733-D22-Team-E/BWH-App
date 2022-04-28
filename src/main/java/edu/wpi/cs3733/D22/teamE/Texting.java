@@ -11,7 +11,7 @@ public class Texting {
 
   public static void sendSMS(String phoneNumber, String sms) {
     if (!phoneNumber.startsWith("+1"))
-      phoneNumber = "+1" + phoneNumber; // TODO: Why does this add to the end of the phone number?
+      phoneNumber = "+1" + phoneNumber;
     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     Message message =
         Message.creator(
