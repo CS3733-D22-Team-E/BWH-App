@@ -19,6 +19,9 @@ public class Main {
     //    Thread thread =
     //        new Thread(
     //            () -> {
+
+    ardComm.getInstance().checkArdConnection();
+
     App.launch(App.class, args);
     //            });
     //    thread.start();
