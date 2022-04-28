@@ -110,25 +110,18 @@ public class serviceRequestLandingController {
   }
 
   @FXML
-  public void floralDeliveryButton(ActionEvent event) throws IOException {
-    //    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+  public void floralDeliveryButton(ActionEvent event) {
     CallAPI.getInstance().openFloralAPI();
-    //
-    //    pageControl.loadCenter("floralPage.fxml", thisStage);
   }
 
   @FXML
-  public void api1Button(ActionEvent event) throws IOException {
-    //    Stage thisStage = (Stage) mainPane.getScene().getWindow();
-    CallAPI.getInstance().getExternalTransportAPI();
-    //    pageControl.loadCenter("api1.fxml", thisStage);
+  public void api1Button(ActionEvent event) {
+    CallAPI.getInstance().openExternalTransportAPI();
   }
 
   @FXML
-  public void api2Button(ActionEvent event) throws IOException {
-    //    Stage thisStage = (Stage) mainPane.getScene().getWindow();
+  public void api2Button(ActionEvent event) {
     CallAPI.getInstance().openSanitationRequestAPI();
-    //    pageControl.loadCenter("api1.fxml", thisStage);
   }
 
   @FXML
