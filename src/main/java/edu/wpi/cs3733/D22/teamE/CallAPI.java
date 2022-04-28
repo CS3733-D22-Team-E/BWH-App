@@ -1,10 +1,7 @@
 package edu.wpi.cs3733.D22.teamE;
 
-import edu.wpi.cs3733.D22.teamD.API.StartAPI;
 import edu.wpi.cs3733.D22.teamE.database.CSVManager;
-import edu.wpi.cs3733.D22.teamE_api.Run;
 import edu.wpi.cs3733.D22.teamZ.api.API;
-import java.io.IOException;
 import javax.xml.rpc.ServiceException;
 
 public class CallAPI {
@@ -48,14 +45,6 @@ public class CallAPI {
               "");
       CSVManager.saveExternalTransportCSV();
     } catch (edu.wpi.cs3733.D22.teamZ.api.exception.ServiceException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void openSanitationRequestAPI() {
-    try {
-      StartAPI.appLaunch(100, 100, 1100, 1000, "default.css", "");
-    } catch (IOException e) {
       e.printStackTrace();
     }
   }

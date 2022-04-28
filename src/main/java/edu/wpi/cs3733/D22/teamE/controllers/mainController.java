@@ -238,16 +238,10 @@ public class mainController implements pageButtons {
     CallAPI.getInstance().openFloralAPI();
   }
 
-  @FXML
-  public void setSanitationButton(ActionEvent event) {
-    CallAPI.getInstance().openSanitationRequestAPI();
-  }
-
   public static String getDatabaseMode() {
     return databaseMode;
   }
 
-  @FXML
   public void extTransportButton(ActionEvent event) {
     CallAPI.getInstance().openExternalTransportAPI();
   }

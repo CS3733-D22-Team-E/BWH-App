@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.entity;
 
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
-import edu.wpi.cs3733.D22.teamE_api.entity.FloralServiceRequest;
 import java.time.LocalDate;
 
 public class FloralRequestAdapter implements RequestInterface {
@@ -144,7 +143,7 @@ public class FloralRequestAdapter implements RequestInterface {
 
   @Override
   public Location getLocation() {
-    return DAOSystemSingleton.INSTANCE.getSystem().getLocation(r.getRoomID());
+    return DAOSystemSingleton.INSTANCE.getSystem().getLocation(r.roomID);
   }
 
   @Override
