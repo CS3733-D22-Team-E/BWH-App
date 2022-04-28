@@ -142,11 +142,11 @@ public class sanitationServiceController extends serviceRequestPageController
 
       request.setOtherNotes(notes.getText());
 
-      if (staffAssignee.getText().isEmpty() || staffAssignee.getText().isBlank())
+      if (staffAssignee.getValue().isEmpty() || staffAssignee.getValue().isBlank())
         throw new NullPointerException();
-      else request.setStaffAssignee(staffAssignee.getText());
+      else request.setStaffAssignee(staffAssignee.getValue());
 
-      request.setRequestStatus(requestStatus.getText());
+      request.setRequestStatus(requestStatus.getValue());
 
       if (floor.getValue() != null && room.getValue() != null) {
         request.setFloorID(floor.getValue());
@@ -184,8 +184,9 @@ public class sanitationServiceController extends serviceRequestPageController
       biohazardGroup.selectToggle(bioNo);
       urgencyGroup.selectToggle(notUrgent);
       notes.clear();
-      staffAssignee.clear();
-      requestStatus.clear();
+      staffAssignee.getSelectionModel().clearSelection();
+      ;
+      requestStatus.getSelectionModel().clearSelection();
       room.setVisible(false);
       // populateSanReqTable();
       // tableList.add(new sanitationRequestModel(request));
@@ -207,7 +208,9 @@ public class sanitationServiceController extends serviceRequestPageController
     biohazardGroup.selectToggle(bioNo);
     urgencyGroup.selectToggle(notUrgent);
     notes.clear();
-    staffAssignee.clear();
+    staffAssignee.getSelectionModel().clearSelection();
+    ;
+    requestStatus.getSelectionModel().clearSelection();
     room.setVisible(false);
   }
 }

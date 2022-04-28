@@ -85,12 +85,12 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="staffAssignee" promptText="Employee" styleClass="inputField" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
+                              <JFXComboBox fx:id="staffAssignee" promptText="Employee" styleClass="inputField" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
                               <VBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <children>
                                     <HBox alignment="CENTER_LEFT" maxHeight="10.0" spacing="5.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField fx:id="requestStatus" prefHeight="26.0" prefWidth="368.0" promptText="Done, Processing, etc. " styleClass="inputField" />
+                                          <JFXComboBox fx:id="requestStatus" prefHeight="26.0" prefWidth="368.0" promptText="Done, Processing, etc. " styleClass="inputField" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS" />

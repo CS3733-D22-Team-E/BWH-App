@@ -114,8 +114,8 @@ public class medicineDeliveryController extends serviceRequestPageController
       medicineDeliveryRequest.setReocurringDays(medicineDeliveryRequest.getRepeatingDays());
       medicineDeliveryRequest.setOtherNotes(notes.getText());
       medicineDeliveryRequest.setRequestDate(LocalDate.now());
-      medicineDeliveryRequest.setStaffAssignee(staffAssignee.getText());
-      medicineDeliveryRequest.setRequestStatus(requestStatus.getText());
+      medicineDeliveryRequest.setStaffAssignee(staffAssignee.getValue());
+      medicineDeliveryRequest.setRequestStatus(requestStatus.getValue());
 
       medicineSendToDB(medicineDeliveryRequest);
       setInfographicsCount("MED_DELIV_REQ");
@@ -180,8 +180,8 @@ public class medicineDeliveryController extends serviceRequestPageController
     sat.setSelected(false);
     sun.setSelected(false);
     notes.clear();
-    staffAssignee.clear();
-    requestStatus.clear();
+    staffAssignee.getSelectionModel().clearSelection();
+    requestStatus.getSelectionModel().clearSelection();
     room.setVisible(false);
   }
 
@@ -203,8 +203,8 @@ public class medicineDeliveryController extends serviceRequestPageController
     sat.setSelected(false);
     sun.setSelected(false);
     notes.clear();
-    staffAssignee.clear();
-    requestStatus.clear();
+    staffAssignee.getSelectionModel().clearSelection();
+    requestStatus.getSelectionModel().clearSelection();
     room.setVisible(false);
   }
 

@@ -121,7 +121,7 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="requestStatus" alignment="TOP_LEFT" promptText="To Do, Processing, Complete" styleClass="inputField" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                              <JFXComboBox fx:id="requestStatus" promptText="To Do, Processing, Complete" styleClass="inputField" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                               <Label styleClass="inputLabel" text="Staff Assignee:" textAlignment="RIGHT" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -170,7 +170,7 @@
                               </HBox>
                               <VBox minHeight="50.0" spacing="5.0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <children>
-                                    <TextField fx:id="staffAssignee" promptText="Employee" styleClass="inputField" />
+                                    <JFXComboBox fx:id="staffAssignee" promptText="Employee" styleClass="inputField" />
                                  </children>
                               </VBox>
                               <Label styleClass="inputLabel" text="Biohazard On Site:" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
