@@ -82,7 +82,7 @@
                         <RowConstraints fx:id="authors2" maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sanitation" textAlignment="CENTER" GridPane.rowIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Sanitation" textAlignment="CENTER" GridPane.rowIndex="1" />
                         <Button fx:id="sanitationButton" alignment="BOTTOM_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#sanitationButton" style="-fx-opacity: 0.;" styleClass="lessRounded" textAlignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="115.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
@@ -137,11 +137,14 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Interpreter" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Text fx:id="sanitationAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Colin Mettler" textAlignment="CENTER" visible="false" GridPane.rowIndex="2" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facilities" textAlignment="CENTER" GridPane.rowIndex="4" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Medicine Delivery" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Security" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Interpreter" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Text fx:id="sanitationAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Colin Mettler" textAlignment="CENTER" visible="false" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Facilities" textAlignment="CENTER" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Medicine Delivery" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Security" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                         <Text fx:id="floralName" strokeType="OUTSIDE" strokeWidth="0.0" text="Floral Delivery" textAlignment="CENTER" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                         <Text fx:id="api1Name" strokeType="OUTSIDE" strokeWidth="0.0" text="External Transport" textAlignment="CENTER" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="4" />
                         <Text fx:id="api2Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Sanitation API" textAlignment="CENTER" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="4" />
@@ -199,21 +202,54 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Text fx:id="facilitiesAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Jeremy Bornstein" textAlignment="CENTER" visible="false" GridPane.rowIndex="5" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment Delivery" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Delivery" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lab Request" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gift Delivery" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                        <Text fx:id="languageAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Sizhe Li" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Text fx:id="equipmentAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Tim Connors" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <Text fx:id="mealAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Phil Brush" textAlignment="CENTER" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                        <Text fx:id="labAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Tim Connors" textAlignment="CENTER" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                        <Text fx:id="giftAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Eric Zhou" textAlignment="CENTER" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                        <Text fx:id="medicineAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Hannah Zink" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Text fx:id="securityAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Shen Fang" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                        <Text fx:id="floralAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Joey Rozman" textAlignment="CENTER" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                        <Text fx:id="api1Author" strokeType="OUTSIDE" strokeWidth="0.0" text="Team []" textAlignment="CENTER" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                        <Text fx:id="api2Author" strokeType="OUTSIDE" strokeWidth="0.0" text="Team []" textAlignment="CENTER" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                        <Text fx:id="facilitiesAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Jeremy Bornstein" textAlignment="CENTER" visible="false" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Equipment Delivery" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Meal Delivery" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Lab Request" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bold" text="Gift Delivery" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                        <Text fx:id="languageAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Sizhe Li" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Text>
+                        <Text fx:id="equipmentAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Tim Connors" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Text>
+                        <Text fx:id="mealAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Phil Brush" textAlignment="CENTER" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Text>
+                        <Text fx:id="labAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Tim Connors" textAlignment="CENTER" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Text>
+                        <Text fx:id="giftAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Eric Zhou" textAlignment="CENTER" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Text>
+                        <Text fx:id="medicineAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Hannah Zink" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Text>
+                        <Text fx:id="securityAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Shen Fang" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Text>
+                        <Text fx:id="floralAuthor" strokeType="OUTSIDE" strokeWidth="0.0" text="Joey Rozman" textAlignment="CENTER" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Text>
+                        <Text fx:id="api1Author" strokeType="OUTSIDE" strokeWidth="0.0" text="Team []" textAlignment="CENTER" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Text>
+                        <Text fx:id="api2Author" strokeType="OUTSIDE" strokeWidth="0.0" text="Team []" textAlignment="CENTER" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Text>
                      </children>
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
