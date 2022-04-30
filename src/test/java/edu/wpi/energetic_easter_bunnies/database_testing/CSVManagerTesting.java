@@ -44,4 +44,9 @@ public class CSVManagerTesting {
     DBCreation.createTables();
     assertTrue(CSVManager.loadMedEquipReqCSV(CSVManager.getDefaultMedEquipRequestFilename()));
   }
+
+  @Test
+  public void generateNewSavesTest() {
+    CSVManager.generateNewSaves();
+  }
 }

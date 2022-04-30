@@ -75,7 +75,7 @@ public class mapPageController extends HeaderController implements Initializable
   @FXML VBox serviceRequestLegend;
   @FXML ScrollPane scroller;
 
-  @FXML HBox helpIcon;
+  @FXML VBox helpIcon;
 
   // Map editor components
   @FXML JFXButton mapEditorButton;

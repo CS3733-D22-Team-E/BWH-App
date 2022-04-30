@@ -105,9 +105,9 @@ public class securityRequestController extends serviceRequestPageController
       room.getSelectionModel().clearSelection();
       securityRequestType.getSelectionModel().clearSelection();
       timeFrameComboBox.getSelectionModel().clearSelection();
-      requestStatus.clear();
+      requestStatus.getSelectionModel().clearSelection();
       isUrgent.setSelected(false);
-      staffAssignee.clear();
+      staffAssignee.getSelectionModel().clearSelection();
       notes.clear();
       room.setVisible(false);
     } catch (RuntimeException error) {
@@ -124,8 +124,8 @@ public class securityRequestController extends serviceRequestPageController
     securityReq.setRoomID(roomNameToRoomID.get(room.getValue()));
     securityReq.setFloorID(floor.getValue());
     securityReq.setIsUrgent(isUrgent.isSelected());
-    securityReq.setStaffAssignee(staffAssignee.getText());
-    securityReq.setRequestStatus(requestStatus.getText());
+    securityReq.setStaffAssignee(staffAssignee.getValue());
+    securityReq.setRequestStatus(requestStatus.getValue());
     securityReq.setRequestDate(LocalDate.now());
     securityReq.setDeliveryDate(LocalDate.now());
     securityReq.setOtherNotes(notes.getText());
@@ -143,9 +143,9 @@ public class securityRequestController extends serviceRequestPageController
     room.getSelectionModel().clearSelection();
     securityRequestType.getSelectionModel().clearSelection();
     timeFrameComboBox.getSelectionModel().clearSelection();
-    requestStatus.clear();
+    requestStatus.getSelectionModel().clearSelection();
     isUrgent.setSelected(false);
-    staffAssignee.clear();
+    staffAssignee.getSelectionModel().clearSelection();
     notes.clear();
     room.setVisible(false);
   }

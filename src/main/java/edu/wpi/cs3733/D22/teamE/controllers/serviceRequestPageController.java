@@ -12,10 +12,7 @@ import edu.wpi.cs3733.D22.teamE.entity.Location;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -34,8 +31,8 @@ public abstract class serviceRequestPageController {
   @FXML TextField notes;
   @FXML JFXButton submitButton;
   @FXML JFXButton resetButton;
-  @FXML TextField requestStatus;
-  @FXML TextField staffAssignee;
+  @FXML JFXComboBox<String> requestStatus;
+  @FXML JFXComboBox<String> staffAssignee;
   @FXML JFXHamburger burger;
   @FXML JFXDrawer drawer;
   @FXML JFXComboBox<String> floor;
@@ -70,6 +67,8 @@ public abstract class serviceRequestPageController {
 
   public void initialize(URL url, ResourceBundle rb) {
     system = DAOSystemSingleton.INSTANCE.getSystem();
+    requestStatus.getItems().addAll("To Do", "Processing", "Complete");
+    populateEmployeeComboBox();
 
     try {
       populateLocationComboBoxes();
@@ -151,6 +150,15 @@ public abstract class serviceRequestPageController {
                 }
               }
             });
+  }
+
+  protected void populateEmployeeComboBox() {
+    ArrayList<Employee> employees = (ArrayList<Employee>) system.getAllEmployee();
+    ArrayList<String> employeeNames = new ArrayList<>();
+    for (Employee curEmployee : employees) {
+      employeeNames.add(curEmployee.getName());
+    }
+    staffAssignee.setItems(FXCollections.observableArrayList(employeeNames));
   }
 
   @FXML

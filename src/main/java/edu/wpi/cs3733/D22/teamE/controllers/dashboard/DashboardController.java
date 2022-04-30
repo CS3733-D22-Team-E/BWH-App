@@ -165,9 +165,9 @@ public class DashboardController implements Initializable {
 
   private void quickAccessButtonHandler() {
     quickAccessButtonClickedHandler(mapButton, "map.fxml");
-    quickAccessButtonClickedHandler(requestStatusButton, "serviceRequestLanding.fxml");
+    quickAccessButtonClickedHandler(requestStatusButton, "statusPage.fxml");
     quickAccessButtonClickedHandler(profileButton, "profilePage.fxml");
-    quickAccessButtonClickedHandler(submitRequestButton, "aboutPage.fxml");
+    quickAccessButtonClickedHandler(submitRequestButton, "serviceRequestLanding.fxml");
   }
 
   private void quickAccessButtonClickedHandler(ImageView quickAccessButton, String url) {

@@ -9,517 +9,509 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="5.0" styleClass="gradient" stylesheets="@styles/skeleton.css" vgap="10.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.mapPageController">
-  <columnConstraints>
-    <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" />
-      <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="-Infinity" />
-    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-      <ColumnConstraints halignment="CENTER" hgrow="NEVER" />
-      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
-  </columnConstraints>
-  <rowConstraints>
-      <RowConstraints valignment="CENTER" vgrow="NEVER" />
-    <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="NEVER" />
-    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-  </rowConstraints>
+<HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="300.0" styleClass="gradient" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.mapPageController">
    <children>
-      <ScrollPane fx:id="scroller" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="468.0" prefViewportHeight="100.0" prefViewportWidth="100.0" prefWidth="468.0" vbarPolicy="NEVER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-         <content>
-            <StackPane fx:id="canvasPane" styleClass="gradient">
-               <children>
-                  <Group fx:id="group">
-                     <children>
-                        <StackPane fx:id="mapBox">
-                           <children>
-                              <ImageView fx:id="mapImage" fitHeight="1200.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true" styleClass="gradient">
-                                 <image>
-                                    <Image url="@images/maps/01_thefirstfloor.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </Group>
-               </children>
-            </StackPane>
-         </content>
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
-         <styleClass>
-            <String fx:value="edge-to-edge" />
-            <String fx:value="darkBorder" />
-            <String fx:value="gradient" />
-            <String fx:value="pageBackgroundColor" />
-         </styleClass>
-      </ScrollPane>
-      <Group GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="200.0" minWidth="300.0" spacing="20.0" HBox.hgrow="ALWAYS">
          <children>
-            <VBox fx:id="sideParent" alignment="CENTER" layoutX="-5.0" layoutY="-1.0" spacing="10.0" visible="false">
+            <Group VBox.vgrow="ALWAYS">
                <children>
-                  <VBox fx:id="editorParent" alignment="CENTER" visible="false">
+                  <VBox fx:id="sideParent" alignment="CENTER" layoutX="-5.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" spacing="10.0">
                      <children>
-                        <HBox fx:id="editorModeContainer" alignment="CENTER" spacing="20.0" visible="false">
+                        <VBox fx:id="editorParent" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                            <children>
-                              <JFXButton fx:id="addLocation" buttonType="RAISED" onAction="#addLocation" style="-fx-text-fill: black;" text="Add">
-                                 <styleClass>
-                                    <String fx:value="containerButton" />
-                                    <String fx:value="rounded" />
-                                 </styleClass>
-                              </JFXButton>
-                              <JFXButton fx:id="deleteLocation" buttonType="RAISED" onAction="#deleteLocation" style="-fx-text-fill: black;" text="Delete">
-                                 <styleClass>
-                                    <String fx:value="containerButton" />
-                                    <String fx:value="rounded" />
-                                 </styleClass>
-                              </JFXButton>
+                              <HBox fx:id="editorModeContainer" alignment="CENTER" spacing="20.0">
+                                 <children>
+                                    <JFXButton fx:id="addLocation" buttonType="RAISED" onAction="#addLocation" style="-fx-text-fill: black;" text="Add">
+                                       <styleClass>
+                                          <String fx:value="containerButton" />
+                                          <String fx:value="rounded" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton fx:id="deleteLocation" buttonType="RAISED" onAction="#deleteLocation" style="-fx-text-fill: black;" text="Delete">
+                                       <styleClass>
+                                          <String fx:value="containerButton" />
+                                          <String fx:value="rounded" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                              <Group>
+                                 <children>
+                                    <VBox fx:id="addLocationPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" spacing="10.0" styleClass="bodyText">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Location">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="addShortName" promptText="Enter Short Name" styleClass="inputField" />
+                                          <TextField fx:id="addLongName" promptText="Enter Long Name" styleClass="inputField" />
+                                          <JFXComboBox fx:id="addNodeType" prefHeight="27.0" prefWidth="152.0" promptText="Select Node Type" styleClass="inputField" />
+                                          <JFXButton fx:id="smallAddLocation" mnemonicParsing="false" onAction="#smallAddLocationButton" style="-fx-text-fill: black;" text="Add Location">
+                                             <styleClass>
+                                                <String fx:value="containerButton" />
+                                                <String fx:value="rounded" />
+                                             </styleClass>
+                                          </JFXButton>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox fx:id="deleteLocationPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" styleClass="bodyText" visible="false">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Location">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fx:id="deleteText" strokeType="OUTSIDE" strokeWidth="0.0" text="Click on the location you would like to delete" textAlignment="CENTER" wrappingWidth="247.1875" />
+                                          <JFXButton fx:id="smallDeleteLocation" mnemonicParsing="false" onAction="#smallDeleteLocationButton" style="-fx-text-fill: black;" text="Delete Location">
+                                             <styleClass>
+                                                <String fx:value="containerButton" />
+                                                <String fx:value="rounded" />
+                                             </styleClass>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                                             </VBox.margin>
+                                          </JFXButton>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </Group>
+                           </children>
+                           <styleClass>
+                              <String fx:value="bodyText" />
+                              <String fx:value="rounded" />
+                              <String fx:value="container" />
+                           </styleClass>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </Group>
+            <Group>
+               <children>
+                  <VBox fx:id="towerLocationsLegend" alignment="CENTER" layoutX="7.0" spacing="10.0" visible="false">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tower Locations">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <HBox alignment="CENTER" spacing="10.0">
+                           <children>
+                              <VBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/towerLocations/dept.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Department" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/towerLocations/dirt.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Dirty Storage" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/towerLocations/elev.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Elevator" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/towerLocations/exit.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Exit" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/towerLocations/hall.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Hallway" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/towerLocations/labs.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Labs" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/towerLocations/pati.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Patient" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/towerLocations/rest.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Restroom" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/towerLocations/retl.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Retail" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/towerLocations/serv.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Service" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/towerLocations/stai.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Stairs" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/towerLocations/stor.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Storage" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
                            </children>
                         </HBox>
-                        <Group>
-                           <children>
-                              <VBox fx:id="addLocationPane" alignment="CENTER" spacing="10.0" styleClass="bodyText" visible="false">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Location">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Text>
-                                    <TextField fx:id="addShortName" promptText="Enter Short Name" styleClass="inputField" />
-                                    <TextField fx:id="addLongName" promptText="Enter Long Name" styleClass="inputField" />
-                                    <JFXComboBox fx:id="addNodeType" prefHeight="27.0" prefWidth="152.0" promptText="Select Node Type" styleClass="inputField" />
-                                    <JFXButton fx:id="smallAddLocation" mnemonicParsing="false" onAction="#smallAddLocationButton" style="-fx-text-fill: black;" text="Add Location">
-                                       <styleClass>
-                                          <String fx:value="containerButton" />
-                                          <String fx:value="rounded" />
-                                       </styleClass>
-                                    </JFXButton>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </VBox>
-                              <VBox fx:id="deleteLocationPane" alignment="CENTER" styleClass="bodyText" visible="false">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Location">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Text>
-                                    <Text fx:id="deleteText" strokeType="OUTSIDE" strokeWidth="0.0" text="Click on the location you would like to delete" textAlignment="CENTER" wrappingWidth="247.1875" />
-                                    <JFXButton fx:id="smallDeleteLocation" mnemonicParsing="false" onAction="#smallDeleteLocationButton" style="-fx-text-fill: black;" text="Delete Location">
-                                       <styleClass>
-                                          <String fx:value="containerButton" />
-                                          <String fx:value="rounded" />
-                                       </styleClass>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
-                                       </VBox.margin>
-                                    </JFXButton>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
-                                 </padding>
-                              </VBox>
-                           </children>
-                        </Group>
                      </children>
                      <styleClass>
-                        <String fx:value="bodyText" />
-                        <String fx:value="rounded" />
                         <String fx:value="container" />
+                        <String fx:value="rounded" />
+                        <String fx:value="bodyText" />
                      </styleClass>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </VBox>
-                  <Group>
+                  <VBox fx:id="serviceRequestLegend" alignment="CENTER" spacing="10.0" visible="false">
                      <children>
-                        <VBox fx:id="towerLocationsLegend" alignment="CENTER" layoutX="7.0" spacing="10.0" visible="false">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Service Requests">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <HBox alignment="CENTER" spacing="10.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tower Locations">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
-                              <HBox alignment="CENTER" spacing="10.0">
+                              <VBox alignment="CENTER" spacing="10.0">
                                  <children>
-                                    <VBox alignment="CENTER" spacing="10.0">
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
                                        <children>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/towerLocations/dept.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Department" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/towerLocations/dirt.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Dirty Storage" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/towerLocations/elev.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Elevator" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/towerLocations/exit.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Exit" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/towerLocations/hall.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Hallway" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/towerLocations/labs.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Labs" />
-                                             </children>
-                                          </HBox>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/serviceRequests/equipment.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Equipment" />
                                        </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" spacing="10.0">
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
                                        <children>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/towerLocations/pati.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Patient" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/towerLocations/rest.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Restroom" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/towerLocations/retl.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Retail" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/towerLocations/serv.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Service" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/towerLocations/stai.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Stairs" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/towerLocations/stor.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Storage" />
-                                             </children>
-                                          </HBox>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/serviceRequests/labs.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Lab Request" />
                                        </children>
-                                    </VBox>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/serviceRequests/language.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Language" />
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
-                           </children>
-                           <styleClass>
-                              <String fx:value="container" />
-                              <String fx:value="rounded" />
-                              <String fx:value="bodyText" />
-                           </styleClass>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </VBox>
-                        <VBox fx:id="serviceRequestLegend" alignment="CENTER" spacing="10.0" visible="false">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Service Requests">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
-                              <HBox alignment="CENTER" spacing="10.0">
+                              </VBox>
+                              <VBox alignment="CENTER" spacing="10.0">
                                  <children>
-                                    <VBox alignment="CENTER" spacing="10.0">
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
                                        <children>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/serviceRequests/equipment.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Equipment" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/serviceRequests/labs.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Lab Request" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/serviceRequests/language.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Language" />
-                                             </children>
-                                          </HBox>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/serviceRequests/meal.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Meal Delivery" />
                                        </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" spacing="10.0">
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
                                        <children>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/serviceRequests/meal.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Meal Delivery" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/serviceRequests/medicine.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Medicine" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/serviceRequests/sanitation.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Sanitation" />
-                                             </children>
-                                          </HBox>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/serviceRequests/medicine.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Medicine" />
                                        </children>
-                                    </VBox>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/serviceRequests/sanitation.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Sanitation" />
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
+                              </VBox>
                            </children>
-                           <styleClass>
-                              <String fx:value="container" />
-                              <String fx:value="rounded" />
-                              <String fx:value="bodyText" />
-                           </styleClass>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </VBox>
-                        <VBox fx:id="medicalEquipmentLegend" alignment="CENTER" layoutX="8.0" spacing="10.0" visible="false">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Medical Equipment">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
-                              <HBox alignment="CENTER" spacing="10.0">
-                                 <children>
-                                    <VBox alignment="CENTER" spacing="10.0">
-                                       <children>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/medicalEquipment/bed.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Beds" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/medicalEquipment/infusion.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Infusion Pump" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" spacing="10.0">
-                                       <children>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/medicalEquipment/recliner.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Recliner" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                             <children>
-                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@icons/medicalEquipment/xray.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Xray" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <styleClass>
-                              <String fx:value="container" />
-                              <String fx:value="rounded" />
-                              <String fx:value="bodyText" />
-                           </styleClass>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </VBox>
+                        </HBox>
                      </children>
-                  </Group>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="rounded" />
+                        <String fx:value="bodyText" />
+                     </styleClass>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="medicalEquipmentLegend" alignment="CENTER" layoutX="8.0" spacing="10.0" visible="false">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Medical Equipment">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <HBox alignment="CENTER" spacing="10.0">
+                           <children>
+                              <VBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/medicalEquipment/bed.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Beds" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/medicalEquipment/infusion.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Infusion Pump" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/medicalEquipment/recliner.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Recliner" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/medicalEquipment/xray.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="legendText" text="Xray" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <styleClass>
+                        <String fx:value="container" />
+                        <String fx:value="rounded" />
+                        <String fx:value="bodyText" />
+                     </styleClass>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
                </children>
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-            </VBox>
+            </Group>
          </children>
-      </Group>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
-         <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Map" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font name="System Bold" size="64.0" />
-               </font></Text>
-         </children>
-         <styleClass>
-            <String fx:value="headerText" />
-            <String fx:value="rounded" />
-            <String fx:value="bold" />
-         </styleClass>
-         <GridPane.margin>
+         <HBox.margin>
             <Insets />
-         </GridPane.margin>
-         <padding>
-            <Insets bottom="10.0" left="100.0" right="100.0" top="10.0" />
-         </padding>
-      </HBox>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="15.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
-         <children>
-            <JFXComboBox fx:id="floorDropdown" onAction="#floorDropdown" promptText="Select Floor" styleClass="inputField" />
-            <JFXComboBox fx:id="locationTypeDropdown" onAction="#locationTypeDropdown" promptText="Select Location Type" styleClass="inputField" />
-            <JFXButton fx:id="mapEditorButton" buttonType="RAISED" onAction="#mapEditorButton" ripplerFill="RED" style="-fx-text-fill: black;" text="Open Editor">
-               <styleClass>
-                  <String fx:value="containerButton" />
-                  <String fx:value="rounded" />
-               </styleClass></JFXButton>
-            <JFXButton fx:id="legendOpenButton" buttonType="RAISED" layoutX="362.0" layoutY="10.0" ripplerFill="RED" style="-fx-text-fill: black;" text="Open Legend">
-               <styleClass>
-                  <String fx:value="containerButton" />
-                  <String fx:value="rounded" />
-               </styleClass></JFXButton>
-         </children>
+         </HBox.margin>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
-         <styleClass>
-            <String fx:value="bodyText" />
-            <String fx:value="container" />
-            <String fx:value="rounded" />
-         </styleClass>
-      </HBox>
-      <VBox alignment="TOP_CENTER" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+      </VBox>
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" minWidth="300.0" prefHeight="1000.0" spacing="20.0" stylesheets="@styles/skeleton.css" HBox.hgrow="ALWAYS">
          <children>
-            <HBox fx:id="helpIcon" alignment="TOP_RIGHT" VBox.vgrow="NEVER">
+            <HBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                <children>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/help.png" />
-                     </image>
-                  </ImageView>
+                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Map">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="helpIcon" alignment="CENTER_RIGHT">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
+                           <image>
+                              <Image url="@icons/help.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+               </children>
+               <styleClass>
+                  <String fx:value="headerText" />
+                  <String fx:value="rounded" />
+                  <String fx:value="bold" />
+               </styleClass>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="100.0" maxWidth="700.0" minHeight="70.0" spacing="15.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <JFXComboBox fx:id="floorDropdown" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" onAction="#floorDropdown" promptText="Select Floor" styleClass="inputField" HBox.hgrow="ALWAYS" />
+                  <JFXComboBox fx:id="locationTypeDropdown" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" onAction="#locationTypeDropdown" promptText="Select Location Type" styleClass="inputField" HBox.hgrow="ALWAYS" />
+                  <JFXButton fx:id="mapEditorButton" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" onAction="#mapEditorButton" ripplerFill="RED" style="-fx-text-fill: black;" text="Open Editor" HBox.hgrow="ALWAYS">
+                     <styleClass>
+                        <String fx:value="containerButton" />
+                        <String fx:value="rounded" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="legendOpenButton" buttonType="RAISED" layoutX="362.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" ripplerFill="RED" style="-fx-text-fill: black;" text="Open Legend" HBox.hgrow="ALWAYS">
+                     <styleClass>
+                        <String fx:value="containerButton" />
+                        <String fx:value="rounded" />
+                     </styleClass>
+                  </JFXButton>
                </children>
                <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
+               <styleClass>
+                  <String fx:value="bodyText" />
+                  <String fx:value="container" />
+                  <String fx:value="rounded" />
+               </styleClass>
             </HBox>
+            <ScrollPane fx:id="scroller" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" prefViewportHeight="100.0" prefViewportWidth="100.0" prefWidth="100.0" style="-fx-border-width: 5; -fx-border-color: #666666;" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+               <content>
+                  <StackPane fx:id="canvasPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="gradient">
+                     <children>
+                        <Group fx:id="group" StackPane.alignment="CENTER">
+                           <children>
+                              <StackPane fx:id="mapBox">
+                                 <children>
+                                    <ImageView fx:id="mapImage" fitHeight="1200.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: #666666; -fx-border-width: 4;" styleClass="container" StackPane.alignment="CENTER">
+                                       <image>
+                                          <Image url="@images/maps/01_thefirstfloor.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </Group>
+                     </children>
+                  </StackPane>
+               </content>
+               <styleClass>
+                  <String fx:value="edge-to-edge" />
+                  <String fx:value="gradient" />
+                  <String fx:value="pageBackgroundColor" />
+               </styleClass>
+            </ScrollPane>
          </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="10.0" top="20.0" />
+         </padding>
       </VBox>
    </children>
    <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
    </padding>
-</GridPane>
+</HBox>

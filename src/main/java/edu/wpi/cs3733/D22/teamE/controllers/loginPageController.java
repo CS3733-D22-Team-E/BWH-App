@@ -10,6 +10,7 @@ import edu.wpi.cs3733.D22.teamE.ardComm;
 import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAO;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
+import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.database.daos.EmployeeDAOImpl;
 import edu.wpi.cs3733.D22.teamE.entity.Employee;
 import edu.wpi.cs3733.D22.teamE.entity.accounts.Account;
@@ -129,42 +130,38 @@ public class loginPageController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     RequiredFieldValidator validator = new RequiredFieldValidator();
     validator.setMessage("Input Required");
-    try {
-      db = new DAOSystem();
-      usernameField.getValidators().add(validator);
-      usernameField
-          .focusedProperty()
-          .addListener(
-              (o, oldVal, newVal) -> {
-                if (!newVal) usernameField.validate();
-              });
+    db = DAOSystemSingleton.INSTANCE.getSystem();
+    usernameField.getValidators().add(validator);
+    usernameField
+        .focusedProperty()
+        .addListener(
+            (o, oldVal, newVal) -> {
+              if (!newVal) usernameField.validate();
+            });
 
-      passwordField.getValidators().add(validator);
-      passwordField
-          .focusedProperty()
-          .addListener(
-              (o, oldVal, newVal) -> {
-                if (!newVal) passwordField.validate();
-              });
-      invalidWarning.setVisible(false);
-      usernameField.setOnKeyReleased(
-          event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-              if (passwordField.getText().isEmpty() || passwordField.getText().isBlank())
-                passwordField.requestFocus();
-              else submitLogin(new ActionEvent());
-            }
-          });
-      passwordField.setOnKeyReleased(
-          event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-              if (usernameField.getText().isBlank() || passwordField.getText().isEmpty())
-                usernameField.requestFocus();
-              else submitLogin(new ActionEvent());
-            }
-          });
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    passwordField.getValidators().add(validator);
+    passwordField
+        .focusedProperty()
+        .addListener(
+            (o, oldVal, newVal) -> {
+              if (!newVal) passwordField.validate();
+            });
+    invalidWarning.setVisible(false);
+    usernameField.setOnKeyReleased(
+        event -> {
+          if (event.getCode() == KeyCode.ENTER) {
+            if (passwordField.getText().isEmpty() || passwordField.getText().isBlank())
+              passwordField.requestFocus();
+            else submitLogin(new ActionEvent());
+          }
+        });
+    passwordField.setOnKeyReleased(
+        event -> {
+          if (event.getCode() == KeyCode.ENTER) {
+            if (usernameField.getText().isBlank() || passwordField.getText().isEmpty())
+              usernameField.requestFocus();
+            else submitLogin(new ActionEvent());
+          }
+        });
   }
 }

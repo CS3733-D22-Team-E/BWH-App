@@ -46,7 +46,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="gradient" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.statusPageController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="gradient" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.statusPageController">
    <center>
       <HBox styleClass="container" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -116,7 +116,7 @@
                <children>
                   <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                      <children>
-                        <JFXButton buttonType="RAISED" minHeight="50.0" minWidth="200.0" onAction="#deleteReqButton" ripplerFill="RED" text="Delete Selected Request" HBox.hgrow="ALWAYS">
+                        <JFXButton fx:id="deleteReqButton" buttonType="RAISED" minHeight="50.0" minWidth="200.0" onAction="#deleteReqButton" ripplerFill="RED" text="Delete Selected Request" HBox.hgrow="ALWAYS">
                            <styleClass>
                               <String fx:value="submitButton" />
                               <String fx:value="rounded_08" />

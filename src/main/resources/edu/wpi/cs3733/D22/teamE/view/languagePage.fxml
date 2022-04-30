@@ -55,7 +55,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="700.0" maxWidth="1200.0" minHeight="100.0" minWidth="100.0" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.languageInterpreterRequestController">
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.languageInterpreterRequestController">
     <children>
       <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" VBox.vgrow="ALWAYS">
          <children>
@@ -102,7 +102,7 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label styleClass="inputLabel" text="Delivery Date:" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+                              <Label styleClass="inputLabel" text="End Date:" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
@@ -123,8 +123,8 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="staffAssignee" promptText="Employee" styleClass="inputField" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
-                              <TextField fx:id="requestStatus" promptText="Done, Processing, etc. " styleClass="inputField" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                              <JFXComboBox fx:id="staffAssignee" promptText="Employee" styleClass="inputField" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
+                              <JFXComboBox fx:id="requestStatus" promptText="Done, Processing, etc. " styleClass="inputField" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                               <VBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <children>
                                     <HBox alignment="CENTER_LEFT" maxHeight="10.0" spacing="5.0" VBox.vgrow="ALWAYS">
@@ -159,7 +159,7 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label styleClass="inputLabel" text="Request Date:" textAlignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                              <Label styleClass="inputLabel" text="Start Date:" textAlignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
@@ -557,7 +557,7 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <JFXButton fx:id="tableViewButton" onAction="#displayTableView" buttonType="RAISED" minHeight="10.0" minWidth="10.0" prefHeight="50.0" prefWidth="200.0" styleClass="tableView" text="Table View " VBox.vgrow="ALWAYS">
+                        <JFXButton fx:id="tableViewButton" buttonType="RAISED" minHeight="10.0" minWidth="10.0" onAction="#displayTableView" prefHeight="50.0" prefWidth="200.0" styleClass="tableView" text="Table View " VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -569,7 +569,7 @@
                   </VBox>
                </children>
                <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                </padding>
             </HBox>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="120.0" direction="RIGHT" overLayVisible="false" visible="false" StackPane.alignment="CENTER" />

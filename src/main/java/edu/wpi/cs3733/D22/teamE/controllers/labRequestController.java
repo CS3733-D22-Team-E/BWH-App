@@ -104,8 +104,8 @@ public class labRequestController extends serviceRequestPageController implement
       labReq.setFloorID(floor.getValue());
       labReq.setRoomID(roomNameToRoomID.get(room.getValue()));
       labReq.setOtherNotes(notes.getText());
-      labReq.setRequestStatus(requestStatus.getText());
-      labReq.setStaffAssignee(staffAssignee.getText());
+      labReq.setRequestStatus(requestStatus.getValue());
+      labReq.setStaffAssignee(staffAssignee.getValue());
       labReq.setIsUrgent(isUrgent.isSelected());
       labSendToDB(labReq);
       setInfographicsCount("LAB_REQUEST");
@@ -124,8 +124,8 @@ public class labRequestController extends serviceRequestPageController implement
     room.getSelectionModel().clearSelection();
     labRequestType.getSelectionModel().clearSelection();
     timeFrameComboBox.getSelectionModel().clearSelection();
-    requestStatus.clear();
-    staffAssignee.clear();
+    requestStatus.getSelectionModel().clearSelection();
+    staffAssignee.getSelectionModel().clearSelection();
     notes.clear();
     isUrgent.setSelected(false);
     room.setVisible(false);
@@ -138,8 +138,8 @@ public class labRequestController extends serviceRequestPageController implement
     room.getSelectionModel().clearSelection();
     labRequestType.getSelectionModel().clearSelection();
     timeFrameComboBox.getSelectionModel().clearSelection();
-    requestStatus.clear();
-    staffAssignee.clear();
+    requestStatus.getSelectionModel().clearSelection();
+    staffAssignee.getSelectionModel().clearSelection();
     notes.clear();
     isUrgent.setSelected(false);
     room.setVisible(false);
