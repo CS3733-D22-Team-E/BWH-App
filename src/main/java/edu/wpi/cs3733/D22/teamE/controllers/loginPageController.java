@@ -48,16 +48,17 @@ public class loginPageController implements Initializable {
   public void submitLogin(ActionEvent event) {
     if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
       Account account = db.getAccount(getUsername());
-      AccountsManager.getInstance().setAccount(account);
-      if (enableTwoFactorAuthentication) {
-        TwoFAcode = generateRandom5DigitID();
-        Texting.sendSMS(
-            account
-                .getPhoneNumber(), // "+16178936605", // "+19788317440", //account.getPhoneNumber(),
-            "Your Brigham & Womens Hospital authentication code is: " + TwoFAcode);
+        AccountsManager.getInstance().setAccount(account);
+        if (enableTwoFactorAuthentication) {
+          TwoFAcode = generateRandom5DigitID();
+          while (TwoFAcode.length()<5) TwoFAcode = "0" + TwoFAcode;
+          Texting.sendSMS(
+              account.getPhoneNumber(),
+              "Your Brigham & Womens Hospital authentication code is: " + TwoFAcode);
 
-        pageControl.loadPage("twoFacAuthPage.fxml", (Stage) passwordField.getScene().getWindow());
-      } else {
+          pageControl.loadPage("twoFacAuthPage.fxml", (Stage) passwordField.getScene().getWindow());
+        }
+       else {
         pageControl.loadPage("BasePage.fxml", (Stage) passwordField.getScene().getWindow());
       }
     } else {
