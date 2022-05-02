@@ -25,8 +25,8 @@ public class ardComm {
   public String readData() {
     System.out.println("In readData()");
     String data = "";
-    uno = new Arduino("COM10", 9600);
-    boolean connection = uno.openConnection();
+    boolean ard = uno.openConnection();
+    boolean connection = ardComm.getInstance().getUno().openConnection();
     if (!connection) {
       System.err.println("Error: Unable to connect to serial port");
     } else {
@@ -45,7 +45,6 @@ public class ardComm {
     for (SerialPort s : ports) {
       if (s.openPort()) {
         available.add(s.getSystemPortName().trim());
-        //        System.out.println(s.getSystemPortName().trim());
       }
       s.closePort();
     }
@@ -54,6 +53,7 @@ public class ardComm {
 
   public void checkArdConnection() {
     List<String> ports = this.getAvailableCOMs();
+    System.out.println(ports);
     for (String port : ports) {
       Thread search =
           new Thread(
@@ -64,12 +64,15 @@ public class ardComm {
                   if (arduino.openConnection() && ardComm.this.checkForBuffer(arduino)) {
                     System.out.println("Port " + port + " has correct connection");
                     arduino.closeConnection();
+                    System.out.println("hi");
                     if (!connections.containsKey(port)) {
                       connections.put(port, arduino);
                     }
                   } else arduino.closeConnection();
+                  System.out.println("Hi again");
                 }
               });
+      System.out.println("Searching " + port);
       search.start();
     }
   }
@@ -99,5 +102,9 @@ public class ardComm {
 
   public Collection<Arduino> getConnections() {
     return this.connections.values();
+  }
+
+  public Arduino getUno() {
+    return this.uno;
   }
 }

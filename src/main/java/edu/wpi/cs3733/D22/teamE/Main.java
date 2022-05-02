@@ -21,8 +21,10 @@ public class Main {
     //            () -> {
 
     ardComm.getInstance().checkArdConnection();
+    ardComm.getInstance().readData();
+    // ardComm.getInstance().readData();
 
-    App.launch(App.class, args);
+    // App.launch(App.class, args);
     //            });
     //    thread.start();
     // CallAPI.getInstance().openAPI();

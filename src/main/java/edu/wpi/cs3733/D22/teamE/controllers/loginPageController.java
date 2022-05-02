@@ -47,7 +47,11 @@ public class loginPageController implements Initializable {
 
   @FXML
   public void submitLogin(ActionEvent event) {
-    if (verifyUser(getUsername(), getPassword()) || verifyUserRFID()) {
+    if (verifyUserRFID()) {
+      Account account = db.getAccount("admin");
+      pageControl.loadPage("BasePage.fxml", (Stage) passwordField.getScene().getWindow());
+      AccountsManager.getInstance().setAccount(account);
+    } else if (verifyUser(getUsername(), getPassword())) {
       Account account = db.getAccount(getUsername());
       AccountsManager.getInstance().setAccount(account);
       if (enableTwoFactorAuthentication) {
@@ -117,7 +121,13 @@ public class loginPageController implements Initializable {
     if (!ardComm.getInstance().hasConnections()) {
       return false;
     }
-    return true;
+    Account account = db.getAccount("admin");
+    String id = ardComm.getInstance().readData();
+    if (id.equals("93 52 CD 1B")) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   private boolean verifyUser2FA(String phoneNumber) {
