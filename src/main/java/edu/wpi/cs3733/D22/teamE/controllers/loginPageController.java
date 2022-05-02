@@ -123,7 +123,7 @@ public class loginPageController implements Initializable {
     }
     Account account = db.getAccount("admin");
     String id = ardComm.getInstance().readData();
-    if (id.equals("93 52 CD 1B")) {
+    if (ardComm.getInstance().readData().contains("93\n52\nCD\n1B")) {
       return true;
     } else {
       return false;

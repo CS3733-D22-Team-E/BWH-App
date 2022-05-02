@@ -20,11 +20,13 @@ public class Main {
     //        new Thread(
     //            () -> {
 
-    ardComm.getInstance().checkArdConnection();
-    ardComm.getInstance().readData();
+    // ardComm.getInstance().checkArdConnection();
+    //    ardComm.getInstance().readData();
+    //    System.out.println(ardComm.getInstance().readData());
+    //    System.out.println(ardComm.getInstance().verifyID(ardComm.getInstance().readData()));
     // ardComm.getInstance().readData();
 
-    // App.launch(App.class, args);
+    App.launch(App.class, args);
     //            });
     //    thread.start();
     // CallAPI.getInstance().openAPI();

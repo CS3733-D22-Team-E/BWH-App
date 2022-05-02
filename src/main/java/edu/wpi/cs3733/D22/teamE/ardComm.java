@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ardComm {
-  private Arduino arduino;
+  private Arduino arduino = new Arduino("COM10", 9600);
   private static ardComm singleton;
 
   private ardComm() {}
@@ -19,14 +19,13 @@ public class ardComm {
     if (singleton == null) {
       singleton = new ardComm();
     }
-    singleton.checkArdConnection();
+    // singleton.checkArdConnection();
     return singleton;
   }
 
   public String readData() {
     System.out.println("In readData()");
     String data = "";
-    // boolean ard = uno.openConnection();
     boolean connection = ardComm.getInstance().getUno().openConnection();
     if (!connection) {
       System.err.println("Error: Unable to connect to serial port");
@@ -36,8 +35,15 @@ public class ardComm {
       }
     }
     arduino.closeConnection();
-    System.out.println(data);
+    System.out.println("The data is" + data);
     return data;
+  }
+
+  public boolean verifyID(String id) {
+    if (!id.contains("93\n52\nCD\n1B")) {
+      return false;
+    }
+    return true;
   }
 
   public List<String> getAvailableCOMs() {
