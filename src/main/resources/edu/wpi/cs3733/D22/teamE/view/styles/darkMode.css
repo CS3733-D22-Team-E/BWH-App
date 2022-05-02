@@ -159,7 +159,7 @@
 }
 
 .inputLabel {
-    -fx-text-fill: #212121;
+    -fx-text-fill: #CCCCCC;
     -fx-font-weight: bold;
     -fx-font-size: 14;
 }
@@ -172,11 +172,59 @@
 
 /* Profile */
 .gradient{
-    -fx-background-color: linear-gradient(to bottom right, #020079, #993ab0);
+    -fx-background-color: linear-gradient(to bottom right, #3c79aa, #9c7ca7);
     -fx-opacity: 0.96;
 }
+
 
 /* Profile */
 .profile {
     -fx-border-radius: 100%;
+}
+.default-background {
+    -fx-background-image: url("../images/rsz_2bwn_3.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.card-background {
+    -fx-background-image: url("../images/holographic3.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.dashboardIcon {
+    -fx-background-image: url("../icons/dashboard.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.profileIcon {
+    -fx-background-image: url("../icons/prof.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.serviceIcon {
+    -fx-background-image: url("../icons/serviceHelp.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.mapIcon {
+    -fx-background-image: url("../icons/mapHelp.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.statusIcon {
+    -fx-background-image: url("../icons/progress.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.empIcon {
+    -fx-background-image: url("../icons/profile.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
 }

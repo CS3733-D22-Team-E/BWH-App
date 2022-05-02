@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamE.controllers;
 
 import com.jfoenix.controls.JFXToggleButton;
+import edu.wpi.cs3733.D22.teamE.CallAPI;
 import edu.wpi.cs3733.D22.teamE.pageControl;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -109,24 +110,18 @@ public class serviceRequestLandingController {
   }
 
   @FXML
-  public void floralDeliveryButton(ActionEvent event) throws IOException {
-    //    Stage thisStage = (Stage) mainPane.getScene().getWindow();
-    //
-    //    pageControl.loadCenter("floralPage.fxml", thisStage);
+  public void floralDeliveryButton(ActionEvent event) {
+    CallAPI.getInstance().openFloralAPI();
   }
 
   @FXML
-  public void api1Button(ActionEvent event) throws IOException {
-    //    Stage thisStage = (Stage) mainPane.getScene().getWindow();
-    //
-    //    pageControl.loadCenter("api1.fxml", thisStage);
+  public void api1Button(ActionEvent event) {
+    CallAPI.getInstance().openExternalTransportAPI();
   }
 
   @FXML
-  public void api2Button(ActionEvent event) throws IOException {
-    //    Stage thisStage = (Stage) mainPane.getScene().getWindow();
-    //
-    //    pageControl.loadCenter("api1.fxml", thisStage);
+  public void api2Button(ActionEvent event) {
+    CallAPI.getInstance().openSanitationRequestAPI();
   }
 
   @FXML

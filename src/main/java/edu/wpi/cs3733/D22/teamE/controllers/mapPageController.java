@@ -204,7 +204,7 @@ public class mapPageController extends HeaderController implements Initializable
     this.helpIcon.setOnMouseEntered(hoverListener);
     this.helpIcon.setOnMouseExited(hoverListener);
 
-    setZoom(1.3);
+    setZoom(0.7);
   }
 
   // Re-fetch data from database after location update
@@ -772,7 +772,7 @@ public class mapPageController extends HeaderController implements Initializable
     // group.setScaleX(group.getScaleX() * zoomValue);
     //  group.setScaleY(group.getScaleY() * zoomValue);
 
-    if (mapBox.getScaleX() * zoomValue >= 1.3) {
+    if (mapBox.getScaleX() * zoomValue >= 0.7) {
 
       mapBox.setScaleX(mapBox.getScaleX() * zoomValue);
       mapBox.setScaleY(mapBox.getScaleY() * zoomValue);

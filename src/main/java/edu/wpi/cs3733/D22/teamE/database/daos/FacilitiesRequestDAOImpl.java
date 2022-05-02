@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamE.database.daos;
 
-import edu.wpi.cs3733.D22.teamE.database.DBConnect;
+import edu.wpi.cs3733.D22.teamE.database.AccountsManager;
 import edu.wpi.cs3733.D22.teamE.entity.facilitiesRequest;
 import java.sql.*;
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FacilitiesRequestDAOImpl implements DAO<facilitiesRequest> {
 
-  static Connection connection = DBConnect.EMBEDDED_INSTANCE.getConnection();
+  static Connection connection = AccountsManager.getInstance().getConnection();
   List<facilitiesRequest> facilitiesRequests;
 
   public FacilitiesRequestDAOImpl() throws SQLException {

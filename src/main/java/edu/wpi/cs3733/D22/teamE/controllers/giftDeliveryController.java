@@ -106,15 +106,17 @@ public class giftDeliveryController extends serviceRequestPageController impleme
       request.setPatientName(patientName.getText());
       request.setFloorID(floor.getValue());
       request.setRoomID(roomNameToRoomID.get(room.getValue()));
-      request.setStaffAssignee(staffAssignee.getText());
+      request.setStaffAssignee(staffAssignee.getValue());
       request.setRequestDate(LocalDate.now());
       request.setDeliveryDate(deliveryDate.getValue());
-      request.setRequestStatus(requestStatus.getText());
+      request.setRequestStatus(requestStatus.getValue());
       request.setOtherNotes(notes.getText());
       request.setIsUrgent(isUrgent.isSelected());
 
       giftSendToDB(request);
       setInfographicsCount("GIFT_REQUEST");
+      PopUp.submissionConfirmation(
+          "Your gift service request has been submitted.", submitButton.getScene().getWindow());
 
     } catch (NullPointerException e) {
       System.out.println("Error : Some Value is NULL");
@@ -132,8 +134,8 @@ public class giftDeliveryController extends serviceRequestPageController impleme
       giftOptionType.getSelectionModel().clearSelection();
       isUrgent.setSelected(false);
       deliveryDate.getEditor().clear();
-      requestStatus.clear();
-      staffAssignee.clear();
+      requestStatus.getSelectionModel().clearSelection();
+      staffAssignee.getSelectionModel().clearSelection();
       patientName.clear();
       notes.clear();
       room.setVisible(false);
@@ -155,8 +157,8 @@ public class giftDeliveryController extends serviceRequestPageController impleme
     giftOptionType.getSelectionModel().clearSelection();
     isUrgent.setSelected(false);
     deliveryDate.getEditor().clear();
-    requestStatus.clear();
-    staffAssignee.clear();
+    requestStatus.getSelectionModel().clearSelection();
+    staffAssignee.getSelectionModel().clearSelection();
     patientName.clear();
     notes.clear();
     room.setVisible(false);

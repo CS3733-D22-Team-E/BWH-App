@@ -2,14 +2,9 @@ package edu.wpi.cs3733.D22.teamE.controllers;
 
 import edu.wpi.cs3733.D22.teamE.PopUp;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 
 public class helpPageController {
-
-  @FXML Button serviceHelp;
-  @FXML Button mapHelp;
 
   private String mapHelpMessage =
       "The Interactive Map allows user to view the location of the different service requests, medical equipment,a dn important locations in the hospital.  Additionally, you are able to move locations and medical equipment around.  There is also an option to add locations or medical equipment. If there is an issue with the icons showing up in the correct spot or at all, then there is an issue with the backend, and nothing can be done without contacting (508) 740-3904.";

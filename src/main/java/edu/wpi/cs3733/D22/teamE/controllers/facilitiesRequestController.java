@@ -110,16 +110,19 @@ public class facilitiesRequestController extends serviceRequestPageController
       request.setFacilitiesRequestType(facilitiesOptionType.getValue()); // getValue());
       request.setFloorID(floor.getValue());
       request.setRoomID(roomNameToRoomID.get(room.getValue()));
-      request.setStaffAssignee(staffAssignee.getText());
+      request.setStaffAssignee(staffAssignee.getValue());
       request.setRequestDate(LocalDate.now());
       request.setDeliveryDate(deliveryDate.getValue());
-      request.setRequestStatus(requestStatus.getText());
+      request.setRequestStatus(requestStatus.getValue());
       request.setOtherNotes(notes.getText());
       request.setIsUrgent(isUrgent.isSelected());
       request.setTimeFrame(timeFrame.getText());
 
       facilitiesSendToDB(request);
       setInfographicsCount("FACILITIES_REQ");
+      PopUp.submissionConfirmation(
+          "Your facilities service request has been submitted.",
+          submitButton.getScene().getWindow());
 
     } catch (NullPointerException e) {
       System.out.println("Error : Some Value is NULL");
@@ -138,8 +141,8 @@ public class facilitiesRequestController extends serviceRequestPageController
       timeFrame.clear();
       isUrgent.setSelected(false);
       deliveryDate.getEditor().clear();
-      staffAssignee.clear();
-      requestStatus.clear();
+      staffAssignee.getSelectionModel().clearSelection();
+      requestStatus.getSelectionModel().clearSelection();
       notes.clear();
       room.setVisible(false);
       // tableList.add(request);
@@ -161,8 +164,8 @@ public class facilitiesRequestController extends serviceRequestPageController
     timeFrame.clear();
     isUrgent.setSelected(false);
     deliveryDate.getEditor().clear();
-    staffAssignee.clear();
-    requestStatus.clear();
+    staffAssignee.getSelectionModel().clearSelection();
+    requestStatus.getSelectionModel().clearSelection();
     notes.clear();
     room.setVisible(false);
   }

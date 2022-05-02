@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.shape.Circle?>
 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="214.0" spacing="5.0" styleClass="sidebarBackground" stylesheets="@styles/skeleton.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
          <children>
       <VBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
@@ -15,7 +16,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/default_profile_pic.png" />
+                        <Image url="@icons/sidebar/dashboard-white.png" />
                      </image>
                   </ImageView>
                   <Label styleClass="sidebarButton" text="Dashboard" />
@@ -25,7 +26,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/default_profile_pic.png" />
+                        <Image url="@icons/sidebar/serviceRequest-white.png" />
                      </image>
                   </ImageView>
                   <Label styleClass="sidebarButton" text="Service Requests" />
@@ -35,7 +36,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/default_profile_pic.png" />
+                        <Image url="@icons/sidebar/statusPage-white.png" />
                      </image>
                   </ImageView>
                   <Label styleClass="sidebarButton" text="Status Page" />
@@ -45,7 +46,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/default_profile_pic.png" />
+                        <Image url="@icons/sidebar/map-white.png" />
                      </image>
                   </ImageView>
                   <Label styleClass="sidebarButton" text="Map" />
@@ -53,11 +54,7 @@
             </HBox>
             <HBox fx:id="profileBox" alignment="CENTER_LEFT" spacing="4.0" styleClass="sidebarButton" VBox.vgrow="NEVER">
                <children>
-                  <ImageView fx:id="profilePicture" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/default_profile_pic.png" />
-                     </image>
-                  </ImageView>
+                  <Circle fx:id="profilePicture" fill="TRANSPARENT" radius="18.0" pickOnBounds="true" stroke="darkslategray" strokeType="INSIDE"> </Circle>
                   <Label styleClass="sidebarButton" text="Profile" />
                </children>
             </HBox>
@@ -65,7 +62,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/default_profile_pic.png" />
+                        <Image url="@icons/sidebar/about-white.png" />
                      </image>
                   </ImageView>
                   <Label styleClass="sidebarButton" text="About" />
@@ -75,7 +72,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/default_profile_pic.png" />
+                        <Image url="@icons/sidebar/help-white.png" />
                      </image>
                   </ImageView>
                   <Label styleClass="sidebarButton" text="Help" />
@@ -91,7 +88,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/default_profile_pic.png" />
+                        <Image url="@icons/sidebar/logout-white.png" />
                      </image>
                   </ImageView>
                   <Label styleClass="sidebarButton" text="Logout" />
@@ -101,7 +98,7 @@
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/default_profile_pic.png" />
+                        <Image url="@icons/sidebar/close-white.png" />
                      </image>
                   </ImageView>
                   <Label styleClass="sidebarButton" text="Exit" />

@@ -180,14 +180,17 @@ public class medicalEquipmentController extends serviceRequestPageController
       medicalEquipmentRequest.setRoomID(roomNameToRoomID.get(room.getValue()));
       medicalEquipmentRequest.setEquipment(equipmentType.getValue());
       medicalEquipmentRequest.setEquipmentQuantity(equipmentQuantity.getValue());
-      medicalEquipmentRequest.setRequestStatus(requestStatus.getText());
-      medicalEquipmentRequest.setStaffAssignee(staffAssignee.getText());
+      medicalEquipmentRequest.setRequestStatus(requestStatus.getValue());
+      medicalEquipmentRequest.setStaffAssignee(staffAssignee.getValue());
       medicalEquipmentRequest.setDeliveryDate(deliveryDate.getValue());
       medicalEquipmentRequest.setRequestDate(LocalDate.now());
       medicalEquipmentRequest.setIsUrgent(isUrgent.isSelected());
       medicalEquipmentRequest.setOtherNotes(notes.getText());
       medSendToDB(medicalEquipmentRequest);
       setInfographicsCount("MED_EQUIP_REQ");
+      PopUp.submissionConfirmation(
+          "Your medical equipment service request has been submitted.",
+          submitButton.getScene().getWindow());
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
@@ -204,8 +207,8 @@ public class medicalEquipmentController extends serviceRequestPageController
     equipmentQuantity.getSelectionModel().clearSelection();
     deliveryDate.getEditor().clear();
     isUrgent.setSelected(false);
-    requestStatus.clear();
-    staffAssignee.clear();
+    requestStatus.getSelectionModel().clearSelection();
+    staffAssignee.getSelectionModel().clearSelection();
     notes.clear();
     room.setVisible(false);
   }
@@ -230,8 +233,8 @@ public class medicalEquipmentController extends serviceRequestPageController
     equipmentQuantity.getSelectionModel().clearSelection();
     deliveryDate.getEditor().clear();
     isUrgent.setSelected(false);
-    requestStatus.clear();
-    staffAssignee.clear();
+    requestStatus.getSelectionModel().clearSelection();
+    staffAssignee.getSelectionModel().clearSelection();
     notes.clear();
     room.setVisible(false);
   }

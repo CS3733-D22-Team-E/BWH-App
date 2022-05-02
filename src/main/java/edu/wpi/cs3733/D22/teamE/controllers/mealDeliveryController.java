@@ -27,8 +27,6 @@ public class mealDeliveryController extends serviceRequestPageController impleme
   @FXML DatePicker dateTime;
   @FXML TextField timeTxt;
   @FXML CheckBox isUrgent;
-  @FXML TextField staffAssignee;
-  @FXML TextField requestStatus;
   @FXML TextField otherNotesTxt;
   /*@FXML TableView<mealDeliveryRequest> mealDeliveryTable;
 
@@ -155,11 +153,14 @@ public class mealDeliveryController extends serviceRequestPageController impleme
       mealDeliveryRequest.setDeliveryTime(timeTxt.getText());
       mealDeliveryRequest.setIsUrgent(isUrgent.isSelected());
       mealDeliveryRequest.setOtherNotes(otherNotesTxt.getText());
-      mealDeliveryRequest.setStaffAssignee(staffAssignee.getText());
-      mealDeliveryRequest.setRequestStatus(requestStatus.getText());
+      mealDeliveryRequest.setStaffAssignee(staffAssignee.getValue());
+      mealDeliveryRequest.setRequestStatus(requestStatus.getValue());
       mealSendToDB(mealDeliveryRequest);
 
       setInfographicsCount("MEAL_DELIV_REQ");
+      PopUp.submissionConfirmation(
+          "Your meal delivery service request has been submitted.",
+          submitButton.getScene().getWindow());
 
     } catch (NullPointerException | SQLException error) {
       System.out.println("Error : Some Value is NULL");
@@ -175,8 +176,8 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     dessertDropDown.getSelectionModel().clearSelection();
     dateTime.getEditor().clear();
     isUrgent.setSelected(false);
-    staffAssignee.clear();
-    requestStatus.clear();
+    staffAssignee.getSelectionModel().clearSelection();
+    requestStatus.getSelectionModel().clearSelection();
     timeTxt.clear();
     otherNotesTxt.clear();
     floor.getSelectionModel().clearSelection();
@@ -197,8 +198,8 @@ public class mealDeliveryController extends serviceRequestPageController impleme
     dessertDropDown.getSelectionModel().clearSelection();
     dateTime.getEditor().clear();
     isUrgent.setSelected(false);
-    staffAssignee.clear();
-    requestStatus.clear();
+    staffAssignee.getSelectionModel().clearSelection();
+    requestStatus.getSelectionModel().clearSelection();
     timeTxt.clear();
     otherNotesTxt.clear();
     floor.getSelectionModel().clearSelection();

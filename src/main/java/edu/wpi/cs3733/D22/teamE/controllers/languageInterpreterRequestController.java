@@ -17,8 +17,6 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
 
   @FXML ComboBox<String> languageOptions;
   @FXML CheckBox isUrgent;
-  @FXML TextField requestStatus;
-  @FXML TextField staffAssignee;
   @FXML DatePicker startDate;
   @FXML DatePicker endDate;
   @FXML TextField notes;
@@ -94,8 +92,8 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
       languageInterpreterRequest request = new languageInterpreterRequest();
       request.setFloorID(floor.getValue());
       request.setRoomID(roomNameToRoomID.get(room.getValue()));
-      request.setRequestStatus(requestStatus.getText());
-      request.setStaffAssignee(staffAssignee.getText());
+      request.setRequestStatus(requestStatus.getValue());
+      request.setStaffAssignee(staffAssignee.getValue());
       request.setIsUrgent(isUrgent.isSelected());
       request.setOtherNotes(notes.getText());
       request.setLanguage(languageOptions.getValue());
@@ -104,6 +102,9 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
 
       langSendToDB(request);
       setInfographicsCount("LANG_INTERP_REQ");
+      PopUp.submissionConfirmation(
+          "Your language interpreter service request has been submitted.",
+          submitButton.getScene().getWindow());
 
     } catch (NullPointerException error) {
       System.out.println("Error : Some Value is NULL");
@@ -120,8 +121,8 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
       room.getSelectionModel().clearSelection();
       languageOptions.getSelectionModel().clearSelection();
       isUrgent.setSelected(false);
-      requestStatus.clear();
-      staffAssignee.clear();
+      requestStatus.getSelectionModel().clearSelection();
+      staffAssignee.getSelectionModel().clearSelection();
       startDate.getEditor().clear();
       endDate.getEditor().clear();
       notes.clear();
@@ -138,8 +139,9 @@ public class languageInterpreterRequestController extends serviceRequestPageCont
     room.getSelectionModel().clearSelection();
     languageOptions.getSelectionModel().clearSelection();
     isUrgent.setSelected(false);
-    requestStatus.clear();
-    staffAssignee.clear();
+    requestStatus.getSelectionModel().clearSelection();
+    ;
+    staffAssignee.getSelectionModel().clearSelection();
     startDate.getEditor().clear();
     endDate.getEditor().clear();
     notes.clear();

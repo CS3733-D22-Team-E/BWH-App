@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamE.controllers.dashboard;
 
 import com.jfoenix.controls.JFXBadge;
 import com.jfoenix.controls.JFXToggleNode;
-import edu.wpi.cs3733.D22.teamE.PopUp;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystem;
 import edu.wpi.cs3733.D22.teamE.database.daos.DAOSystemSingleton;
 import edu.wpi.cs3733.D22.teamE.entity.MedicalEquipment;
@@ -19,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class DashboardController implements Initializable {
 
@@ -68,22 +68,30 @@ public class DashboardController implements Initializable {
   @FXML VBox infusionPumpBox;
   @FXML JFXBadge infusionPumpAlertBadge;
 
+  @FXML Label bedBoxLabel;
+  @FXML Label infusionPumpBoxLabel;
+
   DAOSystem database;
   ArrayList<MedicalEquipment> currentEquipment;
   ArrayList<RequestInterface> currentServiceRequests;
   DashboardEquipmentHandler dashboardEquipmentHandler;
   DashboardServiceRequestHandler dashboardServiceRequestHandler;
 
+  @FXML Tooltip bedBoxTooltip;
+  @FXML Tooltip infusionPumpBoxTooltip;
+
   public DashboardController() {}
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    initializeTooltip(bedBoxTooltip, bedBoxLabel);
+    initializeTooltip(infusionPumpBoxTooltip, infusionPumpBoxLabel);
+
     bedAlertBadge = new JFXBadge();
     // bedBox.getChildren().add(bedAlertBadge);
 
     database = DAOSystemSingleton.INSTANCE.getSystem();
-
     currentFloorString = "All";
     floorButtonsHandler();
 
@@ -93,10 +101,20 @@ public class DashboardController implements Initializable {
     dashboardEquipmentHandler = new DashboardEquipmentHandler(this);
     dashboardServiceRequestHandler = new DashboardServiceRequestHandler(this);
 
+    dashboardEquipmentHandler.setSubject(database);
+    dashboardServiceRequestHandler.setSubject(database);
+
     dashboardEquipmentHandler.updateEquipmentReports();
     dashboardServiceRequestHandler.updateServiceRequestTable();
 
     quickAccessButtonHandler();
+  }
+
+  private void initializeTooltip(Tooltip tooltip, Label parentLabel) {
+    tooltip.maxWidth(150);
+    tooltip.setText("No Alerts");
+    tooltip.setStyle("-fx-font-size: 12");
+    tooltip.setShowDelay(Duration.seconds(.2));
   }
 
   private void floorButtonsHandler() {
@@ -119,17 +137,10 @@ public class DashboardController implements Initializable {
                   ObservableValue<? extends Toggle> observableValue, Toggle oldVal, Toggle newVal) {
                 currentFloor = (JFXToggleNode) newVal;
                 updateFloorString(newVal);
-                if (dashboardEquipmentHandler.updateEquipmentReports()) {
-                  bedAlertDisplay();
-                }
+                dashboardEquipmentHandler.updateEquipmentReports();
                 dashboardServiceRequestHandler.updateServiceRequestTable();
               }
             });
-  }
-
-  private void bedAlertDisplay() {
-    PopUp.createWarning(
-        "There are too many beds in a dirty area!", bedDirty.getScene().getWindow());
   }
 
   private void updateFloorString(Toggle newVal) {
@@ -154,9 +165,9 @@ public class DashboardController implements Initializable {
 
   private void quickAccessButtonHandler() {
     quickAccessButtonClickedHandler(mapButton, "map.fxml");
-    quickAccessButtonClickedHandler(requestStatusButton, "serviceRequestLanding.fxml");
+    quickAccessButtonClickedHandler(requestStatusButton, "statusPage.fxml");
     quickAccessButtonClickedHandler(profileButton, "profilePage.fxml");
-    quickAccessButtonClickedHandler(submitRequestButton, "aboutPage.fxml");
+    quickAccessButtonClickedHandler(submitRequestButton, "serviceRequestLanding.fxml");
   }
 
   private void quickAccessButtonClickedHandler(ImageView quickAccessButton, String url) {
