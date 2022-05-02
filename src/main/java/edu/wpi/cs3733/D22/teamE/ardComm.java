@@ -39,7 +39,7 @@ public class ardComm {
     return data;
   }
 
-  public boolean verifyID(String id) {
+  public boolean verifyID(String id) { // for testing rfid only
     if (!id.contains("93\n52\nCD\n1B")) {
       return false;
     }

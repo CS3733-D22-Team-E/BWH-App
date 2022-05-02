@@ -11,7 +11,7 @@
 
 <HBox id="default-background" prefHeight="600.0" prefWidth="960.0" stylesheets="@styles/Login_page.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamE.controllers.loginPageController">
    <children>
-      <VBox prefHeight="542.0" prefWidth="478.0" styleClass="loginPane">
+      <VBox  fx:id="mainPane" prefHeight="542.0" prefWidth="478.0" styleClass="loginPane">
          <children>
             <ImageView fitHeight="51.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" x="10.0" y="10.0">
                <image>

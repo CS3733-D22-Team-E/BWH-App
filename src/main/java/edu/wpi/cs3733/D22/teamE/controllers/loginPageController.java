@@ -25,6 +25,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -32,6 +33,8 @@ import javax.crypto.IllegalBlockSizeException;
 public class loginPageController implements Initializable {
 
   private final boolean enableTwoFactorAuthentication = false;
+
+  @FXML VBox mainPane;
 
   private @FXML JFXTextField usernameField;
 
@@ -47,10 +50,14 @@ public class loginPageController implements Initializable {
 
   @FXML
   public void submitLogin(ActionEvent event) {
+    System.out.println(ardComm.getInstance().readData());
+    System.out.println(verifyUserRFID());
     if (verifyUserRFID()) {
       Account account = db.getAccount("admin");
-      pageControl.loadPage("BasePage.fxml", (Stage) passwordField.getScene().getWindow());
+      Employee employee = db.getEmployee("admin");
       AccountsManager.getInstance().setAccount(account);
+      AccountsManager.getInstance().setEmployee(employee);
+      pageControl.loadPage("BasePage.fxml", (Stage) passwordField.getScene().getWindow());
     } else if (verifyUser(getUsername(), getPassword())) {
       Account account = db.getAccount(getUsername());
       AccountsManager.getInstance().setAccount(account);
@@ -118,9 +125,6 @@ public class loginPageController implements Initializable {
   }
 
   private boolean verifyUserRFID() {
-    if (!ardComm.getInstance().hasConnections()) {
-      return false;
-    }
     Account account = db.getAccount("admin");
     String id = ardComm.getInstance().readData();
     if (ardComm.getInstance().readData().contains("93\n52\nCD\n1B")) {
