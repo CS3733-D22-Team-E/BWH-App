@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ardComm {
-  private Arduino uno;
+  private Arduino arduino;
   private static ardComm singleton;
 
   private ardComm() {}
@@ -19,22 +19,23 @@ public class ardComm {
     if (singleton == null) {
       singleton = new ardComm();
     }
+    singleton.checkArdConnection();
     return singleton;
   }
 
   public String readData() {
     System.out.println("In readData()");
     String data = "";
-    boolean ard = uno.openConnection();
+    // boolean ard = uno.openConnection();
     boolean connection = ardComm.getInstance().getUno().openConnection();
     if (!connection) {
       System.err.println("Error: Unable to connect to serial port");
     } else {
       while (data.equals("")) {
-        data = uno.serialRead();
+        data = arduino.serialRead();
       }
     }
-    uno.closeConnection();
+    arduino.closeConnection();
     System.out.println(data);
     return data;
   }
@@ -60,7 +61,7 @@ public class ardComm {
               new Runnable() {
                 @Override
                 public void run() {
-                  Arduino arduino = new Arduino(port, 9600);
+                  arduino = new Arduino(port, 9600);
                   if (arduino.openConnection() && ardComm.this.checkForBuffer(arduino)) {
                     System.out.println("Port " + port + " has correct connection");
                     arduino.closeConnection();
@@ -105,6 +106,6 @@ public class ardComm {
   }
 
   public Arduino getUno() {
-    return this.uno;
+    return this.arduino;
   }
 }
